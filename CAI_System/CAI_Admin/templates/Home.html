@@ -3,24 +3,42 @@
 
 <head>
     <title>C.A.I. Admin</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 
 <body>
 
-    <h1>Computer-aided Instructions System in Mathematics for the Grade 1 Students of La Camelle School</h1>
-    <a id="name">{{ name }}</a>
-    <a id="position">{{ position }}</a>
+    <h2 class="card-header">Computer-aided Instructions System in Mathematics for the Grade 1 Students of La Camelle School</h2>
 
-    <button id="btnHome">Home</button>
-    <button id="btnClassList">Class List</button>
-    <button id="btnLesson">Lesson</button>
-    <button id="btnQuiz">Quiz</button>
-    <button id="btnExercise">Exercise</button>
-    <button id="btnSections">Sections</button>
-    <button id="btnReports">Reports</button>
+    <header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar">
+        <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
+            <a id="name">{{ name }}</a>
+            <a id="position">{{ position }}</a>
+        </ul>
+    </header>
 
-    <button id="btnReports">Users</button>
-    <button id="btnReports">Utilities</button>
+    <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
+        <ul class="nav nav-pills flex-column mb-auto">
+            <li class="nav-item"><a id="btnHome" class="nav-link active" href="#" aria-current="page">Home</a></li>
+            <li class="nav-item"><a id="btnClassList" class="nav-link" aria-current="page">Class List</a></li>
+            <li class="nav-item"><a id="btnLesson" class="nav-link" aria-current="page">Lesson</a></li>
+            <li class="nav-item"><a id="btnQuiz" class="nav-link" aria-current="page">Quiz</a></li>
+            <li class="nav-item"><a id="btnExercise" class="nav-link" aria-current="page">Exercise</a></li>
+            <li class="nav-item"><a id="btnSections" class="nav-link" aria-current="page">Sections</a></li>
+            <li class="nav-item"><a id="btnReports" class="nav-link" aria-current="page">Reports</a></li>
+        </ul>
+
+        <hr>
+
+        <ul class="nav nav-pills flex-column mb-auto">
+            <li class="nav-item"><a id="btnReports" class="nav-link" aria-current="page">Users</a></li>
+            <li class="nav-item"><a id="btnReports" class="nav-link" aria-current="page">Utilities</a></li>
+        </ul>
+    </div>
 
 </body>
 
