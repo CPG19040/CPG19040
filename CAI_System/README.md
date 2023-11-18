@@ -2,13 +2,13 @@
 
 This is a thesis project originally developed in C#.NET with Microsoft SQL Server database connection.
 
-#### School:
+### School:
 STI College Bacoor
 
-#### Year:
+### Year:
 2018-2019
 
-#### Developers:
+### Developers:
 - Christopher Gabriel
 - Crystalyn Gaguis
 - Mae Anne Gallardo
