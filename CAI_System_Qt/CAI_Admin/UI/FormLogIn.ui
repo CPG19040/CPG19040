@@ -26,9 +26,8 @@
    <string/>
   </property>
   <property name="styleSheet">
-   <string notr="true">QMainWindow {
-	background-color: rgb(61, 61, 61);
-}</string>
+   <string notr="true">background-color: rgb(61, 61, 61);
+</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -73,8 +72,9 @@ QPushButton:hover {
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>../../../Desktop/lcs logo.png</normaloff>
-          <disabledon>Images/lcs logo.png</disabledon>../../../Desktop/lcs logo.png</iconset>
+          <normaloff>../Images/lcs logo.png</normaloff>
+          <disabledoff>../Images/lcs logo.png</disabledoff>
+          <disabledon>../Images/lcs logo.png</disabledon>../Images/lcs logo.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -100,7 +100,7 @@ QPushButton:hover {
         </property>
         <property name="font">
          <font>
-          <family>Segoe UI</family>
+          <family>Ubuntu</family>
           <pointsize>20</pointsize>
           <weight>50</weight>
           <italic>false</italic>
@@ -171,8 +171,8 @@ QPushButton:hover {
          </property>
          <property name="font">
           <font>
-           <family>Segoe UI</family>
-           <pointsize>12</pointsize>
+           <family>Ubuntu</family>
+           <pointsize>11</pointsize>
            <weight>50</weight>
            <bold>false</bold>
           </font>
@@ -188,15 +188,28 @@ QPushButton:hover {
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEdit_2">
+        <widget class="QLineEdit" name="txtUsername">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>32</height>
+          </size>
+         </property>
          <property name="font">
           <font>
-           <family>Segoe UI</family>
-           <pointsize>12</pointsize>
+           <family>Ubuntu</family>
+           <pointsize>11</pointsize>
           </font>
          </property>
          <property name="styleSheet">
           <string notr="true">QLineEdit {
+	background-color: rgb(234, 234, 234);
 	padding: 5px;
 	border-radius: 10px;
 }</string>
@@ -213,8 +226,8 @@ QPushButton:hover {
          </property>
          <property name="font">
           <font>
-           <family>Segoe UI</family>
-           <pointsize>12</pointsize>
+           <family>Ubuntu</family>
+           <pointsize>11</pointsize>
            <weight>50</weight>
            <bold>false</bold>
           </font>
@@ -230,15 +243,28 @@ QPushButton:hover {
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEdit">
+        <widget class="QLineEdit" name="txtPassword">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>32</height>
+          </size>
+         </property>
          <property name="font">
           <font>
-           <family>Segoe UI</family>
-           <pointsize>12</pointsize>
+           <family>Ubuntu</family>
+           <pointsize>11</pointsize>
           </font>
          </property>
          <property name="styleSheet">
-          <string>QLineEdit {
+          <string notr="true">QLineEdit {
+	background-color: rgb(234, 234, 234);
 	padding: 5px;
 	border-radius: 10px;
 }</string>
@@ -257,7 +283,7 @@ QPushButton:hover {
           <number>5</number>
          </property>
          <item>
-          <widget class="QPushButton" name="pushButton">
+          <widget class="QPushButton" name="btnLogin">
            <property name="minimumSize">
             <size>
              <width>0</width>
@@ -272,8 +298,8 @@ QPushButton:hover {
            </property>
            <property name="font">
             <font>
-             <family>Segoe UI</family>
-             <pointsize>12</pointsize>
+             <family>Ubuntu</family>
+             <pointsize>11</pointsize>
              <weight>75</weight>
              <bold>true</bold>
             </font>
@@ -297,7 +323,7 @@ QPushButton:hover {
         </layout>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_2">
+        <widget class="QPushButton" name="btnForgotPassword">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -306,8 +332,8 @@ QPushButton:hover {
          </property>
          <property name="font">
           <font>
-           <family>Segoe UI</family>
-           <pointsize>12</pointsize>
+           <family>Ubuntu</family>
+           <pointsize>11</pointsize>
           </font>
          </property>
          <property name="styleSheet">
