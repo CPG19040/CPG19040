@@ -1,0 +1,24 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# UI conversion artifacts (if you don't want to track generated .py files)
+# Home.py
+# FormLogIn_ui.py
+
+# Environments
+.venv/
+env/
+venv/
+ENV/
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.swp
+
+# Local system files
+.DS_Store
+Thumbs.db
+
