@@ -12,6 +12,7 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 
 
 class Ui_FormLogin(object):
+
     def setupUi(self, FormLogin):
         FormLogin.setObjectName("FormLogin")
         FormLogin.resize(400, 558)
@@ -191,13 +192,4 @@ class Ui_FormLogin(object):
 "}"))
         self.btnLogin.setText(_translate("FormLogin", "Log in"))
         self.btnForgotPassword.setText(_translate("FormLogin", "Forgot password ?"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_FormLogin()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec_())
+        
