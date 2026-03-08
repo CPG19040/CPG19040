@@ -408,7 +408,7 @@ QPushButton:hover {
           </spacer>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_14">
+          <widget class="QPushButton" name="btnUserName">
            <property name="minimumSize">
             <size>
              <width>200</width>
@@ -457,7 +457,7 @@ QPushButton:hover {
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label_25">
+          <widget class="QLabel" name="labelPosition">
            <property name="font">
             <font>
              <pointsize>11</pointsize>
