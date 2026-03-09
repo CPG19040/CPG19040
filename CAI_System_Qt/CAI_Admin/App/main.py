@@ -1,5 +1,6 @@
 import sys
 import psycopg2
+import datetime
 
 from passlib.hash import bcrypt
 from PyQt6.QtCore import pyqtSignal, QPropertyAnimation, QPoint, QEasingCurve, Qt, QParallelAnimationGroup
@@ -8,16 +9,11 @@ from PyQt6.QtWidgets import QApplication, QMainWindow, QMessageBox, QDialog
 from FormLogIn import Ui_FormLogin
 from FormHome import Ui_MainWindow
 from FormAddNewUser import Ui_AddNewUserDialog
+from ClassStaff import Staff
+from CRUDTools import DatabaseTools
 
 # Scale the application depending on the screen resolution.
 # QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling, True)
-
-class UserObject:
-    def __init__(self, firstname, middlename, lastname, position):
-        self.firstname = firstname
-        self.middlename = middlename
-        self.lastname = lastname
-        self.position = position
 
 class LoginWindow(QMainWindow, Ui_FormLogin):
     login_success = pyqtSignal(object)
@@ -56,7 +52,7 @@ class LoginWindow(QMainWindow, Ui_FormLogin):
             if result:
                 firstname, middlename, lastname, stored_hash, position = result
                 if bcrypt.verify(password, stored_hash):
-                    return UserObject(firstname, middlename, lastname, position)
+                    return Staff(firstname=firstname, middlename=middlename, lastname=lastname, position=position)
             return None
         except Exception as e:
             print(f"Database error: {e}")
@@ -67,6 +63,7 @@ class LoginWindow(QMainWindow, Ui_FormLogin):
 
 class Controller:
     def __init__(self):
+        self.database_tools = DatabaseTools()
         self.login_win = LoginWindow()
         self.login_win.login_success.connect(self.show_home)
         self.login_win.show()
@@ -89,6 +86,8 @@ class Controller:
 
         for btn, index in self.nav_map.items():
             btn.clicked.connect(lambda checked, i=index: self.slide_to_page(i))
+
+        self.ui_home.btnUsers.clicked.connect(self.show_add_user)
 
         full_name = f"{user.firstname} {user.lastname}"
         self.ui_home.btnUserName.setText(full_name)
@@ -140,7 +139,67 @@ class Controller:
         self.add_user_dialog = QDialog()
         self.ui_add_user = Ui_AddNewUserDialog()
         self.ui_add_user.setupUi(self.add_user_dialog)
+
+        positions = self.database_tools.fetch_all("SELECT DISTINCT position_id, position_name FROM cai.staff_positions ORDER BY position_id ASC")  # Fetch positions from the database if needed
+        for pos in positions:
+            self.ui_add_user.comboBox_position.addItem(pos['position_name'], pos['position_id'])  # Assuming position_name is the second column and position_id is the first
+        
+        self.ui_add_user.comboBox_recoveryQuestion.addItems([
+            "What is your mother's maiden name?",
+            "What was the name of your first pet?",
+            "What was the make of your first car?"
+        ])
+        self.ui_add_user.btnSave.clicked.connect(self.register_user)
+
         self.add_user_dialog.exec()
+
+    def register_user(self):
+        firstname = self.ui_add_user.lineEdit_firstname.text()
+        middlename = self.ui_add_user.lineEdit_middlename.text()
+        lastname = self.ui_add_user.lineEdit_lastname.text()
+        username = self.ui_add_user.lineEdit_username.text()
+        password = self.ui_add_user.lineEdit_password.text()
+        encrypted_password = self.encrypt_password(password)
+        position = self.ui_add_user.comboBox_position.currentText()
+        RecoveryQuestion = self.ui_add_user.comboBox_recoveryQuestion.currentText()
+        RecoveryAnswer = self.ui_add_user.lineEdit_Answer.text()
+
+        if not all([firstname, lastname, username, encrypted_password, position, RecoveryQuestion, RecoveryAnswer]):
+            QMessageBox.warning(self.add_user_dialog, "Error", "Please fill in all required fields.")
+            return
+
+        cur = self.database_tools.retrieve_records("SELECT COUNT(*) FROM cai.tbl_staff_info")
+        current_count = 0
+
+        if cur:
+            result = cur.fetchone()
+            current_count = result[0]
+        else:
+            QMessageBox.warning(self.add_user_dialog, "Error", "Failed to retrieve current staff count.")
+            return
+
+        new_staff = Staff(
+            school_id=self.generate_school_number(current_count), 
+            firstname=firstname, 
+            middlename=middlename, 
+            lastname=lastname, 
+            username=username, 
+            password=encrypted_password, 
+            position=position, 
+            RecoveryQuestion=RecoveryQuestion, 
+            RecoveryAnswer=RecoveryAnswer)
+
+        new_staff.register()
+        QMessageBox.information(self.add_user_dialog, "Success", "New user registered successfully!")
+        self.add_user_dialog.close()
+
+    def encrypt_password(self, password):
+        return bcrypt.hash(password)
+
+    def generate_school_number(self, current_count):
+        year = datetime.datetime.now().year
+        new_number = current_count + 1
+        return f"{year}-{new_number:04d}-STA"
 
 
 if __name__ == "__main__":

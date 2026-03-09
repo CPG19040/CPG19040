@@ -16,8 +16,7 @@ class Ui_FormLogin(object):
         FormLogin.setMinimumSize(QtCore.QSize(400, 558))
         FormLogin.setMaximumSize(QtCore.QSize(400, 558))
         FormLogin.setWindowTitle("")
-        FormLogin.setStyleSheet("background-color: rgb(61, 61, 61);\n"
-"")
+        FormLogin.setStyleSheet("background-color: rgb(61, 61, 61);")
         self.centralwidget = QtWidgets.QWidget(parent=FormLogin)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.centralwidget)
@@ -60,9 +59,7 @@ class Ui_FormLogin(object):
         font.setItalic(False)
         font.setWeight(75)
         self.label_3.setFont(font)
-        self.label_3.setStyleSheet("QLabel {\n"
-"    color: white;\n"
-"}")
+        self.label_3.setStyleSheet("QLabel { font-family: \'Ubuntu\'; font-weight: bold; color: white; }")
         self.label_3.setObjectName("label_3")
         self.horizontalLayout_2.addWidget(self.label_3)
         self.verticalLayout_2.addLayout(self.horizontalLayout_2)
@@ -91,9 +88,7 @@ class Ui_FormLogin(object):
         font.setBold(False)
         font.setWeight(50)
         self.label.setFont(font)
-        self.label.setStyleSheet("QLabel {\n"
-"    color: rgb(186, 186, 186);\n"
-"}")
+        self.label.setStyleSheet("QLabel { font-family: \'Inter\'; font-weight: normal; color: rgb(186, 186, 186); }")
         self.label.setObjectName("label")
         self.verticalLayout.addWidget(self.label)
         self.txtUsername = QtWidgets.QLineEdit(parent=self.frame)
@@ -120,9 +115,7 @@ class Ui_FormLogin(object):
         font.setBold(False)
         font.setWeight(50)
         self.label_2.setFont(font)
-        self.label_2.setStyleSheet("QLabel {\n"
-"    color: rgb(186, 186, 186);\n"
-"}")
+        self.label_2.setStyleSheet("QLabel { font-family: \'Inter\'; font-weight: normal; color: rgb(186, 186, 186); }")
         self.label_2.setObjectName("label_2")
         self.verticalLayout.addWidget(self.label_2)
         self.txtPassword = QtWidgets.QLineEdit(parent=self.frame)
@@ -157,6 +150,8 @@ class Ui_FormLogin(object):
 "    border-radius: 10px;\n"
 "    background: #FF1595;\n"
 "    color: white;\n"
+"    font-fam: \'Inter\'; \n"
+"    font-weight: bold; \n"
 "}\n"
 "\n"
 "QPushButton:hover {\n"
