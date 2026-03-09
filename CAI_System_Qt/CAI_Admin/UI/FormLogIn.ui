@@ -26,8 +26,7 @@
    <string/>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(61, 61, 61);
-</string>
+   <string notr="true">background-color: rgb(61, 61, 61);</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -108,9 +107,7 @@ QPushButton:hover {
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">QLabel {
-	color: white;
-}</string>
+         <string notr="true">QLabel { font-family: 'Ubuntu'; font-weight: bold; color: white; }</string>
         </property>
         <property name="text">
          <string>La Camelle School</string>
@@ -178,9 +175,7 @@ QPushButton:hover {
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">QLabel {
-	color: rgb(186, 186, 186);
-}</string>
+          <string notr="true">QLabel { font-family: 'Inter'; font-weight: normal; color: rgb(186, 186, 186); }</string>
          </property>
          <property name="text">
           <string>Username</string>
@@ -235,9 +230,7 @@ QPushButton:hover {
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">QLabel {
-	color: rgb(186, 186, 186);
-}</string>
+          <string notr="true">QLabel { font-family: 'Inter'; font-weight: normal; color: rgb(186, 186, 186); }</string>
          </property>
          <property name="text">
           <string>Password</string>
@@ -312,6 +305,8 @@ QPushButton:hover {
 	border-radius: 10px;
 	background: #FF1595;
 	color: white;
+	font-fam: 'Inter'; 
+	font-weight: bold; 
 }
 
 QPushButton:hover {
