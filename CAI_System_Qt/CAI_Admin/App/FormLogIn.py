@@ -8,7 +8,6 @@
 
 from PyQt6 import QtCore, QtGui, QtWidgets
 
-# QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling, True) # Scale the application depending on the screen resolution.
 
 class Ui_FormLogin(object):
     def setupUi(self, FormLogin):
@@ -57,9 +56,9 @@ class Ui_FormLogin(object):
         font = QtGui.QFont()
         font.setFamily("Ubuntu")
         font.setPointSize(20)
-        font.setBold(False)
+        font.setBold(True)
         font.setItalic(False)
-        font.setWeight(50)
+        font.setWeight(75)
         self.label_3.setFont(font)
         self.label_3.setStyleSheet("QLabel {\n"
 "    color: white;\n"
@@ -87,7 +86,7 @@ class Ui_FormLogin(object):
         self.label = QtWidgets.QLabel(parent=self.frame)
         self.label.setMaximumSize(QtCore.QSize(16777215, 30))
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Inter")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
@@ -101,20 +100,22 @@ class Ui_FormLogin(object):
         self.txtUsername.setMinimumSize(QtCore.QSize(0, 32))
         self.txtUsername.setMaximumSize(QtCore.QSize(16777215, 32))
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Inter")
         font.setPointSize(11)
         self.txtUsername.setFont(font)
         self.txtUsername.setStyleSheet("QLineEdit {\n"
 "    background-color: rgb(234, 234, 234);\n"
 "    padding: 5px;\n"
 "    border-radius: 10px;\n"
-"}")
+"    color: rgb(36, 31, 49);\n"
+"}\n"
+"")
         self.txtUsername.setObjectName("txtUsername")
         self.verticalLayout.addWidget(self.txtUsername)
         self.label_2 = QtWidgets.QLabel(parent=self.frame)
         self.label_2.setMaximumSize(QtCore.QSize(16777215, 30))
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Inter")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
@@ -128,13 +129,14 @@ class Ui_FormLogin(object):
         self.txtPassword.setMinimumSize(QtCore.QSize(0, 32))
         self.txtPassword.setMaximumSize(QtCore.QSize(16777215, 32))
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Inter")
         font.setPointSize(11)
         self.txtPassword.setFont(font)
         self.txtPassword.setStyleSheet("QLineEdit {\n"
 "    background-color: rgb(234, 234, 234);\n"
 "    padding: 5px;\n"
 "    border-radius: 10px;\n"
+"    color: rgb(36, 31, 49);\n"
 "}")
         self.txtPassword.setEchoMode(QtWidgets.QLineEdit.EchoMode.Password)
         self.txtPassword.setObjectName("txtPassword")
@@ -167,7 +169,7 @@ class Ui_FormLogin(object):
         self.btnForgotPassword = QtWidgets.QPushButton(parent=self.frame)
         self.btnForgotPassword.setMinimumSize(QtCore.QSize(0, 40))
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Inter")
         font.setPointSize(11)
         self.btnForgotPassword.setFont(font)
         self.btnForgotPassword.setStyleSheet("QPushButton {\n"
@@ -197,12 +199,3 @@ class Ui_FormLogin(object):
         self.btnLogin.setText(_translate("FormLogin", "Log in"))
         self.btnForgotPassword.setText(_translate("FormLogin", "Forgot password ?"))
 
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    FormLogin = QtWidgets.QMainWindow()
-    ui = Ui_FormLogin()
-    ui.setupUi(FormLogin)
-    FormLogin.show()
-    sys.exit(app.exec())
