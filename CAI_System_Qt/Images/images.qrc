@@ -1,0 +1,20 @@
+<RCC>
+  <qresource prefix="newPrefix">
+    <file>05-bulb.svg</file>
+    <file>add-277.svg</file>
+    <file>books-28.svg</file>
+    <file>calendar_widget.png</file>
+    <file>dumbell.svg</file>
+    <file>edit-60.svg</file>
+    <file>eye-21.svg</file>
+    <file>House-01.svg</file>
+    <file>icon-user-7.svg</file>
+    <file>lcs logo.png</file>
+    <file>library-90.svg</file>
+    <file>list-color.svg</file>
+    <file>product-data.svg</file>
+    <file>recycle-bin-32.svg</file>
+    <file>settings-125.svg</file>
+    <file>users-61.svg</file>
+  </qresource>
+</RCC>
