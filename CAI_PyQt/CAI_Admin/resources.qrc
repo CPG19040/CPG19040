@@ -1,0 +1,30 @@
+<RCC>
+  <qresource prefix="Images">
+    <file>Images/05-bulb.svg</file>
+    <file>Images/add-277.svg</file>
+    <file>Images/books-28.svg</file>
+    <file>Images/calendar_widget.png</file>
+    <file>Images/caret-down.png</file>
+    <file>Images/check.png</file>
+    <file>Images/dumbell.svg</file>
+    <file>Images/edit-60.svg</file>
+    <file>Images/eye-21.svg</file>
+    <file>Images/favicon.ico</file>
+    <file>Images/House-01.svg</file>
+    <file>Images/icon-user-7.svg</file>
+    <file>Images/lcs logo.png</file>
+    <file>Images/library-90.svg</file>
+    <file>Images/list-color.svg</file>
+    <file>Images/logout.png</file>
+    <file>Images/no-image.png</file>
+    <file>Images/no-image2.png</file>
+    <file>Images/product-data.svg</file>
+    <file>Images/profile.png</file>
+    <file>Images/profile_gray.png</file>
+    <file>Images/recycle-bin-32.svg</file>
+    <file>Images/search.png</file>
+    <file>Images/settings-125.svg</file>
+    <file>Images/undo.png</file>
+    <file>Images/users-61.svg</file>
+  </qresource>
+</RCC>

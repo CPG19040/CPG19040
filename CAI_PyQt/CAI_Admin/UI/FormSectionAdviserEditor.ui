@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SectionAdviserEditorDialog</class>
+ <widget class="QDialog" name="SectionAdviserEditorDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>546</width>
+    <height>517</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(222, 221, 218); color: rgb(0, 0, 0);</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="label_24">
+     <property name="font">
+      <font>
+       <family>Inter SemiBold</family>
+       <pointsize>11</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Assign an adviser to each section</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QWidget" name="widget" native="true">
+     <layout class="QFormLayout" name="formLayout">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_9">
+        <property name="text">
+         <string>Section:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QComboBox" name="cmb_section">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(246, 245, 244); padding: 0px 10px 0px;</string>
+        </property>
+        <property name="editable">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_10">
+        <property name="text">
+         <string>Adviser:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QComboBox" name="cmb_teacher">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(246, 245, 244); padding: 0px 10px 0px;</string>
+        </property>
+        <property name="editable">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QTableView" name="table_section">
+     <property name="styleSheet">
+      <string notr="true">QTableView {
+    border: 1px solid rgb(38, 162, 105);
+    gridline-color: #f0f0f0;
+    background-color: white;
+    selection-background-color: rgba(38, 162, 105, 0.2);
+    selection-color: black;
+    outline: none;
+}
+
+/* Remove the row numbers (Vertical Header) */
+QHeaderView:vertical {
+    width: 0px;
+}
+
+QHeaderView::section:vertical {
+    width: 0px;
+    border: none;
+}
+
+/* Style the top horizontal header */
+QHeaderView::section:horizontal {
+    background-color: rgb(38, 162, 105);  
+    color: white;
+    padding: 6px;
+    font-weight: bold;
+    font-size: 11pt;
+    border: none;
+}
+
+/* Custom Scrollbars */
+QScrollBar:vertical {
+    border: none;
+    background: #f8f8f8;
+    width: 10px;
+}
+
+QScrollBar::handle:vertical {
+    background: rgb(38, 162, 105);
+    min-height: 30px;
+    border-radius: 5px; 
+    margin: 2px;
+}
+
+QScrollBar:horizontal {
+    border: none;
+    background: #f8f8f8;
+    height: 10px;
+}
+
+QScrollBar::handle:horizontal {
+    background: rgb(38, 162, 105);
+    min-width: 30px;
+    border-radius: 5px;
+    margin: 2px;
+}
+
+/* Remove scrollbar arrows */
+QScrollBar::add-line, QScrollBar::sub-line {
+    width: 0px; height: 0px;
+}</string>
+     </property>
+     <property name="selectionBehavior">
+      <enum>QAbstractItemView::SelectRows</enum>
+     </property>
+     <attribute name="verticalHeaderVisible">
+      <bool>false</bool>
+     </attribute>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnCancel">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>30</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Cancel</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnSave">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>30</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Save</string>
+       </property>
+       <property name="default">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
