@@ -536,6 +536,12 @@ class Ui_Home(object):
         self.stackedWidget.addWidget(self.pageHome)
         self.pageClassList = QWidget()
         self.pageClassList.setObjectName(u"pageClassList")
+        self.pageClassList.setStyleSheet(u"QPushButton:disabled {\n"
+"    background-color: #bdc3c7;\n"
+"    color: #7f8c8d;\n"
+"    border: 1px solid #95a5a6;\n"
+"	border-radius: 2px;\n"
+"}")
         self.horizontalLayout_15 = QHBoxLayout(self.pageClassList)
         self.horizontalLayout_15.setObjectName(u"horizontalLayout_15")
         self.InformationPanel = QWidget(self.pageClassList)
@@ -1068,7 +1074,7 @@ class Ui_Home(object):
         self.scrollArea.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
         self.container = QWidget()
         self.container.setObjectName(u"container")
-        self.container.setGeometry(QRect(0, 0, 100, 30))
+        self.container.setGeometry(QRect(0, 0, 565, 616))
         self.verticalLayout_9 = QVBoxLayout(self.container)
         self.verticalLayout_9.setObjectName(u"verticalLayout_9")
         self.scrollArea.setWidget(self.container)
@@ -1100,7 +1106,12 @@ class Ui_Home(object):
         self.stackedWidget.addWidget(self.pageClassList)
         self.pageLesson = QWidget()
         self.pageLesson.setObjectName(u"pageLesson")
-        self.pageLesson.setStyleSheet(u"color: rgb(0, 0, 0);")
+        self.pageLesson.setStyleSheet(u"QPushButton:disabled {\n"
+"    background-color: #bdc3c7;\n"
+"    color: #7f8c8d;\n"
+"    border: 1px solid #95a5a6;\n"
+"	border-radius: 2px;\n"
+"}")
         self.verticalLayout = QVBoxLayout(self.pageLesson)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.horizontalLayout_3 = QHBoxLayout()
@@ -1267,7 +1278,12 @@ class Ui_Home(object):
         self.stackedWidget.addWidget(self.pageLesson)
         self.pageQuiz = QWidget()
         self.pageQuiz.setObjectName(u"pageQuiz")
-        self.pageQuiz.setStyleSheet(u"color: rgb(0, 0, 0); background-color: rgb(222, 221, 218);")
+        self.pageQuiz.setStyleSheet(u"QPushButton:disabled {\n"
+"    background-color: #bdc3c7;\n"
+"    color: #7f8c8d;\n"
+"    border: 1px solid #95a5a6;\n"
+"	border-radius: 2px;\n"
+"}")
         self.verticalLayout_8 = QVBoxLayout(self.pageQuiz)
         self.verticalLayout_8.setObjectName(u"verticalLayout_8")
         self.headerLayout = QHBoxLayout()
@@ -1615,7 +1631,7 @@ class Ui_Home(object):
         self.scrollArea_mc.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 98, 28))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 315, 528))
         self.verticalLayout_12 = QVBoxLayout(self.scrollAreaWidgetContents_3)
         self.verticalLayout_12.setObjectName(u"verticalLayout_12")
         self.scrollArea_mc.setWidget(self.scrollAreaWidgetContents_3)
@@ -1698,7 +1714,7 @@ class Ui_Home(object):
         self.scrollArea_tf.setWidgetResizable(True)
         self.scrollAreaWidgetContents_4 = QWidget()
         self.scrollAreaWidgetContents_4.setObjectName(u"scrollAreaWidgetContents_4")
-        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 98, 28))
+        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 315, 528))
         self.verticalLayout_13 = QVBoxLayout(self.scrollAreaWidgetContents_4)
         self.verticalLayout_13.setObjectName(u"verticalLayout_13")
         self.scrollArea_tf.setWidget(self.scrollAreaWidgetContents_4)
@@ -1795,7 +1811,7 @@ class Ui_Home(object):
         self.scrollArea_id.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 98, 28))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 315, 528))
         self.verticalLayout_11 = QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_11.setObjectName(u"verticalLayout_11")
         self.scrollArea_id.setWidget(self.scrollAreaWidgetContents_2)
@@ -1825,7 +1841,12 @@ class Ui_Home(object):
         self.stackedWidget.addWidget(self.pageQuiz)
         self.pageExercise = QWidget()
         self.pageExercise.setObjectName(u"pageExercise")
-        self.pageExercise.setStyleSheet(u"color: rgb(0, 0, 0);")
+        self.pageExercise.setStyleSheet(u"QPushButton:disabled {\n"
+"    background-color: #bdc3c7;\n"
+"    color: #7f8c8d;\n"
+"    border: 1px solid #95a5a6;\n"
+"	border-radius: 2px;\n"
+"}")
         self.verticalLayout_10 = QVBoxLayout(self.pageExercise)
         self.verticalLayout_10.setObjectName(u"verticalLayout_10")
         self.horizontalLayout_7 = QHBoxLayout()
@@ -1880,7 +1901,12 @@ class Ui_Home(object):
         self.stackedWidget.addWidget(self.pageExercise)
         self.pageSections = QWidget()
         self.pageSections.setObjectName(u"pageSections")
-        self.pageSections.setStyleSheet(u"color: rgb(0, 0, 0);")
+        self.pageSections.setStyleSheet(u"QPushButton:disabled {\n"
+"    background-color: #bdc3c7;\n"
+"    color: #7f8c8d;\n"
+"    border: 1px solid #95a5a6;\n"
+"	border-radius: 2px;\n"
+"}")
         self.verticalLayout_2 = QVBoxLayout(self.pageSections)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.horizontalLayout_8 = QHBoxLayout()
@@ -2020,7 +2046,12 @@ class Ui_Home(object):
         self.stackedWidget.addWidget(self.pageSections)
         self.pageReports = QWidget()
         self.pageReports.setObjectName(u"pageReports")
-        self.pageReports.setStyleSheet(u"color: rgb(0, 0, 0);")
+        self.pageReports.setStyleSheet(u"QPushButton:disabled {\n"
+"    background-color: #bdc3c7;\n"
+"    color: #7f8c8d;\n"
+"    border: 1px solid #95a5a6;\n"
+"	border-radius: 2px;\n"
+"}")
         self.verticalLayout_4 = QVBoxLayout(self.pageReports)
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
         self.tabWidget = QTabWidget(self.pageReports)
@@ -2085,6 +2116,12 @@ class Ui_Home(object):
         self.stackedWidget.addWidget(self.pageReports)
         self.pageUsers = QWidget()
         self.pageUsers.setObjectName(u"pageUsers")
+        self.pageUsers.setStyleSheet(u"QPushButton:disabled {\n"
+"    background-color: #bdc3c7;\n"
+"    color: #7f8c8d;\n"
+"    border: 1px solid #95a5a6;\n"
+"	border-radius: 2px;\n"
+"}")
         self.verticalLayout_17 = QVBoxLayout(self.pageUsers)
         self.verticalLayout_17.setObjectName(u"verticalLayout_17")
         self.widget = QWidget(self.pageUsers)
@@ -2124,7 +2161,7 @@ class Ui_Home(object):
         self.btnEditUserInfo.setEnabled(True)
         self.btnEditUserInfo.setMinimumSize(QSize(30, 30))
         self.btnEditUserInfo.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.btnEditUserInfo.setStyleSheet(u"padding: 0px 10px 0px;")
+        self.btnEditUserInfo.setStyleSheet(u"QPushButton { padding: 0px 10px 0px; }")
 
         self.horizontalLayout_19.addWidget(self.btnEditUserInfo)
 
@@ -2220,6 +2257,12 @@ class Ui_Home(object):
         self.stackedWidget.addWidget(self.pageUsers)
         self.pageUtilities = QWidget()
         self.pageUtilities.setObjectName(u"pageUtilities")
+        self.pageUtilities.setStyleSheet(u"QPushButton:disabled {\n"
+"    background-color: #bdc3c7;\n"
+"    color: #7f8c8d;\n"
+"    border: 1px solid #95a5a6;\n"
+"	border-radius: 2px;\n"
+"}")
         self.verticalLayout_14 = QVBoxLayout(self.pageUtilities)
         self.verticalLayout_14.setObjectName(u"verticalLayout_14")
         self.tabWidget_2 = QTabWidget(self.pageUtilities)

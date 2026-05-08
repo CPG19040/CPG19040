@@ -160,6 +160,38 @@ class Controller:
         self.ui.checkBoxLockQuiz.setVisible(False)
         self.ui.btnQuizAdd.clicked.connect(self.showQuizDialog)
 
+        #=============================================================
+        #  Application-Level Privileges (Role-Based Access Control)
+        #=============================================================
+
+        role = user.get("position_name")
+
+        if role == "Admin":
+           pass
+            
+        elif role == "Teacher":
+            self.ui.btnEditUserInfo.setVisible(False)
+
+        else:
+            self.ui.btnUsers.setVisible(False)
+            self.ui.btnUtility.setVisible(False)
+
+            self.ui.btnAddStudent.setVisible(False)
+            self.ui.btnLessonAdd.setVisible(False)
+            self.ui.btnQuizAdd.setVisible(False)
+            self.ui.btnExerciseAdd.setVisible(False)
+            self.ui.btnSectionAdd.setVisible(False)
+
+            self.ui.btnEditStudent.setVisible(False)
+            self.ui.btnLessonEdit.setVisible(False)
+            self.ui.btnSectionEdit.setVisible(False)
+            self.ui.btnExerciseEdit.setVisible(False)
+
+            self.ui.btnDeleteStudent.setVisible(False)
+            self.ui.btnSectionDelete.setVisible(False)
+
+            self.ui.btnShowPwdStudent.setVisible(False)
+
         self.login_win.close()
         self.home_win.show()
 
@@ -221,6 +253,7 @@ class Controller:
             self.display_student_info()
 
         elif index == 2: # Lesson
+            self.ui.txtSearchLesson.clear()
             self.displayLessons()
 
         elif index == 3: # Quiz
@@ -265,6 +298,13 @@ class Controller:
         self.ui.label_timeAP.setText(ap)
 
     def logout(self):
+        confirm_msg = f"Are you sure you want to log out?"
+        confirm = QMessageBox.question(self.home_win, "Confirm Logout", confirm_msg,
+                                    QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
+
+        if confirm == QMessageBox.StandardButton.No:
+            return
+        
         # 1. Clear the persistent session from QSettings
         self.settings.clear()
         self.settings.sync()

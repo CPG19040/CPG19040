@@ -1060,6 +1060,14 @@ QPushButton:hover {
        </layout>
       </widget>
       <widget class="QWidget" name="pageClassList">
+       <property name="styleSheet">
+        <string notr="true">QPushButton:disabled {
+    background-color: #bdc3c7;
+    color: #7f8c8d;
+    border: 1px solid #95a5a6;
+	border-radius: 2px;
+}</string>
+       </property>
        <layout class="QHBoxLayout" name="horizontalLayout_15">
         <item>
          <widget class="QWidget" name="InformationPanel" native="true">
@@ -2341,8 +2349,8 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>100</width>
-                <height>30</height>
+                <width>565</width>
+                <height>616</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_9"/>
@@ -2403,7 +2411,12 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
       </widget>
       <widget class="QWidget" name="pageLesson">
        <property name="styleSheet">
-        <string notr="true">color: rgb(0, 0, 0);</string>
+        <string notr="true">QPushButton:disabled {
+    background-color: #bdc3c7;
+    color: #7f8c8d;
+    border: 1px solid #95a5a6;
+	border-radius: 2px;
+}</string>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
@@ -2701,7 +2714,12 @@ QScrollBar::add-line, QScrollBar::sub-line {
       </widget>
       <widget class="QWidget" name="pageQuiz">
        <property name="styleSheet">
-        <string notr="true">color: rgb(0, 0, 0); background-color: rgb(222, 221, 218);</string>
+        <string notr="true">QPushButton:disabled {
+    background-color: #bdc3c7;
+    color: #7f8c8d;
+    border: 1px solid #95a5a6;
+	border-radius: 2px;
+}</string>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_8">
         <item>
@@ -3256,8 +3274,8 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>98</width>
-               <height>28</height>
+               <width>315</width>
+               <height>528</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_12"/>
@@ -3346,8 +3364,8 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>98</width>
-               <height>28</height>
+               <width>315</width>
+               <height>528</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_13"/>
@@ -3474,8 +3492,8 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>98</width>
-               <height>28</height>
+               <width>315</width>
+               <height>528</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_11"/>
@@ -3527,7 +3545,12 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
       </widget>
       <widget class="QWidget" name="pageExercise">
        <property name="styleSheet">
-        <string notr="true">color: rgb(0, 0, 0);</string>
+        <string notr="true">QPushButton:disabled {
+    background-color: #bdc3c7;
+    color: #7f8c8d;
+    border: 1px solid #95a5a6;
+	border-radius: 2px;
+}</string>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_10">
         <item>
@@ -3643,7 +3666,12 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
       </widget>
       <widget class="QWidget" name="pageSections">
        <property name="styleSheet">
-        <string notr="true">color: rgb(0, 0, 0);</string>
+        <string notr="true">QPushButton:disabled {
+    background-color: #bdc3c7;
+    color: #7f8c8d;
+    border: 1px solid #95a5a6;
+	border-radius: 2px;
+}</string>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
@@ -3863,7 +3891,12 @@ QScrollBar::add-line, QScrollBar::sub-line {
       </widget>
       <widget class="QWidget" name="pageReports">
        <property name="styleSheet">
-        <string notr="true">color: rgb(0, 0, 0);</string>
+        <string notr="true">QPushButton:disabled {
+    background-color: #bdc3c7;
+    color: #7f8c8d;
+    border: 1px solid #95a5a6;
+	border-radius: 2px;
+}</string>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_4">
         <item>
@@ -3972,6 +4005,14 @@ QScrollBar::add-line, QScrollBar::sub-line {
        </layout>
       </widget>
       <widget class="QWidget" name="pageUsers">
+       <property name="styleSheet">
+        <string notr="true">QPushButton:disabled {
+    background-color: #bdc3c7;
+    color: #7f8c8d;
+    border: 1px solid #95a5a6;
+	border-radius: 2px;
+}</string>
+       </property>
        <layout class="QVBoxLayout" name="verticalLayout_17">
         <item>
          <widget class="QWidget" name="widget" native="true">
@@ -4072,7 +4113,7 @@ QScrollBar::add-line, QScrollBar::sub-line {
               <cursorShape>PointingHandCursor</cursorShape>
              </property>
              <property name="styleSheet">
-              <string notr="true">padding: 0px 10px 0px;</string>
+              <string notr="true">QPushButton { padding: 0px 10px 0px; }</string>
              </property>
              <property name="text">
               <string>Edit User Information</string>
@@ -4217,6 +4258,14 @@ QScrollBar::add-line, QScrollBar::sub-line {
        </layout>
       </widget>
       <widget class="QWidget" name="pageUtilities">
+       <property name="styleSheet">
+        <string notr="true">QPushButton:disabled {
+    background-color: #bdc3c7;
+    color: #7f8c8d;
+    border: 1px solid #95a5a6;
+	border-radius: 2px;
+}</string>
+       </property>
        <layout class="QVBoxLayout" name="verticalLayout_14">
         <item>
          <widget class="QTabWidget" name="tabWidget_2">

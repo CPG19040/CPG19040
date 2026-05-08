@@ -62,14 +62,15 @@ class Lesson:
         sql += '    ,chapter AS "Chapter"\n'
         sql += 'FROM\n'
         sql += '    cai.tbl_lessons\n'
-        sql += 'ORDER BY gradingperiod, chapter, lessonnum\n'
+
+        params = None
 
         if searchText:
-            search_param = f"%{searchText}%"
-            sql += 'WHERE title ILIKE %s\n'
-            cursor, conn = self.db_tools.retrieve_records(sql, (search_param,))
-        else:
-            cursor, conn = self.db_tools.retrieve_records(sql)
+            sql += "WHERE title ILIKE %s\n"
+            params = (f"%{searchText}%",)
+
+        sql += "ORDER BY gradingperiod, chapter, lessonnum"
+        cursor, conn = self.db_tools.retrieve_records(sql, params)
 
         if cursor:
             headers = [desc[0] for desc in cursor.description]
