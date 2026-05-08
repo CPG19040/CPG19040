@@ -141,6 +141,7 @@ class Controller:
 
         self.ui.txt_search_user.textChanged.connect(lambda text: self.displayUsers(text))
         self.ui.btnRefreshUsers.clicked.connect(lambda: self.displayUsers())
+        self.ui.btnDeleteUser.clicked.connect(lambda: self.delete_user(user))
 
         self.difficulty_group = QButtonGroup(self.home_win)
         self.difficulty_group.setExclusive(True)
@@ -171,6 +172,7 @@ class Controller:
             
         elif role == "Teacher":
             self.ui.btnEditUserInfo.setVisible(False)
+            self.ui.btnDeleteUser.setVisible(False)
 
         else:
             self.ui.btnUsers.setVisible(False)
@@ -189,6 +191,7 @@ class Controller:
 
             self.ui.btnDeleteStudent.setVisible(False)
             self.ui.btnSectionDelete.setVisible(False)
+            self.ui.btnDeleteUser.setVisible(False)
 
             self.ui.btnShowPwdStudent.setVisible(False)
 
@@ -763,6 +766,21 @@ class Controller:
 
             header = self.ui.table_users.horizontalHeader()
             header.setSectionResizeMode(QHeaderView.ResizeMode.ResizeToContents)
+
+    def delete_user(self, user):
+        selection = self.ui.table_users.selectionModel()
+
+        if not selection.hasSelection():
+            QMessageBox.information(self.ui.table_users.window(), "No Selection", "Select a user to delete.")
+            return
+
+        # Get the index of the first selected row
+        selected_row_index = selection.selectedRows()[0].row()
+        model = self.ui.table_users.model()
+        school_id = model.index(selected_row_index, 1).data()
+        staff = Staff()
+        staff.archive_and_delete_staff(user, school_id)
+        self.displayUsers()
 
     def displayAuditTrail(self):
         from App.CRUDTools import DatabaseTools

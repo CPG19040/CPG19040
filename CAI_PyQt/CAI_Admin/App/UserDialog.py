@@ -16,8 +16,25 @@ class Staff:
         self.db_tools = DatabaseTools()
         self.util = Utility()
 
-    def generate_id(self, count):
-        return f"{datetime.datetime.now().year}-{(count + 1):04d}-STA"
+    def get_userid(self, school_id):
+        sql = """
+                SELECT user_id
+                FROM cai.tbl_staff_info
+                WHERE school_id = %s
+            """
+
+        cursor, conn = self.db_tools.retrieve_records(sql, (school_id,))
+        userid = None
+
+        if cursor:
+            row = cursor.fetchone()
+
+            if row:
+                userid = row[0]
+
+        if conn: conn.close()
+
+        return userid
 
     def get_user_profile_pic(self, school_id, size:int=30):
         sql = """
@@ -54,8 +71,6 @@ class Staff:
                     lastname,
                     username,
                     positionid,
-                    recovery_question,
-                    answer,
                     profile_pic,
                     contact_person,
                     contact_number,
@@ -81,8 +96,6 @@ class Staff:
         sql += '    A.lastname AS "Last Name",\n'
         sql += '    A.username AS "Username",\n'
         sql += '    B.position_name AS "Position",\n'
-        sql += '    A.recovery_question AS "Recovery Question",\n'
-        sql += '    A.answer AS "Answer",\n'
         sql += '    A.contact_person AS "Contact Person",\n'
         sql += '    A.contact_number AS "Contact Number"\n'
         sql += 'FROM cai.tbl_staff_info A\n'
@@ -148,6 +161,54 @@ class Staff:
         if conn: conn.close()
         return None
 
+    def archive_and_delete_staff(self, user:dict, staff_id):
+        """
+        Args:
+            user (dict): The person performing the arhive.
+            staff_id: The school_id of the person to be archived.
+        """
+        conn = None
+        cur = None
+        
+        try:
+            conn = self.db_tools.get_connection()
+            cur = conn.cursor()
+
+            sql  = "WITH moved_rows AS (\n"
+            sql += "    DELETE FROM cai.tbl_staff_info\n"
+            sql += "    WHERE school_id = %s\n"
+            sql += "    RETURNING *\n"
+            sql += ")\n"
+            sql += "INSERT INTO cai.tbl_staff_info_archive (\n"
+            sql += "    user_id, school_id, firstname, middlename, lastname, \n"
+            sql += "    username, password, profile_pic, new_user, archived_by \n"
+            sql += ")\n"
+            sql += "SELECT \n"
+            sql += "    user_id, school_id, firstname, middlename, lastname, \n"
+            sql += "    username, password, profile_pic, new_user, %s \n"
+            sql += "FROM moved_rows"
+            
+            userid = self.get_userid(user["school_id"])
+            cur.execute(sql, (staff_id, userid))
+            
+            actionStr = f"Deleted user ({staff_id})"
+            sql  = "INSERT INTO cai.tbl_audit_trail(user_id, username, action)\n"
+            sql += "VALUES (%s, %s, %s);\n"
+            cur.execute(sql, (user["school_id"], user["username"], actionStr))
+
+            conn.commit()
+
+            print(f"Staff {staff_id} successfully archived and removed.")
+
+        except Exception as e:
+            if conn:
+                conn.rollback() # Undo everything if an error occurs
+            print(f"Transaction failed: {e}")
+
+        finally:
+            if cur: cur.close()
+            if conn: conn.close()
+
 
 
 class AddUserDialog(QDialog, Ui_AddNewUserDialog):
@@ -175,13 +236,6 @@ class AddUserDialog(QDialog, Ui_AddNewUserDialog):
         sql += "ORDER BY position_id ASC"
         self.util.populate_pulldown(self.comboBox_position, sql, add_empty=True)
 
-        self.comboBox_recoveryQuestion.addItems([
-            "",
-            "What is your mother's maiden name?",
-            "What was the name of your first pet?",
-            "What was the make of your first car?"
-        ])
-
     def update_photo(self):
         self.profile_pic, self.binaryImage = self.util.browsePhoto(self, self.label_profile_pic.width(), self.label_profile_pic.height())
 
@@ -198,12 +252,10 @@ class AddUserDialog(QDialog, Ui_AddNewUserDialog):
             "uname": self.lineEdit_username.text().strip(),
             "pwd": self.lineEdit_password.text(),
             "pos": self.comboBox_position.currentData(),
-            "q": self.comboBox_recoveryQuestion.currentText(),
-            "a": self.lineEdit_Answer.text().strip()
         }
 
         # 2. Basic Validation: Required Fields
-        required_fields = ["fname", "lname", "uname", "pwd", "a"]
+        required_fields = ["fname", "lname", "uname", "pwd"]
         if not all(data[field] for field in required_fields):
             QMessageBox.warning(self, "Validation Error", "All fields except Middle Name are required.")
             return
@@ -228,33 +280,27 @@ class AddUserDialog(QDialog, Ui_AddNewUserDialog):
 
         # 6. Proceed to Registration
         try:
-            cur, conn = self.db.retrieve_records("SELECT COUNT(*) FROM cai.tbl_staff_info")
-            count = cur.fetchone()[0] if cur else 0
-
             sql  = 'INSERT INTO cai.tbl_staff_info(\n'
-            sql += '    school_id\n'
+            sql += "    school_id\n"
             sql += '    ,firstname\n'
             sql += '    ,middlename\n'
             sql += '    ,lastname\n'
             sql += '    ,username\n'
             sql += '    ,password\n'
             sql += '    ,positionid\n'
-            sql += '    ,recovery_question\n'
-            sql += '    ,answer\n'
             sql += '    ,profile_pic\n'
             sql += ')\n'
-            sql += 'VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s);'
+            sql += 'VALUES ( \n'
+            sql += "    to_char(CURRENT_DATE, 'YYYY') || '-' || lpad(nextval('cai.staff_id_seq')::text, 4, '0') || '-STA',\n"
+            sql += '    %s, %s, %s, %s, %s, %s, %s);'
 
             self.db.execute_query(sql, (
-                self.staff.generate_id(count),
                 data["fname"],
                 data["mname"],
                 data["lname"],
                 data["uname"],
                 bcrypt.hash(data["pwd"]),
                 data["pos"],
-                data["q"],
-                data["a"],
                 psycopg2.Binary(self.binaryImage) if self.binaryImage else None
             ))
 
@@ -267,9 +313,6 @@ class AddUserDialog(QDialog, Ui_AddNewUserDialog):
 
         except Exception as e:
             QMessageBox.critical(self, "Database Error", f"Failed to register user: {str(e)}")
-
-        finally:
-            if conn: conn.close()
 
 
 
@@ -299,12 +342,6 @@ class EditUserDialog(QDialog, Ui_EditUserDialog):
         sql += "ORDER BY position_id ASC"
         self.util.populate_pulldown(self.comboBox_position, sql)
 
-        self.comboBox_recoveryQuestion.addItems([
-            "What is your mother's maiden name?",
-            "What was the name of your first pet?",
-            "What was the make of your first car?"
-        ])
-
         self.binaryImage = None
         self.user = user
         self.mode = mode
@@ -317,7 +354,6 @@ class EditUserDialog(QDialog, Ui_EditUserDialog):
             self.lineEdit_middlename.setText(self.userObj.get('middlename', ''))
             self.lineEdit_lastname.setText(self.userObj.get('lastname', ''))
             self.lineEdit_username.setText(self.userObj.get('username', ''))
-            self.lineEdit_Answer.setText(self.userObj.get('answer', ''))
             self.txtContactPerson.setText(self.userObj.get('contact_person', ''))
             self.txtContactNum.setText(self.userObj.get('contact_number', ''))
 
@@ -359,14 +395,12 @@ class EditUserDialog(QDialog, Ui_EditUserDialog):
             "uname": self.lineEdit_username.text().strip(),
             "pwd": self.lineEdit_password.text(),
             "pos": self.comboBox_position.currentData(),
-            "q": self.comboBox_recoveryQuestion.currentText(),
-            "a": self.lineEdit_Answer.text().strip(),
             "contact_person": self.txtContactPerson.text().strip(),
             "contact_number": self.txtContactNum.text().strip()
         }
 
         # 2. Basic Validation: Required Fields
-        required_fields = ["fname", "lname", "uname", "a"]
+        required_fields = ["fname", "lname", "uname"]
         if not all(ui_data[field] for field in required_fields):
             QMessageBox.warning(self, "Validation Error", "All fields except Middle Name are required.")
             return
@@ -414,14 +448,8 @@ class EditUserDialog(QDialog, Ui_EditUserDialog):
                 params.append(bcrypt.hash(ui_data["pwd"]))
 
             sql += '    ,positionid = %s\n'
-            sql += '    ,recovery_question = %s\n'
-            sql += '    ,answer = %s\n'
 
-            params.extend([
-                ui_data["pos"],
-                ui_data["q"],
-                ui_data["a"]
-            ])
+            params.append(ui_data["pos"])
 
             if self.binaryImage:
                 sql += '    ,profile_pic = %s\n'

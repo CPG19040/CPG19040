@@ -25,9 +25,9 @@ class Ui_EditUserDialog(object):
     def setupUi(self, EditUserDialog):
         if not EditUserDialog.objectName():
             EditUserDialog.setObjectName(u"EditUserDialog")
-        EditUserDialog.resize(790, 604)
-        EditUserDialog.setMinimumSize(QSize(790, 604))
-        EditUserDialog.setMaximumSize(QSize(790, 604))
+        EditUserDialog.resize(790, 525)
+        EditUserDialog.setMinimumSize(QSize(790, 525))
+        EditUserDialog.setMaximumSize(QSize(790, 525))
         EditUserDialog.setStyleSheet(u"background-color: rgb(222, 221, 218); color: rgb(0, 0, 0);")
         self.verticalLayout = QVBoxLayout(EditUserDialog)
         self.verticalLayout.setObjectName(u"verticalLayout")
@@ -54,10 +54,6 @@ class Ui_EditUserDialog(object):
         self.btnUploadPhoto.setObjectName(u"btnUploadPhoto")
 
         self.gridLayout.addWidget(self.btnUploadPhoto, 1, 0, 1, 1)
-
-        self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
-
-        self.gridLayout.addItem(self.verticalSpacer_2, 2, 0, 1, 1)
 
 
         self.horizontalLayout.addWidget(self.widget_3)
@@ -140,39 +136,6 @@ class Ui_EditUserDialog(object):
         self.line.setFrameShadow(QFrame.Shadow.Sunken)
 
         self.verticalLayout.addWidget(self.line)
-
-        self.grp_recovery = QWidget(EditUserDialog)
-        self.grp_recovery.setObjectName(u"grp_recovery")
-        self.grp_recovery.setStyleSheet(u"QComboBox, QLineEdit { padding: 0px 5px 0px; }")
-        self.formLayout_4 = QFormLayout(self.grp_recovery)
-        self.formLayout_4.setObjectName(u"formLayout_4")
-        self.label_14 = QLabel(self.grp_recovery)
-        self.label_14.setObjectName(u"label_14")
-
-        self.formLayout_4.setWidget(0, QFormLayout.ItemRole.LabelRole, self.label_14)
-
-        self.comboBox_recoveryQuestion = QComboBox(self.grp_recovery)
-        self.comboBox_recoveryQuestion.setObjectName(u"comboBox_recoveryQuestion")
-        self.comboBox_recoveryQuestion.setMinimumSize(QSize(0, 30))
-        self.comboBox_recoveryQuestion.setStyleSheet(u"background-color: rgb(246, 245, 244);")
-        self.comboBox_recoveryQuestion.setEditable(True)
-
-        self.formLayout_4.setWidget(0, QFormLayout.ItemRole.FieldRole, self.comboBox_recoveryQuestion)
-
-        self.labelAnswer_2 = QLabel(self.grp_recovery)
-        self.labelAnswer_2.setObjectName(u"labelAnswer_2")
-
-        self.formLayout_4.setWidget(1, QFormLayout.ItemRole.LabelRole, self.labelAnswer_2)
-
-        self.lineEdit_Answer = QLineEdit(self.grp_recovery)
-        self.lineEdit_Answer.setObjectName(u"lineEdit_Answer")
-        self.lineEdit_Answer.setMinimumSize(QSize(0, 30))
-        self.lineEdit_Answer.setStyleSheet(u"background-color: rgb(246, 245, 244);")
-
-        self.formLayout_4.setWidget(1, QFormLayout.ItemRole.FieldRole, self.lineEdit_Answer)
-
-
-        self.verticalLayout.addWidget(self.grp_recovery)
 
         self.widget_form_3 = QWidget(EditUserDialog)
         self.widget_form_3.setObjectName(u"widget_form_3")
@@ -288,8 +251,6 @@ class Ui_EditUserDialog(object):
         self.label_10.setText(QCoreApplication.translate("EditUserDialog", u"Last name", None))
         self.label_11.setText(QCoreApplication.translate("EditUserDialog", u"User name", None))
         self.label_13.setText(QCoreApplication.translate("EditUserDialog", u"Position", None))
-        self.label_14.setText(QCoreApplication.translate("EditUserDialog", u"Recovery question", None))
-        self.labelAnswer_2.setText(QCoreApplication.translate("EditUserDialog", u"Answer", None))
         self.label_25.setText(QCoreApplication.translate("EditUserDialog", u"Change Password", None))
         self.label_12.setText(QCoreApplication.translate("EditUserDialog", u"Password", None))
         self.label_24.setText(QCoreApplication.translate("EditUserDialog", u"Emergency contact", None))

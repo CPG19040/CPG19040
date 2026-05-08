@@ -1,0 +1,5 @@
+sudo -u postgres psql -c "ALTER USER postgres PASSWORD '1234';"
+sudo -u postgres createdb DB_CAI
+
+//verify
+PGPASSWORD='1234' psql -h localhost -U postgres -d DB_CAI

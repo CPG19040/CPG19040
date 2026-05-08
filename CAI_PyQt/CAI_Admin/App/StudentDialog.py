@@ -94,7 +94,7 @@ class Student:
 
             self.db_tools.execute_query(sql, (ids, user["school_id"]))
 
-            actionStr = f"Successfully archived and deleted students: {ids}"
+            actionStr = f"Deleted students: {ids}"
             sql  = "INSERT INTO cai.tbl_audit_trail(user_id, username, action)\n"
             sql += "VALUES (%s, %s, %s);\n"
             self.db_tools.execute_query(sql, (user["school_id"], user["username"], actionStr))
@@ -201,7 +201,7 @@ class AddNewStudentDialog(QDialog, Ui_AddNewStudentDialog):
 
         sql = 'INSERT INTO cai.tbl_student_info(\n'
         sql += '    school_year\n'
-        sql += '    ,studentid\n'
+        sql += "    ,studentid\n"
         sql += '    ,firstname\n'
         sql += '    ,middlename\n'
         sql += '    ,lastname\n'
@@ -212,11 +212,12 @@ class AddNewStudentDialog(QDialog, Ui_AddNewStudentDialog):
         sql += '    ,contact_person\n'
         sql += '    ,contact_number\n'
         sql += ')\n'
-        sql += 'VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);'
+        sql += "VALUES (%s, \n"
+        sql += "    to_char(CURRENT_DATE, 'YYYY') || '-' || lpad(nextval('cai.student_id_seq')::text, 4, '0') || '-STU', \n"
+        sql += "    %s, %s, %s, %s, %s, %s, %s, %s, %s);"
 
         self.db_tools.execute_query(sql, (
             f"{sy1}-{sy2}",
-            self.generate_id(),
             firstname,
             middlename,
             lastname,
@@ -272,12 +273,13 @@ class AddNewStudentDialog(QDialog, Ui_AddNewStudentDialog):
             sql += '    ,contact_person\n'
             sql += '    ,contact_number\n'
             sql += ')\n'
-            sql += 'VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s);'
+            sql += 'VALUES (%s, \n'
+            sql += "    to_char(CURRENT_DATE, 'YYYY') || '-' || lpad(nextval('cai.student_id_seq')::text, 4, '0') || '-STU'\n"
+            sql += '    %s, %s, %s, %s, %s, %s, %s, %s);'
 
             for i, row in enumerate(reader, 1):
                 self.db_tools.execute_query(sql, (
                     f"{sy1}-{sy2}",
-                    self.generate_id(),
                     row['LAST NAME'],
                     row['FIRST NAME'],
                     row['MIDDLE NAME'],
@@ -443,25 +445,6 @@ class AddNewStudentDialog(QDialog, Ui_AddNewStudentDialog):
 
         conn.close()
         return tuple([0, 0, 0])
-
-    def generate_id(self):
-        try:
-            # Get the next number from the sequence
-            # This is atomic; Postgres ensures no two calls get the same number
-            cur, conn = self.db_tools.retrieve_records("SELECT nextval('cai.student_id_seq')")
-            next_num = cur.fetchone()[0] if cur else 1  # Fallback to 1 if something goes wrong
-
-            current_year = datetime.datetime.now().year
-
-            # Format: 2026-0001-STU
-            return f"{current_year}-{next_num:04d}-STU"
-
-        except Exception as e:
-            print(f"Error generating ID: {e}")
-            return None
-
-        finally:
-            conn.close()
 
     
 

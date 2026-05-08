@@ -3274,8 +3274,8 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>315</width>
-               <height>528</height>
+               <width>21</width>
+               <height>18</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_12"/>
@@ -3364,8 +3364,8 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>315</width>
-               <height>528</height>
+               <width>20</width>
+               <height>18</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_13"/>
@@ -3492,8 +3492,8 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>315</width>
-               <height>528</height>
+               <width>21</width>
+               <height>18</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_11"/>
@@ -4117,6 +4117,28 @@ QScrollBar::add-line, QScrollBar::sub-line {
              </property>
              <property name="text">
               <string>Edit User Information</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="btnDeleteUser">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>30</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="cursor">
+              <cursorShape>PointingHandCursor</cursorShape>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton { padding: 0px 10px 0px; }</string>
+             </property>
+             <property name="text">
+              <string>Delete User</string>
              </property>
             </widget>
            </item>
