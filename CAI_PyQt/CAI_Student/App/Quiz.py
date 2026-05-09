@@ -24,6 +24,8 @@ class Quiz(QFrame, Ui_CardQuiz):
         self.choice_b = ""
         self.choice_c = ""
 
+        self.correct_answer = ""
+
         self.input_css = """
             /* Styling the input field */
             QLineEdit {
@@ -211,17 +213,17 @@ class QuizUtils:
         if not scores:
             return
 
-        sql = "INSERT INTO cai.tbl_quizscores (\n"
-        sql += "    quiznumber\n"
-        sql += "    ,gradingperiod\n"
-        sql += "    ,lessonid\n"
-        sql += "    ,studentid\n"
-        sql += "    ,quizscore\n"
-        sql += "    ,totalitems\n"
-        sql += ")\n"
-        sql += "VALUES (%s, %s, %s, %s, %s, %s);"
-
         try:
+            sql = "INSERT INTO cai.tbl_quizscores (\n"
+            sql += "    quiznumber\n"
+            sql += "    ,gradingperiod\n"
+            sql += "    ,lessonid\n"
+            sql += "    ,studentid\n"
+            sql += "    ,quizscore\n"
+            sql += "    ,totalitems\n"
+            sql += ")\n"
+            sql += "VALUES (%s, %s, %s, %s, %s, %s);"
+            
             self.db_tools.execute_query(sql, (
                 scores.get("quiznumber"),
                 scores.get("gradingperiod"),

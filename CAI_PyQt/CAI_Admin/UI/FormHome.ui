@@ -2824,7 +2824,7 @@ QCheckBox::indicator:checked {
 }</string>
             </property>
             <property name="text">
-             <string>Lock Quiz</string>
+             <string>Unpublish Quiz</string>
             </property>
            </widget>
           </item>
@@ -3274,8 +3274,8 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>21</width>
-               <height>18</height>
+               <width>315</width>
+               <height>528</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_12"/>
@@ -3364,8 +3364,8 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>20</width>
-               <height>18</height>
+               <width>315</width>
+               <height>528</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_13"/>
@@ -3492,8 +3492,8 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>21</width>
-               <height>18</height>
+               <width>315</width>
+               <height>528</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_11"/>

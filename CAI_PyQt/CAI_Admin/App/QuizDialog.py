@@ -53,7 +53,7 @@ class Ui_QuizCreatorDialog(object):
 
         self.cbGradingPeriod = QComboBox(QuizCreatorDialog)
         self.cbGradingPeriod.setObjectName(u"cbGradingPeriod")
-        self.cbGradingPeriod.setMinimumSize(QSize(100, 30))
+        self.cbGradingPeriod.setMinimumSize(QSize(180, 30))
         self.cbGradingPeriod.setStyleSheet(u"color: rgb(0, 0, 0); background-color: rgb(246, 245, 244); padding: 0px 10px 0px;")
 
         self.headerLayout.addWidget(self.cbGradingPeriod)
@@ -65,7 +65,8 @@ class Ui_QuizCreatorDialog(object):
 
         self.cbLessonName = QComboBox(QuizCreatorDialog)
         self.cbLessonName.setObjectName(u"cbLessonName")
-        self.cbLessonName.setMinimumSize(QSize(100, 30))
+        self.cbLessonName.setMinimumSize(QSize(250, 30))
+        self.cbLessonName.setMaximumSize(QSize(250, 30))
         self.cbLessonName.setStyleSheet(u"color: rgb(0, 0, 0); background-color: rgb(246, 245, 244); padding: 0px 10px 0px;")
 
         self.headerLayout.addWidget(self.cbLessonName)
@@ -684,7 +685,7 @@ class Ui_QuizCreatorDialog(object):
         self.label_1.setText(QCoreApplication.translate("QuizCreatorDialog", u"Quiz #:", None))
         self.label_2.setText(QCoreApplication.translate("QuizCreatorDialog", u"Grading Period:", None))
         self.label_3.setText(QCoreApplication.translate("QuizCreatorDialog", u"Lesson Title:", None))
-        self.checkBoxLockQuiz.setText(QCoreApplication.translate("QuizCreatorDialog", u"Lock Quiz", None))
+        self.checkBoxLockQuiz.setText(QCoreApplication.translate("QuizCreatorDialog", u"Unpublish Quiz", None))
         self.label_4.setText(QCoreApplication.translate("QuizCreatorDialog", u"Total Score:", None))
         self.label_totalScore.setText(QCoreApplication.translate("QuizCreatorDialog", u"000", None))
         self.label_6.setText(QCoreApplication.translate("QuizCreatorDialog", u"Diffuculty:", None))

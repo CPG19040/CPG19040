@@ -155,7 +155,7 @@ class Controller:
         self.ui.btnEasy.setChecked(True)
 
         self.ui.quiz_no.valueChanged.connect(self.display_quiz)
-        self.ui.cbGradingPeriod.currentIndexChanged.connect(self.display_quiz)
+        self.ui.cbGradingPeriod.currentIndexChanged.connect(self.handle_quiz_filter)
         self.ui.cbLessonName.currentIndexChanged.connect(self.cbLesson_selection_change)
         self.ui.checkBoxLockQuiz.clicked.connect(self.save_quiz_lock_status)
         self.ui.checkBoxLockQuiz.setVisible(False)
@@ -651,6 +651,21 @@ class Controller:
 
         if quiz.exec() == QDialog.DialogCode.Accepted:
             self.display_quiz()
+
+    def handle_quiz_filter(self):
+        self.ui.cbLessonName.clear()
+        selected_period = self.ui.cbGradingPeriod.currentData()
+
+        if selected_period:
+            sql = 'SELECT\n'
+            sql += '    lesson_id\n'
+            sql += '    ,title\n'
+            sql += 'FROM cai.tbl_lessons\n'
+            sql += 'WHERE gradingperiod = %s\n'
+            sql += 'ORDER BY chapter, lessonnum ASC'
+            self.util.populate_pulldown(self.ui.cbLessonName, sql, params=(selected_period,), add_empty=True)
+
+        self.display_quiz()
 
     def display_quiz(self):
         from App.Quiz import Quiz, CardQuiz

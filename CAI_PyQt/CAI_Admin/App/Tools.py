@@ -105,7 +105,7 @@ class Utility:
         painter.end()
         return target
 
-    def populate_pulldown(self, pulldown:QComboBox, sql:str, params:tuple=None, add_empty:bool=False):
+    def populate_pulldown(self, pulldown, sql:str, params:tuple=None, add_empty:bool=False):
         """
         Fetches records from the database and populates a QComboBox (pulldown).
         

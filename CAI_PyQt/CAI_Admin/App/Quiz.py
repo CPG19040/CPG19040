@@ -285,9 +285,6 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
         sql += "UNION ALL\n"
         sql += "SELECT 4, 'Fourth Grading'\n"
         self.util.populate_pulldown(self.cbGradingPeriod, sql)
-        
-        self.populate_pulldown_lesson()
-        self.countLayoutChildren()
 
         self.btn_save.clicked.connect(self.save_to_db)
 
@@ -304,6 +301,9 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
         _idx = self.cbLessonName.findData(lesson_id)
         if _idx != -1:
             self.cbLessonName.setCurrentIndex(_idx)
+
+        self.populate_pulldown_lesson()
+        self.countLayoutChildren()
 
         self.difficulty_group = QButtonGroup(self)
         self.difficulty_group.setExclusive(True)
