@@ -16,14 +16,14 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QFrame, QHBoxLayout, QLabel,
-    QSizePolicy, QVBoxLayout, QWidget)
+    QSizePolicy, QSpacerItem, QVBoxLayout, QWidget)
 import resources_rc
 
 class Ui_CardQuiz(object):
     def setupUi(self, CardQuiz):
         if not CardQuiz.objectName():
             CardQuiz.setObjectName(u"CardQuiz")
-        CardQuiz.resize(558, 220)
+        CardQuiz.resize(314, 377)
         CardQuiz.setStyleSheet(u"background: transparent;")
         self.horizontalLayout = QHBoxLayout(CardQuiz)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
@@ -37,15 +37,16 @@ class Ui_CardQuiz(object):
 "	border-radius: 10px;\n"
 "	border: 1px solid #ddd;\n"
 "}\n"
+"/*\n"
 "#Card:hover {\n"
 "	border: 3px solid #3498db;\n"
 "	background-color: #f7fbfe;\n"
 "}\n"
-"/* This style applies when the custom property is true */\n"
 "#Card[selected=\"true\"] {\n"
 "	background-color: #e1f5fe;\n"
 "	border: 2px solid #3498db;\n"
 "}\n"
+"*/\n"
 "QLabel {\n"
 "	color: #333;\n"
 "}")
@@ -73,6 +74,30 @@ class Ui_CardQuiz(object):
 
         self.verticalLayout_2.addWidget(self.label_itemno)
 
+        self.widget = QWidget(self.frame_2)
+        self.widget.setObjectName(u"widget")
+        self.horizontalLayout_3 = QHBoxLayout(self.widget)
+        self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_3.addItem(self.horizontalSpacer)
+
+        self.label_q_image = QLabel(self.widget)
+        self.label_q_image.setObjectName(u"label_q_image")
+        self.label_q_image.setMinimumSize(QSize(200, 200))
+        self.label_q_image.setMaximumSize(QSize(200, 200))
+        self.label_q_image.setStyleSheet(u"border-image: url(:/Images/Images/no-image2.png);")
+        self.label_q_image.setScaledContents(True)
+
+        self.horizontalLayout_3.addWidget(self.label_q_image)
+
+        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_3.addItem(self.horizontalSpacer_2)
+
+
+        self.verticalLayout_2.addWidget(self.widget)
+
         self.label_question = QLabel(self.frame_2)
         self.label_question.setObjectName(u"label_question")
         self.label_question.setStyleSheet(u"padding: 0px 10px 0px; font: 11pt \"Inter\";")
@@ -83,15 +108,6 @@ class Ui_CardQuiz(object):
 
 
         self.horizontalLayout_2.addWidget(self.frame_2)
-
-        self.label_q_image = QLabel(self.Card)
-        self.label_q_image.setObjectName(u"label_q_image")
-        self.label_q_image.setMinimumSize(QSize(200, 200))
-        self.label_q_image.setMaximumSize(QSize(200, 200))
-        self.label_q_image.setStyleSheet(u"border-image: url(:/Images/Images/no-image2.png);")
-        self.label_q_image.setScaledContents(True)
-
-        self.horizontalLayout_2.addWidget(self.label_q_image)
 
 
         self.horizontalLayout.addWidget(self.Card)
@@ -105,7 +121,7 @@ class Ui_CardQuiz(object):
     def retranslateUi(self, CardQuiz):
         CardQuiz.setWindowTitle(QCoreApplication.translate("CardQuiz", u"Form", None))
         self.label_itemno.setText(QCoreApplication.translate("CardQuiz", u"ITEM 1", None))
-        self.label_question.setText(QCoreApplication.translate("CardQuiz", u"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.", None))
         self.label_q_image.setText("")
+        self.label_question.setText(QCoreApplication.translate("CardQuiz", u"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.", None))
     # retranslateUi
 

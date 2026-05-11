@@ -161,6 +161,10 @@ class Controller:
         self.ui.checkBoxLockQuiz.setVisible(False)
         self.ui.btnQuizAdd.clicked.connect(self.showQuizDialog)
 
+        self.ui.table_student_score_idv.clicked.connect(self.handle_report_student_click)
+        self.ui.btnEvaluateQuiz.clicked.connect(self.evaluate_quiz)
+        self.ui.cb_gp_quiz_idv.currentIndexChanged.connect(self.handle_reports_filter)
+
         #=============================================================
         #  Application-Level Privileges (Role-Based Access Control)
         #=============================================================
@@ -260,30 +264,47 @@ class Controller:
             self.displayLessons()
 
         elif index == 3: # Quiz
-            sql =  "SELECT 1 AS index, 'First Grading' AS itemname\n"
-            sql += "UNION ALL\n"
-            sql += "SELECT 2, 'Second Grading'\n"
-            sql += "UNION ALL\n"
-            sql += "SELECT 3, 'Third Grading'\n"
-            sql += "UNION ALL\n"
-            sql += "SELECT 4, 'Fourth Grading'\n"
-            self.util.populate_pulldown(self.ui.cbGradingPeriod, sql)
+            # sql =  "SELECT 1 AS index, 'First Grading' AS itemname\n"
+            # sql += "UNION ALL\n"
+            # sql += "SELECT 2, 'Second Grading'\n"
+            # sql += "UNION ALL\n"
+            # sql += "SELECT 3, 'Third Grading'\n"
+            # sql += "UNION ALL\n"
+            # sql += "SELECT 4, 'Fourth Grading'\n"
+            # self.util.populate_pulldown(self.ui.cbGradingPeriod, sql)
 
-            selected_period = self.ui.cbGradingPeriod.currentData()
+            # selected_period = self.ui.cbGradingPeriod.currentData()
 
-            if selected_period:
-                sql = 'SELECT\n'
-                sql += '    lesson_id\n'
-                sql += '    ,title\n'
-                sql += 'FROM cai.tbl_lessons\n'
-                sql += 'WHERE gradingperiod = %s\n'
-                sql += 'ORDER BY chapter, lessonnum ASC'
-                self.util.populate_pulldown(self.ui.cbLessonName, sql, params=(selected_period,), add_empty=True)
+            # if selected_period:
+            #     sql = 'SELECT\n'
+            #     sql += '    lesson_id\n'
+            #     sql += '    ,title\n'
+            #     sql += 'FROM cai.tbl_lessons\n'
+            #     sql += 'WHERE gradingperiod = %s\n'
+            #     sql += 'ORDER BY chapter, lessonnum ASC'
+            #     self.util.populate_pulldown(self.ui.cbLessonName, sql, params=(selected_period,), add_empty=True)
+
+            self.util.populate_pulldowns(self.ui.cbGradingPeriod, self.ui.cbLessonName)
 
             self.display_quiz()
 
         elif index == 5:
             self.display_section_info()
+
+        elif index == 6: # Reports
+            self.util.populate_pulldowns(self.ui.cb_gp_quiz_idv, self.ui.cb_ln_quiz_idv)
+
+            stud = Student()
+            new_model = stud.refresh_student_table(None)
+            self.ui.table_student_score_idv.sortByColumn(-1, Qt.AscendingOrder)
+
+            if new_model:
+                self.ui.table_student_score_idv.setModel(new_model)
+                header = self.ui.table_student_score_idv.horizontalHeader()
+                header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+                header.setSectionResizeMode(0, QHeaderView.ResizeMode.ResizeToContents)
+                header.setSectionResizeMode(4, QHeaderView.ResizeMode.ResizeToContents)
+                header.setSectionResizeMode(5, QHeaderView.ResizeMode.ResizeToContents)
 
         elif index == 7:
             self.displayUsers()
@@ -409,8 +430,8 @@ class Controller:
             self.cards.clear()
 
             # 2. Fetch data
-            studDialog = AddNewStudentDialog(self.script_dir)
-            students = studDialog.refresh_student_cards(params)
+            stud = Student()
+            students = stud.refresh_student_cards(params)
 
             # Update count label
             count = len(students)
@@ -541,8 +562,8 @@ class Controller:
         section_id = self.ui.comboBox_Section.currentData()
 
         if section_id:
-            studDialog = AddNewStudentDialog(self.script_dir)
-            new_model = studDialog.refresh_student_table(section_id)
+            stud = Student()
+            new_model = stud.refresh_student_table(section_id)
 
             if new_model:
                 self.ui.table_section.setModel(new_model)
@@ -708,7 +729,7 @@ class Controller:
             card.idKey = row["idkey"]
             card.itemno = row["itemno"]
             card.question = row["question"]
-            card.answer = row["correct_answer_1"]
+            card.answer = row["correct_answer"]
             card.imageQ = row["imagequestion"]
             card.setAttributes()
 
@@ -891,7 +912,6 @@ class Controller:
 
         if not lesson_id:
             return
-        
 
         lesson_obj = Lesson()
         # Unpack the 8-tuple from retrieve_lesson_info method
@@ -911,5 +931,56 @@ class Controller:
         else:
             QMessageBox.warning(self.ui.table_lesson.window(), "Missing Path", 
                                 f"No file path associated with: {lesson_title}")
+            
+    def handle_report_student_click(self, index):
+        studentId = index.siblingAtColumn(0).data()
+
+        from App.Quiz import Quiz
+        quiz = Quiz()
+        model = quiz.get_scores(
+            studentId, 
+            self.ui.quiz_no_idv.value(), 
+            self.ui.cb_gp_quiz_idv.currentData(), 
+            self.ui.cb_ln_quiz_idv.currentData()
+        )
+
+        if model:
+            self.ui.table_quiz_score_idv.setModel(model)
+            self.ui.table_quiz_score_idv.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+
+    def handle_reports_filter(self):
+        self.ui.cbLessonName.clear()
+        selected_period = self.ui.cb_gp_quiz_idv.currentData()
+
+        if selected_period:
+            sql = 'SELECT\n'
+            sql += '    lesson_id\n'
+            sql += '    ,title\n'
+            sql += 'FROM cai.tbl_lessons\n'
+            sql += 'WHERE gradingperiod = %s\n'
+            sql += 'ORDER BY chapter, lessonnum ASC'
+            self.util.populate_pulldown(self.ui.cb_ln_quiz_idv, sql, params=(selected_period,), add_empty=True)
+
+    def evaluate_quiz(self):
+        from App.Assessment import Assessment
+        assmt = Assessment()
+        
+        selection = self.ui.table_student_score_idv.selectionModel()
+
+        if not selection.hasSelection():
+            self.ui.table_quiz_score_idv.setModel(None)
+            QMessageBox.information(self.home_win, "No Selection", "Select a lesson to view.")
+            return
+        
+        selected_row_index = selection.selectedRows()[0].row()
+        model = self.ui.table_student_score_idv.model()
+        student_id = model.index(selected_row_index, 0).data()
+
+        assmt.evaluate_quiz(
+            student_id, 
+            self.ui.quiz_no_idv.value(), 
+            self.ui.cb_ln_quiz_idv.currentData(), 
+            self.ui.cb_gp_quiz_idv.currentData()
+        )
 
     

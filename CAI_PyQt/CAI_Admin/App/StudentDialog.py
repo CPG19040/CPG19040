@@ -17,6 +17,97 @@ class Student:
         self.db_tools = DatabaseTools()
         self.circular_bar = CircularProgress()
 
+    def refresh_student_table(self, sectionid):
+        sql = 'SELECT\n'
+        sql += '    stud.studentid AS "STUDENT ID"\n'
+        sql += '    ,stud.lastname AS "LAST NAME"\n'
+        sql += '    ,stud.firstname AS "FIRST NAME"\n'
+        sql += '    ,stud.middlename AS "MIDDLE NAME"\n'
+        sql += '    ,sec.sectionname AS "SECTION"\n'
+        sql += '    ,stud.gender AS "GENDER"\n'
+        sql += 'FROM\n'
+        sql += '    cai.tbl_student_info stud\n'
+        sql += 'INNER JOIN\n'
+        sql += '    cai.tbl_section sec\n'
+        sql += '    ON stud.sectionid = sec.sectionid\n'
+
+        params = []
+
+        if sectionid:
+            sql += '    AND stud.sectionid = %s\n'
+            params.append(sectionid)
+
+        sql += 'ORDER BY\n'
+        sql += '    stud.lastname, stud.firstname ASC'
+
+        params = tuple(params) if params else None
+
+        cursor, conn = self.db_tools.retrieve_records(sql, params)
+        if cursor:
+            headers = [desc[0] for desc in cursor.description]
+            records = cursor.fetchall()
+            model = QStandardItemModel(len(records), len(headers))
+            model.setHorizontalHeaderLabels(headers)
+
+            for row_idx, row_data in enumerate(records):
+
+                for col_idx, value in enumerate(row_data):
+                    item = QStandardItem(str(value) if value is not None else "")
+                    item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsEditable)
+                    model.setItem(row_idx, col_idx, item)
+
+            cursor.close()
+            conn.close()
+            return model
+
+        if conn: conn.close()
+        return None
+    
+    def refresh_student_cards(self, params):
+        schoolYear, sectionid, text = params
+
+        sql = 'SELECT\n'
+        sql += '    studentid\n'
+        sql += '    ,firstname\n'
+        sql += '    ,middlename\n'
+        sql += '    ,lastname\n'
+        sql += '    ,sectionid\n'
+        sql += '    ,gender\n'
+        sql += '    ,password\n'
+        sql += '    ,profile_pic\n'
+        sql += 'FROM cai.tbl_student_info\n'
+        sql += 'WHERE school_year = %s\n'
+
+        params2 = [schoolYear]
+
+        if sectionid:
+            sql += '    AND sectionid = %s\n'
+            params2.append(sectionid)
+
+        # Global search across multiple columns
+        if text:
+            sql += '    AND (\n'
+            sql += '        studentid ILIKE %s OR\n'
+            sql += '        firstname ILIKE %s OR\n'
+            sql += '        lastname ILIKE %s\n'
+            sql += '    )\n'
+            
+            # Append the search term 3 times to match the 3 placeholders
+            search_term = f"%{text}%"
+            params2.extend([search_term, search_term, search_term])
+
+        sql += 'ORDER BY lastname ASC'
+
+        cursor, conn = self.db_tools.retrieve_records(sql, tuple(params2))
+        if cursor:
+            records = cursor.fetchall()
+            cursor.close()
+            conn.close()
+            return records
+
+        if conn: conn.close()
+        return list()
+
     def getStudentMastery(self):
         """
             This calculates the percentage for every quiz and adds a "Status" label based on their performance.
@@ -309,90 +400,7 @@ class AddNewStudentDialog(QDialog, Ui_AddNewStudentDialog):
         }
         
         return lookup.get(clean_gender, "")
-
-    def refresh_student_table(self, sectionid):
-        sql = 'SELECT\n'
-        sql += '    stud.studentid AS "Student ID"\n'
-        sql += '    ,stud.lastname AS "Last Name"\n'
-        sql += '    ,stud.firstname AS "First Name"\n'
-        sql += '    ,stud.middlename AS "Middle Name"\n'
-        sql += '    ,sec.sectionname AS "Section"\n'
-        sql += '    ,stud.gender AS "Gender"\n'
-        sql += 'FROM\n'
-        sql += '    cai.tbl_student_info stud\n'
-        sql += 'INNER JOIN\n'
-        sql += '    cai.tbl_section sec\n'
-        sql += '    ON stud.sectionid = sec.sectionid\n'
-        sql += '    AND stud.sectionid = %s\n'
-        sql += 'ORDER BY\n'
-        sql += '    stud.lastname ASC'
-
-        cursor, conn = self.db_tools.retrieve_records(sql, (sectionid,))
-        if cursor:
-            headers = [desc[0] for desc in cursor.description]
-            records = cursor.fetchall()
-            model = QStandardItemModel(len(records), len(headers))
-            model.setHorizontalHeaderLabels(headers)
-
-            for row_idx, row_data in enumerate(records):
-
-                for col_idx, value in enumerate(row_data):
-                    item = QStandardItem(str(value) if value is not None else "")
-                    item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsEditable)
-                    model.setItem(row_idx, col_idx, item)
-
-            cursor.close()
-            conn.close()
-            return model
-
-        if conn: conn.close()
-        return None
     
-    def refresh_student_cards(self, params):
-        schoolYear, sectionid, text = params
-
-        sql = 'SELECT\n'
-        sql += '    studentid\n'
-        sql += '    ,firstname\n'
-        sql += '    ,middlename\n'
-        sql += '    ,lastname\n'
-        sql += '    ,sectionid\n'
-        sql += '    ,gender\n'
-        sql += '    ,password\n'
-        sql += '    ,profile_pic\n'
-        sql += 'FROM cai.tbl_student_info\n'
-        sql += 'WHERE school_year = %s\n'
-
-        params2 = [schoolYear]
-
-        if sectionid:
-            sql += '    AND sectionid = %s\n'
-            params2.append(sectionid)
-
-        # Global search across multiple columns
-        if text:
-            sql += '    AND (\n'
-            sql += '        studentid ILIKE %s OR\n'
-            sql += '        firstname ILIKE %s OR\n'
-            sql += '        lastname ILIKE %s\n'
-            sql += '    )\n'
-            
-            # Append the search term 3 times to match the 3 placeholders
-            search_term = f"%{text}%"
-            params2.extend([search_term, search_term, search_term])
-
-        sql += 'ORDER BY lastname ASC'
-
-        cursor, conn = self.db_tools.retrieve_records(sql, tuple(params2))
-        if cursor:
-            records = cursor.fetchall()
-            cursor.close()
-            conn.close()
-            return records
-
-        if conn: conn.close()
-        return list()
-
     def refresh_student_info(self, student_id):
         sql = 'SELECT\n'
         sql += '    stud.studentid\n'

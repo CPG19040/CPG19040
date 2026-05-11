@@ -8,14 +8,17 @@ from PySide6.QtCore import (Qt, QSize)
 
 class Quiz(QFrame, Ui_CardQuiz):
 
-    def __init__(self, item_type):
+    def __init__(self, quiz_type):
         super().__init__()
         self.setupUi(self)
         self.db_tools = DatabaseTools()
         self.util = Utility()
 
-        self.item_type = item_type
+        self.quiz_type = quiz_type
         self.idKey = None
+        self.quiznumber = None
+        self.gradingperiod = None
+        self.lessonid = None
         self.itemno = ""
         self.question = ""
         self.imageQ = None
@@ -57,7 +60,7 @@ class Quiz(QFrame, Ui_CardQuiz):
         self.init_answers()
 
     def init_answers(self):
-        if self.item_type == "Identification":
+        if self.quiz_type == "ID":
             self.ans_input = QLineEdit() # renamed to avoid confusion
             self.ans_input.setPlaceholderText("Enter your answer here")
             self.ans_input.setMinimumSize(QSize(0, 30))
@@ -66,7 +69,7 @@ class Quiz(QFrame, Ui_CardQuiz):
 
         else:
             self.button_group = QButtonGroup(self)
-            labels = [self.choice_a, self.choice_b, self.choice_c] if self.item_type == "Multiple Choice" else ["True", "False"]
+            labels = [self.choice_a, self.choice_b, self.choice_c] if self.quiz_type == "MC" else ["True", "False"]
 
             self.opts = [] # To keep references if needed
             for i, text in enumerate(labels):
@@ -81,10 +84,10 @@ class Quiz(QFrame, Ui_CardQuiz):
     def get_answer(self):
         """Returns the current input value of the card."""
 
-        if self.item_type == "Identification":
+        if self.quiz_type == "ID":
             return self.ans_input.text().strip()
         
-        elif self.item_type in ["Multiple Choice", "True or False"]:
+        elif self.quiz_type in ["MC", "TF"]:
             selected_button = self.button_group.checkedButton()
 
             if selected_button:
@@ -144,10 +147,13 @@ class QuizUtils:
 
         sql_id  = "SELECT\n"
         sql_id += "    IDKEY,\n"
+        sql_id += "    quiznumber,\n"
+        sql_id += "    gradingperiod,\n"
+        sql_id += "    lessonid,\n"
         sql_id += "    ITEMNO,\n"
         sql_id += "    QUESTION,\n"
         sql_id += "    IMAGEQUESTION,\n"
-        sql_id += "    CORRECT_ANSWER_1\n"
+        sql_id += "    CORRECT_ANSWER\n"
         sql_id += "FROM\n"
         sql_id += "    cai.tbl_quizidentification\n"
         sql_id += "WHERE\n"
@@ -158,6 +164,9 @@ class QuizUtils:
 
         sql_mc  = "SELECT\n"
         sql_mc += "    MCKEY,\n"
+        sql_mc += "    quiznumber,\n"
+        sql_mc += "    gradingperiod,\n"
+        sql_mc += "    lessonid,\n"
         sql_mc += "    ITEMNO,\n"
         sql_mc += "    QUESTION,\n"
         sql_mc += "    IMAGEQUESTION,\n"
@@ -175,6 +184,9 @@ class QuizUtils:
 
         sql_tf  = "SELECT\n"
         sql_tf += "    TFKEY,\n"
+        sql_tf += "    quiznumber,\n"
+        sql_tf += "    gradingperiod,\n"
+        sql_tf += "    lessonid,\n"
         sql_tf += "    ITEMNO,\n"
         sql_tf += "    QUESTION,\n"
         sql_tf += "    IMAGEQUESTION,\n"
@@ -209,32 +221,48 @@ class QuizUtils:
 
         return record_id, record_mc, record_tf
 
-    def save_quiz(self, scores = {}):
-        if not scores:
+    def save_quiz(self, student_id, quiz_cards):
+        if not quiz_cards:
             return
 
         try:
-            sql = "INSERT INTO cai.tbl_quizscores (\n"
-            sql += "    quiznumber\n"
-            sql += "    ,gradingperiod\n"
-            sql += "    ,lessonid\n"
-            sql += "    ,studentid\n"
-            sql += "    ,quizscore\n"
-            sql += "    ,totalitems\n"
-            sql += ")\n"
-            sql += "VALUES (%s, %s, %s, %s, %s, %s);"
-            
-            self.db_tools.execute_query(sql, (
-                scores.get("quiznumber"),
-                scores.get("gradingperiod"),
-                scores.get("lessonid"),
-                scores.get("studentid"),
-                scores.get("quizscore"),
-                scores.get("totalitems"),
-            ))
+            conn = self.db_tools.get_connection()
+            conn.autocommit = False
 
-            QMessageBox.information(self, "Success", "Quiz results saved successfully!")
-            self.accept()
+            with conn.cursor() as cur:
+
+                for card in quiz_cards:
+                    student_ans = card.get_answer().strip().lower()
+                    is_correct = (card.correct_answer.strip().lower() == student_ans)
+                    remark = "Correct" if is_correct else "Incorrect"
+
+                    sql = """
+                        INSERT INTO cai.tbl_answers (
+                            assmt_key, quiztype, quiznumber, itemno, answer, studentid, remarks
+                        ) VALUES (%s, %s, %s, %s, %s, %s, %s)
+                        ON CONFLICT (assmt_key, quiztype, quiznumber, itemno, studentid)
+                        DO UPDATE SET
+                        answer = EXCLUDED.answer,
+                        datetaken = CURRENT_TIMESTAMP,
+                        remarks = EXCLUDED.remarks;
+                    """
+                    
+                    cur.execute(sql, (
+                        card.idKey,
+                        card.quiz_type,
+                        card.quiznumber,
+                        card.itemno,
+                        student_ans,
+                        student_id,
+                        remark
+                    ))
+
+            conn.commit()
+            print("Quiz results saved successfully!")
 
         except Exception as e:
-            QMessageBox.critical(self, "Database Error", f"Failed to save: {str(e)}")
+            if conn: conn.rollback()
+            print(f"Failed to save: {str(e)}")
+
+        finally:
+            if conn: conn.close()

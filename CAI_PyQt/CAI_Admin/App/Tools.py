@@ -140,6 +140,27 @@ class Utility:
             if conn:
                 conn.close()
 
+    def populate_pulldowns(self, pulldown_gradingPeroid, pulldown_lessons):
+        sql =  "SELECT 1 AS index, 'First Grading' AS itemname\n"
+        sql += "UNION ALL\n"
+        sql += "SELECT 2, 'Second Grading'\n"
+        sql += "UNION ALL\n"
+        sql += "SELECT 3, 'Third Grading'\n"
+        sql += "UNION ALL\n"
+        sql += "SELECT 4, 'Fourth Grading'\n"
+        self.populate_pulldown(pulldown_gradingPeroid, sql)
+
+        selected_period = pulldown_gradingPeroid.currentData()
+
+        if selected_period:
+            sql = 'SELECT\n'
+            sql += '    lesson_id\n'
+            sql += '    ,title\n'
+            sql += 'FROM cai.tbl_lessons\n'
+            sql += 'WHERE gradingperiod = %s\n'
+            sql += 'ORDER BY chapter, lessonnum ASC'
+            self.populate_pulldown(pulldown_lessons, sql, params=(selected_period,), add_empty=True)
+
     def isEmpty(self, val):
         """Evaluate if val is NONE, NULL, 'N/A', or ''"""
         # 1. Handle None or empty objects immediately

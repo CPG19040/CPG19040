@@ -2106,6 +2106,362 @@ class Ui_Home(object):
         self.tabWidget.addTab(self.tab, "")
         self.tab_2 = QWidget()
         self.tab_2.setObjectName(u"tab_2")
+        self.verticalLayout_21 = QVBoxLayout(self.tab_2)
+        self.verticalLayout_21.setObjectName(u"verticalLayout_21")
+        self.widget_10 = QWidget(self.tab_2)
+        self.widget_10.setObjectName(u"widget_10")
+        self.verticalLayout_20 = QVBoxLayout(self.widget_10)
+        self.verticalLayout_20.setSpacing(0)
+        self.verticalLayout_20.setObjectName(u"verticalLayout_20")
+        self.verticalLayout_20.setContentsMargins(0, 0, 0, 0)
+        self.widget_5 = QWidget(self.widget_10)
+        self.widget_5.setObjectName(u"widget_5")
+        self.widget_5.setStyleSheet(u"#widget_5 { \n"
+"	background-color: rgb(224, 243, 255);\n"
+"	border: 1px solid rgb(98, 160, 234);\n"
+"	border-top-left-radius: 6px;\n"
+"	border-top-right-radius: 6px;\n"
+"}\n"
+"\n"
+"QLabel {\n"
+"	background: transparent;\n"
+"	border: none;\n"
+"}")
+        self.horizontalLayout_20 = QHBoxLayout(self.widget_5)
+        self.horizontalLayout_20.setObjectName(u"horizontalLayout_20")
+        self.labelGradingPeriod_3 = QLabel(self.widget_5)
+        self.labelGradingPeriod_3.setObjectName(u"labelGradingPeriod_3")
+
+        self.horizontalLayout_20.addWidget(self.labelGradingPeriod_3)
+
+        self.quiz_no_idv = QSpinBox(self.widget_5)
+        self.quiz_no_idv.setObjectName(u"quiz_no_idv")
+        self.quiz_no_idv.setMinimumSize(QSize(0, 30))
+        self.quiz_no_idv.setStyleSheet(u"background-color: rgb(246, 245, 244); padding: 0px 5px 0px;")
+        self.quiz_no_idv.setMinimum(1)
+        self.quiz_no_idv.setMaximum(999)
+        self.quiz_no_idv.setValue(1)
+
+        self.horizontalLayout_20.addWidget(self.quiz_no_idv)
+
+        self.labelGradingPeriod_4 = QLabel(self.widget_5)
+        self.labelGradingPeriod_4.setObjectName(u"labelGradingPeriod_4")
+
+        self.horizontalLayout_20.addWidget(self.labelGradingPeriod_4)
+
+        self.cb_gp_quiz_idv = QComboBox(self.widget_5)
+        self.cb_gp_quiz_idv.setObjectName(u"cb_gp_quiz_idv")
+        self.cb_gp_quiz_idv.setMinimumSize(QSize(120, 30))
+        self.cb_gp_quiz_idv.setStyleSheet(u"color: rgb(0, 0, 0); background-color: rgb(246, 245, 244); padding: 0px 10px 0px;")
+
+        self.horizontalLayout_20.addWidget(self.cb_gp_quiz_idv)
+
+        self.labelLesson_2 = QLabel(self.widget_5)
+        self.labelLesson_2.setObjectName(u"labelLesson_2")
+
+        self.horizontalLayout_20.addWidget(self.labelLesson_2)
+
+        self.cb_ln_quiz_idv = QComboBox(self.widget_5)
+        self.cb_ln_quiz_idv.setObjectName(u"cb_ln_quiz_idv")
+        self.cb_ln_quiz_idv.setMinimumSize(QSize(120, 30))
+        self.cb_ln_quiz_idv.setStyleSheet(u"color: rgb(0, 0, 0); background-color: rgb(246, 245, 244); padding: 0px 10px 0px;")
+
+        self.horizontalLayout_20.addWidget(self.cb_ln_quiz_idv)
+
+        self.btnEvaluateQuiz = QPushButton(self.widget_5)
+        self.btnEvaluateQuiz.setObjectName(u"btnEvaluateQuiz")
+        self.btnEvaluateQuiz.setMinimumSize(QSize(0, 30))
+        self.btnEvaluateQuiz.setStyleSheet(u"padding: 0px 10px 0px;")
+
+        self.horizontalLayout_20.addWidget(self.btnEvaluateQuiz)
+
+        self.horizontalSpacer_13 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_20.addItem(self.horizontalSpacer_13)
+
+        self.txt_search_score_idv = QLineEdit(self.widget_5)
+        self.txt_search_score_idv.setObjectName(u"txt_search_score_idv")
+        self.txt_search_score_idv.setMinimumSize(QSize(0, 30))
+        self.txt_search_score_idv.setStyleSheet(u"QLineEdit { \n"
+"	background-color: rgb(246, 245, 244);\n"
+"	color: rgb(0, 0, 0);\n"
+"	padding: 0px 10px 0px;\n"
+"	border-radius: 6px;\n"
+"	border: 1px solid rgb(161, 161, 161);\n"
+"}\n"
+"\n"
+"QLineEdit:focus {\n"
+"	border: 1px solid rgb(53, 132, 228);\n"
+"}")
+
+        self.horizontalLayout_20.addWidget(self.txt_search_score_idv)
+
+
+        self.verticalLayout_20.addWidget(self.widget_5)
+
+        self.table_student_score_idv = QTableView(self.widget_10)
+        self.table_student_score_idv.setObjectName(u"table_student_score_idv")
+        self.table_student_score_idv.setStyleSheet(u"QTableView {\n"
+"    border: 1px solid rgb(161, 161, 161);\n"
+"    gridline-color: #f0f0f0;\n"
+"    background-color: white;\n"
+"    selection-background-color: rgba(38, 162, 105, 0.2);\n"
+"    selection-color: black;\n"
+"    outline: none;\n"
+"}\n"
+"\n"
+"/* Remove the row numbers (Vertical Header) */\n"
+"QHeaderView:vertical {\n"
+"    width: 0px;\n"
+"}\n"
+"\n"
+"QHeaderView::section:vertical {\n"
+"    width: 0px;\n"
+"    border: none;\n"
+"}\n"
+"\n"
+"/* Style the top horizontal header */\n"
+"QHeaderView::section:horizontal {\n"
+"    background-color: rgb(222, 255, 233);  \n"
+"    color: black;\n"
+"    padding: 6px;\n"
+"    font-weight: bold;\n"
+"}\n"
+"\n"
+"/* Custom Scrollbars */\n"
+"QScrollBar:vertical {\n"
+"    border: none;\n"
+"    background: #f8f8f8;\n"
+"    width: 10px;\n"
+"}\n"
+"\n"
+"QScrollBar::handle:vertical {\n"
+"    background: rgb(38, 162, 105);\n"
+"    min-height: 30px;\n"
+"    border-radius: 5px; \n"
+"    margin: 2px;\n"
+"}\n"
+"\n"
+"QScrollBar:horizontal {\n"
+"    border: none;\n"
+"    background"
+                        ": #f8f8f8;\n"
+"    height: 10px;\n"
+"}\n"
+"\n"
+"QScrollBar::handle:horizontal {\n"
+"    background: rgb(38, 162, 105);\n"
+"    min-width: 30px;\n"
+"    border-radius: 5px;\n"
+"    margin: 2px;\n"
+"}\n"
+"\n"
+"/* Remove scrollbar arrows */\n"
+"QScrollBar::add-line, QScrollBar::sub-line {\n"
+"    width: 0px; height: 0px;\n"
+"}")
+        self.table_student_score_idv.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.table_student_score_idv.setSortingEnabled(True)
+        self.table_student_score_idv.verticalHeader().setVisible(False)
+
+        self.verticalLayout_20.addWidget(self.table_student_score_idv)
+
+
+        self.verticalLayout_21.addWidget(self.widget_10)
+
+        self.widget_8 = QWidget(self.tab_2)
+        self.widget_8.setObjectName(u"widget_8")
+        self.verticalLayout_19 = QVBoxLayout(self.widget_8)
+        self.verticalLayout_19.setSpacing(0)
+        self.verticalLayout_19.setObjectName(u"verticalLayout_19")
+        self.verticalLayout_19.setContentsMargins(0, 0, 0, 0)
+        self.widget_7 = QWidget(self.widget_8)
+        self.widget_7.setObjectName(u"widget_7")
+        self.widget_7.setStyleSheet(u"QWidget { \n"
+"	background-color: rgb(224, 243, 255);\n"
+"	border: 1px solid rgb(98, 160, 234);\n"
+"	border-top-left-radius: 6px;\n"
+"    border-top-right-radius: 6px;\n"
+"}\n"
+"\n"
+"QLabel {\n"
+"	background: transparent;\n"
+"	border: none;\n"
+"}")
+        self.horizontalLayout_21 = QHBoxLayout(self.widget_7)
+        self.horizontalLayout_21.setObjectName(u"horizontalLayout_21")
+        self.label_student_icon = QLabel(self.widget_7)
+        self.label_student_icon.setObjectName(u"label_student_icon")
+        self.label_student_icon.setMaximumSize(QSize(30, 30))
+        self.label_student_icon.setPixmap(QPixmap(u":/Images/Images/profile_gray.png"))
+        self.label_student_icon.setScaledContents(True)
+
+        self.horizontalLayout_21.addWidget(self.label_student_icon)
+
+        self.label_student_name = QLabel(self.widget_7)
+        self.label_student_name.setObjectName(u"label_student_name")
+
+        self.horizontalLayout_21.addWidget(self.label_student_name)
+
+        self.horizontalSpacer_14 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_21.addItem(self.horizontalSpacer_14)
+
+        self.label_avg_icon = QLabel(self.widget_7)
+        self.label_avg_icon.setObjectName(u"label_avg_icon")
+        self.label_avg_icon.setMaximumSize(QSize(30, 30))
+        self.label_avg_icon.setPixmap(QPixmap(u":/Images/Images/trophy.png"))
+        self.label_avg_icon.setScaledContents(True)
+        self.label_avg_icon.setMargin(2)
+
+        self.horizontalLayout_21.addWidget(self.label_avg_icon)
+
+        self.label_avg = QLabel(self.widget_7)
+        self.label_avg.setObjectName(u"label_avg")
+
+        self.horizontalLayout_21.addWidget(self.label_avg)
+
+        self.label_average_percentage = QLabel(self.widget_7)
+        self.label_average_percentage.setObjectName(u"label_average_percentage")
+
+        self.horizontalLayout_21.addWidget(self.label_average_percentage)
+
+        self.horizontalSpacer_15 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_21.addItem(self.horizontalSpacer_15)
+
+        self.label_lessons_prog_icon = QLabel(self.widget_7)
+        self.label_lessons_prog_icon.setObjectName(u"label_lessons_prog_icon")
+        self.label_lessons_prog_icon.setMaximumSize(QSize(30, 30))
+        self.label_lessons_prog_icon.setPixmap(QPixmap(u":/Images/Images/stack-of-books.png"))
+        self.label_lessons_prog_icon.setScaledContents(True)
+        self.label_lessons_prog_icon.setMargin(2)
+
+        self.horizontalLayout_21.addWidget(self.label_lessons_prog_icon)
+
+        self.label_lessons_prog_1 = QLabel(self.widget_7)
+        self.label_lessons_prog_1.setObjectName(u"label_lessons_prog_1")
+
+        self.horizontalLayout_21.addWidget(self.label_lessons_prog_1)
+
+        self.label_lessons_prog = QLabel(self.widget_7)
+        self.label_lessons_prog.setObjectName(u"label_lessons_prog")
+
+        self.horizontalLayout_21.addWidget(self.label_lessons_prog)
+
+
+        self.verticalLayout_19.addWidget(self.widget_7)
+
+        self.widget_6 = QWidget(self.widget_8)
+        self.widget_6.setObjectName(u"widget_6")
+        self.verticalLayout_18 = QVBoxLayout(self.widget_6)
+        self.verticalLayout_18.setSpacing(0)
+        self.verticalLayout_18.setObjectName(u"verticalLayout_18")
+        self.verticalLayout_18.setContentsMargins(0, 0, 0, 0)
+        self.widget_9 = QWidget(self.widget_6)
+        self.widget_9.setObjectName(u"widget_9")
+        self.widget_9.setStyleSheet(u"#widget_9 { \n"
+"	border-left: 1px solid rgb(161, 161, 161);\n"
+"	border-right: 1px solid rgb(161, 161, 161);\n"
+"	background-color: rgb(246, 245, 244);\n"
+"}\n"
+"\n"
+"QLineEdit { \n"
+"	background-color: rgb(255, 255, 255);\n"
+"	color: rgb(0, 0, 0);\n"
+"	padding: 0px 10px 0px;\n"
+"	border-radius: 6px;\n"
+"	border: 1px solid rgb(161, 161, 161);\n"
+"}\n"
+"\n"
+"QLineEdit:focus {\n"
+"	border: 1px solid rgb(53, 132, 228);\n"
+"}")
+        self.horizontalLayout_22 = QHBoxLayout(self.widget_9)
+        self.horizontalLayout_22.setObjectName(u"horizontalLayout_22")
+        self.txt_search_score_d_idv = QLineEdit(self.widget_9)
+        self.txt_search_score_d_idv.setObjectName(u"txt_search_score_d_idv")
+        self.txt_search_score_d_idv.setMinimumSize(QSize(0, 30))
+        self.txt_search_score_d_idv.setStyleSheet(u"")
+
+        self.horizontalLayout_22.addWidget(self.txt_search_score_d_idv)
+
+
+        self.verticalLayout_18.addWidget(self.widget_9)
+
+        self.table_quiz_score_idv = QTableView(self.widget_6)
+        self.table_quiz_score_idv.setObjectName(u"table_quiz_score_idv")
+        self.table_quiz_score_idv.setStyleSheet(u"QTableView {\n"
+"    border: 1px solid rgb(161, 161, 161);\n"
+"    gridline-color: #f0f0f0;\n"
+"    background-color: white;\n"
+"    selection-background-color: rgba(38, 162, 105, 0.2);\n"
+"    selection-color: black;\n"
+"    outline: none;\n"
+"}\n"
+"\n"
+"/* Remove the row numbers (Vertical Header) */\n"
+"QHeaderView:vertical {\n"
+"    width: 0px;\n"
+"}\n"
+"\n"
+"QHeaderView::section:vertical {\n"
+"    width: 0px;\n"
+"    border: none;\n"
+"}\n"
+"\n"
+"/* Style the top horizontal header */\n"
+"QHeaderView::section:horizontal {\n"
+"    background-color: rgb(222, 255, 233);  \n"
+"    color: black;\n"
+"    padding: 6px;\n"
+"    font-weight: bold;\n"
+"}\n"
+"\n"
+"/* Custom Scrollbars */\n"
+"QScrollBar:vertical {\n"
+"    border: none;\n"
+"    background: #f8f8f8;\n"
+"    width: 10px;\n"
+"}\n"
+"\n"
+"QScrollBar::handle:vertical {\n"
+"    background: rgb(38, 162, 105);\n"
+"    min-height: 30px;\n"
+"    border-radius: 5px; \n"
+"    margin: 2px;\n"
+"}\n"
+"\n"
+"QScrollBar:horizontal {\n"
+"    border: none;\n"
+"    background"
+                        ": #f8f8f8;\n"
+"    height: 10px;\n"
+"}\n"
+"\n"
+"QScrollBar::handle:horizontal {\n"
+"    background: rgb(38, 162, 105);\n"
+"    min-width: 30px;\n"
+"    border-radius: 5px;\n"
+"    margin: 2px;\n"
+"}\n"
+"\n"
+"/* Remove scrollbar arrows */\n"
+"QScrollBar::add-line, QScrollBar::sub-line {\n"
+"    width: 0px; height: 0px;\n"
+"}")
+        self.table_quiz_score_idv.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.table_quiz_score_idv.setSortingEnabled(True)
+        self.table_quiz_score_idv.verticalHeader().setVisible(False)
+
+        self.verticalLayout_18.addWidget(self.table_quiz_score_idv)
+
+
+        self.verticalLayout_19.addWidget(self.widget_6)
+
+
+        self.verticalLayout_21.addWidget(self.widget_8)
+
         self.tabWidget.addTab(self.tab_2, "")
         self.tab_3 = QWidget()
         self.tab_3.setObjectName(u"tab_3")
@@ -2409,7 +2765,7 @@ class Ui_Home(object):
 
         self.stackedWidget.setCurrentIndex(0)
         self.btnRefreshSY.setDefault(True)
-        self.tabWidget.setCurrentIndex(2)
+        self.tabWidget.setCurrentIndex(0)
         self.tabWidget_2.setCurrentIndex(0)
 
 
@@ -2526,6 +2882,20 @@ class Ui_Home(object):
         self.label_18.setText(QCoreApplication.translate("Home", u"Section:", None))
         self.btnPreview.setText(QCoreApplication.translate("Home", u"Preview", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QCoreApplication.translate("Home", u"Class list", None))
+        self.labelGradingPeriod_3.setText(QCoreApplication.translate("Home", u"Quiz #:", None))
+        self.labelGradingPeriod_4.setText(QCoreApplication.translate("Home", u"Grading Period:", None))
+        self.labelLesson_2.setText(QCoreApplication.translate("Home", u"Lesson Title:", None))
+        self.btnEvaluateQuiz.setText(QCoreApplication.translate("Home", u"Evaluate Quiz", None))
+        self.txt_search_score_idv.setPlaceholderText(QCoreApplication.translate("Home", u"Search", None))
+        self.label_student_icon.setText("")
+        self.label_student_name.setText(QCoreApplication.translate("Home", u"Student Name", None))
+        self.label_avg_icon.setText("")
+        self.label_avg.setText(QCoreApplication.translate("Home", u"Average:", None))
+        self.label_average_percentage.setText(QCoreApplication.translate("Home", u"85%", None))
+        self.label_lessons_prog_icon.setText("")
+        self.label_lessons_prog_1.setText(QCoreApplication.translate("Home", u"Lessons:", None))
+        self.label_lessons_prog.setText(QCoreApplication.translate("Home", u"12/20", None))
+        self.txt_search_score_d_idv.setPlaceholderText(QCoreApplication.translate("Home", u"Search", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("Home", u"Raw scores (Individual)", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), QCoreApplication.translate("Home", u"Raw score (All)", None))
         self.label_2.setText("")

@@ -10,7 +10,9 @@ class DatabaseTools:
             'host': 'localhost',
             'port': '5432'
         }
-        
+    
+    def get_connection(self):
+        return psycopg2.connect(**self.connection_config)
 
     def fetch_all(self, sql, params=None):
         """Equivalent to ExecuteReader, returns list of dicts."""

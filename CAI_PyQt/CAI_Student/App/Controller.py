@@ -252,33 +252,45 @@ class Controller:
         record_id, record_mc, record_tf = qUtils.retrieve_quiz()
 
         for row in record_id:
-            quiz = Quiz("Identification")
+            quiz = Quiz("ID") # Identification
             quiz.idKey = row.get("idkey")
+            quiz.quiznumber = row.get("quiznumber")
+            quiz.gradingperiod = row.get("gradingperiod")
+            quiz.lessonid = row.get("lessonid")
             quiz.itemno = row.get("itemno", "")
             quiz.question = row.get("question", "")
+            quiz.correct_answer = row.get("correct_answer", "")
             quiz.imageQ = row.get("imagequestion", None)
             quiz.setAttributes()
             self.quiz_cards.append(quiz)
             layout_id.addWidget(quiz)
 
         for row in record_mc:
-            quiz = Quiz("Multiple Choice")
+            quiz = Quiz("MC") # Multiple Choice
             quiz.idKey = row.get("mckey")
+            quiz.quiznumber = row.get("quiznumber")
+            quiz.gradingperiod = row.get("gradingperiod")
+            quiz.lessonid = row.get("lessonid")
             quiz.itemno = row.get("itemno", "")
             quiz.question = row.get("question", "")
             quiz.choice_a = row.get("choice_a")
             quiz.choice_b = row.get("choice_b")
             quiz.choice_c = row.get("choice_c")
+            quiz.correct_answer = row.get("correct_answer", "")
             quiz.imageQ = row.get("imagequestion", None)
             quiz.setAttributes()
             self.quiz_cards.append(quiz)
             layout_mc.addWidget(quiz)
 
         for row in record_tf:
-            quiz = Quiz("True or False")
+            quiz = Quiz("TF") # True or False
             quiz.idKey = row.get("tfkey")
+            quiz.quiznumber = row.get("quiznumber")
+            quiz.gradingperiod = row.get("gradingperiod")
+            quiz.lessonid = row.get("lessonid")
             quiz.itemno = row.get("itemno", "")
             quiz.question = row.get("question", "")
+            quiz.correct_answer = row.get("correct_answer", "")
             quiz.imageQ = row.get("imagequestion", None)
             quiz.setAttributes()
             self.quiz_cards.append(quiz)
@@ -292,28 +304,8 @@ class Controller:
         from App.Quiz import QuizUtils
         qUtils = QuizUtils()
 
-        score = 0
-        total_items = len(self.quiz_cards)
-        
-        for card in self.quiz_cards:
-            student_ans = card.get_answer().strip().lower()
-            correct_ans = str(card.correct_answer).strip().lower()
-
-            if student_ans == correct_ans:
-                score += 1
-        
         student_id = self.settings.value("studentid")
-        
-        quiz_data = {
-            "quiznumber": getattr(self, "current_quiz_num", 1), 
-            "gradingperiod": getattr(self, "current_period", "1st"),
-            "lessonid": getattr(self, "current_lesson_id", 0),
-            "studentid": student_id,
-            "quizscore": score,
-            "totalitems": total_items
-        }
-
-        qUtils.save_quiz(quiz_data)
+        qUtils.save_quiz(student_id, self.quiz_cards)
 
     def handle_lesson_selection(self, clicked_card, lesson_id):
         print(f"Selected Lesson ID: {lesson_id}")

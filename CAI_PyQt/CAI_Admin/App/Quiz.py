@@ -1,4 +1,4 @@
-import sys, os
+import os
 import psycopg2
 
 from PySide6.QtGui import QStandardItemModel, QStandardItem, QImage, QPixmap
@@ -17,6 +17,69 @@ from App.CardQuiz import Ui_CardQuiz
 class Quiz:
     def __init__(self):
         self.db_tools = DatabaseTools()
+
+    def get_scores(self, studentId, quiznumber, gradingperiod, lessonid):
+        """
+        Retrieves all quiz scores for a given student, including lesson titles.
+        Formatted to populate a QStandardItemModel for the UI.
+        """
+
+        sql = """
+            SELECT
+                qs.quiznumber,
+                l.title,
+                qs.quizscore,
+                q.total_items,
+                TO_CHAR(qs.datetaken, \'YYYY/MM/DD, HH12:MI AM\')
+            FROM cai.tbl_quiz AS q
+            JOIN cai.tbl_quizscores AS qs 
+                ON q.quiznumber = qs.quiznumber
+                    --AND q.gradingperiod = qs.gradingperiod
+                    --AND q.lessonid = qs.lessonid
+            JOIN cai.tbl_lessons AS l ON qs.lessonid = l.lesson_id
+            WHERE qs.studentid = %s
+            ORDER BY qs.datetaken DESC;
+        """
+
+        cursor, conn = self.db_tools.retrieve_records(sql, (studentId,))
+
+        if not cursor:
+            if conn: conn.close()
+            return None
+
+        ui_headers = ["QUIZ #", "LESSON TITLE", "SCORE", "PERCENTAGE", "DATE TAKEN"]
+        records = cursor.fetchall()
+        model = QStandardItemModel(len(records), len(ui_headers))
+        model.setHorizontalHeaderLabels(ui_headers)
+
+        for row_idx, row_data in enumerate(records):
+            quiz_num, lesson_title, quiz_score, total_items, date_taken = row_data
+            quiz_num_str = f"{quiz_num}"
+            score_str = f"{quiz_score}/{total_items}"
+
+            if total_items > 0:
+                percent_val = (quiz_score / total_items) * 100
+                percentage_str = f"{percent_val:.0f}%" # Format to 0 decimal places
+            else:
+                percentage_str = "0%"
+
+            date_taken_str = str(date_taken) if date_taken is not None else ""
+
+            row_items = [
+                QStandardItem(quiz_num_str),
+                QStandardItem(lesson_title),
+                QStandardItem(score_str),
+                QStandardItem(percentage_str),
+                QStandardItem(date_taken_str)
+            ]
+
+            for col_idx, item in enumerate(row_items):
+                item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsEditable)
+                model.setItem(row_idx, col_idx, item)
+
+        cursor.close()
+        conn.close()
+        return model
 
     def retrieve_quiz(self, q_num, g_period, lesson_id, diff_level):
         """
@@ -65,7 +128,7 @@ class Quiz:
         sql_id += "    ITEMNO,\n"
         sql_id += "    QUESTION,\n"
         sql_id += "    IMAGEQUESTION,\n"
-        sql_id += "    CORRECT_ANSWER_1,\n"
+        sql_id += "    CORRECT_ANSWER,\n"
         sql_id += "    DIFFICULTYLEVEL\n"
         sql_id += "FROM\n"
         sql_id += "    cai.tbl_quizidentification\n"
@@ -124,7 +187,7 @@ class Quiz:
 
                 if idx == 0:
                     record_id = record
-            
+
                 elif idx == 1:
                     record_mc = record
 
@@ -134,7 +197,7 @@ class Quiz:
         multipliers = self.getQuizMultiplier(q_num, g_period, lesson_id)
 
         return record_id, record_mc, record_tf, quiz_record, multipliers
-    
+
     def getQuizMultiplier(self, q_num, g_period, lesson_id):
         sql  = "SELECT\n"
         sql += "    MULTIPLIERID,\n"
@@ -188,6 +251,10 @@ class QuizItemWidget(QFrame):
             QLineEdit:focus {
                 border: 1px solid #007BFF;
             }
+
+            QLabel {
+                background: transparent;
+            }
         """
 
         self.main_layout = QVBoxLayout(self)
@@ -236,7 +303,14 @@ class QuizItemWidget(QFrame):
             self.bot_row.addWidget(self.ans)
 
         elif self.item_type == "Multiple Choice":
-            self.opts = [QLineEdit("A"), QLineEdit("B"), QLineEdit("C")]
+            self.opts = [
+                QLabel("lbl_a", text="A."), 
+                QLineEdit("A"), 
+                QLabel("lbl_b", text="B."), 
+                QLineEdit("B"), 
+                QLabel("lbl_c", text="C."), 
+                QLineEdit("C")
+            ]
             self.correct = QComboBox(); self.correct.addItems(["A", "B", "C"])
             self.correct.setMinimumSize(QSize(0, 30))
             self.correct.setStyleSheet(self.input_css)
@@ -293,7 +367,7 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
         self.btnAddItem_tf.clicked.connect(lambda: self.add_item("True or False", self.verticalLayout_4))
 
         self.quiz_no.setValue(q_num)
-        
+
         idx = self.cbGradingPeriod.findData(g_period)
         if idx != -1:
             self.cbGradingPeriod.setCurrentIndex(idx)
@@ -339,7 +413,7 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
                 widget = layout.itemAt(i).widget()
                 if isinstance(widget, QuizItemWidget):
                     actual_count += 1
-            
+
             setattr(self, attr_name, actual_count)
 
             suffix = "item" if actual_count <= 1 else "items"
@@ -352,7 +426,7 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
         total = (self.count_id * self.multiplier_easy.value()) + \
                 (self.count_mc * self.multiplier_average.value()) + \
                 (self.count_tf * self.multiplier_hard.value())
-        
+
         self.label_totalScore.setText(f"{total}")
         return total
 
@@ -388,7 +462,7 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
         self.multiplier_easy.setValue(1)
         self.multiplier_average.setValue(1)
         self.multiplier_hard.setValue(1)
-        
+
         if not lesson_id:
             return
 
@@ -410,7 +484,7 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
             layout.setSpacing(5)
 
             if item_type == "Identification":
-                sql  = "SELECT QI.idkey, QI.question, QI.imagequestion, QI.correct_answer_1\n"
+                sql  = "SELECT QI.idkey, QI.question, QI.imagequestion, QI.correct_answer\n"
                 sql += "FROM cai.tbl_quiz Q\n"
                 sql += f"INNER JOIN CAI.TBL_QUIZIDENTIFICATION QI\n"
                 sql += "    ON Q.quiznumber = QI.quiznumber\n"
@@ -452,21 +526,21 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
 
                 if item_type == "Identification":
                     new_w.id = row.get("idkey")
-                    
+
                 if item_type == "Multiple Choice":
                     new_w.id = row.get("mckey")
-                    
+
                 if item_type == "True or False":
                     new_w.id = row.get("tfkey")
 
                 new_w.q_input.setText(row.get("question", ""))
                 imgQ = row.get("imagequestion", "")
-                
+
                 # Handle Image
                 if not self.util.isEmpty(imgQ):
                     new_w.img_binary = bytes(imgQ)
                     image = QImage.fromData(bytes(imgQ))
-                    
+
                     if not image.isNull():
                         pixmap = QPixmap.fromImage(image)
                         new_w.img_label.setPixmap(pixmap)
@@ -474,12 +548,12 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
                         new_w.img_label.setMaximumHeight(30)
 
                 if item_type == "Identification":
-                    new_w.ans.setText(row.get("correct_answer_1", ""))
+                    new_w.ans.setText(row.get("correct_answer", ""))
 
                 elif item_type == "Multiple Choice":
-                    new_w.opts[0].setText(row.get("choice_a", ""))
-                    new_w.opts[1].setText(row.get("choice_b", ""))
-                    new_w.opts[2].setText(row.get("choice_c", ""))
+                    new_w.opts[1].setText(row.get("choice_a", ""))
+                    new_w.opts[3].setText(row.get("choice_b", ""))
+                    new_w.opts[5].setText(row.get("choice_c", ""))
                     new_w.correct.setCurrentText(row.get("correct_answer", ""))
 
                 else: # True/False
@@ -500,7 +574,7 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
         if cursor:
             record = cursor.fetchone()
 
-            if not self.util.isEmpty(record): 
+            if not self.util.isEmpty(record):
                 self.checkBoxLockQuiz.setChecked(record[0])
 
             cursor.close()
@@ -513,7 +587,7 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
         if multipliers:
             self.multiplier_easy.setValue(multipliers[4])
             self.multiplier_average.setValue(multipliers[5])
-            self.multiplier_hard.setValue(multipliers[6])  
+            self.multiplier_hard.setValue(multipliers[6])
 
         self.countLayoutChildren()
 
@@ -637,14 +711,14 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
                 sql += "    ITEMNO,\n"
                 sql += "    LESSONID,\n"
                 sql += "    QUESTION,\n"
-                sql += "    CORRECT_ANSWER_1,\n"
+                sql += "    CORRECT_ANSWER,\n"
                 sql += "    IMAGEQUESTION,\n"
                 sql += "    DIFFICULTYLEVEL\n"
                 sql += ") VALUES (%s, %s, %s, %s, %s, %s, %s, %s)\n"
                 sql += "ON CONFLICT (QUIZNUMBER, GRADINGPERIOD, ITEMNO, LESSONID, DIFFICULTYLEVEL)\n"
                 sql += "DO UPDATE SET\n"
                 sql += "    QUESTION = EXCLUDED.QUESTION,\n"
-                sql += "    CORRECT_ANSWER_1 = EXCLUDED.CORRECT_ANSWER_1,\n"
+                sql += "    CORRECT_ANSWER = EXCLUDED.CORRECT_ANSWER,\n"
                 sql += "    IMAGEQUESTION = EXCLUDED.IMAGEQUESTION,\n"
                 sql += "    DIFFICULTYLEVEL = EXCLUDED.DIFFICULTYLEVEL\n"
 
@@ -687,16 +761,27 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
                 sql += "    IMAGEQUESTION = EXCLUDED.IMAGEQUESTION,\n"
                 sql += "    DIFFICULTYLEVEL = EXCLUDED.DIFFICULTYLEVEL\n"
 
+                correct = None
+
+                if w.correct.currentText() == 'A':
+                    correct = w.opts[1].text()
+
+                elif w.correct.currentText() == 'B':
+                    correct = w.opts[3].text()
+
+                elif w.correct.currentText() == 'C':
+                    correct = w.opts[5].text()
+
                 self.db_tools.execute_query(sql, (
                     self.quiz_no.value(),
                     g_period,
                     i+1,
                     l_id,
                     w.q_input.text(),
-                    w.opts[0].text(),
                     w.opts[1].text(),
-                    w.opts[2].text(),
-                    w.correct.currentText(),
+                    w.opts[3].text(),
+                    w.opts[5].text(),
+                    correct,
                     psycopg2.Binary(img) if img else w.img_binary,
                     self.difficulty_group.checkedId()
                 ))
@@ -761,16 +846,16 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
             if self.itemsToRemove:
                 # Filter out None values just in case
                 ids_to_delete = [i for i in self.itemsToRemove if i is not None]
-                
+
                 if ids_to_delete:
-                    # Generic deletion query - you'll need to run this for each table 
+                    # Generic deletion query - you'll need to run this for each table
                     # since idKey, mcKey, and tfKey are likely distinct columns
                     tables = [
                         ("cai.tbl_quizidentification", "idkey"),
                         ("cai.tbl_quizmultiplechoice", "mckey"),
                         ("cai.tbl_quiztrueorfalse", "tfkey")
                     ]
-                    
+
                     for table, col in tables:
                         sql_del = f"DELETE FROM {table} WHERE {col} = ANY(%s)"
                         self.db_tools.execute_query(sql_del, (ids_to_delete,))
@@ -787,14 +872,14 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
 
 class CardQuiz(QFrame, Ui_CardQuiz):
     """Custom widget representing a single card."""
-    
+
     # Define a signal that carries a string (the student's name)
     clicked = Signal(object, str)
 
     def __init__(self, item_type):
         super().__init__()
         self.setupUi(self)
-        
+
         self.util = Utility()
 
         self.item_type = item_type

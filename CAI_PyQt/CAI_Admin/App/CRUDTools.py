@@ -20,6 +20,7 @@ class DatabaseTools:
             conn = psycopg2.connect(**self.connection_config)
             with conn.cursor(cursor_factory=extras.RealDictCursor) as cur:
                 cur.execute(sql, params)
+                # print(cur.mogrify(sql, params).decode('utf-8'))
                 return cur.fetchall()
 
         except Exception as e:

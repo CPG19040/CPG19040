@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>558</width>
-    <height>220</height>
+    <width>314</width>
+    <height>377</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -39,15 +39,16 @@
 	border-radius: 10px;
 	border: 1px solid #ddd;
 }
+/*
 #Card:hover {
 	border: 3px solid #3498db;
 	background-color: #f7fbfe;
 }
-/* This style applies when the custom property is true */
 #Card[selected=&quot;true&quot;] {
 	background-color: #e1f5fe;
 	border: 2px solid #3498db;
 }
+*/
 QLabel {
 	color: #333;
 }</string>
@@ -106,6 +107,63 @@ QLabel {
           </widget>
          </item>
          <item>
+          <widget class="QWidget" name="widget" native="true">
+           <layout class="QHBoxLayout" name="horizontalLayout_3">
+            <item>
+             <spacer name="horizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_q_image">
+              <property name="minimumSize">
+               <size>
+                <width>200</width>
+                <height>200</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>200</width>
+                <height>200</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">border-image: url(:/Images/Images/no-image2.png);</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="scaledContents">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_2">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
           <widget class="QLabel" name="label_question">
            <property name="styleSheet">
             <string notr="true">padding: 0px 10px 0px; font: 11pt &quot;Inter&quot;;</string>
@@ -122,31 +180,6 @@ QLabel {
           </widget>
          </item>
         </layout>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_q_image">
-        <property name="minimumSize">
-         <size>
-          <width>200</width>
-          <height>200</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>200</width>
-          <height>200</height>
-         </size>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">border-image: url(:/Images/Images/no-image2.png);</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="scaledContents">
-         <bool>true</bool>
-        </property>
        </widget>
       </item>
      </layout>
