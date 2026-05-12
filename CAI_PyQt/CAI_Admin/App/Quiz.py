@@ -1,7 +1,7 @@
 import os
 import psycopg2
 
-from PySide6.QtGui import QStandardItemModel, QStandardItem, QImage, QPixmap
+from PySide6.QtGui import QStandardItemModel, QStandardItem, QImage, QPixmap, QKeySequence, QShortcut
 from PySide6.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout,
                              QHBoxLayout, QLabel, QLineEdit, QComboBox,
                              QSpinBox, QPushButton, QScrollArea, QButtonGroup,
@@ -9,9 +9,10 @@ from PySide6.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout,
 from PySide6.QtCore import Qt, QSize, Signal
 
 from App.CRUDTools import DatabaseTools
-from App.Tools import Utility
+from App.Tools import Utility, NoScrollComboBox
 from App.QuizDialog import Ui_QuizCreatorDialog
 from App.CardQuiz import Ui_CardQuiz
+from App.CardQuiz_edit import Ui_CardQuiz_edit
 
 
 class Quiz:
@@ -32,7 +33,7 @@ class Quiz:
                 q.total_items,
                 TO_CHAR(qs.datetaken, \'YYYY/MM/DD, HH12:MI AM\')
             FROM cai.tbl_quiz AS q
-            JOIN cai.tbl_quizscores AS qs 
+            JOIN cai.tbl_quizscores AS qs
                 ON q.quiznumber = qs.quiznumber
                     --AND q.gradingperiod = qs.gradingperiod
                     --AND q.lessonid = qs.lessonid
@@ -195,8 +196,9 @@ class Quiz:
                     record_tf = record
 
         multipliers = self.getQuizMultiplier(q_num, g_period, lesson_id)
+        total_score = self.getQuizTotalScore(q_num, g_period, lesson_id)
 
-        return record_id, record_mc, record_tf, quiz_record, multipliers
+        return record_id, record_mc, record_tf, quiz_record, multipliers, total_score
 
     def getQuizMultiplier(self, q_num, g_period, lesson_id):
         sql  = "SELECT\n"
@@ -224,125 +226,228 @@ class Quiz:
         if conn: conn.close()
 
         return None
+    
+    def getQuizTotalScore(self, quiznumber, gradingperiod, lessonid):
+        sql = """
+            SELECT 
+                COUNT(CASE WHEN Q.DIFFICULTYLEVEL = 1 THEN 1 END) * M.EASY_MULTIPLIER AS "easy_score",
+                COUNT(CASE WHEN Q.DIFFICULTYLEVEL = 2 THEN 1 END) * M.AVERAGE_MULTIPLIER AS "average_score",
+                COUNT(CASE WHEN Q.DIFFICULTYLEVEL = 3 THEN 1 END) * M.HARD_MULTIPLIER AS "hard_score",
+
+                (COUNT(CASE WHEN Q.DIFFICULTYLEVEL = 1 THEN 1 END) * M.EASY_MULTIPLIER) +
+                (COUNT(CASE WHEN Q.DIFFICULTYLEVEL = 2 THEN 1 END) * M.AVERAGE_MULTIPLIER) +
+                (COUNT(CASE WHEN Q.DIFFICULTYLEVEL = 3 THEN 1 END) * M.HARD_MULTIPLIER) as max_score
+            FROM (
+                SELECT QUIZNUMBER, LESSONID, GRADINGPERIOD, DIFFICULTYLEVEL FROM CAI.TBL_QUIZIDENTIFICATION
+                UNION ALL
+                SELECT QUIZNUMBER, LESSONID, GRADINGPERIOD, DIFFICULTYLEVEL FROM CAI.TBL_QUIZMULTIPLECHOICE
+                UNION ALL
+                SELECT QUIZNUMBER, LESSONID, GRADINGPERIOD, DIFFICULTYLEVEL FROM CAI.TBL_QUIZTRUEORFALSE
+            ) Q
+
+            JOIN CAI.TBL_SCOREMULTIPLIER M ON Q.QUIZNUMBER = M.QUIZNUMBER AND Q.LESSONID = M.LESSONID
+            WHERE q.quiznumber = %s
+                AND q.gradingperiod = %s
+                AND q.lessonid = %s
+            GROUP BY M.QUIZNUMBER, M.EASY_MULTIPLIER, M.AVERAGE_MULTIPLIER, M.HARD_MULTIPLIER;
+        """
+
+        record = self.db_tools.fetch_all(sql, (quiznumber, gradingperiod, lessonid))
+
+        easy_score = 0
+        average_score = 0
+        hard_score = 0
+        total_score = 0
+
+        if record:
+            easy_score = record[0]['easy_score']
+            average_score = record[0]['average_score']
+            hard_score = record[0]['hard_score']
+            total_score = record[0]['max_score']
+
+        return (easy_score, average_score, hard_score, total_score)
 
 
-class QuizItemWidget(QFrame):
+
+class QuizItemWidget(QFrame, Ui_CardQuiz_edit):
     """A reusable row for a single quiz question."""
     def __init__(self, item_type, remove_callback):
         super().__init__()
+        self.setupUi(self)
+
         self.util = Utility()
         self.item_type = item_type
         self.img_path = None
         self.id = None
-        self.setFrameShape(QFrame.StyledPanel)
-        self.setObjectName("Card")
-        self.setStyleSheet("#Card { border-radius: 16px; background-color: #FFF; }")
 
         self.input_css = """
-            /* Styling the input field */
-            QLineEdit {
+
+            *[class="correct-label"] {
+                background-color: #f0f0f0;
+                color: #555555;
                 border: 1px solid #ABABAB;
-                border-radius: 10px;
-                background-color: #FFF;
+                border-right: none;
+                border-top-left-radius: 15px;
+                border-bottom-left-radius: 15px;
+                padding-left: 10px;
+                max-width: 62px;
+            }
+
+            *[class="correct-input"] {
+                background-color: #ffffff;
+                border: 1px solid #ABABAB;
+                border-left: none;
+                border-top-right-radius: 15px;
+                border-bottom-right-radius: 15px;
+                padding-left: 8px;
+                color: #333333;
+            }
+
+            QComboBox:focus, QLineEdit:focus, *[class="correct-input"]:focus {
+                border: 2px solid #007BFF;
+            }
+
+            QComboBox {
+                height: 30px;
+                border: 2px solid #e0e0e0;
                 padding: 0px 10px 0px;
+                background-color: #ffffff;
+                color: #333333;
+                font-size: 12px;
+                selection-background-color: #3498db;
             }
 
-            /* Highlight when typing (focus) */
-            QLineEdit:focus {
-                border: 1px solid #007BFF;
+            QLineEdit:hover, QComboBox:hover {
+                border: 2px solid #3498db;
             }
 
-            QLabel {
-                background: transparent;
+            QComboBox::drop-down {
+                subcontrol-origin: padding;
+                subcontrol-position: top right;
+                width: 30px;
+                border-left-width: 0px;
+                border-top-right-radius: 8px;
+                border-bottom-right-radius: 8px;
+            }
+
+            QComboBox::down-arrow {
+                image: url(:/Images/Images/caret-down.png);
+                border: none;
+                width: 10px;
+                height: 14px;
+            }
+
+            QComboBox QAbstractItemView {
+                background-color: #ffffff;
+                selection-background-color: #3498db;
+                selection-color: #ffffff;
+                border-radius: 5px;
+            }
+
+            QComboBox QAbstractItemView::item {
+                min-height: 35px;
+                padding-left: 10px;
+                border-radius: 4px;
             }
         """
 
-        self.main_layout = QVBoxLayout(self)
-        self.main_layout.setSpacing(10)
-
-        # Top Row: Question, Difficulty, Image, Delete
-        top_row = QHBoxLayout()
-        self.q_input = QLineEdit()
-        self.q_input.setMinimumSize(QSize(0, 30))
-        self.q_input.setStyleSheet(self.input_css)
-        self.q_input.setPlaceholderText("Enter Question (e.g. 1 + 5 = ?)")
-
-        self.btn_img = QPushButton("📸")
-        self.btn_img.setFixedWidth(30)
-        self.btn_img.setFixedHeight(30)
-        self.btn_img.clicked.connect(self.get_image)
-
         self.img_binary = None
-        self.img_label = QLabel("No Image")
-        self.img_label.setStyleSheet("font-size: 9px; color: gray; background: transparent;")
-        self.img_label.setScaledContents(True)
-
-        self.btn_delete = QPushButton("✖")
-        self.btn_delete.setFixedWidth(30)
-        self.btn_delete.setFixedHeight(30)
-        self.btn_delete.setStyleSheet("color: red; font-weight: bold;")
+        self.btn_upload_img.clicked.connect(lambda: self.get_image())
         self.btn_delete.clicked.connect(lambda: remove_callback(self))
 
-        top_row.addWidget(self.q_input)
-        top_row.addWidget(self.btn_img)
-        top_row.addWidget(self.img_label)
-        top_row.addWidget(self.btn_delete)
-        self.main_layout.addLayout(top_row)
-
-        # Bottom Row: Answer Fields
-        self.bot_row = QHBoxLayout()
         self.init_answers()
-        self.main_layout.addLayout(self.bot_row)
+        self.layout_inputs.setAlignment(Qt.AlignmentFlag.AlignTop)
+        self.layout_card_body.setAlignment(Qt.AlignmentFlag.AlignTop)
 
     def init_answers(self):
 
+        label_correct = QLabel("Correct:")
+        label_correct.setProperty("class", "correct-label")
+        label_correct.setStyleSheet(self.input_css)
+
         if self.item_type == "Identification":
-            self.ans = QLineEdit(); self.ans.setPlaceholderText("Correct Answer")
+            self.ans = QLineEdit()
             self.ans.setMinimumSize(QSize(0, 30))
+            self.ans.setProperty("class", "correct-input")
             self.ans.setStyleSheet(self.input_css)
-            self.bot_row.addWidget(self.ans)
+            h_layout = QHBoxLayout()
+            h_layout.addWidget(label_correct)
+            h_layout.addWidget(self.ans)
+            h_layout.setSpacing(0)
+            self.layout_inputs.addLayout(h_layout)
 
         elif self.item_type == "Multiple Choice":
-            self.opts = [
-                QLabel("lbl_a", text="A."), 
-                QLineEdit("A"), 
-                QLabel("lbl_b", text="B."), 
-                QLineEdit("B"), 
-                QLabel("lbl_c", text="C."), 
-                QLineEdit("C")
-            ]
-            self.correct = QComboBox(); self.correct.addItems(["A", "B", "C"])
+            self.choices = [] # To store QLineEdits if you need to access their text later
+            self.options_data = [("A.", ""), ("B.", ""), ("C.", "")]
+
+            for label_text, placeholder in self.options_data:
+                h_layout = QHBoxLayout()
+
+                lbl = QLabel(label_text)
+                lbl.setProperty("class", "correct-label")
+                lbl.setStyleSheet(self.input_css)
+
+                edit = QLineEdit(placeholder)
+                edit.setMinimumSize(QSize(0, 30))
+                edit.setProperty("class", "correct-input")
+                edit.setStyleSheet(self.input_css)
+                self.choices.append(edit) # Store reference
+
+                h_layout.addWidget(lbl)
+                h_layout.addWidget(edit)
+                h_layout.setSpacing(0)
+                self.layout_inputs.addLayout(h_layout)
+
+            self.correct = NoScrollComboBox()
+            self.correct.addItems(["A", "B", "C"])
             self.correct.setMinimumSize(QSize(0, 30))
+            self.correct.setProperty("class", "correct-input")
             self.correct.setStyleSheet(self.input_css)
-
-            for opt in self.opts:
-                opt.setMinimumSize(QSize(0, 30))
-                opt.setStyleSheet(self.input_css)
-                self.bot_row.addWidget(opt)
-
-            label_correct = QLabel("Correct:")
-            label_correct.setStyleSheet("background: transparent;")
-            self.bot_row.addWidget(label_correct)
-            self.bot_row.addWidget(self.correct)
+            self.correct.setFocusPolicy(Qt.StrongFocus)
+            h_layout = QHBoxLayout()
+            h_layout.addWidget(label_correct)
+            h_layout.addWidget(self.correct)
+            h_layout.setSpacing(0)
+            self.layout_inputs.addLayout(h_layout)
 
         else: # True/False
-            self.ans = QComboBox(); self.ans.addItems(["True", "False"])
+            self.ans = NoScrollComboBox(); self.ans.addItems(["True", "False"])
             self.ans.setMinimumSize(QSize(0, 30))
+            self.ans.setProperty("class", "correct-input")
             self.ans.setStyleSheet(self.input_css)
-            self.bot_row.addWidget(self.ans)
+            self.ans.setFocusPolicy(Qt.StrongFocus)
+            h_layout = QHBoxLayout()
+            h_layout.addWidget(label_correct)
+            h_layout.addWidget(self.ans)
+            h_layout.setSpacing(0)
+            self.layout_inputs.addLayout(h_layout)
 
     def get_image(self):
         file_path, _ = QFileDialog.getOpenFileName(self, "Select Image", "", "Images (*.png *.jpg *.jpeg)")
+
         if file_path:
             self.img_path = file_path
-            self.img_label.setText(os.path.basename(file_path))
-            self.img_label.setStyleSheet("color: green;")
+            source_pixmap = QPixmap(file_path)
+            square_pixmap = source_pixmap.scaled(
+                self.label_q_image.width(), self.label_q_image.height(),
+                Qt.AspectRatioMode.KeepAspectRatioByExpanding,
+                Qt.TransformationMode.SmoothTransformation
+            )
+            self.label_q_image.setPixmap(square_pixmap)
+
 
 
 class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
     def __init__(self, q_num, g_period, lesson_id, diff_level):
         super().__init__()
         self.setupUi(self)
+
+        self.difficulty_group = QButtonGroup(self)
+        self.difficulty_group.setExclusive(True)
+        self.level_map = { 1: self.btnEasy, 2: self.btnAverage, 3: self.btnHard }
+
+        self.save_shortcut = QShortcut(QKeySequence("Ctrl+S"), self)
+
         self.db_tools = DatabaseTools()
         self.util = Utility()
 
@@ -361,12 +466,19 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
         self.util.populate_pulldown(self.cbGradingPeriod, sql)
 
         self.btn_save.clicked.connect(self.save_to_db)
+        self.save_shortcut.activated.connect(self.save_to_db)
 
-        self.btnAddItem_id.clicked.connect(lambda: self.add_item("Identification", self.verticalLayout_7))
-        self.btnAddItem_mc.clicked.connect(lambda: self.add_item("Multiple Choice", self.verticalLayout_3))
-        self.btnAddItem_tf.clicked.connect(lambda: self.add_item("True or False", self.verticalLayout_4))
+        self.layout_identification.setAlignment(Qt.AlignmentFlag.AlignTop)
+        self.layout_multiplechoice.setAlignment(Qt.AlignmentFlag.AlignTop)
+        self.layout_trueorfalse.setAlignment(Qt.AlignmentFlag.AlignTop)
+
+        self.btnAddItem_id.clicked.connect(lambda: self.add_item("Identification", self.layout_identification))
+        self.btnAddItem_mc.clicked.connect(lambda: self.add_item("Multiple Choice", self.layout_multiplechoice))
+        self.btnAddItem_tf.clicked.connect(lambda: self.add_item("True or False", self.layout_trueorfalse))
 
         self.quiz_no.setValue(q_num)
+        self.populate_pulldown_lesson()
+        self.countLayoutChildren()
 
         idx = self.cbGradingPeriod.findData(g_period)
         if idx != -1:
@@ -375,13 +487,6 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
         _idx = self.cbLessonName.findData(lesson_id)
         if _idx != -1:
             self.cbLessonName.setCurrentIndex(_idx)
-
-        self.populate_pulldown_lesson()
-        self.countLayoutChildren()
-
-        self.difficulty_group = QButtonGroup(self)
-        self.difficulty_group.setExclusive(True)
-        self.level_map = { 1: self.btnEasy, 2: self.btnAverage, 3: self.btnHard }
 
         for idx, btn in self.level_map.items():
             btn.setCheckable(True)
@@ -402,9 +507,9 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
 
     def countLayoutChildren(self):
         sections = [
-            (self.verticalLayout_7, "count_id", self.label_id_count),
-            (self.verticalLayout_3, "count_mc", self.label_mc_count),
-            (self.verticalLayout_4, "count_tf", self.label_tf_count)
+            (self.layout_identification, "count_id", self.label_id_count),
+            (self.layout_multiplechoice, "count_mc", self.label_mc_count),
+            (self.layout_trueorfalse, "count_tf", self.label_tf_count)
         ]
 
         for layout, attr_name, label in sections:
@@ -413,6 +518,7 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
                 widget = layout.itemAt(i).widget()
                 if isinstance(widget, QuizItemWidget):
                     actual_count += 1
+                    widget.label_itemno.setText(f"ITEM {actual_count}")
 
             setattr(self, attr_name, actual_count)
 
@@ -422,13 +528,23 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
         self.updateTotalScoreDisplay()
 
     def updateTotalScoreDisplay(self):
-        # Calculate weighted total
-        total = (self.count_id * self.multiplier_easy.value()) + \
-                (self.count_mc * self.multiplier_average.value()) + \
-                (self.count_tf * self.multiplier_hard.value())
+        quiz = Quiz()
+        scores = quiz.getQuizTotalScore(self.quiz_no.value(), self.cbGradingPeriod.currentData(), self.cbLessonName.currentData())
+        easy_score, average_score, hard_score, total_score = scores
 
-        self.label_totalScore.setText(f"{total}")
-        return total
+        score_per_level = ""
+
+        match self.difficulty_group.checkedId():
+            case 1:
+                score_per_level = f"{easy_score}"
+            case 2:
+                score_per_level = f"{average_score}"
+            case 3:
+                score_per_level = f"{hard_score}"
+
+        self.label_scoreperlevel.setText(score_per_level)
+        self.label_totalScore.setText(f"{total_score}")
+
 
     def populate_pulldown_lesson(self):
         selected_period = self.cbGradingPeriod.currentData()
@@ -454,9 +570,9 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
     def refresh_quiz(self):
         """Refreshes all quiz sections from the database."""
         lesson_id = self.cbLessonName.currentData()
-        self.clear_layout(self.verticalLayout_7)
-        self.clear_layout(self.verticalLayout_3)
-        self.clear_layout(self.verticalLayout_4)
+        self.clear_layout(self.layout_identification)
+        self.clear_layout(self.layout_multiplechoice)
+        self.clear_layout(self.layout_trueorfalse)
 
         self.countLayoutChildren()
         self.multiplier_easy.setValue(1)
@@ -474,13 +590,12 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
         )
 
         sections = [
-            (self.verticalLayout_7, "Identification"),
-            (self.verticalLayout_3, "Multiple Choice"),
-            (self.verticalLayout_4, "True or False")
+            (self.layout_identification, "Identification"),
+            (self.layout_multiplechoice, "Multiple Choice"),
+            (self.layout_trueorfalse, "True or False")
         ]
 
         for layout, item_type in sections:
-            layout.setAlignment(Qt.AlignmentFlag.AlignTop)
             layout.setSpacing(5)
 
             if item_type == "Identification":
@@ -496,7 +611,7 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
                 sql += "    AND QI.DIFFICULTYLEVEL = %s"
 
             if item_type == "Multiple Choice":
-                sql  = "SELECT MC.mckey, MC.question, MC.imagequestion, MC.choice_a, MC.choice_b, MC.choice_c\n"
+                sql  = "SELECT MC.mckey, MC.question, MC.imagequestion, MC.choice_a, MC.choice_b, MC.choice_c, MC.correct_answer\n"
                 sql += "FROM cai.tbl_quiz Q\n"
                 sql += f"INNER JOIN CAI.TBL_QUIZMULTIPLECHOICE MC\n"
                 sql += "    ON Q.quiznumber = MC.quiznumber\n"
@@ -533,7 +648,7 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
                 if item_type == "True or False":
                     new_w.id = row.get("tfkey")
 
-                new_w.q_input.setText(row.get("question", ""))
+                new_w.txt_question.setPlainText(row.get("question", ""))
                 imgQ = row.get("imagequestion", "")
 
                 # Handle Image
@@ -543,18 +658,28 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
 
                     if not image.isNull():
                         pixmap = QPixmap.fromImage(image)
-                        new_w.img_label.setPixmap(pixmap)
-                        new_w.img_label.setMaximumWidth(30)
-                        new_w.img_label.setMaximumHeight(30)
+                        new_w.label_q_image.setPixmap(pixmap)
 
                 if item_type == "Identification":
                     new_w.ans.setText(row.get("correct_answer", ""))
 
                 elif item_type == "Multiple Choice":
-                    new_w.opts[1].setText(row.get("choice_a", ""))
-                    new_w.opts[3].setText(row.get("choice_b", ""))
-                    new_w.opts[5].setText(row.get("choice_c", ""))
-                    new_w.correct.setCurrentText(row.get("correct_answer", ""))
+                    new_w.choices[0].setText(row.get("choice_a", ""))
+                    new_w.choices[1].setText(row.get("choice_b", ""))
+                    new_w.choices[2].setText(row.get("choice_c", ""))
+
+                    correct = ''
+
+                    if row.get("choice_a", "") == row.get("correct_answer", ""):
+                        correct = 'A'
+
+                    elif row.get("choice_b", "") == row.get("correct_answer", ""):
+                        correct = 'B'
+
+                    elif row.get("choice_c", "") == row.get("correct_answer", ""):
+                        correct = 'C'
+
+                    new_w.correct.setCurrentText(correct)
 
                 else: # True/False
                     new_w.ans.setCurrentText(row.get("correct_answer", ""))
@@ -640,16 +765,16 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
             self.toggle_validation(self.cbLessonName, True)
 
         # Validate each QuizItemWidget
-        for layout in [self.verticalLayout_2, self.verticalLayout_3, self.verticalLayout_4]:
+        for layout in [self.verticalLayout_2, self.layout_multiplechoice, self.layout_trueorfalse]:
             for i in range(layout.count()):
                 w = layout.itemAt(i).widget()
                 if isinstance(w, QuizItemWidget):
                     # Check Question
-                    if not w.q_input.text().strip():
-                        self.toggle_validation(w.q_input, False)
+                    if not w.txt_question.toPlainText().strip():
+                        self.toggle_validation(w.txt_question, False)
                         is_valid = False
                     else:
-                        self.toggle_validation(w.q_input, True)
+                        self.toggle_validation(w.txt_question, True)
 
                     # Check Answer (Identification)
                     if hasattr(w, 'ans') and isinstance(w.ans, QLineEdit):
@@ -700,8 +825,8 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
                 True if self.checkBoxLockQuiz.isChecked() else False
             ))
 
-            for i in range(self.verticalLayout_7.count()):
-                w = self.verticalLayout_7.itemAt(i).widget()
+            for i in range(self.layout_identification.count()):
+                w = self.layout_identification.itemAt(i).widget()
                 if not isinstance(w, QuizItemWidget): continue
 
                 img = self.get_binary(w.img_path)
@@ -727,14 +852,14 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
                     g_period,
                     i+1,
                     l_id,
-                    w.q_input.text(),
+                    w.txt_question.toPlainText().strip(),
                     w.ans.text(),
                     psycopg2.Binary(img) if img else w.img_binary,
                     self.difficulty_group.checkedId()
                 ))
 
-            for i in range(self.verticalLayout_3.count()):
-                w = self.verticalLayout_3.itemAt(i).widget()
+            for i in range(self.layout_multiplechoice.count()):
+                w = self.layout_multiplechoice.itemAt(i).widget()
                 if not isinstance(w, QuizItemWidget): continue
 
                 img = self.get_binary(w.img_path)
@@ -764,30 +889,30 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
                 correct = None
 
                 if w.correct.currentText() == 'A':
-                    correct = w.opts[1].text()
+                    correct = w.choices[0].text()
 
                 elif w.correct.currentText() == 'B':
-                    correct = w.opts[3].text()
+                    correct = w.choices[1].text()
 
                 elif w.correct.currentText() == 'C':
-                    correct = w.opts[5].text()
+                    correct = w.choices[2].text()
 
                 self.db_tools.execute_query(sql, (
                     self.quiz_no.value(),
                     g_period,
                     i+1,
                     l_id,
-                    w.q_input.text(),
-                    w.opts[1].text(),
-                    w.opts[3].text(),
-                    w.opts[5].text(),
+                    w.txt_question.toPlainText().strip(),
+                    w.choices[0].text(),
+                    w.choices[1].text(),
+                    w.choices[2].text(),
                     correct,
                     psycopg2.Binary(img) if img else w.img_binary,
                     self.difficulty_group.checkedId()
                 ))
 
-            for i in range(self.verticalLayout_4.count()):
-                w = self.verticalLayout_4.itemAt(i).widget()
+            for i in range(self.layout_trueorfalse.count()):
+                w = self.layout_trueorfalse.itemAt(i).widget()
                 if not isinstance(w, QuizItemWidget): continue
 
                 img = self.get_binary(w.img_path)
@@ -813,7 +938,7 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
                     g_period,
                     i+1,
                     l_id,
-                    w.q_input.text(),
+                    w.txt_question.toPlainText().strip(),
                     w.ans.currentText(),
                     psycopg2.Binary(img) if img else w.img_binary,
                     self.difficulty_group.checkedId()
@@ -822,7 +947,7 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
             mult_easy = self.multiplier_easy.value()
             mult_average = self.multiplier_average.value()
             mult_hard = self.multiplier_hard.value()
-            total_score = self.label_totalScore.text()
+            total_score = self.label_totalPossibleScore.text()
 
             sql  = "INSERT INTO CAI.TBL_SCOREMULTIPLIER (\n"
             sql += "    QUIZNUMBER,\n"
@@ -884,18 +1009,32 @@ class CardQuiz(QFrame, Ui_CardQuiz):
 
         self.item_type = item_type
         self.idKey = None
-        self.itemno = ""
+        self.itemno = 0
         self.question = ""
+        self.choices = ""
         self.answer = ""
         self.imageQ = None
 
         # Ensure the widget can receive focus for keyboard navigation
         self.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
 
-    def setAttributes(self):
+    def displayAttributes(self):
         self.label_itemno.setText(f"ITEM {self.itemno}")
         self.label_question.setText(f"{self.question}")
-        self.label_ans.setText(f"{self.answer}")
+
+        if self.choices:
+            self.layout_body_text.addWidget(QLabel(self.choices))
+
+        if self.answer:
+            layout = QHBoxLayout()
+            lbl = QLabel("Answer:")
+            lbl.setMaximumSize(QSize(55, 55))
+            lbl.setStyleSheet("font-weight: bold")
+            lbl_ans = QLabel(self.answer)
+
+            layout.addWidget(lbl)
+            layout.addWidget(lbl_ans)
+            self.layout_body_text.addLayout(layout)
 
         # Handle Image
         if not self.util.isEmpty(self.imageQ):

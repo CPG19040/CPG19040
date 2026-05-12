@@ -1357,11 +1357,11 @@ class Ui_Home(object):
 
         self.headerLayout.addItem(self.horizontalSpacer_9)
 
-        self.label_totalScore_2 = QLabel(self.pageQuiz)
-        self.label_totalScore_2.setObjectName(u"label_totalScore_2")
-        self.label_totalScore_2.setMinimumSize(QSize(0, 30))
+        self.label_7 = QLabel(self.pageQuiz)
+        self.label_7.setObjectName(u"label_7")
+        self.label_7.setMinimumSize(QSize(0, 30))
 
-        self.headerLayout.addWidget(self.label_totalScore_2)
+        self.headerLayout.addWidget(self.label_7)
 
         self.label_totalScore = QLabel(self.pageQuiz)
         self.label_totalScore.setObjectName(u"label_totalScore")
@@ -1530,6 +1530,18 @@ class Ui_Home(object):
         self.multiplier_hard.setValue(1)
 
         self.horizontalLayout.addWidget(self.multiplier_hard)
+
+        self.label_3 = QLabel(self.frame_6)
+        self.label_3.setObjectName(u"label_3")
+        self.label_3.setMinimumSize(QSize(0, 30))
+
+        self.horizontalLayout.addWidget(self.label_3)
+
+        self.label_scoreperlevel = QLabel(self.frame_6)
+        self.label_scoreperlevel.setObjectName(u"label_scoreperlevel")
+        self.label_scoreperlevel.setMinimumSize(QSize(0, 30))
+
+        self.horizontalLayout.addWidget(self.label_scoreperlevel)
 
 
         self.verticalLayout_8.addWidget(self.frame_6)
@@ -2855,7 +2867,7 @@ class Ui_Home(object):
         self.labelGradingPeriod.setText(QCoreApplication.translate("Home", u"Grading Period:", None))
         self.labelLesson.setText(QCoreApplication.translate("Home", u"Lesson Title:", None))
         self.checkBoxLockQuiz.setText(QCoreApplication.translate("Home", u"Unpublish Quiz", None))
-        self.label_totalScore_2.setText(QCoreApplication.translate("Home", u"Total Score:", None))
+        self.label_7.setText(QCoreApplication.translate("Home", u"Total Score:", None))
         self.label_totalScore.setText(QCoreApplication.translate("Home", u"000", None))
         self.label_6.setText(QCoreApplication.translate("Home", u"Diffuculty:", None))
         self.btnEasy.setText(QCoreApplication.translate("Home", u"Easy", None))
@@ -2865,6 +2877,8 @@ class Ui_Home(object):
         self.label_15.setText(QCoreApplication.translate("Home", u"Easy", None))
         self.label_22.setText(QCoreApplication.translate("Home", u"Average", None))
         self.label_23.setText(QCoreApplication.translate("Home", u"Hard", None))
+        self.label_3.setText(QCoreApplication.translate("Home", u"Score:", None))
+        self.label_scoreperlevel.setText(QCoreApplication.translate("Home", u"000", None))
         self.label_11.setText(QCoreApplication.translate("Home", u"Identification", None))
         self.label_13.setText(QCoreApplication.translate("Home", u"True or False", None))
         self.label_12.setText(QCoreApplication.translate("Home", u"Multiple Choice", None))

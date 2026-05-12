@@ -697,10 +697,22 @@ class Controller:
         lesson_id = self.ui.cbLessonName.currentData()
         diff_level = self.difficulty_group.checkedId()
 
-        record_id, record_mc, record_tf, quiz_record, multipliers = quiz.retrieve_quiz(q_num, g_period, lesson_id, diff_level)
+        record_id, record_mc, record_tf, quiz_record, multipliers, scores = quiz.retrieve_quiz(q_num, g_period, lesson_id, diff_level)
         total_items, quizlock = quiz_record
+        easy_score, average_score, hard_score, total_score = scores
 
-        self.ui.label_totalScore.setText(f"{total_items}")
+        self.ui.label_totalScore.setText(f"{total_score}")
+        score_per_level = ""
+
+        match diff_level:
+            case 1:
+                score_per_level = f"{easy_score}"
+            case 2:
+                score_per_level = f"{average_score}"
+            case 3:
+                score_per_level = f"{hard_score}"
+
+        self.ui.label_scoreperlevel.setText(score_per_level)
         self.ui.checkBoxLockQuiz.setChecked(quizlock)
 
         self.ui.multiplier_easy.setValue(1)
@@ -731,7 +743,7 @@ class Controller:
             card.question = row["question"]
             card.answer = row["correct_answer"]
             card.imageQ = row["imagequestion"]
-            card.setAttributes()
+            card.displayAttributes()
 
             layout_id.addWidget(card)
 
@@ -740,9 +752,10 @@ class Controller:
             card.idKey = row["mckey"]
             card.itemno = row["itemno"]
             card.question = row["question"]
-            card.answer = f"A. {row["choice_a"]} | B. {row["choice_b"]} | C. {row["choice_c"]}\nCorrect: {row["correct_answer"]}"
+            card.choices = f"A. {row["choice_a"]} | B. {row["choice_b"]} | C. {row["choice_c"]}"
+            card.answer = row["correct_answer"]
             card.imageQ = row["imagequestion"]
-            card.setAttributes()
+            card.displayAttributes()
 
             layout_mc.addWidget(card)
 
@@ -753,7 +766,7 @@ class Controller:
             card.question = row["question"]
             card.answer = row["correct_answer"]
             card.imageQ = row["imagequestion"]
-            card.setAttributes()
+            card.displayAttributes()
 
             layout_tf.addWidget(card)
 

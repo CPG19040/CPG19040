@@ -261,7 +261,7 @@ class Controller:
             quiz.question = row.get("question", "")
             quiz.correct_answer = row.get("correct_answer", "")
             quiz.imageQ = row.get("imagequestion", None)
-            quiz.setAttributes()
+            quiz.displayAttributes()
             self.quiz_cards.append(quiz)
             layout_id.addWidget(quiz)
 
@@ -278,7 +278,7 @@ class Controller:
             quiz.choice_c = row.get("choice_c")
             quiz.correct_answer = row.get("correct_answer", "")
             quiz.imageQ = row.get("imagequestion", None)
-            quiz.setAttributes()
+            quiz.displayAttributes()
             self.quiz_cards.append(quiz)
             layout_mc.addWidget(quiz)
 
@@ -292,7 +292,7 @@ class Controller:
             quiz.question = row.get("question", "")
             quiz.correct_answer = row.get("correct_answer", "")
             quiz.imageQ = row.get("imagequestion", None)
-            quiz.setAttributes()
+            quiz.displayAttributes()
             self.quiz_cards.append(quiz)
             layout_tf.addWidget(quiz)
 

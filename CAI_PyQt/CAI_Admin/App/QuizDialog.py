@@ -25,7 +25,7 @@ class Ui_QuizCreatorDialog(object):
     def setupUi(self, QuizCreatorDialog):
         if not QuizCreatorDialog.objectName():
             QuizCreatorDialog.setObjectName(u"QuizCreatorDialog")
-        QuizCreatorDialog.resize(1011, 689)
+        QuizCreatorDialog.resize(1016, 689)
         QuizCreatorDialog.setStyleSheet(u"color: black; font: 10pt \"Inter\"; background-color: rgb(222, 221, 218);")
         self.verticalLayout_2 = QVBoxLayout(QuizCreatorDialog)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
@@ -96,10 +96,10 @@ class Ui_QuizCreatorDialog(object):
 
         self.headerLayout.addItem(self.horizontalSpacer)
 
-        self.label_4 = QLabel(QuizCreatorDialog)
-        self.label_4.setObjectName(u"label_4")
+        self.label_5 = QLabel(QuizCreatorDialog)
+        self.label_5.setObjectName(u"label_5")
 
-        self.headerLayout.addWidget(self.label_4)
+        self.headerLayout.addWidget(self.label_5)
 
         self.label_totalScore = QLabel(QuizCreatorDialog)
         self.label_totalScore.setObjectName(u"label_totalScore")
@@ -273,6 +273,16 @@ class Ui_QuizCreatorDialog(object):
 
         self.horizontalLayout.addWidget(self.multiplier_hard)
 
+        self.label_4 = QLabel(self.frame_5)
+        self.label_4.setObjectName(u"label_4")
+
+        self.horizontalLayout.addWidget(self.label_4)
+
+        self.label_scoreperlevel = QLabel(self.frame_5)
+        self.label_scoreperlevel.setObjectName(u"label_scoreperlevel")
+
+        self.horizontalLayout.addWidget(self.label_scoreperlevel)
+
 
         self.verticalLayout_5.addWidget(self.frame_5)
 
@@ -286,7 +296,16 @@ class Ui_QuizCreatorDialog(object):
 
         self.verticalLayout_2.addWidget(self.line_2)
 
-        self.widget = QWidget(QuizCreatorDialog)
+        self.widget_6 = QWidget(QuizCreatorDialog)
+        self.widget_6.setObjectName(u"widget_6")
+        self.horizontalLayout_7 = QHBoxLayout(self.widget_6)
+        self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
+        self.horizontalLayout_7.setContentsMargins(0, 0, 0, 0)
+        self.widget_5 = QWidget(self.widget_6)
+        self.widget_5.setObjectName(u"widget_5")
+        self.verticalLayout = QVBoxLayout(self.widget_5)
+        self.verticalLayout.setObjectName(u"verticalLayout")
+        self.widget = QWidget(self.widget_5)
         self.widget.setObjectName(u"widget")
         self.horizontalLayout_3 = QHBoxLayout(self.widget)
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
@@ -322,9 +341,9 @@ class Ui_QuizCreatorDialog(object):
         self.horizontalLayout_3.addWidget(self.btnAddItem_id)
 
 
-        self.verticalLayout_2.addWidget(self.widget)
+        self.verticalLayout.addWidget(self.widget)
 
-        self.scrollArea_id = QScrollArea(QuizCreatorDialog)
+        self.scrollArea_id = QScrollArea(self.widget_5)
         self.scrollArea_id.setObjectName(u"scrollArea_id")
         self.scrollArea_id.setStyleSheet(u"/* 1. THE MAIN CONTAINER */\n"
 "#scrollArea_id { \n"
@@ -403,14 +422,22 @@ class Ui_QuizCreatorDialog(object):
         self.scrollArea_id.setWidgetResizable(True)
         self.scrollAreaWidgetContents_5 = QWidget()
         self.scrollAreaWidgetContents_5.setObjectName(u"scrollAreaWidgetContents_5")
-        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 993, 128))
-        self.verticalLayout_7 = QVBoxLayout(self.scrollAreaWidgetContents_5)
-        self.verticalLayout_7.setObjectName(u"verticalLayout_7")
+        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 311, 467))
+        self.layout_identification = QVBoxLayout(self.scrollAreaWidgetContents_5)
+        self.layout_identification.setObjectName(u"layout_identification")
         self.scrollArea_id.setWidget(self.scrollAreaWidgetContents_5)
 
-        self.verticalLayout_2.addWidget(self.scrollArea_id)
+        self.verticalLayout.addWidget(self.scrollArea_id)
 
-        self.widget_3 = QWidget(QuizCreatorDialog)
+
+        self.horizontalLayout_7.addWidget(self.widget_5)
+
+        self.widget_7 = QWidget(self.widget_6)
+        self.widget_7.setObjectName(u"widget_7")
+        self.widget_7.setMinimumSize(QSize(0, 0))
+        self.verticalLayout_6 = QVBoxLayout(self.widget_7)
+        self.verticalLayout_6.setObjectName(u"verticalLayout_6")
+        self.widget_3 = QWidget(self.widget_7)
         self.widget_3.setObjectName(u"widget_3")
         self.horizontalLayout_5 = QHBoxLayout(self.widget_3)
         self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
@@ -440,9 +467,9 @@ class Ui_QuizCreatorDialog(object):
         self.horizontalLayout_5.addWidget(self.btnAddItem_mc)
 
 
-        self.verticalLayout_2.addWidget(self.widget_3)
+        self.verticalLayout_6.addWidget(self.widget_3)
 
-        self.scrollArea_mc = QScrollArea(QuizCreatorDialog)
+        self.scrollArea_mc = QScrollArea(self.widget_7)
         self.scrollArea_mc.setObjectName(u"scrollArea_mc")
         self.scrollArea_mc.setStyleSheet(u"/* 1. THE MAIN CONTAINER */\n"
 "#scrollArea_mc { \n"
@@ -521,14 +548,22 @@ class Ui_QuizCreatorDialog(object):
         self.scrollArea_mc.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 993, 127))
-        self.verticalLayout_3 = QVBoxLayout(self.scrollAreaWidgetContents_2)
-        self.verticalLayout_3.setObjectName(u"verticalLayout_3")
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 310, 467))
+        self.layout_multiplechoice = QVBoxLayout(self.scrollAreaWidgetContents_2)
+        self.layout_multiplechoice.setObjectName(u"layout_multiplechoice")
         self.scrollArea_mc.setWidget(self.scrollAreaWidgetContents_2)
 
-        self.verticalLayout_2.addWidget(self.scrollArea_mc)
+        self.verticalLayout_6.addWidget(self.scrollArea_mc)
 
-        self.widget_4 = QWidget(QuizCreatorDialog)
+
+        self.horizontalLayout_7.addWidget(self.widget_7)
+
+        self.widget_8 = QWidget(self.widget_6)
+        self.widget_8.setObjectName(u"widget_8")
+        self.widget_8.setMinimumSize(QSize(0, 100))
+        self.verticalLayout_8 = QVBoxLayout(self.widget_8)
+        self.verticalLayout_8.setObjectName(u"verticalLayout_8")
+        self.widget_4 = QWidget(self.widget_8)
         self.widget_4.setObjectName(u"widget_4")
         self.horizontalLayout_6 = QHBoxLayout(self.widget_4)
         self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
@@ -558,9 +593,9 @@ class Ui_QuizCreatorDialog(object):
         self.horizontalLayout_6.addWidget(self.btnAddItem_tf)
 
 
-        self.verticalLayout_2.addWidget(self.widget_4)
+        self.verticalLayout_8.addWidget(self.widget_4)
 
-        self.scrollArea_tf = QScrollArea(QuizCreatorDialog)
+        self.scrollArea_tf = QScrollArea(self.widget_8)
         self.scrollArea_tf.setObjectName(u"scrollArea_tf")
         self.scrollArea_tf.setStyleSheet(u"/* 1. THE MAIN CONTAINER */\n"
 "#scrollArea_tf { \n"
@@ -639,12 +674,18 @@ class Ui_QuizCreatorDialog(object):
         self.scrollArea_tf.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 993, 128))
-        self.verticalLayout_4 = QVBoxLayout(self.scrollAreaWidgetContents_3)
-        self.verticalLayout_4.setObjectName(u"verticalLayout_4")
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 311, 467))
+        self.layout_trueorfalse = QVBoxLayout(self.scrollAreaWidgetContents_3)
+        self.layout_trueorfalse.setObjectName(u"layout_trueorfalse")
         self.scrollArea_tf.setWidget(self.scrollAreaWidgetContents_3)
 
-        self.verticalLayout_2.addWidget(self.scrollArea_tf)
+        self.verticalLayout_8.addWidget(self.scrollArea_tf)
+
+
+        self.horizontalLayout_7.addWidget(self.widget_8)
+
+
+        self.verticalLayout_2.addWidget(self.widget_6)
 
         self.frame_4 = QFrame(QuizCreatorDialog)
         self.frame_4.setObjectName(u"frame_4")
@@ -653,13 +694,14 @@ class Ui_QuizCreatorDialog(object):
         self.frame_4.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_4 = QHBoxLayout(self.frame_4)
         self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
+        self.horizontalLayout_4.setContentsMargins(0, 0, 0, 0)
         self.horizontalSpacer_7 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_4.addItem(self.horizontalSpacer_7)
 
         self.btn_save = QPushButton(self.frame_4)
         self.btn_save.setObjectName(u"btn_save")
-        self.btn_save.setMinimumSize(QSize(0, 30))
+        self.btn_save.setMinimumSize(QSize(100, 30))
         font = QFont()
         font.setFamilies([u"Inter SemiBold"])
         font.setPointSize(10)
@@ -668,6 +710,7 @@ class Ui_QuizCreatorDialog(object):
         self.btn_save.setFont(font)
         self.btn_save.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btn_save.setStyleSheet(u"background: #27ae60; font: 10pt \"Inter SemiBold\";")
+        self.btn_save.setIconSize(QSize(20, 20))
 
         self.horizontalLayout_4.addWidget(self.btn_save)
 
@@ -686,7 +729,7 @@ class Ui_QuizCreatorDialog(object):
         self.label_2.setText(QCoreApplication.translate("QuizCreatorDialog", u"Grading Period:", None))
         self.label_3.setText(QCoreApplication.translate("QuizCreatorDialog", u"Lesson Title:", None))
         self.checkBoxLockQuiz.setText(QCoreApplication.translate("QuizCreatorDialog", u"Unpublish Quiz", None))
-        self.label_4.setText(QCoreApplication.translate("QuizCreatorDialog", u"Total Score:", None))
+        self.label_5.setText(QCoreApplication.translate("QuizCreatorDialog", u"Total Score:", None))
         self.label_totalScore.setText(QCoreApplication.translate("QuizCreatorDialog", u"000", None))
         self.label_6.setText(QCoreApplication.translate("QuizCreatorDialog", u"Diffuculty:", None))
         self.btnEasy.setText(QCoreApplication.translate("QuizCreatorDialog", u"Easy", None))
@@ -696,6 +739,8 @@ class Ui_QuizCreatorDialog(object):
         self.label_15.setText(QCoreApplication.translate("QuizCreatorDialog", u"Easy", None))
         self.label_16.setText(QCoreApplication.translate("QuizCreatorDialog", u"Average", None))
         self.label_17.setText(QCoreApplication.translate("QuizCreatorDialog", u"Hard", None))
+        self.label_4.setText(QCoreApplication.translate("QuizCreatorDialog", u"Score:", None))
+        self.label_scoreperlevel.setText(QCoreApplication.translate("QuizCreatorDialog", u"000", None))
         self.label_12.setText(QCoreApplication.translate("QuizCreatorDialog", u"Identification", None))
         self.label_9.setText("")
         self.label_id_count.setText(QCoreApplication.translate("QuizCreatorDialog", u"000", None))

@@ -373,3 +373,13 @@ class CircularProgress(QWidget):
         painter.setFont(QFont("Arial", 18, QFont.Bold))
         painter.drawText(rect, Qt.AlignCenter, f"{int(self.value)}{self.suffix}")
 
+
+class NoScrollComboBox(QComboBox):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        # Prevent the widget from accepting focus via scrolling
+        self.setFocusPolicy(Qt.StrongFocus)
+
+    def wheelEvent(self, event):
+        # Ignore the event so the scroll goes to the parent (the page)
+        event.ignore()

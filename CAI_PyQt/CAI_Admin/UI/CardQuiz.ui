@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>472</width>
-    <height>188</height>
+    <width>508</width>
+    <height>191</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -38,15 +38,7 @@
 	border-radius: 10px;
 	border: 1px solid #ddd;
 }
-#Card:hover {
-	border: 1px solid #3498db;
-	background-color: #f7fbfe;
-}
-/* This style applies when the custom property is true */
-#Card[selected=&quot;true&quot;] {
-	background-color: #e1f5fe;
-	border: 2px solid #3498db;
-}
+
 QLabel {
 	color: #333;
 }</string>
@@ -66,7 +58,7 @@ QLabel {
         <property name="frameShadow">
          <enum>QFrame::Raised</enum>
         </property>
-        <layout class="QVBoxLayout" name="verticalLayout_2">
+        <layout class="QVBoxLayout" name="layout_body_text">
          <property name="leftMargin">
           <number>0</number>
          </property>
@@ -114,16 +106,6 @@ QLabel {
            </property>
            <property name="alignment">
             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-           </property>
-           <property name="wordWrap">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_ans">
-           <property name="text">
-            <string>Correct answer</string>
            </property>
            <property name="wordWrap">
             <bool>true</bool>

@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1011</width>
+    <width>1016</width>
     <height>689</height>
    </rect>
   </property>
@@ -140,7 +140,7 @@ QCheckBox::indicator:checked {
       </spacer>
      </item>
      <item>
-      <widget class="QLabel" name="label_4">
+      <widget class="QLabel" name="label_5">
        <property name="text">
         <string>Total Score:</string>
        </property>
@@ -462,6 +462,20 @@ QPushButton:hover {
            </property>
           </widget>
          </item>
+         <item>
+          <widget class="QLabel" name="label_4">
+           <property name="text">
+            <string>Score:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_scoreperlevel">
+           <property name="text">
+            <string>000</string>
+           </property>
+          </widget>
+         </item>
         </layout>
        </widget>
       </item>
@@ -476,8 +490,8 @@ QPushButton:hover {
     </widget>
    </item>
    <item>
-    <widget class="QWidget" name="widget" native="true">
-     <layout class="QHBoxLayout" name="horizontalLayout_3">
+    <widget class="QWidget" name="widget_6" native="true">
+     <layout class="QHBoxLayout" name="horizontalLayout_7">
       <property name="leftMargin">
        <number>0</number>
       </property>
@@ -491,80 +505,98 @@ QPushButton:hover {
        <number>0</number>
       </property>
       <item>
-       <widget class="QLabel" name="label_12">
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>30</height>
-         </size>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">font: 11pt &quot;Inter SemiBold&quot;; </string>
-        </property>
-        <property name="text">
-         <string>Identification</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_9">
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>30</height>
-         </size>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_id_count">
-        <property name="text">
-         <string>000</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer name="horizontalSpacer_2">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QPushButton" name="btnAddItem_id">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>30</height>
-         </size>
-        </property>
-        <property name="cursor">
-         <cursorShape>PointingHandCursor</cursorShape>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background: #27ae60;</string>
-        </property>
-        <property name="text">
-         <string>+ Add Item</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item>
-    <widget class="QScrollArea" name="scrollArea_id">
-     <property name="styleSheet">
-      <string notr="true">/* 1. THE MAIN CONTAINER */
+       <widget class="QWidget" name="widget_5" native="true">
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <item>
+          <widget class="QWidget" name="widget" native="true">
+           <layout class="QHBoxLayout" name="horizontalLayout_3">
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="label_12">
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">font: 11pt &quot;Inter SemiBold&quot;; </string>
+              </property>
+              <property name="text">
+               <string>Identification</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_9">
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_id_count">
+              <property name="text">
+               <string>000</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_2">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QPushButton" name="btnAddItem_id">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="cursor">
+               <cursorShape>PointingHandCursor</cursorShape>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background: #27ae60;</string>
+              </property>
+              <property name="text">
+               <string>+ Add Item</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QScrollArea" name="scrollArea_id">
+           <property name="styleSheet">
+            <string notr="true">/* 1. THE MAIN CONTAINER */
 #scrollArea_id { 
     border: none;
     border-radius: 20px; 
@@ -637,100 +669,112 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
     background: rgb(246, 245, 244);
     border: none;
 }</string>
-     </property>
-     <property name="widgetResizable">
-      <bool>true</bool>
-     </property>
-     <widget class="QWidget" name="scrollAreaWidgetContents_5">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>993</width>
-        <height>128</height>
-       </rect>
-      </property>
-      <layout class="QVBoxLayout" name="verticalLayout_7"/>
-     </widget>
-    </widget>
-   </item>
-   <item>
-    <widget class="QWidget" name="widget_3" native="true">
-     <layout class="QHBoxLayout" name="horizontalLayout_5">
-      <property name="leftMargin">
-       <number>0</number>
-      </property>
-      <property name="topMargin">
-       <number>0</number>
-      </property>
-      <property name="rightMargin">
-       <number>0</number>
-      </property>
-      <property name="bottomMargin">
-       <number>0</number>
-      </property>
-      <item>
-       <widget class="QLabel" name="label_13">
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>30</height>
-         </size>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">font: 11pt &quot;Inter SemiBold&quot;; </string>
-        </property>
-        <property name="text">
-         <string>Multiple Choice</string>
-        </property>
+           </property>
+           <property name="widgetResizable">
+            <bool>true</bool>
+           </property>
+           <widget class="QWidget" name="scrollAreaWidgetContents_5">
+            <property name="geometry">
+             <rect>
+              <x>0</x>
+              <y>0</y>
+              <width>311</width>
+              <height>467</height>
+             </rect>
+            </property>
+            <layout class="QVBoxLayout" name="layout_identification"/>
+           </widget>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="label_mc_count">
-        <property name="text">
-         <string>000</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer name="horizontalSpacer_4">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QPushButton" name="btnAddItem_mc">
+       <widget class="QWidget" name="widget_7" native="true">
         <property name="minimumSize">
          <size>
           <width>0</width>
-          <height>30</height>
+          <height>0</height>
          </size>
         </property>
-        <property name="cursor">
-         <cursorShape>PointingHandCursor</cursorShape>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background: #27ae60;</string>
-        </property>
-        <property name="text">
-         <string>+ Add Item</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item>
-    <widget class="QScrollArea" name="scrollArea_mc">
-     <property name="styleSheet">
-      <string notr="true">/* 1. THE MAIN CONTAINER */
+        <layout class="QVBoxLayout" name="verticalLayout_6">
+         <item>
+          <widget class="QWidget" name="widget_3" native="true">
+           <layout class="QHBoxLayout" name="horizontalLayout_5">
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="label_13">
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">font: 11pt &quot;Inter SemiBold&quot;; </string>
+              </property>
+              <property name="text">
+               <string>Multiple Choice</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_mc_count">
+              <property name="text">
+               <string>000</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_4">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QPushButton" name="btnAddItem_mc">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="cursor">
+               <cursorShape>PointingHandCursor</cursorShape>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background: #27ae60;</string>
+              </property>
+              <property name="text">
+               <string>+ Add Item</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QScrollArea" name="scrollArea_mc">
+           <property name="styleSheet">
+            <string notr="true">/* 1. THE MAIN CONTAINER */
 #scrollArea_mc { 
     border: none;
     border-radius: 20px; 
@@ -803,100 +847,112 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
     background: rgb(246, 245, 244);
     border: none;
 }</string>
-     </property>
-     <property name="widgetResizable">
-      <bool>true</bool>
-     </property>
-     <widget class="QWidget" name="scrollAreaWidgetContents_2">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>993</width>
-        <height>127</height>
-       </rect>
-      </property>
-      <layout class="QVBoxLayout" name="verticalLayout_3"/>
-     </widget>
-    </widget>
-   </item>
-   <item>
-    <widget class="QWidget" name="widget_4" native="true">
-     <layout class="QHBoxLayout" name="horizontalLayout_6">
-      <property name="leftMargin">
-       <number>0</number>
-      </property>
-      <property name="topMargin">
-       <number>0</number>
-      </property>
-      <property name="rightMargin">
-       <number>0</number>
-      </property>
-      <property name="bottomMargin">
-       <number>0</number>
-      </property>
-      <item>
-       <widget class="QLabel" name="label_14">
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>30</height>
-         </size>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">font: 11pt &quot;Inter SemiBold&quot;; </string>
-        </property>
-        <property name="text">
-         <string>True or False</string>
-        </property>
+           </property>
+           <property name="widgetResizable">
+            <bool>true</bool>
+           </property>
+           <widget class="QWidget" name="scrollAreaWidgetContents_2">
+            <property name="geometry">
+             <rect>
+              <x>0</x>
+              <y>0</y>
+              <width>310</width>
+              <height>467</height>
+             </rect>
+            </property>
+            <layout class="QVBoxLayout" name="layout_multiplechoice"/>
+           </widget>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="label_tf_count">
-        <property name="text">
-         <string>000</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer name="horizontalSpacer_5">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QPushButton" name="btnAddItem_tf">
+       <widget class="QWidget" name="widget_8" native="true">
         <property name="minimumSize">
          <size>
           <width>0</width>
-          <height>30</height>
+          <height>100</height>
          </size>
         </property>
-        <property name="cursor">
-         <cursorShape>PointingHandCursor</cursorShape>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background: #27ae60;</string>
-        </property>
-        <property name="text">
-         <string>+ Add Item</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item>
-    <widget class="QScrollArea" name="scrollArea_tf">
-     <property name="styleSheet">
-      <string notr="true">/* 1. THE MAIN CONTAINER */
+        <layout class="QVBoxLayout" name="verticalLayout_8">
+         <item>
+          <widget class="QWidget" name="widget_4" native="true">
+           <layout class="QHBoxLayout" name="horizontalLayout_6">
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="label_14">
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">font: 11pt &quot;Inter SemiBold&quot;; </string>
+              </property>
+              <property name="text">
+               <string>True or False</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_tf_count">
+              <property name="text">
+               <string>000</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_5">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QPushButton" name="btnAddItem_tf">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="cursor">
+               <cursorShape>PointingHandCursor</cursorShape>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background: #27ae60;</string>
+              </property>
+              <property name="text">
+               <string>+ Add Item</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QScrollArea" name="scrollArea_tf">
+           <property name="styleSheet">
+            <string notr="true">/* 1. THE MAIN CONTAINER */
 #scrollArea_tf { 
     border: none;
     border-radius: 20px; 
@@ -969,21 +1025,27 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
     background: rgb(246, 245, 244);
     border: none;
 }</string>
-     </property>
-     <property name="widgetResizable">
-      <bool>true</bool>
-     </property>
-     <widget class="QWidget" name="scrollAreaWidgetContents_3">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>993</width>
-        <height>128</height>
-       </rect>
-      </property>
-      <layout class="QVBoxLayout" name="verticalLayout_4"/>
-     </widget>
+           </property>
+           <property name="widgetResizable">
+            <bool>true</bool>
+           </property>
+           <widget class="QWidget" name="scrollAreaWidgetContents_3">
+            <property name="geometry">
+             <rect>
+              <x>0</x>
+              <y>0</y>
+              <width>311</width>
+              <height>467</height>
+             </rect>
+            </property>
+            <layout class="QVBoxLayout" name="layout_trueorfalse"/>
+           </widget>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </item>
    <item>
@@ -998,6 +1060,18 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
       <enum>QFrame::Raised</enum>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_4">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
       <item>
        <spacer name="horizontalSpacer_7">
         <property name="orientation">
@@ -1015,7 +1089,7 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
        <widget class="QPushButton" name="btn_save">
         <property name="minimumSize">
          <size>
-          <width>0</width>
+          <width>100</width>
           <height>30</height>
          </size>
         </property>
@@ -1036,6 +1110,12 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
         </property>
         <property name="text">
          <string>Save all</string>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
         </property>
        </widget>
       </item>

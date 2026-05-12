@@ -2842,7 +2842,7 @@ QCheckBox::indicator:checked {
            </spacer>
           </item>
           <item>
-           <widget class="QLabel" name="label_totalScore_2">
+           <widget class="QLabel" name="label_7">
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -3158,6 +3158,32 @@ QPushButton:hover {
              </property>
              <property name="value">
               <number>1</number>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_3">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Score:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_scoreperlevel">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>000</string>
              </property>
             </widget>
            </item>

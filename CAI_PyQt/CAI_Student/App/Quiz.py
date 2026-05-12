@@ -46,7 +46,7 @@ class Quiz(QFrame, Ui_CardQuiz):
             }
         """
 
-    def setAttributes(self):
+    def displayAttributes(self):
         self.label_itemno.setText(f"ITEM {self.itemno}")
         self.label_question.setText(f"{self.question}")
 
