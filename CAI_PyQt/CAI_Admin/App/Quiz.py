@@ -19,7 +19,7 @@ class Quiz:
     def __init__(self):
         self.db_tools = DatabaseTools()
 
-    def get_scores(self, studentId, quiznumber, gradingperiod, lessonid):
+    def get_scores(self, studentId, gradingperiod):
         """
         Retrieves all quiz scores for a given student, including lesson titles.
         Formatted to populate a QStandardItemModel for the UI.
@@ -28,47 +28,48 @@ class Quiz:
         sql = """
             SELECT
                 qs.quiznumber,
+                q.lessonid,
                 l.title,
                 qs.quizscore,
                 q.total_items,
-                TO_CHAR(qs.datetaken, \'YYYY/MM/DD, HH12:MI AM\')
+                TO_CHAR(qs.datetaken, 'YYYY/MM/DD, HH12:MI AM') AS datetaken
             FROM cai.tbl_quiz AS q
             JOIN cai.tbl_quizscores AS qs
                 ON q.quiznumber = qs.quiznumber
-                    --AND q.gradingperiod = qs.gradingperiod
-                    --AND q.lessonid = qs.lessonid
             JOIN cai.tbl_lessons AS l ON qs.lessonid = l.lesson_id
             WHERE qs.studentid = %s
+                AND qs.gradingperiod = %s
             ORDER BY qs.datetaken DESC;
         """
 
-        cursor, conn = self.db_tools.retrieve_records(sql, (studentId,))
+        records = self.db_tools.fetch_all(sql, (studentId, gradingperiod))
 
-        if not cursor:
-            if conn: conn.close()
+        if not records:
+            print('get_scores(): Returned None.')
             return None
 
         ui_headers = ["QUIZ #", "LESSON TITLE", "SCORE", "PERCENTAGE", "DATE TAKEN"]
-        records = cursor.fetchall()
         model = QStandardItemModel(len(records), len(ui_headers))
         model.setHorizontalHeaderLabels(ui_headers)
 
         for row_idx, row_data in enumerate(records):
-            quiz_num, lesson_title, quiz_score, total_items, date_taken = row_data
-            quiz_num_str = f"{quiz_num}"
-            score_str = f"{quiz_score}/{total_items}"
+            _, _, _, total_score = self.getQuizTotalScore(row_data['quiznumber'], gradingperiod, row_data['lessonid'])
+            quiz_num_str = f"{row_data['quiznumber']}"
+            score_str = f"{row_data['quizscore']}/{total_score}" if row_data['quizscore'] and total_score else ""
 
-            if total_items > 0:
-                percent_val = (quiz_score / total_items) * 100
-                percentage_str = f"{percent_val:.0f}%" # Format to 0 decimal places
-            else:
-                percentage_str = "0%"
+            percentage_str = ""
 
-            date_taken_str = str(date_taken) if date_taken is not None else ""
+            if total_score > 0 and 0 <= row_data['quizscore'] <= total_score:
+                percent_val = (row_data['quizscore'] / total_score) * 100
+
+                if percent_val:
+                    percentage_str = f"{percent_val:.0f}%"
+
+            date_taken_str = row_data['datetaken'] if row_data['datetaken'] is not None else ""
 
             row_items = [
                 QStandardItem(quiz_num_str),
-                QStandardItem(lesson_title),
+                QStandardItem(row_data['title']),
                 QStandardItem(score_str),
                 QStandardItem(percentage_str),
                 QStandardItem(date_taken_str)
@@ -78,8 +79,6 @@ class Quiz:
                 item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsEditable)
                 model.setItem(row_idx, col_idx, item)
 
-        cursor.close()
-        conn.close()
         return model
 
     def retrieve_quiz(self, q_num, g_period, lesson_id, diff_level):
@@ -95,7 +94,7 @@ class Quiz:
                 record_id (list): list of dict for QScrollArea (Identification)
                 record_mc (list): list of dict for QScrollArea (Multiple Choice)
                 record_tf (list): list of dict for QScrollArea (True or False)
-                quiz_record (tuple): total_items, id_level, mc_level, tf_level, quizlock from tbl_quiz
+                quiz_record (tuple): total_items, id_level, mc_level, tf_level, publish from tbl_quiz
 
             Raises:
                 N/A
@@ -105,7 +104,7 @@ class Quiz:
 
         sql  = "SELECT\n"
         sql += "    COALESCE(TOTAL_ITEMS, 0) AS TOTAL_ITEMS,\n"
-        sql += "    QUIZLOCK\n"
+        sql += "    publish\n"
         sql += "FROM cai.tbl_quiz\n"
         sql += "WHERE quiznumber = %s\n"
         sql += "    AND gradingperiod = %s\n"
@@ -249,7 +248,7 @@ class Quiz:
             WHERE q.quiznumber = %s
                 AND q.gradingperiod = %s
                 AND q.lessonid = %s
-            GROUP BY M.QUIZNUMBER, M.EASY_MULTIPLIER, M.AVERAGE_MULTIPLIER, M.HARD_MULTIPLIER;
+            GROUP BY M.QUIZNUMBER, M.LESSONID, M.EASY_MULTIPLIER, M.AVERAGE_MULTIPLIER, M.HARD_MULTIPLIER;
         """
 
         record = self.db_tools.fetch_all(sql, (quiznumber, gradingperiod, lessonid))
@@ -266,6 +265,7 @@ class Quiz:
             total_score = record[0]['max_score']
 
         return (easy_score, average_score, hard_score, total_score)
+
 
 
 
@@ -446,6 +446,25 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
         self.difficulty_group.setExclusive(True)
         self.level_map = { 1: self.btnEasy, 2: self.btnAverage, 3: self.btnHard }
 
+        for idx, btn in self.level_map.items():
+            btn.setCheckable(True)
+            self.difficulty_group.addButton(btn, idx)
+            btn.clicked.connect(lambda checked, i=idx: self.handle_level_click(i))
+
+        button = self.difficulty_group.button(diff_level)
+        if button:
+            button.setChecked(True)
+
+        quiz = Quiz()
+        self.record_id = {}
+        self.record_mc = {}
+        self.record_tf = {}
+        self.is_saved = False
+        self.title_init = self.windowTitle()
+
+        if q_num and g_period and lesson_id and diff_level:
+            self.record_id, self.record_mc, self.record_tf, _, _, _ = quiz.retrieve_quiz(q_num, g_period, lesson_id, diff_level)
+
         self.save_shortcut = QShortcut(QKeySequence("Ctrl+S"), self)
 
         self.db_tools = DatabaseTools()
@@ -488,15 +507,6 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
         if _idx != -1:
             self.cbLessonName.setCurrentIndex(_idx)
 
-        for idx, btn in self.level_map.items():
-            btn.setCheckable(True)
-            self.difficulty_group.addButton(btn, idx)
-            btn.clicked.connect(lambda checked, i=idx: self.handle_level_click(i))
-
-        button = self.difficulty_group.button(diff_level)
-        if button:
-            button.setChecked(True)
-
         self.refresh_quiz()
         self.quiz_no.valueChanged.connect(self.refresh_quiz)
         self.cbGradingPeriod.currentIndexChanged.connect(self.populate_pulldown_lesson)
@@ -504,6 +514,35 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
 
     def handle_level_click(self, idx):
         self.refresh_quiz()
+
+        quiz = Quiz()
+        q_num = self.quiz_no.value()
+        g_period = self.cbGradingPeriod.currentData()
+        lesson_id = self.cbLessonName.currentData()
+        diff_level = self.difficulty_group.checkedId()
+        record_id, record_mc, record_tf, _, _, _ = quiz.retrieve_quiz(q_num, g_period, lesson_id, diff_level)
+
+        record_db = {}
+        record_self = {}
+
+        if diff_level == 1:
+            record_db = record_id
+            record_self = self.record_id
+        elif diff_level == 2:
+            record_db = record_mc
+            record_self = self.record_mc
+        elif diff_level == 3:
+            record_db = record_tf
+            record_self = self.record_tf
+
+        if not self.is_saved and record_db and record_self and record_self != record_db:
+            w_title = self.windowTitle()
+            self.title_init = w_title
+            self.setWindowTitle(f"{w_title} *")
+
+        if q_num and g_period and lesson_id and diff_level:
+            self.record_id, self.record_mc, self.record_tf, _, _, _ = quiz.retrieve_quiz(q_num, g_period, lesson_id, diff_level)
+            self.is_saved = False
 
     def countLayoutChildren(self):
         sections = [
@@ -544,7 +583,6 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
 
         self.label_scoreperlevel.setText(score_per_level)
         self.label_totalScore.setText(f"{total_score}")
-
 
     def populate_pulldown_lesson(self):
         selected_period = self.cbGradingPeriod.currentData()
@@ -688,19 +726,19 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
                 layout.setSpacing(10)
 
         sql  = "SELECT\n"
-        sql += "    QUIZLOCK\n"
+        sql += "    PUBLISH\n"
         sql += "FROM cai.tbl_quiz\n"
         sql += "WHERE quiznumber = %s\n"
         sql += "    AND gradingperiod = %s\n"
         sql += "    AND lessonid = %s"
         cursor, conn = self.db_tools.retrieve_records(sql, (params[0], params[1], params[2]))
-        self.checkBoxLockQuiz.setChecked(False)
+        self.checkBoxPublish.setChecked(True)
 
         if cursor:
             record = cursor.fetchone()
 
             if not self.util.isEmpty(record):
-                self.checkBoxLockQuiz.setChecked(record[0])
+                self.checkBoxPublish.setChecked(record[0])
 
             cursor.close()
 
@@ -795,204 +833,236 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
             g_period = self.cbGradingPeriod.currentData()
             l_id = self.cbLessonName.currentData()
 
-            total_count = self.count_id + self.count_mc + self.count_tf
-            sql  = "INSERT INTO CAI.TBL_QUIZ (\n"
-            sql += "    QUIZNUMBER\n"
-            sql += "    ,GRADINGPERIOD\n"
-            sql += "    ,LESSONID\n"
-            sql += "    ,TOTAL_ITEMS\n"
-            sql += "    ,EASY_COUNT\n"
-            sql += "    ,AVERAGE_COUNT\n"
-            sql += "    ,HARD_COUNT\n"
-            sql += "    ,QUIZLOCK\n"
-            sql += ") VALUES (%s, %s, %s, %s, %s, %s, %s, %s)\n"
-            sql += "ON CONFLICT (QUIZNUMBER, GRADINGPERIOD, LESSONID)\n"
-            sql += "DO UPDATE SET\n"
-            sql += "    TOTAL_ITEMS = EXCLUDED.TOTAL_ITEMS,\n"
-            sql += "    EASY_COUNT = EXCLUDED.EASY_COUNT,\n"
-            sql += "    AVERAGE_COUNT = EXCLUDED.AVERAGE_COUNT,\n"
-            sql += "    HARD_COUNT = EXCLUDED.HARD_COUNT,\n"
-            sql += "    QUIZLOCK = EXCLUDED.QUIZLOCK\n"
+            conn = self.db_tools.get_connection()
+            conn.autocommit = False
 
-            self.db_tools.execute_query(sql, (
-                q_num,
-                g_period,
-                l_id,
-                total_count,
-                self.count_id,
-                self.count_mc,
-                self.count_tf,
-                True if self.checkBoxLockQuiz.isChecked() else False
-            ))
+            with conn.cursor() as cur:
 
-            for i in range(self.layout_identification.count()):
-                w = self.layout_identification.itemAt(i).widget()
-                if not isinstance(w, QuizItemWidget): continue
+                for i in range(self.layout_identification.count()):
+                    w = self.layout_identification.itemAt(i).widget()
+                    if not isinstance(w, QuizItemWidget): continue
 
-                img = self.get_binary(w.img_path)
-                sql  = "INSERT INTO CAI.TBL_QUIZIDENTIFICATION (\n"
+                    img = self.get_binary(w.img_path)
+                    sql  = "INSERT INTO CAI.TBL_QUIZIDENTIFICATION (\n"
+                    sql += "    QUIZNUMBER,\n"
+                    sql += "    GRADINGPERIOD,\n"
+                    sql += "    ITEMNO,\n"
+                    sql += "    LESSONID,\n"
+                    sql += "    QUESTION,\n"
+                    sql += "    CORRECT_ANSWER,\n"
+                    sql += "    IMAGEQUESTION,\n"
+                    sql += "    DIFFICULTYLEVEL\n"
+                    sql += ") VALUES (%s, %s, %s, %s, %s, %s, %s, %s)\n"
+                    sql += "ON CONFLICT (QUIZNUMBER, GRADINGPERIOD, ITEMNO, LESSONID, DIFFICULTYLEVEL)\n"
+                    sql += "DO UPDATE SET\n"
+                    sql += "    QUESTION = EXCLUDED.QUESTION,\n"
+                    sql += "    CORRECT_ANSWER = EXCLUDED.CORRECT_ANSWER,\n"
+                    sql += "    IMAGEQUESTION = EXCLUDED.IMAGEQUESTION,\n"
+                    sql += "    DIFFICULTYLEVEL = EXCLUDED.DIFFICULTYLEVEL\n"
+
+                    cur.execute(sql, (
+                        q_num,
+                        g_period,
+                        i+1,
+                        l_id,
+                        w.txt_question.toPlainText().strip(),
+                        w.ans.text(),
+                        psycopg2.Binary(img) if img else w.img_binary,
+                        self.difficulty_group.checkedId()
+                    ))
+
+                for i in range(self.layout_multiplechoice.count()):
+                    w = self.layout_multiplechoice.itemAt(i).widget()
+                    if not isinstance(w, QuizItemWidget): continue
+
+                    img = self.get_binary(w.img_path)
+                    sql  = "INSERT INTO CAI.TBL_QUIZMULTIPLECHOICE (\n"
+                    sql += "    QUIZNUMBER,\n"
+                    sql += "    GRADINGPERIOD,\n"
+                    sql += "    ITEMNO,\n"
+                    sql += "    LESSONID,\n"
+                    sql += "    QUESTION,\n"
+                    sql += "    CHOICE_A,\n"
+                    sql += "    CHOICE_B,\n"
+                    sql += "    CHOICE_C,\n"
+                    sql += "    CORRECT_ANSWER,\n"
+                    sql += "    IMAGEQUESTION,\n"
+                    sql += "    DIFFICULTYLEVEL\n"
+                    sql += ") VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)\n"
+                    sql += "ON CONFLICT (QUIZNUMBER, GRADINGPERIOD, ITEMNO, LESSONID, DIFFICULTYLEVEL)\n"
+                    sql += "DO UPDATE SET\n"
+                    sql += "    QUESTION = EXCLUDED.QUESTION,\n"
+                    sql += "    CHOICE_A = EXCLUDED.CHOICE_A,\n"
+                    sql += "    CHOICE_B = EXCLUDED.CHOICE_B,\n"
+                    sql += "    CHOICE_C = EXCLUDED.CHOICE_C,\n"
+                    sql += "    CORRECT_ANSWER = EXCLUDED.CORRECT_ANSWER,\n"
+                    sql += "    IMAGEQUESTION = EXCLUDED.IMAGEQUESTION,\n"
+                    sql += "    DIFFICULTYLEVEL = EXCLUDED.DIFFICULTYLEVEL\n"
+
+                    correct = None
+
+                    if w.correct.currentText() == 'A':
+                        correct = w.choices[0].text()
+
+                    elif w.correct.currentText() == 'B':
+                        correct = w.choices[1].text()
+
+                    elif w.correct.currentText() == 'C':
+                        correct = w.choices[2].text()
+
+                    cur.execute(sql, (
+                        self.quiz_no.value(),
+                        g_period,
+                        i+1,
+                        l_id,
+                        w.txt_question.toPlainText().strip(),
+                        w.choices[0].text(),
+                        w.choices[1].text(),
+                        w.choices[2].text(),
+                        correct,
+                        psycopg2.Binary(img) if img else w.img_binary,
+                        self.difficulty_group.checkedId()
+                    ))
+
+                for i in range(self.layout_trueorfalse.count()):
+                    w = self.layout_trueorfalse.itemAt(i).widget()
+                    if not isinstance(w, QuizItemWidget): continue
+
+                    img = self.get_binary(w.img_path)
+                    sql  = "INSERT INTO CAI.TBL_QUIZTRUEORFALSE (\n"
+                    sql += "    QUIZNUMBER\n"
+                    sql += "    ,GRADINGPERIOD\n"
+                    sql += "    ,ITEMNO\n"
+                    sql += "    ,LESSONID\n"
+                    sql += "    ,QUESTION\n"
+                    sql += "    ,CORRECT_ANSWER\n"
+                    sql += "    ,IMAGEQUESTION\n"
+                    sql += "    ,DIFFICULTYLEVEL\n"
+                    sql += ") VALUES (%s,%s,%s,%s,%s,%s,%s,%s)\n"
+                    sql += "ON CONFLICT (QUIZNUMBER, GRADINGPERIOD, ITEMNO, LESSONID, DIFFICULTYLEVEL)\n"
+                    sql += "DO UPDATE SET\n"
+                    sql += "    QUESTION = EXCLUDED.QUESTION,\n"
+                    sql += "    CORRECT_ANSWER = EXCLUDED.CORRECT_ANSWER,\n"
+                    sql += "    IMAGEQUESTION = EXCLUDED.IMAGEQUESTION,\n"
+                    sql += "    DIFFICULTYLEVEL = EXCLUDED.DIFFICULTYLEVEL\n"
+
+                    cur.execute(sql, (
+                        self.quiz_no.value(),
+                        g_period,
+                        i+1,
+                        l_id,
+                        w.txt_question.toPlainText().strip(),
+                        w.ans.currentText(),
+                        psycopg2.Binary(img) if img else w.img_binary,
+                        self.difficulty_group.checkedId()
+                    ))
+
+                sql = """
+                    WITH QuizCounts AS (
+                        SELECT 
+                            COUNT(*) AS total,
+                            COUNT(*) FILTER (WHERE DIFFICULTYLEVEL = 1) AS easy,
+                            COUNT(*) FILTER (WHERE DIFFICULTYLEVEL = 2) AS average,
+                            COUNT(*) FILTER (WHERE DIFFICULTYLEVEL = 3) AS hard
+                        FROM (
+                            SELECT QUIZNUMBER, GRADINGPERIOD, LESSONID, DIFFICULTYLEVEL FROM CAI.TBL_QUIZIDENTIFICATION
+                            UNION ALL
+                            SELECT QUIZNUMBER, GRADINGPERIOD, LESSONID, DIFFICULTYLEVEL FROM CAI.TBL_QUIZMULTIPLECHOICE
+                            UNION ALL
+                            SELECT QUIZNUMBER, GRADINGPERIOD, LESSONID, DIFFICULTYLEVEL FROM CAI.TBL_QUIZTRUEORFALSE
+                        ) Q
+                        WHERE Q.QUIZNUMBER = %s 
+                        AND Q.GRADINGPERIOD = %s 
+                        AND Q.LESSONID = %s
+                    )
+                    INSERT INTO CAI.TBL_QUIZ (
+                        QUIZNUMBER,
+                        GRADINGPERIOD,
+                        LESSONID,
+                        TOTAL_ITEMS,
+                        EASY_COUNT,
+                        AVERAGE_COUNT,
+                        HARD_COUNT,
+                        PUBLISH
+                    )
+                    SELECT 
+                        %s, %s, %s,
+                        C.total, C.easy, C.average, C.hard,
+                        %s
+                    FROM QuizCounts C
+                    ON CONFLICT (QUIZNUMBER, GRADINGPERIOD, LESSONID)
+                    DO UPDATE SET
+                        TOTAL_ITEMS = EXCLUDED.TOTAL_ITEMS,
+                        EASY_COUNT = EXCLUDED.EASY_COUNT,
+                        AVERAGE_COUNT = EXCLUDED.AVERAGE_COUNT,
+                        HARD_COUNT = EXCLUDED.HARD_COUNT,
+                        PUBLISH = EXCLUDED.PUBLISH;
+                """
+
+                params = (
+                    q_num, g_period, l_id,
+                    q_num, g_period, l_id,
+                    True if self.checkBoxPublish.isChecked() else False
+                )
+
+                cur.execute(sql, params)
+
+                mult_easy = self.multiplier_easy.value()
+                mult_average = self.multiplier_average.value()
+                mult_hard = self.multiplier_hard.value()
+                total_score = self.label_scoreperlevel.text()
+
+                sql  = "INSERT INTO CAI.TBL_SCOREMULTIPLIER (\n"
                 sql += "    QUIZNUMBER,\n"
-                sql += "    GRADINGPERIOD,\n"
-                sql += "    ITEMNO,\n"
                 sql += "    LESSONID,\n"
-                sql += "    QUESTION,\n"
-                sql += "    CORRECT_ANSWER,\n"
-                sql += "    IMAGEQUESTION,\n"
-                sql += "    DIFFICULTYLEVEL\n"
-                sql += ") VALUES (%s, %s, %s, %s, %s, %s, %s, %s)\n"
-                sql += "ON CONFLICT (QUIZNUMBER, GRADINGPERIOD, ITEMNO, LESSONID, DIFFICULTYLEVEL)\n"
-                sql += "DO UPDATE SET\n"
-                sql += "    QUESTION = EXCLUDED.QUESTION,\n"
-                sql += "    CORRECT_ANSWER = EXCLUDED.CORRECT_ANSWER,\n"
-                sql += "    IMAGEQUESTION = EXCLUDED.IMAGEQUESTION,\n"
-                sql += "    DIFFICULTYLEVEL = EXCLUDED.DIFFICULTYLEVEL\n"
-
-                self.db_tools.execute_query(sql, (
-                    q_num,
-                    g_period,
-                    i+1,
-                    l_id,
-                    w.txt_question.toPlainText().strip(),
-                    w.ans.text(),
-                    psycopg2.Binary(img) if img else w.img_binary,
-                    self.difficulty_group.checkedId()
-                ))
-
-            for i in range(self.layout_multiplechoice.count()):
-                w = self.layout_multiplechoice.itemAt(i).widget()
-                if not isinstance(w, QuizItemWidget): continue
-
-                img = self.get_binary(w.img_path)
-                sql  = "INSERT INTO CAI.TBL_QUIZMULTIPLECHOICE (\n"
-                sql += "    QUIZNUMBER,\n"
                 sql += "    GRADINGPERIOD,\n"
-                sql += "    ITEMNO,\n"
-                sql += "    LESSONID,\n"
-                sql += "    QUESTION,\n"
-                sql += "    CHOICE_A,\n"
-                sql += "    CHOICE_B,\n"
-                sql += "    CHOICE_C,\n"
-                sql += "    CORRECT_ANSWER,\n"
-                sql += "    IMAGEQUESTION,\n"
-                sql += "    DIFFICULTYLEVEL\n"
-                sql += ") VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)\n"
-                sql += "ON CONFLICT (QUIZNUMBER, GRADINGPERIOD, ITEMNO, LESSONID, DIFFICULTYLEVEL)\n"
+                sql += "    EASY_MULTIPLIER,\n"
+                sql += "    AVERAGE_MULTIPLIER,\n"
+                sql += "    HARD_MULTIPLIER,\n"
+                sql += "    TOTAL_POSSIBLE_POINTS\n"
+                sql += ") VALUES (%s, %s, %s, %s, %s, %s, %s)\n"
+                sql += "ON CONFLICT (QUIZNUMBER, LESSONID, GRADINGPERIOD)\n"
                 sql += "DO UPDATE SET\n"
-                sql += "    QUESTION = EXCLUDED.QUESTION,\n"
-                sql += "    CHOICE_A = EXCLUDED.CHOICE_A,\n"
-                sql += "    CHOICE_B = EXCLUDED.CHOICE_B,\n"
-                sql += "    CHOICE_C = EXCLUDED.CHOICE_C,\n"
-                sql += "    CORRECT_ANSWER = EXCLUDED.CORRECT_ANSWER,\n"
-                sql += "    IMAGEQUESTION = EXCLUDED.IMAGEQUESTION,\n"
-                sql += "    DIFFICULTYLEVEL = EXCLUDED.DIFFICULTYLEVEL\n"
+                sql += "    EASY_MULTIPLIER = EXCLUDED.EASY_MULTIPLIER,\n"
+                sql += "    AVERAGE_MULTIPLIER = EXCLUDED.AVERAGE_MULTIPLIER,\n"
+                sql += "    HARD_MULTIPLIER = EXCLUDED.HARD_MULTIPLIER,\n"
+                sql += "    TOTAL_POSSIBLE_POINTS = EXCLUDED.TOTAL_POSSIBLE_POINTS"
 
-                correct = None
+                data = (q_num, l_id, g_period, mult_easy, mult_average, mult_hard, total_score)
+                cur.execute(sql, data)
 
-                if w.correct.currentText() == 'A':
-                    correct = w.choices[0].text()
+                if self.itemsToRemove:
+                    # Filter out None values just in case
+                    ids_to_delete = [i for i in self.itemsToRemove if i is not None]
 
-                elif w.correct.currentText() == 'B':
-                    correct = w.choices[1].text()
+                    if ids_to_delete:
+                        # Generic deletion query - you'll need to run this for each table
+                        # since idKey, mcKey, and tfKey are likely distinct columns
+                        tables = [
+                            ("cai.tbl_quizidentification", "idkey"),
+                            ("cai.tbl_quizmultiplechoice", "mckey"),
+                            ("cai.tbl_quiztrueorfalse", "tfkey")
+                        ]
 
-                elif w.correct.currentText() == 'C':
-                    correct = w.choices[2].text()
+                        for table, col in tables:
+                            sql_del = f"DELETE FROM {table} WHERE {col} = ANY(%s)"
+                            cur.execute(sql_del, (ids_to_delete,))
 
-                self.db_tools.execute_query(sql, (
-                    self.quiz_no.value(),
-                    g_period,
-                    i+1,
-                    l_id,
-                    w.txt_question.toPlainText().strip(),
-                    w.choices[0].text(),
-                    w.choices[1].text(),
-                    w.choices[2].text(),
-                    correct,
-                    psycopg2.Binary(img) if img else w.img_binary,
-                    self.difficulty_group.checkedId()
-                ))
+                conn.commit()
+                self.itemsToRemove.clear()
 
-            for i in range(self.layout_trueorfalse.count()):
-                w = self.layout_trueorfalse.itemAt(i).widget()
-                if not isinstance(w, QuizItemWidget): continue
-
-                img = self.get_binary(w.img_path)
-                sql  = "INSERT INTO CAI.TBL_QUIZTRUEORFALSE (\n"
-                sql += "    QUIZNUMBER\n"
-                sql += "    ,GRADINGPERIOD\n"
-                sql += "    ,ITEMNO\n"
-                sql += "    ,LESSONID\n"
-                sql += "    ,QUESTION\n"
-                sql += "    ,CORRECT_ANSWER\n"
-                sql += "    ,IMAGEQUESTION\n"
-                sql += "    ,DIFFICULTYLEVEL\n"
-                sql += ") VALUES (%s,%s,%s,%s,%s,%s,%s,%s)\n"
-                sql += "ON CONFLICT (QUIZNUMBER, GRADINGPERIOD, ITEMNO, LESSONID, DIFFICULTYLEVEL)\n"
-                sql += "DO UPDATE SET\n"
-                sql += "    QUESTION = EXCLUDED.QUESTION,\n"
-                sql += "    CORRECT_ANSWER = EXCLUDED.CORRECT_ANSWER,\n"
-                sql += "    IMAGEQUESTION = EXCLUDED.IMAGEQUESTION,\n"
-                sql += "    DIFFICULTYLEVEL = EXCLUDED.DIFFICULTYLEVEL\n"
-
-                self.db_tools.execute_query(sql, (
-                    self.quiz_no.value(),
-                    g_period,
-                    i+1,
-                    l_id,
-                    w.txt_question.toPlainText().strip(),
-                    w.ans.currentText(),
-                    psycopg2.Binary(img) if img else w.img_binary,
-                    self.difficulty_group.checkedId()
-                ))
-
-            mult_easy = self.multiplier_easy.value()
-            mult_average = self.multiplier_average.value()
-            mult_hard = self.multiplier_hard.value()
-            total_score = self.label_totalPossibleScore.text()
-
-            sql  = "INSERT INTO CAI.TBL_SCOREMULTIPLIER (\n"
-            sql += "    QUIZNUMBER,\n"
-            sql += "    LESSONID,\n"
-            sql += "    GRADINGPERIOD,\n"
-            sql += "    EASY_MULTIPLIER,\n"
-            sql += "    AVERAGE_MULTIPLIER,\n"
-            sql += "    HARD_MULTIPLIER,\n"
-            sql += "    TOTAL_POSSIBLE_POINTS\n"
-            sql += ") VALUES (%s, %s, %s, %s, %s, %s, %s)\n"
-            sql += "ON CONFLICT (QUIZNUMBER, LESSONID, GRADINGPERIOD)\n"
-            sql += "DO UPDATE SET\n"
-            sql += "    EASY_MULTIPLIER = EXCLUDED.EASY_MULTIPLIER,\n"
-            sql += "    AVERAGE_MULTIPLIER = EXCLUDED.AVERAGE_MULTIPLIER,\n"
-            sql += "    HARD_MULTIPLIER = EXCLUDED.HARD_MULTIPLIER,\n"
-            sql += "    TOTAL_POSSIBLE_POINTS = EXCLUDED.TOTAL_POSSIBLE_POINTS"
-
-            data = (q_num, l_id, g_period, mult_easy, mult_average, mult_hard, total_score)
-            self.db_tools.execute_query(sql, data)
-
-            if self.itemsToRemove:
-                # Filter out None values just in case
-                ids_to_delete = [i for i in self.itemsToRemove if i is not None]
-
-                if ids_to_delete:
-                    # Generic deletion query - you'll need to run this for each table
-                    # since idKey, mcKey, and tfKey are likely distinct columns
-                    tables = [
-                        ("cai.tbl_quizidentification", "idkey"),
-                        ("cai.tbl_quizmultiplechoice", "mckey"),
-                        ("cai.tbl_quiztrueorfalse", "tfkey")
-                    ]
-
-                    for table, col in tables:
-                        sql_del = f"DELETE FROM {table} WHERE {col} = ANY(%s)"
-                        self.db_tools.execute_query(sql_del, (ids_to_delete,))
-
-            self.itemsToRemove.clear()
-
-            QMessageBox.information(self, "Success", "Quiz updated successfully!")
-            self.accept()
+                QMessageBox.information(self, "Success", "Quiz updated successfully!")
+                self.is_saved = True
+                self.setWindowTitle(self.title_init)
+                self.accept()
 
         except Exception as e:
+            if conn: conn.rollback()
             print(f"Database Error: {e}")
             QMessageBox.critical(self, "Error", f"Failed to sync database: {e}")
+
+        finally:
+            if conn: conn.close()
 
 
 class CardQuiz(QFrame, Ui_CardQuiz):

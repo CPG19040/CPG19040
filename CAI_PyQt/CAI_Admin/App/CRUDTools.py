@@ -15,7 +15,10 @@ class DatabaseTools:
         return psycopg2.connect(**self.connection_config)
 
     def fetch_all(self, sql, params=None):
-        """Equivalent to ExecuteReader, returns list of dicts."""
+        """
+            Returns:
+                List of dicts (list[RealDictCursor]):
+        """
         try:
             conn = psycopg2.connect(**self.connection_config)
             with conn.cursor(cursor_factory=extras.RealDictCursor) as cur:
@@ -28,7 +31,7 @@ class DatabaseTools:
             return []
 
         finally:
-            conn.close()
+            if conn: conn.close()
 
     def execute_query(self, sql, params=None):
         """Equivalent to ExecuteNonQuery."""
@@ -55,5 +58,6 @@ class DatabaseTools:
         except Exception as e:
             print(f"Database Error: {e}")
             return None, None
+       
 
         

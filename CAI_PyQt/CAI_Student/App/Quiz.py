@@ -102,6 +102,21 @@ class QuizUtils:
         self.db_tools = DatabaseTools()
         self.util = Utility()
 
+        sql  = "SELECT\n"
+        sql += "    quiznumber,\n"
+        sql += "    gradingperiod,\n"
+        sql += "    lessonid,\n"
+        sql += "    publish\n"
+        sql += "FROM cai.tbl_quiz\n"
+        sql += "WHERE publish = TRUE"
+        record = self.db_tools.fetch_all(sql)
+
+        if record:
+            self.quiznumber     = record[0].get('quiznumber')
+            self.gradingperiod  = record[0].get('gradingperiod')
+            self.lessonid       = record[0].get('lessonid')
+            self.publish        = record[0].get('publish')
+
     def retrieve_quiz(self):
         """
             Retrieves quizzes from database (Identification, Multiple Choice, True or False)
@@ -118,30 +133,11 @@ class QuizUtils:
                 N/A
         """
 
-        sql  = "SELECT\n"
-        sql += "    quiznumber,\n"
-        sql += "    gradingperiod,\n"
-        sql += "    lessonid,\n"
-        sql += "    quizlock\n"
-        sql += "FROM cai.tbl_quiz\n"
-        sql += "WHERE quizlock = FALSE"
-        cursor, conn = self.db_tools.retrieve_records(sql)
-
-        q_num, g_period, lesson_id = None, None, None
-
-        if cursor:
-            row = cursor.fetchone()
-
-            if row:
-                q_num, g_period, lesson_id, _ = row
-
-            cursor.close()
-
-        conn.close()
+        
 
         record_id = record_mc = record_tf = []
 
-        if self.util.isEmpty(q_num) or self.util.isEmpty(g_period) or self.util.isEmpty(lesson_id):
+        if self.util.isEmpty(self.quiznumber) or self.util.isEmpty(self.gradingperiod) or self.util.isEmpty(self.lessonid):
             print("ℹ️ No available quiz.")
             return record_id, record_mc, record_tf
 
@@ -206,7 +202,7 @@ class QuizUtils:
         ]
 
         for idx, sql in sections:
-            record = self.db_tools.fetch_all(sql, (q_num, g_period, lesson_id))
+            record = self.db_tools.fetch_all(sql, (self.quiznumber, self.gradingperiod, self.lessonid))
 
             if record:
 
@@ -223,7 +219,7 @@ class QuizUtils:
 
     def save_quiz(self, student_id, quiz_cards):
         if not quiz_cards:
-            return
+            return 1
 
         try:
             conn = self.db_tools.get_connection()
@@ -258,11 +254,120 @@ class QuizUtils:
                     ))
 
             conn.commit()
-            print("Quiz results saved successfully!")
 
+            self.evaluate_quiz(student_id)
+
+            return 0
+            
         except Exception as e:
             if conn: conn.rollback()
             print(f"Failed to save: {str(e)}")
+            return 1
 
         finally:
             if conn: conn.close()
+
+    def evaluate_quiz(self, student_id):
+        # FETCH MULTIPLIERS
+        sql = """
+            SELECT easy_multiplier, average_multiplier, hard_multiplier
+            FROM cai.tbl_scoremultiplier
+            WHERE
+                quiznumber = %s
+                AND lessonid = %s
+                AND gradingperiod = %s
+        """
+        res_mult = self.db_tools.fetch_all(sql, (self.quiznumber, self.lessonid, self.gradingperiod))
+
+        if not res_mult:
+            return
+        
+        res_mult = res_mult[0]
+
+        # DEFINE CALCULATION HELPERS
+        quiz_types = [
+            {'table': 'tbl_quizmultiplechoice', 'key': 'mckey', 'type': 'MC'},
+            {'table': 'tbl_quizidentification', 'key': 'idkey', 'type': 'ID'},
+            {'table': 'tbl_quiztrueorfalse',     'key': 'tfkey', 'type': 'TF'}
+        ]
+
+        total_student_points = 0
+
+        for q in quiz_types:
+            sql  = "SELECT\n"
+            sql += "    COALESCE(SUM(CASE WHEN q.difficultylevel = '1' THEN 1 ELSE 0 END), 0) * %s AS s1,\n"
+            sql += "    COALESCE(SUM(CASE WHEN q.difficultylevel = '2' THEN 1 ELSE 0 END), 0) * %s AS s2,\n"
+            sql += "    COALESCE(SUM(CASE WHEN q.difficultylevel = '3' THEN 1 ELSE 0 END), 0) * %s AS s3\n"
+            sql += f"FROM cai.{q['table']} q\n"
+            sql += f"INNER JOIN cai.tbl_answers a ON q.{q['key']} = a.assmt_key\n"
+            sql += "WHERE a.studentid = %s\n"
+            sql += "AND a.quiznumber = %s\n"
+            sql += "AND a.quiztype = %s\n"
+            sql += "AND LOWER(q.correct_answer) = LOWER(a.answer);\n"
+
+            res = self.db_tools.fetch_all(sql, (
+                res_mult['easy_multiplier'],
+                res_mult['average_multiplier'],
+                res_mult['hard_multiplier'],
+                student_id,
+                self.quiznumber,
+                q['type'])
+            )
+
+            if res:
+                row = res[0]
+                total_student_points += sum(row.values()) if isinstance(row, dict) else sum(row)
+
+        sql_upsert = """
+            INSERT INTO cai.tbl_quizscores (
+                quiznumber, gradingperiod, lessonid, studentid, quizscore
+            ) VALUES (%s, %s, %s, %s, %s)
+            ON CONFLICT (studentid, quiznumber, gradingperiod, lessonid)
+            DO UPDATE SET
+                datetaken = CURRENT_TIMESTAMP,
+                quizscore = EXCLUDED.quizscore;
+        """
+
+        upsert_params = (
+            self.quiznumber, 
+            self.gradingperiod, 
+            self.lessonid,
+            student_id, 
+            total_student_points
+        )
+
+        sql_prog = """
+            UPDATE cai.tbl_progress 
+            SET lessonsdone = CASE 
+                    WHEN lessonsdone = '' THEN %s 
+                    WHEN lessonsdone LIKE %s THEN lessonsdone
+                    ELSE lessonsdone || ',' || %s 
+                END,
+                quizdone = CASE 
+                    WHEN quizdone = '' THEN %s 
+                    WHEN quizdone LIKE %s THEN quizdone
+                    ELSE quizdone || ',' || %s 
+                END
+            WHERE studentid = %s;
+        """
+
+        try:
+            conn = self.db_tools.get_connection()
+            conn.autocommit = False
+
+            with conn.cursor() as cur:
+                cur.execute(sql_upsert, upsert_params)
+                
+                # Formatting parameters for the "LIKE" check to prevent duplicate entries in the CSV string
+                l_id = str(self.lessonid)
+                q_id = str(self.quiznumber)
+                cur.execute(sql_prog, (l_id, f'%{l_id}%', l_id, q_id, f'%{q_id}%', q_id, student_id))
+                
+                conn.commit()
+
+        except Exception as e:
+            if conn: conn.rollback()
+            print(f"❌ Database error: {e}")
+
+        finally:
+                if conn: conn.close()

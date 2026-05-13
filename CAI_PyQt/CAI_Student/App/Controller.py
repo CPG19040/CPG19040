@@ -6,7 +6,7 @@ from PySide6.QtGui import QFontDatabase, QImage, QPixmap
 from App.Login import Login
 from App.FormHome import Ui_FormHome
 from App.Student import Student
-from App.Tools import Utility, WindowHandler
+from App.Tools import Utility, WindowHandler, CustomShapeDialog
 from App.Lessons import Lessons, LessonCard
 
 
@@ -305,7 +305,11 @@ class Controller:
         qUtils = QuizUtils()
 
         student_id = self.settings.value("studentid")
-        qUtils.save_quiz(student_id, self.quiz_cards)
+        err = qUtils.save_quiz(student_id, self.quiz_cards)
+
+        if err == 0:
+            dialog = CustomShapeDialog("Good Job !!!", parent=self.home_win)
+            dialog.exec()
 
     def handle_lesson_selection(self, clicked_card, lesson_id):
         print(f"Selected Lesson ID: {lesson_id}")

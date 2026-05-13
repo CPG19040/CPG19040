@@ -140,7 +140,7 @@ class Utility:
             if conn:
                 conn.close()
 
-    def populate_pulldowns(self, pulldown_gradingPeroid, pulldown_lessons):
+    def populate_pulldowns(self, pulldown_gradingPeroid, pulldown_lessons=None):
         sql =  "SELECT 1 AS index, 'First Grading' AS itemname\n"
         sql += "UNION ALL\n"
         sql += "SELECT 2, 'Second Grading'\n"
@@ -149,6 +149,9 @@ class Utility:
         sql += "UNION ALL\n"
         sql += "SELECT 4, 'Fourth Grading'\n"
         self.populate_pulldown(pulldown_gradingPeroid, sql)
+
+        if not pulldown_lessons:
+            return
 
         selected_period = pulldown_gradingPeroid.currentData()
 

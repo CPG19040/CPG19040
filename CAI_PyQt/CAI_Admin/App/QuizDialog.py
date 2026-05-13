@@ -71,11 +71,11 @@ class Ui_QuizCreatorDialog(object):
 
         self.headerLayout.addWidget(self.cbLessonName)
 
-        self.checkBoxLockQuiz = QCheckBox(QuizCreatorDialog)
-        self.checkBoxLockQuiz.setObjectName(u"checkBoxLockQuiz")
-        self.checkBoxLockQuiz.setMinimumSize(QSize(0, 30))
-        self.checkBoxLockQuiz.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.checkBoxLockQuiz.setStyleSheet(u"QCheckBox {\n"
+        self.checkBoxPublish = QCheckBox(QuizCreatorDialog)
+        self.checkBoxPublish.setObjectName(u"checkBoxPublish")
+        self.checkBoxPublish.setMinimumSize(QSize(0, 30))
+        self.checkBoxPublish.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.checkBoxPublish.setStyleSheet(u"QCheckBox {\n"
 "	background-color: transparent;\n"
 "	padding: 5px 10px;\n"
 "}\n"
@@ -90,7 +90,7 @@ class Ui_QuizCreatorDialog(object):
 "	image: url(:/Images/Images/check.png);\n"
 "}")
 
-        self.headerLayout.addWidget(self.checkBoxLockQuiz)
+        self.headerLayout.addWidget(self.checkBoxPublish)
 
         self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
@@ -728,7 +728,7 @@ class Ui_QuizCreatorDialog(object):
         self.label_1.setText(QCoreApplication.translate("QuizCreatorDialog", u"Quiz #:", None))
         self.label_2.setText(QCoreApplication.translate("QuizCreatorDialog", u"Grading Period:", None))
         self.label_3.setText(QCoreApplication.translate("QuizCreatorDialog", u"Lesson Title:", None))
-        self.checkBoxLockQuiz.setText(QCoreApplication.translate("QuizCreatorDialog", u"Unpublish Quiz", None))
+        self.checkBoxPublish.setText(QCoreApplication.translate("QuizCreatorDialog", u"Publish", None))
         self.label_5.setText(QCoreApplication.translate("QuizCreatorDialog", u"Total Score:", None))
         self.label_totalScore.setText(QCoreApplication.translate("QuizCreatorDialog", u"000", None))
         self.label_6.setText(QCoreApplication.translate("QuizCreatorDialog", u"Diffuculty:", None))

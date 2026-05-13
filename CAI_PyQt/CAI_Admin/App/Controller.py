@@ -157,13 +157,12 @@ class Controller:
         self.ui.quiz_no.valueChanged.connect(self.display_quiz)
         self.ui.cbGradingPeriod.currentIndexChanged.connect(self.handle_quiz_filter)
         self.ui.cbLessonName.currentIndexChanged.connect(self.cbLesson_selection_change)
-        self.ui.checkBoxLockQuiz.clicked.connect(self.save_quiz_lock_status)
-        self.ui.checkBoxLockQuiz.setVisible(False)
+        self.ui.checkBoxPublish.clicked.connect(self.save_quiz_lock_status)
+        self.ui.checkBoxPublish.setVisible(True)
         self.ui.btnQuizAdd.clicked.connect(self.showQuizDialog)
 
         self.ui.table_student_score_idv.clicked.connect(self.handle_report_student_click)
-        self.ui.btnEvaluateQuiz.clicked.connect(self.evaluate_quiz)
-        self.ui.cb_gp_quiz_idv.currentIndexChanged.connect(self.handle_reports_filter)
+        # self.ui.cb_gp_quiz_idv.currentIndexChanged.connect(self.handle_report_student_click)
 
         #=============================================================
         #  Application-Level Privileges (Role-Based Access Control)
@@ -264,26 +263,6 @@ class Controller:
             self.displayLessons()
 
         elif index == 3: # Quiz
-            # sql =  "SELECT 1 AS index, 'First Grading' AS itemname\n"
-            # sql += "UNION ALL\n"
-            # sql += "SELECT 2, 'Second Grading'\n"
-            # sql += "UNION ALL\n"
-            # sql += "SELECT 3, 'Third Grading'\n"
-            # sql += "UNION ALL\n"
-            # sql += "SELECT 4, 'Fourth Grading'\n"
-            # self.util.populate_pulldown(self.ui.cbGradingPeriod, sql)
-
-            # selected_period = self.ui.cbGradingPeriod.currentData()
-
-            # if selected_period:
-            #     sql = 'SELECT\n'
-            #     sql += '    lesson_id\n'
-            #     sql += '    ,title\n'
-            #     sql += 'FROM cai.tbl_lessons\n'
-            #     sql += 'WHERE gradingperiod = %s\n'
-            #     sql += 'ORDER BY chapter, lessonnum ASC'
-            #     self.util.populate_pulldown(self.ui.cbLessonName, sql, params=(selected_period,), add_empty=True)
-
             self.util.populate_pulldowns(self.ui.cbGradingPeriod, self.ui.cbLessonName)
 
             self.display_quiz()
@@ -292,19 +271,20 @@ class Controller:
             self.display_section_info()
 
         elif index == 6: # Reports
-            self.util.populate_pulldowns(self.ui.cb_gp_quiz_idv, self.ui.cb_ln_quiz_idv)
+            self.util.populate_pulldowns(self.ui.cb_gp_quiz_idv)
 
             stud = Student()
             new_model = stud.refresh_student_table(None)
             self.ui.table_student_score_idv.sortByColumn(-1, Qt.AscendingOrder)
+            self.ui.table_quiz_score_idv.sortByColumn(-1, Qt.AscendingOrder)
 
             if new_model:
                 self.ui.table_student_score_idv.setModel(new_model)
                 header = self.ui.table_student_score_idv.horizontalHeader()
                 header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
-                header.setSectionResizeMode(0, QHeaderView.ResizeMode.ResizeToContents)
-                header.setSectionResizeMode(4, QHeaderView.ResizeMode.ResizeToContents)
-                header.setSectionResizeMode(5, QHeaderView.ResizeMode.ResizeToContents)
+                # header.setSectionResizeMode(0, QHeaderView.ResizeMode.ResizeToContents)
+                # header.setSectionResizeMode(4, QHeaderView.ResizeMode.ResizeToContents)
+                self.ui.table_student_score_idv.setColumnHidden(5, True) # Hide 'Gender' column
 
         elif index == 7:
             self.displayUsers()
@@ -631,15 +611,16 @@ class Controller:
             header.setSectionResizeMode(1, QHeaderView.ResizeMode.ResizeToContents)
             header.setSectionResizeMode(2, QHeaderView.ResizeMode.ResizeToContents)
             self.ui.table_lesson.verticalHeader().setVisible(False)
+            self.ui.table_lesson.sortByColumn(-1, Qt.AscendingOrder)
 
     def cbLesson_selection_change(self):
         self.display_quiz()
 
-        if self.ui.label_totalScore.text() == "0":
-            self.ui.checkBoxLockQuiz.setVisible(False)
+        if self.ui.label_totalScore.text() in ['', '0', '000']:
+            self.ui.checkBoxPublish.setVisible(False)
 
         else:
-            self.ui.checkBoxLockQuiz.setVisible(True)
+            self.ui.checkBoxPublish.setVisible(True)
 
     def showLessonDialog(self, mode):
         """mode: 1 Add, 2 Edit"""
@@ -698,7 +679,7 @@ class Controller:
         diff_level = self.difficulty_group.checkedId()
 
         record_id, record_mc, record_tf, quiz_record, multipliers, scores = quiz.retrieve_quiz(q_num, g_period, lesson_id, diff_level)
-        total_items, quizlock = quiz_record
+        _, publish = quiz_record
         easy_score, average_score, hard_score, total_score = scores
 
         self.ui.label_totalScore.setText(f"{total_score}")
@@ -713,16 +694,16 @@ class Controller:
                 score_per_level = f"{hard_score}"
 
         self.ui.label_scoreperlevel.setText(score_per_level)
-        self.ui.checkBoxLockQuiz.setChecked(quizlock)
+        self.ui.checkBoxPublish.setChecked(publish)
 
-        self.ui.multiplier_easy.setValue(1)
-        self.ui.multiplier_average.setValue(1)
-        self.ui.multiplier_hard.setValue(1)
+        self.ui.multiplier_easy.setText('1')
+        self.ui.multiplier_average.setText('1')
+        self.ui.multiplier_hard.setText('1')
 
         if multipliers:
-            self.ui.multiplier_easy.setValue(multipliers[4])
-            self.ui.multiplier_average.setValue(multipliers[5])
-            self.ui.multiplier_hard.setValue(multipliers[6])
+            self.ui.multiplier_easy.setText(f'{multipliers[4]}')
+            self.ui.multiplier_average.setText(f'{multipliers[5]}')
+            self.ui.multiplier_hard.setText(f'{multipliers[6]}')
 
         layout_id = self.ui.verticalLayout_11
         layout_mc = self.ui.verticalLayout_12
@@ -790,18 +771,20 @@ class Controller:
 
         try:
 
-            sql  = "UPDATE cai.tbl_quiz\n"
-            sql += "    SET QUIZLOCK = %s\n"
-            sql += "WHERE quiznumber = %s\n"
-            sql += "    AND gradingperiod = %s\n"
-            sql += "    AND lessonid = %s"
+            sql = """
+                UPDATE cai.tbl_quiz
+                SET PUBLISH = CASE 
+                    WHEN quiznumber = %s AND gradingperiod = %s AND lessonid = %s THEN true
+                    ELSE false
+                END;
+            """
 
-            db_tools.execute_query(sql, (checked, self.ui.quiz_no.value(), self.ui.cbGradingPeriod.currentData(), lessonId))
+            db_tools.execute_query(sql, (self.ui.quiz_no.value(), self.ui.cbGradingPeriod.currentData(), lessonId))
 
             if checked:
-                QMessageBox.information(self.home_win, "Publishing", "This quiz is locked. Students cannot see this.")
+                QMessageBox.information(self.home_win, "Publishing", "This quiz is published. Students can see this.")
             else:
-                QMessageBox.information(self.home_win, "Publishing", "This quiz is unlocked. Students can see this.")
+                QMessageBox.information(self.home_win, "Publishing", "This quiz is unpublished. Students cannot see this.")
 
         except Exception as e:
             print(f"Error saving to database: {e}")
@@ -838,7 +821,7 @@ class Controller:
         sql  = 'SELECT\n'
         sql += '    user_id AS "User Id",\n'
         sql += '    username AS "User Name",\n'
-        sql += '    TO_CHAR(date_logged, \'Mon DD, YYYY, HH12:MI AM\') AS "Date Logged",\n'
+        sql += '    TO_CHAR(date_logged, \'YYYY/MM/DD, HH12:MI AM\') AS "Date Logged",\n'
         sql += '    action AS "Action"\n'
         sql += 'FROM cai.tbl_audit_trail\n'
         sql += 'ORDER BY date_logged DESC'
@@ -880,7 +863,7 @@ class Controller:
                 gender AS "Gender",
                 contact_person AS "Contact Person",
                 contact_number AS "Contact Number",
-                TO_CHAR(archived_at, \'Mon DD, YYYY, HH12:MI AM\') AS "Date Archived",
+                TO_CHAR(archived_at, 'YYYY/MM/DD, HH12:MI AM') AS "Date Archived",
                 archived_by AS "Archived By"
             FROM cai.TBL_STUDENT_INFO_ARCHIVE
             ORDER BY archived_at DESC
@@ -947,53 +930,27 @@ class Controller:
             
     def handle_report_student_click(self, index):
         studentId = index.siblingAtColumn(0).data()
+        lastName = index.siblingAtColumn(1).data()
+        firstName = index.siblingAtColumn(2).data()
+        middleName = index.siblingAtColumn(3).data()
+        stud_name = self.util.formatFullname(firstName, middleName, lastName)
+        self.ui.label_student_name.setText(stud_name)
+
+        stud = Student()
+        s = self.ui.label_student_icon.width()
+        pixmap = stud.get_student_picture(studentId, True, s)
+        self.ui.label_student_icon.setPixmap(pixmap)
 
         from App.Quiz import Quiz
         quiz = Quiz()
         model = quiz.get_scores(
             studentId, 
-            self.ui.quiz_no_idv.value(), 
             self.ui.cb_gp_quiz_idv.currentData(), 
-            self.ui.cb_ln_quiz_idv.currentData()
         )
 
         if model:
             self.ui.table_quiz_score_idv.setModel(model)
             self.ui.table_quiz_score_idv.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
-
-    def handle_reports_filter(self):
-        self.ui.cbLessonName.clear()
-        selected_period = self.ui.cb_gp_quiz_idv.currentData()
-
-        if selected_period:
-            sql = 'SELECT\n'
-            sql += '    lesson_id\n'
-            sql += '    ,title\n'
-            sql += 'FROM cai.tbl_lessons\n'
-            sql += 'WHERE gradingperiod = %s\n'
-            sql += 'ORDER BY chapter, lessonnum ASC'
-            self.util.populate_pulldown(self.ui.cb_ln_quiz_idv, sql, params=(selected_period,), add_empty=True)
-
-    def evaluate_quiz(self):
-        from App.Assessment import Assessment
-        assmt = Assessment()
-        
-        selection = self.ui.table_student_score_idv.selectionModel()
-
-        if not selection.hasSelection():
-            self.ui.table_quiz_score_idv.setModel(None)
-            QMessageBox.information(self.home_win, "No Selection", "Select a lesson to view.")
-            return
-        
-        selected_row_index = selection.selectedRows()[0].row()
-        model = self.ui.table_student_score_idv.model()
-        student_id = model.index(selected_row_index, 0).data()
-
-        assmt.evaluate_quiz(
-            student_id, 
-            self.ui.quiz_no_idv.value(), 
-            self.ui.cb_ln_quiz_idv.currentData(), 
-            self.ui.cb_gp_quiz_idv.currentData()
-        )
+            self.ui.table_quiz_score_idv.sortByColumn(-1, Qt.AscendingOrder)
 
     

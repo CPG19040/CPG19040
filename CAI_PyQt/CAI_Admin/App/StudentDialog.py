@@ -15,7 +15,31 @@ class Student:
 
     def __init__(self):
         self.db_tools = DatabaseTools()
+        self.util = Utility()
         self.circular_bar = CircularProgress()
+
+    def get_student_picture(self, studentid, isCircular=False, size=80):
+        sql = """
+            SELECT profile_pic
+            FROM cai.tbl_student_info
+            WHERE studentid = %s
+        """
+        record = self.db_tools.fetch_all(sql, (studentid,))
+        pixmap = QPixmap(u":/Images/Images/profile_gray.png")
+
+        if record:
+            img_data = record[0]['profile_pic']
+
+            if img_data:
+                image = QImage.fromData(bytes(img_data))
+
+                if not image.isNull():
+                    pixmap = QPixmap.fromImage(image)
+
+        if isCircular:
+            pixmap = self.util.makeCircularPixmap(pixmap, size)
+
+        return pixmap
 
     def refresh_student_table(self, sectionid):
         sql = 'SELECT\n'

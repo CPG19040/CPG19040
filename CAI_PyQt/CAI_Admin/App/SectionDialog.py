@@ -200,8 +200,9 @@ class Section(QDialog, Ui_SectionRegistrationDialog):
                     """
                     cur.execute(move_sql, (student_ids, self.user["school_id"]))
 
-                    # 2. Delete Quiz Scores
+                    # 2. Delete Answers and Quiz Scores
                     cur.execute("DELETE FROM cai.tbl_quizscores WHERE studentid IN %s", (student_ids,))
+                    cur.execute("DELETE FROM cai.tbl_answers WHERE studentid IN %s", (student_ids,))
 
                 # 3. Delete the Section
                 cur.execute("DELETE FROM cai.tbl_section WHERE sectionid = %s", (sectionId,))
