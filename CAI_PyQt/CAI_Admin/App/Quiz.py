@@ -23,6 +23,9 @@ class Quiz:
         """
         Retrieves all quiz scores for a given student, including lesson titles.
         Formatted to populate a QStandardItemModel for the UI.
+
+        Returns:
+            model (QStandardItemModel):
         """
 
         sql = """
@@ -33,24 +36,24 @@ class Quiz:
                 qs.quizscore,
                 q.total_items,
                 TO_CHAR(qs.datetaken, 'YYYY/MM/DD, HH12:MI AM') AS datetaken
-            FROM cai.tbl_quiz AS q
-            JOIN cai.tbl_quizscores AS qs
-                ON q.quiznumber = qs.quiznumber
-            JOIN cai.tbl_lessons AS l ON qs.lessonid = l.lesson_id
+            FROM cai.tbl_quiz AS q, cai.tbl_quizscores AS qs, cai.tbl_lessons AS l
             WHERE qs.studentid = %s
                 AND qs.gradingperiod = %s
+                AND q.quiznumber = qs.quiznumber
+                AND q.lessonid = qs.lessonid
+                AND qs.lessonid = l.lesson_id
             ORDER BY qs.datetaken DESC;
         """
 
         records = self.db_tools.fetch_all(sql, (studentId, gradingperiod))
 
-        if not records:
-            print('get_scores(): Returned None.')
-            return None
 
         ui_headers = ["QUIZ #", "LESSON TITLE", "SCORE", "PERCENTAGE", "DATE TAKEN"]
         model = QStandardItemModel(len(records), len(ui_headers))
         model.setHorizontalHeaderLabels(ui_headers)
+
+        if not records:
+            return model
 
         for row_idx, row_data in enumerate(records):
             _, _, _, total_score = self.getQuizTotalScore(row_data['quiznumber'], gradingperiod, row_data['lessonid'])
@@ -59,6 +62,7 @@ class Quiz:
 
             percentage_str = ""
 
+            # Ensure total_score is greater than 0 and score doesn't exceed total
             if total_score > 0 and 0 <= row_data['quizscore'] <= total_score:
                 percent_val = (row_data['quizscore'] / total_score) * 100
 
@@ -822,6 +826,28 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
                         else:
                             self.toggle_validation(w.ans, True)
         return is_valid
+    
+    def count_quiz(self, quiznumber):
+        sql = """
+            SELECT 
+                COUNT(*) AS quiz_count
+            FROM (
+                SELECT QUIZNUMBER FROM CAI.TBL_QUIZIDENTIFICATION
+                UNION ALL
+                SELECT QUIZNUMBER FROM CAI.TBL_QUIZMULTIPLECHOICE
+                UNION ALL
+                SELECT QUIZNUMBER FROM CAI.TBL_QUIZTRUEORFALSE
+            ) combined_quizzes
+            WHERE QUIZNUMBER = %s;
+        """
+
+        record = self.db_tools.fetch_all(sql, (quiznumber,))
+        quiz_count = 0
+
+        if record:
+            quiz_count = record[0]['quiz_count']
+
+        return quiz_count
 
     def save_to_db(self):
         try:
@@ -833,12 +859,22 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
             g_period = self.cbGradingPeriod.currentData()
             l_id = self.cbLessonName.currentData()
 
+            ctr = 1
+            quiz_count = self.count_quiz(q_num)
+
+            if quiz_count:
+                ctr = quiz_count + 1
+
+            id_count = self.layout_identification.count()
+            mc_count = self.layout_multiplechoice.count()
+            tf_count = self.layout_trueorfalse.count()
+
             conn = self.db_tools.get_connection()
             conn.autocommit = False
 
             with conn.cursor() as cur:
-
-                for i in range(self.layout_identification.count()):
+                
+                for i in range(id_count):
                     w = self.layout_identification.itemAt(i).widget()
                     if not isinstance(w, QuizItemWidget): continue
 
@@ -863,7 +899,7 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
                     cur.execute(sql, (
                         q_num,
                         g_period,
-                        i+1,
+                        ctr,
                         l_id,
                         w.txt_question.toPlainText().strip(),
                         w.ans.text(),
@@ -871,7 +907,9 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
                         self.difficulty_group.checkedId()
                     ))
 
-                for i in range(self.layout_multiplechoice.count()):
+                    ctr += 1
+
+                for i in range(mc_count):
                     w = self.layout_multiplechoice.itemAt(i).widget()
                     if not isinstance(w, QuizItemWidget): continue
 
@@ -913,7 +951,7 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
                     cur.execute(sql, (
                         self.quiz_no.value(),
                         g_period,
-                        i+1,
+                        ctr,
                         l_id,
                         w.txt_question.toPlainText().strip(),
                         w.choices[0].text(),
@@ -924,7 +962,9 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
                         self.difficulty_group.checkedId()
                     ))
 
-                for i in range(self.layout_trueorfalse.count()):
+                    ctr += 1
+
+                for i in range(tf_count):
                     w = self.layout_trueorfalse.itemAt(i).widget()
                     if not isinstance(w, QuizItemWidget): continue
 
@@ -949,7 +989,7 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
                     cur.execute(sql, (
                         self.quiz_no.value(),
                         g_period,
-                        i+1,
+                        ctr,
                         l_id,
                         w.txt_question.toPlainText().strip(),
                         w.ans.currentText(),
@@ -957,7 +997,15 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
                         self.difficulty_group.checkedId()
                     ))
 
+                    ctr += 1
+
                 sql = """
+                    UPDATE cai.tbl_quiz
+                    SET PUBLISH = CASE 
+                        WHEN quiznumber = %s AND gradingperiod = %s AND lessonid = %s THEN %s
+                        ELSE false
+                    END;
+
                     WITH QuizCounts AS (
                         SELECT 
                             COUNT(*) AS total,
@@ -982,27 +1030,24 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
                         TOTAL_ITEMS,
                         EASY_COUNT,
                         AVERAGE_COUNT,
-                        HARD_COUNT,
-                        PUBLISH
+                        HARD_COUNT
                     )
                     SELECT 
                         %s, %s, %s,
-                        C.total, C.easy, C.average, C.hard,
-                        %s
+                        C.total, C.easy, C.average, C.hard
                     FROM QuizCounts C
                     ON CONFLICT (QUIZNUMBER, GRADINGPERIOD, LESSONID)
                     DO UPDATE SET
                         TOTAL_ITEMS = EXCLUDED.TOTAL_ITEMS,
                         EASY_COUNT = EXCLUDED.EASY_COUNT,
                         AVERAGE_COUNT = EXCLUDED.AVERAGE_COUNT,
-                        HARD_COUNT = EXCLUDED.HARD_COUNT,
-                        PUBLISH = EXCLUDED.PUBLISH;
+                        HARD_COUNT = EXCLUDED.HARD_COUNT;
                 """
 
                 params = (
+                    q_num, g_period, l_id, self.checkBoxPublish.isChecked(),
                     q_num, g_period, l_id,
-                    q_num, g_period, l_id,
-                    True if self.checkBoxPublish.isChecked() else False
+                    q_num, g_period, l_id
                 )
 
                 cur.execute(sql, params)

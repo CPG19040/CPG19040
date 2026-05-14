@@ -157,12 +157,13 @@ class Controller:
         self.ui.quiz_no.valueChanged.connect(self.display_quiz)
         self.ui.cbGradingPeriod.currentIndexChanged.connect(self.handle_quiz_filter)
         self.ui.cbLessonName.currentIndexChanged.connect(self.cbLesson_selection_change)
-        self.ui.checkBoxPublish.clicked.connect(self.save_quiz_lock_status)
+        self.ui.checkBoxPublish.clicked.connect(self.save_quiz_publishing)
         self.ui.checkBoxPublish.setVisible(True)
         self.ui.btnQuizAdd.clicked.connect(self.showQuizDialog)
 
-        self.ui.table_student_score_idv.clicked.connect(self.handle_report_student_click)
-        # self.ui.cb_gp_quiz_idv.currentIndexChanged.connect(self.handle_report_student_click)
+        self.reports_selectedRow_idv = None
+        self.ui.table_student_score_idv.clicked.connect(lambda row: self.handle_report_student_click(row))
+        self.ui.cb_gp_quiz_idv.currentIndexChanged.connect(lambda: self.handle_report_student_click(self.reports_selectedRow_idv))
 
         #=============================================================
         #  Application-Level Privileges (Role-Based Access Control)
@@ -760,7 +761,7 @@ class Controller:
     def handle_level_click(self, idx):
         self.display_quiz()
 
-    def save_quiz_lock_status(self, checked):
+    def save_quiz_publishing(self, checked):
         lessonId = self.ui.cbLessonName.currentData()
 
         if self.ui.label_totalScore.text() == "0" or not lessonId:
@@ -774,12 +775,12 @@ class Controller:
             sql = """
                 UPDATE cai.tbl_quiz
                 SET PUBLISH = CASE 
-                    WHEN quiznumber = %s AND gradingperiod = %s AND lessonid = %s THEN true
+                    WHEN quiznumber = %s AND gradingperiod = %s AND lessonid = %s THEN %s
                     ELSE false
                 END;
             """
 
-            db_tools.execute_query(sql, (self.ui.quiz_no.value(), self.ui.cbGradingPeriod.currentData(), lessonId))
+            db_tools.execute_query(sql, (self.ui.quiz_no.value(), self.ui.cbGradingPeriod.currentData(), lessonId, checked))
 
             if checked:
                 QMessageBox.information(self.home_win, "Publishing", "This quiz is published. Students can see this.")
@@ -928,11 +929,19 @@ class Controller:
             QMessageBox.warning(self.ui.table_lesson.window(), "Missing Path", 
                                 f"No file path associated with: {lesson_title}")
             
-    def handle_report_student_click(self, index):
-        studentId = index.siblingAtColumn(0).data()
-        lastName = index.siblingAtColumn(1).data()
-        firstName = index.siblingAtColumn(2).data()
-        middleName = index.siblingAtColumn(3).data()
+    def handle_report_student_click(self, row=None):
+        if row is not None:
+            self.reports_selectedRow_idv = row
+
+        if row == None:
+            return
+        
+        row = self.reports_selectedRow_idv
+        gradingperiod = self.ui.cb_gp_quiz_idv.currentData()
+        studentId = row.siblingAtColumn(0).data()
+        lastName = row.siblingAtColumn(1).data()
+        firstName = row.siblingAtColumn(2).data()
+        middleName = row.siblingAtColumn(3).data()
         stud_name = self.util.formatFullname(firstName, middleName, lastName)
         self.ui.label_student_name.setText(stud_name)
 
@@ -945,7 +954,7 @@ class Controller:
         quiz = Quiz()
         model = quiz.get_scores(
             studentId, 
-            self.ui.cb_gp_quiz_idv.currentData(), 
+            gradingperiod
         )
 
         if model:

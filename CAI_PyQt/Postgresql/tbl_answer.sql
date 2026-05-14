@@ -8,7 +8,7 @@ CREATE TABLE cai.tbl_answers (
     itemno           INTEGER NULL,
     answer           VARCHAR(50) NULL,
     studentid        VARCHAR(50) NULL,
-    datetaken        TIMESTAMP DEFAULT NULL,
+    datetaken        TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     remarks          VARCHAR(50) NULL,
     CONSTRAINT unique_quiz_submission UNIQUE (quiztype, assmt_key, quiznumber, itemno, studentid)
 );
