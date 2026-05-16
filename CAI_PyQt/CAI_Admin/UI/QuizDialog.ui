@@ -14,99 +14,254 @@
    <string>Quiz Editor</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">color: black; font: 10pt &quot;Inter&quot;; background-color: rgb(222, 221, 218);</string>
+   <string notr="true">* {
+    color: black;
+    font: 10pt &quot;Inter&quot;;
+    background-color: rgb(222, 221, 218);
+}
+
+*[class=&quot;button-green&quot;] {
+    border-radius: 15px;
+    padding: 0px 10px 0px;
+    background: #129046;
+    color: #FFF;
+	font: 10pt &quot;Inter SemiBold&quot;;
+}
+
+*[class=&quot;button-green&quot;]:hover {
+    background: #27AE60;
+}
+
+QComboBox[class=&quot;combobox-main&quot;] {
+	height: 30px;
+	border: 1px solid #999;
+	border-radius: 15px;
+    padding-left: 10px;
+    background-color: #ffffff;
+    color: #333333;
+    font-size: 12px;
+    selection-background-color: #7eb4d7;
+	font: 10pt &quot;Inter&quot;;
+}
+
+QComboBox[class=&quot;combobox-main&quot;]:focus {
+	border: 1px solid #007BFF;
+}
+
+QComboBox[class=&quot;combobox-main&quot;]:hover {
+    border: 1px solid #3498db;
+}
+
+QComboBox[class=&quot;combobox-main&quot;]::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 30px;
+    border-left-width: 0px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+QComboBox[class=&quot;combobox-main&quot;]::down-arrow {
+    image: url(:/Images/Images/caret-down.png);
+    border: none;
+    width: 8px;
+    height: 8px;
+}
+
+QComboBox[class=&quot;combobox-main&quot;] QAbstractItemView {
+    background-color: #ffffff;
+    selection-background-color: #7eb4d7;
+    selection-color: #ffffff;
+    border-radius: 5px;
+}
+
+QComboBox[class=&quot;combobox-main&quot;] QAbstractItemView::item {
+    min-height: 35px;
+    padding-left: 10px;
+    border-radius: 4px;
+}
+
+QSpinBox {
+    height: 30px;
+    border: 1px solid #999;
+    border-radius: 15px;
+    padding: 0px 5px 0px;
+    background-color: #ffffff;
+    color: #333333;
+    font-size: 12px;
+    selection-background-color: #7eb4d7;
+	font: 10pt &quot;Inter&quot;;
+}
+
+QSpinBox:focus {
+    border: 1px solid #007BFF;
+}
+
+QSpinBox:hover {
+    border: 1px solid #3498db;
+}
+
+QSpinBox::up-button {
+    subcontrol-origin: border;
+    subcontrol-position: top right;
+    width: 8px;
+    height: 8px;
+    border-top-right-radius: 15px;
+    padding: 6px 10px 6px 2px;
+	color: rgb(119, 118, 123);
+}
+
+QSpinBox::down-button {
+    subcontrol-origin: border;
+    subcontrol-position: bottom right;
+    width: 8px;
+    height: 8px;
+    border-bottom-right-radius: 15px;
+    padding: 6px 10px 6px 2px;
+	color: rgb(119, 118, 123);
+}
+
+QSpinBox::up-arrow {
+    image: url(:/Images/Images/caret-up.png);
+    width: 8px;
+    height: 8px;
+}
+
+QSpinBox::down-arrow {
+    image: url(:/Images/Images/caret-down.png);
+    width: 8px;
+    height: 8px;
+}
+</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
-    <layout class="QHBoxLayout" name="headerLayout">
-     <item>
-      <widget class="QLabel" name="label_1">
-       <property name="text">
-        <string>Quiz #:</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QSpinBox" name="quiz_no">
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>30</height>
-        </size>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(246, 245, 244);</string>
-       </property>
-       <property name="minimum">
-        <number>1</number>
-       </property>
-       <property name="maximum">
-        <number>999</number>
-       </property>
-       <property name="value">
-        <number>1</number>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="label_2">
-       <property name="text">
-        <string>Grading Period:</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QComboBox" name="cbGradingPeriod">
-       <property name="minimumSize">
-        <size>
-         <width>180</width>
-         <height>30</height>
-        </size>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: rgb(0, 0, 0); background-color: rgb(246, 245, 244); padding: 0px 10px 0px;</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="label_3">
-       <property name="text">
-        <string>Lesson Title:</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QComboBox" name="cbLessonName">
-       <property name="minimumSize">
-        <size>
-         <width>250</width>
-         <height>30</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>250</width>
-         <height>30</height>
-        </size>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: rgb(0, 0, 0); background-color: rgb(246, 245, 244); padding: 0px 10px 0px;</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QCheckBox" name="checkBoxPublish">
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>30</height>
-        </size>
-       </property>
-       <property name="cursor">
-        <cursorShape>PointingHandCursor</cursorShape>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QCheckBox {
+    <widget class="QWidget" name="widget_header" native="true">
+     <layout class="QHBoxLayout" name="headerLayout">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QLabel" name="label_1">
+        <property name="text">
+         <string>Quiz #:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSpinBox" name="quiz_no">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>999</number>
+        </property>
+        <property name="value">
+         <number>1</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Grading Period:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="cbGradingPeriod">
+        <property name="minimumSize">
+         <size>
+          <width>180</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(0, 0, 0); background-color: rgb(246, 245, 244); padding: 0px 10px 0px;</string>
+        </property>
+        <property name="class" stdset="0">
+         <string>combobox-main</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>Lesson Title:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="cbLessonName">
+        <property name="minimumSize">
+         <size>
+          <width>250</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>250</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(0, 0, 0); background-color: rgb(246, 245, 244); padding: 0px 10px 0px;</string>
+        </property>
+        <property name="class" stdset="0">
+         <string>combobox-main</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="checkBoxPublish">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QCheckBox {
 	background-color: transparent;
 	padding: 5px 10px;
 }
@@ -115,45 +270,58 @@ QCheckBox::indicator {
 	height: 18px;
 	background-color: rgb(246, 245, 244);
 	border: 2px solid #555555;
-	border-radius: 3px;
+	border-radius: 5px;
 }
 QCheckBox::indicator:checked {
 	image: url(:/Images/Images/check.png);
 }</string>
-       </property>
-       <property name="text">
-        <string>Publish</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="QLabel" name="label_5">
-       <property name="text">
-        <string>Total Score:</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="label_totalScore">
-       <property name="text">
-        <string>000</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
+        </property>
+        <property name="text">
+         <string>Publish</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_5">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Total Score:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_totalScore">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>000</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
    </item>
    <item>
     <widget class="Line" name="line_3">
@@ -180,7 +348,7 @@ QCheckBox::indicator:checked {
       <item>
        <widget class="QFrame" name="frame_5">
         <property name="styleSheet">
-         <string notr="true">#frame_5 { background-color: transparent; }</string>
+         <string notr="true">#frame_5 { background: transparent; }</string>
         </property>
         <property name="frameShape">
          <enum>QFrame::StyledPanel</enum>
@@ -189,6 +357,81 @@ QCheckBox::indicator:checked {
          <enum>QFrame::Raised</enum>
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QPushButton" name="btn_save">
+           <property name="minimumSize">
+            <size>
+             <width>30</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>30</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Inter</family>
+             <pointsize>10</pointsize>
+             <weight>50</weight>
+             <italic>false</italic>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
+           <property name="toolTip">
+            <string>Save (Ctrl + S)</string>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">#btn_save {
+	border: none; 
+	background: transparent;
+}
+
+#btn_save:hover {
+	background-color: rgb(255, 255, 255);
+	border-radius: 5px;
+}
+</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../resources.qrc">
+             <normaloff>:/Images/Images/save.png</normaloff>:/Images/Images/save.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>30</width>
+             <height>30</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="Line" name="line">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+          </widget>
+         </item>
          <item>
           <widget class="QLabel" name="label_6">
            <property name="maximumSize">
@@ -378,8 +621,14 @@ QPushButton:hover {
              <height>30</height>
             </size>
            </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>30</height>
+            </size>
+           </property>
            <property name="styleSheet">
-            <string notr="true">background-color: rgb(255, 255, 255);</string>
+            <string notr="true"/>
            </property>
            <property name="minimum">
             <number>1</number>
@@ -413,8 +662,14 @@ QPushButton:hover {
              <height>30</height>
             </size>
            </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>30</height>
+            </size>
+           </property>
            <property name="styleSheet">
-            <string notr="true">background-color: rgb(255, 255, 255);</string>
+            <string notr="true"/>
            </property>
            <property name="minimum">
             <number>1</number>
@@ -448,8 +703,14 @@ QPushButton:hover {
              <height>30</height>
             </size>
            </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>30</height>
+            </size>
+           </property>
            <property name="styleSheet">
-            <string notr="true">background-color: rgb(255, 255, 255);</string>
+            <string notr="true"/>
            </property>
            <property name="minimum">
             <number>1</number>
@@ -490,7 +751,82 @@ QPushButton:hover {
     </widget>
    </item>
    <item>
-    <widget class="QWidget" name="widget_6" native="true">
+    <widget class="QWidget" name="widget_quizview" native="true">
+     <property name="styleSheet">
+      <string notr="true">/* 1. THE MAIN CONTAINER */
+#QScrollArea { 
+    border: none;
+    border-radius: 20px; 
+    background-color: rgb(246, 245, 244);
+	font: 10pt &quot;Inter&quot;;
+}
+
+/* 2. THE VIEWPORT (Crucial for transparency/backgrounds) */
+#QScrollArea QWidget #qt_scrollarea_viewport {
+    background: rgb(246, 245, 244);
+    border-radius: 20px;
+}
+
+/* 3. VERTICAL SCROLLBAR */
+QScrollBar:vertical {
+    border: none;
+    background: #ffffff;
+    width: 10px;
+    margin: 0px;
+    border-radius: 5px;
+}
+
+QScrollBar::handle:vertical {
+    background: #7a7a7a;
+    min-height: 20px;
+    border-radius: 5px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background: #574939;
+}
+
+/* 4. HORIZONTAL SCROLLBAR */
+QScrollBar:horizontal {
+    border: none;
+    background: #ffffff;
+    height: 10px; /* Note: height, not width */
+    margin: 0px;
+    border-radius: 5px;
+}
+
+QScrollBar::handle:horizontal {
+    background: #7a7a7a;
+    min-width: 20px;
+    border-radius: 5px;
+}
+
+QScrollBar::handle:horizontal:hover {
+    background: #574939;
+}
+
+/* 5. REMOVE BUTTONS &amp; TRACK BACKGROUNDS */
+/* This handles both horizontal and vertical arrows/tracks */
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical,
+QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {
+    border: none;
+    background: none;
+    width: 0px;
+    height: 0px;
+}
+
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical,
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
+    background: none;
+}
+
+/* 6. THE CORNER WIDGET 
+   (The small square where both bars meet) */
+#QScrollArea QWidget #qt_scrollarea_corner {
+    background: rgb(246, 245, 244);
+    border: none;
+}</string>
+     </property>
      <layout class="QHBoxLayout" name="horizontalLayout_7">
       <property name="leftMargin">
        <number>0</number>
@@ -506,7 +842,22 @@ QPushButton:hover {
       </property>
       <item>
        <widget class="QWidget" name="widget_5" native="true">
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
         <layout class="QVBoxLayout" name="verticalLayout">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
          <item>
           <widget class="QWidget" name="widget" native="true">
            <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -583,10 +934,13 @@ QPushButton:hover {
                <cursorShape>PointingHandCursor</cursorShape>
               </property>
               <property name="styleSheet">
-               <string notr="true">background: #27ae60;</string>
+               <string notr="true"/>
               </property>
               <property name="text">
                <string>+ Add Item</string>
+              </property>
+              <property name="class" stdset="0">
+               <string>button-green</string>
               </property>
              </widget>
             </item>
@@ -596,79 +950,13 @@ QPushButton:hover {
          <item>
           <widget class="QScrollArea" name="scrollArea_id">
            <property name="styleSheet">
-            <string notr="true">/* 1. THE MAIN CONTAINER */
-#scrollArea_id { 
-    border: none;
-    border-radius: 20px; 
-    background-color: rgb(246, 245, 244);
-	font: 10pt &quot;Inter&quot;;
-}
-
-/* 2. THE VIEWPORT (Crucial for transparency/backgrounds) */
-#scrollArea_id QWidget #qt_scrollarea_viewport {
-    background: rgb(246, 245, 244);
-    border-radius: 20px;
-}
-
-/* 3. VERTICAL SCROLLBAR */
-QScrollBar:vertical {
-    border: none;
-    background: #ffffff;
-    width: 10px;
-    margin: 0px;
-    border-radius: 5px;
-}
-
-QScrollBar::handle:vertical {
-    background: #7a7a7a;
-    min-height: 20px;
-    border-radius: 5px;
-}
-
-QScrollBar::handle:vertical:hover {
-    background: #574939;
-}
-
-/* 4. HORIZONTAL SCROLLBAR */
-QScrollBar:horizontal {
-    border: none;
-    background: #ffffff;
-    height: 10px; /* Note: height, not width */
-    margin: 0px;
-    border-radius: 5px;
-}
-
-QScrollBar::handle:horizontal {
-    background: #7a7a7a;
-    min-width: 20px;
-    border-radius: 5px;
-}
-
-QScrollBar::handle:horizontal:hover {
-    background: #574939;
-}
-
-/* 5. REMOVE BUTTONS &amp; TRACK BACKGROUNDS */
-/* This handles both horizontal and vertical arrows/tracks */
-QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical,
-QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {
-    border: none;
-    background: none;
-    width: 0px;
-    height: 0px;
-}
-
-QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical,
-QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
-    background: none;
-}
-
-/* 6. THE CORNER WIDGET 
-   (The small square where both bars meet) */
-#scrollArea_id QWidget #qt_scrollarea_corner {
-    background: rgb(246, 245, 244);
-    border: none;
-}</string>
+            <string notr="true"/>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::NoFrame</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Sunken</enum>
            </property>
            <property name="widgetResizable">
             <bool>true</bool>
@@ -678,8 +966,8 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>311</width>
-              <height>467</height>
+              <width>323</width>
+              <height>543</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="layout_identification"/>
@@ -687,6 +975,13 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
           </widget>
          </item>
         </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="Line" name="line_4">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
        </widget>
       </item>
       <item>
@@ -698,6 +993,18 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
          </size>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_6">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
          <item>
           <widget class="QWidget" name="widget_3" native="true">
            <layout class="QHBoxLayout" name="horizontalLayout_5">
@@ -761,10 +1068,13 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
                <cursorShape>PointingHandCursor</cursorShape>
               </property>
               <property name="styleSheet">
-               <string notr="true">background: #27ae60;</string>
+               <string notr="true"/>
               </property>
               <property name="text">
                <string>+ Add Item</string>
+              </property>
+              <property name="class" stdset="0">
+               <string>button-green</string>
               </property>
              </widget>
             </item>
@@ -774,79 +1084,13 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
          <item>
           <widget class="QScrollArea" name="scrollArea_mc">
            <property name="styleSheet">
-            <string notr="true">/* 1. THE MAIN CONTAINER */
-#scrollArea_mc { 
-    border: none;
-    border-radius: 20px; 
-    background-color: rgb(246, 245, 244);
-	font: 10pt &quot;Inter&quot;;
-}
-
-/* 2. THE VIEWPORT (Crucial for transparency/backgrounds) */
-#scrollArea_mc QWidget #qt_scrollarea_viewport {
-    background: rgb(246, 245, 244);
-    border-radius: 20px;
-}
-
-/* 3. VERTICAL SCROLLBAR */
-QScrollBar:vertical {
-    border: none;
-    background: #ffffff;
-    width: 10px;
-    margin: 0px;
-    border-radius: 5px;
-}
-
-QScrollBar::handle:vertical {
-    background: #7a7a7a;
-    min-height: 20px;
-    border-radius: 5px;
-}
-
-QScrollBar::handle:vertical:hover {
-    background: #574939;
-}
-
-/* 4. HORIZONTAL SCROLLBAR */
-QScrollBar:horizontal {
-    border: none;
-    background: #ffffff;
-    height: 10px; /* Note: height, not width */
-    margin: 0px;
-    border-radius: 5px;
-}
-
-QScrollBar::handle:horizontal {
-    background: #7a7a7a;
-    min-width: 20px;
-    border-radius: 5px;
-}
-
-QScrollBar::handle:horizontal:hover {
-    background: #574939;
-}
-
-/* 5. REMOVE BUTTONS &amp; TRACK BACKGROUNDS */
-/* This handles both horizontal and vertical arrows/tracks */
-QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical,
-QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {
-    border: none;
-    background: none;
-    width: 0px;
-    height: 0px;
-}
-
-QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical,
-QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
-    background: none;
-}
-
-/* 6. THE CORNER WIDGET 
-   (The small square where both bars meet) */
-#scrollArea_mc QWidget #qt_scrollarea_corner {
-    background: rgb(246, 245, 244);
-    border: none;
-}</string>
+            <string notr="true"/>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::NoFrame</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Sunken</enum>
            </property>
            <property name="widgetResizable">
             <bool>true</bool>
@@ -856,8 +1100,8 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>310</width>
-              <height>467</height>
+              <width>322</width>
+              <height>543</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="layout_multiplechoice"/>
@@ -865,6 +1109,13 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
           </widget>
          </item>
         </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="Line" name="line_5">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
        </widget>
       </item>
       <item>
@@ -876,6 +1127,18 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
          </size>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_8">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
          <item>
           <widget class="QWidget" name="widget_4" native="true">
            <layout class="QHBoxLayout" name="horizontalLayout_6">
@@ -939,10 +1202,13 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
                <cursorShape>PointingHandCursor</cursorShape>
               </property>
               <property name="styleSheet">
-               <string notr="true">background: #27ae60;</string>
+               <string notr="true"/>
               </property>
               <property name="text">
                <string>+ Add Item</string>
+              </property>
+              <property name="class" stdset="0">
+               <string>button-green</string>
               </property>
              </widget>
             </item>
@@ -952,79 +1218,13 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
          <item>
           <widget class="QScrollArea" name="scrollArea_tf">
            <property name="styleSheet">
-            <string notr="true">/* 1. THE MAIN CONTAINER */
-#scrollArea_tf { 
-    border: none;
-    border-radius: 20px; 
-    background-color: rgb(246, 245, 244);
-	font: 10pt &quot;Inter&quot;;
-}
-
-/* 2. THE VIEWPORT (Crucial for transparency/backgrounds) */
-#scrollArea_tf QWidget #qt_scrollarea_viewport {
-    background: rgb(246, 245, 244);
-    border-radius: 20px;
-}
-
-/* 3. VERTICAL SCROLLBAR */
-QScrollBar:vertical {
-    border: none;
-    background: #ffffff;
-    width: 10px;
-    margin: 0px;
-    border-radius: 5px;
-}
-
-QScrollBar::handle:vertical {
-    background: #7a7a7a;
-    min-height: 20px;
-    border-radius: 5px;
-}
-
-QScrollBar::handle:vertical:hover {
-    background: #574939;
-}
-
-/* 4. HORIZONTAL SCROLLBAR */
-QScrollBar:horizontal {
-    border: none;
-    background: #ffffff;
-    height: 10px; /* Note: height, not width */
-    margin: 0px;
-    border-radius: 5px;
-}
-
-QScrollBar::handle:horizontal {
-    background: #7a7a7a;
-    min-width: 20px;
-    border-radius: 5px;
-}
-
-QScrollBar::handle:horizontal:hover {
-    background: #574939;
-}
-
-/* 5. REMOVE BUTTONS &amp; TRACK BACKGROUNDS */
-/* This handles both horizontal and vertical arrows/tracks */
-QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical,
-QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {
-    border: none;
-    background: none;
-    width: 0px;
-    height: 0px;
-}
-
-QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical,
-QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
-    background: none;
-}
-
-/* 6. THE CORNER WIDGET 
-   (The small square where both bars meet) */
-#scrollArea_tf QWidget #qt_scrollarea_corner {
-    background: rgb(246, 245, 244);
-    border: none;
-}</string>
+            <string notr="true"/>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::NoFrame</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Sunken</enum>
            </property>
            <property name="widgetResizable">
             <bool>true</bool>
@@ -1034,8 +1234,8 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>311</width>
-              <height>467</height>
+              <width>323</width>
+              <height>543</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="layout_trueorfalse"/>
@@ -1043,80 +1243,6 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
           </widget>
          </item>
         </layout>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item>
-    <widget class="QFrame" name="frame_4">
-     <property name="styleSheet">
-      <string notr="true">#frame_4 { border: none; background-color: transparent; }</string>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
-     </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_4">
-      <property name="leftMargin">
-       <number>0</number>
-      </property>
-      <property name="topMargin">
-       <number>0</number>
-      </property>
-      <property name="rightMargin">
-       <number>0</number>
-      </property>
-      <property name="bottomMargin">
-       <number>0</number>
-      </property>
-      <item>
-       <spacer name="horizontalSpacer_7">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QPushButton" name="btn_save">
-        <property name="minimumSize">
-         <size>
-          <width>100</width>
-          <height>30</height>
-         </size>
-        </property>
-        <property name="font">
-         <font>
-          <family>Inter SemiBold</family>
-          <pointsize>10</pointsize>
-          <weight>50</weight>
-          <italic>false</italic>
-          <bold>false</bold>
-         </font>
-        </property>
-        <property name="cursor">
-         <cursorShape>PointingHandCursor</cursorShape>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background: #27ae60; font: 10pt &quot;Inter SemiBold&quot;;</string>
-        </property>
-        <property name="text">
-         <string>Save all</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>20</width>
-          <height>20</height>
-         </size>
-        </property>
        </widget>
       </item>
      </layout>

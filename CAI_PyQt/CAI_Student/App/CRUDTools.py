@@ -15,10 +15,14 @@ class DatabaseTools:
         return psycopg2.connect(**self.connection_config)
 
     def fetch_all(self, sql, params=None):
-        """Equivalent to ExecuteReader, returns list of dicts."""
+        """
+            Returns:
+                List of dicts (list[RealDictCursor]):
+        """
         try:
             conn = psycopg2.connect(**self.connection_config)
             with conn.cursor(cursor_factory=extras.RealDictCursor) as cur:
+                # print(cur.mogrify(sql, params).decode('utf-8'))
                 cur.execute(sql, params)
                 return cur.fetchall()
 

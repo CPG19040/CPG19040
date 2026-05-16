@@ -158,7 +158,7 @@ class Controller:
         self.ui.cbGradingPeriod.currentIndexChanged.connect(self.handle_quiz_filter)
         self.ui.cbLessonName.currentIndexChanged.connect(self.cbLesson_selection_change)
         self.ui.checkBoxPublish.clicked.connect(self.save_quiz_publishing)
-        self.ui.checkBoxPublish.setVisible(True)
+        self.ui.checkBoxPublish.setVisible(False)
         self.ui.btnQuizAdd.clicked.connect(self.showQuizDialog)
 
         self.reports_selectedRow_idv = None

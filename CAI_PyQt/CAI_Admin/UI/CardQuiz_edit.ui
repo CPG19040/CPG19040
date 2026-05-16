@@ -86,19 +86,19 @@ QLabel {
 	margin: 0px 20px 0px;
 }
 
-#plainTextEdit, #txt_question {
+#txt_question {
 	background-color: white;
 	border-radius: 15px;
 	padding: 0px 10px 0px;
 	border: 1px solid #ABABAB;
 }
 
-#plainTextEdit:hover, #txt_question:hover {
-	border: 2px solid #3498db;
+#txt_question:hover {
+	border: 1px solid #3498db;
 }
 
 #txt_question:focus {
-	border: 2px solid #007BFF;
+	border: 1px solid #007BFF;
 }</string>
      </property>
      <property name="frameShape">

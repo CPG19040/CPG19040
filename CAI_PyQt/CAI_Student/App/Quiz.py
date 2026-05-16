@@ -102,6 +102,11 @@ class QuizUtils:
         self.db_tools = DatabaseTools()
         self.util = Utility()
 
+        self.quiznumber     = None
+        self.gradingperiod  = None
+        self.lessonid       = None
+        self.publish        = True
+
         sql  = "SELECT\n"
         sql += "    quiznumber,\n"
         sql += "    gradingperiod,\n"
@@ -132,8 +137,6 @@ class QuizUtils:
             Raises:
                 N/A
         """
-
-        
 
         record_id = record_mc = record_tf = []
 
@@ -288,7 +291,7 @@ class QuizUtils:
         quiz_types = [
             {'table': 'tbl_quizmultiplechoice', 'key': 'mckey', 'type': 'MC'},
             {'table': 'tbl_quizidentification', 'key': 'idkey', 'type': 'ID'},
-            {'table': 'tbl_quiztrueorfalse',     'key': 'tfkey', 'type': 'TF'}
+            {'table': 'tbl_quiztrueorfalse', 'key': 'tfkey', 'type': 'TF'}
         ]
 
         total_student_points = 0

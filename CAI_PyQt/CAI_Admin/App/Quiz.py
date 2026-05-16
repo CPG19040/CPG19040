@@ -68,7 +68,7 @@ class Quiz:
 
                 if percent_val:
                     percentage_str = f"{percent_val:.0f}%"
-
+            
             date_taken_str = row_data['datetaken'] if row_data['datetaken'] is not None else ""
 
             row_items = [
@@ -231,6 +231,15 @@ class Quiz:
         return None
     
     def getQuizTotalScore(self, quiznumber, gradingperiod, lessonid):
+        """
+            Args:
+                quiznumber (int):
+                gradingperiod (int):
+                lessonid (int):
+
+            Returns:
+                (easy_score, average_score, hard_score, total_score) (tuple):
+        """
         sql = """
             SELECT 
                 COUNT(CASE WHEN Q.DIFFICULTYLEVEL = 1 THEN 1 END) * M.EASY_MULTIPLIER AS "easy_score",
@@ -297,7 +306,7 @@ class QuizItemWidget(QFrame, Ui_CardQuiz_edit):
                 max-width: 62px;
             }
 
-            *[class="correct-input"] {
+            QLineEdit[class="correct-input"] {
                 background-color: #ffffff;
                 border: 1px solid #ABABAB;
                 border-left: none;
@@ -307,55 +316,54 @@ class QuizItemWidget(QFrame, Ui_CardQuiz_edit):
                 color: #333333;
             }
 
-            QComboBox:focus, QLineEdit:focus, *[class="correct-input"]:focus {
-                border: 2px solid #007BFF;
+            QLineEdit:focus, *[class="correct-input"]:focus {
+                border: 1px solid #007BFF;
             }
 
-            QComboBox {
+            QComboBox[class="correct-input"] {
                 height: 30px;
-                border: 2px solid #e0e0e0;
+                border: 1px solid #999;
                 padding: 0px 10px 0px;
                 background-color: #ffffff;
                 color: #333333;
-                font-size: 12px;
-                selection-background-color: #3498db;
+                font: 10pt "Inter";
+                selection-background-color: #7eb4d7;
+                border-top-right-radius: 15px;
+                border-bottom-right-radius: 15px;
             }
 
-            QLineEdit:hover, QComboBox:hover {
-                border: 2px solid #3498db;
+            QLineEdit:hover, QComboBox[class="correct-input"]:hover {
+                border: 1px solid #3498db;
             }
 
-            QComboBox::drop-down {
+            QComboBox[class="correct-input"]::drop-down {
                 subcontrol-origin: padding;
                 subcontrol-position: top right;
                 width: 30px;
                 border-left-width: 0px;
-                border-top-right-radius: 8px;
-                border-bottom-right-radius: 8px;
             }
 
-            QComboBox::down-arrow {
+            QComboBox[class="correct-input"]::down-arrow {
                 image: url(:/Images/Images/caret-down.png);
                 border: none;
                 width: 10px;
                 height: 14px;
             }
 
-            QComboBox QAbstractItemView {
+            QComboBox[class="correct-input"] QAbstractItemView {
                 background-color: #ffffff;
-                selection-background-color: #3498db;
-                selection-color: #ffffff;
+                selection-background-color: #7eb4d7;
                 border-radius: 5px;
             }
 
-            QComboBox QAbstractItemView::item {
+            QComboBox[class="correct-input"] QAbstractItemView::item {
                 min-height: 35px;
                 padding-left: 10px;
                 border-radius: 4px;
             }
         """
 
-        self.img_binary = None
+        self.img_binary = None # from database
         self.btn_upload_img.clicked.connect(lambda: self.get_image())
         self.btn_delete.clicked.connect(lambda: remove_callback(self))
 
@@ -736,7 +744,7 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
         sql += "    AND gradingperiod = %s\n"
         sql += "    AND lessonid = %s"
         cursor, conn = self.db_tools.retrieve_records(sql, (params[0], params[1], params[2]))
-        self.checkBoxPublish.setChecked(True)
+        self.checkBoxPublish.setChecked(False)
 
         if cursor:
             record = cursor.fetchone()
@@ -827,7 +835,7 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
                             self.toggle_validation(w.ans, True)
         return is_valid
     
-    def count_quiz(self, quiznumber):
+    def count_quiz(self, quiznumber, gradingperiod, lessonid):
         sql = """
             SELECT 
                 COUNT(*) AS quiz_count
@@ -838,10 +846,13 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
                 UNION ALL
                 SELECT QUIZNUMBER FROM CAI.TBL_QUIZTRUEORFALSE
             ) combined_quizzes
-            WHERE QUIZNUMBER = %s;
+            WHERE 
+                QUIZNUMBER = %s AND
+                GRADINGPERIOD = %s AND
+                LESSONID = %s;
         """
 
-        record = self.db_tools.fetch_all(sql, (quiznumber,))
+        record = self.db_tools.fetch_all(sql, (quiznumber, gradingperiod, lessonid))
         quiz_count = 0
 
         if record:
@@ -859,12 +870,6 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
             g_period = self.cbGradingPeriod.currentData()
             l_id = self.cbLessonName.currentData()
 
-            ctr = 1
-            quiz_count = self.count_quiz(q_num)
-
-            if quiz_count:
-                ctr = quiz_count + 1
-
             id_count = self.layout_identification.count()
             mc_count = self.layout_multiplechoice.count()
             tf_count = self.layout_trueorfalse.count()
@@ -873,28 +878,36 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
             conn.autocommit = False
 
             with conn.cursor() as cur:
-                
+
+                sql = """
+                    DELETE FROM cai.tbl_quizidentification WHERE quiznumber = %s AND gradingperiod = %s AND lessonid = %s AND difficultylevel = %s;
+                    DELETE FROM cai.tbl_quizmultiplechoice WHERE quiznumber = %s AND gradingperiod = %s AND lessonid = %s AND difficultylevel = %s;
+                    DELETE FROM cai.tbl_quiztrueorfalse WHERE quiznumber = %s AND gradingperiod = %s AND lessonid = %s AND difficultylevel = %s;
+                """
+                cur.execute(sql, (
+                    q_num, g_period, l_id, self.difficulty_group.checkedId(),
+                    q_num, g_period, l_id, self.difficulty_group.checkedId(),
+                    q_num, g_period, l_id, self.difficulty_group.checkedId()
+                ))
+                ctr = 1
+
                 for i in range(id_count):
                     w = self.layout_identification.itemAt(i).widget()
                     if not isinstance(w, QuizItemWidget): continue
 
                     img = self.get_binary(w.img_path)
-                    sql  = "INSERT INTO CAI.TBL_QUIZIDENTIFICATION (\n"
-                    sql += "    QUIZNUMBER,\n"
-                    sql += "    GRADINGPERIOD,\n"
-                    sql += "    ITEMNO,\n"
-                    sql += "    LESSONID,\n"
-                    sql += "    QUESTION,\n"
-                    sql += "    CORRECT_ANSWER,\n"
-                    sql += "    IMAGEQUESTION,\n"
-                    sql += "    DIFFICULTYLEVEL\n"
-                    sql += ") VALUES (%s, %s, %s, %s, %s, %s, %s, %s)\n"
-                    sql += "ON CONFLICT (QUIZNUMBER, GRADINGPERIOD, ITEMNO, LESSONID, DIFFICULTYLEVEL)\n"
-                    sql += "DO UPDATE SET\n"
-                    sql += "    QUESTION = EXCLUDED.QUESTION,\n"
-                    sql += "    CORRECT_ANSWER = EXCLUDED.CORRECT_ANSWER,\n"
-                    sql += "    IMAGEQUESTION = EXCLUDED.IMAGEQUESTION,\n"
-                    sql += "    DIFFICULTYLEVEL = EXCLUDED.DIFFICULTYLEVEL\n"
+                    sql = """
+                        INSERT INTO CAI.TBL_QUIZIDENTIFICATION (
+                            QUIZNUMBER,
+                            GRADINGPERIOD,
+                            ITEMNO,
+                            LESSONID,
+                            QUESTION,
+                            CORRECT_ANSWER,
+                            IMAGEQUESTION,
+                            DIFFICULTYLEVEL
+                        ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+                    """
 
                     cur.execute(sql, (
                         q_num,
@@ -914,28 +927,21 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
                     if not isinstance(w, QuizItemWidget): continue
 
                     img = self.get_binary(w.img_path)
-                    sql  = "INSERT INTO CAI.TBL_QUIZMULTIPLECHOICE (\n"
-                    sql += "    QUIZNUMBER,\n"
-                    sql += "    GRADINGPERIOD,\n"
-                    sql += "    ITEMNO,\n"
-                    sql += "    LESSONID,\n"
-                    sql += "    QUESTION,\n"
-                    sql += "    CHOICE_A,\n"
-                    sql += "    CHOICE_B,\n"
-                    sql += "    CHOICE_C,\n"
-                    sql += "    CORRECT_ANSWER,\n"
-                    sql += "    IMAGEQUESTION,\n"
-                    sql += "    DIFFICULTYLEVEL\n"
-                    sql += ") VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)\n"
-                    sql += "ON CONFLICT (QUIZNUMBER, GRADINGPERIOD, ITEMNO, LESSONID, DIFFICULTYLEVEL)\n"
-                    sql += "DO UPDATE SET\n"
-                    sql += "    QUESTION = EXCLUDED.QUESTION,\n"
-                    sql += "    CHOICE_A = EXCLUDED.CHOICE_A,\n"
-                    sql += "    CHOICE_B = EXCLUDED.CHOICE_B,\n"
-                    sql += "    CHOICE_C = EXCLUDED.CHOICE_C,\n"
-                    sql += "    CORRECT_ANSWER = EXCLUDED.CORRECT_ANSWER,\n"
-                    sql += "    IMAGEQUESTION = EXCLUDED.IMAGEQUESTION,\n"
-                    sql += "    DIFFICULTYLEVEL = EXCLUDED.DIFFICULTYLEVEL\n"
+                    sql = """
+                        INSERT INTO CAI.TBL_QUIZMULTIPLECHOICE (
+                            QUIZNUMBER,
+                            GRADINGPERIOD,
+                            ITEMNO,
+                            LESSONID,
+                            QUESTION,
+                            CHOICE_A,
+                            CHOICE_B,
+                            CHOICE_C,
+                            CORRECT_ANSWER,
+                            IMAGEQUESTION,
+                            DIFFICULTYLEVEL
+                        ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                    """
 
                     correct = None
 
@@ -969,22 +975,18 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
                     if not isinstance(w, QuizItemWidget): continue
 
                     img = self.get_binary(w.img_path)
-                    sql  = "INSERT INTO CAI.TBL_QUIZTRUEORFALSE (\n"
-                    sql += "    QUIZNUMBER\n"
-                    sql += "    ,GRADINGPERIOD\n"
-                    sql += "    ,ITEMNO\n"
-                    sql += "    ,LESSONID\n"
-                    sql += "    ,QUESTION\n"
-                    sql += "    ,CORRECT_ANSWER\n"
-                    sql += "    ,IMAGEQUESTION\n"
-                    sql += "    ,DIFFICULTYLEVEL\n"
-                    sql += ") VALUES (%s,%s,%s,%s,%s,%s,%s,%s)\n"
-                    sql += "ON CONFLICT (QUIZNUMBER, GRADINGPERIOD, ITEMNO, LESSONID, DIFFICULTYLEVEL)\n"
-                    sql += "DO UPDATE SET\n"
-                    sql += "    QUESTION = EXCLUDED.QUESTION,\n"
-                    sql += "    CORRECT_ANSWER = EXCLUDED.CORRECT_ANSWER,\n"
-                    sql += "    IMAGEQUESTION = EXCLUDED.IMAGEQUESTION,\n"
-                    sql += "    DIFFICULTYLEVEL = EXCLUDED.DIFFICULTYLEVEL\n"
+                    sql  = """
+                        INSERT INTO CAI.TBL_QUIZTRUEORFALSE (
+                            QUIZNUMBER
+                            ,GRADINGPERIOD
+                            ,ITEMNO
+                            ,LESSONID
+                            ,QUESTION
+                            ,CORRECT_ANSWER
+                            ,IMAGEQUESTION
+                            ,DIFFICULTYLEVEL
+                        ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+                    """
 
                     cur.execute(sql, (
                         self.quiz_no.value(),
@@ -1075,23 +1077,6 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
 
                 data = (q_num, l_id, g_period, mult_easy, mult_average, mult_hard, total_score)
                 cur.execute(sql, data)
-
-                if self.itemsToRemove:
-                    # Filter out None values just in case
-                    ids_to_delete = [i for i in self.itemsToRemove if i is not None]
-
-                    if ids_to_delete:
-                        # Generic deletion query - you'll need to run this for each table
-                        # since idKey, mcKey, and tfKey are likely distinct columns
-                        tables = [
-                            ("cai.tbl_quizidentification", "idkey"),
-                            ("cai.tbl_quizmultiplechoice", "mckey"),
-                            ("cai.tbl_quiztrueorfalse", "tfkey")
-                        ]
-
-                        for table, col in tables:
-                            sql_del = f"DELETE FROM {table} WHERE {col} = ANY(%s)"
-                            cur.execute(sql_del, (ids_to_delete,))
 
                 conn.commit()
                 self.itemsToRemove.clear()
