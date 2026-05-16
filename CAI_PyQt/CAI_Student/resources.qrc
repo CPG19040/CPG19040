@@ -47,6 +47,7 @@
     <file>Images/flatButton.png</file>
     <file>Images/flatButtonGlow.png</file>
     <file>Images/fraction.png</file>
+    <file>Images/happy.gif</file>
     <file>Images/happy.png</file>
     <file>Images/leftArrowWood.png</file>
     <file>Images/leftArrowWoodGlow.png</file>
@@ -60,6 +61,8 @@
     <file>Images/questionMark.png</file>
     <file>Images/reef.jpg</file>
     <file>Images/reef2.jpg</file>
+    <file>Images/remark_correct.png</file>
+    <file>Images/remark_wrong.png</file>
     <file>Images/rightArrowWood.png</file>
     <file>Images/rightArrowWoodGlow.png</file>
     <file>Images/sad2.png</file>

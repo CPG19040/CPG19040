@@ -27,13 +27,30 @@ class Ui_CustomDialog(object):
         CustomDialog.resize(415, 306)
         CustomDialog.setMinimumSize(QSize(415, 306))
         CustomDialog.setMaximumSize(QSize(415, 306))
-        CustomDialog.setStyleSheet(u"background: transparent;")
+        CustomDialog.setStyleSheet(u"#CustomDialog { \n"
+"	background: transparent;\n"
+"}\n"
+"\n"
+"#widget { \n"
+"	border-image: url(:/Images/Images/slab.png); \n"
+"}\n"
+"\n"
+"#widget_2 { \n"
+"	border-image: url(:/Images/Images/paper.svg); \n"
+"	margin: 0px 20px 0px; \n"
+"}\n"
+"\n"
+"#label_message {\n"
+"	padding: 10px 30px 10px; \n"
+"	font: 13pt \"Kissy Hugs\"; \n"
+"	color: Brown;\n"
+"}")
         self.verticalLayout = QVBoxLayout(CustomDialog)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.widget = QWidget(CustomDialog)
         self.widget.setObjectName(u"widget")
-        self.widget.setStyleSheet(u"#widget { border-image: url(:/Images/Images/slab.png); }")
+        self.widget.setStyleSheet(u"")
         self.verticalLayout_2 = QVBoxLayout(self.widget)
         self.verticalLayout_2.setSpacing(0)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
@@ -64,14 +81,30 @@ class Ui_CustomDialog(object):
 
         self.widget_2 = QWidget(self.widget)
         self.widget_2.setObjectName(u"widget_2")
-        self.widget_2.setStyleSheet(u"#widget_2 { border-image: url(:/Images/Images/paper.svg); margin: 0px 20px 0px; }")
+        self.widget_2.setStyleSheet(u"")
         self.verticalLayout_3 = QVBoxLayout(self.widget_2)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.verticalLayout_3.setContentsMargins(-1, 0, 9, -1)
+        self.widget_3 = QWidget(self.widget_2)
+        self.widget_3.setObjectName(u"widget_3")
+        self.horizontalLayout = QHBoxLayout(self.widget_3)
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.label_gif = QLabel(self.widget_3)
+        self.label_gif.setObjectName(u"label_gif")
+        self.label_gif.setMinimumSize(QSize(120, 120))
+        self.label_gif.setMaximumSize(QSize(120, 120))
+        self.label_gif.setScaledContents(True)
+        self.label_gif.setAlignment(Qt.AlignCenter)
+
+        self.horizontalLayout.addWidget(self.label_gif)
+
+
+        self.verticalLayout_3.addWidget(self.widget_3)
+
         self.label_message = QLabel(self.widget_2)
         self.label_message.setObjectName(u"label_message")
-        self.label_message.setStyleSheet(u"padding: 10px 30px 10px; font: 13pt \"Inter Medium\"; color: green;")
-        self.label_message.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+        self.label_message.setStyleSheet(u"")
+        self.label_message.setAlignment(Qt.AlignCenter)
         self.label_message.setWordWrap(True)
 
         self.verticalLayout_3.addWidget(self.label_message)
@@ -91,6 +124,7 @@ class Ui_CustomDialog(object):
     def retranslateUi(self, CustomDialog):
         CustomDialog.setWindowTitle(QCoreApplication.translate("CustomDialog", u"Dialog", None))
         self.btnClose.setText("")
+        self.label_gif.setText("")
         self.label_message.setText(QCoreApplication.translate("CustomDialog", u"Hello World", None))
     # retranslateUi
 

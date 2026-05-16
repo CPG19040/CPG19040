@@ -236,17 +236,21 @@ class QuizUtils:
                     remark = "Correct" if is_correct else "Incorrect"
 
                     sql = """
+                        DELETE FROM cai.tbl_answers
+                        WHERE 
+                            assmt_key = %s AND
+                            quiztype = %s AND
+                            quiznumber = %s AND
+                            studentid = %s;
+
                         INSERT INTO cai.tbl_answers (
                             assmt_key, quiztype, quiznumber, itemno, answer, studentid, remarks
-                        ) VALUES (%s, %s, %s, %s, %s, %s, %s)
-                        ON CONFLICT (assmt_key, quiztype, quiznumber, itemno, studentid)
-                        DO UPDATE SET
-                        answer = EXCLUDED.answer,
-                        datetaken = CURRENT_TIMESTAMP,
-                        remarks = EXCLUDED.remarks;
+                        ) VALUES (%s, %s, %s, %s, %s, %s, %s);
                     """
                     
                     cur.execute(sql, (
+                        card.idKey, card.quiz_type, card.quiznumber, student_id,
+
                         card.idKey,
                         card.quiz_type,
                         card.quiznumber,

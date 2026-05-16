@@ -2,7 +2,7 @@ import os
 
 # PyQt Imports
 from PySide6.QtCore import QSettings, QTimer, QDateTime, QPoint, QEasingCurve, QPropertyAnimation, QParallelAnimationGroup, Qt, QDate
-from PySide6.QtWidgets import QMainWindow, QHeaderView, QDialog, QVBoxLayout, QWidget, QMessageBox, QApplication, QButtonGroup
+from PySide6.QtWidgets import QMainWindow, QHeaderView, QDialog, QStyledItemDelegate, QWidget, QMessageBox, QApplication, QButtonGroup
 from PySide6.QtGui import QFontDatabase, QImage, QPixmap, QGuiApplication, QStandardItemModel, QStandardItem
 from shiboken6 import isValid
 
@@ -61,6 +61,13 @@ class Controller:
         self.ui = Ui_Home()
         self.ui.setupUi(self.home_win)
         # self.home_win.showMaximized()
+
+        # self.ui.cmb_studSection.setItemDelegate(QStyledItemDelegate())
+        # self.ui.cbGradingPeriod.setItemDelegate(QStyledItemDelegate())
+        # self.ui.cbLessonName.setItemDelegate(QStyledItemDelegate())
+        # self.ui.cb_gp_quiz_idv.setItemDelegate(QStyledItemDelegate())
+        # self.ui.comboBox_Section.setItemDelegate(QStyledItemDelegate())
+        # self.ui.comboBox_ReportsSection.setItemDelegate(QStyledItemDelegate())
 
         # Setup UI
         self.card_layout = self.ui.verticalLayout_9
@@ -952,14 +959,13 @@ class Controller:
 
         from App.Quiz import Quiz
         quiz = Quiz()
-        model = quiz.get_scores(
-            studentId, 
-            gradingperiod
-        )
+        model, average_percentage = quiz.get_scores(studentId, gradingperiod)
 
         if model:
             self.ui.table_quiz_score_idv.setModel(model)
             self.ui.table_quiz_score_idv.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
             self.ui.table_quiz_score_idv.sortByColumn(-1, Qt.AscendingOrder)
+
+        self.ui.label_average_percentage.setText(f'{average_percentage:.0f}%')
 
     

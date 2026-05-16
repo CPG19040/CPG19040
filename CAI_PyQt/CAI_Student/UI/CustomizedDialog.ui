@@ -26,7 +26,24 @@
    <string>Dialog</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background: transparent;</string>
+   <string notr="true">#CustomDialog { 
+	background: transparent;
+}
+
+#widget { 
+	border-image: url(:/Images/Images/slab.png); 
+}
+
+#widget_2 { 
+	border-image: url(:/Images/Images/paper.svg); 
+	margin: 0px 20px 0px; 
+}
+
+#label_message {
+	padding: 10px 30px 10px; 
+	font: 13pt &quot;Kissy Hugs&quot;; 
+	color: Brown;
+}</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="leftMargin">
@@ -44,7 +61,7 @@
    <item>
     <widget class="QWidget" name="widget" native="true">
      <property name="styleSheet">
-      <string notr="true">#widget { border-image: url(:/Images/Images/slab.png); }</string>
+      <string notr="true"/>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <property name="spacing">
@@ -134,7 +151,7 @@
       <item>
        <widget class="QWidget" name="widget_2" native="true">
         <property name="styleSheet">
-         <string notr="true">#widget_2 { border-image: url(:/Images/Images/paper.svg); margin: 0px 20px 0px; }</string>
+         <string notr="true"/>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_3">
          <property name="topMargin">
@@ -144,15 +161,46 @@
           <number>9</number>
          </property>
          <item>
+          <widget class="QWidget" name="widget_3" native="true">
+           <layout class="QHBoxLayout" name="horizontalLayout">
+            <item>
+             <widget class="QLabel" name="label_gif">
+              <property name="minimumSize">
+               <size>
+                <width>120</width>
+                <height>120</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>120</width>
+                <height>120</height>
+               </size>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="scaledContents">
+               <bool>true</bool>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
           <widget class="QLabel" name="label_message">
            <property name="styleSheet">
-            <string notr="true">padding: 10px 30px 10px; font: 13pt &quot;Inter Medium&quot;; color: green;</string>
+            <string notr="true"/>
            </property>
            <property name="text">
             <string>Hello World</string>
            </property>
            <property name="alignment">
-            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+            <set>Qt::AlignCenter</set>
            </property>
            <property name="wordWrap">
             <bool>true</bool>

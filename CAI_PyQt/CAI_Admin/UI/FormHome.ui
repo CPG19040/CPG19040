@@ -37,7 +37,7 @@
 	background-color: rgb(222, 221, 218); 
 	margin: 0px;
 	font: 10pt &quot;Inter&quot;; 
-	color: rgb(0, 0, 0);
+	color: black;
 }
 
 *[class=&quot;button-normal&quot;] {
@@ -79,19 +79,18 @@
 }
 
 QComboBox[class=&quot;combobox-main&quot;] {
-	height: 30px;
-	border: 1px solid #999;
-	border-radius: 15px;
+    height: 30px;
+    border: 1px solid #999;
+    border-radius: 15px; /* Fully rounded pills */
     padding-left: 10px;
     background-color: #ffffff;
     color: #333333;
-    font-size: 12px;
+    font: 10pt &quot;Inter&quot;; /* Consolidated font settings */
     selection-background-color: #7eb4d7;
-	font: 10pt &quot;Inter&quot;;
 }
 
 QComboBox[class=&quot;combobox-main&quot;]:focus {
-	border: 1px solid #007BFF;
+    border: 1px solid #007BFF;
 }
 
 QComboBox[class=&quot;combobox-main&quot;]:hover {
@@ -103,8 +102,9 @@ QComboBox[class=&quot;combobox-main&quot;]::drop-down {
     subcontrol-position: top right;
     width: 30px;
     border-left-width: 0px;
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
+    /* Match the 15px border-radius of the main control */
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
 }
 
 QComboBox[class=&quot;combobox-main&quot;]::down-arrow {
@@ -116,15 +116,24 @@ QComboBox[class=&quot;combobox-main&quot;]::down-arrow {
 
 QComboBox[class=&quot;combobox-main&quot;] QAbstractItemView {
     background-color: #ffffff;
+    border: 1px solid #999;
+    border-radius: 8px;
     selection-background-color: #7eb4d7;
     selection-color: #ffffff;
-    border-radius: 5px;
+    outline: 0; /* Removes the ugly dotted focus border */
 }
 
 QComboBox[class=&quot;combobox-main&quot;] QAbstractItemView::item {
-    min-height: 35px;
+    min-height: 35px; /* Requires QStyledItemDelegate() in Python */
     padding-left: 10px;
     border-radius: 4px;
+    color: #333333;
+}
+
+/* Hover state for items inside the dropdown */
+QComboBox[class=&quot;combobox-main&quot;] QAbstractItemView::item:hover {
+    background-color: #7eb4d7;
+    color: #ffffff;
 }
 
 QSpinBox {
@@ -1092,7 +1101,7 @@ QPushButton:hover {
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">color: rgb(0, 0, 0);</string>
+       <string notr="true"/>
       </property>
       <property name="frameShape">
        <enum>QFrame::NoFrame</enum>

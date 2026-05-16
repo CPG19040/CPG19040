@@ -1,6 +1,6 @@
 import os
 from PySide6.QtWidgets import QVBoxLayout, QHBoxLayout, QLabel, QFrame, QFileDialog, QMainWindow, QWidget, QDialog
-from PySide6.QtGui import QPixmap, QPainter, QBrush, QColor, QPen, QRegion, QPainterPath
+from PySide6.QtGui import QPixmap, QPainter, QBrush, QColor, QPen, QMovie, QPainterPath
 from PySide6.QtCore import Qt, Signal, QBuffer, QByteArray, QIODevice, QUrl, QObject, QEvent
 from PySide6.QtWebEngineWidgets import QWebEngineView
 from App.CRUDTools import DatabaseTools
@@ -353,6 +353,12 @@ class CustomShapeDialog(QDialog, Ui_CustomDialog):
         # 2. Re-use WindowHandler for dragging
         self.handler = WindowHandler(self)
 
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        file_path = os.path.join(script_dir, "..", "Images", "happy.gif")
+        movie = QMovie(file_path)
+
         # 3. Content
+        self.label_gif.setMovie(movie)
+        movie.start()
         self.label_message.setText(str(message))
         self.btnClose.clicked.connect(self.accept)

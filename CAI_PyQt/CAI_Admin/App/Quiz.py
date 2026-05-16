@@ -47,13 +47,16 @@ class Quiz:
 
         records = self.db_tools.fetch_all(sql, (studentId, gradingperiod))
 
-
         ui_headers = ["QUIZ #", "LESSON TITLE", "SCORE", "PERCENTAGE", "DATE TAKEN"]
         model = QStandardItemModel(len(records), len(ui_headers))
         model.setHorizontalHeaderLabels(ui_headers)
+        average = 0
 
         if not records:
-            return model
+            return model, average
+        
+        row_count = len(records)
+        sum_score = 0
 
         for row_idx, row_data in enumerate(records):
             _, _, _, total_score = self.getQuizTotalScore(row_data['quiznumber'], gradingperiod, row_data['lessonid'])
@@ -65,6 +68,7 @@ class Quiz:
             # Ensure total_score is greater than 0 and score doesn't exceed total
             if total_score > 0 and 0 <= row_data['quizscore'] <= total_score:
                 percent_val = (row_data['quizscore'] / total_score) * 100
+                sum_score += percent_val
 
                 if percent_val:
                     percentage_str = f"{percent_val:.0f}%"
@@ -83,8 +87,11 @@ class Quiz:
                 item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsEditable)
                 model.setItem(row_idx, col_idx, item)
 
-        return model
+            if sum_score and row_count:
+                average = sum_score / row_count
 
+        return model, average
+    
     def retrieve_quiz(self, q_num, g_period, lesson_id, diff_level):
         """
             Retrieves quizzes from database (Identification, Multiple Choice, True or False)

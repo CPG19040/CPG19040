@@ -386,3 +386,4 @@ class NoScrollComboBox(QComboBox):
     def wheelEvent(self, event):
         # Ignore the event so the scroll goes to the parent (the page)
         event.ignore()
+
