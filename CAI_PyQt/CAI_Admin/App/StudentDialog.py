@@ -389,7 +389,7 @@ class AddNewStudentDialog(QDialog, Ui_AddNewStudentDialog):
             sql += '    ,contact_number\n'
             sql += ')\n'
             sql += 'VALUES (%s, \n'
-            sql += "    to_char(CURRENT_DATE, 'YYYY') || '-' || lpad(nextval('cai.student_id_seq')::text, 4, '0') || '-STU'\n"
+            sql += "    to_char(CURRENT_DATE, 'YYYY') || '-' || lpad(nextval('cai.student_id_seq')::text, 4, '0') || '-STU',\n"
             sql += '    %s, %s, %s, %s, %s, %s, %s, %s);'
 
             for i, row in enumerate(reader, 1):

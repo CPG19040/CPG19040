@@ -27,7 +27,8 @@ class Ui_FormLogin(object):
             FormLogin.setObjectName(u"FormLogin")
         FormLogin.resize(968, 665)
         FormLogin.setMinimumSize(QSize(0, 0))
-        FormLogin.setStyleSheet(u"QWidget { background-color: #ffdaa5; }")
+        FormLogin.setStyleSheet(u"#FormLogin { background-color: #ffdaa5; }\n"
+"#stackedWidget, #page1, #page2 { background: transparent; }")
         self.verticalLayout_3 = QVBoxLayout(FormLogin)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
@@ -134,13 +135,130 @@ class Ui_FormLogin(object):
         QListWidgetItem(self.list_sections)
         QListWidgetItem(self.list_sections)
         QListWidgetItem(self.list_sections)
+        QListWidgetItem(self.list_sections)
+        QListWidgetItem(self.list_sections)
+        QListWidgetItem(self.list_sections)
+        QListWidgetItem(self.list_sections)
+        QListWidgetItem(self.list_sections)
+        QListWidgetItem(self.list_sections)
         self.list_sections.setObjectName(u"list_sections")
         self.list_sections.setMaximumSize(QSize(300, 16777215))
         font2 = QFont()
         font2.setFamilies([u"Inter Medium"])
         font2.setPointSize(13)
         self.list_sections.setFont(font2)
-        self.list_sections.setStyleSheet(u"border-radius: 20px; background-color: rgb(248, 230, 203); padding: 10px; color: rgb(84, 51, 51); border: 5px solid #fff;")
+        self.list_sections.setFocusPolicy(Qt.TabFocus)
+        self.list_sections.setStyleSheet(u"/* 1. THE LIST CONTAINER */\n"
+"QListWidget {\n"
+"    background-color: rgb(248, 230, 203);\n"
+"    border: 5px solid rgb(206, 152, 115);\n"
+"    border-radius: 20px;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"/* 2. THE DEFAULT ITEM STATE */\n"
+"QListWidget::item {\n"
+"    background-color: transparent;\n"
+"    color: #333333;\n"
+"    padding: 10px 10px;      /* Vertical and horizontal spacing inside the item */\n"
+"    margin: 1px 0px;         /* Spacing between adjacent items */\n"
+"    border-radius: 20px;      /* Rounded corners for individual items */\n"
+"}\n"
+"\n"
+"/* 3. HOVER STATE (Mouse over item) */\n"
+"QListWidget::item:hover {\n"
+"    background-color: rgb(255, 200, 116);\n"
+"    color: #574939;\n"
+"}\n"
+"\n"
+"/* 4. SELECTED STATE (Active/Clicked item) */\n"
+"QListWidget::item:selected {\n"
+"    background-color: #574939;\n"
+"    color: #ffffff;\n"
+"	font-weight: bold;\n"
+"}\n"
+"\n"
+"/* 5. SELECTED & HOVERED STATE */\n"
+"/* Prevents the hover color from overriding the selection color when clicking */\n"
+""
+                        "QListWidget::item:selected:hover {\n"
+"    background-color: #4a3e30; \n"
+"    color: #ffffff;\n"
+"}\n"
+"\n"
+"/* 6. DISABLED STATE */\n"
+"QListWidget::item:disabled {\n"
+"    background-color: transparent;\n"
+"    color: #aaaaaa;\n"
+"}\n"
+"\n"
+"/* 3. VERTICAL SCROLLBAR */\n"
+"QScrollBar:vertical {\n"
+"    border: none;\n"
+"    background: #ffffff;\n"
+"    width: 10px;\n"
+"    margin: 5px 0px 5px 0px; /* Adds a little padding so it doesn't hug the border */\n"
+"    border-radius: 5px;\n"
+"}\n"
+"\n"
+"QScrollBar::handle:vertical {\n"
+"    background: #7a7a7a;\n"
+"    min-height: 20px;\n"
+"    border-radius: 5px;\n"
+"}\n"
+"\n"
+"QScrollBar::handle:vertical:hover {\n"
+"    background: #574939;\n"
+"}\n"
+"\n"
+"QScrollBar::handle:vertical:pressed {\n"
+"    background: #3d3327; /* Darker shade for active dragging */\n"
+"}\n"
+"\n"
+"/* 4. HORIZONTAL SCROLLBAR */\n"
+"QScrollBar:horizontal {\n"
+"    border: none;\n"
+"    background: #ffffff;\n"
+"    height: 10px;\n"
+"    margin: 2px 4px 2px 4px; \n"
+"    border-radius: 5px;"
+                        "\n"
+"}\n"
+"\n"
+"QScrollBar::handle:horizontal {\n"
+"    background: #7a7a7a;\n"
+"    min-width: 20px;\n"
+"    border-radius: 5px;\n"
+"}\n"
+"\n"
+"QScrollBar::handle:horizontal:hover {\n"
+"    background: #574939;\n"
+"}\n"
+"\n"
+"QScrollBar::handle:horizontal:pressed {\n"
+"    background: #3d3327;\n"
+"}\n"
+"\n"
+"/* 5. REMOVE BUTTONS & TRACK BACKGROUNDS */\n"
+"QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical,\n"
+"QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {\n"
+"    border: none;\n"
+"    background: none;\n"
+"    width: 0px;\n"
+"    height: 0px;\n"
+"}\n"
+"\n"
+"QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical,\n"
+"QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {\n"
+"    background: none;\n"
+"}\n"
+"\n"
+"/* 6. THE CORNER WIDGET */\n"
+"/* Native Qt selector for the bottom-right intersection square */\n"
+"QListWidget QCornerWidget {\n"
+"    background: transparent;\n"
+"    border: none;\n"
+"}")
         self.list_sections.setFlow(QListView.TopToBottom)
         self.list_sections.setSpacing(5)
 
@@ -195,15 +313,20 @@ class Ui_FormLogin(object):
         self.scrollArea.setObjectName(u"scrollArea")
         self.scrollArea.setStyleSheet(u"/* 1. THE MAIN CONTAINER */\n"
 "#scrollArea { \n"
-"    border: none;\n"
+"    border: 5px solid rgb(206, 152, 115);\n"
 "    border-radius: 20px; \n"
-"    background-color: rgb(255, 255, 255);\n"
+"    background-color: rgb(248, 230, 203);\n"
 "}\n"
 "\n"
-"/* 2. THE VIEWPORT (Crucial for transparency/backgrounds) */\n"
+"/* 2. THE VIEWPORT & INNER CONTENT */\n"
+"/* Enforces transparency and helps keep content within the rounded border */\n"
+"#scrollArea > QWidget > QWidget {\n"
+"    background: transparent;\n"
+"}\n"
+"\n"
 "#scrollArea QWidget #qt_scrollarea_viewport {\n"
 "    background: transparent;\n"
-"    border-radius: 20px;\n"
+"    border-radius: 15px; /* Slightly smaller than container to prevent clipping artifacts */\n"
 "}\n"
 "\n"
 "/* 3. VERTICAL SCROLLBAR */\n"
@@ -211,7 +334,7 @@ class Ui_FormLogin(object):
 "    border: none;\n"
 "    background: #ffffff;\n"
 "    width: 10px;\n"
-"    margin: 0px;\n"
+"    margin: 5px 0px 5px 0px; /* Adds a little padding so it doesn't hug the border */\n"
 "    border-radius: 5px;\n"
 "}\n"
 "\n"
@@ -222,21 +345,25 @@ class Ui_FormLogin(object):
 "}\n"
 "\n"
 "QScrollBar::handle:vertical:hover {\n"
-"    background: #574939;\n"
+"    background: #5"
+                        "74939;\n"
+"}\n"
+"\n"
+"QScrollBar::handle:vertical:pressed {\n"
+"    background: #3d3327; /* Darker shade for active dragging */\n"
 "}\n"
 "\n"
 "/* 4. HORIZONTAL SCROLLBAR */\n"
 "QScrollBar:horizontal {\n"
 "    border: none;\n"
 "    background: #ffffff;\n"
-"    height: 10px; /* Note: height, not width */\n"
-"    margin: 0px;\n"
+"    height: 10px;\n"
+"    margin: 2px 4px 2px 4px; \n"
 "    border-radius: 5px;\n"
 "}\n"
 "\n"
 "QScrollBar::handle:horizontal {\n"
-"    background: #7"
-                        "a7a7a;\n"
+"    background: #7a7a7a;\n"
 "    min-width: 20px;\n"
 "    border-radius: 5px;\n"
 "}\n"
@@ -245,8 +372,11 @@ class Ui_FormLogin(object):
 "    background: #574939;\n"
 "}\n"
 "\n"
+"QScrollBar::handle:horizontal:pressed {\n"
+"    background: #3d3327;\n"
+"}\n"
+"\n"
 "/* 5. REMOVE BUTTONS & TRACK BACKGROUNDS */\n"
-"/* This handles both horizontal and vertical arrows/tracks */\n"
 "QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical,\n"
 "QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {\n"
 "    border: none;\n"
@@ -256,13 +386,14 @@ class Ui_FormLogin(object):
 "}\n"
 "\n"
 "QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical,\n"
-"QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {\n"
+"QScrollBar::add-page:horizon"
+                        "tal, QScrollBar::sub-page:horizontal {\n"
 "    background: none;\n"
 "}\n"
 "\n"
-"/* 6. THE CORNER WIDGET \n"
-"   (The small square where both bars meet) */\n"
-"#scrollArea QWidget #qt_scrollarea_corner {\n"
+"/* 6. THE CORNER WIDGET */\n"
+"/* Native Qt selector for the bottom-right intersection square */\n"
+"QAbstractScrollArea QCornerWidget {\n"
 "    background: transparent;\n"
 "    border: none;\n"
 "}")
@@ -271,7 +402,7 @@ class Ui_FormLogin(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 644, 545))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 634, 535))
         self.scrollAreaWidgetContents.setStyleSheet(u"")
         self.gridLayout = QGridLayout(self.scrollAreaWidgetContents)
         self.gridLayout.setObjectName(u"gridLayout")
@@ -412,19 +543,28 @@ class Ui_FormLogin(object):
 
         self.verticalLayout_2.addWidget(self.widget_2)
 
-        self.widget_4 = QWidget(self.widget_3)
-        self.widget_4.setObjectName(u"widget_4")
-        self.widget_4.setMinimumSize(QSize(0, 60))
-        self.widget_4.setMaximumSize(QSize(16777215, 60))
-        self.widget_4.setStyleSheet(u"#widget_4 { background-color: rgb(246, 245, 244); border-radius: 20px; padding: 20px; border: 5px solid rgb(206, 152, 115); color: rgb(54, 37, 26); }")
-        self.horizontalLayout_4 = QHBoxLayout(self.widget_4)
-        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
-        self.horizontalLayout_4.setContentsMargins(0, 0, 0, 0)
+        self.widget_password = QWidget(self.widget_3)
+        self.widget_password.setObjectName(u"widget_password")
+        self.widget_password.setMinimumSize(QSize(0, 60))
+        self.widget_password.setMaximumSize(QSize(16777215, 60))
+        self.widget_password.setStyleSheet(u"QWidget#widget_password {\n"
+"	border: 5px solid rgb(206, 152, 115);\n"
+"	border-radius: 20px;\n"
+"	padding: 20px;\n"
+"	background-color: rgb(246, 245, 244);\n"
+"}\n"
+"\n"
+"QWidget#widget_password[focused=\"true\"] {\n"
+"	border: 5px solid #007BFF;\n"
+"}")
+        self.layout_password = QHBoxLayout(self.widget_password)
+        self.layout_password.setObjectName(u"layout_password")
+        self.layout_password.setContentsMargins(0, 0, 0, 0)
         self.horizontalSpacer_11 = QSpacerItem(20, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
 
-        self.horizontalLayout_4.addItem(self.horizontalSpacer_11)
+        self.layout_password.addItem(self.horizontalSpacer_11)
 
-        self.txtPassword = QLineEdit(self.widget_4)
+        self.txtPassword = QLineEdit(self.widget_password)
         self.txtPassword.setObjectName(u"txtPassword")
         self.txtPassword.setMinimumSize(QSize(350, 40))
         self.txtPassword.setMaximumSize(QSize(1000, 40))
@@ -448,9 +588,9 @@ class Ui_FormLogin(object):
 "}")
         self.txtPassword.setEchoMode(QLineEdit.Password)
 
-        self.horizontalLayout_4.addWidget(self.txtPassword)
+        self.layout_password.addWidget(self.txtPassword)
 
-        self.btnShowPassword = QPushButton(self.widget_4)
+        self.btnShowPassword = QPushButton(self.widget_password)
         self.btnShowPassword.setObjectName(u"btnShowPassword")
         self.btnShowPassword.setMinimumSize(QSize(50, 50))
         self.btnShowPassword.setMaximumSize(QSize(50, 50))
@@ -469,14 +609,14 @@ class Ui_FormLogin(object):
 "	background-color: transparent;\n"
 "}")
 
-        self.horizontalLayout_4.addWidget(self.btnShowPassword)
+        self.layout_password.addWidget(self.btnShowPassword)
 
         self.horizontalSpacer_12 = QSpacerItem(20, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
 
-        self.horizontalLayout_4.addItem(self.horizontalSpacer_12)
+        self.layout_password.addItem(self.horizontalSpacer_12)
 
 
-        self.verticalLayout_2.addWidget(self.widget_4)
+        self.verticalLayout_2.addWidget(self.widget_password)
 
         self.widget_5 = QWidget(self.widget_3)
         self.widget_5.setObjectName(u"widget_5")
@@ -547,11 +687,23 @@ class Ui_FormLogin(object):
         ___qlistwidgetitem = self.list_sections.item(0)
         ___qlistwidgetitem.setText(QCoreApplication.translate("FormLogin", u"Clarity", None))
         ___qlistwidgetitem1 = self.list_sections.item(1)
-        ___qlistwidgetitem1.setText(QCoreApplication.translate("FormLogin", u"Hope", None))
+        ___qlistwidgetitem1.setText(QCoreApplication.translate("FormLogin", u"New Item", None))
         ___qlistwidgetitem2 = self.list_sections.item(2)
-        ___qlistwidgetitem2.setText(QCoreApplication.translate("FormLogin", u"Humility", None))
+        ___qlistwidgetitem2.setText(QCoreApplication.translate("FormLogin", u"New Item", None))
         ___qlistwidgetitem3 = self.list_sections.item(3)
-        ___qlistwidgetitem3.setText(QCoreApplication.translate("FormLogin", u"Honesty", None))
+        ___qlistwidgetitem3.setText(QCoreApplication.translate("FormLogin", u"New Item", None))
+        ___qlistwidgetitem4 = self.list_sections.item(4)
+        ___qlistwidgetitem4.setText(QCoreApplication.translate("FormLogin", u"New Item", None))
+        ___qlistwidgetitem5 = self.list_sections.item(5)
+        ___qlistwidgetitem5.setText(QCoreApplication.translate("FormLogin", u"New Item", None))
+        ___qlistwidgetitem6 = self.list_sections.item(6)
+        ___qlistwidgetitem6.setText(QCoreApplication.translate("FormLogin", u"New Item", None))
+        ___qlistwidgetitem7 = self.list_sections.item(7)
+        ___qlistwidgetitem7.setText(QCoreApplication.translate("FormLogin", u"Hope", None))
+        ___qlistwidgetitem8 = self.list_sections.item(8)
+        ___qlistwidgetitem8.setText(QCoreApplication.translate("FormLogin", u"Humility", None))
+        ___qlistwidgetitem9 = self.list_sections.item(9)
+        ___qlistwidgetitem9.setText(QCoreApplication.translate("FormLogin", u"Honesty", None))
         self.list_sections.setSortingEnabled(__sortingEnabled)
 
         self.label_3.setText(QCoreApplication.translate("FormLogin", u"2", None))
@@ -562,6 +714,6 @@ class Ui_FormLogin(object):
         self.label_4.setText(QCoreApplication.translate("FormLogin", u"3", None))
         self.label_27.setText(QCoreApplication.translate("FormLogin", u"What's your password?", None))
         self.btnShowPassword.setText("")
-        self.btnLogin.setText(QCoreApplication.translate("FormLogin", u"Enter", None))
+        self.btnLogin.setText(QCoreApplication.translate("FormLogin", u"Let's Go !", None))
     # retranslateUi
 

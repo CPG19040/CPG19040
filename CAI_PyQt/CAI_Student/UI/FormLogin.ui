@@ -20,7 +20,8 @@
    <string>Login</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QWidget { background-color: #ffdaa5; }</string>
+   <string notr="true">#FormLogin { background-color: #ffdaa5; }
+#stackedWidget, #page1, #page2 { background: transparent; }</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_3">
    <property name="leftMargin">
@@ -288,8 +289,119 @@
               <pointsize>13</pointsize>
              </font>
             </property>
+            <property name="focusPolicy">
+             <enum>Qt::TabFocus</enum>
+            </property>
             <property name="styleSheet">
-             <string notr="true">border-radius: 20px; background-color: rgb(248, 230, 203); padding: 10px; color: rgb(84, 51, 51); border: 5px solid #fff;</string>
+             <string notr="true">/* 1. THE LIST CONTAINER */
+QListWidget {
+    background-color: rgb(248, 230, 203);
+    border: 5px solid rgb(206, 152, 115);
+    border-radius: 20px;
+    padding: 5px;
+}
+
+/* 2. THE DEFAULT ITEM STATE */
+QListWidget::item {
+    background-color: transparent;
+    color: #333333;
+    padding: 10px 10px;      /* Vertical and horizontal spacing inside the item */
+    margin: 1px 0px;         /* Spacing between adjacent items */
+    border-radius: 20px;      /* Rounded corners for individual items */
+}
+
+/* 3. HOVER STATE (Mouse over item) */
+QListWidget::item:hover {
+    background-color: rgb(255, 200, 116);
+    color: #574939;
+}
+
+/* 4. SELECTED STATE (Active/Clicked item) */
+QListWidget::item:selected {
+    background-color: #574939;
+    color: #ffffff;
+	font-weight: bold;
+}
+
+/* 5. SELECTED &amp; HOVERED STATE */
+/* Prevents the hover color from overriding the selection color when clicking */
+QListWidget::item:selected:hover {
+    background-color: #4a3e30; 
+    color: #ffffff;
+}
+
+/* 6. DISABLED STATE */
+QListWidget::item:disabled {
+    background-color: transparent;
+    color: #aaaaaa;
+}
+
+/* 3. VERTICAL SCROLLBAR */
+QScrollBar:vertical {
+    border: none;
+    background: #ffffff;
+    width: 10px;
+    margin: 5px 0px 5px 0px; /* Adds a little padding so it doesn't hug the border */
+    border-radius: 5px;
+}
+
+QScrollBar::handle:vertical {
+    background: #7a7a7a;
+    min-height: 20px;
+    border-radius: 5px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background: #574939;
+}
+
+QScrollBar::handle:vertical:pressed {
+    background: #3d3327; /* Darker shade for active dragging */
+}
+
+/* 4. HORIZONTAL SCROLLBAR */
+QScrollBar:horizontal {
+    border: none;
+    background: #ffffff;
+    height: 10px;
+    margin: 2px 4px 2px 4px; 
+    border-radius: 5px;
+}
+
+QScrollBar::handle:horizontal {
+    background: #7a7a7a;
+    min-width: 20px;
+    border-radius: 5px;
+}
+
+QScrollBar::handle:horizontal:hover {
+    background: #574939;
+}
+
+QScrollBar::handle:horizontal:pressed {
+    background: #3d3327;
+}
+
+/* 5. REMOVE BUTTONS &amp; TRACK BACKGROUNDS */
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical,
+QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {
+    border: none;
+    background: none;
+    width: 0px;
+    height: 0px;
+}
+
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical,
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
+    background: none;
+}
+
+/* 6. THE CORNER WIDGET */
+/* Native Qt selector for the bottom-right intersection square */
+QListWidget QCornerWidget {
+    background: transparent;
+    border: none;
+}</string>
             </property>
             <property name="flow">
              <enum>QListView::TopToBottom</enum>
@@ -300,6 +412,36 @@
             <item>
              <property name="text">
               <string>Clarity</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>New Item</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>New Item</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>New Item</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>New Item</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>New Item</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>New Item</string>
              </property>
             </item>
             <item>
@@ -450,15 +592,20 @@
             <property name="styleSheet">
              <string notr="true">/* 1. THE MAIN CONTAINER */
 #scrollArea { 
-    border: none;
+    border: 5px solid rgb(206, 152, 115);
     border-radius: 20px; 
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(248, 230, 203);
 }
 
-/* 2. THE VIEWPORT (Crucial for transparency/backgrounds) */
+/* 2. THE VIEWPORT &amp; INNER CONTENT */
+/* Enforces transparency and helps keep content within the rounded border */
+#scrollArea &gt; QWidget &gt; QWidget {
+    background: transparent;
+}
+
 #scrollArea QWidget #qt_scrollarea_viewport {
     background: transparent;
-    border-radius: 20px;
+    border-radius: 15px; /* Slightly smaller than container to prevent clipping artifacts */
 }
 
 /* 3. VERTICAL SCROLLBAR */
@@ -466,7 +613,7 @@ QScrollBar:vertical {
     border: none;
     background: #ffffff;
     width: 10px;
-    margin: 0px;
+    margin: 5px 0px 5px 0px; /* Adds a little padding so it doesn't hug the border */
     border-radius: 5px;
 }
 
@@ -480,12 +627,16 @@ QScrollBar::handle:vertical:hover {
     background: #574939;
 }
 
+QScrollBar::handle:vertical:pressed {
+    background: #3d3327; /* Darker shade for active dragging */
+}
+
 /* 4. HORIZONTAL SCROLLBAR */
 QScrollBar:horizontal {
     border: none;
     background: #ffffff;
-    height: 10px; /* Note: height, not width */
-    margin: 0px;
+    height: 10px;
+    margin: 2px 4px 2px 4px; 
     border-radius: 5px;
 }
 
@@ -499,8 +650,11 @@ QScrollBar::handle:horizontal:hover {
     background: #574939;
 }
 
+QScrollBar::handle:horizontal:pressed {
+    background: #3d3327;
+}
+
 /* 5. REMOVE BUTTONS &amp; TRACK BACKGROUNDS */
-/* This handles both horizontal and vertical arrows/tracks */
 QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical,
 QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {
     border: none;
@@ -514,9 +668,9 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
     background: none;
 }
 
-/* 6. THE CORNER WIDGET 
-   (The small square where both bars meet) */
-#scrollArea QWidget #qt_scrollarea_corner {
+/* 6. THE CORNER WIDGET */
+/* Native Qt selector for the bottom-right intersection square */
+QAbstractScrollArea QCornerWidget {
     background: transparent;
     border: none;
 }</string>
@@ -535,8 +689,8 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>644</width>
-               <height>545</height>
+               <width>634</width>
+               <height>535</height>
               </rect>
              </property>
              <property name="styleSheet">
@@ -854,7 +1008,7 @@ QPushButton:hover {
            </widget>
           </item>
           <item>
-           <widget class="QWidget" name="widget_4" native="true">
+           <widget class="QWidget" name="widget_password" native="true">
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -868,9 +1022,18 @@ QPushButton:hover {
              </size>
             </property>
             <property name="styleSheet">
-             <string notr="true">#widget_4 { background-color: rgb(246, 245, 244); border-radius: 20px; padding: 20px; border: 5px solid rgb(206, 152, 115); color: rgb(54, 37, 26); }</string>
+             <string notr="true">QWidget#widget_password {
+	border: 5px solid rgb(206, 152, 115);
+	border-radius: 20px;
+	padding: 20px;
+	background-color: rgb(246, 245, 244);
+}
+
+QWidget#widget_password[focused=&quot;true&quot;] {
+	border: 5px solid #007BFF;
+}</string>
             </property>
-            <layout class="QHBoxLayout" name="horizontalLayout_4">
+            <layout class="QHBoxLayout" name="layout_password">
              <property name="leftMargin">
               <number>0</number>
              </property>
@@ -1052,7 +1215,7 @@ QPushButton:pressed {
 }</string>
                </property>
                <property name="text">
-                <string>Enter</string>
+                <string>Let's Go !</string>
                </property>
               </widget>
              </item>

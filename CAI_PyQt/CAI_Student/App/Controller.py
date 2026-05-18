@@ -1,7 +1,8 @@
 import os, sys
-from PySide6.QtCore import QSettings, QPoint, QEasingCurve, QPropertyAnimation, QParallelAnimationGroup, Qt
-from PySide6.QtWidgets import QMainWindow, QButtonGroup, QLineEdit
+from PySide6.QtCore import QSettings, QPoint, QEasingCurve, QPropertyAnimation, QParallelAnimationGroup, Qt, QUrl, QEvent, QObject
+from PySide6.QtWidgets import QMainWindow, QButtonGroup
 from PySide6.QtGui import QFontDatabase, QImage, QPixmap
+from PySide6.QtMultimedia import QSoundEffect, QMediaPlayer, QAudioOutput
 
 from App.Login import Login
 from App.FormHome import Ui_FormHome
@@ -10,12 +11,16 @@ from App.Tools import Utility, WindowHandler, CustomShapeDialog
 from App.Lessons import Lessons, LessonCard
 
 
-class Controller:
+class Controller(QObject): # Controller inherits from QObject to handle events.
+
     RESIZE_MARGIN = 8  # The clickable area around the edges (in pixels)
     
     def __init__(self):
+        super().__init__() # Initialize QObject
+
         self.settings = QSettings("CAI_System", "CAI_Student_App")
         self.script_dir = os.path.dirname(os.path.abspath(__file__))
+        self.audio_path = os.path.join(self.script_dir, "..", "Audio")
         sys.path.append(self.script_dir)
         self.util = Utility()
 
@@ -50,6 +55,53 @@ class Controller:
         self.ui = Ui_FormHome()
         self.ui.setupUi(self.home_win)
 
+        controls = [
+            self.ui.btnMinimize,
+            self.ui.btnMaximize,
+            self.ui.btnClose,
+            self.ui.btnQuit,
+            self.ui.btnLessons,
+            self.ui.btnQuiz,
+            self.ui.btnExercise,
+            self.ui.btnScores,
+            self.ui.btnGames,
+        ]
+
+        for control in controls:
+            control.setMouseTracking(True)
+            control.installEventFilter(self)
+        
+        path = os.path.join(self.audio_path, "bgMusic2.wav")
+        self.home_win.player = QMediaPlayer()
+        self.home_win.audio_output = QAudioOutput()
+        self.home_win.player.setAudioOutput(self.home_win.audio_output)
+        self.home_win.player.setSource(QUrl.fromLocalFile(path))
+        self.home_win.audio_output.setVolume(0.7)
+        self.login_win.player.stop()
+        self.home_win.player.play()
+
+        self.sounds = {}
+
+        # Initialize sound effects
+        sound_files = {
+            "back_sound": "Back.wav",
+            "exit_sound": "Exit.wav",
+            "quit_sound": "Quit.wav",
+            "quiz_sound": "TakeQuiz.wav",
+            "lesson_sound": "Lessons.wav",
+            "exer_sound": "Exercises.wav",
+            "scores_sound": "MyScores.wav",
+            "games_sound": "Games.wav",
+        }
+
+        for name, filename in sound_files.items():
+            path = os.path.normpath(os.path.join(self.audio_path, filename))
+            effect = QSoundEffect(self)
+            effect.setSource(QUrl.fromLocalFile(path))
+            effect.setVolume(0.7)
+            
+            self.sounds[name] = effect
+
         # Remove OS default window frame
         self.home_win.setWindowFlags(Qt.WindowType.FramelessWindowHint)
         self.home_win.setMouseTracking(True)
@@ -81,7 +133,6 @@ class Controller:
         self.ui.btnLessons.setChecked(True)
 
         # Optional: Set the initial active button (Home)
-        self.ui.btnLessons.setChecked(True)
         self.ui.btnLessons.clicked.connect(self.display_lessons)
         self.ui.btnQuiz.clicked.connect(self.displayQuiz)
         self.ui.btnSubmitQuiz.clicked.connect(self.save_quiz_answers)
@@ -92,6 +143,41 @@ class Controller:
 
         self.login_win.close()
         self.home_win.show()
+
+    def eventFilter(self, watched_obj, event):
+
+        if event.type() == QEvent.Type.Enter:
+
+            if watched_obj == self.ui.btnClose:
+                self.sounds["exit_sound"].stop() 
+                self.sounds["exit_sound"].play()
+
+            elif watched_obj == self.ui.btnQuit:
+                self.sounds["quit_sound"].stop() 
+                self.sounds["quit_sound"].play()
+
+            elif watched_obj == self.ui.btnLessons:
+                self.sounds["lesson_sound"].stop() 
+                self.sounds["lesson_sound"].play()
+
+            elif watched_obj == self.ui.btnQuiz:
+                self.sounds["quiz_sound"].stop() 
+                self.sounds["quiz_sound"].play()
+
+            elif watched_obj == self.ui.btnExercise:
+                self.sounds["exer_sound"].stop() 
+                self.sounds["exer_sound"].play()
+
+            elif watched_obj == self.ui.btnScores:
+                self.sounds["scores_sound"].stop() 
+                self.sounds["scores_sound"].play()
+
+            elif watched_obj == self.ui.btnGames:
+                self.sounds["games_sound"].stop() 
+                self.sounds["games_sound"].play()
+        
+        # Always pass the event to the parent class handler so UI functions normally
+        return super().eventFilter(watched_obj, event)
 
     def toggle_maximize(self):
         if self.home_win.isMaximized():
@@ -148,8 +234,10 @@ class Controller:
 
     def logout(self):
         self.settings.clear()
+        self.home_win.player.stop()
         self.home_win.close()
         self.login_win.show()
+        self.login_win.player.play()
         self.login_win.txtPassword.clear()
 
     def load_fonts(self):

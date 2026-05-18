@@ -206,7 +206,7 @@ class Card(QFrame):
                 border: 1px solid #ddd;
             }
             Card:hover {
-                border: 1px solid #3498db;
+                border: 2px solid #3498db;
                 background-color: #f7fbfe;
             }
             /* This style applies when the custom property is true */
@@ -341,7 +341,7 @@ class WindowHandler(QObject):
 
 class CustomShapeDialog(QDialog, Ui_CustomDialog):
 
-    def __init__(self, message, parent=None):
+    def __init__(self, message, parent=None, type=1):
         super().__init__(parent)
         self.setupUi(self)
 
@@ -354,7 +354,15 @@ class CustomShapeDialog(QDialog, Ui_CustomDialog):
         self.handler = WindowHandler(self)
 
         script_dir = os.path.dirname(os.path.abspath(__file__))
-        file_path = os.path.join(script_dir, "..", "Images", "happy.gif")
+        img_path = os.path.join(script_dir, "..", "Images")
+        file_path = os.path.join(img_path, "happy.gif") # Default
+
+        if type == 2:
+            file_path = os.path.join(img_path, "tonton-sad.gif")
+
+        if type == 3:
+            file_path = os.path.join(img_path, "tonton-warning.gif")
+
         movie = QMovie(file_path)
 
         # 3. Content
@@ -362,3 +370,4 @@ class CustomShapeDialog(QDialog, Ui_CustomDialog):
         movie.start()
         self.label_message.setText(str(message))
         self.btnClose.clicked.connect(self.accept)
+

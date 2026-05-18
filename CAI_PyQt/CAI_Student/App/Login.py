@@ -1,7 +1,9 @@
 from PySide6.QtWidgets import QWidget, QListWidgetItem, QLineEdit
-from PySide6.QtCore import Qt, Signal, QPropertyAnimation, QParallelAnimationGroup, QEasingCurve, QPoint
+from PySide6.QtCore import Qt, Signal, QPropertyAnimation, QParallelAnimationGroup, QEasingCurve, QPoint, QUrl, QEvent
 from PySide6.QtGui import QImage, QPixmap
+from PySide6.QtMultimedia import QSoundEffect, QMediaPlayer, QAudioOutput
 
+import os
 from passlib.hash import bcrypt
 from App.Tools import Utility, Card, CustomShapeDialog
 
@@ -20,6 +22,47 @@ class Login(QWidget, Ui_FormLogin):
         # Remove OS default window frame
         self.setWindowFlags(Qt.WindowType.FramelessWindowHint)
         self.setMouseTracking(True)
+
+        controls = [
+            self.txtPassword,
+            self.btnLogin,
+            self.btnMinimize,
+            self.btnMaximize,
+            self.btnClose,
+            self.btnBack,
+        ]
+
+        for control in controls:
+            control.setMouseTracking(True)
+            control.installEventFilter(self)
+
+        self.script_dir = os.path.dirname(os.path.abspath(__file__))
+        self.audio_path = os.path.join(self.script_dir, "..", "Audio")
+        
+        self.player = QMediaPlayer()
+        self.audio_output = QAudioOutput()
+        self.player.setAudioOutput(self.audio_output)
+        self.player.setSource(QUrl.fromLocalFile(os.path.join(self.audio_path, "bgMusic.wav")))
+        self.audio_output.setVolume(0.7)
+        self.player.play()
+        self.sounds = {}
+
+        # Initialize sound effects
+        sound_files = {
+            "password_sound": "Enter Password.wav",
+            "back_sound": "Back.wav",
+            "exit_sound": "Exit.wav",
+            "login_sound": "LetsGo.wav",
+        }
+
+        for name, filename in sound_files.items():
+            path = os.path.normpath(os.path.join(self.audio_path, filename))
+            
+            effect = QSoundEffect(self)
+            effect.setSource(QUrl.fromLocalFile(path))
+            effect.setVolume(0.7)
+            
+            self.sounds[name] = effect
 
         self.btnClose.clicked.connect(self.close)
         self.btnMinimize.clicked.connect(self.showMinimized)
@@ -54,6 +97,45 @@ class Login(QWidget, Ui_FormLogin):
 
             first_item = self.list_sections.item(0)
             self.display_student_cards(first_item)
+
+    def eventFilter(self, watched_obj, event):
+
+        if event.type() == QEvent.Type.FocusIn:
+
+            if watched_obj == self.txtPassword:
+                self.widget_password.setProperty("focused", True)
+                self.widget_password.style().unpolish(self.widget_password)
+                self.widget_password.style().polish(self.widget_password)
+                self.widget_password.update()
+        
+        elif event.type() == QEvent.Type.FocusOut:
+            
+            if watched_obj == self.txtPassword:
+                self.widget_password.setProperty("focused", False)
+                self.widget_password.style().unpolish(self.widget_password)
+                self.widget_password.style().polish(self.widget_password)
+                self.widget_password.update()
+
+        if event.type() == QEvent.Type.Enter:
+
+            if watched_obj == self.txtPassword:
+                self.sounds["password_sound"].stop() # Reset if hovered rapidly
+                self.sounds["password_sound"].play()
+
+            elif watched_obj == self.btnLogin:
+                self.sounds["login_sound"].stop() # Reset if hovered rapidly
+                self.sounds["login_sound"].play()
+
+            elif watched_obj == self.btnClose:
+                self.sounds["exit_sound"].stop() # Reset if hovered rapidly
+                self.sounds["exit_sound"].play()
+
+            elif watched_obj == self.btnBack:
+                self.sounds["back_sound"].stop() # Reset if hovered rapidly
+                self.sounds["back_sound"].play()
+
+        # Always pass unhandled events down to the parent class hierarchy
+        return super().eventFilter(watched_obj, event)
 
     def toggle_maximize(self):
         if self.isMaximized():
@@ -110,14 +192,15 @@ class Login(QWidget, Ui_FormLogin):
         user = self.authenticate_user(studentid, password)
 
         if user:
+            self.player.stop()
             self.login_success.emit(user)
 
         elif not password:
-            dialog = CustomShapeDialog("Please type your password.", parent=self)
+            dialog = CustomShapeDialog("Please type your password.", parent=self, type=3)
             dialog.exec()
 
         else:
-            dialog = CustomShapeDialog("Oops! Wrong password.", parent=self)
+            dialog = CustomShapeDialog("Oops! Wrong password.", parent=self, type=2)
             dialog.exec()
 
     def authenticate_user(self, studentid, password):
@@ -318,3 +401,5 @@ class Login(QWidget, Ui_FormLogin):
                 }
             """
             self.btnShowPassword.setStyleSheet(css)
+
+            
