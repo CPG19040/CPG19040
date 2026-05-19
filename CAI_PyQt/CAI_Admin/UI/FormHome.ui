@@ -155,15 +155,14 @@ QComboBox[class=&quot;combobox-main&quot;] QAbstractItemView::item:hover {
 }
 
 QSpinBox {
+	font: 10pt &quot;Inter&quot;;
     height: 30px;
     border: 1px solid #999;
     border-radius: 15px;
     padding: 0px 5px 0px;
     background-color: #ffffff;
     color: #333333;
-    font-size: 12px;
     selection-background-color: #7eb4d7;
-	font: 10pt &quot;Inter&quot;;
 }
 
 QSpinBox:focus {
@@ -3741,8 +3740,8 @@ QPushButton:hover {
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>594</width>
-                <height>634</height>
+                <width>466</width>
+                <height>18</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_9"/>
@@ -4058,14 +4057,14 @@ QScrollBar::add-line, QScrollBar::sub-line {
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_lessonTotalCount">
-          <property name="text">
-           <string>40 items</string>
-          </property>
-         </widget>
-        </item>
-        <item>
          <layout class="QHBoxLayout" name="horizontalLayout_5">
+          <item>
+           <widget class="QLabel" name="label_lessonTotalCount">
+            <property name="text">
+             <string>0 items</string>
+            </property>
+           </widget>
+          </item>
           <item>
            <spacer name="horizontalSpacer_2">
             <property name="orientation">
@@ -4780,8 +4779,8 @@ QPushButton:hover {
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>311</width>
-               <height>532</height>
+               <width>18</width>
+               <height>18</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_12"/>
@@ -4808,8 +4807,8 @@ QPushButton:hover {
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>311</width>
-               <height>532</height>
+               <width>18</width>
+               <height>18</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_13"/>
@@ -4873,8 +4872,8 @@ QPushButton:hover {
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>311</width>
-               <height>532</height>
+               <width>18</width>
+               <height>18</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_11"/>
@@ -6708,28 +6707,15 @@ font: 12pt &quot;Inter&quot;;</string>
                </item>
                <item>
                 <widget class="QWidget" name="widget_SY_body" native="true">
-                 <layout class="QFormLayout" name="formLayout">
-                  <property name="leftMargin">
-                   <number>15</number>
+                 <layout class="QGridLayout" name="gridLayout_3">
+                  <property name="horizontalSpacing">
+                   <number>20</number>
                   </property>
-                  <property name="topMargin">
-                   <number>15</number>
+                  <property name="verticalSpacing">
+                   <number>10</number>
                   </property>
-                  <property name="rightMargin">
-                   <number>15</number>
-                  </property>
-                  <property name="bottomMargin">
-                   <number>15</number>
-                  </property>
-                  <item row="0" column="0">
-                   <widget class="QLabel" name="label_30">
-                    <property name="text">
-                     <string>First:</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="0" column="1">
-                   <widget class="QDateEdit" name="dateEdit_firstgrading_start">
+                  <item row="4" column="1">
+                   <widget class="QDateEdit" name="dateEdit_fourthgrading_start">
                     <property name="minimumSize">
                      <size>
                       <width>0</width>
@@ -6747,15 +6733,8 @@ font: 12pt &quot;Inter&quot;;</string>
                     </property>
                    </widget>
                   </item>
-                  <item row="1" column="0">
-                   <widget class="QLabel" name="label_31">
-                    <property name="text">
-                     <string>Second:</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="1" column="1">
-                   <widget class="QDateEdit" name="dateEdit_secondgrading_start">
+                  <item row="1" column="2">
+                   <widget class="QDateEdit" name="dateEdit_firstgrading_end">
                     <property name="minimumSize">
                      <size>
                       <width>0</width>
@@ -6774,14 +6753,27 @@ font: 12pt &quot;Inter&quot;;</string>
                    </widget>
                   </item>
                   <item row="2" column="0">
-                   <widget class="QLabel" name="label_39">
+                   <widget class="QLabel" name="label_31">
+                    <property name="maximumSize">
+                     <size>
+                      <width>100</width>
+                      <height>16777215</height>
+                     </size>
+                    </property>
                     <property name="text">
-                     <string>Third:</string>
+                     <string>Second:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="2">
+                   <widget class="QLabel" name="label_44">
+                    <property name="text">
+                     <string>End</string>
                     </property>
                    </widget>
                   </item>
                   <item row="2" column="1">
-                   <widget class="QDateEdit" name="dateEdit_thirdgrading_start">
+                   <widget class="QDateEdit" name="dateEdit_secondgrading_start">
                     <property name="minimumSize">
                      <size>
                       <width>0</width>
@@ -6800,14 +6792,20 @@ font: 12pt &quot;Inter&quot;;</string>
                    </widget>
                   </item>
                   <item row="3" column="0">
-                   <widget class="QLabel" name="label_40">
+                   <widget class="QLabel" name="label_39">
+                    <property name="maximumSize">
+                     <size>
+                      <width>100</width>
+                      <height>16777215</height>
+                     </size>
+                    </property>
                     <property name="text">
-                     <string>Fourth:</string>
+                     <string>Third:</string>
                     </property>
                    </widget>
                   </item>
-                  <item row="3" column="1">
-                   <widget class="QDateEdit" name="dateEdit_fourthgrading_start">
+                  <item row="3" column="2">
+                   <widget class="QDateEdit" name="dateEdit_thirdgrading_end">
                     <property name="minimumSize">
                      <size>
                       <width>0</width>
@@ -6824,6 +6822,128 @@ font: 12pt &quot;Inter&quot;;</string>
                      <string>yyyy/MM/dd</string>
                     </property>
                    </widget>
+                  </item>
+                  <item row="3" column="1">
+                   <widget class="QDateEdit" name="dateEdit_thirdgrading_start">
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>30</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>16777215</width>
+                      <height>30</height>
+                     </size>
+                    </property>
+                    <property name="displayFormat">
+                     <string>yyyy/MM/dd</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="2">
+                   <widget class="QDateEdit" name="dateEdit_secondgrading_end">
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>30</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>16777215</width>
+                      <height>30</height>
+                     </size>
+                    </property>
+                    <property name="displayFormat">
+                     <string>yyyy/MM/dd</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="4" column="2">
+                   <widget class="QDateEdit" name="dateEdit_fourthgrading_end">
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>30</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>16777215</width>
+                      <height>30</height>
+                     </size>
+                    </property>
+                    <property name="displayFormat">
+                     <string>yyyy/MM/dd</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="QDateEdit" name="dateEdit_firstgrading_start">
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>30</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>16777215</width>
+                      <height>30</height>
+                     </size>
+                    </property>
+                    <property name="displayFormat">
+                     <string>yyyy/MM/dd</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="4" column="0">
+                   <widget class="QLabel" name="label_40">
+                    <property name="maximumSize">
+                     <size>
+                      <width>100</width>
+                      <height>16777215</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>Fourth:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QLabel" name="label_42">
+                    <property name="text">
+                     <string>Start</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QLabel" name="label_30">
+                    <property name="maximumSize">
+                     <size>
+                      <width>100</width>
+                      <height>16777215</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>First:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="5" column="0">
+                   <spacer name="verticalSpacer_4">
+                    <property name="orientation">
+                     <enum>Qt::Vertical</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>20</width>
+                      <height>40</height>
+                     </size>
+                    </property>
+                   </spacer>
                   </item>
                  </layout>
                 </widget>

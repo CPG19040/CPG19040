@@ -4,7 +4,8 @@ CREATE TABLE cai.tbl_grading_period
 (
     gpid       INTEGER NOT NULL PRIMARY KEY,
     gpname     VARCHAR(50) NOT NULL,
-    startdate  DATE
+    startdate  DATE,
+    enddate    DATE
 );
 
 INSERT INTO cai.tbl_grading_period (GPID, GPNAME) VALUES 

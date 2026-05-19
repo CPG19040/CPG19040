@@ -494,13 +494,10 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
         self.count_id = self.count_mc = self.count_tf = 0
         self.easy_count = self.average_count = self.hard_count = 0
 
-        sql =  "SELECT 1 AS index, 'First Grading' AS itemname\n"
-        sql += "UNION ALL\n"
-        sql += "SELECT 2, 'Second Grading'\n"
-        sql += "UNION ALL\n"
-        sql += "SELECT 3, 'Third Grading'\n"
-        sql += "UNION ALL\n"
-        sql += "SELECT 4, 'Fourth Grading'\n"
+        sql =  """
+            SELECT gpid, gpname
+	        FROM cai.tbl_grading_period;
+        """
         self.util.populate_pulldown(self.cbGradingPeriod, sql)
 
         self.btn_save.clicked.connect(self.save_to_db)

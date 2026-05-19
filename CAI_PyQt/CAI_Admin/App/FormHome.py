@@ -164,15 +164,14 @@ class Ui_Home(object):
 "}\n"
 "\n"
 "QSpinBox {\n"
+"	font: 10pt \"Inter\";\n"
 "    height: 30px;\n"
 "    border: 1px solid #999;\n"
 "    border-radius: 15px;\n"
 "    padding: 0px 5px 0px;\n"
 "    background-color: #ffffff;\n"
 "    color: #333333;\n"
-"    font-size: 12px;\n"
 "    selection-background-color: #7eb4d7;\n"
-"	font: 10pt \"Inter\";\n"
 "}\n"
 "\n"
 "QSpinBox:focus {\n"
@@ -198,8 +197,8 @@ class Ui_Home(object):
 "    subcontrol-position: bottom right;\n"
 "    width: 8px;\n"
 "    height: 8px;\n"
-"    bo"
-                        "rder-bottom-right-radius: 15px;\n"
+"    border-bottom-right-radius:"
+                        " 15px;\n"
 "    padding: 6px 10px 6px 2px;\n"
 "	color: rgb(119, 118, 123);\n"
 "}\n"
@@ -243,10 +242,10 @@ class Ui_Home(object):
 "    background: #7a7a7a;\n"
 "    min-height: 20px;\n"
 "    border-radius: 5px;\n"
-""
-                        "}\n"
+"}\n"
 "\n"
-"QScrollBar::handle:vertical:hover {\n"
+"QScrollBar:"
+                        ":handle:vertical:hover {\n"
 "    background: #574939;\n"
 "}\n"
 "\n"
@@ -281,10 +280,10 @@ class Ui_Home(object):
 "\n"
 "QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical,\n"
 "QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {\n"
-"    backgr"
-                        "ound: none;\n"
+"    background: none;\n"
 "}\n"
-"\n"
+""
+                        "\n"
 "/* 6. THE CORNER WIDGET \n"
 "   (The small square where both bars meet) */\n"
 "QScrollArea QWidget #qt_scrollarea_corner {\n"
@@ -1830,7 +1829,7 @@ class Ui_Home(object):
         self.scrollArea.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
         self.container = QWidget()
         self.container.setObjectName(u"container")
-        self.container.setGeometry(QRect(0, 0, 594, 634))
+        self.container.setGeometry(QRect(0, 0, 466, 18))
         self.verticalLayout_9 = QVBoxLayout(self.container)
         self.verticalLayout_9.setObjectName(u"verticalLayout_9")
         self.scrollArea.setWidget(self.container)
@@ -1994,13 +1993,13 @@ class Ui_Home(object):
 
         self.verticalLayout.addWidget(self.table_lesson)
 
+        self.horizontalLayout_5 = QHBoxLayout()
+        self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
         self.label_lessonTotalCount = QLabel(self.pageLesson)
         self.label_lessonTotalCount.setObjectName(u"label_lessonTotalCount")
 
-        self.verticalLayout.addWidget(self.label_lessonTotalCount)
+        self.horizontalLayout_5.addWidget(self.label_lessonTotalCount)
 
-        self.horizontalLayout_5 = QHBoxLayout()
-        self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
         self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_5.addItem(self.horizontalSpacer_2)
@@ -2342,7 +2341,7 @@ class Ui_Home(object):
         self.scrollArea_mc.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 311, 532))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 18, 18))
         self.verticalLayout_12 = QVBoxLayout(self.scrollAreaWidgetContents_3)
         self.verticalLayout_12.setObjectName(u"verticalLayout_12")
         self.scrollArea_mc.setWidget(self.scrollAreaWidgetContents_3)
@@ -2362,7 +2361,7 @@ class Ui_Home(object):
         self.scrollArea_tf.setWidgetResizable(True)
         self.scrollAreaWidgetContents_4 = QWidget()
         self.scrollAreaWidgetContents_4.setObjectName(u"scrollAreaWidgetContents_4")
-        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 311, 532))
+        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 18, 18))
         self.verticalLayout_13 = QVBoxLayout(self.scrollAreaWidgetContents_4)
         self.verticalLayout_13.setObjectName(u"verticalLayout_13")
         self.scrollArea_tf.setWidget(self.scrollAreaWidgetContents_4)
@@ -2391,7 +2390,7 @@ class Ui_Home(object):
         self.scrollArea_id.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 311, 532))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 18, 18))
         self.verticalLayout_11 = QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_11.setObjectName(u"verticalLayout_11")
         self.scrollArea_id.setWidget(self.scrollAreaWidgetContents_2)
@@ -3317,56 +3316,103 @@ class Ui_Home(object):
 
         self.widget_SY_body = QWidget(self.widget_SY_settings)
         self.widget_SY_body.setObjectName(u"widget_SY_body")
-        self.formLayout = QFormLayout(self.widget_SY_body)
-        self.formLayout.setObjectName(u"formLayout")
-        self.formLayout.setContentsMargins(15, 15, 15, 15)
-        self.label_30 = QLabel(self.widget_SY_body)
-        self.label_30.setObjectName(u"label_30")
+        self.gridLayout_3 = QGridLayout(self.widget_SY_body)
+        self.gridLayout_3.setObjectName(u"gridLayout_3")
+        self.gridLayout_3.setHorizontalSpacing(20)
+        self.gridLayout_3.setVerticalSpacing(10)
+        self.dateEdit_fourthgrading_start = QDateEdit(self.widget_SY_body)
+        self.dateEdit_fourthgrading_start.setObjectName(u"dateEdit_fourthgrading_start")
+        self.dateEdit_fourthgrading_start.setMinimumSize(QSize(0, 30))
+        self.dateEdit_fourthgrading_start.setMaximumSize(QSize(16777215, 30))
 
-        self.formLayout.setWidget(0, QFormLayout.ItemRole.LabelRole, self.label_30)
+        self.gridLayout_3.addWidget(self.dateEdit_fourthgrading_start, 4, 1, 1, 1)
 
-        self.dateEdit_firstgrading_start = QDateEdit(self.widget_SY_body)
-        self.dateEdit_firstgrading_start.setObjectName(u"dateEdit_firstgrading_start")
-        self.dateEdit_firstgrading_start.setMinimumSize(QSize(0, 30))
-        self.dateEdit_firstgrading_start.setMaximumSize(QSize(16777215, 30))
+        self.dateEdit_firstgrading_end = QDateEdit(self.widget_SY_body)
+        self.dateEdit_firstgrading_end.setObjectName(u"dateEdit_firstgrading_end")
+        self.dateEdit_firstgrading_end.setMinimumSize(QSize(0, 30))
+        self.dateEdit_firstgrading_end.setMaximumSize(QSize(16777215, 30))
 
-        self.formLayout.setWidget(0, QFormLayout.ItemRole.FieldRole, self.dateEdit_firstgrading_start)
+        self.gridLayout_3.addWidget(self.dateEdit_firstgrading_end, 1, 2, 1, 1)
 
         self.label_31 = QLabel(self.widget_SY_body)
         self.label_31.setObjectName(u"label_31")
+        self.label_31.setMaximumSize(QSize(100, 16777215))
 
-        self.formLayout.setWidget(1, QFormLayout.ItemRole.LabelRole, self.label_31)
+        self.gridLayout_3.addWidget(self.label_31, 2, 0, 1, 1)
+
+        self.label_44 = QLabel(self.widget_SY_body)
+        self.label_44.setObjectName(u"label_44")
+
+        self.gridLayout_3.addWidget(self.label_44, 0, 2, 1, 1)
 
         self.dateEdit_secondgrading_start = QDateEdit(self.widget_SY_body)
         self.dateEdit_secondgrading_start.setObjectName(u"dateEdit_secondgrading_start")
         self.dateEdit_secondgrading_start.setMinimumSize(QSize(0, 30))
         self.dateEdit_secondgrading_start.setMaximumSize(QSize(16777215, 30))
 
-        self.formLayout.setWidget(1, QFormLayout.ItemRole.FieldRole, self.dateEdit_secondgrading_start)
+        self.gridLayout_3.addWidget(self.dateEdit_secondgrading_start, 2, 1, 1, 1)
 
         self.label_39 = QLabel(self.widget_SY_body)
         self.label_39.setObjectName(u"label_39")
+        self.label_39.setMaximumSize(QSize(100, 16777215))
 
-        self.formLayout.setWidget(2, QFormLayout.ItemRole.LabelRole, self.label_39)
+        self.gridLayout_3.addWidget(self.label_39, 3, 0, 1, 1)
+
+        self.dateEdit_thirdgrading_end = QDateEdit(self.widget_SY_body)
+        self.dateEdit_thirdgrading_end.setObjectName(u"dateEdit_thirdgrading_end")
+        self.dateEdit_thirdgrading_end.setMinimumSize(QSize(0, 30))
+        self.dateEdit_thirdgrading_end.setMaximumSize(QSize(16777215, 30))
+
+        self.gridLayout_3.addWidget(self.dateEdit_thirdgrading_end, 3, 2, 1, 1)
 
         self.dateEdit_thirdgrading_start = QDateEdit(self.widget_SY_body)
         self.dateEdit_thirdgrading_start.setObjectName(u"dateEdit_thirdgrading_start")
         self.dateEdit_thirdgrading_start.setMinimumSize(QSize(0, 30))
         self.dateEdit_thirdgrading_start.setMaximumSize(QSize(16777215, 30))
 
-        self.formLayout.setWidget(2, QFormLayout.ItemRole.FieldRole, self.dateEdit_thirdgrading_start)
+        self.gridLayout_3.addWidget(self.dateEdit_thirdgrading_start, 3, 1, 1, 1)
+
+        self.dateEdit_secondgrading_end = QDateEdit(self.widget_SY_body)
+        self.dateEdit_secondgrading_end.setObjectName(u"dateEdit_secondgrading_end")
+        self.dateEdit_secondgrading_end.setMinimumSize(QSize(0, 30))
+        self.dateEdit_secondgrading_end.setMaximumSize(QSize(16777215, 30))
+
+        self.gridLayout_3.addWidget(self.dateEdit_secondgrading_end, 2, 2, 1, 1)
+
+        self.dateEdit_fourthgrading_end = QDateEdit(self.widget_SY_body)
+        self.dateEdit_fourthgrading_end.setObjectName(u"dateEdit_fourthgrading_end")
+        self.dateEdit_fourthgrading_end.setMinimumSize(QSize(0, 30))
+        self.dateEdit_fourthgrading_end.setMaximumSize(QSize(16777215, 30))
+
+        self.gridLayout_3.addWidget(self.dateEdit_fourthgrading_end, 4, 2, 1, 1)
+
+        self.dateEdit_firstgrading_start = QDateEdit(self.widget_SY_body)
+        self.dateEdit_firstgrading_start.setObjectName(u"dateEdit_firstgrading_start")
+        self.dateEdit_firstgrading_start.setMinimumSize(QSize(0, 30))
+        self.dateEdit_firstgrading_start.setMaximumSize(QSize(16777215, 30))
+
+        self.gridLayout_3.addWidget(self.dateEdit_firstgrading_start, 1, 1, 1, 1)
 
         self.label_40 = QLabel(self.widget_SY_body)
         self.label_40.setObjectName(u"label_40")
+        self.label_40.setMaximumSize(QSize(100, 16777215))
 
-        self.formLayout.setWidget(3, QFormLayout.ItemRole.LabelRole, self.label_40)
+        self.gridLayout_3.addWidget(self.label_40, 4, 0, 1, 1)
 
-        self.dateEdit_fourthgrading_start = QDateEdit(self.widget_SY_body)
-        self.dateEdit_fourthgrading_start.setObjectName(u"dateEdit_fourthgrading_start")
-        self.dateEdit_fourthgrading_start.setMinimumSize(QSize(0, 30))
-        self.dateEdit_fourthgrading_start.setMaximumSize(QSize(16777215, 30))
+        self.label_42 = QLabel(self.widget_SY_body)
+        self.label_42.setObjectName(u"label_42")
 
-        self.formLayout.setWidget(3, QFormLayout.ItemRole.FieldRole, self.dateEdit_fourthgrading_start)
+        self.gridLayout_3.addWidget(self.label_42, 0, 1, 1, 1)
+
+        self.label_30 = QLabel(self.widget_SY_body)
+        self.label_30.setObjectName(u"label_30")
+        self.label_30.setMaximumSize(QSize(100, 16777215))
+
+        self.gridLayout_3.addWidget(self.label_30, 1, 0, 1, 1)
+
+        self.verticalSpacer_4 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.gridLayout_3.addItem(self.verticalSpacer_4, 5, 0, 1, 1)
 
 
         self.verticalLayout_28.addWidget(self.widget_SY_body)
@@ -3546,7 +3592,7 @@ class Ui_Home(object):
 #endif // QT_CONFIG(tooltip)
         self.btnRefreshLessonTable.setText("")
         self.btnRefreshLessonTable.setProperty(u"class", QCoreApplication.translate("Home", u"button-normal", None))
-        self.label_lessonTotalCount.setText(QCoreApplication.translate("Home", u"40 items", None))
+        self.label_lessonTotalCount.setText(QCoreApplication.translate("Home", u"0 items", None))
         self.btnLessonView.setText(QCoreApplication.translate("Home", u"View", None))
         self.btnLessonView.setProperty(u"class", QCoreApplication.translate("Home", u"button-normal", None))
         self.btnLessonEdit.setText(QCoreApplication.translate("Home", u"Edit", None))
@@ -3646,14 +3692,20 @@ class Ui_Home(object):
         self.label_14.setText(QCoreApplication.translate("Home", u"-", None))
         self.btnSaveSettings_SY.setText(QCoreApplication.translate("Home", u"Save", None))
         self.btnSaveSettings_SY.setProperty(u"class", QCoreApplication.translate("Home", u"button-green", None))
-        self.label_30.setText(QCoreApplication.translate("Home", u"First:", None))
-        self.dateEdit_firstgrading_start.setDisplayFormat(QCoreApplication.translate("Home", u"yyyy/MM/dd", None))
+        self.dateEdit_fourthgrading_start.setDisplayFormat(QCoreApplication.translate("Home", u"yyyy/MM/dd", None))
+        self.dateEdit_firstgrading_end.setDisplayFormat(QCoreApplication.translate("Home", u"yyyy/MM/dd", None))
         self.label_31.setText(QCoreApplication.translate("Home", u"Second:", None))
+        self.label_44.setText(QCoreApplication.translate("Home", u"End", None))
         self.dateEdit_secondgrading_start.setDisplayFormat(QCoreApplication.translate("Home", u"yyyy/MM/dd", None))
         self.label_39.setText(QCoreApplication.translate("Home", u"Third:", None))
+        self.dateEdit_thirdgrading_end.setDisplayFormat(QCoreApplication.translate("Home", u"yyyy/MM/dd", None))
         self.dateEdit_thirdgrading_start.setDisplayFormat(QCoreApplication.translate("Home", u"yyyy/MM/dd", None))
+        self.dateEdit_secondgrading_end.setDisplayFormat(QCoreApplication.translate("Home", u"yyyy/MM/dd", None))
+        self.dateEdit_fourthgrading_end.setDisplayFormat(QCoreApplication.translate("Home", u"yyyy/MM/dd", None))
+        self.dateEdit_firstgrading_start.setDisplayFormat(QCoreApplication.translate("Home", u"yyyy/MM/dd", None))
         self.label_40.setText(QCoreApplication.translate("Home", u"Fourth:", None))
-        self.dateEdit_fourthgrading_start.setDisplayFormat(QCoreApplication.translate("Home", u"yyyy/MM/dd", None))
+        self.label_42.setText(QCoreApplication.translate("Home", u"Start", None))
+        self.label_30.setText(QCoreApplication.translate("Home", u"First:", None))
         self.tabWidget_utility.setTabText(self.tabWidget_utility.indexOf(self.tab_settings), QCoreApplication.translate("Home", u"Settings", None))
         self.tabWidget_utility.setTabText(self.tabWidget_utility.indexOf(self.tab_audit_trail), QCoreApplication.translate("Home", u"Audit Trail", None))
         self.tabWidget_utility.setTabText(self.tabWidget_utility.indexOf(self.tab_archive), QCoreApplication.translate("Home", u"Archive", None))

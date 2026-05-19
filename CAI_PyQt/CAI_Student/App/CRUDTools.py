@@ -35,6 +35,7 @@ class DatabaseTools:
 
     def execute_query(self, sql, params=None):
         """Equivalent to ExecuteNonQuery."""
+        conn = None
         try:
             conn = psycopg2.connect(**self.connection_config)
             with conn.cursor() as cur:
@@ -42,10 +43,13 @@ class DatabaseTools:
             conn.commit()
 
         except Exception as e:
+            if conn:
+                conn.rollback()
             print(f"Database Error: {e}")
 
         finally:
-            conn.close()
+            if conn:
+                conn.close()
 
     def retrieve_records(self, sql, params=None):
         """Returns a cursor for reading records (use with fetchone/fetchall)."""

@@ -10,6 +10,7 @@ from shiboken6 import isValid
 from App.FormHome import Ui_Home
 from App.Login import Login
 from App.Tools import Card, Utility
+from App.CRUDTools import DatabaseTools
 
 # Dialogs
 from App.StudentDialog import Student, AddNewStudentDialog, StudentEditorDialog
@@ -22,6 +23,7 @@ class Controller:
         self.script_dir = script_dir
         self.settings = QSettings("CAI_System", "CAI_Admin_App")
         self.util = Utility()
+        self.db_tools = DatabaseTools()
 
         self.login_win = Login()
         self.login_win.txtUsername.returnPressed.connect(self.login_win.btnLogin.click)
@@ -167,6 +169,8 @@ class Controller:
         self.ui.table_student_score_idv.clicked.connect(lambda row: self.handle_report_student_click(row))
         self.ui.cb_gp_quiz_idv.currentIndexChanged.connect(lambda: self.handle_report_student_click(self.reports_selectedRow_idv))
 
+        self.ui.btnSaveSettings_SY.clicked.connect(self.saveSchoolYear_gradingPeriod)
+
         #=============================================================
         #  Application-Level Privileges (Role-Based Access Control)
         #=============================================================
@@ -212,9 +216,6 @@ class Controller:
         self.ui.spinBox_SY2.setValue(end_year)
 
         self.ui.label_SY.setText(f"School Year {current_year}-{end_year}")
-
-        self.ui.spinBox_SY_start.setValue(current_year)
-        self.ui.spinBox_SY_end.setValue(end_year)
 
     def displayDashboard(self):
         self.ui.label_lessons_total.setText(f"{Lesson().count()}")
@@ -281,7 +282,6 @@ class Controller:
 
         elif index == 3: # Quiz
             self.util.populate_pulldowns(self.ui.cbGradingPeriod, self.ui.cbLessonName)
-
             self.display_quiz()
 
         elif index == 5:
@@ -303,12 +303,14 @@ class Controller:
                 # header.setSectionResizeMode(4, QHeaderView.ResizeMode.ResizeToContents)
                 self.ui.table_student_score_idv.setColumnHidden(5, True) # Hide 'Gender' column
 
-        elif index == 7:
+        elif index == 7: # Users
             self.displayUsers()
 
-        elif index == 8:
+        elif index == 8: # Utilities
             self.displayAuditTrail()
             self.displayArchive()
+            self.get_dynamic_school_year_dates()
+            self.display_grading_periods()
 
     def update_clock(self):
         now = QDateTime.currentDateTime()
@@ -432,7 +434,7 @@ class Controller:
 
             # Update count label
             count = len(students)
-            self.ui.label_totalStudCount.setText(f"{count} {'item' if count == 1 else 'items'}")
+            self.ui.label_totalStudCount.setText(f"{count} {'item' if count <= 1 else 'items'}")
 
             # 3. Add new cards
             for row in students:
@@ -621,14 +623,15 @@ class Controller:
         if model:
             self.ui.table_lesson.setModel(model)
             self.ui.table_lesson.setColumnHidden(0, True)
-
             header = self.ui.table_lesson.horizontalHeader()
-
             header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
             header.setSectionResizeMode(1, QHeaderView.ResizeMode.ResizeToContents)
             header.setSectionResizeMode(2, QHeaderView.ResizeMode.ResizeToContents)
             self.ui.table_lesson.verticalHeader().setVisible(False)
             self.ui.table_lesson.sortByColumn(-1, Qt.AscendingOrder)
+
+            suffix = "item" if model.rowCount() <= 1 else "items"
+            self.ui.label_lessonTotalCount.setText(f"{model.rowCount()} {suffix}")
 
     def cbLesson_selection_change(self):
         self.display_quiz()
@@ -783,9 +786,6 @@ class Controller:
         if self.ui.label_totalScore.text() == "0" or not lessonId:
             return
 
-        from App.CRUDTools import DatabaseTools
-        db_tools = DatabaseTools()
-
         try:
 
             sql = """
@@ -796,7 +796,7 @@ class Controller:
                 END;
             """
 
-            db_tools.execute_query(sql, (self.ui.quiz_no.value(), self.ui.cbGradingPeriod.currentData(), lessonId, checked))
+            self.db_tools.execute_query(sql, (self.ui.quiz_no.value(), self.ui.cbGradingPeriod.currentData(), lessonId, checked))
 
             if checked:
                 QMessageBox.information(self.home_win, "Publishing", "This quiz is published. Students can see this.")
@@ -832,9 +832,6 @@ class Controller:
         self.displayUsers()
 
     def displayAuditTrail(self):
-        from App.CRUDTools import DatabaseTools
-        db_tools = DatabaseTools()
-
         sql  = 'SELECT\n'
         sql += '    user_id AS "User Id",\n'
         sql += '    username AS "User Name",\n'
@@ -842,7 +839,7 @@ class Controller:
         sql += '    action AS "Action"\n'
         sql += 'FROM cai.tbl_audit_trail\n'
         sql += 'ORDER BY date_logged DESC'
-        cursor, conn = db_tools.retrieve_records(sql)
+        cursor, conn = self.db_tools.retrieve_records(sql)
 
         if cursor:
             headers = [desc[0] for desc in cursor.description]
@@ -866,9 +863,6 @@ class Controller:
         if conn: conn.close()
 
     def displayArchive(self):
-        from App.CRUDTools import DatabaseTools
-        db_tools = DatabaseTools()
-
         sql = """
             SELECT
                 school_year AS "School Year",
@@ -885,7 +879,7 @@ class Controller:
             FROM cai.TBL_STUDENT_INFO_ARCHIVE
             ORDER BY archived_at DESC
         """
-        cursor, conn = db_tools.retrieve_records(sql)
+        cursor, conn = self.db_tools.retrieve_records(sql)
 
         if cursor:
             headers = [desc[0] for desc in cursor.description]
@@ -977,4 +971,73 @@ class Controller:
 
         self.ui.label_average_percentage.setText(f'{average_percentage:.0f}%')
 
+    def get_dynamic_school_year_dates(self):
+        today = QDate.currentDate()
+        current_year = today.year()
+        current_month = today.month()
+        
+        # If today is between Jan and May, the next school year begins in June of THIS year.
+        # If today is between June and Dec, the next school year begins in June of NEXT year.
+        if current_month < 6:
+            base_year = current_year
+        else:
+            base_year = current_year + 1
+            
+        next_year = base_year + 1
+
+        self.ui.spinBox_SY_start.setValue(base_year)
+        self.ui.spinBox_SY_end.setValue(next_year)
+        
+        # Generate the exact 4-Quarter DepEd standard milestones dynamically
+        return {
+            1: {"start": f"{base_year}-06-16", "end": f"{base_year}-08-22"},
+            2: {"start": f"{base_year}-08-26", "end": f"{base_year}-10-24"},
+            3: {"start": f"{base_year}-11-03", "end": f"{next_year}-01-23"},
+            4: {"start": f"{next_year}-01-26", "end": f"{next_year}-03-20"}
+        }
+
+    def saveSchoolYear_gradingPeriod(self):
+        schedule = self.get_dynamic_school_year_dates()
+        sql = ""
+        params = []
+        
+        for gpid, dates in schedule.items():
+            sql += """
+                UPDATE cai.tbl_grading_period 
+                SET startdate = %s, enddate = %s
+                WHERE gpid = %s;
+            """
+            params.extend([dates["start"], dates["end"], gpid])
+
+        if sql:
+            self.db_tools.execute_query(sql, tuple(params))
+
+    def display_grading_periods(self):
+        sql = """
+            SELECT gpid, gpname, startdate, enddate
+	        FROM cai.tbl_grading_period;
+        """
+
+        rows = self.db_tools.fetch_all(sql)
+
+        if rows:
+            for row in rows:
+                start = QDate.fromString(str(row['startdate']), "yyyy-MM-dd")
+                end = QDate.fromString(str(row['enddate']), "yyyy-MM-dd")
+
+                if row['gpid'] == 1:
+                    self.ui.dateEdit_firstgrading_start.setDate(start)
+                    self.ui.dateEdit_firstgrading_end.setDate(end)
+
+                elif row['gpid'] == 2:
+                    self.ui.dateEdit_secondgrading_start.setDate(start)
+                    self.ui.dateEdit_secondgrading_end.setDate(end)
+
+                elif row['gpid'] == 3:
+                    self.ui.dateEdit_thirdgrading_start.setDate(start)
+                    self.ui.dateEdit_thirdgrading_end.setDate(end)
+
+                else:
+                    self.ui.dateEdit_fourthgrading_start.setDate(start)
+                    self.ui.dateEdit_fourthgrading_end.setDate(end)
     

@@ -144,13 +144,10 @@ class LessonDialog(QDialog, Ui_LessonDialog):
 
         self.image_data = None
 
-        sql =  "SELECT 1 AS index, 'First Grading' AS itemname\n"
-        sql += "UNION ALL\n"
-        sql += "SELECT 2, 'Second Grading'\n"
-        sql += "UNION ALL\n"
-        sql += "SELECT 3, 'Third Grading'\n"
-        sql += "UNION ALL\n"
-        sql += "SELECT 4, 'Fourth Grading'\n"
+        sql =  """
+            SELECT gpid, gpname
+	        FROM cai.tbl_grading_period;
+        """
         self.util.populate_pulldown(self.cmbGradingPeriod, sql, add_empty=True)
 
         if mode == 1:
