@@ -1,4 +1,4 @@
-import datetime, re, psycopg2
+import re, psycopg2
 from passlib.hash import bcrypt
 
 from PySide6.QtWidgets import QDialog, QMessageBox
@@ -15,6 +15,25 @@ class Staff:
     def __init__(self):
         self.db_tools = DatabaseTools()
         self.util = Utility()
+
+    def count(self):
+        sql = """
+            SELECT
+                COUNT(*) 
+            FROM 
+                cai.tbl_staff_info a, cai.tbl_staff_positions b
+            WHERE
+                a.positionid = b.position_id AND
+                b.position_name = 'Teacher';
+        """
+        record = self.db_tools.fetch_all(sql)
+
+        count = 0
+
+        if record:
+            count = record[0]['count']
+
+        return count
 
     def get_userid(self, school_id):
         sql = """
@@ -252,6 +271,8 @@ class AddUserDialog(QDialog, Ui_AddNewUserDialog):
             "uname": self.lineEdit_username.text().strip(),
             "pwd": self.lineEdit_password.text(),
             "pos": self.comboBox_position.currentData(),
+            "contact_person": self.txtContactPerson.text().strip(),
+            "contact_number": self.txtContactNum.text().strip()
         }
 
         # 2. Basic Validation: Required Fields
@@ -280,19 +301,23 @@ class AddUserDialog(QDialog, Ui_AddNewUserDialog):
 
         # 6. Proceed to Registration
         try:
-            sql  = 'INSERT INTO cai.tbl_staff_info(\n'
-            sql += "    school_id\n"
-            sql += '    ,firstname\n'
-            sql += '    ,middlename\n'
-            sql += '    ,lastname\n'
-            sql += '    ,username\n'
-            sql += '    ,password\n'
-            sql += '    ,positionid\n'
-            sql += '    ,profile_pic\n'
-            sql += ')\n'
-            sql += 'VALUES ( \n'
-            sql += "    to_char(CURRENT_DATE, 'YYYY') || '-' || lpad(nextval('cai.staff_id_seq')::text, 4, '0') || '-STA',\n"
-            sql += '    %s, %s, %s, %s, %s, %s, %s);'
+            sql = """
+                INSERT INTO cai.tbl_staff_info(
+                    school_id
+                    ,firstname
+                    ,middlename
+                    ,lastname
+                    ,username
+                    ,password
+                    ,positionid
+                    ,profile_pic
+                    ,contact_person
+                    ,contact_number
+                )
+                VALUES ( 
+                    to_char(CURRENT_DATE, 'YYYY') || '-' || lpad(nextval('cai.staff_id_seq')::text, 4, '0') || '-STA',
+                    %s, %s, %s, %s, %s, %s, %s, %s, %s);
+            """
 
             self.db.execute_query(sql, (
                 data["fname"],
@@ -301,7 +326,9 @@ class AddUserDialog(QDialog, Ui_AddNewUserDialog):
                 data["uname"],
                 bcrypt.hash(data["pwd"]),
                 data["pos"],
-                psycopg2.Binary(self.binaryImage) if self.binaryImage else None
+                psycopg2.Binary(self.binaryImage) if self.binaryImage else None,
+                data["contact_person"],
+                data["contact_number"]
             ))
 
             actionStr = f"Added a staff: {data['lname']}, {data['fname']} as {self.comboBox_position.currentText()}"

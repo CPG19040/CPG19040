@@ -62,13 +62,6 @@ class Controller:
         self.ui.setupUi(self.home_win)
         # self.home_win.showMaximized()
 
-        # self.ui.cmb_studSection.setItemDelegate(QStyledItemDelegate())
-        # self.ui.cbGradingPeriod.setItemDelegate(QStyledItemDelegate())
-        # self.ui.cbLessonName.setItemDelegate(QStyledItemDelegate())
-        # self.ui.cb_gp_quiz_idv.setItemDelegate(QStyledItemDelegate())
-        # self.ui.comboBox_Section.setItemDelegate(QStyledItemDelegate())
-        # self.ui.comboBox_ReportsSection.setItemDelegate(QStyledItemDelegate())
-
         # Setup UI
         self.card_layout = self.ui.verticalLayout_9
         self.card_layout.setAlignment(Qt.AlignmentFlag.AlignTop)
@@ -89,6 +82,8 @@ class Controller:
         self.timer = QTimer()
         self.timer.timeout.connect(self.update_clock)
         self.timer.start(1000)
+
+        self.displayDashboard()
 
         self.nav_group = QButtonGroup(self.home_win)
         self.nav_group.setExclusive(True)
@@ -212,8 +207,19 @@ class Controller:
     def displaySchoolYear(self):
         current_date = QDate.currentDate()
         current_year = current_date.year()
+        end_year = current_year + 1
         self.ui.spinBox_SY1.setValue(current_year)
-        self.ui.spinBox_SY2.setValue(current_year + 1)
+        self.ui.spinBox_SY2.setValue(end_year)
+
+        self.ui.label_SY.setText(f"School Year {current_year}-{end_year}")
+
+        self.ui.spinBox_SY_start.setValue(current_year)
+        self.ui.spinBox_SY_end.setValue(end_year)
+
+    def displayDashboard(self):
+        self.ui.label_lessons_total.setText(f"{Lesson().count()}")
+        self.ui.label_student_total.setText(f"{Student().count()}")
+        self.ui.label_teachers_total.setText(f"{Staff().count()}")
 
     def handle_student_searching(self):
         searchStr = self.ui.txt_classList_search.text().strip()
@@ -261,7 +267,10 @@ class Controller:
     def handle_nav_click(self, index):
         self.slide_to_page(index)
 
-        if index == 1: # Student List
+        if index == 0:
+            self.displayDashboard()
+
+        elif index == 1: # Student List
             self.sectionObj.populate_sections(self.ui.cmb_studSection, True)
             self.display_student_cards()
             self.display_student_info()

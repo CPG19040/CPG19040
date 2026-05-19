@@ -12,6 +12,17 @@ class Lesson:
 
     def __init__(self):
         self.db_tools = DatabaseTools()
+
+    def count(self):
+        sql = "SELECT COUNT(*) FROM cai.tbl_lessons;"
+        record = self.db_tools.fetch_all(sql)
+
+        count = 0
+
+        if record:
+            count = record[0]['count']
+
+        return count
         
     def retrieve_lesson_info(self, lesson_id):
         """

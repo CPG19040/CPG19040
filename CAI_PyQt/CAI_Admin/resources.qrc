@@ -6,6 +6,7 @@
     <file>Images/caret-down.png</file>
     <file>Images/caret-up.png</file>
     <file>Images/check.png</file>
+    <file>Images/diskette.png</file>
     <file>Images/dumbell.svg</file>
     <file>Images/eye.png</file>
     <file>Images/eye-21.svg</file>
@@ -27,6 +28,8 @@
     <file>Images/search.png</file>
     <file>Images/settings-125.svg</file>
     <file>Images/stack-of-books.png</file>
+    <file>Images/student.png</file>
+    <file>Images/teacher.png</file>
     <file>Images/trash.png</file>
     <file>Images/trophy.png</file>
     <file>Images/undo.png</file>

@@ -1,4 +1,4 @@
-import datetime, os, psycopg2, csv
+import psycopg2, csv
 from passlib.hash import bcrypt
 
 from PySide6.QtGui import QStandardItemModel, QStandardItem, QImage, QPixmap
@@ -17,6 +17,17 @@ class Student:
         self.db_tools = DatabaseTools()
         self.util = Utility()
         self.circular_bar = CircularProgress()
+
+    def count(self):
+        sql = "SELECT COUNT(*) FROM cai.tbl_student_info;"
+        record = self.db_tools.fetch_all(sql)
+
+        count = 0
+
+        if record:
+            count = record[0]['count']
+
+        return count
 
     def get_student_picture(self, studentid, isCircular=False, size=80):
         sql = """
