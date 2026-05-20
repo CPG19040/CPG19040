@@ -285,7 +285,8 @@ class AddNewStudentDialog(QDialog, Ui_AddNewStudentDialog):
         self.profile_pic, self.binaryImage = self.util.browsePhoto(self, self.label_profile_pic.width(), self.label_profile_pic.height())
 
         if self.profile_pic:
-            self.label_profile_pic.setPixmap(self.profile_pic)
+            w = self.label_profile_pic.width()
+            self.label_profile_pic.setPixmap(self.util.makeCircularPixmap(self.profile_pic, w))
 
     def register(self):
         if self.rb_importCSV.isChecked():
@@ -530,14 +531,8 @@ class StudentEditorDialog(QDialog, Ui_EditStudentDialog):
                 image = QImage.fromData(bytes(self.image_data))
                 if not image.isNull():
                     pixmap = QPixmap.fromImage(image)
-                    # Scale it to fit your label while keeping aspect ratio
-                    scaled_pixmap = pixmap.scaled(
-                        self.label_profile_pic.width(),
-                        self.label_profile_pic.height(),
-                        Qt.AspectRatioMode.KeepAspectRatio,
-                        Qt.TransformationMode.SmoothTransformation
-                    )
-                    self.label_profile_pic.setPixmap(scaled_pixmap)
+                    w = self.label_profile_pic.width()
+                    self.label_profile_pic.setPixmap(self.util.makeCircularPixmap(pixmap, w))
                 else:
                     self.label_profile_pic.setText("Invalid Image")
 
@@ -678,7 +673,8 @@ class StudentEditorDialog(QDialog, Ui_EditStudentDialog):
         pixmap, binaryImage = self.util.browsePhoto(self, self.label_profile_pic.width(), self.label_profile_pic.height())
 
         if pixmap:
-            self.label_profile_pic.setPixmap(pixmap)
+            w = self.label_profile_pic.width()
+            self.label_profile_pic.setPixmap(self.util.makeCircularPixmap(pixmap, w))
 
         if binaryImage:
             self.image_data = binaryImage

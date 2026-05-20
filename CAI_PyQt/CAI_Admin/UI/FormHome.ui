@@ -3815,8 +3815,8 @@ QSpinBox::down-arrow {
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>100</width>
-                <height>30</height>
+                <width>614</width>
+                <height>634</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_9"/>
@@ -4964,8 +4964,8 @@ QPushButton:hover {
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>100</width>
-               <height>30</height>
+               <width>317</width>
+               <height>532</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_13"/>
@@ -5007,8 +5007,8 @@ QPushButton:hover {
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>100</width>
-               <height>30</height>
+               <width>317</width>
+               <height>532</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_12"/>
@@ -5028,8 +5028,8 @@ QPushButton:hover {
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>100</width>
-               <height>30</height>
+               <width>317</width>
+               <height>532</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_11"/>
@@ -5721,7 +5721,7 @@ QScrollBar::add-line, QScrollBar::sub-line {
 	background: transparent;
 }
 
-QComboBox[class=&quot;combobox-main&quot;] {
+QComboBox {
     height: 30px;
     border: 1px solid #999;
     border-radius: 15px; /* Fully rounded pills */

@@ -26,10 +26,161 @@ class Ui_AddNewStudentDialog(object):
     def setupUi(self, AddNewStudentDialog):
         if not AddNewStudentDialog.objectName():
             AddNewStudentDialog.setObjectName(u"AddNewStudentDialog")
-        AddNewStudentDialog.resize(870, 580)
+        AddNewStudentDialog.resize(870, 590)
         AddNewStudentDialog.setMinimumSize(QSize(870, 580))
-        AddNewStudentDialog.setMaximumSize(QSize(870, 580))
-        AddNewStudentDialog.setStyleSheet(u"background-color: rgb(222, 221, 218); color: rgb(0, 0, 0);")
+        AddNewStudentDialog.setStyleSheet(u"* {\n"
+"	background-color: rgb(222, 221, 218); \n"
+"	color: black;\n"
+"}\n"
+"\n"
+"*[class=\"button-normal\"] {\n"
+"	font: 10pt \"Inter\";\n"
+"	background-color: #e7e7e7;\n"
+"	color: black;\n"
+"	border-radius: 15px;\n"
+"	border: 1px solid rgb(154, 153, 150);\n"
+"}\n"
+"\n"
+"*[class=\"button-normal\"]:hover {\n"
+"	background-color: white;\n"
+"}\n"
+"\n"
+"QProgressBar {\n"
+"	border-radius: 10px;\n"
+"	background-color: white;\n"
+"}\n"
+"\n"
+"QProgressBar::chunk {\n"
+"	background-color: #007BFF;\n"
+"	border-radius: 10px;\n"
+"}\n"
+"\n"
+"QPushButton:disabled, QLineEdit:disabled, QComboBox:disabled {\n"
+"    background-color: #d5d6d7;\n"
+"    color: #7f8c8d;\n"
+"    border: 1px solid #95a5a6;\n"
+"}\n"
+"\n"
+"#widget_CSV:disabled, #widget_stud_info:disabled, QComboBox:disabled { \n"
+"	color: rgba(0, 0, 0, 50); \n"
+"	background-color: rgba(200, 200, 200, 0); \n"
+"}\n"
+"\n"
+"QLineEdit {\n"
+"	background-color: rgb(255, 255, 255); \n"
+"	border-radius: 15px;\n"
+"	border: 1px solid #999;\n"
+"	padding: 0px 15px;\n"
+"}\n"
+"\n"
+"QC"
+                        "omboBox {\n"
+"    border: 1px solid #999;\n"
+"    border-radius: 15px; /* Fully rounded pills */\n"
+"    padding: 0px 15px 0px;\n"
+"    background-color: #ffffff;\n"
+"    color: #333333;\n"
+"    font: 10pt \"Inter Medium\"; /* Consolidated font settings */\n"
+"    selection-background-color: #7eb4d7;\n"
+"}\n"
+"\n"
+"QComboBox:focus, QLineEdit:focus {\n"
+"    border: 1px solid #007BFF;\n"
+"}\n"
+"\n"
+"QComboBox:hover, QLineEdit:hover {\n"
+"    border: 1px solid #3498db;\n"
+"}\n"
+"\n"
+"QComboBox::drop-down {\n"
+"    subcontrol-origin: padding;\n"
+"    subcontrol-position: top right;\n"
+"    width: 30px;\n"
+"    border-left-width: 0px;\n"
+"    /* Match the 15px border-radius of the main control */\n"
+"    border-top-right-radius: 15px;\n"
+"    border-bottom-right-radius: 15px;\n"
+"}\n"
+"\n"
+"QComboBox::down-arrow {\n"
+"    image: url(:/Images/Images/caret-down.png);\n"
+"    border: none;\n"
+"    width: 8px;\n"
+"    height: 8px;\n"
+"}\n"
+"\n"
+"QComboBox QAbstractItemView {\n"
+"    background-color: white !important;"
+                        "\n"
+"    border: 1px solid #999;\n"
+"    selection-background-color: #7eb4d7;\n"
+"    selection-color: #ffffff;\n"
+"    outline: 0; /* Removes the ugly dotted focus border */\n"
+"}\n"
+"\n"
+"QComboBox QAbstractItemView::item {\n"
+"    padding: 0px 15px;\n"
+"    border-radius: 4px;\n"
+"    color: #333333;\n"
+"}\n"
+"\n"
+"/* Hover state for items inside the dropdown */\n"
+"QComboBox QAbstractItemView::item:hover {\n"
+"    background-color: #7eb4d7;\n"
+"    color: #ffffff;\n"
+"}\n"
+"\n"
+"QSpinBox {\n"
+"	font: 10pt \"Inter Medium\";\n"
+"    height: 30px;\n"
+"    border: 1px solid #999;\n"
+"    border-radius: 15px;\n"
+"    padding: 0px 5px 0px;\n"
+"    background-color: #ffffff;\n"
+"    color: #333333;\n"
+"    selection-background-color: #7eb4d7;\n"
+"}\n"
+"\n"
+"QSpinBox:focus {\n"
+"    border: 1px solid #007BFF;\n"
+"}\n"
+"\n"
+"QSpinBox:hover {\n"
+"    border: 1px solid #3498db;\n"
+"}\n"
+"\n"
+"QSpinBox::up-button {\n"
+"    subcontrol-origin: border;\n"
+"    subcontrol-position: top right;\n"
+"    width: 8px;\n"
+"    h"
+                        "eight: 8px;\n"
+"    border-top-right-radius: 15px;\n"
+"    padding: 6px 10px 6px 2px;\n"
+"	color: rgb(119, 118, 123);\n"
+"}\n"
+"\n"
+"QSpinBox::down-button {\n"
+"    subcontrol-origin: border;\n"
+"    subcontrol-position: bottom right;\n"
+"    width: 8px;\n"
+"    height: 8px;\n"
+"    border-bottom-right-radius: 15px;\n"
+"    padding: 6px 10px 6px 2px;\n"
+"	color: rgb(119, 118, 123);\n"
+"}\n"
+"\n"
+"QSpinBox::up-arrow {\n"
+"    image: url(:/Images/Images/caret-up.png);\n"
+"    width: 8px;\n"
+"    height: 8px;\n"
+"}\n"
+"\n"
+"QSpinBox::down-arrow {\n"
+"    image: url(:/Images/Images/caret-down.png);\n"
+"    width: 8px;\n"
+"    height: 8px;\n"
+"}")
         self.verticalLayout = QVBoxLayout(AddNewStudentDialog)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.widget = QWidget(AddNewStudentDialog)
@@ -43,8 +194,10 @@ class Ui_AddNewStudentDialog(object):
 
         self.spinBox_SY1 = QSpinBox(self.widget)
         self.spinBox_SY1.setObjectName(u"spinBox_SY1")
-        self.spinBox_SY1.setMinimumSize(QSize(0, 30))
-        self.spinBox_SY1.setStyleSheet(u"background-color: rgb(246, 245, 244);")
+        self.spinBox_SY1.setMinimumSize(QSize(80, 30))
+        self.spinBox_SY1.setMaximumSize(QSize(80, 30))
+        self.spinBox_SY1.setStyleSheet(u"")
+        self.spinBox_SY1.setAlignment(Qt.AlignCenter)
         self.spinBox_SY1.setMinimum(2000)
         self.spinBox_SY1.setMaximum(3000)
 
@@ -57,8 +210,10 @@ class Ui_AddNewStudentDialog(object):
 
         self.spinBox_SY2 = QSpinBox(self.widget)
         self.spinBox_SY2.setObjectName(u"spinBox_SY2")
-        self.spinBox_SY2.setMinimumSize(QSize(0, 30))
-        self.spinBox_SY2.setStyleSheet(u"background-color: rgb(246, 245, 244);")
+        self.spinBox_SY2.setMinimumSize(QSize(80, 30))
+        self.spinBox_SY2.setMaximumSize(QSize(80, 30))
+        self.spinBox_SY2.setStyleSheet(u"")
+        self.spinBox_SY2.setAlignment(Qt.AlignCenter)
         self.spinBox_SY2.setMinimum(2000)
         self.spinBox_SY2.setMaximum(3000)
 
@@ -92,7 +247,7 @@ class Ui_AddNewStudentDialog(object):
 
         self.widget_stud_info = QWidget(AddNewStudentDialog)
         self.widget_stud_info.setObjectName(u"widget_stud_info")
-        self.widget_stud_info.setStyleSheet(u"QWidget:disabled { color: rgba(0, 0, 0, 50); background-color: rgba(200, 200, 200, 0); }")
+        self.widget_stud_info.setStyleSheet(u"")
         self.horizontalLayout = QHBoxLayout(self.widget_stud_info)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.widget_3 = QWidget(self.widget_stud_info)
@@ -101,8 +256,8 @@ class Ui_AddNewStudentDialog(object):
         self.gridLayout.setObjectName(u"gridLayout")
         self.label_profile_pic = QLabel(self.widget_3)
         self.label_profile_pic.setObjectName(u"label_profile_pic")
-        self.label_profile_pic.setMinimumSize(QSize(99, 100))
-        self.label_profile_pic.setMaximumSize(QSize(100, 100))
+        self.label_profile_pic.setMinimumSize(QSize(150, 150))
+        self.label_profile_pic.setMaximumSize(QSize(150, 150))
         self.label_profile_pic.setPixmap(QPixmap(u":/Images/Images/profile_gray.png"))
         self.label_profile_pic.setScaledContents(True)
         self.label_profile_pic.setAlignment(Qt.AlignCenter)
@@ -111,6 +266,8 @@ class Ui_AddNewStudentDialog(object):
 
         self.btnUploadPhoto = QPushButton(self.widget_3)
         self.btnUploadPhoto.setObjectName(u"btnUploadPhoto")
+        self.btnUploadPhoto.setMinimumSize(QSize(100, 30))
+        self.btnUploadPhoto.setMaximumSize(QSize(16777215, 30))
         self.btnUploadPhoto.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
         self.gridLayout.addWidget(self.btnUploadPhoto, 1, 0, 1, 1)
@@ -137,7 +294,7 @@ class Ui_AddNewStudentDialog(object):
         self.txtFirstName = QLineEdit(self.widget_form)
         self.txtFirstName.setObjectName(u"txtFirstName")
         self.txtFirstName.setMinimumSize(QSize(0, 30))
-        self.txtFirstName.setStyleSheet(u"background-color: rgb(246, 245, 244);")
+        self.txtFirstName.setStyleSheet(u"")
 
         self.formLayout_2.setWidget(0, QFormLayout.ItemRole.FieldRole, self.txtFirstName)
 
@@ -149,7 +306,7 @@ class Ui_AddNewStudentDialog(object):
         self.txtMiddleName = QLineEdit(self.widget_form)
         self.txtMiddleName.setObjectName(u"txtMiddleName")
         self.txtMiddleName.setMinimumSize(QSize(0, 30))
-        self.txtMiddleName.setStyleSheet(u"background-color: rgb(246, 245, 244);")
+        self.txtMiddleName.setStyleSheet(u"")
 
         self.formLayout_2.setWidget(1, QFormLayout.ItemRole.FieldRole, self.txtMiddleName)
 
@@ -161,7 +318,7 @@ class Ui_AddNewStudentDialog(object):
         self.txtLastName = QLineEdit(self.widget_form)
         self.txtLastName.setObjectName(u"txtLastName")
         self.txtLastName.setMinimumSize(QSize(0, 30))
-        self.txtLastName.setStyleSheet(u"background-color: rgb(246, 245, 244);")
+        self.txtLastName.setStyleSheet(u"")
 
         self.formLayout_2.setWidget(2, QFormLayout.ItemRole.FieldRole, self.txtLastName)
 
@@ -173,7 +330,7 @@ class Ui_AddNewStudentDialog(object):
         self.cmbSection = QComboBox(self.widget_form)
         self.cmbSection.setObjectName(u"cmbSection")
         self.cmbSection.setMinimumSize(QSize(0, 30))
-        self.cmbSection.setStyleSheet(u"background-color: rgb(246, 245, 244);")
+        self.cmbSection.setStyleSheet(u"")
         self.cmbSection.setEditable(False)
 
         self.formLayout_2.setWidget(3, QFormLayout.ItemRole.FieldRole, self.cmbSection)
@@ -186,7 +343,8 @@ class Ui_AddNewStudentDialog(object):
         self.txtPassword = QLineEdit(self.widget_form)
         self.txtPassword.setObjectName(u"txtPassword")
         self.txtPassword.setMinimumSize(QSize(0, 30))
-        self.txtPassword.setStyleSheet(u"background-color: rgb(246, 245, 244);")
+        self.txtPassword.setStyleSheet(u"")
+        self.txtPassword.setEchoMode(QLineEdit.PasswordEchoOnEdit)
 
         self.formLayout_2.setWidget(4, QFormLayout.ItemRole.FieldRole, self.txtPassword)
 
@@ -200,7 +358,7 @@ class Ui_AddNewStudentDialog(object):
         self.cmbGender.addItem("")
         self.cmbGender.setObjectName(u"cmbGender")
         self.cmbGender.setMinimumSize(QSize(0, 30))
-        self.cmbGender.setStyleSheet(u"background-color: rgb(246, 245, 244);")
+        self.cmbGender.setStyleSheet(u"")
         self.cmbGender.setEditable(False)
 
         self.formLayout_2.setWidget(5, QFormLayout.ItemRole.FieldRole, self.cmbGender)
@@ -221,7 +379,7 @@ class Ui_AddNewStudentDialog(object):
         self.widget_form_emergency = QWidget(AddNewStudentDialog)
         self.widget_form_emergency.setObjectName(u"widget_form_emergency")
         self.widget_form_emergency.setEnabled(True)
-        self.widget_form_emergency.setStyleSheet(u"QWidget:disabled { color: rgba(0, 0, 0, 50); background-color: rgba(200, 200, 200, 0); }")
+        self.widget_form_emergency.setStyleSheet(u"")
         self.formLayout_5 = QFormLayout(self.widget_form_emergency)
         self.formLayout_5.setObjectName(u"formLayout_5")
         self.label_24 = QLabel(self.widget_form_emergency)
@@ -237,7 +395,7 @@ class Ui_AddNewStudentDialog(object):
         self.txtContactPerson = QLineEdit(self.widget_form_emergency)
         self.txtContactPerson.setObjectName(u"txtContactPerson")
         self.txtContactPerson.setMinimumSize(QSize(0, 30))
-        self.txtContactPerson.setStyleSheet(u"background-color: rgb(246, 245, 244);")
+        self.txtContactPerson.setStyleSheet(u"")
 
         self.formLayout_5.setWidget(1, QFormLayout.ItemRole.FieldRole, self.txtContactPerson)
 
@@ -249,7 +407,7 @@ class Ui_AddNewStudentDialog(object):
         self.txtContactNum = QLineEdit(self.widget_form_emergency)
         self.txtContactNum.setObjectName(u"txtContactNum")
         self.txtContactNum.setMinimumSize(QSize(0, 30))
-        self.txtContactNum.setStyleSheet(u"background-color: rgb(246, 245, 244);")
+        self.txtContactNum.setStyleSheet(u"")
 
         self.formLayout_5.setWidget(2, QFormLayout.ItemRole.FieldRole, self.txtContactNum)
 
@@ -277,7 +435,7 @@ class Ui_AddNewStudentDialog(object):
         self.widget_CSV = QWidget(AddNewStudentDialog)
         self.widget_CSV.setObjectName(u"widget_CSV")
         self.widget_CSV.setEnabled(False)
-        self.widget_CSV.setStyleSheet(u"QWidget:disabled { color: rgba(0, 0, 0, 50); background-color: rgba(200, 200, 200, 0); }")
+        self.widget_CSV.setStyleSheet(u"")
         self.horizontalLayout_3 = QHBoxLayout(self.widget_CSV)
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
         self.label_14 = QLabel(self.widget_CSV)
@@ -289,7 +447,7 @@ class Ui_AddNewStudentDialog(object):
         self.cmbSection_2 = QComboBox(self.widget_CSV)
         self.cmbSection_2.setObjectName(u"cmbSection_2")
         self.cmbSection_2.setMinimumSize(QSize(0, 30))
-        self.cmbSection_2.setStyleSheet(u"background-color: rgb(246, 245, 244);")
+        self.cmbSection_2.setStyleSheet(u"")
         self.cmbSection_2.setEditable(False)
 
         self.horizontalLayout_3.addWidget(self.cmbSection_2)
@@ -297,13 +455,14 @@ class Ui_AddNewStudentDialog(object):
         self.txtCSVPath = QLineEdit(self.widget_CSV)
         self.txtCSVPath.setObjectName(u"txtCSVPath")
         self.txtCSVPath.setMinimumSize(QSize(0, 30))
-        self.txtCSVPath.setStyleSheet(u"background-color: rgb(246, 245, 244);")
+        self.txtCSVPath.setStyleSheet(u"")
 
         self.horizontalLayout_3.addWidget(self.txtCSVPath)
 
         self.btnBrowseCSV = QPushButton(self.widget_CSV)
         self.btnBrowseCSV.setObjectName(u"btnBrowseCSV")
-        self.btnBrowseCSV.setMinimumSize(QSize(0, 30))
+        self.btnBrowseCSV.setMinimumSize(QSize(100, 30))
+        self.btnBrowseCSV.setMaximumSize(QSize(100, 30))
         self.btnBrowseCSV.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
         self.horizontalLayout_3.addWidget(self.btnBrowseCSV)
@@ -319,7 +478,10 @@ class Ui_AddNewStudentDialog(object):
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
         self.progressBar = QProgressBar(AddNewStudentDialog)
         self.progressBar.setObjectName(u"progressBar")
+        self.progressBar.setMinimumSize(QSize(0, 20))
+        self.progressBar.setMaximumSize(QSize(16777215, 20))
         self.progressBar.setValue(24)
+        self.progressBar.setAlignment(Qt.AlignCenter)
         self.progressBar.setTextVisible(True)
 
         self.horizontalLayout_2.addWidget(self.progressBar)
@@ -330,14 +492,16 @@ class Ui_AddNewStudentDialog(object):
 
         self.btnCancel = QPushButton(AddNewStudentDialog)
         self.btnCancel.setObjectName(u"btnCancel")
-        self.btnCancel.setMinimumSize(QSize(0, 30))
+        self.btnCancel.setMinimumSize(QSize(100, 30))
+        self.btnCancel.setMaximumSize(QSize(100, 30))
         self.btnCancel.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
         self.horizontalLayout_2.addWidget(self.btnCancel)
 
         self.btnSave = QPushButton(AddNewStudentDialog)
         self.btnSave.setObjectName(u"btnSave")
-        self.btnSave.setMinimumSize(QSize(0, 30))
+        self.btnSave.setMinimumSize(QSize(100, 30))
+        self.btnSave.setMaximumSize(QSize(100, 30))
         self.btnSave.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
         self.horizontalLayout_2.addWidget(self.btnSave)
@@ -360,8 +524,13 @@ class Ui_AddNewStudentDialog(object):
         self.label_15.setText(QCoreApplication.translate("AddNewStudentDialog", u"School Year:", None))
         self.label_16.setText(QCoreApplication.translate("AddNewStudentDialog", u"-", None))
         self.btnRefreshSY.setText("")
+        self.btnRefreshSY.setProperty(u"class", QCoreApplication.translate("AddNewStudentDialog", u"button-normal", None))
+#if QT_CONFIG(tooltip)
+        self.label_profile_pic.setToolTip(QCoreApplication.translate("AddNewStudentDialog", u"Aspect Ratio (1:1)", None))
+#endif // QT_CONFIG(tooltip)
         self.label_profile_pic.setText("")
         self.btnUploadPhoto.setText(QCoreApplication.translate("AddNewStudentDialog", u"Update photo", None))
+        self.btnUploadPhoto.setProperty(u"class", QCoreApplication.translate("AddNewStudentDialog", u"button-normal", None))
         self.label_8.setText(QCoreApplication.translate("AddNewStudentDialog", u"First name", None))
         self.label_9.setText(QCoreApplication.translate("AddNewStudentDialog", u"Middle name", None))
         self.label_10.setText(QCoreApplication.translate("AddNewStudentDialog", u"Last name", None))
@@ -377,7 +546,10 @@ class Ui_AddNewStudentDialog(object):
         self.rb_importCSV.setText(QCoreApplication.translate("AddNewStudentDialog", u"Import from CSV", None))
         self.label_14.setText(QCoreApplication.translate("AddNewStudentDialog", u"Section", None))
         self.btnBrowseCSV.setText(QCoreApplication.translate("AddNewStudentDialog", u"Browse", None))
+        self.btnBrowseCSV.setProperty(u"class", QCoreApplication.translate("AddNewStudentDialog", u"button-normal", None))
         self.btnCancel.setText(QCoreApplication.translate("AddNewStudentDialog", u"Cancel", None))
+        self.btnCancel.setProperty(u"class", QCoreApplication.translate("AddNewStudentDialog", u"button-normal", None))
         self.btnSave.setText(QCoreApplication.translate("AddNewStudentDialog", u"Save", None))
+        self.btnSave.setProperty(u"class", QCoreApplication.translate("AddNewStudentDialog", u"button-normal", None))
     # retranslateUi
 

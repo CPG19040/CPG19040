@@ -28,7 +28,144 @@ class Ui_EditStudentDialog(object):
         EditStudentDialog.resize(890, 577)
         EditStudentDialog.setMinimumSize(QSize(890, 577))
         EditStudentDialog.setMaximumSize(QSize(890, 577))
-        EditStudentDialog.setStyleSheet(u"background-color: rgb(222, 221, 218); color: rgb(0, 0, 0);")
+        EditStudentDialog.setStyleSheet(u"* {\n"
+"	background-color: rgb(222, 221, 218); \n"
+"	color: black;\n"
+"}\n"
+"\n"
+"*[class=\"button-normal\"] {\n"
+"	font: 10pt \"Inter\";\n"
+"	background-color: #e7e7e7;\n"
+"	color: black;\n"
+"	border-radius: 15px;\n"
+"	border: 1px solid rgb(154, 153, 150);\n"
+"}\n"
+"\n"
+"*[class=\"button-normal\"]:hover {\n"
+"	background-color: white;\n"
+"}\n"
+"\n"
+"*[class=\"button-normal\"]:disabled {\n"
+"    background-color: #bdc3c7;\n"
+"    color: #7f8c8d;\n"
+"    border: 1px solid #95a5a6;\n"
+"}\n"
+"\n"
+"QLineEdit {\n"
+"	background-color: rgb(255, 255, 255); \n"
+"	border-radius: 15px;\n"
+"	border: 1px solid #999;\n"
+"	padding: 0px 15px;\n"
+"}\n"
+"\n"
+"QComboBox {\n"
+"    border: 1px solid #999;\n"
+"    border-radius: 15px; /* Fully rounded pills */\n"
+"    padding: 0px 15px 0px;\n"
+"    background-color: #ffffff;\n"
+"    color: #333333;\n"
+"    font: 10pt \"Inter Medium\"; /* Consolidated font settings */\n"
+"    selection-background-color: #7eb4d7;\n"
+"}\n"
+"\n"
+"QComboBox:focus, QLineEdit:focus {\n"
+"    border: 1px s"
+                        "olid #007BFF;\n"
+"}\n"
+"\n"
+"QComboBox:hover, QLineEdit:hover {\n"
+"    border: 1px solid #3498db;\n"
+"}\n"
+"\n"
+"QComboBox::drop-down {\n"
+"    subcontrol-origin: padding;\n"
+"    subcontrol-position: top right;\n"
+"    width: 30px;\n"
+"    border-left-width: 0px;\n"
+"    /* Match the 15px border-radius of the main control */\n"
+"    border-top-right-radius: 15px;\n"
+"    border-bottom-right-radius: 15px;\n"
+"}\n"
+"\n"
+"QComboBox::down-arrow {\n"
+"    image: url(:/Images/Images/caret-down.png);\n"
+"    border: none;\n"
+"    width: 8px;\n"
+"    height: 8px;\n"
+"}\n"
+"\n"
+"QComboBox QAbstractItemView {\n"
+"    background-color: white !important;\n"
+"    border: 1px solid #999;\n"
+"    selection-background-color: #7eb4d7;\n"
+"    selection-color: #ffffff;\n"
+"    outline: 0; /* Removes the ugly dotted focus border */\n"
+"}\n"
+"\n"
+"QComboBox QAbstractItemView::item {\n"
+"    padding: 0px 15px;\n"
+"    border-radius: 4px;\n"
+"    color: #333333;\n"
+"}\n"
+"\n"
+"/* Hover state for items inside the dropdown */\n"
+"Q"
+                        "ComboBox QAbstractItemView::item:hover {\n"
+"    background-color: #7eb4d7;\n"
+"    color: #ffffff;\n"
+"}\n"
+"\n"
+"QSpinBox {\n"
+"	font: 10pt \"Inter Medium\";\n"
+"    height: 30px;\n"
+"    border: 1px solid #999;\n"
+"    border-radius: 15px;\n"
+"    padding: 0px 5px 0px;\n"
+"    background-color: #ffffff;\n"
+"    color: #333333;\n"
+"    selection-background-color: #7eb4d7;\n"
+"}\n"
+"\n"
+"QSpinBox:focus {\n"
+"    border: 1px solid #007BFF;\n"
+"}\n"
+"\n"
+"QSpinBox:hover {\n"
+"    border: 1px solid #3498db;\n"
+"}\n"
+"\n"
+"QSpinBox::up-button {\n"
+"    subcontrol-origin: border;\n"
+"    subcontrol-position: top right;\n"
+"    width: 8px;\n"
+"    height: 8px;\n"
+"    border-top-right-radius: 15px;\n"
+"    padding: 6px 10px 6px 2px;\n"
+"	color: rgb(119, 118, 123);\n"
+"}\n"
+"\n"
+"QSpinBox::down-button {\n"
+"    subcontrol-origin: border;\n"
+"    subcontrol-position: bottom right;\n"
+"    width: 8px;\n"
+"    height: 8px;\n"
+"    border-bottom-right-radius: 15px;\n"
+"    padding: 6px 10px 6px 2px;\n"
+"	color: rgb(119,"
+                        " 118, 123);\n"
+"}\n"
+"\n"
+"QSpinBox::up-arrow {\n"
+"    image: url(:/Images/Images/caret-up.png);\n"
+"    width: 8px;\n"
+"    height: 8px;\n"
+"}\n"
+"\n"
+"QSpinBox::down-arrow {\n"
+"    image: url(:/Images/Images/caret-down.png);\n"
+"    width: 8px;\n"
+"    height: 8px;\n"
+"}")
         self.verticalLayout = QVBoxLayout(EditStudentDialog)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.widget_3 = QWidget(EditStudentDialog)
@@ -42,8 +179,10 @@ class Ui_EditStudentDialog(object):
 
         self.spinBox_SY1 = QSpinBox(self.widget_3)
         self.spinBox_SY1.setObjectName(u"spinBox_SY1")
-        self.spinBox_SY1.setMinimumSize(QSize(0, 30))
-        self.spinBox_SY1.setStyleSheet(u"background-color: rgb(246, 245, 244);")
+        self.spinBox_SY1.setMinimumSize(QSize(80, 30))
+        self.spinBox_SY1.setMaximumSize(QSize(80, 30))
+        self.spinBox_SY1.setStyleSheet(u"")
+        self.spinBox_SY1.setAlignment(Qt.AlignCenter)
         self.spinBox_SY1.setMinimum(2000)
         self.spinBox_SY1.setMaximum(3000)
 
@@ -56,8 +195,10 @@ class Ui_EditStudentDialog(object):
 
         self.spinBox_SY2 = QSpinBox(self.widget_3)
         self.spinBox_SY2.setObjectName(u"spinBox_SY2")
-        self.spinBox_SY2.setMinimumSize(QSize(0, 30))
-        self.spinBox_SY2.setStyleSheet(u"background-color: rgb(246, 245, 244);")
+        self.spinBox_SY2.setMinimumSize(QSize(80, 30))
+        self.spinBox_SY2.setMaximumSize(QSize(80, 30))
+        self.spinBox_SY2.setStyleSheet(u"")
+        self.spinBox_SY2.setAlignment(Qt.AlignCenter)
         self.spinBox_SY2.setMinimum(2000)
         self.spinBox_SY2.setMaximum(3000)
 
@@ -91,7 +232,7 @@ class Ui_EditStudentDialog(object):
 
         self.widget_2 = QWidget(EditStudentDialog)
         self.widget_2.setObjectName(u"widget_2")
-        self.widget_2.setStyleSheet(u"QComboBox, QLineEdit { padding: 0px 5px 0px; }")
+        self.widget_2.setStyleSheet(u"")
         self.formLayout_2 = QFormLayout(self.widget_2)
         self.formLayout_2.setObjectName(u"formLayout_2")
         self.widget = QWidget(self.widget_2)
@@ -100,8 +241,8 @@ class Ui_EditStudentDialog(object):
         self.gridLayout.setObjectName(u"gridLayout")
         self.label_profile_pic = QLabel(self.widget)
         self.label_profile_pic.setObjectName(u"label_profile_pic")
-        self.label_profile_pic.setMinimumSize(QSize(99, 100))
-        self.label_profile_pic.setMaximumSize(QSize(100, 100))
+        self.label_profile_pic.setMinimumSize(QSize(150, 150))
+        self.label_profile_pic.setMaximumSize(QSize(150, 150))
         self.label_profile_pic.setPixmap(QPixmap(u":/Images/Images/profile_gray.png"))
         self.label_profile_pic.setScaledContents(True)
         self.label_profile_pic.setAlignment(Qt.AlignCenter)
@@ -110,6 +251,9 @@ class Ui_EditStudentDialog(object):
 
         self.btnUploadPhoto = QPushButton(self.widget)
         self.btnUploadPhoto.setObjectName(u"btnUploadPhoto")
+        self.btnUploadPhoto.setMinimumSize(QSize(100, 30))
+        self.btnUploadPhoto.setMaximumSize(QSize(16777215, 30))
+        self.btnUploadPhoto.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
         self.gridLayout.addWidget(self.btnUploadPhoto, 1, 0, 1, 1)
 
@@ -135,7 +279,8 @@ class Ui_EditStudentDialog(object):
         self.txtFirstName = QLineEdit(self.widget_form)
         self.txtFirstName.setObjectName(u"txtFirstName")
         self.txtFirstName.setMinimumSize(QSize(0, 30))
-        self.txtFirstName.setStyleSheet(u"background-color: rgb(246, 245, 244); padding: 0px 10px 0px;")
+        self.txtFirstName.setMaximumSize(QSize(16777215, 30))
+        self.txtFirstName.setStyleSheet(u"")
 
         self.formLayout.setWidget(0, QFormLayout.ItemRole.FieldRole, self.txtFirstName)
 
@@ -147,7 +292,8 @@ class Ui_EditStudentDialog(object):
         self.txtMiddleName = QLineEdit(self.widget_form)
         self.txtMiddleName.setObjectName(u"txtMiddleName")
         self.txtMiddleName.setMinimumSize(QSize(0, 30))
-        self.txtMiddleName.setStyleSheet(u"background-color: rgb(246, 245, 244); padding: 0px 10px 0px;")
+        self.txtMiddleName.setMaximumSize(QSize(16777215, 30))
+        self.txtMiddleName.setStyleSheet(u"")
 
         self.formLayout.setWidget(1, QFormLayout.ItemRole.FieldRole, self.txtMiddleName)
 
@@ -159,7 +305,8 @@ class Ui_EditStudentDialog(object):
         self.txtLastName = QLineEdit(self.widget_form)
         self.txtLastName.setObjectName(u"txtLastName")
         self.txtLastName.setMinimumSize(QSize(0, 30))
-        self.txtLastName.setStyleSheet(u"background-color: rgb(246, 245, 244); padding: 0px 10px 0px;")
+        self.txtLastName.setMaximumSize(QSize(16777215, 30))
+        self.txtLastName.setStyleSheet(u"")
 
         self.formLayout.setWidget(2, QFormLayout.ItemRole.FieldRole, self.txtLastName)
 
@@ -171,7 +318,8 @@ class Ui_EditStudentDialog(object):
         self.cmbSection = QComboBox(self.widget_form)
         self.cmbSection.setObjectName(u"cmbSection")
         self.cmbSection.setMinimumSize(QSize(0, 30))
-        self.cmbSection.setStyleSheet(u"background-color: rgb(246, 245, 244); padding: 0px 10px 0px;")
+        self.cmbSection.setMaximumSize(QSize(16777215, 30))
+        self.cmbSection.setStyleSheet(u"")
         self.cmbSection.setEditable(False)
 
         self.formLayout.setWidget(3, QFormLayout.ItemRole.FieldRole, self.cmbSection)
@@ -186,7 +334,8 @@ class Ui_EditStudentDialog(object):
         self.cmbGender.addItem("")
         self.cmbGender.setObjectName(u"cmbGender")
         self.cmbGender.setMinimumSize(QSize(0, 30))
-        self.cmbGender.setStyleSheet(u"background-color: rgb(246, 245, 244); padding: 0px 10px 0px;")
+        self.cmbGender.setMaximumSize(QSize(16777215, 30))
+        self.cmbGender.setStyleSheet(u"")
         self.cmbGender.setEditable(False)
 
         self.formLayout.setWidget(4, QFormLayout.ItemRole.FieldRole, self.cmbGender)
@@ -217,13 +366,14 @@ class Ui_EditStudentDialog(object):
         self.widget_form_2 = QWidget(EditStudentDialog)
         self.widget_form_2.setObjectName(u"widget_form_2")
         self.widget_form_2.setEnabled(True)
-        self.widget_form_2.setStyleSheet(u"QLineEdit { padding: 0px 5px 0px; }")
+        self.widget_form_2.setStyleSheet(u"")
         self.formLayout_3 = QFormLayout(self.widget_form_2)
         self.formLayout_3.setObjectName(u"formLayout_3")
         self.txtContactPerson = QLineEdit(self.widget_form_2)
         self.txtContactPerson.setObjectName(u"txtContactPerson")
         self.txtContactPerson.setMinimumSize(QSize(0, 30))
-        self.txtContactPerson.setStyleSheet(u"background-color: rgb(246, 245, 244); padding: 0px 10px 0px;")
+        self.txtContactPerson.setMaximumSize(QSize(16777215, 30))
+        self.txtContactPerson.setStyleSheet(u"")
 
         self.formLayout_3.setWidget(1, QFormLayout.ItemRole.FieldRole, self.txtContactPerson)
 
@@ -235,7 +385,8 @@ class Ui_EditStudentDialog(object):
         self.txtContactNum = QLineEdit(self.widget_form_2)
         self.txtContactNum.setObjectName(u"txtContactNum")
         self.txtContactNum.setMinimumSize(QSize(0, 30))
-        self.txtContactNum.setStyleSheet(u"background-color: rgb(246, 245, 244); padding: 0px 10px 0px;")
+        self.txtContactNum.setMaximumSize(QSize(16777215, 30))
+        self.txtContactNum.setStyleSheet(u"")
 
         self.formLayout_3.setWidget(2, QFormLayout.ItemRole.FieldRole, self.txtContactNum)
 
@@ -263,7 +414,9 @@ class Ui_EditStudentDialog(object):
         self.txtPassword = QLineEdit(EditStudentDialog)
         self.txtPassword.setObjectName(u"txtPassword")
         self.txtPassword.setMinimumSize(QSize(0, 30))
-        self.txtPassword.setStyleSheet(u"background-color: rgb(246, 245, 244); padding: 0px 5px 0px;")
+        self.txtPassword.setMaximumSize(QSize(16777215, 30))
+        self.txtPassword.setStyleSheet(u"")
+        self.txtPassword.setEchoMode(QLineEdit.PasswordEchoOnEdit)
 
         self.verticalLayout.addWidget(self.txtPassword)
 
@@ -279,13 +432,17 @@ class Ui_EditStudentDialog(object):
 
         self.btnCancel = QPushButton(EditStudentDialog)
         self.btnCancel.setObjectName(u"btnCancel")
-        self.btnCancel.setMinimumSize(QSize(0, 30))
+        self.btnCancel.setMinimumSize(QSize(100, 30))
+        self.btnCancel.setMaximumSize(QSize(100, 30))
+        self.btnCancel.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
         self.horizontalLayout_2.addWidget(self.btnCancel)
 
         self.btnUpdate = QPushButton(EditStudentDialog)
         self.btnUpdate.setObjectName(u"btnUpdate")
-        self.btnUpdate.setMinimumSize(QSize(0, 30))
+        self.btnUpdate.setMinimumSize(QSize(100, 30))
+        self.btnUpdate.setMaximumSize(QSize(100, 30))
+        self.btnUpdate.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
         self.horizontalLayout_2.addWidget(self.btnUpdate)
 
@@ -307,8 +464,13 @@ class Ui_EditStudentDialog(object):
         self.label_15.setText(QCoreApplication.translate("EditStudentDialog", u"School Year:", None))
         self.label_16.setText(QCoreApplication.translate("EditStudentDialog", u"-", None))
         self.btnRefreshSY.setText("")
+        self.btnRefreshSY.setProperty(u"class", QCoreApplication.translate("EditStudentDialog", u"button-normal", None))
+#if QT_CONFIG(tooltip)
+        self.label_profile_pic.setToolTip(QCoreApplication.translate("EditStudentDialog", u"Aspect Ratio (1:1)", None))
+#endif // QT_CONFIG(tooltip)
         self.label_profile_pic.setText("")
         self.btnUploadPhoto.setText(QCoreApplication.translate("EditStudentDialog", u"Update photo", None))
+        self.btnUploadPhoto.setProperty(u"class", QCoreApplication.translate("EditStudentDialog", u"button-normal", None))
         self.label_8.setText(QCoreApplication.translate("EditStudentDialog", u"First name", None))
         self.label_9.setText(QCoreApplication.translate("EditStudentDialog", u"Middle name", None))
         self.label_10.setText(QCoreApplication.translate("EditStudentDialog", u"Last name", None))
@@ -323,6 +485,8 @@ class Ui_EditStudentDialog(object):
         self.label_25.setText(QCoreApplication.translate("EditStudentDialog", u"Change Password", None))
         self.txtPassword.setPlaceholderText(QCoreApplication.translate("EditStudentDialog", u"Enter new password", None))
         self.btnCancel.setText(QCoreApplication.translate("EditStudentDialog", u"Cancel", None))
+        self.btnCancel.setProperty(u"class", QCoreApplication.translate("EditStudentDialog", u"button-normal", None))
         self.btnUpdate.setText(QCoreApplication.translate("EditStudentDialog", u"Update", None))
+        self.btnUpdate.setProperty(u"class", QCoreApplication.translate("EditStudentDialog", u"button-normal", None))
     # retranslateUi
 

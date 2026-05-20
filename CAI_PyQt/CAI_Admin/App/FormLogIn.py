@@ -27,14 +27,52 @@ class Ui_FormLogin(object):
         FormLogin.resize(400, 558)
         FormLogin.setMinimumSize(QSize(400, 558))
         FormLogin.setMaximumSize(QSize(400, 558))
-        FormLogin.setStyleSheet(u"background-color: rgb(61, 61, 61);")
+        FormLogin.setStyleSheet(u"* {\n"
+"	background-color: rgb(61, 61, 61);\n"
+"}\n"
+"\n"
+"#label_school_name {\n"
+"	color: rgb(255, 255, 255); \n"
+"	font-family: 'Ubuntu'; \n"
+"	font-weight: bold;\n"
+"}\n"
+"\n"
+"QLineEdit {\n"
+"	background-color: rgb(234, 234, 234);\n"
+"	padding: 0px 15px;\n"
+"	border-radius: 16px;\n"
+"	color: rgb(36, 31, 49);\n"
+"}\n"
+"\n"
+"QLineEdit:hover {\n"
+"	border: 1px solid blue;\n"
+"}\n"
+"\n"
+"QLineEdit:focus {\n"
+"	border: 1px solid blue;\n"
+"}\n"
+"\n"
+"QPushButton {\n"
+"	border-radius: 20px;\n"
+"	background: #FF1595;\n"
+"	color: white;\n"
+"	font-family: 'Inter Medium'; \n"
+"	font-size: 11pt;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+" 	background: #ED5AB3;\n"
+"}\n"
+"")
         self.centralwidget = QWidget(FormLogin)
         self.centralwidget.setObjectName(u"centralwidget")
         self.verticalLayout_2 = QVBoxLayout(self.centralwidget)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
-        self.horizontalLayout_2 = QHBoxLayout()
+        self.widget = QWidget(self.centralwidget)
+        self.widget.setObjectName(u"widget")
+        self.horizontalLayout_2 = QHBoxLayout(self.widget)
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
-        self.label_logo = QLabel(self.centralwidget)
+        self.label_logo = QLabel(self.widget)
         self.label_logo.setObjectName(u"label_logo")
         self.label_logo.setMinimumSize(QSize(75, 75))
         self.label_logo.setMaximumSize(QSize(75, 75))
@@ -43,26 +81,26 @@ class Ui_FormLogin(object):
         font.setPointSize(11)
         font.setBold(False)
         self.label_logo.setFont(font)
-        self.label_logo.setStyleSheet(u"QLabel { font-family: 'Inter Medium'; font-weight: normal; font-size: 11pt; color: rgb(186, 186, 186); }")
+        self.label_logo.setStyleSheet(u"")
         self.label_logo.setPixmap(QPixmap(u":/Images/Images/lcs logo.png"))
         self.label_logo.setScaledContents(True)
 
         self.horizontalLayout_2.addWidget(self.label_logo)
 
-        self.label_schoolName1_2 = QLabel(self.centralwidget)
-        self.label_schoolName1_2.setObjectName(u"label_schoolName1_2")
+        self.label_school_name = QLabel(self.widget)
+        self.label_school_name.setObjectName(u"label_school_name")
         font1 = QFont()
         font1.setFamilies([u"Ubuntu"])
         font1.setPointSize(22)
         font1.setBold(True)
-        self.label_schoolName1_2.setFont(font1)
-        self.label_schoolName1_2.setAutoFillBackground(False)
-        self.label_schoolName1_2.setStyleSheet(u"color: rgb(255, 255, 255); font-family: 'Ubuntu'; font-weight: bold;")
+        self.label_school_name.setFont(font1)
+        self.label_school_name.setAutoFillBackground(False)
+        self.label_school_name.setStyleSheet(u"")
 
-        self.horizontalLayout_2.addWidget(self.label_schoolName1_2)
+        self.horizontalLayout_2.addWidget(self.label_school_name)
 
 
-        self.verticalLayout_2.addLayout(self.horizontalLayout_2)
+        self.verticalLayout_2.addWidget(self.widget)
 
         self.frame = QFrame(self.centralwidget)
         self.frame.setObjectName(u"frame")
@@ -97,13 +135,7 @@ class Ui_FormLogin(object):
         font2.setFamilies([u"Inter Medium"])
         font2.setPointSize(11)
         self.txtUsername.setFont(font2)
-        self.txtUsername.setStyleSheet(u"QLineEdit {\n"
-"	background-color: rgb(234, 234, 234);\n"
-"	padding: 5px;\n"
-"	border-radius: 10px;\n"
-"	color: rgb(36, 31, 49);\n"
-"}\n"
-"")
+        self.txtUsername.setStyleSheet(u"")
 
         self.verticalLayout.addWidget(self.txtUsername)
 
@@ -120,12 +152,7 @@ class Ui_FormLogin(object):
         self.txtPassword.setMinimumSize(QSize(0, 32))
         self.txtPassword.setMaximumSize(QSize(16777215, 32))
         self.txtPassword.setFont(font2)
-        self.txtPassword.setStyleSheet(u"QLineEdit {\n"
-"	background-color: rgb(234, 234, 234);\n"
-"	padding: 5px;\n"
-"	border-radius: 10px;\n"
-"	color: rgb(36, 31, 49);\n"
-"}")
+        self.txtPassword.setStyleSheet(u"")
         self.txtPassword.setEchoMode(QLineEdit.Password)
 
         self.verticalLayout.addWidget(self.txtPassword)
@@ -134,10 +161,12 @@ class Ui_FormLogin(object):
 
         self.verticalLayout.addItem(self.verticalSpacer_3)
 
-        self.horizontalLayout = QHBoxLayout()
+        self.widget1 = QWidget(self.frame)
+        self.widget1.setObjectName(u"widget1")
+        self.horizontalLayout = QHBoxLayout(self.widget1)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.horizontalLayout.setContentsMargins(-1, 5, -1, 5)
-        self.btnLogin = QPushButton(self.frame)
+        self.btnLogin = QPushButton(self.widget1)
         self.btnLogin.setObjectName(u"btnLogin")
         self.btnLogin.setMinimumSize(QSize(0, 40))
         self.btnLogin.setMaximumSize(QSize(200, 16777215))
@@ -146,29 +175,21 @@ class Ui_FormLogin(object):
         font3.setPointSize(11)
         font3.setBold(True)
         self.btnLogin.setFont(font3)
+        self.btnLogin.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btnLogin.setMouseTracking(True)
-        self.btnLogin.setStyleSheet(u"QPushButton {\n"
-"	border-radius: 10px;\n"
-"	background: #FF1595;\n"
-"	color: white;\n"
-"	font-family: 'Inter Medium'; \n"
-"	font-size: 11pt;\n"
-"}\n"
-"\n"
-"QPushButton:hover {\n"
-" 	background: #ED5AB3;\n"
-"}")
+        self.btnLogin.setStyleSheet(u"")
         self.btnLogin.setAutoDefault(True)
 
         self.horizontalLayout.addWidget(self.btnLogin)
 
 
-        self.verticalLayout.addLayout(self.horizontalLayout)
+        self.verticalLayout.addWidget(self.widget1)
 
         self.btnForgotPassword = QPushButton(self.frame)
         self.btnForgotPassword.setObjectName(u"btnForgotPassword")
         self.btnForgotPassword.setMinimumSize(QSize(0, 40))
         self.btnForgotPassword.setFont(font)
+        self.btnForgotPassword.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btnForgotPassword.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
 "	background: transparent;\n"
@@ -204,7 +225,7 @@ class Ui_FormLogin(object):
     def retranslateUi(self, FormLogin):
         FormLogin.setWindowTitle(QCoreApplication.translate("FormLogin", u"Login", None))
         self.label_logo.setText("")
-        self.label_schoolName1_2.setText(QCoreApplication.translate("FormLogin", u"La Camelle School", None))
+        self.label_school_name.setText(QCoreApplication.translate("FormLogin", u"La Camelle School", None))
         self.label.setText(QCoreApplication.translate("FormLogin", u"Username", None))
         self.label_2.setText(QCoreApplication.translate("FormLogin", u"Password", None))
         self.btnLogin.setText(QCoreApplication.translate("FormLogin", u"Log in", None))

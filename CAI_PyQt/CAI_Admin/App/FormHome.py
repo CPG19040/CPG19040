@@ -1849,7 +1849,7 @@ class Ui_Home(object):
         self.scrollArea_classlist.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
         self.container = QWidget()
         self.container.setObjectName(u"container")
-        self.container.setGeometry(QRect(0, 0, 100, 30))
+        self.container.setGeometry(QRect(0, 0, 614, 634))
         self.verticalLayout_9 = QVBoxLayout(self.container)
         self.verticalLayout_9.setObjectName(u"verticalLayout_9")
         self.scrollArea_classlist.setWidget(self.container)
@@ -2476,7 +2476,7 @@ class Ui_Home(object):
         self.scrollArea_tf.setWidgetResizable(True)
         self.scrollAreaWidgetContents_4 = QWidget()
         self.scrollAreaWidgetContents_4.setObjectName(u"scrollAreaWidgetContents_4")
-        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 100, 30))
+        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 317, 532))
         self.verticalLayout_13 = QVBoxLayout(self.scrollAreaWidgetContents_4)
         self.verticalLayout_13.setObjectName(u"verticalLayout_13")
         self.scrollArea_tf.setWidget(self.scrollAreaWidgetContents_4)
@@ -2502,7 +2502,7 @@ class Ui_Home(object):
         self.scrollArea_mc.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 100, 30))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 317, 532))
         self.verticalLayout_12 = QVBoxLayout(self.scrollAreaWidgetContents_3)
         self.verticalLayout_12.setObjectName(u"verticalLayout_12")
         self.scrollArea_mc.setWidget(self.scrollAreaWidgetContents_3)
@@ -2515,7 +2515,7 @@ class Ui_Home(object):
         self.scrollArea_id.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 100, 30))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 317, 532))
         self.verticalLayout_11 = QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_11.setObjectName(u"verticalLayout_11")
         self.scrollArea_id.setWidget(self.scrollAreaWidgetContents_2)
@@ -2920,7 +2920,7 @@ class Ui_Home(object):
 "	background: transparent;\n"
 "}\n"
 "\n"
-"QComboBox[class=\"combobox-main\"] {\n"
+"QComboBox {\n"
 "    height: 30px;\n"
 "    border: 1px solid #999;\n"
 "    border-radius: 15px; /* Fully rounded pills */\n"
@@ -2939,9 +2939,9 @@ class Ui_Home(object):
 "    border: 1px solid #3498db;\n"
 "}\n"
 "\n"
-"Q"
-                        "ComboBox::drop-down {\n"
-"    subcontrol-origin: padding;\n"
+"QComboBox::drop-down {\n"
+""
+                        "    subcontrol-origin: padding;\n"
 "    subcontrol-position: top right;\n"
 "    width: 30px;\n"
 "    border-left-width: 0px;\n"
@@ -2974,11 +2974,11 @@ class Ui_Home(object):
 "/* Hover state for items inside the dropdown */\n"
 "QComboBox[class=\"combobox-main\"] QAbstractItemView::item:hover {\n"
 "    background-color: #7eb4d7;\n"
-"    color"
-                        ": #ffffff;\n"
+"    color: #ffffff;\n"
 "}\n"
 "\n"
-"QSpinBox {\n"
+""
+                        "QSpinBox {\n"
 "	font: 10pt \"Inter Medium\";\n"
 "    height: 30px;\n"
 "    border: 1px solid #999;\n"
@@ -3018,9 +3018,9 @@ class Ui_Home(object):
 "}\n"
 "\n"
 "QSpinBox::up-arrow {\n"
-"    image: url(:/Images/Images/caret-"
-                        "up.png);\n"
-"    width: 8px;\n"
+"    image: url(:/Images/Images/caret-up.png);\n"
+"    width: 8p"
+                        "x;\n"
 "    height: 8px;\n"
 "}\n"
 "\n"

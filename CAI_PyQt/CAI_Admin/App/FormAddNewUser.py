@@ -28,12 +28,90 @@ class Ui_AddNewUserDialog(object):
         AddNewUserDialog.resize(750, 456)
         AddNewUserDialog.setMinimumSize(QSize(750, 456))
         AddNewUserDialog.setMaximumSize(QSize(750, 456))
-        AddNewUserDialog.setStyleSheet(u"background-color: rgb(222, 221, 218); color: rgb(0, 0, 0);")
+        AddNewUserDialog.setStyleSheet(u"* {\n"
+"	background-color: rgb(222, 221, 218); \n"
+"	color: black;\n"
+"}\n"
+"\n"
+"QPushButton {\n"
+"	font: 10pt \"Inter\";\n"
+"	background-color: #e7e7e7;\n"
+"	color: black;\n"
+"	border-radius: 15px;\n"
+"	border: 1px solid rgb(154, 153, 150);\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color: white;\n"
+"}\n"
+"\n"
+"QLineEdit {\n"
+"	background-color: rgb(255, 255, 255); \n"
+"	border-radius: 15px;\n"
+"	border: 1px solid #999;\n"
+"	padding: 0px 15px;\n"
+"}\n"
+"\n"
+"QComboBox {\n"
+"    border: 1px solid #999;\n"
+"    border-radius: 15px; /* Fully rounded pills */\n"
+"    padding: 0px 15px 0px;\n"
+"    background-color: #ffffff;\n"
+"    color: #333333;\n"
+"    font: 10pt \"Inter Medium\"; /* Consolidated font settings */\n"
+"    selection-background-color: #7eb4d7;\n"
+"}\n"
+"\n"
+"QComboBox:focus, QLineEdit:focus {\n"
+"    border: 1px solid #007BFF;\n"
+"}\n"
+"\n"
+"QComboBox:hover, QLineEdit:hover {\n"
+"    border: 1px solid #3498db;\n"
+"}\n"
+"\n"
+"QComboBox::drop-down {\n"
+"    subcontrol-origin: padding;\n"
+""
+                        "    subcontrol-position: top right;\n"
+"    width: 30px;\n"
+"    border-left-width: 0px;\n"
+"    /* Match the 15px border-radius of the main control */\n"
+"    border-top-right-radius: 15px;\n"
+"    border-bottom-right-radius: 15px;\n"
+"}\n"
+"\n"
+"QComboBox::down-arrow {\n"
+"    image: url(:/Images/Images/caret-down.png);\n"
+"    border: none;\n"
+"    width: 8px;\n"
+"    height: 8px;\n"
+"}\n"
+"\n"
+"QComboBox QAbstractItemView {\n"
+"    background-color: white !important;\n"
+"    border: 1px solid #999;\n"
+"    selection-background-color: #7eb4d7;\n"
+"    selection-color: #ffffff;\n"
+"    outline: 0; /* Removes the ugly dotted focus border */\n"
+"}\n"
+"\n"
+"QComboBox QAbstractItemView::item {\n"
+"    padding: 0px 15px;\n"
+"    border-radius: 4px;\n"
+"    color: #333333;\n"
+"}\n"
+"\n"
+"/* Hover state for items inside the dropdown */\n"
+"QComboBox QAbstractItemView::item:hover {\n"
+"    background-color: #7eb4d7;\n"
+"    color: #ffffff;\n"
+"}")
         self.verticalLayout = QVBoxLayout(AddNewUserDialog)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.widget = QWidget(AddNewUserDialog)
         self.widget.setObjectName(u"widget")
-        self.widget.setStyleSheet(u"QComboBox, QLineEdit { padding: 0px 5px 0px; }")
+        self.widget.setStyleSheet(u"")
         self.horizontalLayout = QHBoxLayout(self.widget)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.widget_3 = QWidget(self.widget)
@@ -52,6 +130,9 @@ class Ui_AddNewUserDialog(object):
 
         self.btnUploadPhoto = QPushButton(self.widget_3)
         self.btnUploadPhoto.setObjectName(u"btnUploadPhoto")
+        self.btnUploadPhoto.setMinimumSize(QSize(0, 30))
+        self.btnUploadPhoto.setMaximumSize(QSize(16777215, 30))
+        self.btnUploadPhoto.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
         self.gridLayout.addWidget(self.btnUploadPhoto, 1, 0, 1, 1)
 
@@ -71,7 +152,7 @@ class Ui_AddNewUserDialog(object):
         self.lineEdit_firstname = QLineEdit(self.grp_info)
         self.lineEdit_firstname.setObjectName(u"lineEdit_firstname")
         self.lineEdit_firstname.setMinimumSize(QSize(0, 30))
-        self.lineEdit_firstname.setStyleSheet(u"background-color: rgb(246, 245, 244);")
+        self.lineEdit_firstname.setStyleSheet(u"")
 
         self.formLayout_3.setWidget(0, QFormLayout.ItemRole.FieldRole, self.lineEdit_firstname)
 
@@ -83,7 +164,7 @@ class Ui_AddNewUserDialog(object):
         self.lineEdit_middlename = QLineEdit(self.grp_info)
         self.lineEdit_middlename.setObjectName(u"lineEdit_middlename")
         self.lineEdit_middlename.setMinimumSize(QSize(0, 30))
-        self.lineEdit_middlename.setStyleSheet(u"background-color: rgb(246, 245, 244);")
+        self.lineEdit_middlename.setStyleSheet(u"")
 
         self.formLayout_3.setWidget(1, QFormLayout.ItemRole.FieldRole, self.lineEdit_middlename)
 
@@ -95,7 +176,7 @@ class Ui_AddNewUserDialog(object):
         self.lineEdit_lastname = QLineEdit(self.grp_info)
         self.lineEdit_lastname.setObjectName(u"lineEdit_lastname")
         self.lineEdit_lastname.setMinimumSize(QSize(0, 30))
-        self.lineEdit_lastname.setStyleSheet(u"background-color: rgb(246, 245, 244);")
+        self.lineEdit_lastname.setStyleSheet(u"")
 
         self.formLayout_3.setWidget(2, QFormLayout.ItemRole.FieldRole, self.lineEdit_lastname)
 
@@ -107,7 +188,7 @@ class Ui_AddNewUserDialog(object):
         self.lineEdit_username = QLineEdit(self.grp_info)
         self.lineEdit_username.setObjectName(u"lineEdit_username")
         self.lineEdit_username.setMinimumSize(QSize(0, 30))
-        self.lineEdit_username.setStyleSheet(u"background-color: rgb(246, 245, 244);")
+        self.lineEdit_username.setStyleSheet(u"")
 
         self.formLayout_3.setWidget(3, QFormLayout.ItemRole.FieldRole, self.lineEdit_username)
 
@@ -119,7 +200,8 @@ class Ui_AddNewUserDialog(object):
         self.lineEdit_password = QLineEdit(self.grp_info)
         self.lineEdit_password.setObjectName(u"lineEdit_password")
         self.lineEdit_password.setMinimumSize(QSize(0, 30))
-        self.lineEdit_password.setStyleSheet(u"background-color: rgb(246, 245, 244);")
+        self.lineEdit_password.setStyleSheet(u"")
+        self.lineEdit_password.setEchoMode(QLineEdit.PasswordEchoOnEdit)
 
         self.formLayout_3.setWidget(4, QFormLayout.ItemRole.FieldRole, self.lineEdit_password)
 
@@ -131,7 +213,7 @@ class Ui_AddNewUserDialog(object):
         self.comboBox_position = QComboBox(self.grp_info)
         self.comboBox_position.setObjectName(u"comboBox_position")
         self.comboBox_position.setMinimumSize(QSize(0, 30))
-        self.comboBox_position.setStyleSheet(u"background-color: rgb(246, 245, 244);")
+        self.comboBox_position.setStyleSheet(u"")
         self.comboBox_position.setEditable(True)
 
         self.formLayout_3.setWidget(5, QFormLayout.ItemRole.FieldRole, self.comboBox_position)
@@ -152,7 +234,7 @@ class Ui_AddNewUserDialog(object):
         self.widget_form_2 = QWidget(AddNewUserDialog)
         self.widget_form_2.setObjectName(u"widget_form_2")
         self.widget_form_2.setEnabled(True)
-        self.widget_form_2.setStyleSheet(u"QLineEdit { padding: 0px 5px 0px; }")
+        self.widget_form_2.setStyleSheet(u"")
         self.formLayout_5 = QFormLayout(self.widget_form_2)
         self.formLayout_5.setObjectName(u"formLayout_5")
         self.label_24 = QLabel(self.widget_form_2)
@@ -168,7 +250,7 @@ class Ui_AddNewUserDialog(object):
         self.txtContactPerson = QLineEdit(self.widget_form_2)
         self.txtContactPerson.setObjectName(u"txtContactPerson")
         self.txtContactPerson.setMinimumSize(QSize(0, 30))
-        self.txtContactPerson.setStyleSheet(u"background-color: rgb(246, 245, 244);")
+        self.txtContactPerson.setStyleSheet(u"")
 
         self.formLayout_5.setWidget(1, QFormLayout.ItemRole.FieldRole, self.txtContactPerson)
 
@@ -180,7 +262,7 @@ class Ui_AddNewUserDialog(object):
         self.txtContactNum = QLineEdit(self.widget_form_2)
         self.txtContactNum.setObjectName(u"txtContactNum")
         self.txtContactNum.setMinimumSize(QSize(0, 30))
-        self.txtContactNum.setStyleSheet(u"background-color: rgb(246, 245, 244);")
+        self.txtContactNum.setStyleSheet(u"")
 
         self.formLayout_5.setWidget(2, QFormLayout.ItemRole.FieldRole, self.txtContactNum)
 
@@ -204,13 +286,17 @@ class Ui_AddNewUserDialog(object):
 
         self.btnCancel = QPushButton(AddNewUserDialog)
         self.btnCancel.setObjectName(u"btnCancel")
-        self.btnCancel.setMinimumSize(QSize(0, 30))
+        self.btnCancel.setMinimumSize(QSize(100, 30))
+        self.btnCancel.setMaximumSize(QSize(100, 30))
+        self.btnCancel.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
         self.horizontalLayout_2.addWidget(self.btnCancel)
 
         self.btnSave = QPushButton(AddNewUserDialog)
         self.btnSave.setObjectName(u"btnSave")
-        self.btnSave.setMinimumSize(QSize(0, 30))
+        self.btnSave.setMinimumSize(QSize(100, 30))
+        self.btnSave.setMaximumSize(QSize(100, 30))
+        self.btnSave.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
         self.horizontalLayout_2.addWidget(self.btnSave)
 

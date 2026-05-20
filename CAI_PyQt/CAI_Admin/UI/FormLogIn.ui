@@ -26,70 +26,108 @@
    <string>Login</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(61, 61, 61);</string>
+   <string notr="true">* {
+	background-color: rgb(61, 61, 61);
+}
+
+#label_school_name {
+	color: rgb(255, 255, 255); 
+	font-family: 'Ubuntu'; 
+	font-weight: bold;
+}
+
+QLineEdit {
+	background-color: rgb(234, 234, 234);
+	padding: 0px 15px;
+	border-radius: 16px;
+	color: rgb(36, 31, 49);
+}
+
+QLineEdit:hover {
+	border: 1px solid blue;
+}
+
+QLineEdit:focus {
+	border: 1px solid blue;
+}
+
+QPushButton {
+	border-radius: 20px;
+	background: #FF1595;
+	color: white;
+	font-family: 'Inter Medium'; 
+	font-size: 11pt;
+}
+
+QPushButton:hover {
+ 	background: #ED5AB3;
+}
+</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_2">
-      <item>
-       <widget class="QLabel" name="label_logo">
-        <property name="minimumSize">
-         <size>
-          <width>75</width>
-          <height>75</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>75</width>
-          <height>75</height>
-         </size>
-        </property>
-        <property name="font">
-         <font>
-          <family>Inter Medium</family>
-          <pointsize>11</pointsize>
-          <weight>50</weight>
-          <bold>false</bold>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QLabel { font-family: 'Inter Medium'; font-weight: normal; font-size: 11pt; color: rgb(186, 186, 186); }</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="pixmap">
-         <pixmap resource="../resources.qrc">:/Images/Images/lcs logo.png</pixmap>
-        </property>
-        <property name="scaledContents">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_schoolName1_2">
-        <property name="font">
-         <font>
-          <family>Ubuntu</family>
-          <pointsize>22</pointsize>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="autoFillBackground">
-         <bool>false</bool>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">color: rgb(255, 255, 255); font-family: 'Ubuntu'; font-weight: bold;</string>
-        </property>
-        <property name="text">
-         <string>La Camelle School</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
+     <widget class="QWidget" name="" native="true">
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <widget class="QLabel" name="label_logo">
+         <property name="minimumSize">
+          <size>
+           <width>75</width>
+           <height>75</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>75</width>
+           <height>75</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Inter Medium</family>
+           <pointsize>11</pointsize>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="pixmap">
+          <pixmap resource="../resources.qrc">:/Images/Images/lcs logo.png</pixmap>
+         </property>
+         <property name="scaledContents">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_school_name">
+         <property name="font">
+          <font>
+           <family>Ubuntu</family>
+           <pointsize>22</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="autoFillBackground">
+          <bool>false</bool>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <property name="text">
+          <string>La Camelle School</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
     </item>
     <item>
      <widget class="QFrame" name="frame">
@@ -176,13 +214,7 @@
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">QLineEdit {
-	background-color: rgb(234, 234, 234);
-	padding: 5px;
-	border-radius: 10px;
-	color: rgb(36, 31, 49);
-}
-</string>
+          <string notr="true"/>
          </property>
         </widget>
        </item>
@@ -231,12 +263,7 @@
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">QLineEdit {
-	background-color: rgb(234, 234, 234);
-	padding: 5px;
-	border-radius: 10px;
-	color: rgb(36, 31, 49);
-}</string>
+          <string notr="true"/>
          </property>
          <property name="echoMode">
           <enum>QLineEdit::Password</enum>
@@ -260,63 +287,58 @@
         </spacer>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout">
-         <property name="topMargin">
-          <number>5</number>
-         </property>
-         <property name="bottomMargin">
-          <number>5</number>
-         </property>
-         <item>
-          <widget class="QPushButton" name="btnLogin">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>40</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>200</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <family>Inter Medium</family>
-             <pointsize>11</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="mouseTracking">
-            <bool>true</bool>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">QPushButton {
-	border-radius: 10px;
-	background: #FF1595;
-	color: white;
-	font-family: 'Inter Medium'; 
-	font-size: 11pt;
-}
-
-QPushButton:hover {
- 	background: #ED5AB3;
-}</string>
-           </property>
-           <property name="text">
-            <string>Log in</string>
-           </property>
-           <property name="autoDefault">
-            <bool>true</bool>
-           </property>
-           <property name="default">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-        </layout>
+        <widget class="QWidget" name="" native="true">
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <property name="topMargin">
+           <number>5</number>
+          </property>
+          <property name="bottomMargin">
+           <number>5</number>
+          </property>
+          <item>
+           <widget class="QPushButton" name="btnLogin">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>40</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>200</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>Inter Medium</family>
+              <pointsize>11</pointsize>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="mouseTracking">
+             <bool>true</bool>
+            </property>
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>Log in</string>
+            </property>
+            <property name="autoDefault">
+             <bool>true</bool>
+            </property>
+            <property name="default">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
        </item>
        <item>
         <widget class="QPushButton" name="btnForgotPassword">
@@ -333,6 +355,9 @@ QPushButton:hover {
            <weight>50</weight>
            <bold>false</bold>
           </font>
+         </property>
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
          </property>
          <property name="styleSheet">
           <string notr="true">QPushButton {

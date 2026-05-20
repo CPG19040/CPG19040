@@ -26,13 +26,90 @@
    <string>Registration</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(222, 221, 218); color: rgb(0, 0, 0);</string>
+   <string notr="true">* {
+	background-color: rgb(222, 221, 218); 
+	color: black;
+}
+
+QPushButton {
+	font: 10pt &quot;Inter&quot;;
+	background-color: #e7e7e7;
+	color: black;
+	border-radius: 15px;
+	border: 1px solid rgb(154, 153, 150);
+}
+
+QPushButton:hover {
+	background-color: white;
+}
+
+QLineEdit {
+	background-color: rgb(255, 255, 255); 
+	border-radius: 15px;
+	border: 1px solid #999;
+	padding: 0px 15px;
+}
+
+QComboBox {
+    border: 1px solid #999;
+    border-radius: 15px; /* Fully rounded pills */
+    padding: 0px 15px 0px;
+    background-color: #ffffff;
+    color: #333333;
+    font: 10pt &quot;Inter Medium&quot;; /* Consolidated font settings */
+    selection-background-color: #7eb4d7;
+}
+
+QComboBox:focus, QLineEdit:focus {
+    border: 1px solid #007BFF;
+}
+
+QComboBox:hover, QLineEdit:hover {
+    border: 1px solid #3498db;
+}
+
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 30px;
+    border-left-width: 0px;
+    /* Match the 15px border-radius of the main control */
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+QComboBox::down-arrow {
+    image: url(:/Images/Images/caret-down.png);
+    border: none;
+    width: 8px;
+    height: 8px;
+}
+
+QComboBox QAbstractItemView {
+    background-color: white !important;
+    border: 1px solid #999;
+    selection-background-color: #7eb4d7;
+    selection-color: #ffffff;
+    outline: 0; /* Removes the ugly dotted focus border */
+}
+
+QComboBox QAbstractItemView::item {
+    padding: 0px 15px;
+    border-radius: 4px;
+    color: #333333;
+}
+
+/* Hover state for items inside the dropdown */
+QComboBox QAbstractItemView::item:hover {
+    background-color: #7eb4d7;
+    color: #ffffff;
+}</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QWidget" name="widget" native="true">
      <property name="styleSheet">
-      <string notr="true">QComboBox, QLineEdit { padding: 0px 5px 0px; }</string>
+      <string notr="true"/>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
@@ -68,6 +145,21 @@
          </item>
          <item row="1" column="0">
           <widget class="QPushButton" name="btnUploadPhoto">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
            <property name="text">
             <string>Update photo</string>
            </property>
@@ -107,7 +199,7 @@
             </size>
            </property>
            <property name="styleSheet">
-            <string notr="true">background-color: rgb(246, 245, 244);</string>
+            <string notr="true"/>
            </property>
           </widget>
          </item>
@@ -127,7 +219,7 @@
             </size>
            </property>
            <property name="styleSheet">
-            <string notr="true">background-color: rgb(246, 245, 244);</string>
+            <string notr="true"/>
            </property>
           </widget>
          </item>
@@ -147,7 +239,7 @@
             </size>
            </property>
            <property name="styleSheet">
-            <string notr="true">background-color: rgb(246, 245, 244);</string>
+            <string notr="true"/>
            </property>
           </widget>
          </item>
@@ -167,7 +259,7 @@
             </size>
            </property>
            <property name="styleSheet">
-            <string notr="true">background-color: rgb(246, 245, 244);</string>
+            <string notr="true"/>
            </property>
           </widget>
          </item>
@@ -187,7 +279,10 @@
             </size>
            </property>
            <property name="styleSheet">
-            <string notr="true">background-color: rgb(246, 245, 244);</string>
+            <string notr="true"/>
+           </property>
+           <property name="echoMode">
+            <enum>QLineEdit::PasswordEchoOnEdit</enum>
            </property>
           </widget>
          </item>
@@ -207,7 +302,7 @@
             </size>
            </property>
            <property name="styleSheet">
-            <string notr="true">background-color: rgb(246, 245, 244);</string>
+            <string notr="true"/>
            </property>
            <property name="editable">
             <bool>true</bool>
@@ -233,7 +328,7 @@
       <bool>true</bool>
      </property>
      <property name="styleSheet">
-      <string notr="true">QLineEdit { padding: 0px 5px 0px; }</string>
+      <string notr="true"/>
      </property>
      <layout class="QFormLayout" name="formLayout_5">
       <item row="0" column="0">
@@ -260,7 +355,7 @@
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">background-color: rgb(246, 245, 244);</string>
+         <string notr="true"/>
         </property>
        </widget>
       </item>
@@ -280,7 +375,7 @@
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">background-color: rgb(246, 245, 244);</string>
+         <string notr="true"/>
         </property>
        </widget>
       </item>
@@ -326,9 +421,18 @@
       <widget class="QPushButton" name="btnCancel">
        <property name="minimumSize">
         <size>
-         <width>0</width>
+         <width>100</width>
          <height>30</height>
         </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>100</width>
+         <height>30</height>
+        </size>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
        </property>
        <property name="text">
         <string>Cancel</string>
@@ -339,9 +443,18 @@
       <widget class="QPushButton" name="btnSave">
        <property name="minimumSize">
         <size>
-         <width>0</width>
+         <width>100</width>
          <height>30</height>
         </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>100</width>
+         <height>30</height>
+        </size>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
        </property>
        <property name="text">
         <string>Save</string>
