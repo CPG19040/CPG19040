@@ -68,7 +68,7 @@ class Controller:
         self.card_layout = self.ui.verticalLayout_9
         self.card_layout.setAlignment(Qt.AlignmentFlag.AlignTop)
         self.card_layout.setSpacing(10)
-        self.displaySchoolYear()
+        self.get_dynamic_school_year_dates()
 
         # Search Box: Pass the text directly
         self.ui.txt_classList_search.textChanged.connect(self.display_student_cards)
@@ -116,7 +116,7 @@ class Controller:
         if pic:
             self.ui.btnUserName.setIcon(pic)
 
-        self.ui.btnRefreshSY.clicked.connect(self.displaySchoolYear)
+        self.ui.btnRefreshSY.clicked.connect(self.get_dynamic_school_year_dates)
         self.ui.btnAddStudent.clicked.connect(self.register_student)
         self.ui.btnDeleteStudent.clicked.connect(lambda: self.delete_student(user))
         self.ui.btnEditStudent.clicked.connect(lambda: self.edit_student(user))
@@ -208,15 +208,6 @@ class Controller:
         self.login_win.close()
         self.home_win.show()
 
-    def displaySchoolYear(self):
-        current_date = QDate.currentDate()
-        current_year = current_date.year()
-        end_year = current_year + 1
-        self.ui.spinBox_SY1.setValue(current_year)
-        self.ui.spinBox_SY2.setValue(end_year)
-
-        self.ui.label_SY.setText(f"School Year {current_year}-{end_year}")
-
     def displayDashboard(self):
         self.ui.label_lessons_total.setText(f"{Lesson().count()}")
         self.ui.label_student_total.setText(f"{Student().count()}")
@@ -270,6 +261,7 @@ class Controller:
 
         if index == 0:
             self.displayDashboard()
+            self.get_dynamic_school_year_dates()
 
         elif index == 1: # Student List
             self.sectionObj.populate_sections(self.ui.cmb_studSection, True)
@@ -418,7 +410,7 @@ class Controller:
         params = (schoolYear, sectionid, text)
 
         # UI Optimization: Stop painting until the loop is done
-        self.ui.scrollArea.setUpdatesEnabled(False)
+        self.ui.scrollArea_classlist.setUpdatesEnabled(False)
 
         try:
             # 1. Clear existing cards
@@ -456,7 +448,7 @@ class Controller:
 
         finally:
             # Resume painting the UI
-            self.ui.scrollArea.setUpdatesEnabled(True)
+            self.ui.scrollArea_classlist.setUpdatesEnabled(True)
 
     def display_student_info(self, clicked_card=None, student_id=None):
         studDialog = AddNewStudentDialog(self.script_dir)
@@ -985,16 +977,47 @@ class Controller:
             
         next_year = base_year + 1
 
+        self.ui.label_SY.setText(f"School Year {base_year}-{next_year}")
         self.ui.spinBox_SY_start.setValue(base_year)
         self.ui.spinBox_SY_end.setValue(next_year)
+
+        self.ui.spinBox_SY1.setValue(base_year)
+        self.ui.spinBox_SY2.setValue(next_year)
         
         # Generate the exact 4-Quarter DepEd standard milestones dynamically
-        return {
+        quarters = {
             1: {"start": f"{base_year}-06-16", "end": f"{base_year}-08-22"},
             2: {"start": f"{base_year}-08-26", "end": f"{base_year}-10-24"},
             3: {"start": f"{base_year}-11-03", "end": f"{next_year}-01-23"},
             4: {"start": f"{next_year}-01-26", "end": f"{next_year}-03-20"}
         }
+
+        # Determine and display the active grading period
+        active_quarter = "Off-season / Break"
+        is_break = True
+
+        for q_num, dates in quarters.items():
+            start_date = QDate.fromString(dates["start"], "yyyy-MM-dd")
+            end_date = QDate.fromString(dates["end"], "yyyy-MM-dd")
+            
+            if start_date <= today <= end_date:
+                suffix = {1: "st", 2: "nd", 3: "rd"}.get(q_num, "th")
+                active_quarter = f"{q_num}{suffix} Grading Period"
+                is_break = False
+                break
+                
+        self.ui.label_gradingperiod.setText(active_quarter)
+
+        qss = 'font: 10pt "Inter Medium"; border-radius: 12px; padding: 0px 10px 0px;'
+
+        if is_break:
+            qss += 'background-color: #E5254B; color: white;'
+            self.ui.label_gradingperiod.setStyleSheet(qss)
+        else:
+            qss += 'background-color: #038100; color: white;'
+            self.ui.label_gradingperiod.setStyleSheet(qss)
+        
+        return quarters
 
     def saveSchoolYear_gradingPeriod(self):
         schedule = self.get_dynamic_school_year_dates()
