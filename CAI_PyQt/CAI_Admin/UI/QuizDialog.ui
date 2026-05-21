@@ -461,8 +461,8 @@ QPushButton {
 
 /* LEFT BUTTON (Easy) */
 QPushButton#btnEasy {
-    border-top-left-radius: 6px;
-    border-bottom-left-radius: 6px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
     border-right: none; /* Avoid double borders in the middle */
 }
 QPushButton#btnEasy:checked {
@@ -484,8 +484,8 @@ QPushButton#btnAverage:checked {
 
 /* RIGHT BUTTON (Hard) */
 QPushButton#btnHard {
-    border-top-right-radius: 6px;
-    border-bottom-right-radius: 6px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
 }
 QPushButton#btnHard:checked {
 	background-color: #F07D75; /* Red */
@@ -518,7 +518,13 @@ QPushButton:hover {
              <widget class="QPushButton" name="btnEasy">
               <property name="minimumSize">
                <size>
-                <width>0</width>
+                <width>82</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>82</width>
                 <height>30</height>
                </size>
               </property>
@@ -537,7 +543,13 @@ QPushButton:hover {
              <widget class="QPushButton" name="btnAverage">
               <property name="minimumSize">
                <size>
-                <width>0</width>
+                <width>82</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>82</width>
                 <height>30</height>
                </size>
               </property>
@@ -556,7 +568,13 @@ QPushButton:hover {
              <widget class="QPushButton" name="btnHard">
               <property name="minimumSize">
                <size>
-                <width>0</width>
+                <width>82</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>82</width>
                 <height>30</height>
                </size>
               </property>

@@ -168,7 +168,18 @@ class Controller:
         self.reports_selectedRow_idv = None
         self.ui.table_student_score_idv.clicked.connect(lambda row: self.handle_report_student_click(row))
         self.ui.cb_gp_quiz_idv.currentIndexChanged.connect(lambda: self.handle_report_student_click(self.reports_selectedRow_idv))
+        self.ui.txt_search_score_idv.textChanged.connect(lambda text: self.handle_report_student_idv(text))
 
+        self.gradingperiod_group = QButtonGroup(self.home_win)
+        self.gradingperiod_group.setExclusive(True)
+        gp_map = { 1: self.ui.btn_manual, 2: self.ui.btn_auto }
+
+        for idx, btn in gp_map.items():
+            btn.setCheckable(True)
+            self.gradingperiod_group.addButton(btn, idx)
+            btn.clicked.connect(lambda checked, i=idx: self.handle_gp_click(i))
+
+        self.ui.btn_manual.setChecked(True)
         self.ui.btnSaveSettings_SY.clicked.connect(self.saveSchoolYear_gradingPeriod)
 
         #=============================================================
@@ -281,19 +292,7 @@ class Controller:
 
         elif index == 6: # Reports
             self.util.populate_pulldowns(self.ui.cb_gp_quiz_idv)
-
-            stud = Student()
-            new_model = stud.refresh_student_table(None)
-            self.ui.table_student_score_idv.sortByColumn(-1, Qt.AscendingOrder)
-            self.ui.table_quiz_score_idv.sortByColumn(-1, Qt.AscendingOrder)
-
-            if new_model:
-                self.ui.table_student_score_idv.setModel(new_model)
-                header = self.ui.table_student_score_idv.horizontalHeader()
-                header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
-                # header.setSectionResizeMode(0, QHeaderView.ResizeMode.ResizeToContents)
-                # header.setSectionResizeMode(4, QHeaderView.ResizeMode.ResizeToContents)
-                self.ui.table_student_score_idv.setColumnHidden(5, True) # Hide 'Gender' column
+            self.handle_report_student_idv()
 
         elif index == 7: # Users
             self.displayUsers()
@@ -303,6 +302,7 @@ class Controller:
             self.displayArchive()
             self.get_dynamic_school_year_dates()
             self.display_grading_periods()
+
 
     def update_clock(self):
         now = QDateTime.currentDateTime()
@@ -931,6 +931,19 @@ class Controller:
             QMessageBox.warning(self.ui.table_lesson.window(), "Missing Path", 
                                 f"No file path associated with: {lesson_title}")
             
+    def handle_report_student_idv(self, text=""):
+        new_model = Student().search_student(text)
+        self.ui.table_student_score_idv.sortByColumn(-1, Qt.AscendingOrder)
+        self.ui.table_quiz_score_idv.sortByColumn(-1, Qt.AscendingOrder)
+
+        if new_model:
+            self.ui.table_student_score_idv.setModel(new_model)
+            header = self.ui.table_student_score_idv.horizontalHeader()
+            header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+            # header.setSectionResizeMode(0, QHeaderView.ResizeMode.ResizeToContents)
+            # header.setSectionResizeMode(4, QHeaderView.ResizeMode.ResizeToContents)
+            self.ui.table_student_score_idv.setColumnHidden(5, True) # Hide 'Gender' column
+            
     def handle_report_student_click(self, row=None):
         if row is not None:
             self.reports_selectedRow_idv = row
@@ -1020,11 +1033,17 @@ class Controller:
         return quarters
 
     def saveSchoolYear_gradingPeriod(self):
-        schedule = self.get_dynamic_school_year_dates()
         sql = ""
         params = []
+
+        ui_schedule = {
+            1: {"start": self.ui.dateEdit_firstgrading_start.date().toPython(), "end": self.ui.dateEdit_firstgrading_end.date().toPython()},
+            2: {"start": self.ui.dateEdit_secondgrading_start.date().toPython(), "end": self.ui.dateEdit_secondgrading_end.date().toPython()},
+            3: {"start": self.ui.dateEdit_thirdgrading_start.date().toPython(), "end": self.ui.dateEdit_thirdgrading_end.date().toPython()},
+            4: {"start": self.ui.dateEdit_fourthgrading_start.date().toPython(), "end": self.ui.dateEdit_fourthgrading_end.date().toPython()},
+        }
         
-        for gpid, dates in schedule.items():
+        for gpid, dates in ui_schedule.items():
             sql += """
                 UPDATE cai.tbl_grading_period 
                 SET startdate = %s, enddate = %s
@@ -1033,7 +1052,13 @@ class Controller:
             params.extend([dates["start"], dates["end"], gpid])
 
         if sql:
-            self.db_tools.execute_query(sql, tuple(params))
+            err = self.db_tools.execute_query(sql, tuple(params))
+
+            if not err:
+                QMessageBox.information(self.home_win, "Successful", "School year and grading period are saved.")
+
+            else:
+                QMessageBox.critical(self.home_win, "Failed", "Unable to save school year and grading period.")
 
     def display_grading_periods(self):
         sql = """
@@ -1064,3 +1089,32 @@ class Controller:
                     self.ui.dateEdit_fourthgrading_start.setDate(start)
                     self.ui.dateEdit_fourthgrading_end.setDate(end)
     
+    def handle_gp_click(self, idx):
+        if idx == 1:
+            self.ui.widget_SY_body_2.setEnabled(True)
+            self.display_grading_periods()
+
+        elif idx == 2:
+            schedule = self.get_dynamic_school_year_dates()
+
+            for gpid, dates in schedule.items():
+                start = QDate.fromString(str(dates['start']), "yyyy-MM-dd")
+                end = QDate.fromString(str(dates['end']), "yyyy-MM-dd")
+
+                if gpid == 1:
+                    self.ui.dateEdit_firstgrading_start.setDate(start)
+                    self.ui.dateEdit_firstgrading_end.setDate(end)
+
+                elif gpid == 2:
+                    self.ui.dateEdit_secondgrading_start.setDate(start)
+                    self.ui.dateEdit_secondgrading_end.setDate(end)
+
+                elif gpid == 3:
+                    self.ui.dateEdit_thirdgrading_start.setDate(start)
+                    self.ui.dateEdit_thirdgrading_end.setDate(end)
+
+                else:
+                    self.ui.dateEdit_fourthgrading_start.setDate(start)
+                    self.ui.dateEdit_fourthgrading_end.setDate(end)
+
+            self.ui.widget_SY_body_2.setEnabled(False)

@@ -70,8 +70,6 @@
     border: 1px solid #95a5a6;
 }
 
-
-
 /* 1. THE MAIN CONTAINER */
 QScrollArea { 
     border: none;
@@ -143,19 +141,6 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
 QScrollArea QWidget #qt_scrollarea_corner {
     background: transparent;
     border: none;
-}
-
-#widget_SY_header, #widget_GP_header { 
-	background-color: rgb(224, 243, 255);
-	border: 1px solid rgb(98, 160, 234);
-	border-top-left-radius: 10px;
-	border-top-right-radius: 10px;
-}
-
-#widget_SY_body, #widget_GP_body {
-	background-color: #fff;
-	border: 1px solid #999;
-	border-top: none;
 }
 
 QDateEdit {
@@ -4627,8 +4612,8 @@ QPushButton {
 
 /* LEFT BUTTON (Easy) */
 QPushButton#btnEasy {
-    border-top-left-radius: 6px;
-    border-bottom-left-radius: 6px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
     border-right: none; /* Avoid double borders in the middle */
 }
 QPushButton#btnEasy:checked {
@@ -4650,8 +4635,8 @@ QPushButton#btnAverage:checked {
 
 /* RIGHT BUTTON (Hard) */
 QPushButton#btnHard {
-    border-top-right-radius: 6px;
-    border-bottom-right-radius: 6px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
 }
 QPushButton#btnHard:checked {
 	background-color: #F07D75; /* Red */
@@ -4684,13 +4669,13 @@ QPushButton:hover {
                <widget class="QPushButton" name="btnEasy">
                 <property name="minimumSize">
                  <size>
-                  <width>0</width>
+                  <width>82</width>
                   <height>30</height>
                  </size>
                 </property>
                 <property name="maximumSize">
                  <size>
-                  <width>16777215</width>
+                  <width>82</width>
                   <height>30</height>
                  </size>
                 </property>
@@ -4709,13 +4694,13 @@ QPushButton:hover {
                <widget class="QPushButton" name="btnAverage">
                 <property name="minimumSize">
                  <size>
-                  <width>0</width>
+                  <width>82</width>
                   <height>30</height>
                  </size>
                 </property>
                 <property name="maximumSize">
                  <size>
-                  <width>16777215</width>
+                  <width>82</width>
                   <height>30</height>
                  </size>
                 </property>
@@ -4734,13 +4719,13 @@ QPushButton:hover {
                <widget class="QPushButton" name="btnHard">
                 <property name="minimumSize">
                  <size>
-                  <width>0</width>
+                  <width>82</width>
                   <height>30</height>
                  </size>
                 </property>
                 <property name="maximumSize">
                  <size>
-                  <width>16777215</width>
+                  <width>82</width>
                   <height>30</height>
                  </size>
                 </property>
@@ -7091,7 +7076,44 @@ QSpinBox::down-arrow, QDateEdit::down-arrow {
           </property>
           <widget class="QWidget" name="tab_settings">
            <property name="styleSheet">
-            <string notr="true"/>
+            <string notr="true">#widget_SY_header, #widget_GP_header { 
+	background-color: rgb(224, 243, 255);
+	border: 1px solid rgb(98, 160, 234);
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+
+#widget_SY_body_1, #widget_SY_body_2, #widget_GP_body {
+	background-color: #fff;
+	border: 1px solid #999;
+	border-top: none;
+}
+
+#widget_SY_body_2 QDateEdit:disabled {
+	background-color: rgb(192, 191, 188);
+}
+
+QRadioButton {
+    color: black;
+    spacing: 8px;
+	padding: 0px 10px;
+	background: transparent;
+	font: 10pt &quot;Inter Medium&quot;;
+}
+
+QRadioButton::indicator {
+	border: 1px solid #999;
+	border-radius: 6px;
+}
+
+QRadioButton::indicator:hover {
+    border-color: #3b82f6;
+}
+
+QRadioButton::indicator:checked {
+    border-color: #3b82f6;
+    background-color: blue;
+}</string>
            </property>
            <attribute name="title">
             <string>Settings</string>
@@ -7268,7 +7290,7 @@ font: 12pt &quot;Inter&quot;;</string>
                      <cursorShape>PointingHandCursor</cursorShape>
                     </property>
                     <property name="styleSheet">
-                     <string notr="true">*[class=&quot;button-green&quot;] {
+                     <string notr="true">QPushButton {
     border-radius: 15px;
     padding: 0px 10px 0px;
     background: #129046;
@@ -7276,7 +7298,7 @@ font: 12pt &quot;Inter&quot;;</string>
 	font: 10pt &quot;Inter SemiBold&quot;;
 }
 
-*[class=&quot;button-green&quot;]:hover {
+QPushButton:hover {
     background: #27AE60;
 }</string>
                     </property>
@@ -7292,16 +7314,244 @@ font: 12pt &quot;Inter&quot;;</string>
                 </widget>
                </item>
                <item>
-                <widget class="QWidget" name="widget_SY_body" native="true">
+                <widget class="QWidget" name="widget_SY_body_1" native="true">
+                 <property name="styleSheet">
+                  <string notr="true"/>
+                 </property>
+                 <layout class="QHBoxLayout" name="horizontalLayout_31">
+                  <item>
+                   <widget class="QLabel" name="label_60">
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>30</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>16777215</width>
+                      <height>30</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>Set the dates for each grading period:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QWidget" name="widget_15" native="true">
+                    <property name="styleSheet">
+                     <string notr="true">#widget_15 {
+	background: transparent;
+}
+
+QPushButton {
+    border: 1px solid #999;
+    padding: 5px 15px;
+	font: 10pt &quot;Inter&quot;;
+    background-color: #f0f0f0;
+}
+
+QPushButton:hover {
+    background-color: #e0e0e0;
+}
+
+#btn_manual {
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-right: none;
+}
+
+#btn_manual:checked {
+    background-color: #72D582;
+	border: 2px solid #448D50;
+    color: #000;
+}
+
+#btn_auto {
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+#btn_auto:checked {
+    background-color: #72D582;
+	border: 2px solid #448D50;
+    color: #000;
+}</string>
+                    </property>
+                    <layout class="QHBoxLayout" name="horizontalLayout_29">
+                     <property name="spacing">
+                      <number>0</number>
+                     </property>
+                     <property name="leftMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="topMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="rightMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="bottomMargin">
+                      <number>0</number>
+                     </property>
+                     <item>
+                      <widget class="QPushButton" name="btn_manual">
+                       <property name="minimumSize">
+                        <size>
+                         <width>100</width>
+                         <height>30</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>100</width>
+                         <height>30</height>
+                        </size>
+                       </property>
+                       <property name="cursor">
+                        <cursorShape>PointingHandCursor</cursorShape>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true"/>
+                       </property>
+                       <property name="text">
+                        <string>Manual</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QPushButton" name="btn_auto">
+                       <property name="minimumSize">
+                        <size>
+                         <width>100</width>
+                         <height>30</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>100</width>
+                         <height>30</height>
+                        </size>
+                       </property>
+                       <property name="cursor">
+                        <cursorShape>PointingHandCursor</cursorShape>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true"/>
+                       </property>
+                       <property name="text">
+                        <string>Automated</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
+                  </item>
+                  <item>
+                   <spacer name="horizontalSpacer_24">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>40</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item>
+                <widget class="QWidget" name="widget_SY_body_2" native="true">
                  <layout class="QGridLayout" name="gridLayout_3">
+                  <property name="bottomMargin">
+                   <number>9</number>
+                  </property>
                   <property name="horizontalSpacing">
                    <number>20</number>
                   </property>
                   <property name="verticalSpacing">
                    <number>10</number>
                   </property>
-                  <item row="4" column="1">
-                   <widget class="QDateEdit" name="dateEdit_fourthgrading_start">
+                  <item row="2" column="0">
+                   <widget class="QLabel" name="label_31">
+                    <property name="maximumSize">
+                     <size>
+                      <width>100</width>
+                      <height>16777215</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>Second:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="0">
+                   <widget class="QLabel" name="label_39">
+                    <property name="maximumSize">
+                     <size>
+                      <width>100</width>
+                      <height>16777215</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>Third:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="4" column="0">
+                   <widget class="QLabel" name="label_40">
+                    <property name="maximumSize">
+                     <size>
+                      <width>100</width>
+                      <height>16777215</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>Fourth:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="QDateEdit" name="dateEdit_firstgrading_start">
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>30</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>16777215</width>
+                      <height>30</height>
+                     </size>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
+                    <property name="displayFormat">
+                     <string>yyyy / MM / dd</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QLabel" name="label_30">
+                    <property name="maximumSize">
+                     <size>
+                      <width>100</width>
+                      <height>16777215</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>First:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="4" column="2">
+                   <widget class="QDateEdit" name="dateEdit_fourthgrading_end">
                     <property name="minimumSize">
                      <size>
                       <width>0</width>
@@ -7344,19 +7594,6 @@ font: 12pt &quot;Inter&quot;;</string>
                     </property>
                    </widget>
                   </item>
-                  <item row="2" column="0">
-                   <widget class="QLabel" name="label_31">
-                    <property name="maximumSize">
-                     <size>
-                      <width>100</width>
-                      <height>16777215</height>
-                     </size>
-                    </property>
-                    <property name="text">
-                     <string>Second:</string>
-                    </property>
-                   </widget>
-                  </item>
                   <item row="0" column="2">
                    <widget class="QLabel" name="label_44">
                     <property name="styleSheet">
@@ -7367,60 +7604,13 @@ font: 12pt &quot;Inter&quot;;</string>
                     </property>
                    </widget>
                   </item>
-                  <item row="2" column="1">
-                   <widget class="QDateEdit" name="dateEdit_secondgrading_start">
-                    <property name="minimumSize">
-                     <size>
-                      <width>0</width>
-                      <height>30</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>16777215</width>
-                      <height>30</height>
-                     </size>
-                    </property>
-                    <property name="alignment">
-                     <set>Qt::AlignCenter</set>
-                    </property>
-                    <property name="displayFormat">
-                     <string>yyyy / MM / dd</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="3" column="0">
-                   <widget class="QLabel" name="label_39">
-                    <property name="maximumSize">
-                     <size>
-                      <width>100</width>
-                      <height>16777215</height>
-                     </size>
+                  <item row="0" column="1">
+                   <widget class="QLabel" name="label_42">
+                    <property name="styleSheet">
+                     <string notr="true">font: 11pt &quot;Inter SemiBold&quot;;</string>
                     </property>
                     <property name="text">
-                     <string>Third:</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="3" column="2">
-                   <widget class="QDateEdit" name="dateEdit_thirdgrading_end">
-                    <property name="minimumSize">
-                     <size>
-                      <width>0</width>
-                      <height>30</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>16777215</width>
-                      <height>30</height>
-                     </size>
-                    </property>
-                    <property name="alignment">
-                     <set>Qt::AlignCenter</set>
-                    </property>
-                    <property name="displayFormat">
-                     <string>yyyy / MM / dd</string>
+                     <string>Start</string>
                     </property>
                    </widget>
                   </item>
@@ -7468,8 +7658,8 @@ font: 12pt &quot;Inter&quot;;</string>
                     </property>
                    </widget>
                   </item>
-                  <item row="4" column="2">
-                   <widget class="QDateEdit" name="dateEdit_fourthgrading_end">
+                  <item row="4" column="1">
+                   <widget class="QDateEdit" name="dateEdit_fourthgrading_start">
                     <property name="minimumSize">
                      <size>
                       <width>0</width>
@@ -7490,8 +7680,8 @@ font: 12pt &quot;Inter&quot;;</string>
                     </property>
                    </widget>
                   </item>
-                  <item row="1" column="1">
-                   <widget class="QDateEdit" name="dateEdit_firstgrading_start">
+                  <item row="2" column="1">
+                   <widget class="QDateEdit" name="dateEdit_secondgrading_start">
                     <property name="minimumSize">
                      <size>
                       <width>0</width>
@@ -7512,39 +7702,25 @@ font: 12pt &quot;Inter&quot;;</string>
                     </property>
                    </widget>
                   </item>
-                  <item row="4" column="0">
-                   <widget class="QLabel" name="label_40">
-                    <property name="maximumSize">
+                  <item row="3" column="2">
+                   <widget class="QDateEdit" name="dateEdit_thirdgrading_end">
+                    <property name="minimumSize">
                      <size>
-                      <width>100</width>
-                      <height>16777215</height>
+                      <width>0</width>
+                      <height>30</height>
                      </size>
                     </property>
-                    <property name="text">
-                     <string>Fourth:</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="0" column="1">
-                   <widget class="QLabel" name="label_42">
-                    <property name="styleSheet">
-                     <string notr="true">font: 11pt &quot;Inter SemiBold&quot;;</string>
-                    </property>
-                    <property name="text">
-                     <string>Start</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="1" column="0">
-                   <widget class="QLabel" name="label_30">
                     <property name="maximumSize">
                      <size>
-                      <width>100</width>
-                      <height>16777215</height>
+                      <width>16777215</width>
+                      <height>30</height>
                      </size>
                     </property>
-                    <property name="text">
-                     <string>First:</string>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
+                    <property name="displayFormat">
+                     <string>yyyy / MM / dd</string>
                     </property>
                    </widget>
                   </item>

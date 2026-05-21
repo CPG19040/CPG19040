@@ -311,8 +311,8 @@ class Ui_QuizCreatorDialog(object):
 "\n"
 "/* LEFT BUTTON (Easy) */\n"
 "QPushButton#btnEasy {\n"
-"    border-top-left-radius: 6px;\n"
-"    border-bottom-left-radius: 6px;\n"
+"    border-top-left-radius: 15px;\n"
+"    border-bottom-left-radius: 15px;\n"
 "    border-right: none; /* Avoid double borders in the middle */\n"
 "}\n"
 "QPushButton#btnEasy:checked {\n"
@@ -334,12 +334,12 @@ class Ui_QuizCreatorDialog(object):
 "\n"
 "/* RIGHT BUTTON (Hard) */\n"
 "QPushButton#btnHard {\n"
-"    border-top-right-radius: 6px;\n"
-"    border-bottom-right-radius: 6px;\n"
+"    border-top-right-radius: 15px;\n"
+"    border-bottom-right-radius: 15px;\n"
 "}\n"
 "QPushButton#btnHard:checked {\n"
-"	bac"
-                        "kground-color: #F07D75; /* Red */\n"
+""
+                        "	background-color: #F07D75; /* Red */\n"
 "	border: 2px solid #E65247;\n"
 "	color: #000;\n"
 "}\n"
@@ -354,7 +354,8 @@ class Ui_QuizCreatorDialog(object):
         self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.btnEasy = QPushButton(self.widget_2)
         self.btnEasy.setObjectName(u"btnEasy")
-        self.btnEasy.setMinimumSize(QSize(0, 30))
+        self.btnEasy.setMinimumSize(QSize(82, 30))
+        self.btnEasy.setMaximumSize(QSize(82, 30))
         self.btnEasy.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btnEasy.setStyleSheet(u"")
 
@@ -362,7 +363,8 @@ class Ui_QuizCreatorDialog(object):
 
         self.btnAverage = QPushButton(self.widget_2)
         self.btnAverage.setObjectName(u"btnAverage")
-        self.btnAverage.setMinimumSize(QSize(0, 30))
+        self.btnAverage.setMinimumSize(QSize(82, 30))
+        self.btnAverage.setMaximumSize(QSize(82, 30))
         self.btnAverage.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btnAverage.setStyleSheet(u"")
 
@@ -370,7 +372,8 @@ class Ui_QuizCreatorDialog(object):
 
         self.btnHard = QPushButton(self.widget_2)
         self.btnHard.setObjectName(u"btnHard")
-        self.btnHard.setMinimumSize(QSize(0, 30))
+        self.btnHard.setMinimumSize(QSize(82, 30))
+        self.btnHard.setMaximumSize(QSize(82, 30))
         self.btnHard.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btnHard.setStyleSheet(u"")
 

@@ -76,8 +76,6 @@ class Ui_Home(object):
 "    border: 1px solid #95a5a6;\n"
 "}\n"
 "\n"
-"\n"
-"\n"
 "/* 1. THE MAIN CONTAINER */\n"
 "QScrollArea { \n"
 "    border: none;\n"
@@ -85,8 +83,8 @@ class Ui_Home(object):
 "	background-color: rgb(246, 245, 244);\n"
 "}\n"
 "\n"
-"/* 2. THE VIEWPORT (Crucial for transparency/b"
-                        "ackgrounds) */\n"
+"/* 2. THE VIEWPORT (Crucial for transparency/backgrounds"
+                        ") */\n"
 "QScrollArea QWidget #qt_scrollarea_viewport {\n"
 "    background: transparent;\n"
 "    border-radius: 20px;\n"
@@ -131,8 +129,8 @@ class Ui_Home(object):
 "}\n"
 "\n"
 "/* 5. REMOVE BUTTONS & TRACK BACKGROUNDS */\n"
-"/"
-                        "* This handles both horizontal and vertical arrows/tracks */\n"
+"/* This han"
+                        "dles both horizontal and vertical arrows/tracks */\n"
 "QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical,\n"
 "QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {\n"
 "    border: none;\n"
@@ -153,22 +151,8 @@ class Ui_Home(object):
 "    border: none;\n"
 "}\n"
 "\n"
-"#widget_SY_header, #widget_GP_header { \n"
-"	background-color: rgb(224, 243, 255);\n"
-"	border: 1px solid rgb(98, 160, 234);\n"
-"	border-top-left-radius: 10px;\n"
-"	border-top-right-radius: 10px;\n"
-"}\n"
-"\n"
-"#widget_SY_body, #widget_GP_body {\n"
-"	background-color: #fff;\n"
-"	border: 1px solid #999;\n"
-"	border-top: none;\n"
-"}\n"
-"\n"
 "QDateEdit {\n"
-""
-                        "	background-color: #fff;\n"
+"	background-color: #fff;\n"
 "}\n"
 "\n"
 "QLabel {\n"
@@ -2316,8 +2300,8 @@ class Ui_Home(object):
 "\n"
 "/* LEFT BUTTON (Easy) */\n"
 "QPushButton#btnEasy {\n"
-"    border-top-left-radius: 6px;\n"
-"    border-bottom-left-radius: 6px;\n"
+"    border-top-left-radius: 15px;\n"
+"    border-bottom-left-radius: 15px;\n"
 "    border-right: none; /* Avoid double borders in the middle */\n"
 "}\n"
 "QPushButton#btnEasy:checked {\n"
@@ -2339,12 +2323,12 @@ class Ui_Home(object):
 "\n"
 "/* RIGHT BUTTON (Hard) */\n"
 "QPushButton#btnHard {\n"
-"    border-top-right-radius: 6px;\n"
-"    border-bottom-right-radius: 6px;\n"
+"    border-top-right-radius: 15px;\n"
+"    border-bottom-right-radius: 15px;\n"
 "}\n"
 "QPushButton#btnHard:checked {\n"
-"	bac"
-                        "kground-color: #F07D75; /* Red */\n"
+""
+                        "	background-color: #F07D75; /* Red */\n"
 "	border: 2px solid #E65247;\n"
 "	color: #000;\n"
 "}\n"
@@ -2359,8 +2343,8 @@ class Ui_Home(object):
         self.horizontalLayout_11.setContentsMargins(0, 0, 0, 0)
         self.btnEasy = QPushButton(self.widget_4)
         self.btnEasy.setObjectName(u"btnEasy")
-        self.btnEasy.setMinimumSize(QSize(0, 30))
-        self.btnEasy.setMaximumSize(QSize(16777215, 30))
+        self.btnEasy.setMinimumSize(QSize(82, 30))
+        self.btnEasy.setMaximumSize(QSize(82, 30))
         self.btnEasy.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btnEasy.setStyleSheet(u"")
 
@@ -2368,8 +2352,8 @@ class Ui_Home(object):
 
         self.btnAverage = QPushButton(self.widget_4)
         self.btnAverage.setObjectName(u"btnAverage")
-        self.btnAverage.setMinimumSize(QSize(0, 30))
-        self.btnAverage.setMaximumSize(QSize(16777215, 30))
+        self.btnAverage.setMinimumSize(QSize(82, 30))
+        self.btnAverage.setMaximumSize(QSize(82, 30))
         self.btnAverage.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btnAverage.setStyleSheet(u"")
 
@@ -2377,8 +2361,8 @@ class Ui_Home(object):
 
         self.btnHard = QPushButton(self.widget_4)
         self.btnHard.setObjectName(u"btnHard")
-        self.btnHard.setMinimumSize(QSize(0, 30))
-        self.btnHard.setMaximumSize(QSize(16777215, 30))
+        self.btnHard.setMinimumSize(QSize(82, 30))
+        self.btnHard.setMaximumSize(QSize(82, 30))
         self.btnHard.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btnHard.setStyleSheet(u"")
 
@@ -3752,7 +3736,44 @@ class Ui_Home(object):
 "}")
         self.tab_settings = QWidget()
         self.tab_settings.setObjectName(u"tab_settings")
-        self.tab_settings.setStyleSheet(u"")
+        self.tab_settings.setStyleSheet(u"#widget_SY_header, #widget_GP_header { \n"
+"	background-color: rgb(224, 243, 255);\n"
+"	border: 1px solid rgb(98, 160, 234);\n"
+"	border-top-left-radius: 10px;\n"
+"	border-top-right-radius: 10px;\n"
+"}\n"
+"\n"
+"#widget_SY_body_1, #widget_SY_body_2, #widget_GP_body {\n"
+"	background-color: #fff;\n"
+"	border: 1px solid #999;\n"
+"	border-top: none;\n"
+"}\n"
+"\n"
+"#widget_SY_body_2 QDateEdit:disabled {\n"
+"	background-color: rgb(192, 191, 188);\n"
+"}\n"
+"\n"
+"QRadioButton {\n"
+"    color: black;\n"
+"    spacing: 8px;\n"
+"	padding: 0px 10px;\n"
+"	background: transparent;\n"
+"	font: 10pt \"Inter Medium\";\n"
+"}\n"
+"\n"
+"QRadioButton::indicator {\n"
+"	border: 1px solid #999;\n"
+"	border-radius: 6px;\n"
+"}\n"
+"\n"
+"QRadioButton::indicator:hover {\n"
+"    border-color: #3b82f6;\n"
+"}\n"
+"\n"
+"QRadioButton::indicator:checked {\n"
+"    border-color: #3b82f6;\n"
+"    background-color: blue;\n"
+"}")
         self.verticalLayout_27 = QVBoxLayout(self.tab_settings)
         self.verticalLayout_27.setObjectName(u"verticalLayout_27")
         self.widget_SY_settings = QWidget(self.tab_settings)
@@ -3825,7 +3846,7 @@ class Ui_Home(object):
         font12.setItalic(False)
         self.btnSaveSettings_SY.setFont(font12)
         self.btnSaveSettings_SY.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.btnSaveSettings_SY.setStyleSheet(u"*[class=\"button-green\"] {\n"
+        self.btnSaveSettings_SY.setStyleSheet(u"QPushButton {\n"
 "    border-radius: 15px;\n"
 "    padding: 0px 10px 0px;\n"
 "    background: #129046;\n"
@@ -3833,7 +3854,7 @@ class Ui_Home(object):
 "	font: 10pt \"Inter SemiBold\";\n"
 "}\n"
 "\n"
-"*[class=\"button-green\"]:hover {\n"
+"QPushButton:hover {\n"
 "    background: #27AE60;\n"
 "}")
 
@@ -3842,87 +3863,115 @@ class Ui_Home(object):
 
         self.verticalLayout_28.addWidget(self.widget_SY_header)
 
-        self.widget_SY_body = QWidget(self.widget_SY_settings)
-        self.widget_SY_body.setObjectName(u"widget_SY_body")
-        self.gridLayout_3 = QGridLayout(self.widget_SY_body)
+        self.widget_SY_body_1 = QWidget(self.widget_SY_settings)
+        self.widget_SY_body_1.setObjectName(u"widget_SY_body_1")
+        self.widget_SY_body_1.setStyleSheet(u"")
+        self.horizontalLayout_31 = QHBoxLayout(self.widget_SY_body_1)
+        self.horizontalLayout_31.setObjectName(u"horizontalLayout_31")
+        self.label_60 = QLabel(self.widget_SY_body_1)
+        self.label_60.setObjectName(u"label_60")
+        self.label_60.setMinimumSize(QSize(0, 30))
+        self.label_60.setMaximumSize(QSize(16777215, 30))
+
+        self.horizontalLayout_31.addWidget(self.label_60)
+
+        self.widget_15 = QWidget(self.widget_SY_body_1)
+        self.widget_15.setObjectName(u"widget_15")
+        self.widget_15.setStyleSheet(u"#widget_15 {\n"
+"	background: transparent;\n"
+"}\n"
+"\n"
+"QPushButton {\n"
+"    border: 1px solid #999;\n"
+"    padding: 5px 15px;\n"
+"	font: 10pt \"Inter\";\n"
+"    background-color: #f0f0f0;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: #e0e0e0;\n"
+"}\n"
+"\n"
+"#btn_manual {\n"
+"    border-top-left-radius: 15px;\n"
+"    border-bottom-left-radius: 15px;\n"
+"    border-right: none;\n"
+"}\n"
+"\n"
+"#btn_manual:checked {\n"
+"    background-color: #72D582;\n"
+"	border: 2px solid #448D50;\n"
+"    color: #000;\n"
+"}\n"
+"\n"
+"#btn_auto {\n"
+"    border-top-right-radius: 15px;\n"
+"    border-bottom-right-radius: 15px;\n"
+"}\n"
+"\n"
+"#btn_auto:checked {\n"
+"    background-color: #72D582;\n"
+"	border: 2px solid #448D50;\n"
+"    color: #000;\n"
+"}")
+        self.horizontalLayout_29 = QHBoxLayout(self.widget_15)
+        self.horizontalLayout_29.setSpacing(0)
+        self.horizontalLayout_29.setObjectName(u"horizontalLayout_29")
+        self.horizontalLayout_29.setContentsMargins(0, 0, 0, 0)
+        self.btn_manual = QPushButton(self.widget_15)
+        self.btn_manual.setObjectName(u"btn_manual")
+        self.btn_manual.setMinimumSize(QSize(100, 30))
+        self.btn_manual.setMaximumSize(QSize(100, 30))
+        self.btn_manual.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.btn_manual.setStyleSheet(u"")
+
+        self.horizontalLayout_29.addWidget(self.btn_manual)
+
+        self.btn_auto = QPushButton(self.widget_15)
+        self.btn_auto.setObjectName(u"btn_auto")
+        self.btn_auto.setMinimumSize(QSize(100, 30))
+        self.btn_auto.setMaximumSize(QSize(100, 30))
+        self.btn_auto.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.btn_auto.setStyleSheet(u"")
+
+        self.horizontalLayout_29.addWidget(self.btn_auto)
+
+
+        self.horizontalLayout_31.addWidget(self.widget_15)
+
+        self.horizontalSpacer_24 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_31.addItem(self.horizontalSpacer_24)
+
+
+        self.verticalLayout_28.addWidget(self.widget_SY_body_1)
+
+        self.widget_SY_body_2 = QWidget(self.widget_SY_settings)
+        self.widget_SY_body_2.setObjectName(u"widget_SY_body_2")
+        self.gridLayout_3 = QGridLayout(self.widget_SY_body_2)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
         self.gridLayout_3.setHorizontalSpacing(20)
         self.gridLayout_3.setVerticalSpacing(10)
-        self.dateEdit_fourthgrading_start = QDateEdit(self.widget_SY_body)
-        self.dateEdit_fourthgrading_start.setObjectName(u"dateEdit_fourthgrading_start")
-        self.dateEdit_fourthgrading_start.setMinimumSize(QSize(0, 30))
-        self.dateEdit_fourthgrading_start.setMaximumSize(QSize(16777215, 30))
-        self.dateEdit_fourthgrading_start.setAlignment(Qt.AlignCenter)
-
-        self.gridLayout_3.addWidget(self.dateEdit_fourthgrading_start, 4, 1, 1, 1)
-
-        self.dateEdit_firstgrading_end = QDateEdit(self.widget_SY_body)
-        self.dateEdit_firstgrading_end.setObjectName(u"dateEdit_firstgrading_end")
-        self.dateEdit_firstgrading_end.setMinimumSize(QSize(0, 30))
-        self.dateEdit_firstgrading_end.setMaximumSize(QSize(16777215, 30))
-        self.dateEdit_firstgrading_end.setAlignment(Qt.AlignCenter)
-
-        self.gridLayout_3.addWidget(self.dateEdit_firstgrading_end, 1, 2, 1, 1)
-
-        self.label_31 = QLabel(self.widget_SY_body)
+        self.gridLayout_3.setContentsMargins(-1, -1, -1, 9)
+        self.label_31 = QLabel(self.widget_SY_body_2)
         self.label_31.setObjectName(u"label_31")
         self.label_31.setMaximumSize(QSize(100, 16777215))
 
         self.gridLayout_3.addWidget(self.label_31, 2, 0, 1, 1)
 
-        self.label_44 = QLabel(self.widget_SY_body)
-        self.label_44.setObjectName(u"label_44")
-        self.label_44.setStyleSheet(u"font: 11pt \"Inter SemiBold\";")
-
-        self.gridLayout_3.addWidget(self.label_44, 0, 2, 1, 1)
-
-        self.dateEdit_secondgrading_start = QDateEdit(self.widget_SY_body)
-        self.dateEdit_secondgrading_start.setObjectName(u"dateEdit_secondgrading_start")
-        self.dateEdit_secondgrading_start.setMinimumSize(QSize(0, 30))
-        self.dateEdit_secondgrading_start.setMaximumSize(QSize(16777215, 30))
-        self.dateEdit_secondgrading_start.setAlignment(Qt.AlignCenter)
-
-        self.gridLayout_3.addWidget(self.dateEdit_secondgrading_start, 2, 1, 1, 1)
-
-        self.label_39 = QLabel(self.widget_SY_body)
+        self.label_39 = QLabel(self.widget_SY_body_2)
         self.label_39.setObjectName(u"label_39")
         self.label_39.setMaximumSize(QSize(100, 16777215))
 
         self.gridLayout_3.addWidget(self.label_39, 3, 0, 1, 1)
 
-        self.dateEdit_thirdgrading_end = QDateEdit(self.widget_SY_body)
-        self.dateEdit_thirdgrading_end.setObjectName(u"dateEdit_thirdgrading_end")
-        self.dateEdit_thirdgrading_end.setMinimumSize(QSize(0, 30))
-        self.dateEdit_thirdgrading_end.setMaximumSize(QSize(16777215, 30))
-        self.dateEdit_thirdgrading_end.setAlignment(Qt.AlignCenter)
+        self.label_40 = QLabel(self.widget_SY_body_2)
+        self.label_40.setObjectName(u"label_40")
+        self.label_40.setMaximumSize(QSize(100, 16777215))
 
-        self.gridLayout_3.addWidget(self.dateEdit_thirdgrading_end, 3, 2, 1, 1)
+        self.gridLayout_3.addWidget(self.label_40, 4, 0, 1, 1)
 
-        self.dateEdit_thirdgrading_start = QDateEdit(self.widget_SY_body)
-        self.dateEdit_thirdgrading_start.setObjectName(u"dateEdit_thirdgrading_start")
-        self.dateEdit_thirdgrading_start.setMinimumSize(QSize(0, 30))
-        self.dateEdit_thirdgrading_start.setMaximumSize(QSize(16777215, 30))
-        self.dateEdit_thirdgrading_start.setAlignment(Qt.AlignCenter)
-
-        self.gridLayout_3.addWidget(self.dateEdit_thirdgrading_start, 3, 1, 1, 1)
-
-        self.dateEdit_secondgrading_end = QDateEdit(self.widget_SY_body)
-        self.dateEdit_secondgrading_end.setObjectName(u"dateEdit_secondgrading_end")
-        self.dateEdit_secondgrading_end.setMinimumSize(QSize(0, 30))
-        self.dateEdit_secondgrading_end.setMaximumSize(QSize(16777215, 30))
-        self.dateEdit_secondgrading_end.setAlignment(Qt.AlignCenter)
-
-        self.gridLayout_3.addWidget(self.dateEdit_secondgrading_end, 2, 2, 1, 1)
-
-        self.dateEdit_fourthgrading_end = QDateEdit(self.widget_SY_body)
-        self.dateEdit_fourthgrading_end.setObjectName(u"dateEdit_fourthgrading_end")
-        self.dateEdit_fourthgrading_end.setMinimumSize(QSize(0, 30))
-        self.dateEdit_fourthgrading_end.setMaximumSize(QSize(16777215, 30))
-        self.dateEdit_fourthgrading_end.setAlignment(Qt.AlignCenter)
-
-        self.gridLayout_3.addWidget(self.dateEdit_fourthgrading_end, 4, 2, 1, 1)
-
-        self.dateEdit_firstgrading_start = QDateEdit(self.widget_SY_body)
+        self.dateEdit_firstgrading_start = QDateEdit(self.widget_SY_body_2)
         self.dateEdit_firstgrading_start.setObjectName(u"dateEdit_firstgrading_start")
         self.dateEdit_firstgrading_start.setMinimumSize(QSize(0, 30))
         self.dateEdit_firstgrading_start.setMaximumSize(QSize(16777215, 30))
@@ -3930,30 +3979,86 @@ class Ui_Home(object):
 
         self.gridLayout_3.addWidget(self.dateEdit_firstgrading_start, 1, 1, 1, 1)
 
-        self.label_40 = QLabel(self.widget_SY_body)
-        self.label_40.setObjectName(u"label_40")
-        self.label_40.setMaximumSize(QSize(100, 16777215))
+        self.label_30 = QLabel(self.widget_SY_body_2)
+        self.label_30.setObjectName(u"label_30")
+        self.label_30.setMaximumSize(QSize(100, 16777215))
 
-        self.gridLayout_3.addWidget(self.label_40, 4, 0, 1, 1)
+        self.gridLayout_3.addWidget(self.label_30, 1, 0, 1, 1)
 
-        self.label_42 = QLabel(self.widget_SY_body)
+        self.dateEdit_fourthgrading_end = QDateEdit(self.widget_SY_body_2)
+        self.dateEdit_fourthgrading_end.setObjectName(u"dateEdit_fourthgrading_end")
+        self.dateEdit_fourthgrading_end.setMinimumSize(QSize(0, 30))
+        self.dateEdit_fourthgrading_end.setMaximumSize(QSize(16777215, 30))
+        self.dateEdit_fourthgrading_end.setAlignment(Qt.AlignCenter)
+
+        self.gridLayout_3.addWidget(self.dateEdit_fourthgrading_end, 4, 2, 1, 1)
+
+        self.dateEdit_firstgrading_end = QDateEdit(self.widget_SY_body_2)
+        self.dateEdit_firstgrading_end.setObjectName(u"dateEdit_firstgrading_end")
+        self.dateEdit_firstgrading_end.setMinimumSize(QSize(0, 30))
+        self.dateEdit_firstgrading_end.setMaximumSize(QSize(16777215, 30))
+        self.dateEdit_firstgrading_end.setAlignment(Qt.AlignCenter)
+
+        self.gridLayout_3.addWidget(self.dateEdit_firstgrading_end, 1, 2, 1, 1)
+
+        self.label_44 = QLabel(self.widget_SY_body_2)
+        self.label_44.setObjectName(u"label_44")
+        self.label_44.setStyleSheet(u"font: 11pt \"Inter SemiBold\";")
+
+        self.gridLayout_3.addWidget(self.label_44, 0, 2, 1, 1)
+
+        self.label_42 = QLabel(self.widget_SY_body_2)
         self.label_42.setObjectName(u"label_42")
         self.label_42.setStyleSheet(u"font: 11pt \"Inter SemiBold\";")
 
         self.gridLayout_3.addWidget(self.label_42, 0, 1, 1, 1)
 
-        self.label_30 = QLabel(self.widget_SY_body)
-        self.label_30.setObjectName(u"label_30")
-        self.label_30.setMaximumSize(QSize(100, 16777215))
+        self.dateEdit_thirdgrading_start = QDateEdit(self.widget_SY_body_2)
+        self.dateEdit_thirdgrading_start.setObjectName(u"dateEdit_thirdgrading_start")
+        self.dateEdit_thirdgrading_start.setMinimumSize(QSize(0, 30))
+        self.dateEdit_thirdgrading_start.setMaximumSize(QSize(16777215, 30))
+        self.dateEdit_thirdgrading_start.setAlignment(Qt.AlignCenter)
 
-        self.gridLayout_3.addWidget(self.label_30, 1, 0, 1, 1)
+        self.gridLayout_3.addWidget(self.dateEdit_thirdgrading_start, 3, 1, 1, 1)
+
+        self.dateEdit_secondgrading_end = QDateEdit(self.widget_SY_body_2)
+        self.dateEdit_secondgrading_end.setObjectName(u"dateEdit_secondgrading_end")
+        self.dateEdit_secondgrading_end.setMinimumSize(QSize(0, 30))
+        self.dateEdit_secondgrading_end.setMaximumSize(QSize(16777215, 30))
+        self.dateEdit_secondgrading_end.setAlignment(Qt.AlignCenter)
+
+        self.gridLayout_3.addWidget(self.dateEdit_secondgrading_end, 2, 2, 1, 1)
+
+        self.dateEdit_fourthgrading_start = QDateEdit(self.widget_SY_body_2)
+        self.dateEdit_fourthgrading_start.setObjectName(u"dateEdit_fourthgrading_start")
+        self.dateEdit_fourthgrading_start.setMinimumSize(QSize(0, 30))
+        self.dateEdit_fourthgrading_start.setMaximumSize(QSize(16777215, 30))
+        self.dateEdit_fourthgrading_start.setAlignment(Qt.AlignCenter)
+
+        self.gridLayout_3.addWidget(self.dateEdit_fourthgrading_start, 4, 1, 1, 1)
+
+        self.dateEdit_secondgrading_start = QDateEdit(self.widget_SY_body_2)
+        self.dateEdit_secondgrading_start.setObjectName(u"dateEdit_secondgrading_start")
+        self.dateEdit_secondgrading_start.setMinimumSize(QSize(0, 30))
+        self.dateEdit_secondgrading_start.setMaximumSize(QSize(16777215, 30))
+        self.dateEdit_secondgrading_start.setAlignment(Qt.AlignCenter)
+
+        self.gridLayout_3.addWidget(self.dateEdit_secondgrading_start, 2, 1, 1, 1)
+
+        self.dateEdit_thirdgrading_end = QDateEdit(self.widget_SY_body_2)
+        self.dateEdit_thirdgrading_end.setObjectName(u"dateEdit_thirdgrading_end")
+        self.dateEdit_thirdgrading_end.setMinimumSize(QSize(0, 30))
+        self.dateEdit_thirdgrading_end.setMaximumSize(QSize(16777215, 30))
+        self.dateEdit_thirdgrading_end.setAlignment(Qt.AlignCenter)
+
+        self.gridLayout_3.addWidget(self.dateEdit_thirdgrading_end, 3, 2, 1, 1)
 
         self.verticalSpacer_4 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.gridLayout_3.addItem(self.verticalSpacer_4, 5, 0, 1, 1)
 
 
-        self.verticalLayout_28.addWidget(self.widget_SY_body)
+        self.verticalLayout_28.addWidget(self.widget_SY_body_2)
 
 
         self.verticalLayout_27.addWidget(self.widget_SY_settings)
@@ -4231,20 +4336,23 @@ class Ui_Home(object):
         self.label_14.setText(QCoreApplication.translate("Home", u"-", None))
         self.btnSaveSettings_SY.setText(QCoreApplication.translate("Home", u"Save", None))
         self.btnSaveSettings_SY.setProperty(u"class", QCoreApplication.translate("Home", u"button-green", None))
-        self.dateEdit_fourthgrading_start.setDisplayFormat(QCoreApplication.translate("Home", u"yyyy / MM / dd", None))
-        self.dateEdit_firstgrading_end.setDisplayFormat(QCoreApplication.translate("Home", u"yyyy / MM / dd", None))
+        self.label_60.setText(QCoreApplication.translate("Home", u"Set the dates for each grading period:", None))
+        self.btn_manual.setText(QCoreApplication.translate("Home", u"Manual", None))
+        self.btn_auto.setText(QCoreApplication.translate("Home", u"Automated", None))
         self.label_31.setText(QCoreApplication.translate("Home", u"Second:", None))
-        self.label_44.setText(QCoreApplication.translate("Home", u"End", None))
-        self.dateEdit_secondgrading_start.setDisplayFormat(QCoreApplication.translate("Home", u"yyyy / MM / dd", None))
         self.label_39.setText(QCoreApplication.translate("Home", u"Third:", None))
-        self.dateEdit_thirdgrading_end.setDisplayFormat(QCoreApplication.translate("Home", u"yyyy / MM / dd", None))
+        self.label_40.setText(QCoreApplication.translate("Home", u"Fourth:", None))
+        self.dateEdit_firstgrading_start.setDisplayFormat(QCoreApplication.translate("Home", u"yyyy / MM / dd", None))
+        self.label_30.setText(QCoreApplication.translate("Home", u"First:", None))
+        self.dateEdit_fourthgrading_end.setDisplayFormat(QCoreApplication.translate("Home", u"yyyy / MM / dd", None))
+        self.dateEdit_firstgrading_end.setDisplayFormat(QCoreApplication.translate("Home", u"yyyy / MM / dd", None))
+        self.label_44.setText(QCoreApplication.translate("Home", u"End", None))
+        self.label_42.setText(QCoreApplication.translate("Home", u"Start", None))
         self.dateEdit_thirdgrading_start.setDisplayFormat(QCoreApplication.translate("Home", u"yyyy / MM / dd", None))
         self.dateEdit_secondgrading_end.setDisplayFormat(QCoreApplication.translate("Home", u"yyyy / MM / dd", None))
-        self.dateEdit_fourthgrading_end.setDisplayFormat(QCoreApplication.translate("Home", u"yyyy / MM / dd", None))
-        self.dateEdit_firstgrading_start.setDisplayFormat(QCoreApplication.translate("Home", u"yyyy / MM / dd", None))
-        self.label_40.setText(QCoreApplication.translate("Home", u"Fourth:", None))
-        self.label_42.setText(QCoreApplication.translate("Home", u"Start", None))
-        self.label_30.setText(QCoreApplication.translate("Home", u"First:", None))
+        self.dateEdit_fourthgrading_start.setDisplayFormat(QCoreApplication.translate("Home", u"yyyy / MM / dd", None))
+        self.dateEdit_secondgrading_start.setDisplayFormat(QCoreApplication.translate("Home", u"yyyy / MM / dd", None))
+        self.dateEdit_thirdgrading_end.setDisplayFormat(QCoreApplication.translate("Home", u"yyyy / MM / dd", None))
         self.tabWidget_utility.setTabText(self.tabWidget_utility.indexOf(self.tab_settings), QCoreApplication.translate("Home", u"Settings", None))
         self.tabWidget_utility.setTabText(self.tabWidget_utility.indexOf(self.tab_audit_trail), QCoreApplication.translate("Home", u"Audit Trail", None))
         self.tabWidget_utility.setTabText(self.tabWidget_utility.indexOf(self.tab_archive), QCoreApplication.translate("Home", u"Archive", None))

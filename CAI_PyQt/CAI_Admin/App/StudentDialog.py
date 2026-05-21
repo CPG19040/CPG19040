@@ -51,9 +51,62 @@ class Student:
             pixmap = self.util.makeCircularPixmap(pixmap, size)
 
         return pixmap
+    
+    def search_student(self, text=""):
+        sql  = 'SELECT\n'
+        sql += '    stud.studentid\n'
+        sql += '    ,stud.lastname\n'
+        sql += '    ,stud.firstname\n'
+        sql += '    ,stud.middlename\n'
+        sql += '    ,sec.sectionname\n'
+        sql += 'FROM\n'
+        sql += '    cai.tbl_student_info stud\n'
+        sql += 'INNER JOIN\n'
+        sql += '    cai.tbl_section sec\n'
+        sql += '    ON stud.sectionid = sec.sectionid\n'
 
-    def refresh_student_table(self, sectionid):
-        sql = 'SELECT\n'
+        sql_params = []
+
+        if text:
+            sql += '    AND (\n'
+            sql += '        stud.studentid ILIKE %s OR\n'
+            sql += '        stud.lastname ILIKE %s OR\n'
+            sql += '        stud.firstname ILIKE %s OR\n'
+            sql += '        stud.middlename ILIKE %s OR\n'
+            sql += '        sec.sectionname ILIKE %s\n'
+            sql += '    )\n'
+            
+            search_term = f"%{text}%"
+            sql_params.extend([search_term, search_term, search_term, search_term, search_term])
+
+        sql += 'ORDER BY\n'
+        sql += '    stud.lastname, stud.firstname ASC'
+
+        sql_params = tuple(sql_params) if sql_params else None
+        cursor, conn = self.db_tools.retrieve_records(sql, sql_params)
+
+        if cursor:
+            headers = ["STUDENT ID", "LAST NAME", "FIRST NAME", "MIDDLE NAME", "SECTION"]
+            records = cursor.fetchall()
+            model = QStandardItemModel(len(records), len(headers))
+            model.setHorizontalHeaderLabels(headers)
+
+            for row_idx, row_data in enumerate(records):
+
+                for col_idx, value in enumerate(row_data):
+                    item = QStandardItem(str(value) if value is not None else "")
+                    item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsEditable)
+                    model.setItem(row_idx, col_idx, item)
+
+            cursor.close()
+            conn.close()
+            return model
+
+        if conn: conn.close()
+        return None
+
+    def refresh_student_table(self, sectionid=None):
+        sql  = 'SELECT\n'
         sql += '    stud.studentid AS "STUDENT ID"\n'
         sql += '    ,stud.lastname AS "LAST NAME"\n'
         sql += '    ,stud.firstname AS "FIRST NAME"\n'
@@ -66,18 +119,18 @@ class Student:
         sql += '    cai.tbl_section sec\n'
         sql += '    ON stud.sectionid = sec.sectionid\n'
 
-        params = []
+        sql_params = []
 
         if sectionid:
             sql += '    AND stud.sectionid = %s\n'
-            params.append(sectionid)
+            sql_params.append(sectionid)
 
         sql += 'ORDER BY\n'
         sql += '    stud.lastname, stud.firstname ASC'
 
-        params = tuple(params) if params else None
+        sql_params = tuple(sql_params) if sql_params else None
+        cursor, conn = self.db_tools.retrieve_records(sql, sql_params)
 
-        cursor, conn = self.db_tools.retrieve_records(sql, params)
         if cursor:
             headers = [desc[0] for desc in cursor.description]
             records = cursor.fetchall()

@@ -326,16 +326,21 @@ class QuizUtils:
                 total_student_points += sum(row.values()) if isinstance(row, dict) else sum(row)
 
         sql_upsert = """
+            DELETE FROM cai.tbl_quizscores
+            WHERE
+                quiznumber = %s AND
+                gradingperiod = %s AND
+                lessonid = %s AND
+                studentid = %s;
+
             INSERT INTO cai.tbl_quizscores (
                 quiznumber, gradingperiod, lessonid, studentid, quizscore
-            ) VALUES (%s, %s, %s, %s, %s)
-            ON CONFLICT (studentid, quiznumber, gradingperiod, lessonid)
-            DO UPDATE SET
-                datetaken = CURRENT_TIMESTAMP,
-                quizscore = EXCLUDED.quizscore;
+            ) VALUES (%s, %s, %s, %s, %s);
         """
 
         upsert_params = (
+            self.quiznumber, self.gradingperiod, self.lessonid, student_id,
+
             self.quiznumber, 
             self.gradingperiod, 
             self.lessonid,
