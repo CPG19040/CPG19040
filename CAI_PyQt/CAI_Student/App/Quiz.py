@@ -275,106 +275,93 @@ class QuizUtils:
             if conn: conn.close()
 
     def evaluate_quiz(self, student_id):
-        # FETCH MULTIPLIERS
         sql = """
-            SELECT easy_multiplier, average_multiplier, hard_multiplier
-            FROM cai.tbl_scoremultiplier
-            WHERE
-                quiznumber = %s
-                AND lessonid = %s
-                AND gradingperiod = %s
-        """
-        res_mult = self.db_tools.fetch_all(sql, (self.quiznumber, self.lessonid, self.gradingperiod))
+            DELETE FROM CAI.TBL_QUIZSCORES
+            WHERE QUIZNUMBER = %s AND
+                GRADINGPERIOD = %s AND
+                LESSONID = %s AND
+                STUDENTID = %s;
 
-        if not res_mult:
-            return
-        
-        res_mult = res_mult[0]
-
-        # DEFINE CALCULATION HELPERS
-        quiz_types = [
-            {'table': 'tbl_quizmultiplechoice', 'key': 'mckey', 'type': 'MC'},
-            {'table': 'tbl_quizidentification', 'key': 'idkey', 'type': 'ID'},
-            {'table': 'tbl_quiztrueorfalse', 'key': 'tfkey', 'type': 'TF'}
-        ]
-
-        total_student_points = 0
-
-        for q in quiz_types:
-            sql  = "SELECT\n"
-            sql += "    COALESCE(SUM(CASE WHEN q.difficultylevel = '1' THEN 1 ELSE 0 END), 0) * %s AS s1,\n"
-            sql += "    COALESCE(SUM(CASE WHEN q.difficultylevel = '2' THEN 1 ELSE 0 END), 0) * %s AS s2,\n"
-            sql += "    COALESCE(SUM(CASE WHEN q.difficultylevel = '3' THEN 1 ELSE 0 END), 0) * %s AS s3\n"
-            sql += f"FROM cai.{q['table']} q\n"
-            sql += f"INNER JOIN cai.tbl_answers a ON q.{q['key']} = a.assmt_key\n"
-            sql += "WHERE a.studentid = %s\n"
-            sql += "AND a.quiznumber = %s\n"
-            sql += "AND a.quiztype = %s\n"
-            sql += "AND LOWER(q.correct_answer) = LOWER(a.answer);\n"
-
-            res = self.db_tools.fetch_all(sql, (
-                res_mult['easy_multiplier'],
-                res_mult['average_multiplier'],
-                res_mult['hard_multiplier'],
-                student_id,
-                self.quiznumber,
-                q['type'])
+            INSERT INTO CAI.TBL_QUIZSCORES (QUIZNUMBER, GRADINGPERIOD, LESSONID, STUDENTID, QUIZSCORE, DATETAKEN)
+            WITH CombinedQuizzes AS (
+                -- 1. Unify and filter the quiz items for the specific scope
+                SELECT 'ID' AS quiztype, IDKEY AS assmt_key, QUIZNUMBER, LESSONID, GRADINGPERIOD, DIFFICULTYLEVEL, ITEMNO, CORRECT_ANSWER 
+                FROM CAI.TBL_QUIZIDENTIFICATION
+                WHERE QUIZNUMBER = %s AND LESSONID = %s AND GRADINGPERIOD = %s
+                
+                UNION ALL
+                
+                SELECT 'MC' AS quiztype, MCKEY AS assmt_key, QUIZNUMBER, LESSONID, GRADINGPERIOD, DIFFICULTYLEVEL, ITEMNO, CORRECT_ANSWER 
+                FROM CAI.TBL_QUIZMULTIPLECHOICE
+                WHERE QUIZNUMBER = %s AND LESSONID = %s AND GRADINGPERIOD = %s
+                
+                UNION ALL
+                
+                SELECT 'TF' AS quiztype, TFKEY AS assmt_key, QUIZNUMBER, LESSONID, GRADINGPERIOD, DIFFICULTYLEVEL, ITEMNO, CORRECT_ANSWER 
+                FROM CAI.TBL_QUIZTRUEORFALSE
+                WHERE QUIZNUMBER = %s AND LESSONID = %s AND GRADINGPERIOD = %s
+            ),
+            ScoredItems AS (
+                -- 2. Join the targeted student's answers, evaluate correctness, and pull multipliers
+                SELECT 
+                    a.studentid,
+                    m.gradingperiod,
+                    m.lessonid,
+                    m.quiznumber,
+                    a.datetaken,
+                    CASE 
+                        WHEN UPPER(TRIM(a.answer)) = UPPER(TRIM(q.CORRECT_ANSWER)) THEN 1 
+                        ELSE 0 
+                    END AS is_correct,
+                    CASE q.DIFFICULTYLEVEL
+                        WHEN 1 THEN COALESCE(m.EASY_MULTIPLIER, 1)
+                        WHEN 2 THEN COALESCE(m.AVERAGE_MULTIPLIER, 1)
+                        WHEN 3 THEN COALESCE(m.HARD_MULTIPLIER, 1)
+                        ELSE 1
+                    END AS multiplier
+                FROM cai.tbl_answers a
+                INNER JOIN CombinedQuizzes q 
+                    ON a.quiztype = q.quiztype 
+                    AND a.assmt_key = q.assmt_key
+                    AND a.quiznumber = q.quiznumber
+                    AND a.itemno = q.ITEMNO 
+                LEFT JOIN CAI.TBL_SCOREMULTIPLIER m
+                    ON q.QUIZNUMBER = m.QUIZNUMBER
+                    AND q.LESSONID = m.LESSONID
+                    AND q.GRADINGPERIOD = m.GRADINGPERIOD
+                WHERE a.studentid = %s
+                AND a.quiznumber = %s
             )
-
-            if res:
-                row = res[0]
-                total_student_points += sum(row.values()) if isinstance(row, dict) else sum(row)
-
-        sql_upsert = """
-            DELETE FROM cai.tbl_quizscores
-            WHERE
-                quiznumber = %s AND
-                gradingperiod = %s AND
-                lessonid = %s AND
-                studentid = %s;
-
-            INSERT INTO cai.tbl_quizscores (
-                quiznumber, gradingperiod, lessonid, studentid, quizscore
-            ) VALUES (%s, %s, %s, %s, %s);
+            -- 3. Aggregate total score and insert into the destination table
+            SELECT 
+                quiznumber,
+                gradingperiod,
+                lessonid,
+                studentid,
+                SUM(is_correct * multiplier) AS QUIZSCORE,
+                MAX(datetaken) AS DATETAKEN -- Pulls the timestamp from the student's submission
+            FROM ScoredItems
+            GROUP BY 
+                studentid, 
+                gradingperiod, 
+                lessonid, 
+                quiznumber;
         """
 
-        upsert_params = (
+        params = (
             self.quiznumber, self.gradingperiod, self.lessonid, student_id,
-
-            self.quiznumber, 
-            self.gradingperiod, 
-            self.lessonid,
-            student_id, 
-            total_student_points
+            self.quiznumber, self.lessonid, self.gradingperiod,
+            self.quiznumber, self.lessonid, self.gradingperiod,
+            self.quiznumber, self.lessonid, self.gradingperiod,
+            student_id, self.quiznumber
         )
-
-        sql_prog = """
-            UPDATE cai.tbl_progress 
-            SET lessonsdone = CASE 
-                    WHEN lessonsdone = '' THEN %s 
-                    WHEN lessonsdone LIKE %s THEN lessonsdone
-                    ELSE lessonsdone || ',' || %s 
-                END,
-                quizdone = CASE 
-                    WHEN quizdone = '' THEN %s 
-                    WHEN quizdone LIKE %s THEN quizdone
-                    ELSE quizdone || ',' || %s 
-                END
-            WHERE studentid = %s;
-        """
 
         try:
             conn = self.db_tools.get_connection()
             conn.autocommit = False
 
             with conn.cursor() as cur:
-                cur.execute(sql_upsert, upsert_params)
-                
-                # Formatting parameters for the "LIKE" check to prevent duplicate entries in the CSV string
-                l_id = str(self.lessonid)
-                q_id = str(self.quiznumber)
-                cur.execute(sql_prog, (l_id, f'%{l_id}%', l_id, q_id, f'%{q_id}%', q_id, student_id))
-                
+                cur.execute(sql, params)
                 conn.commit()
 
         except Exception as e:
@@ -382,4 +369,5 @@ class QuizUtils:
             print(f"❌ Database error: {e}")
 
         finally:
-                if conn: conn.close()
+            if conn: conn.close()
+

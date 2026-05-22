@@ -409,56 +409,6 @@ QListWidget QCornerWidget {
             <property name="spacing">
              <number>5</number>
             </property>
-            <item>
-             <property name="text">
-              <string>Clarity</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>New Item</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>New Item</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>New Item</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>New Item</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>New Item</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>New Item</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Hope</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Humility</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Honesty</string>
-             </property>
-            </item>
            </widget>
           </item>
          </layout>
