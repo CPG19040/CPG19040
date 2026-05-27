@@ -3975,41 +3975,107 @@ QSpinBox::down-arrow {
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_4">
           <item>
-           <widget class="QPushButton" name="btnAnimation">
+           <widget class="QWidget" name="widget_17" native="true">
             <property name="minimumSize">
              <size>
-              <width>120</width>
-              <height>30</height>
+              <width>100</width>
+              <height>0</height>
              </size>
             </property>
-            <property name="cursor">
-             <cursorShape>PointingHandCursor</cursorShape>
+            <property name="styleSheet">
+             <string notr="true">#widget_17 {
+	background: transparent;
+}
+
+QPushButton {
+    border: 1px solid #999;
+    padding: 5px 15px;
+	font: 10pt &quot;Inter&quot;;
+    background-color: #f0f0f0;
+}
+
+QPushButton:hover {
+    background-color: #e0e0e0;
+}
+
+#btnAnimation {
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-right: none;
+}
+
+#btnAnimation:checked {
+    background-color: #72D582;
+	border: 2px solid #448D50;
+    color: #000;
+}
+
+#btnPowerPoint {
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+#btnPowerPoint:checked {
+    background-color: #72D582;
+	border: 2px solid #448D50;
+    color: #000;
+}</string>
             </property>
-            <property name="text">
-             <string>Animation</string>
-            </property>
-            <property name="class" stdset="0">
-             <string>button-normal</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="btnPowerPoint">
-            <property name="minimumSize">
-             <size>
-              <width>120</width>
-              <height>30</height>
-             </size>
-            </property>
-            <property name="cursor">
-             <cursorShape>PointingHandCursor</cursorShape>
-            </property>
-            <property name="text">
-             <string>MS PowerPoint</string>
-            </property>
-            <property name="class" stdset="0">
-             <string>button-normal</string>
-            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout_32">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QPushButton" name="btnAnimation">
+               <property name="minimumSize">
+                <size>
+                 <width>126</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="cursor">
+                <cursorShape>PointingHandCursor</cursorShape>
+               </property>
+               <property name="text">
+                <string>Animation</string>
+               </property>
+               <property name="class" stdset="0">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="btnPowerPoint">
+               <property name="minimumSize">
+                <size>
+                 <width>126</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="cursor">
+                <cursorShape>PointingHandCursor</cursorShape>
+               </property>
+               <property name="text">
+                <string>MS PowerPoint</string>
+               </property>
+               <property name="class" stdset="0">
+                <string/>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </widget>
           </item>
           <item>
@@ -4101,7 +4167,7 @@ QScrollBar:vertical {
 QScrollBar::handle:vertical {
     background: rgb(38, 162, 105);
     min-height: 30px;
-    border-radius: 5px; 
+    border-radius: 3px; 
     margin: 2px;
 }
 
@@ -4114,7 +4180,7 @@ QScrollBar:horizontal {
 QScrollBar::handle:horizontal {
     background: rgb(38, 162, 105);
     min-width: 30px;
-    border-radius: 5px;
+    border-radius: 3px;
     margin: 2px;
 }
 
@@ -5634,7 +5700,7 @@ QScrollBar:vertical {
 QScrollBar::handle:vertical {
     background: rgb(38, 162, 105);
     min-height: 30px;
-    border-radius: 5px; 
+    border-radius: 3px; 
     margin: 2px;
 }
 
@@ -5647,7 +5713,7 @@ QScrollBar:horizontal {
 QScrollBar::handle:horizontal {
     background: rgb(38, 162, 105);
     min-width: 30px;
-    border-radius: 5px;
+    border-radius: 3px;
     margin: 2px;
 }
 
@@ -5658,6 +5724,9 @@ QScrollBar::add-line, QScrollBar::sub-line {
           </property>
           <property name="selectionBehavior">
            <enum>QAbstractItemView::SelectRows</enum>
+          </property>
+          <property name="sortingEnabled">
+           <bool>true</bool>
           </property>
           <attribute name="verticalHeaderVisible">
            <bool>false</bool>
@@ -5878,6 +5947,9 @@ QSpinBox::down-arrow {
               <property name="styleSheet">
                <string notr="true">background-color: rgb(246, 245, 244);</string>
               </property>
+              <property name="sortingEnabled">
+               <bool>true</bool>
+              </property>
              </widget>
             </item>
             <item>
@@ -5963,7 +6035,7 @@ QScrollBar:vertical {
 QScrollBar::handle:vertical {
     background: rgb(38, 162, 105);
     min-height: 30px;
-    border-radius: 5px; 
+    border-radius: 3px; 
     margin: 2px;
 }
 
@@ -5976,7 +6048,7 @@ QScrollBar:horizontal {
 QScrollBar::handle:horizontal {
     background: rgb(38, 162, 105);
     min-width: 30px;
-    border-radius: 5px;
+    border-radius: 3px;
     margin: 2px;
 }
 
@@ -6928,7 +7000,7 @@ QScrollBar:vertical {
 QScrollBar::handle:vertical {
     background: #ff7d87;
     min-height: 30px;
-    border-radius: 5px; 
+    border-radius: 3px; 
     margin: 2px;
 }
 
@@ -6945,7 +7017,7 @@ QScrollBar:horizontal {
 QScrollBar::handle:horizontal {
     background: #ff7d87;
     min-width: 30px;
-    border-radius: 5px;
+    border-radius: 3px;
     margin: 2px;
 }
 
@@ -7776,6 +7848,9 @@ QPushButton:hover {
               <property name="selectionBehavior">
                <enum>QAbstractItemView::SelectRows</enum>
               </property>
+              <property name="sortingEnabled">
+               <bool>true</bool>
+              </property>
               <property name="wordWrap">
                <bool>true</bool>
               </property>
@@ -7810,6 +7885,9 @@ QPushButton:hover {
               </property>
               <property name="selectionBehavior">
                <enum>QAbstractItemView::SelectRows</enum>
+              </property>
+              <property name="sortingEnabled">
+               <bool>true</bool>
               </property>
               <property name="wordWrap">
                <bool>true</bool>

@@ -1916,19 +1916,66 @@ class Ui_Home(object):
 
         self.horizontalLayout_4 = QHBoxLayout()
         self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
-        self.btnAnimation = QPushButton(self.pageLesson)
+        self.widget_17 = QWidget(self.pageLesson)
+        self.widget_17.setObjectName(u"widget_17")
+        self.widget_17.setMinimumSize(QSize(100, 0))
+        self.widget_17.setStyleSheet(u"#widget_17 {\n"
+"	background: transparent;\n"
+"}\n"
+"\n"
+"QPushButton {\n"
+"    border: 1px solid #999;\n"
+"    padding: 5px 15px;\n"
+"	font: 10pt \"Inter\";\n"
+"    background-color: #f0f0f0;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: #e0e0e0;\n"
+"}\n"
+"\n"
+"#btnAnimation {\n"
+"    border-top-left-radius: 15px;\n"
+"    border-bottom-left-radius: 15px;\n"
+"    border-right: none;\n"
+"}\n"
+"\n"
+"#btnAnimation:checked {\n"
+"    background-color: #72D582;\n"
+"	border: 2px solid #448D50;\n"
+"    color: #000;\n"
+"}\n"
+"\n"
+"#btnPowerPoint {\n"
+"    border-top-right-radius: 15px;\n"
+"    border-bottom-right-radius: 15px;\n"
+"}\n"
+"\n"
+"#btnPowerPoint:checked {\n"
+"    background-color: #72D582;\n"
+"	border: 2px solid #448D50;\n"
+"    color: #000;\n"
+"}")
+        self.horizontalLayout_32 = QHBoxLayout(self.widget_17)
+        self.horizontalLayout_32.setSpacing(0)
+        self.horizontalLayout_32.setObjectName(u"horizontalLayout_32")
+        self.horizontalLayout_32.setContentsMargins(0, 0, 0, 0)
+        self.btnAnimation = QPushButton(self.widget_17)
         self.btnAnimation.setObjectName(u"btnAnimation")
-        self.btnAnimation.setMinimumSize(QSize(120, 30))
+        self.btnAnimation.setMinimumSize(QSize(126, 30))
         self.btnAnimation.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
-        self.horizontalLayout_4.addWidget(self.btnAnimation)
+        self.horizontalLayout_32.addWidget(self.btnAnimation)
 
-        self.btnPowerPoint = QPushButton(self.pageLesson)
+        self.btnPowerPoint = QPushButton(self.widget_17)
         self.btnPowerPoint.setObjectName(u"btnPowerPoint")
-        self.btnPowerPoint.setMinimumSize(QSize(120, 30))
+        self.btnPowerPoint.setMinimumSize(QSize(126, 30))
         self.btnPowerPoint.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
-        self.horizontalLayout_4.addWidget(self.btnPowerPoint)
+        self.horizontalLayout_32.addWidget(self.btnPowerPoint)
+
+
+        self.horizontalLayout_4.addWidget(self.widget_17)
 
         self.btnRefreshLessonTable = QPushButton(self.pageLesson)
         self.btnRefreshLessonTable.setObjectName(u"btnRefreshLessonTable")
@@ -1987,7 +2034,7 @@ class Ui_Home(object):
 "QScrollBar::handle:vertical {\n"
 "    background: rgb(38, 162, 105);\n"
 "    min-height: 30px;\n"
-"    border-radius: 5px; \n"
+"    border-radius: 3px; \n"
 "    margin: 2px;\n"
 "}\n"
 "\n"
@@ -2001,7 +2048,7 @@ class Ui_Home(object):
 "QScrollBar::handle:horizontal {\n"
 "    background: rgb(38, 162, 105);\n"
 "    min-width: 30px;\n"
-"    border-radius: 5px;\n"
+"    border-radius: 3px;\n"
 "    margin: 2px;\n"
 "}\n"
 "\n"
@@ -2848,7 +2895,7 @@ class Ui_Home(object):
 "QScrollBar::handle:vertical {\n"
 "    background: rgb(38, 162, 105);\n"
 "    min-height: 30px;\n"
-"    border-radius: 5px; \n"
+"    border-radius: 3px; \n"
 "    margin: 2px;\n"
 "}\n"
 "\n"
@@ -2862,7 +2909,7 @@ class Ui_Home(object):
 "QScrollBar::handle:horizontal {\n"
 "    background: rgb(38, 162, 105);\n"
 "    min-width: 30px;\n"
-"    border-radius: 5px;\n"
+"    border-radius: 3px;\n"
 "    margin: 2px;\n"
 "}\n"
 "\n"
@@ -2871,6 +2918,7 @@ class Ui_Home(object):
 "    width: 0px; height: 0px;\n"
 "}")
         self.table_section.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.table_section.setSortingEnabled(True)
         self.table_section.verticalHeader().setVisible(False)
 
         self.verticalLayout_2.addWidget(self.table_section)
@@ -3043,6 +3091,7 @@ class Ui_Home(object):
         self.tableWidget = QTableWidget(self.tab_1)
         self.tableWidget.setObjectName(u"tableWidget")
         self.tableWidget.setStyleSheet(u"background-color: rgb(246, 245, 244);")
+        self.tableWidget.setSortingEnabled(True)
 
         self.verticalLayout_7.addWidget(self.tableWidget)
 
@@ -3103,7 +3152,7 @@ class Ui_Home(object):
 "QScrollBar::handle:vertical {\n"
 "    background: rgb(38, 162, 105);\n"
 "    min-height: 30px;\n"
-"    border-radius: 5px; \n"
+"    border-radius: 3px; \n"
 "    margin: 2px;\n"
 "}\n"
 "\n"
@@ -3117,7 +3166,7 @@ class Ui_Home(object):
 "QScrollBar::handle:horizontal {\n"
 "    background: rgb(38, 162, 105);\n"
 "    min-width: 30px;\n"
-"    border-radius: 5px;\n"
+"    border-radius: 3px;\n"
 "    margin: 2px;\n"
 "}\n"
 "\n"
@@ -3589,7 +3638,7 @@ class Ui_Home(object):
 "QScrollBar::handle:vertical {\n"
 "    background: #ff7d87;\n"
 "    min-height: 30px;\n"
-"    border-radius: 5px; \n"
+"    border-radius: 3px; \n"
 "    margin: 2px;\n"
 "}\n"
 "\n"
@@ -3606,7 +3655,7 @@ class Ui_Home(object):
 "QScrollBar::handle:horizontal {\n"
 "    background: #ff7d87;\n"
 "    min-width: 30px;\n"
-"    border-radius: 5px;\n"
+"    border-radius: 3px;\n"
 "    margin: 2px;\n"
 "}\n"
 "\n"
@@ -4078,6 +4127,7 @@ class Ui_Home(object):
         self.table_AuditTrail.setAlternatingRowColors(False)
         self.table_AuditTrail.setSelectionMode(QAbstractItemView.ExtendedSelection)
         self.table_AuditTrail.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.table_AuditTrail.setSortingEnabled(True)
         self.table_AuditTrail.setWordWrap(True)
         self.table_AuditTrail.horizontalHeader().setCascadingSectionResizes(True)
         self.table_AuditTrail.verticalHeader().setVisible(False)
@@ -4096,6 +4146,7 @@ class Ui_Home(object):
         self.table_student_archive.setAlternatingRowColors(False)
         self.table_student_archive.setSelectionMode(QAbstractItemView.ExtendedSelection)
         self.table_student_archive.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.table_student_archive.setSortingEnabled(True)
         self.table_student_archive.setWordWrap(True)
         self.table_student_archive.horizontalHeader().setCascadingSectionResizes(True)
         self.table_student_archive.verticalHeader().setVisible(False)
@@ -4228,9 +4279,9 @@ class Ui_Home(object):
         self.txtSearchLesson.setPlaceholderText(QCoreApplication.translate("Home", u"Search Lesson", None))
         self.txtSearchLesson.setProperty(u"class", QCoreApplication.translate("Home", u"textbox-search", None))
         self.btnAnimation.setText(QCoreApplication.translate("Home", u"Animation", None))
-        self.btnAnimation.setProperty(u"class", QCoreApplication.translate("Home", u"button-normal", None))
+        self.btnAnimation.setProperty(u"class", "")
         self.btnPowerPoint.setText(QCoreApplication.translate("Home", u"MS PowerPoint", None))
-        self.btnPowerPoint.setProperty(u"class", QCoreApplication.translate("Home", u"button-normal", None))
+        self.btnPowerPoint.setProperty(u"class", "")
 #if QT_CONFIG(tooltip)
         self.btnRefreshLessonTable.setToolTip(QCoreApplication.translate("Home", u"Refresh table", None))
 #endif // QT_CONFIG(tooltip)

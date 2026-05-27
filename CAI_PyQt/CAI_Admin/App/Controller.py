@@ -287,7 +287,7 @@ class Controller:
             self.util.populate_pulldowns(self.ui.cbGradingPeriod, self.ui.cbLessonName)
             self.display_quiz()
 
-        elif index == 5:
+        elif index == 5: # Sections
             self.display_section_info()
 
         elif index == 6: # Reports
@@ -563,6 +563,7 @@ class Controller:
             self.ui.table_section.setModel(QStandardItemModel())
 
         self.ui.table_section.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+        self.ui.table_section.sortByColumn(-1, Qt.AscendingOrder)
         class_adviser = self.sectionObj.get_adviser(section_id)
         self.ui.label_Adviser.setText(class_adviser)
 
@@ -804,6 +805,7 @@ class Controller:
 
         if model:
             self.ui.table_users.setModel(model)
+            self.ui.table_users.sortByColumn(-1, Qt.AscendingOrder)
 
             header = self.ui.table_users.horizontalHeader()
             header.setSectionResizeMode(QHeaderView.ResizeMode.ResizeToContents)
@@ -824,13 +826,15 @@ class Controller:
         self.displayUsers()
 
     def displayAuditTrail(self):
-        sql  = 'SELECT\n'
-        sql += '    user_id AS "User Id",\n'
-        sql += '    username AS "User Name",\n'
-        sql += '    TO_CHAR(date_logged, \'YYYY/MM/DD, HH12:MI AM\') AS "Date Logged",\n'
-        sql += '    action AS "Action"\n'
-        sql += 'FROM cai.tbl_audit_trail\n'
-        sql += 'ORDER BY date_logged DESC'
+        sql = """
+            SELECT
+                user_id AS "User Id",
+                username AS "User Name",
+                TO_CHAR(date_logged, 'YYYY/MM/DD, HH12:MI AM') AS "Date Logged",
+                action AS "Action"
+            FROM cai.tbl_audit_trail
+            ORDER BY date_logged DESC
+        """
         cursor, conn = self.db_tools.retrieve_records(sql)
 
         if cursor:
@@ -850,7 +854,11 @@ class Controller:
             conn.close()
 
             self.ui.table_AuditTrail.setModel(model)
-            self.ui.table_AuditTrail.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.ResizeToContents)
+            self.ui.table_AuditTrail.sortByColumn(-1, Qt.AscendingOrder)
+
+            header = self.ui.table_AuditTrail.horizontalHeader()
+            header.setMinimumSectionSize(170)
+            header.setSectionResizeMode(3, QHeaderView.ResizeMode.ResizeToContents)
 
         if conn: conn.close()
 
@@ -890,7 +898,9 @@ class Controller:
             conn.close()
 
             self.ui.table_student_archive.setModel(model)
-            self.ui.table_student_archive.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.ResizeToContents)
+            self.ui.table_student_archive.sortByColumn(-1, Qt.AscendingOrder)
+            header = self.ui.table_student_archive.horizontalHeader()
+            header.setSectionResizeMode(QHeaderView.ResizeMode.ResizeToContents)
 
         if conn: conn.close()
 
