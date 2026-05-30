@@ -4641,15 +4641,9 @@ QCheckBox::indicator:checked {
          </widget>
         </item>
         <item>
-         <widget class="QFrame" name="frame_6">
+         <widget class="QWidget" name="widget_quiz_1" native="true">
           <property name="styleSheet">
            <string notr="true">#frame_6 { background-color: transparent; }</string>
-          </property>
-          <property name="frameShape">
-           <enum>QFrame::StyledPanel</enum>
-          </property>
-          <property name="frameShadow">
-           <enum>QFrame::Raised</enum>
           </property>
           <layout class="QHBoxLayout" name="horizontalLayout">
            <item>
@@ -5001,179 +4995,183 @@ QPushButton:hover {
          </widget>
         </item>
         <item>
-         <layout class="QGridLayout" name="gridLayout">
-          <item row="4" column="2">
-           <widget class="QScrollArea" name="scrollArea_tf">
-            <property name="styleSheet">
-             <string notr="true">background-color: rgb(246, 245, 244);</string>
-            </property>
-            <property name="widgetResizable">
-             <bool>true</bool>
-            </property>
-            <widget class="QWidget" name="scrollAreaWidgetContents_4">
-             <property name="geometry">
-              <rect>
-               <x>0</x>
-               <y>0</y>
-               <width>317</width>
-               <height>532</height>
-              </rect>
+         <widget class="QWidget" name="widget_quiz_2" native="true">
+          <layout class="QGridLayout" name="gridLayout">
+           <item row="4" column="2">
+            <widget class="QScrollArea" name="scrollArea_tf">
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(246, 245, 244);</string>
              </property>
-             <layout class="QVBoxLayout" name="verticalLayout_13"/>
-            </widget>
-           </widget>
-          </item>
-          <item row="2" column="2">
-           <widget class="QLabel" name="label_13">
-            <property name="font">
-             <font>
-              <family>Inter SemiBold</family>
-              <pointsize>14</pointsize>
-              <weight>8</weight>
-              <italic>false</italic>
-              <bold>false</bold>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">font: 63 14pt &quot;Inter SemiBold&quot;;</string>
-            </property>
-            <property name="text">
-             <string>True or False</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="1">
-           <widget class="QScrollArea" name="scrollArea_mc">
-            <property name="styleSheet">
-             <string notr="true">background-color: rgb(246, 245, 244);</string>
-            </property>
-            <property name="widgetResizable">
-             <bool>true</bool>
-            </property>
-            <widget class="QWidget" name="scrollAreaWidgetContents_3">
-             <property name="geometry">
-              <rect>
-               <x>0</x>
-               <y>0</y>
-               <width>317</width>
-               <height>532</height>
-              </rect>
+             <property name="widgetResizable">
+              <bool>true</bool>
              </property>
-             <layout class="QVBoxLayout" name="verticalLayout_12"/>
+             <widget class="QWidget" name="scrollAreaWidgetContents_4">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>317</width>
+                <height>534</height>
+               </rect>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_13"/>
+             </widget>
             </widget>
-           </widget>
-          </item>
-          <item row="4" column="0">
-           <widget class="QScrollArea" name="scrollArea_id">
-            <property name="styleSheet">
-             <string notr="true">background-color: rgb(246, 245, 244);</string>
-            </property>
-            <property name="widgetResizable">
-             <bool>true</bool>
-            </property>
-            <widget class="QWidget" name="scrollAreaWidgetContents_2">
-             <property name="geometry">
-              <rect>
-               <x>0</x>
-               <y>0</y>
-               <width>317</width>
-               <height>532</height>
-              </rect>
+           </item>
+           <item row="2" column="2">
+            <widget class="QLabel" name="label_13">
+             <property name="font">
+              <font>
+               <family>Inter SemiBold</family>
+               <pointsize>14</pointsize>
+               <weight>8</weight>
+               <italic>false</italic>
+               <bold>false</bold>
+              </font>
              </property>
-             <layout class="QVBoxLayout" name="verticalLayout_11"/>
+             <property name="styleSheet">
+              <string notr="true">font: 63 14pt &quot;Inter SemiBold&quot;;</string>
+             </property>
+             <property name="text">
+              <string>True or False</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
             </widget>
-           </widget>
-          </item>
-          <item row="2" column="0">
-           <widget class="QLabel" name="label_11">
-            <property name="font">
-             <font>
-              <family>Inter SemiBold</family>
-              <pointsize>14</pointsize>
-              <weight>50</weight>
-              <italic>false</italic>
-              <bold>false</bold>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">font: 14pt &quot;Inter SemiBold&quot;;</string>
-            </property>
-            <property name="text">
-             <string>Identification</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <widget class="QLabel" name="label_12">
-            <property name="font">
-             <font>
-              <family>Inter SemiBold</family>
-              <pointsize>14</pointsize>
-              <weight>8</weight>
-              <italic>false</italic>
-              <bold>false</bold>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">font: 63 14pt &quot;Inter SemiBold&quot;;</string>
-            </property>
-            <property name="text">
-             <string>Multiple Choice</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-         </layout>
+           </item>
+           <item row="4" column="1">
+            <widget class="QScrollArea" name="scrollArea_mc">
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(246, 245, 244);</string>
+             </property>
+             <property name="widgetResizable">
+              <bool>true</bool>
+             </property>
+             <widget class="QWidget" name="scrollAreaWidgetContents_3">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>317</width>
+                <height>534</height>
+               </rect>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_12"/>
+             </widget>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QScrollArea" name="scrollArea_id">
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(246, 245, 244);</string>
+             </property>
+             <property name="widgetResizable">
+              <bool>true</bool>
+             </property>
+             <widget class="QWidget" name="scrollAreaWidgetContents_2">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>317</width>
+                <height>534</height>
+               </rect>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_11"/>
+             </widget>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="label_11">
+             <property name="font">
+              <font>
+               <family>Inter SemiBold</family>
+               <pointsize>14</pointsize>
+               <weight>50</weight>
+               <italic>false</italic>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">font: 14pt &quot;Inter SemiBold&quot;;</string>
+             </property>
+             <property name="text">
+              <string>Identification</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QLabel" name="label_12">
+             <property name="font">
+              <font>
+               <family>Inter SemiBold</family>
+               <pointsize>14</pointsize>
+               <weight>8</weight>
+               <italic>false</italic>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">font: 63 14pt &quot;Inter SemiBold&quot;;</string>
+             </property>
+             <property name="text">
+              <string>Multiple Choice</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
         </item>
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_12">
-          <item>
-           <spacer name="horizontalSpacer_5">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item>
-           <widget class="QPushButton" name="btnQuizAdd">
-            <property name="minimumSize">
-             <size>
-              <width>100</width>
-              <height>30</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>30</height>
-             </size>
-            </property>
-            <property name="cursor">
-             <cursorShape>PointingHandCursor</cursorShape>
-            </property>
-            <property name="text">
-             <string>Add or Edit</string>
-            </property>
-            <property name="class" stdset="0">
-             <string>button-normal</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
+         <widget class="QWidget" name="widget_quiz_3" native="true">
+          <layout class="QHBoxLayout" name="horizontalLayout_12">
+           <item>
+            <spacer name="horizontalSpacer_5">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QPushButton" name="btnQuizAdd">
+             <property name="minimumSize">
+              <size>
+               <width>100</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="cursor">
+              <cursorShape>PointingHandCursor</cursorShape>
+             </property>
+             <property name="text">
+              <string>Add or Edit</string>
+             </property>
+             <property name="class" stdset="0">
+              <string>button-normal</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
         </item>
        </layout>
       </widget>

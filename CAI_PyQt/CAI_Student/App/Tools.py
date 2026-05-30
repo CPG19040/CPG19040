@@ -101,9 +101,9 @@ class Utility:
         delta_y = (scaled_pixmap.height() - size) // 2
         painter.drawPixmap(0, 0, scaled_pixmap.copy(delta_x, delta_y, size, size))
         
-        # Optional: Add a subtle border
-        painter.setClipping(False) # Stop clipping to draw the border
-        painter.setPen(QPen(Qt.GlobalColor.lightGray, 1))
+        # # Optional: Add a subtle border
+        # painter.setClipping(False) # Stop clipping to draw the border
+        # painter.setPen(QPen(Qt.GlobalColor.lightGray, 1))
 
         if not radius:
             painter.drawEllipse(0, 0, size - 1, size - 1)

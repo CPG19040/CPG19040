@@ -1,4 +1,5 @@
 DROP TABLE IF EXISTS cai.tbl_staff_info CASCADE;
+
 CREATE TABLE cai.tbl_staff_info (
     -- Set as PRIMARY KEY and auto-generate the ID
     user_id           UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -22,3 +23,4 @@ CREATE SEQUENCE cai.staff_id_seq
     MINVALUE 1
     MAXVALUE 9999
     CYCLE;
+    

@@ -1,4 +1,5 @@
 DROP TABLE IF EXISTS cai.tbl_staff_info_archive CASCADE;
+
 CREATE TABLE cai.tbl_staff_info_archive (
     user_id           UUID PRIMARY KEY,
     school_id         VARCHAR(20),

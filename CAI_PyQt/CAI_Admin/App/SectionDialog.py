@@ -49,10 +49,6 @@ class Section(QDialog, Ui_SectionRegistrationDialog):
             QMessageBox.warning(self, "Input Error", "Please enter a section name.")
             return
 
-        if not teacher_id:
-            QMessageBox.warning(self, "Input Error", "Please select a class advisor.")
-            return
-
         conn = None
         try:
             # 2. Get connection and start transaction

@@ -16,6 +16,7 @@ CREATE TABLE CAI.TBL_STUDENT_INFO (
 );
 
 DROP SEQUENCE IF EXISTS cai.student_id_seq;
+
 CREATE SEQUENCE cai.student_id_seq
     START WITH 1
     INCREMENT BY 1

@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS cai.tbl_lessons;
+
 CREATE TABLE cai.tbl_lessons (
     lesson_id       SERIAL PRIMARY KEY,
     chapter         INT,

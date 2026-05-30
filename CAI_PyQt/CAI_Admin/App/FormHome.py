@@ -2322,20 +2322,18 @@ class Ui_Home(object):
 
         self.verticalLayout_8.addWidget(self.line_3)
 
-        self.frame_6 = QFrame(self.pageQuiz)
-        self.frame_6.setObjectName(u"frame_6")
-        self.frame_6.setStyleSheet(u"#frame_6 { background-color: transparent; }")
-        self.frame_6.setFrameShape(QFrame.StyledPanel)
-        self.frame_6.setFrameShadow(QFrame.Raised)
-        self.horizontalLayout = QHBoxLayout(self.frame_6)
+        self.widget_quiz_1 = QWidget(self.pageQuiz)
+        self.widget_quiz_1.setObjectName(u"widget_quiz_1")
+        self.widget_quiz_1.setStyleSheet(u"#frame_6 { background-color: transparent; }")
+        self.horizontalLayout = QHBoxLayout(self.widget_quiz_1)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.label_6 = QLabel(self.frame_6)
+        self.label_6 = QLabel(self.widget_quiz_1)
         self.label_6.setObjectName(u"label_6")
         self.label_6.setMaximumSize(QSize(16777215, 30))
 
         self.horizontalLayout.addWidget(self.label_6)
 
-        self.widget_4 = QWidget(self.frame_6)
+        self.widget_4 = QWidget(self.widget_quiz_1)
         self.widget_4.setObjectName(u"widget_4")
         self.widget_4.setStyleSheet(u"/* Base style for all difficulty buttons */\n"
 "QPushButton {\n"
@@ -2422,20 +2420,20 @@ class Ui_Home(object):
 
         self.horizontalLayout.addItem(self.horizontalSpacer_10)
 
-        self.label_21 = QLabel(self.frame_6)
+        self.label_21 = QLabel(self.widget_quiz_1)
         self.label_21.setObjectName(u"label_21")
         self.label_21.setMaximumSize(QSize(16777215, 30))
         self.label_21.setStyleSheet(u"font: 10pt \"Inter SemiBold\";")
 
         self.horizontalLayout.addWidget(self.label_21)
 
-        self.label_15 = QLabel(self.frame_6)
+        self.label_15 = QLabel(self.widget_quiz_1)
         self.label_15.setObjectName(u"label_15")
         self.label_15.setMaximumSize(QSize(16777215, 30))
 
         self.horizontalLayout.addWidget(self.label_15)
 
-        self.multiplier_easy = QLabel(self.frame_6)
+        self.multiplier_easy = QLabel(self.widget_quiz_1)
         self.multiplier_easy.setObjectName(u"multiplier_easy")
         self.multiplier_easy.setMinimumSize(QSize(0, 30))
         self.multiplier_easy.setMaximumSize(QSize(16777215, 30))
@@ -2444,13 +2442,13 @@ class Ui_Home(object):
 
         self.horizontalLayout.addWidget(self.multiplier_easy)
 
-        self.label_22 = QLabel(self.frame_6)
+        self.label_22 = QLabel(self.widget_quiz_1)
         self.label_22.setObjectName(u"label_22")
         self.label_22.setMaximumSize(QSize(16777215, 30))
 
         self.horizontalLayout.addWidget(self.label_22)
 
-        self.multiplier_average = QLabel(self.frame_6)
+        self.multiplier_average = QLabel(self.widget_quiz_1)
         self.multiplier_average.setObjectName(u"multiplier_average")
         self.multiplier_average.setMinimumSize(QSize(0, 30))
         self.multiplier_average.setMaximumSize(QSize(16777215, 30))
@@ -2459,13 +2457,13 @@ class Ui_Home(object):
 
         self.horizontalLayout.addWidget(self.multiplier_average)
 
-        self.label_23 = QLabel(self.frame_6)
+        self.label_23 = QLabel(self.widget_quiz_1)
         self.label_23.setObjectName(u"label_23")
         self.label_23.setMaximumSize(QSize(16777215, 30))
 
         self.horizontalLayout.addWidget(self.label_23)
 
-        self.multiplier_hard = QLabel(self.frame_6)
+        self.multiplier_hard = QLabel(self.widget_quiz_1)
         self.multiplier_hard.setObjectName(u"multiplier_hard")
         self.multiplier_hard.setMinimumSize(QSize(0, 30))
         self.multiplier_hard.setMaximumSize(QSize(16777215, 30))
@@ -2474,13 +2472,13 @@ class Ui_Home(object):
 
         self.horizontalLayout.addWidget(self.multiplier_hard)
 
-        self.label_3 = QLabel(self.frame_6)
+        self.label_3 = QLabel(self.widget_quiz_1)
         self.label_3.setObjectName(u"label_3")
         self.label_3.setMinimumSize(QSize(0, 30))
 
         self.horizontalLayout.addWidget(self.label_3)
 
-        self.label_scoreperlevel = QLabel(self.frame_6)
+        self.label_scoreperlevel = QLabel(self.widget_quiz_1)
         self.label_scoreperlevel.setObjectName(u"label_scoreperlevel")
         self.label_scoreperlevel.setMinimumSize(QSize(0, 30))
         self.label_scoreperlevel.setMaximumSize(QSize(16777215, 30))
@@ -2489,7 +2487,7 @@ class Ui_Home(object):
         self.horizontalLayout.addWidget(self.label_scoreperlevel)
 
 
-        self.verticalLayout_8.addWidget(self.frame_6)
+        self.verticalLayout_8.addWidget(self.widget_quiz_1)
 
         self.line_7 = QFrame(self.pageQuiz)
         self.line_7.setObjectName(u"line_7")
@@ -2499,22 +2497,24 @@ class Ui_Home(object):
 
         self.verticalLayout_8.addWidget(self.line_7)
 
-        self.gridLayout = QGridLayout()
+        self.widget_quiz_2 = QWidget(self.pageQuiz)
+        self.widget_quiz_2.setObjectName(u"widget_quiz_2")
+        self.gridLayout = QGridLayout(self.widget_quiz_2)
         self.gridLayout.setObjectName(u"gridLayout")
-        self.scrollArea_tf = QScrollArea(self.pageQuiz)
+        self.scrollArea_tf = QScrollArea(self.widget_quiz_2)
         self.scrollArea_tf.setObjectName(u"scrollArea_tf")
         self.scrollArea_tf.setStyleSheet(u"background-color: rgb(246, 245, 244);")
         self.scrollArea_tf.setWidgetResizable(True)
         self.scrollAreaWidgetContents_4 = QWidget()
         self.scrollAreaWidgetContents_4.setObjectName(u"scrollAreaWidgetContents_4")
-        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 317, 532))
+        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 317, 534))
         self.verticalLayout_13 = QVBoxLayout(self.scrollAreaWidgetContents_4)
         self.verticalLayout_13.setObjectName(u"verticalLayout_13")
         self.scrollArea_tf.setWidget(self.scrollAreaWidgetContents_4)
 
         self.gridLayout.addWidget(self.scrollArea_tf, 4, 2, 1, 1)
 
-        self.label_13 = QLabel(self.pageQuiz)
+        self.label_13 = QLabel(self.widget_quiz_2)
         self.label_13.setObjectName(u"label_13")
         font10 = QFont()
         font10.setFamilies([u"Inter SemiBold"])
@@ -2527,33 +2527,33 @@ class Ui_Home(object):
 
         self.gridLayout.addWidget(self.label_13, 2, 2, 1, 1)
 
-        self.scrollArea_mc = QScrollArea(self.pageQuiz)
+        self.scrollArea_mc = QScrollArea(self.widget_quiz_2)
         self.scrollArea_mc.setObjectName(u"scrollArea_mc")
         self.scrollArea_mc.setStyleSheet(u"background-color: rgb(246, 245, 244);")
         self.scrollArea_mc.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 317, 532))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 317, 534))
         self.verticalLayout_12 = QVBoxLayout(self.scrollAreaWidgetContents_3)
         self.verticalLayout_12.setObjectName(u"verticalLayout_12")
         self.scrollArea_mc.setWidget(self.scrollAreaWidgetContents_3)
 
         self.gridLayout.addWidget(self.scrollArea_mc, 4, 1, 1, 1)
 
-        self.scrollArea_id = QScrollArea(self.pageQuiz)
+        self.scrollArea_id = QScrollArea(self.widget_quiz_2)
         self.scrollArea_id.setObjectName(u"scrollArea_id")
         self.scrollArea_id.setStyleSheet(u"background-color: rgb(246, 245, 244);")
         self.scrollArea_id.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 317, 532))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 317, 534))
         self.verticalLayout_11 = QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_11.setObjectName(u"verticalLayout_11")
         self.scrollArea_id.setWidget(self.scrollAreaWidgetContents_2)
 
         self.gridLayout.addWidget(self.scrollArea_id, 4, 0, 1, 1)
 
-        self.label_11 = QLabel(self.pageQuiz)
+        self.label_11 = QLabel(self.widget_quiz_2)
         self.label_11.setObjectName(u"label_11")
         self.label_11.setFont(font10)
         self.label_11.setStyleSheet(u"font: 14pt \"Inter SemiBold\";")
@@ -2561,7 +2561,7 @@ class Ui_Home(object):
 
         self.gridLayout.addWidget(self.label_11, 2, 0, 1, 1)
 
-        self.label_12 = QLabel(self.pageQuiz)
+        self.label_12 = QLabel(self.widget_quiz_2)
         self.label_12.setObjectName(u"label_12")
         self.label_12.setFont(font10)
         self.label_12.setStyleSheet(u"font: 63 14pt \"Inter SemiBold\";")
@@ -2570,15 +2570,17 @@ class Ui_Home(object):
         self.gridLayout.addWidget(self.label_12, 2, 1, 1, 1)
 
 
-        self.verticalLayout_8.addLayout(self.gridLayout)
+        self.verticalLayout_8.addWidget(self.widget_quiz_2)
 
-        self.horizontalLayout_12 = QHBoxLayout()
+        self.widget_quiz_3 = QWidget(self.pageQuiz)
+        self.widget_quiz_3.setObjectName(u"widget_quiz_3")
+        self.horizontalLayout_12 = QHBoxLayout(self.widget_quiz_3)
         self.horizontalLayout_12.setObjectName(u"horizontalLayout_12")
         self.horizontalSpacer_5 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_12.addItem(self.horizontalSpacer_5)
 
-        self.btnQuizAdd = QPushButton(self.pageQuiz)
+        self.btnQuizAdd = QPushButton(self.widget_quiz_3)
         self.btnQuizAdd.setObjectName(u"btnQuizAdd")
         self.btnQuizAdd.setMinimumSize(QSize(100, 30))
         self.btnQuizAdd.setMaximumSize(QSize(16777215, 30))
@@ -2587,7 +2589,7 @@ class Ui_Home(object):
         self.horizontalLayout_12.addWidget(self.btnQuizAdd)
 
 
-        self.verticalLayout_8.addLayout(self.horizontalLayout_12)
+        self.verticalLayout_8.addWidget(self.widget_quiz_3)
 
         self.stackedWidget.addWidget(self.pageQuiz)
         self.pageExercise = QWidget()
