@@ -32,6 +32,12 @@
     background: #27AE60;
 }
 
+*[class=&quot;button-green&quot;]:disabled {
+    background: #A5D6A7;
+    color: #E8F5E9;
+    opacity: 0.6;
+}
+
 QComboBox[class=&quot;combobox-main&quot;] {
 	height: 30px;
 	border: 1px solid #999;
@@ -131,6 +137,20 @@ QSpinBox::down-arrow {
     image: url(:/Images/Images/caret-down.png);
     width: 8px;
     height: 8px;
+}
+
+QSpinBox:disabled {
+    background-color: #f5f5f5;
+    border: 1px solid #dcdcdc;
+    color: #aaaaaa;
+}
+
+QSpinBox::up-arrow:disabled {
+    image: url(:/Images/Images/caret-up-disabled.png);
+}
+
+QSpinBox::down-arrow:disabled {
+    image: url(:/Images/Images/caret-down-disabled.png);
 }
 </string>
   </property>
@@ -248,6 +268,9 @@ QSpinBox::down-arrow {
       </item>
       <item>
        <widget class="QCheckBox" name="checkBoxPublish">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="minimumSize">
          <size>
           <width>0</width>
@@ -277,7 +300,17 @@ QCheckBox::indicator {
 }
 QCheckBox::indicator:checked {
 	image: url(:/Images/Images/check.png);
-}</string>
+}
+
+QCheckBox::indicator:disabled {
+	background-color: #E0E0E0;
+	border-color: #B0B0B0;
+}
+
+QCheckBox:disabled {
+	color: #7f8c8d;
+}
+</string>
         </property>
         <property name="text">
          <string>Publish</string>
@@ -334,8 +367,14 @@ QCheckBox::indicator:checked {
     </widget>
    </item>
    <item>
-    <widget class="QWidget" name="widget_qbuilder" native="true">
-     <layout class="QVBoxLayout" name="verticalLayout_5">
+    <widget class="QWidget" name="widget_builder" native="true">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">#frame_5 { background: transparent; }</string>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
       <property name="leftMargin">
        <number>0</number>
       </property>
@@ -349,60 +388,36 @@ QCheckBox::indicator:checked {
        <number>0</number>
       </property>
       <item>
-       <widget class="QFrame" name="frame_5">
+       <widget class="QPushButton" name="btn_save">
+        <property name="minimumSize">
+         <size>
+          <width>30</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>30</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Inter</family>
+          <pointsize>10</pointsize>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="toolTip">
+         <string>Save (Ctrl + S)</string>
+        </property>
         <property name="styleSheet">
-         <string notr="true">#frame_5 { background: transparent; }</string>
-        </property>
-        <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Raised</enum>
-        </property>
-        <layout class="QHBoxLayout" name="horizontalLayout">
-         <property name="leftMargin">
-          <number>0</number>
-         </property>
-         <property name="topMargin">
-          <number>0</number>
-         </property>
-         <property name="rightMargin">
-          <number>0</number>
-         </property>
-         <property name="bottomMargin">
-          <number>0</number>
-         </property>
-         <item>
-          <widget class="QPushButton" name="btn_save">
-           <property name="minimumSize">
-            <size>
-             <width>30</width>
-             <height>30</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>30</width>
-             <height>30</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <family>Inter</family>
-             <pointsize>10</pointsize>
-             <weight>50</weight>
-             <italic>false</italic>
-             <bold>false</bold>
-            </font>
-           </property>
-           <property name="cursor">
-            <cursorShape>PointingHandCursor</cursorShape>
-           </property>
-           <property name="toolTip">
-            <string>Save (Ctrl + S)</string>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">#btn_save {
+         <string notr="true">#btn_save {
 	border: none; 
 	background: transparent;
 }
@@ -412,46 +427,46 @@ QCheckBox::indicator:checked {
 	border-radius: 5px;
 }
 </string>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset resource="../resources.qrc">
-             <normaloff>:/Images/Images/save.png</normaloff>:/Images/Images/save.png</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>30</width>
-             <height>30</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="Line" name="line">
-           <property name="orientation">
-            <enum>Qt::Vertical</enum>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_6">
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>30</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>Diffuculty:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QWidget" name="widget_2" native="true">
-           <property name="styleSheet">
-            <string notr="true">/* Base style for all difficulty buttons */
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../resources.qrc">
+          <normaloff>:/Images/Images/save.png</normaloff>:/Images/Images/save.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>30</width>
+          <height>30</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="Line" name="line">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_6">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Diffuculty:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QWidget" name="widget_2" native="true">
+        <property name="styleSheet">
+         <string notr="true">/* Base style for all difficulty buttons */
 QPushButton {
     border: 1px solid #999;
     padding: 5px 15px;
@@ -496,138 +511,76 @@ QPushButton#btnHard:checked {
 /* Hover effect */
 QPushButton:hover {
     background-color: #e0e0e0;
+}
+
+QPushButton:disabled {
+    background-color: #E6E6E6; /* Flat, dull gray */
+    border: 1px solid #D0D0D0; /* Faded border */
+    color: #A0A0A0;            /* Grayed out text */
+}
+
+/* Fix borders for the middle/left buttons so they don't look weird when disabled */
+QPushButton#btnEasy:disabled,
+QPushButton#btnAverage:disabled {
+    border-right: none; 
+}
+
+/* 2. Disabled + CHECKED states (If a difficulty is selected but the group is locked) */
+QPushButton#btnEasy:checked:disabled {
+    background-color: #D3EED7; /* Muted, faded green */
+    border: 2px solid #A2CBA8;
+    border-right: none;
+    color: #8A9A8D;
+}
+
+QPushButton#btnAverage:checked:disabled {
+    background-color: #FFF9E0; /* Muted, faded yellow */
+    border: 2px solid #E6D2B5;
+    border-right: none;
+    color: #9A9384;
+}
+
+QPushButton#btnHard:checked:disabled {
+    background-color: #FADAD7; /* Muted, faded red */
+    border: 2px solid #E0B3AF;
+    color: #A68D8A;
 }</string>
-           </property>
-           <layout class="QHBoxLayout" name="horizontalLayout_2">
-            <property name="spacing">
-             <number>0</number>
-            </property>
-            <property name="leftMargin">
-             <number>0</number>
-            </property>
-            <property name="topMargin">
-             <number>0</number>
-            </property>
-            <property name="rightMargin">
-             <number>0</number>
-            </property>
-            <property name="bottomMargin">
-             <number>0</number>
-            </property>
-            <item>
-             <widget class="QPushButton" name="btnEasy">
-              <property name="minimumSize">
-               <size>
-                <width>82</width>
-                <height>30</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>82</width>
-                <height>30</height>
-               </size>
-              </property>
-              <property name="cursor">
-               <cursorShape>PointingHandCursor</cursorShape>
-              </property>
-              <property name="styleSheet">
-               <string notr="true"/>
-              </property>
-              <property name="text">
-               <string>Easy</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="btnAverage">
-              <property name="minimumSize">
-               <size>
-                <width>82</width>
-                <height>30</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>82</width>
-                <height>30</height>
-               </size>
-              </property>
-              <property name="cursor">
-               <cursorShape>PointingHandCursor</cursorShape>
-              </property>
-              <property name="styleSheet">
-               <string notr="true"/>
-              </property>
-              <property name="text">
-               <string>Average</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="btnHard">
-              <property name="minimumSize">
-               <size>
-                <width>82</width>
-                <height>30</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>82</width>
-                <height>30</height>
-               </size>
-              </property>
-              <property name="cursor">
-               <cursorShape>PointingHandCursor</cursorShape>
-              </property>
-              <property name="styleSheet">
-               <string notr="true"/>
-              </property>
-              <property name="text">
-               <string>Hard</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-         </item>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
          <item>
-          <spacer name="horizontalSpacer_3">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
+          <widget class="QPushButton" name="btnEasy">
+           <property name="minimumSize">
             <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_18">
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
+             <width>82</width>
              <height>30</height>
             </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>82</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
            </property>
            <property name="styleSheet">
-            <string notr="true">font: 10pt &quot;Inter SemiBold&quot;;</string>
-           </property>
-           <property name="text">
-            <string>Points:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_15">
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>30</height>
-            </size>
+            <string notr="true"/>
            </property>
            <property name="text">
             <string>Easy</string>
@@ -635,43 +588,24 @@ QPushButton:hover {
           </widget>
          </item>
          <item>
-          <widget class="QSpinBox" name="multiplier_easy">
+          <widget class="QPushButton" name="btnAverage">
            <property name="minimumSize">
             <size>
-             <width>0</width>
+             <width>82</width>
              <height>30</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
-             <width>16777215</width>
+             <width>82</width>
              <height>30</height>
             </size>
+           </property>
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
            </property>
            <property name="styleSheet">
             <string notr="true"/>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-           <property name="minimum">
-            <number>1</number>
-           </property>
-           <property name="maximum">
-            <number>999</number>
-           </property>
-           <property name="value">
-            <number>1</number>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_16">
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>30</height>
-            </size>
            </property>
            <property name="text">
             <string>Average</string>
@@ -679,95 +613,206 @@ QPushButton:hover {
           </widget>
          </item>
          <item>
-          <widget class="QSpinBox" name="multiplier_average">
+          <widget class="QPushButton" name="btnHard">
            <property name="minimumSize">
             <size>
-             <width>0</width>
+             <width>82</width>
              <height>30</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
-             <width>16777215</width>
+             <width>82</width>
              <height>30</height>
             </size>
+           </property>
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
            </property>
            <property name="styleSheet">
             <string notr="true"/>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-           <property name="minimum">
-            <number>1</number>
-           </property>
-           <property name="maximum">
-            <number>999</number>
-           </property>
-           <property name="value">
-            <number>1</number>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_17">
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>30</height>
-            </size>
            </property>
            <property name="text">
             <string>Hard</string>
            </property>
           </widget>
          </item>
-         <item>
-          <widget class="QSpinBox" name="multiplier_hard">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>30</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>30</height>
-            </size>
-           </property>
-           <property name="styleSheet">
-            <string notr="true"/>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-           <property name="minimum">
-            <number>1</number>
-           </property>
-           <property name="maximum">
-            <number>999</number>
-           </property>
-           <property name="value">
-            <number>1</number>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_4">
-           <property name="text">
-            <string>Score:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_scoreperlevel">
-           <property name="text">
-            <string>000</string>
-           </property>
-          </widget>
-         </item>
         </layout>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_3">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_18">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">font: 10pt &quot;Inter SemiBold&quot;;</string>
+        </property>
+        <property name="text">
+         <string>Points:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_15">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Easy</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSpinBox" name="multiplier_easy">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>999</number>
+        </property>
+        <property name="value">
+         <number>1</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_16">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Average</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSpinBox" name="multiplier_average">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>999</number>
+        </property>
+        <property name="value">
+         <number>1</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_17">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Hard</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSpinBox" name="multiplier_hard">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>999</number>
+        </property>
+        <property name="value">
+         <number>1</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>Score:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_scoreperlevel">
+        <property name="text">
+         <string>000</string>
+        </property>
        </widget>
       </item>
      </layout>
@@ -782,6 +827,9 @@ QPushButton:hover {
    </item>
    <item>
     <widget class="QWidget" name="widget_quizview" native="true">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="styleSheet">
       <string notr="true">/* 1. THE MAIN CONTAINER */
 #QScrollArea { 
@@ -997,7 +1045,7 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
               <x>0</x>
               <y>0</y>
               <width>323</width>
-              <height>543</height>
+              <height>545</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="layout_identification"/>
@@ -1131,7 +1179,7 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
               <x>0</x>
               <y>0</y>
               <width>322</width>
-              <height>543</height>
+              <height>545</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="layout_multiplechoice"/>
@@ -1265,7 +1313,7 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
               <x>0</x>
               <y>0</y>
               <width>323</width>
-              <height>543</height>
+              <height>545</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="layout_trueorfalse"/>

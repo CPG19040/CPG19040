@@ -121,15 +121,13 @@ class Ui_FormHome(object):
 
         self.verticalLayout.addWidget(self.widget_4)
 
-        self.line = QFrame(self.widget_left_panel)
-        self.line.setObjectName(u"line")
-        self.line.setStyleSheet(u"background-color: rgb(206, 152, 115);")
-        self.line.setFrameShape(QFrame.Shape.HLine)
-        self.line.setFrameShadow(QFrame.Shadow.Sunken)
-
-        self.verticalLayout.addWidget(self.line)
-
-        self.label_firstname = QLabel(self.widget_left_panel)
+        self.widget_3 = QWidget(self.widget_left_panel)
+        self.widget_3.setObjectName(u"widget_3")
+        self.widget_3.setMinimumSize(QSize(0, 100))
+        self.widget_3.setStyleSheet(u"background-color: rgba(205, 171, 143, 0.5); border-radius: 15px;")
+        self.verticalLayout_13 = QVBoxLayout(self.widget_3)
+        self.verticalLayout_13.setObjectName(u"verticalLayout_13")
+        self.label_firstname = QLabel(self.widget_3)
         self.label_firstname.setObjectName(u"label_firstname")
         self.label_firstname.setMinimumSize(QSize(0, 30))
         self.label_firstname.setStyleSheet(u"#label_firstname { background-color: transparent; color: rgb(255, 255, 255); font: 50 20pt \"Kissy Hugs\"; }")
@@ -138,9 +136,9 @@ class Ui_FormHome(object):
         self.label_firstname.setMargin(0)
         self.label_firstname.setIndent(10)
 
-        self.verticalLayout.addWidget(self.label_firstname)
+        self.verticalLayout_13.addWidget(self.label_firstname)
 
-        self.label_lastname = QLabel(self.widget_left_panel)
+        self.label_lastname = QLabel(self.widget_3)
         self.label_lastname.setObjectName(u"label_lastname")
         self.label_lastname.setMinimumSize(QSize(0, 30))
         font = QFont()
@@ -154,9 +152,9 @@ class Ui_FormHome(object):
         self.label_lastname.setMargin(0)
         self.label_lastname.setIndent(10)
 
-        self.verticalLayout.addWidget(self.label_lastname)
+        self.verticalLayout_13.addWidget(self.label_lastname)
 
-        self.label_studentId = QLabel(self.widget_left_panel)
+        self.label_studentId = QLabel(self.widget_3)
         self.label_studentId.setObjectName(u"label_studentId")
         self.label_studentId.setMinimumSize(QSize(0, 30))
         font1 = QFont()
@@ -166,16 +164,19 @@ class Ui_FormHome(object):
         self.label_studentId.setStyleSheet(u"background-color: transparent; color: rgb(255, 255, 255);")
         self.label_studentId.setIndent(10)
 
-        self.verticalLayout.addWidget(self.label_studentId)
+        self.verticalLayout_13.addWidget(self.label_studentId)
 
-        self.label_sectionName = QLabel(self.widget_left_panel)
+        self.label_sectionName = QLabel(self.widget_3)
         self.label_sectionName.setObjectName(u"label_sectionName")
         self.label_sectionName.setMinimumSize(QSize(0, 30))
         self.label_sectionName.setFont(font1)
         self.label_sectionName.setStyleSheet(u"background-color: transparent; color: rgb(255, 255, 255);")
         self.label_sectionName.setIndent(10)
 
-        self.verticalLayout.addWidget(self.label_sectionName)
+        self.verticalLayout_13.addWidget(self.label_sectionName)
+
+
+        self.verticalLayout.addWidget(self.widget_3)
 
         self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
@@ -183,6 +184,10 @@ class Ui_FormHome(object):
 
         self.widget_5 = QWidget(self.widget_left_panel)
         self.widget_5.setObjectName(u"widget_5")
+        self.widget_5.setStyleSheet(u"#widget_5 {\n"
+"	background-color: rgba(205, 171, 143, 0.5);\n"
+"	border-radius: 15px;\n"
+"}")
         self.horizontalLayout_5 = QHBoxLayout(self.widget_5)
         self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
         self.horizontalSpacer_4 = QSpacerItem(53, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
@@ -494,7 +499,7 @@ class Ui_FormHome(object):
         self.scrollArea_id.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 100, 30))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 18, 18))
         self.verticalLayout_7 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_7.setObjectName(u"verticalLayout_7")
         self.scrollArea_id.setWidget(self.scrollAreaWidgetContents)
@@ -609,7 +614,7 @@ class Ui_FormHome(object):
         self.scrollArea_mc.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 100, 30))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 18, 18))
         self.verticalLayout_8 = QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_8.setObjectName(u"verticalLayout_8")
         self.scrollArea_mc.setWidget(self.scrollAreaWidgetContents_2)
@@ -724,7 +729,7 @@ class Ui_FormHome(object):
         self.scrollArea_tf.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 100, 30))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 18, 18))
         self.verticalLayout_9 = QVBoxLayout(self.scrollAreaWidgetContents_3)
         self.verticalLayout_9.setObjectName(u"verticalLayout_9")
         self.scrollArea_tf.setWidget(self.scrollAreaWidgetContents_3)

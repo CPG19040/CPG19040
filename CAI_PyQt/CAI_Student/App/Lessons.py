@@ -18,18 +18,25 @@ class Lessons:
                 title, path_str, lessonimages, lessonfilename). 
                 Returns an 8-element tuple of empty strings if no record is found.
         """
-
-        sql = 'SELECT\n'
-        sql += '    lesson_id\n'
-        sql += '    ,chapter \n'
-        sql += '    ,lessonnum\n'
-        sql += '    ,gradingperiod\n'
-        sql += '    ,title\n'
-        sql += '    ,path_str\n'
-        sql += '    ,lessonimages\n'
-        sql += '    ,lessonfilename\n'
-        sql += 'FROM cai.tbl_lessons\n'
-        sql += 'ORDER BY gradingperiod, chapter, lessonnum ASC'
+        
+        sql = """
+            SELECT 
+                l.lesson_id,
+                l.chapter,
+                l.lessonnum,
+                l.gradingperiod,
+                l.title,
+                l.path_str,
+                l.lessonimages,
+                l.lessonfilename
+            FROM 
+                cai.tbl_lessons l
+            INNER JOIN 
+                cai.tbl_grading_period gp ON l.gradingperiod = gp.gpid
+            WHERE 
+                CURRENT_DATE BETWEEN gp.startdate AND gp.enddate
+            ORDER BY gradingperiod, chapter, lessonnum ASC;
+        """
         cursor, conn = self.db_tools.retrieve_records(sql)
 
         if cursor:

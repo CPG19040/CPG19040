@@ -1,5 +1,6 @@
 import psycopg2, csv
 from passlib.hash import bcrypt
+from pathlib import Path
 
 from PySide6.QtGui import QStandardItemModel, QStandardItem, QImage, QPixmap
 from PySide6.QtWidgets import QDialog, QMessageBox, QFileDialog
@@ -421,6 +422,10 @@ class AddNewStudentDialog(QDialog, Ui_AddNewStudentDialog):
 
         if not csv_path:
             QMessageBox.warning(self, "Validation Error", "Please select a CSV file.")
+            return 1
+        
+        if not Path(csv_path).exists():
+            QMessageBox.warning(self, "Validation Error", f"{csv_path}\nThe path does not exist.")
             return 1
         
         sy1 = self.spinBox_SY1.value()

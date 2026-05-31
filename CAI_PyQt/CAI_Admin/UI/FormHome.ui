@@ -4123,6 +4123,93 @@ QPushButton:hover {
             </property>
            </spacer>
           </item>
+          <item>
+           <widget class="QPushButton" name="btnLessonView">
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="text">
+             <string>View</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../resources.qrc">
+              <normaloff>:/Images/Images/eye.png</normaloff>:/Images/Images/eye.png</iconset>
+            </property>
+            <property name="class" stdset="0">
+             <string>button-normal</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btnLessonEdit">
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="text">
+             <string>Edit</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../resources.qrc">
+              <normaloff>:/Images/Images/pencil.png</normaloff>:/Images/Images/pencil.png</iconset>
+            </property>
+            <property name="class" stdset="0">
+             <string>button-normal</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btnLessonAdd">
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="text">
+             <string>Add</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../resources.qrc">
+              <normaloff>:/Images/Images/plus.png</normaloff>:/Images/Images/plus.png</iconset>
+            </property>
+            <property name="class" stdset="0">
+             <string>button-normal</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </item>
         <item>
@@ -4221,93 +4308,6 @@ QScrollBar::add-line, QScrollBar::sub-line {
              </size>
             </property>
            </spacer>
-          </item>
-          <item>
-           <widget class="QPushButton" name="btnLessonView">
-            <property name="minimumSize">
-             <size>
-              <width>100</width>
-              <height>30</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>30</height>
-             </size>
-            </property>
-            <property name="cursor">
-             <cursorShape>PointingHandCursor</cursorShape>
-            </property>
-            <property name="text">
-             <string>View</string>
-            </property>
-            <property name="icon">
-             <iconset resource="../resources.qrc">
-              <normaloff>:/Images/Images/eye.png</normaloff>:/Images/Images/eye.png</iconset>
-            </property>
-            <property name="class" stdset="0">
-             <string>button-normal</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="btnLessonEdit">
-            <property name="minimumSize">
-             <size>
-              <width>100</width>
-              <height>30</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>30</height>
-             </size>
-            </property>
-            <property name="cursor">
-             <cursorShape>PointingHandCursor</cursorShape>
-            </property>
-            <property name="text">
-             <string>Edit</string>
-            </property>
-            <property name="icon">
-             <iconset resource="../resources.qrc">
-              <normaloff>:/Images/Images/pencil.png</normaloff>:/Images/Images/pencil.png</iconset>
-            </property>
-            <property name="class" stdset="0">
-             <string>button-normal</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="btnLessonAdd">
-            <property name="minimumSize">
-             <size>
-              <width>100</width>
-              <height>30</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>30</height>
-             </size>
-            </property>
-            <property name="cursor">
-             <cursorShape>PointingHandCursor</cursorShape>
-            </property>
-            <property name="text">
-             <string>Add</string>
-            </property>
-            <property name="icon">
-             <iconset resource="../resources.qrc">
-              <normaloff>:/Images/Images/plus.png</normaloff>:/Images/Images/plus.png</iconset>
-            </property>
-            <property name="class" stdset="0">
-             <string>button-normal</string>
-            </property>
-           </widget>
           </item>
          </layout>
         </item>
@@ -5010,8 +5010,8 @@ QPushButton:hover {
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>317</width>
-                <height>534</height>
+                <width>312</width>
+                <height>502</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_13"/>
@@ -5053,8 +5053,8 @@ QPushButton:hover {
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>317</width>
-                <height>534</height>
+                <width>311</width>
+                <height>502</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_12"/>
@@ -5074,8 +5074,8 @@ QPushButton:hover {
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>317</width>
-                <height>534</height>
+                <width>312</width>
+                <height>502</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_11"/>
@@ -7809,6 +7809,235 @@ QPushButton:hover {
                   </item>
                  </layout>
                 </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QWidget" name="widget_SY_settings_2" native="true">
+              <property name="styleSheet">
+               <string notr="true">#widget_SY_header_2 { 
+	background-color: rgb(224, 243, 255);
+	border: 1px solid rgb(98, 160, 234);
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+
+#widget_SY_body_3 {
+	background-color: #fff;
+	border: 1px solid #999;
+	border-top: none;
+	border-bottom: none;
+}
+
+QLineEdit {
+	border: 1px solid #999;
+	border-radius: 15px;
+	background-color: #FFF;
+	padding: 0px 10px;
+}
+
+QLineEdit:focus {
+	border: 1px solid rgb(53, 132, 228);
+}</string>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_29">
+               <property name="spacing">
+                <number>0</number>
+               </property>
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>10</number>
+               </property>
+               <item>
+                <widget class="QWidget" name="widget_SY_header_2" native="true">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>50</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>50</height>
+                  </size>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true"/>
+                 </property>
+                 <layout class="QHBoxLayout" name="horizontalLayout_33">
+                  <item>
+                   <widget class="QLabel" name="label_29">
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>30</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>16777215</width>
+                      <height>30</height>
+                     </size>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <family>Inter</family>
+                      <pointsize>12</pointsize>
+                      <weight>50</weight>
+                      <italic>false</italic>
+                      <bold>false</bold>
+                     </font>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">background: transparent; 
+font: 12pt &quot;Inter&quot;;</string>
+                    </property>
+                    <property name="text">
+                     <string>IMPORT ALL PREDEFINED LESSONS</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <spacer name="horizontalSpacer_25">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>40</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="btnImportAllLessons">
+                    <property name="minimumSize">
+                     <size>
+                      <width>130</width>
+                      <height>30</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>16777215</width>
+                      <height>30</height>
+                     </size>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <family>Inter SemiBold</family>
+                      <pointsize>10</pointsize>
+                      <weight>50</weight>
+                      <italic>false</italic>
+                      <bold>false</bold>
+                     </font>
+                    </property>
+                    <property name="cursor">
+                     <cursorShape>PointingHandCursor</cursorShape>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">QPushButton {
+    border-radius: 15px;
+    padding: 0px 10px 0px;
+    background: #129046;
+    color: #FFF;
+	font: 10pt &quot;Inter SemiBold&quot;;
+}
+
+QPushButton:hover {
+    background: #27AE60;
+}</string>
+                    </property>
+                    <property name="text">
+                     <string>Import</string>
+                    </property>
+                    <property name="class" stdset="0">
+                     <string>button-green</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item>
+                <widget class="QWidget" name="widget_SY_body_3" native="true">
+                 <property name="styleSheet">
+                  <string notr="true"/>
+                 </property>
+                 <layout class="QHBoxLayout" name="horizontalLayout_34">
+                  <item>
+                   <widget class="QPushButton" name="btnBrowseLessonsCSV">
+                    <property name="minimumSize">
+                     <size>
+                      <width>100</width>
+                      <height>30</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>16777215</width>
+                      <height>30</height>
+                     </size>
+                    </property>
+                    <property name="cursor">
+                     <cursorShape>PointingHandCursor</cursorShape>
+                    </property>
+                    <property name="text">
+                     <string>Browse</string>
+                    </property>
+                    <property name="class" stdset="0">
+                     <string>button-normal</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="label_CSV_path">
+                    <property name="minimumSize">
+                     <size>
+                      <width>100</width>
+                      <height>30</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>16777215</width>
+                      <height>30</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string/>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <spacer name="horizontalSpacer_26">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>40</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item>
+                <widget class="QTableView" name="tableView_LessonsCSV"/>
                </item>
               </layout>
              </widget>

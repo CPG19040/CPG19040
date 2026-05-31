@@ -623,6 +623,17 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
 
     def refresh_quiz(self):
         """Refreshes all quiz sections from the database."""
+
+        if self.cbLessonName.currentIndex() <= 0:
+            self.widget_builder.setEnabled(False)
+            self.widget_quizview.setEnabled(False)
+            self.checkBoxPublish.setEnabled(False)
+         
+        else:
+            self.widget_builder.setEnabled(True)
+            self.widget_quizview.setEnabled(True)
+            self.checkBoxPublish.setEnabled(True)
+
         lesson_id = self.cbLessonName.currentData()
         self.clear_layout(self.layout_identification)
         self.clear_layout(self.layout_multiplechoice)

@@ -261,125 +261,130 @@
            </widget>
           </item>
           <item>
-           <widget class="Line" name="line">
-            <property name="styleSheet">
-             <string notr="true">background-color: rgb(206, 152, 115);</string>
-            </property>
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="label_firstname">
+           <widget class="QWidget" name="widget_3" native="true">
             <property name="minimumSize">
              <size>
               <width>0</width>
-              <height>30</height>
+              <height>100</height>
              </size>
             </property>
             <property name="styleSheet">
-             <string notr="true">#label_firstname { background-color: transparent; color: rgb(255, 255, 255); font: 50 20pt &quot;Kissy Hugs&quot;; }</string>
+             <string notr="true">background-color: rgba(205, 171, 143, 0.5); border-radius: 15px;</string>
             </property>
-            <property name="text">
-             <string>Phineas</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-            </property>
-            <property name="wordWrap">
-             <bool>true</bool>
-            </property>
-            <property name="margin">
-             <number>0</number>
-            </property>
-            <property name="indent">
-             <number>10</number>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="label_lastname">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>30</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <family>Kissy Hugs</family>
-              <pointsize>15</pointsize>
-              <weight>6</weight>
-              <italic>false</italic>
-              <bold>false</bold>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">#label_lastname { background-color: transparent; font: 50 15pt &quot;Kissy Hugs&quot;; color: rgb(255, 255, 255); }</string>
-            </property>
-            <property name="text">
-             <string>Flynn</string>
-            </property>
-            <property name="wordWrap">
-             <bool>true</bool>
-            </property>
-            <property name="margin">
-             <number>0</number>
-            </property>
-            <property name="indent">
-             <number>10</number>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="label_studentId">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>30</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <family>Inter SemiBold</family>
-              <pointsize>11</pointsize>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">background-color: transparent; color: rgb(255, 255, 255);</string>
-            </property>
-            <property name="text">
-             <string>2026-0001-STU</string>
-            </property>
-            <property name="indent">
-             <number>10</number>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="label_sectionName">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>30</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <family>Inter SemiBold</family>
-              <pointsize>11</pointsize>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">background-color: transparent; color: rgb(255, 255, 255);</string>
-            </property>
-            <property name="text">
-             <string>Honesty</string>
-            </property>
-            <property name="indent">
-             <number>10</number>
-            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_13">
+             <item>
+              <widget class="QLabel" name="label_firstname">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">#label_firstname { background-color: transparent; color: rgb(255, 255, 255); font: 50 20pt &quot;Kissy Hugs&quot;; }</string>
+               </property>
+               <property name="text">
+                <string>Phineas</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+               </property>
+               <property name="wordWrap">
+                <bool>true</bool>
+               </property>
+               <property name="margin">
+                <number>0</number>
+               </property>
+               <property name="indent">
+                <number>10</number>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_lastname">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Kissy Hugs</family>
+                 <pointsize>15</pointsize>
+                 <weight>6</weight>
+                 <italic>false</italic>
+                 <bold>false</bold>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">#label_lastname { background-color: transparent; font: 50 15pt &quot;Kissy Hugs&quot;; color: rgb(255, 255, 255); }</string>
+               </property>
+               <property name="text">
+                <string>Flynn</string>
+               </property>
+               <property name="wordWrap">
+                <bool>true</bool>
+               </property>
+               <property name="margin">
+                <number>0</number>
+               </property>
+               <property name="indent">
+                <number>10</number>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_studentId">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Inter SemiBold</family>
+                 <pointsize>11</pointsize>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">background-color: transparent; color: rgb(255, 255, 255);</string>
+               </property>
+               <property name="text">
+                <string>2026-0001-STU</string>
+               </property>
+               <property name="indent">
+                <number>10</number>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_sectionName">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Inter SemiBold</family>
+                 <pointsize>11</pointsize>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">background-color: transparent; color: rgb(255, 255, 255);</string>
+               </property>
+               <property name="text">
+                <string>Honesty</string>
+               </property>
+               <property name="indent">
+                <number>10</number>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </widget>
           </item>
           <item>
@@ -397,6 +402,12 @@
           </item>
           <item>
            <widget class="QWidget" name="widget_5" native="true">
+            <property name="styleSheet">
+             <string notr="true">#widget_5 {
+	background-color: rgba(205, 171, 143, 0.5);
+	border-radius: 15px;
+}</string>
+            </property>
             <layout class="QHBoxLayout" name="horizontalLayout_5">
              <item>
               <spacer name="horizontalSpacer_4">
@@ -927,8 +938,8 @@ QScrollArea QWidget #qt_scrollarea_corner {
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>100</width>
-                         <height>30</height>
+                         <width>18</width>
+                         <height>18</height>
                         </rect>
                        </property>
                        <layout class="QVBoxLayout" name="verticalLayout_7"/>
@@ -1090,8 +1101,8 @@ QScrollArea QWidget #qt_scrollarea_corner {
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>100</width>
-                         <height>30</height>
+                         <width>18</width>
+                         <height>18</height>
                         </rect>
                        </property>
                        <layout class="QVBoxLayout" name="verticalLayout_8"/>
@@ -1253,8 +1264,8 @@ QScrollArea QWidget #qt_scrollarea_corner {
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>100</width>
-                         <height>30</height>
+                         <width>18</width>
+                         <height>18</height>
                         </rect>
                        </property>
                        <layout class="QVBoxLayout" name="verticalLayout_9"/>

@@ -44,6 +44,12 @@ class Ui_QuizCreatorDialog(object):
 "    background: #27AE60;\n"
 "}\n"
 "\n"
+"*[class=\"button-green\"]:disabled {\n"
+"    background: #A5D6A7;\n"
+"    color: #E8F5E9;\n"
+"    opacity: 0.6;\n"
+"}\n"
+"\n"
 "QComboBox[class=\"combobox-main\"] {\n"
 "	height: 30px;\n"
 "	border: 1px solid #999;\n"
@@ -64,12 +70,12 @@ class Ui_QuizCreatorDialog(object):
 "    border: 1px solid #3498db;\n"
 "}\n"
 "\n"
-"QComboBox[class=\"combobox-main\"]::drop-down {\n"
+"QComboBox[class=\"com"
+                        "bobox-main\"]::drop-down {\n"
 "    subcontrol-origin: padding;\n"
 "    subcontrol-position: top right;\n"
 "    width: 30px;\n"
-""
-                        "    border-left-width: 0px;\n"
+"    border-left-width: 0px;\n"
 "    border-top-right-radius: 8px;\n"
 "    border-bottom-right-radius: 8px;\n"
 "}\n"
@@ -102,15 +108,15 @@ class Ui_QuizCreatorDialog(object):
 "    background-color: #ffffff;\n"
 "    color: #333333;\n"
 "    font-size: 12px;\n"
-"    selection-background-color: #7eb4d7;\n"
+"    selection-"
+                        "background-color: #7eb4d7;\n"
 "	font: 10pt \"Inter\";\n"
 "}\n"
 "\n"
 "QSpinBox:focus {\n"
 "    border: 1px solid #007BFF;\n"
 "}\n"
-""
-                        "\n"
+"\n"
 "QSpinBox:hover {\n"
 "    border: 1px solid #3498db;\n"
 "}\n"
@@ -145,6 +151,21 @@ class Ui_QuizCreatorDialog(object):
 "    image: url(:/Images/Images/caret-down.png);\n"
 "    width: 8px;\n"
 "    height: 8px;\n"
+"}\n"
+"\n"
+"QSpinBox:disabled {\n"
+"    background"
+                        "-color: #f5f5f5;\n"
+"    border: 1px solid #dcdcdc;\n"
+"    color: #aaaaaa;\n"
+"}\n"
+"\n"
+"QSpinBox::up-arrow:disabled {\n"
+"    image: url(:/Images/Images/caret-up-disabled.png);\n"
+"}\n"
+"\n"
+"QSpinBox::down-arrow:disabled {\n"
+"    image: url(:/Images/Images/caret-down-disabled.png);\n"
 "}\n"
 "")
         self.verticalLayout_2 = QVBoxLayout(QuizCreatorDialog)
@@ -199,6 +220,7 @@ class Ui_QuizCreatorDialog(object):
 
         self.checkBoxPublish = QCheckBox(self.widget_header)
         self.checkBoxPublish.setObjectName(u"checkBoxPublish")
+        self.checkBoxPublish.setEnabled(False)
         self.checkBoxPublish.setMinimumSize(QSize(0, 30))
         self.checkBoxPublish.setMaximumSize(QSize(16777215, 30))
         self.checkBoxPublish.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
@@ -215,7 +237,17 @@ class Ui_QuizCreatorDialog(object):
 "}\n"
 "QCheckBox::indicator:checked {\n"
 "	image: url(:/Images/Images/check.png);\n"
-"}")
+"}\n"
+"\n"
+"QCheckBox::indicator:disabled {\n"
+"	background-color: #E0E0E0;\n"
+"	border-color: #B0B0B0;\n"
+"}\n"
+"\n"
+"QCheckBox:disabled {\n"
+"	color: #7f8c8d;\n"
+"}\n"
+"")
 
         self.headerLayout.addWidget(self.checkBoxPublish)
 
@@ -245,20 +277,14 @@ class Ui_QuizCreatorDialog(object):
 
         self.verticalLayout_2.addWidget(self.line_3)
 
-        self.widget_qbuilder = QWidget(QuizCreatorDialog)
-        self.widget_qbuilder.setObjectName(u"widget_qbuilder")
-        self.verticalLayout_5 = QVBoxLayout(self.widget_qbuilder)
-        self.verticalLayout_5.setObjectName(u"verticalLayout_5")
-        self.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
-        self.frame_5 = QFrame(self.widget_qbuilder)
-        self.frame_5.setObjectName(u"frame_5")
-        self.frame_5.setStyleSheet(u"#frame_5 { background: transparent; }")
-        self.frame_5.setFrameShape(QFrame.StyledPanel)
-        self.frame_5.setFrameShadow(QFrame.Raised)
-        self.horizontalLayout = QHBoxLayout(self.frame_5)
+        self.widget_builder = QWidget(QuizCreatorDialog)
+        self.widget_builder.setObjectName(u"widget_builder")
+        self.widget_builder.setEnabled(False)
+        self.widget_builder.setStyleSheet(u"#frame_5 { background: transparent; }")
+        self.horizontalLayout = QHBoxLayout(self.widget_builder)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
-        self.btn_save = QPushButton(self.frame_5)
+        self.btn_save = QPushButton(self.widget_builder)
         self.btn_save.setObjectName(u"btn_save")
         self.btn_save.setMinimumSize(QSize(30, 30))
         self.btn_save.setMaximumSize(QSize(30, 30))
@@ -286,20 +312,20 @@ class Ui_QuizCreatorDialog(object):
 
         self.horizontalLayout.addWidget(self.btn_save)
 
-        self.line = QFrame(self.frame_5)
+        self.line = QFrame(self.widget_builder)
         self.line.setObjectName(u"line")
         self.line.setFrameShape(QFrame.Shape.VLine)
         self.line.setFrameShadow(QFrame.Shadow.Sunken)
 
         self.horizontalLayout.addWidget(self.line)
 
-        self.label_6 = QLabel(self.frame_5)
+        self.label_6 = QLabel(self.widget_builder)
         self.label_6.setObjectName(u"label_6")
         self.label_6.setMaximumSize(QSize(16777215, 30))
 
         self.horizontalLayout.addWidget(self.label_6)
 
-        self.widget_2 = QWidget(self.frame_5)
+        self.widget_2 = QWidget(self.widget_builder)
         self.widget_2.setObjectName(u"widget_2")
         self.widget_2.setStyleSheet(u"/* Base style for all difficulty buttons */\n"
 "QPushButton {\n"
@@ -347,6 +373,40 @@ class Ui_QuizCreatorDialog(object):
 "/* Hover effect */\n"
 "QPushButton:hover {\n"
 "    background-color: #e0e0e0;\n"
+"}\n"
+"\n"
+"QPushButton:disabled {\n"
+"    background-color: #E6E6E6; /* Flat, dull gray */\n"
+"    border: 1px solid #D0D0D0; /* Faded border */\n"
+"    color: #A0A0A0;            /* Grayed out text */\n"
+"}\n"
+"\n"
+"/* Fix borders for the middle/left buttons so they don't look weird when disabled */\n"
+"QPushButton#btnEasy:disabled,\n"
+"QPushButton#btnAverage:disabled {\n"
+"    border-right: none; \n"
+"}\n"
+"\n"
+"/* 2. Disabled + CHECKED states (If a difficulty is selected but the group is locked) */\n"
+"QPushButton#btnEasy:checked:disabled {\n"
+"    background-color: #D3EED7; /* Muted, faded green */\n"
+"    border: 2px solid #A2CBA8;\n"
+"    border-right: none;\n"
+"    color: #8A9A8D;\n"
+"}\n"
+"\n"
+"QPushButton#btnAverage:checked:disabled {\n"
+"    background-color: #FFF9E0; /* Muted, faded yellow */\n"
+"    border: 2px solid"
+                        " #E6D2B5;\n"
+"    border-right: none;\n"
+"    color: #9A9384;\n"
+"}\n"
+"\n"
+"QPushButton#btnHard:checked:disabled {\n"
+"    background-color: #FADAD7; /* Muted, faded red */\n"
+"    border: 2px solid #E0B3AF;\n"
+"    color: #A68D8A;\n"
 "}")
         self.horizontalLayout_2 = QHBoxLayout(self.widget_2)
         self.horizontalLayout_2.setSpacing(0)
@@ -386,20 +446,20 @@ class Ui_QuizCreatorDialog(object):
 
         self.horizontalLayout.addItem(self.horizontalSpacer_3)
 
-        self.label_18 = QLabel(self.frame_5)
+        self.label_18 = QLabel(self.widget_builder)
         self.label_18.setObjectName(u"label_18")
         self.label_18.setMaximumSize(QSize(16777215, 30))
         self.label_18.setStyleSheet(u"font: 10pt \"Inter SemiBold\";")
 
         self.horizontalLayout.addWidget(self.label_18)
 
-        self.label_15 = QLabel(self.frame_5)
+        self.label_15 = QLabel(self.widget_builder)
         self.label_15.setObjectName(u"label_15")
         self.label_15.setMaximumSize(QSize(16777215, 30))
 
         self.horizontalLayout.addWidget(self.label_15)
 
-        self.multiplier_easy = QSpinBox(self.frame_5)
+        self.multiplier_easy = QSpinBox(self.widget_builder)
         self.multiplier_easy.setObjectName(u"multiplier_easy")
         self.multiplier_easy.setMinimumSize(QSize(0, 30))
         self.multiplier_easy.setMaximumSize(QSize(16777215, 30))
@@ -411,13 +471,13 @@ class Ui_QuizCreatorDialog(object):
 
         self.horizontalLayout.addWidget(self.multiplier_easy)
 
-        self.label_16 = QLabel(self.frame_5)
+        self.label_16 = QLabel(self.widget_builder)
         self.label_16.setObjectName(u"label_16")
         self.label_16.setMaximumSize(QSize(16777215, 30))
 
         self.horizontalLayout.addWidget(self.label_16)
 
-        self.multiplier_average = QSpinBox(self.frame_5)
+        self.multiplier_average = QSpinBox(self.widget_builder)
         self.multiplier_average.setObjectName(u"multiplier_average")
         self.multiplier_average.setMinimumSize(QSize(0, 30))
         self.multiplier_average.setMaximumSize(QSize(16777215, 30))
@@ -429,13 +489,13 @@ class Ui_QuizCreatorDialog(object):
 
         self.horizontalLayout.addWidget(self.multiplier_average)
 
-        self.label_17 = QLabel(self.frame_5)
+        self.label_17 = QLabel(self.widget_builder)
         self.label_17.setObjectName(u"label_17")
         self.label_17.setMaximumSize(QSize(16777215, 30))
 
         self.horizontalLayout.addWidget(self.label_17)
 
-        self.multiplier_hard = QSpinBox(self.frame_5)
+        self.multiplier_hard = QSpinBox(self.widget_builder)
         self.multiplier_hard.setObjectName(u"multiplier_hard")
         self.multiplier_hard.setMinimumSize(QSize(0, 30))
         self.multiplier_hard.setMaximumSize(QSize(16777215, 30))
@@ -447,21 +507,18 @@ class Ui_QuizCreatorDialog(object):
 
         self.horizontalLayout.addWidget(self.multiplier_hard)
 
-        self.label_4 = QLabel(self.frame_5)
+        self.label_4 = QLabel(self.widget_builder)
         self.label_4.setObjectName(u"label_4")
 
         self.horizontalLayout.addWidget(self.label_4)
 
-        self.label_scoreperlevel = QLabel(self.frame_5)
+        self.label_scoreperlevel = QLabel(self.widget_builder)
         self.label_scoreperlevel.setObjectName(u"label_scoreperlevel")
 
         self.horizontalLayout.addWidget(self.label_scoreperlevel)
 
 
-        self.verticalLayout_5.addWidget(self.frame_5)
-
-
-        self.verticalLayout_2.addWidget(self.widget_qbuilder)
+        self.verticalLayout_2.addWidget(self.widget_builder)
 
         self.line_2 = QFrame(QuizCreatorDialog)
         self.line_2.setObjectName(u"line_2")
@@ -472,6 +529,7 @@ class Ui_QuizCreatorDialog(object):
 
         self.widget_quizview = QWidget(QuizCreatorDialog)
         self.widget_quizview.setObjectName(u"widget_quizview")
+        self.widget_quizview.setEnabled(False)
         self.widget_quizview.setStyleSheet(u"/* 1. THE MAIN CONTAINER */\n"
 "#QScrollArea { \n"
 "    border: none;\n"
@@ -601,7 +659,7 @@ class Ui_QuizCreatorDialog(object):
         self.scrollArea_id.setWidgetResizable(True)
         self.scrollAreaWidgetContents_5 = QWidget()
         self.scrollAreaWidgetContents_5.setObjectName(u"scrollAreaWidgetContents_5")
-        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 323, 543))
+        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 323, 545))
         self.layout_identification = QVBoxLayout(self.scrollAreaWidgetContents_5)
         self.layout_identification.setObjectName(u"layout_identification")
         self.scrollArea_id.setWidget(self.scrollAreaWidgetContents_5)
@@ -664,7 +722,7 @@ class Ui_QuizCreatorDialog(object):
         self.scrollArea_mc.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 322, 543))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 322, 545))
         self.layout_multiplechoice = QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.layout_multiplechoice.setObjectName(u"layout_multiplechoice")
         self.scrollArea_mc.setWidget(self.scrollAreaWidgetContents_2)
@@ -727,7 +785,7 @@ class Ui_QuizCreatorDialog(object):
         self.scrollArea_tf.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 323, 543))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 323, 545))
         self.layout_trueorfalse = QVBoxLayout(self.scrollAreaWidgetContents_3)
         self.layout_trueorfalse.setObjectName(u"layout_trueorfalse")
         self.scrollArea_tf.setWidget(self.scrollAreaWidgetContents_3)

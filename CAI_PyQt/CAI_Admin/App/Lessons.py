@@ -1,3 +1,5 @@
+import os, csv
+
 from pathlib import Path
 
 from PySide6.QtGui import QStandardItemModel, QStandardItem, QImage, QPixmap
@@ -23,7 +25,52 @@ class Lesson:
             count = record[0]['count']
 
         return count
-        
+
+    def add_all_lessons_from_csv(self, csv_path):
+        err = ""
+
+        if not csv_path:
+            err = "No path for the CSV provided."
+            return err
+
+        try:
+
+            with open(csv_path, mode='r', encoding='utf-8') as f:
+                reader = csv.DictReader(f)
+
+                for row in reader:
+                    errors = []
+                    if not row["TITLE"]: errors.append("Lesson Title is required.")
+                    if not row["GRADING PERIOD"]: errors.append("Grading Period is required.")
+                    if not row["CHAPTER"]: errors.append("Chapter is required.")
+                    if not row["NUMBER"]: errors.append("Lesson Number is required.")
+                    
+                    if errors:
+                        err = "\n".join(errors)
+                        return err
+
+                    sql = "INSERT INTO cai.tbl_lessons (\n"
+                    sql += "    chapter\n"
+                    sql += "    ,lessonnum\n"
+                    sql += "    ,gradingperiod\n"
+                    sql += "    ,title\n"
+                    sql += "    ,lessonfilename\n"
+                    sql += ")\n"
+                    sql += "VALUES (%s, %s, %s, %s, %s);"
+
+                    self.db_tools.execute_query(sql, (
+                        row["CHAPTER"],
+                        row["NUMBER"],
+                        row["GRADING PERIOD"],
+                        row["TITLE"],
+                        f"{row["TITLE"]}.pdf"
+                    ))
+                    
+        except Exception as e:
+            err = f"\nFailed to save: {str(e)}"
+
+        return err
+      
     def retrieve_lesson_info(self, lesson_id):
         """
         Retrieves detailed information for a specific lesson from the database.

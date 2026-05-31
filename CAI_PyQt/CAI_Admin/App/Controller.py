@@ -1,8 +1,8 @@
-import os
+import os, csv
 
 # PyQt Imports
 from PySide6.QtCore import QSettings, QTimer, QDateTime, QPoint, QEasingCurve, QPropertyAnimation, QParallelAnimationGroup, Qt, QDate
-from PySide6.QtWidgets import QMainWindow, QHeaderView, QDialog, QStyledItemDelegate, QWidget, QMessageBox, QApplication, QButtonGroup
+from PySide6.QtWidgets import QMainWindow, QHeaderView, QDialog, QStyledItemDelegate, QFileDialog, QMessageBox, QApplication, QButtonGroup
 from PySide6.QtGui import QFontDatabase, QImage, QPixmap, QGuiApplication, QStandardItemModel, QStandardItem
 from shiboken6 import isValid
 
@@ -181,6 +181,8 @@ class Controller:
 
         self.ui.btn_manual.setChecked(True)
         self.ui.btnSaveSettings_SY.clicked.connect(self.saveSchoolYear_gradingPeriod)
+        self.ui.btnBrowseLessonsCSV.clicked.connect(self.browse_lessons_csv)
+        self.ui.btnImportAllLessons.clicked.connect(self.import_lessons)
 
         #=============================================================
         #  Application-Level Privileges (Role-Based Access Control)
@@ -615,6 +617,18 @@ class Controller:
 
         if model:
             self.ui.table_lesson.setModel(model)
+
+            # --- CONNECT THE DOUBLE CLICK SIGNAL ---
+            # Disconnect old connection safely to prevent stacking event behaviors
+            try:
+                self.ui.table_lesson.doubleClicked.disconnect()
+            except TypeError:
+                pass # Thrown if it wasn't connected before; safe to ignore
+                
+            # Connect to your new handler function
+            self.ui.table_lesson.doubleClicked.connect(self.view_lesson)
+            # ----------------------------------------
+
             self.ui.table_lesson.setColumnHidden(0, True)
             header = self.ui.table_lesson.horizontalHeader()
             header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
@@ -625,6 +639,43 @@ class Controller:
 
             suffix = "item" if model.rowCount() <= 1 else "items"
             self.ui.label_lessonTotalCount.setText(f"{model.rowCount()} {suffix}")
+
+    def view_lesson(self):
+        selection = self.ui.table_lesson.selectionModel()
+
+        if not selection.hasSelection():
+            QMessageBox.information(self.ui.table_lesson.window(), "No Selection", "Select a lesson to view.")
+            return
+
+        # Get the index of the first selected row
+        selected_row_index = selection.selectedRows()[0].row()
+        model = self.ui.table_lesson.model()
+
+        # Column 0 is lesson_id (Hidden), Column 2 is Lesson Title
+        lesson_id = model.index(selected_row_index, 0).data()
+        lesson_title = model.index(selected_row_index, 2).data()
+
+        if not lesson_id:
+            return
+
+        lesson_obj = Lesson()
+        # Unpack the 8-tuple from retrieve_lesson_info method
+        info = lesson_obj.retrieve_lesson_info(lesson_id)
+        path_str = info[5] # path_str is the 6th element
+
+        if path_str:
+            file_to_open = lesson_obj.get_absolute_lesson_path(path_str)
+            
+            if file_to_open.exists():
+                from App.Tools import WickPlayer 
+                self.lesson_window = WickPlayer(str(file_to_open))
+                self.lesson_window.show()
+            else:
+                QMessageBox.warning(self.ui.table_lesson.window(), "File Not Found", 
+                                    f"The file does not exist at:\n{file_to_open}")
+        else:
+            QMessageBox.warning(self.ui.table_lesson.window(), "Missing Path", 
+                                f"No file path associated with: {lesson_title}")
 
     def cbLesson_selection_change(self):
         self.display_quiz()
@@ -903,43 +954,6 @@ class Controller:
             header.setSectionResizeMode(QHeaderView.ResizeMode.ResizeToContents)
 
         if conn: conn.close()
-
-    def view_lesson(self):
-        selection = self.ui.table_lesson.selectionModel()
-
-        if not selection.hasSelection():
-            QMessageBox.information(self.ui.table_lesson.window(), "No Selection", "Select a lesson to view.")
-            return
-
-        # Get the index of the first selected row
-        selected_row_index = selection.selectedRows()[0].row()
-        model = self.ui.table_lesson.model()
-
-        # Column 0 is lesson_id (Hidden), Column 2 is Lesson Title
-        lesson_id = model.index(selected_row_index, 0).data()
-        lesson_title = model.index(selected_row_index, 2).data()
-
-        if not lesson_id:
-            return
-
-        lesson_obj = Lesson()
-        # Unpack the 8-tuple from retrieve_lesson_info method
-        info = lesson_obj.retrieve_lesson_info(lesson_id)
-        path_str = info[5] # path_str is the 6th element
-
-        if path_str:
-            file_to_open = lesson_obj.get_absolute_lesson_path(path_str)
-            
-            if file_to_open.exists():
-                from App.Tools import WickPlayer 
-                self.lesson_window = WickPlayer(str(file_to_open))
-                self.lesson_window.show()
-            else:
-                QMessageBox.warning(self.ui.table_lesson.window(), "File Not Found", 
-                                    f"The file does not exist at:\n{file_to_open}")
-        else:
-            QMessageBox.warning(self.ui.table_lesson.window(), "Missing Path", 
-                                f"No file path associated with: {lesson_title}")
             
     def handle_report_student_idv(self, text=""):
         new_model = Student().search_student(text)
@@ -1128,3 +1142,55 @@ class Controller:
                     self.ui.dateEdit_fourthgrading_end.setDate(end)
 
             self.ui.widget_SY_body_2.setEnabled(False)
+
+    def browse_lessons_csv(self):
+        file_dialog = QFileDialog(self.home_win)
+        file_dialog.setNameFilter("CSV files (*.csv)")
+
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        csv_path = os.path.join(script_dir, "..", "Templates")
+        file_dialog.setDirectory(csv_path)
+
+        if file_dialog.exec():
+            selected_files = file_dialog.selectedFiles()
+
+            if selected_files:
+                file_path = selected_files[0]
+                self.ui.label_CSV_path.setText(file_path)
+                self.load_csv_to_table_view(file_path)
+
+    def load_csv_to_table_view(self, file_path):
+        model = QStandardItemModel()
+        
+        try:
+            with open(file_path, mode='r', encoding='utf-8') as file:
+                csv_reader = csv.reader(file)
+                
+                headers = next(csv_reader, None)
+                if headers:
+                    model.setHorizontalHeaderLabels(headers)
+                
+                for row_data in csv_reader:
+                    row_items = []
+                    for field in row_data:
+                        item = QStandardItem(field)
+                        # Optional: Disable direct cell editing inside the view
+                        item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsEditable) 
+                        row_items.append(item)
+                    model.appendRow(row_items)
+                    
+            self.ui.tableView_LessonsCSV.setModel(model)
+            self.ui.tableView_LessonsCSV.resizeColumnsToContents()
+            
+        except Exception as e:
+            print(f"Error reading or displaying CSV: {e}")
+
+    def import_lessons(self):
+        error = Lesson().add_all_lessons_from_csv(self.ui.label_CSV_path.text())
+
+        if error:
+            QMessageBox.critical(self.home_win, "Error", error)
+        
+        else:
+            QMessageBox.information(self.home_win, "Success", "Successfully imported all the predefined lessons.")
+

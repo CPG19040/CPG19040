@@ -1,12 +1,14 @@
 <RCC>
   <qresource prefix="Images">
     <file>Images/05-bulb.svg</file>
+    <file>Images/admin.png</file>
     <file>Images/books-28.svg</file>
     <file>Images/calendar_widget.png</file>
     <file>Images/caret-down.png</file>
+    <file>Images/caret-down-disabled.png</file>
     <file>Images/caret-up.png</file>
+    <file>Images/caret-up-disabled.png</file>
     <file>Images/check.png</file>
-    <file>Images/diskette.png</file>
     <file>Images/dumbell.svg</file>
     <file>Images/eye.png</file>
     <file>Images/eye-21.svg</file>

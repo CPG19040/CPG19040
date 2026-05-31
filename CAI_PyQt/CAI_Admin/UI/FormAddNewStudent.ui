@@ -37,6 +37,16 @@
 	background-color: white;
 }
 
+*[class=&quot;button-normal&quot;]:disabled {
+	background-color: #f5f5f5;
+	border: 1px solid #dcdcdc;
+	color: #aeaeae;
+}
+
+QLabel:disabled {
+	color: #aaaaaa;
+}
+
 QProgressBar {
 	border-radius: 10px;
 	background-color: white;
@@ -118,6 +128,22 @@ QComboBox QAbstractItemView::item {
 QComboBox QAbstractItemView::item:hover {
     background-color: #7eb4d7;
     color: #ffffff;
+}
+
+QComboBox:disabled, QLineEdit:disabled {
+    background-color: #f5f5f5;
+    border: 1px solid #dcdcdc;
+    color: #aaaaaa;
+}
+
+QComboBox::drop-down:disabled {
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    background-color: transparent;
+}
+
+QComboBox::down-arrow:disabled {
+    image: url(:/Images/Images/caret-down-disabled.png);
 }
 
 QSpinBox {
@@ -393,7 +419,7 @@ QSpinBox::down-arrow {
          <bool>true</bool>
         </property>
         <property name="styleSheet">
-         <string notr="true">QWidget:disabled { color: rgba(0, 0, 0, 50); /* Very faded text */ background-color: rgba(200, 200, 200, 0); /* Faded background */}</string>
+         <string notr="true"/>
         </property>
         <layout class="QFormLayout" name="formLayout_2">
          <property name="leftMargin">
