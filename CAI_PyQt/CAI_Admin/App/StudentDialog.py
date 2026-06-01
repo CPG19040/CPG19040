@@ -425,7 +425,7 @@ class AddNewStudentDialog(QDialog, Ui_AddNewStudentDialog):
             return 1
         
         if not Path(csv_path).exists():
-            QMessageBox.warning(self, "Validation Error", f"{csv_path}\nThe path does not exist.")
+            QMessageBox.warning(self, "Validation Error", f"{csv_path}\n\nThe path does not exist.")
             return 1
         
         sy1 = self.spinBox_SY1.value()

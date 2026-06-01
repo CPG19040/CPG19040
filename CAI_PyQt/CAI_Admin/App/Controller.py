@@ -2,7 +2,7 @@ import os, csv
 
 # PyQt Imports
 from PySide6.QtCore import QSettings, QTimer, QDateTime, QPoint, QEasingCurve, QPropertyAnimation, QParallelAnimationGroup, Qt, QDate
-from PySide6.QtWidgets import QMainWindow, QHeaderView, QDialog, QStyledItemDelegate, QFileDialog, QMessageBox, QApplication, QButtonGroup
+from PySide6.QtWidgets import QMainWindow, QHeaderView, QDialog, QStyledItemDelegate, QFileDialog, QMessageBox, QApplication, QButtonGroup, QSpacerItem, QSizePolicy
 from PySide6.QtGui import QFontDatabase, QImage, QPixmap, QGuiApplication, QStandardItemModel, QStandardItem
 from shiboken6 import isValid
 
@@ -65,7 +65,7 @@ class Controller:
         # self.home_win.showMaximized()
 
         # Setup UI
-        self.card_layout = self.ui.verticalLayout_9
+        self.card_layout = self.ui.gridLayout_stud_card
         self.card_layout.setAlignment(Qt.AlignmentFlag.AlignTop)
         self.card_layout.setSpacing(10)
         self.get_dynamic_school_year_dates()
@@ -415,25 +415,26 @@ class Controller:
         self.ui.scrollArea_classlist.setUpdatesEnabled(False)
 
         try:
-            # 1. Clear existing cards
+            # Clear layout safely (including previous spacers)
             while self.card_layout.count():
                 item = self.card_layout.takeAt(0)
-                if item.widget():
-                    item.widget().deleteLater()
+                widget = item.widget()
+                if widget:
+                    widget.setParent(None)
+                    widget.deleteLater()
             self.cards.clear()
 
-            # 2. Fetch data
             stud = Student()
             students = stud.refresh_student_cards(params)
 
-            # Update count label
             count = len(students)
-            self.ui.label_totalStudCount.setText(f"{count} {'item' if count <= 1 else 'items'}")
+            self.ui.label_totalStudCount.setText(f"{count} {'item' if count == 1 else 'items'}")
 
-            # 3. Add new cards
-            for row in students:
-                # Unpacking based on your SQL order
-                sid, f_name, m_name, l_name, _, _, _, img_data = row 
+            male_row = 0
+            female_row = 0
+
+            for index, row in enumerate(students):
+                sid, f_name, m_name, l_name, _, gender, _, img_data = row 
 
                 pixmap = None
                 if img_data:
@@ -445,12 +446,24 @@ class Controller:
                 card = Card(full_name, sid, pixmap)
                 card.clicked.connect(self.handle_card_selection)
 
-                self.card_layout.addWidget(card)
+                gender_clean = str(gender).strip().upper()
+
+                if "MALE" == gender_clean:
+                    row_idx = male_row
+                    col_idx = 0  # Column 0: Left (Male)
+                    male_row += 1  
+                else:
+                    row_idx = female_row
+                    col_idx = 1  # Column 1: Right (Female)
+                    female_row += 1  
+
+                self.card_layout.addWidget(card, row_idx, col_idx)
                 self.cards.append(card)
 
         finally:
-            # Resume painting the UI
+            # Resume painting the UI and force a refresh
             self.ui.scrollArea_classlist.setUpdatesEnabled(True)
+            self.ui.scrollArea_classlist.update()
 
     def display_student_info(self, clicked_card=None, student_id=None):
         studDialog = AddNewStudentDialog(self.script_dir)
