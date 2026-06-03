@@ -29,6 +29,25 @@ class Student:
             count = record[0]['count']
 
         return count
+    
+    def getStudentSchoolYear(self, studentid):
+        sql = """
+            SELECT school_year
+            FROM cai.tbl_student_info
+            WHERE studentid = %s
+        """
+        record = self.db_tools.fetch_all(sql, (studentid,))
+        sy1 = sy2 = None
+
+        if record:
+            school_year = record[0]['school_year']
+
+            if school_year:
+                sy_list = school_year.split('-')
+                sy1 = int(sy_list[0])
+                sy2 = int(sy_list[1])
+        
+        return sy1, sy2
 
     def get_student_picture(self, studentid, isCircular=False, size=80):
         sql = """
@@ -155,7 +174,7 @@ class Student:
     def refresh_student_cards(self, params):
         schoolYear, sectionid, text = params
 
-        sql = 'SELECT\n'
+        sql  = 'SELECT\n'
         sql += '    studentid\n'
         sql += '    ,firstname\n'
         sql += '    ,middlename\n'
@@ -291,12 +310,13 @@ class AddNewStudentDialog(QDialog, Ui_AddNewStudentDialog):
         super().__init__()
         self.setupUi(self)
 
-        self.displaySchoolYear()
         self.util = Utility()
+        self.db_tools = DatabaseTools()
+        
+        self.displaySchoolYear()
         self.script_dir = script_dir
         self.profile_pic = None
         self.binaryImage = None
-        self.db_tools = DatabaseTools()
         self.btnUploadPhoto.clicked.connect(self.update_photo)
         self.btnSave.clicked.connect(self.register)
         self.btnCancel.clicked.connect(self.reject)
@@ -315,10 +335,9 @@ class AddNewStudentDialog(QDialog, Ui_AddNewStudentDialog):
         self.util.populate_pulldown(self.cmbSection_2, sql, add_empty=True)
 
     def displaySchoolYear(self):
-        current_date = QDate.currentDate()
-        current_year = current_date.year()
-        self.spinBox_SY1.setValue(current_year)
-        self.spinBox_SY2.setValue(current_year + 1)
+        _, base_year, next_year = self.util.get_dynamic_school_year_dates()
+        self.spinBox_SY1.setValue(base_year)
+        self.spinBox_SY2.setValue(next_year)
 
     def update_state(self, checked):
         self.widget_stud_info.setEnabled(checked)
@@ -564,12 +583,12 @@ class StudentEditorDialog(QDialog, Ui_EditStudentDialog):
         self.image_data = None
         self.user = user
 
-        self.displaySchoolYear()
+        self.displaySchoolYear(studentid)
 
         self.btnUpdate.clicked.connect(lambda: self.edit(studentid))
         self.btnCancel.clicked.connect(self.reject)
         self.btnUploadPhoto.clicked.connect(self.update_photo)
-        self.btnRefreshSY.clicked.connect(self.displaySchoolYear)
+        self.btnRefreshSY.clicked.connect(lambda: self.displaySchoolYear(studentid))
 
         sql = 'SELECT\n'
         sql += '    sectionid AS index\n'
@@ -578,11 +597,11 @@ class StudentEditorDialog(QDialog, Ui_EditStudentDialog):
         sql += 'ORDER BY sectionname ASC'
 
         self.util.populate_pulldown(self.cmbSection, sql, add_empty=True)
-        sid = lname = fname = mname = sectionid = gender = contact_person = contact_num = ""
+        sy = lname = fname = mname = sectionid = gender = contact_person = contact_num = ""
         record = self.get_student_info(studentid)
 
         if record:
-            sid, lname, fname, mname, sectionid, gender, _, self.image_data, contact_person, contact_num = record
+            sy, _, lname, fname, mname, sectionid, gender, _, self.image_data, contact_person, contact_num = record
 
             # --- Add Profile Picture Logic Here ---
             if self.image_data:
@@ -609,15 +628,20 @@ class StudentEditorDialog(QDialog, Ui_EditStudentDialog):
         self.txtContactPerson.setText(f"{contact_person}")
         self.txtContactNum.setText(f"{contact_num}")
 
-    def displaySchoolYear(self):
-        current_date = QDate.currentDate()
-        current_year = current_date.year()
-        self.spinBox_SY1.setValue(current_year)
-        self.spinBox_SY2.setValue(current_year + 1)
+    def displaySchoolYear(self, studentid):
+        base_year, next_year = Student().getStudentSchoolYear(studentid)
+        
+        if not base_year and not next_year:
+            _, base_year, next_year = self.util.get_dynamic_school_year_dates()
+
+        if base_year and next_year:
+            self.spinBox_SY1.setValue(base_year)
+            self.spinBox_SY2.setValue(next_year)
 
     def get_student_info(self, studentid):
-        sql = 'SELECT\n'
-        sql += '    stud.studentid\n'
+        sql  = 'SELECT\n'
+        sql += '    stud.school_year\n'
+        sql += '    ,stud.studentid\n'
         sql += '    ,stud.lastname\n'
         sql += '    ,stud.firstname \n'
         sql += '    ,stud.middlename\n'

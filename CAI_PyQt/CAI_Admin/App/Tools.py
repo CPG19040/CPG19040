@@ -2,7 +2,7 @@ import os
 
 from PySide6.QtWidgets import QVBoxLayout, QHBoxLayout, QLabel, QFrame, QFileDialog, QWidget, QMainWindow, QDialog, QComboBox
 from PySide6.QtGui import QPixmap, QPainter, QBrush, QColor, QPen, QRegion, QPainterPath, QFont
-from PySide6.QtCore import Qt, Signal, QBuffer, QByteArray, QUrl, QRectF
+from PySide6.QtCore import Qt, Signal, QDate, QByteArray, QUrl, QRectF
 from PySide6.QtWebEngineWidgets import QWebEngineView
 
 from App.CRUDTools import DatabaseTools
@@ -12,6 +12,22 @@ class Utility:
     def __init__(self):
         self.db_tools = DatabaseTools()
         self.script_dir = os.path.dirname(os.path.abspath(__file__))
+
+    def get_dynamic_school_year_dates(self):
+        today = QDate.currentDate()
+        current_year = today.year()
+        current_month = today.month()
+        
+        # If today is between Jan and May, the next school year begins in June of THIS year.
+        # If today is between June and Dec, the next school year begins in June of NEXT year.
+        if current_month < 6:
+            base_year = current_year
+        else:
+            base_year = current_year + 1
+            
+        next_year = base_year + 1
+
+        return today, base_year, next_year
 
     def getCircularPixmapFromImagePath(self, image_path, size=100):
         """

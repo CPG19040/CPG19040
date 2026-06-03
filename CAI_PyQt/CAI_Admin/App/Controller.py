@@ -68,7 +68,7 @@ class Controller:
         self.card_layout = self.ui.gridLayout_stud_card
         self.card_layout.setAlignment(Qt.AlignmentFlag.AlignTop)
         self.card_layout.setSpacing(10)
-        self.get_dynamic_school_year_dates()
+        self.get_dynamic_grading_period_dates()
 
         # Search Box: Pass the text directly
         self.ui.txt_classList_search.textChanged.connect(self.display_student_cards)
@@ -116,7 +116,7 @@ class Controller:
         if pic:
             self.ui.btnUserName.setIcon(pic)
 
-        self.ui.btnRefreshSY.clicked.connect(self.get_dynamic_school_year_dates)
+        self.ui.btnRefreshSY.clicked.connect(self.get_dynamic_grading_period_dates)
         self.ui.btnAddStudent.clicked.connect(self.register_student)
         self.ui.btnDeleteStudent.clicked.connect(lambda: self.delete_student(user))
         self.ui.btnEditStudent.clicked.connect(lambda: self.edit_student(user))
@@ -274,7 +274,7 @@ class Controller:
 
         if index == 0:
             self.displayDashboard()
-            self.get_dynamic_school_year_dates()
+            self.get_dynamic_grading_period_dates()
 
         elif index == 1: # Student List
             self.sectionObj.populate_sections(self.ui.cmb_studSection, True)
@@ -302,7 +302,7 @@ class Controller:
         elif index == 8: # Utilities
             self.displayAuditTrail()
             self.displayArchive()
-            self.get_dynamic_school_year_dates()
+            self.get_dynamic_grading_period_dates()
             self.display_grading_periods()
 
 
@@ -1013,19 +1013,8 @@ class Controller:
 
         self.ui.label_average_percentage.setText(f'{average_percentage:.0f}%')
 
-    def get_dynamic_school_year_dates(self):
-        today = QDate.currentDate()
-        current_year = today.year()
-        current_month = today.month()
-        
-        # If today is between Jan and May, the next school year begins in June of THIS year.
-        # If today is between June and Dec, the next school year begins in June of NEXT year.
-        if current_month < 6:
-            base_year = current_year
-        else:
-            base_year = current_year + 1
-            
-        next_year = base_year + 1
+    def get_dynamic_grading_period_dates(self):
+        today, base_year, next_year = self.util.get_dynamic_school_year_dates()
 
         self.ui.label_SY.setText(f"School Year {base_year}-{next_year}")
         self.ui.spinBox_SY_start.setValue(base_year)
@@ -1132,7 +1121,7 @@ class Controller:
             self.display_grading_periods()
 
         elif idx == 2:
-            schedule = self.get_dynamic_school_year_dates()
+            schedule = self.get_dynamic_grading_period_dates()
 
             for gpid, dates in schedule.items():
                 start = QDate.fromString(str(dates['start']), "yyyy-MM-dd")
