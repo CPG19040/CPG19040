@@ -140,6 +140,7 @@ class Ui_LessonDialog(object):
         self.btnUploadPhoto.setObjectName(u"btnUploadPhoto")
         self.btnUploadPhoto.setMinimumSize(QSize(0, 30))
         self.btnUploadPhoto.setMaximumSize(QSize(16777215, 30))
+        self.btnUploadPhoto.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
         self.gridLayout.addWidget(self.btnUploadPhoto, 1, 0, 1, 1)
 

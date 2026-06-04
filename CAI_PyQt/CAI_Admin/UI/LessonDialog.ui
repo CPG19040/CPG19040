@@ -175,6 +175,9 @@ QComboBox QAbstractItemView::item:hover {
              <height>30</height>
             </size>
            </property>
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
            <property name="text">
             <string>Update photo</string>
            </property>

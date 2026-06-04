@@ -17,6 +17,7 @@ from App.StudentDialog import Student, AddNewStudentDialog, StudentEditorDialog
 from App.UserDialog import Staff, AddUserDialog, EditUserDialog
 from App.SectionDialog import Section
 from App.Lessons import Lesson, LessonDialog
+from App.Quiz import Quiz, CardQuiz
 
 class Controller:
     def __init__(self, script_dir=''):
@@ -747,15 +748,12 @@ class Controller:
         self.display_quiz()
 
     def display_quiz(self):
-        from App.Quiz import Quiz, CardQuiz
-        quiz = Quiz()
-
         q_num = self.ui.quiz_no.value()
         g_period = self.ui.cbGradingPeriod.currentData()
         lesson_id = self.ui.cbLessonName.currentData()
         diff_level = self.difficulty_group.checkedId()
 
-        record_id, record_mc, record_tf, quiz_record, multipliers, scores = quiz.retrieve_quiz(q_num, g_period, lesson_id, diff_level)
+        record_id, record_mc, record_tf, quiz_record, multipliers, scores = Quiz().retrieve_quiz(q_num, g_period, lesson_id, diff_level)
         _, publish = quiz_record
         easy_score, average_score, hard_score, total_score = scores
 
@@ -1002,9 +1000,7 @@ class Controller:
         pixmap = stud.get_student_picture(studentId, True, s)
         self.ui.label_student_icon.setPixmap(pixmap)
 
-        from App.Quiz import Quiz
-        quiz = Quiz()
-        model, average_percentage = quiz.get_scores(studentId, gradingperiod)
+        model, average_percentage = Quiz().get_scores(studentId, gradingperiod)
 
         if model:
             self.ui.table_quiz_score_idv.setModel(model)
@@ -1158,10 +1154,10 @@ class Controller:
 
             if selected_files:
                 file_path = selected_files[0]
-                self.ui.label_CSV_path.setText(file_path)
-                self.load_csv_to_table_view(file_path)
+                self.ui.label_lesson_CSV_path.setText(file_path)
+                self.load_csv_to_table_view(file_path, self.ui.tableView_LessonsCSV)
 
-    def load_csv_to_table_view(self, file_path):
+    def load_csv_to_table_view(self, file_path, tableView):
         model = QStandardItemModel()
         
         try:
@@ -1181,14 +1177,14 @@ class Controller:
                         row_items.append(item)
                     model.appendRow(row_items)
                     
-            self.ui.tableView_LessonsCSV.setModel(model)
-            self.ui.tableView_LessonsCSV.resizeColumnsToContents()
+            tableView.setModel(model)
+            tableView.resizeColumnsToContents()
             
         except Exception as e:
             print(f"Error reading or displaying CSV: {e}")
 
     def import_lessons(self):
-        error = Lesson().add_all_lessons_from_csv(self.ui.label_CSV_path.text())
+        error = Lesson().add_all_lessons_from_csv(self.ui.label_lesson_CSV_path.text())
 
         if error:
             QMessageBox.critical(self.home_win, "Error", error)

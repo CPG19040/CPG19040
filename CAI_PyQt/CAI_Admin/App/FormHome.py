@@ -588,8 +588,9 @@ class Ui_Home(object):
         self.verticalLayout_23.setContentsMargins(0, 0, 0, 0)
         self.widget_5 = QWidget(self.widget)
         self.widget_5.setObjectName(u"widget_5")
+        self.widget_5.setMinimumSize(QSize(0, 40))
         self.widget_5.setMaximumSize(QSize(16777215, 40))
-        self.widget_5.setStyleSheet(u"background-color: rgb(246, 245, 244); border-radius: 15px;")
+        self.widget_5.setStyleSheet(u"background-color: rgb(246, 245, 244); border-radius: 20px;")
         self.horizontalLayout_20 = QHBoxLayout(self.widget_5)
         self.horizontalLayout_20.setObjectName(u"horizontalLayout_20")
         self.horizontalLayout_20.setContentsMargins(-1, 2, -1, 2)
@@ -1794,7 +1795,7 @@ class Ui_Home(object):
         self.scrollArea_classlist.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
         self.container = QWidget()
         self.container.setObjectName(u"container")
-        self.container.setGeometry(QRect(0, 0, 614, 624))
+        self.container.setGeometry(QRect(0, 0, 100, 30))
         self.gridLayout_stud_card = QGridLayout(self.container)
         self.gridLayout_stud_card.setObjectName(u"gridLayout_stud_card")
         self.scrollArea_classlist.setWidget(self.container)
@@ -2507,7 +2508,7 @@ class Ui_Home(object):
         self.scrollArea_tf.setWidgetResizable(True)
         self.scrollAreaWidgetContents_4 = QWidget()
         self.scrollAreaWidgetContents_4.setObjectName(u"scrollAreaWidgetContents_4")
-        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 18, 18))
+        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 100, 30))
         self.verticalLayout_13 = QVBoxLayout(self.scrollAreaWidgetContents_4)
         self.verticalLayout_13.setObjectName(u"verticalLayout_13")
         self.scrollArea_tf.setWidget(self.scrollAreaWidgetContents_4)
@@ -2533,7 +2534,7 @@ class Ui_Home(object):
         self.scrollArea_mc.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 18, 18))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 100, 30))
         self.verticalLayout_12 = QVBoxLayout(self.scrollAreaWidgetContents_3)
         self.verticalLayout_12.setObjectName(u"verticalLayout_12")
         self.scrollArea_mc.setWidget(self.scrollAreaWidgetContents_3)
@@ -2546,7 +2547,7 @@ class Ui_Home(object):
         self.scrollArea_id.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 18, 18))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 100, 30))
         self.verticalLayout_11 = QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_11.setObjectName(u"verticalLayout_11")
         self.scrollArea_id.setWidget(self.scrollAreaWidgetContents_2)
@@ -4143,7 +4144,7 @@ class Ui_Home(object):
         self.verticalLayout_29 = QVBoxLayout(self.widget_SY_settings_2)
         self.verticalLayout_29.setSpacing(0)
         self.verticalLayout_29.setObjectName(u"verticalLayout_29")
-        self.verticalLayout_29.setContentsMargins(0, 0, 0, 10)
+        self.verticalLayout_29.setContentsMargins(0, 0, 0, 0)
         self.widget_SY_header_2 = QWidget(self.widget_SY_settings_2)
         self.widget_SY_header_2.setObjectName(u"widget_SY_header_2")
         self.widget_SY_header_2.setMinimumSize(QSize(0, 50))
@@ -4165,7 +4166,34 @@ class Ui_Home(object):
 
         self.horizontalLayout_33.addItem(self.horizontalSpacer_25)
 
-        self.btnImportAllLessons = QPushButton(self.widget_SY_header_2)
+
+        self.verticalLayout_29.addWidget(self.widget_SY_header_2)
+
+        self.widget_SY_body_3 = QWidget(self.widget_SY_settings_2)
+        self.widget_SY_body_3.setObjectName(u"widget_SY_body_3")
+        self.widget_SY_body_3.setStyleSheet(u"")
+        self.horizontalLayout_34 = QHBoxLayout(self.widget_SY_body_3)
+        self.horizontalLayout_34.setObjectName(u"horizontalLayout_34")
+        self.btnBrowseLessonsCSV = QPushButton(self.widget_SY_body_3)
+        self.btnBrowseLessonsCSV.setObjectName(u"btnBrowseLessonsCSV")
+        self.btnBrowseLessonsCSV.setMinimumSize(QSize(100, 30))
+        self.btnBrowseLessonsCSV.setMaximumSize(QSize(16777215, 30))
+        self.btnBrowseLessonsCSV.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+
+        self.horizontalLayout_34.addWidget(self.btnBrowseLessonsCSV)
+
+        self.label_lesson_CSV_path = QLabel(self.widget_SY_body_3)
+        self.label_lesson_CSV_path.setObjectName(u"label_lesson_CSV_path")
+        self.label_lesson_CSV_path.setMinimumSize(QSize(100, 30))
+        self.label_lesson_CSV_path.setMaximumSize(QSize(16777215, 30))
+
+        self.horizontalLayout_34.addWidget(self.label_lesson_CSV_path)
+
+        self.horizontalSpacer_26 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_34.addItem(self.horizontalSpacer_26)
+
+        self.btnImportAllLessons = QPushButton(self.widget_SY_body_3)
         self.btnImportAllLessons.setObjectName(u"btnImportAllLessons")
         self.btnImportAllLessons.setMinimumSize(QSize(130, 30))
         self.btnImportAllLessons.setMaximumSize(QSize(16777215, 30))
@@ -4183,34 +4211,7 @@ class Ui_Home(object):
 "    background: #27AE60;\n"
 "}")
 
-        self.horizontalLayout_33.addWidget(self.btnImportAllLessons)
-
-
-        self.verticalLayout_29.addWidget(self.widget_SY_header_2)
-
-        self.widget_SY_body_3 = QWidget(self.widget_SY_settings_2)
-        self.widget_SY_body_3.setObjectName(u"widget_SY_body_3")
-        self.widget_SY_body_3.setStyleSheet(u"")
-        self.horizontalLayout_34 = QHBoxLayout(self.widget_SY_body_3)
-        self.horizontalLayout_34.setObjectName(u"horizontalLayout_34")
-        self.btnBrowseLessonsCSV = QPushButton(self.widget_SY_body_3)
-        self.btnBrowseLessonsCSV.setObjectName(u"btnBrowseLessonsCSV")
-        self.btnBrowseLessonsCSV.setMinimumSize(QSize(100, 30))
-        self.btnBrowseLessonsCSV.setMaximumSize(QSize(16777215, 30))
-        self.btnBrowseLessonsCSV.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-
-        self.horizontalLayout_34.addWidget(self.btnBrowseLessonsCSV)
-
-        self.label_CSV_path = QLabel(self.widget_SY_body_3)
-        self.label_CSV_path.setObjectName(u"label_CSV_path")
-        self.label_CSV_path.setMinimumSize(QSize(100, 30))
-        self.label_CSV_path.setMaximumSize(QSize(16777215, 30))
-
-        self.horizontalLayout_34.addWidget(self.label_CSV_path)
-
-        self.horizontalSpacer_26 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.horizontalLayout_34.addItem(self.horizontalSpacer_26)
+        self.horizontalLayout_34.addWidget(self.btnImportAllLessons)
 
 
         self.verticalLayout_29.addWidget(self.widget_SY_body_3)
@@ -4516,11 +4517,11 @@ class Ui_Home(object):
         self.dateEdit_secondgrading_start.setDisplayFormat(QCoreApplication.translate("Home", u"yyyy / MM / dd", None))
         self.dateEdit_thirdgrading_end.setDisplayFormat(QCoreApplication.translate("Home", u"yyyy / MM / dd", None))
         self.label_29.setText(QCoreApplication.translate("Home", u"IMPORT ALL PREDEFINED LESSONS", None))
-        self.btnImportAllLessons.setText(QCoreApplication.translate("Home", u"Import", None))
-        self.btnImportAllLessons.setProperty(u"class", QCoreApplication.translate("Home", u"button-green", None))
         self.btnBrowseLessonsCSV.setText(QCoreApplication.translate("Home", u"Browse", None))
         self.btnBrowseLessonsCSV.setProperty(u"class", QCoreApplication.translate("Home", u"button-normal", None))
-        self.label_CSV_path.setText("")
+        self.label_lesson_CSV_path.setText("")
+        self.btnImportAllLessons.setText(QCoreApplication.translate("Home", u"Import", None))
+        self.btnImportAllLessons.setProperty(u"class", QCoreApplication.translate("Home", u"button-green", None))
         self.tabWidget_utility.setTabText(self.tabWidget_utility.indexOf(self.tab_settings), QCoreApplication.translate("Home", u"Settings", None))
         self.tabWidget_utility.setTabText(self.tabWidget_utility.indexOf(self.tab_audit_trail), QCoreApplication.translate("Home", u"Audit Trail", None))
         self.tabWidget_utility.setTabText(self.tabWidget_utility.indexOf(self.tab_archive), QCoreApplication.translate("Home", u"Archive", None))
