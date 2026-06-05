@@ -18,12 +18,12 @@ class Utility:
         current_year = today.year()
         current_month = today.month()
         
-        # If today is between Jan and May, the next school year begins in June of THIS year.
-        # If today is between June and Dec, the next school year begins in June of NEXT year.
+        # If today is between Jan and May (e.g., May 2026), the current school year started in June of LAST year (2025).
+        # If today is between June and Dec (e.g., June 2026), the current school year started in June of THIS year (2026).
         if current_month < 6:
-            base_year = current_year
+            base_year = current_year - 1
         else:
-            base_year = current_year + 1
+            base_year = current_year
             
         next_year = base_year + 1
 

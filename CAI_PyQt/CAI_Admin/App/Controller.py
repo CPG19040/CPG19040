@@ -69,6 +69,16 @@ class Controller:
         self.card_layout = self.ui.gridLayout_stud_card
         self.card_layout.setAlignment(Qt.AlignmentFlag.AlignTop)
         self.card_layout.setSpacing(10)
+
+        self.gradingperiod_group = QButtonGroup(self.home_win)
+        self.gradingperiod_group.setExclusive(True)
+        gp_map = { 1: self.ui.btn_manual, 2: self.ui.btn_auto }
+
+        for idx, btn in gp_map.items():
+            btn.setCheckable(True)
+            self.gradingperiod_group.addButton(btn, idx)
+            btn.clicked.connect(lambda checked, i=idx: self.handle_gp_click(i))
+
         self.get_dynamic_grading_period_dates()
 
         # Search Box: Pass the text directly
@@ -170,15 +180,6 @@ class Controller:
         self.ui.table_student_score_idv.clicked.connect(lambda row: self.handle_report_student_click(row))
         self.ui.cb_gp_quiz_idv.currentIndexChanged.connect(lambda: self.handle_report_student_click(self.reports_selectedRow_idv))
         self.ui.txt_search_score_idv.textChanged.connect(lambda text: self.handle_report_student_idv(text))
-
-        self.gradingperiod_group = QButtonGroup(self.home_win)
-        self.gradingperiod_group.setExclusive(True)
-        gp_map = { 1: self.ui.btn_manual, 2: self.ui.btn_auto }
-
-        for idx, btn in gp_map.items():
-            btn.setCheckable(True)
-            self.gradingperiod_group.addButton(btn, idx)
-            btn.clicked.connect(lambda checked, i=idx: self.handle_gp_click(i))
 
         self.ui.btn_manual.setChecked(True)
         self.ui.btnSaveSettings_SY.clicked.connect(self.saveSchoolYear_gradingPeriod)
@@ -808,7 +809,7 @@ class Controller:
             card.idKey = row["mckey"]
             card.itemno = row["itemno"]
             card.question = row["question"]
-            card.choices = f"A. {row["choice_a"]} | B. {row["choice_b"]} | C. {row["choice_c"]}"
+            card.choices = f"A. {row["choice_a"]}\nB. {row["choice_b"]}\nC. {row["choice_c"]}"
             card.answer = row["correct_answer"]
             card.imageQ = row["imagequestion"]
             card.displayAttributes()
@@ -843,19 +844,25 @@ class Controller:
 
         try:
 
-            sql = """
-                UPDATE cai.tbl_quiz
-                SET PUBLISH = CASE 
-                    WHEN quiznumber = %s AND gradingperiod = %s AND lessonid = %s THEN %s
-                    ELSE false
-                END;
-            """
-
-            self.db_tools.execute_query(sql, (self.ui.quiz_no.value(), self.ui.cbGradingPeriod.currentData(), lessonId, checked))
-
             if checked:
+                sql = """
+                    UPDATE cai.tbl_quiz
+                    SET PUBLISH = CASE 
+                        WHEN quiznumber = %s AND gradingperiod = %s AND lessonid = %s THEN true
+                        ELSE false
+                    END;
+                """
+                self.db_tools.execute_query(sql, (self.ui.quiz_no.value(), self.ui.cbGradingPeriod.currentData(), lessonId))
                 QMessageBox.information(self.home_win, "Publishing", "This quiz is published. Students can see this.")
+
             else:
+                sql = """
+                    UPDATE cai.tbl_quiz
+                    SET PUBLISH = false
+                    WHERE quiznumber = %s AND gradingperiod = %s AND lessonid = %s;
+                """
+
+                self.db_tools.execute_query(sql, (self.ui.quiz_no.value(), self.ui.cbGradingPeriod.currentData(), lessonId))
                 QMessageBox.information(self.home_win, "Publishing", "This quiz is unpublished. Students cannot see this.")
 
         except Exception as e:
@@ -1018,26 +1025,37 @@ class Controller:
 
         self.ui.spinBox_SY1.setValue(base_year)
         self.ui.spinBox_SY2.setValue(next_year)
-        
-        # Generate the exact 4-Quarter DepEd standard milestones dynamically
-        quarters = {
-            1: {"start": f"{base_year}-06-16", "end": f"{base_year}-08-22"},
-            2: {"start": f"{base_year}-08-26", "end": f"{base_year}-10-24"},
-            3: {"start": f"{base_year}-11-03", "end": f"{next_year}-01-23"},
-            4: {"start": f"{next_year}-01-26", "end": f"{next_year}-03-20"}
-        }
+
+        quarters = []
+
+        if self.gradingperiod_group.checkedId() == 1:
+            sql = """
+                SELECT gpid, gpname, startdate, enddate
+                FROM cai.tbl_grading_period;
+            """
+
+            quarters = self.db_tools.fetch_all(sql)
+
+        else:
+            # Generate the exact 4-Quarter DepEd standard milestones dynamically
+            quarters = [
+                {"gpid": 1, "startdate": f"{base_year}-06-16", "enddate": f"{base_year}-08-22"},
+                {"gpid": 2, "startdate": f"{base_year}-08-26", "enddate": f"{base_year}-10-24"},
+                {"gpid": 3, "startdate": f"{base_year}-11-03", "enddate": f"{next_year}-01-23"},
+                {"gpid": 4, "startdate": f"{next_year}-01-26", "enddate": f"{next_year}-03-20"}
+            ]
 
         # Determine and display the active grading period
         active_quarter = "Off-season / Break"
         is_break = True
 
-        for q_num, dates in quarters.items():
-            start_date = QDate.fromString(dates["start"], "yyyy-MM-dd")
-            end_date = QDate.fromString(dates["end"], "yyyy-MM-dd")
+        for row in quarters:
+            start_date = QDate.fromString(str(row['startdate']), "yyyy-MM-dd")
+            end_date = QDate.fromString(str(row['enddate']), "yyyy-MM-dd")
             
             if start_date <= today <= end_date:
-                suffix = {1: "st", 2: "nd", 3: "rd"}.get(q_num, "th")
-                active_quarter = f"{q_num}{suffix} Grading Period"
+                suffix = {1: "st", 2: "nd", 3: "rd"}.get(row['gpid'], "th")
+                active_quarter = f"{row['gpid']}{suffix} Grading Period"
                 is_break = False
                 break
                 
@@ -1119,19 +1137,19 @@ class Controller:
         elif idx == 2:
             schedule = self.get_dynamic_grading_period_dates()
 
-            for gpid, dates in schedule.items():
-                start = QDate.fromString(str(dates['start']), "yyyy-MM-dd")
-                end = QDate.fromString(str(dates['end']), "yyyy-MM-dd")
+            for row in schedule:
+                start = QDate.fromString(str(row['startdate']), "yyyy-MM-dd")
+                end = QDate.fromString(str(row['enddate']), "yyyy-MM-dd")
 
-                if gpid == 1:
+                if row['gpid'] == 1:
                     self.ui.dateEdit_firstgrading_start.setDate(start)
                     self.ui.dateEdit_firstgrading_end.setDate(end)
 
-                elif gpid == 2:
+                elif row['gpid'] == 2:
                     self.ui.dateEdit_secondgrading_start.setDate(start)
                     self.ui.dateEdit_secondgrading_end.setDate(end)
 
-                elif gpid == 3:
+                elif row['gpid'] == 3:
                     self.ui.dateEdit_thirdgrading_start.setDate(start)
                     self.ui.dateEdit_thirdgrading_end.setDate(end)
 

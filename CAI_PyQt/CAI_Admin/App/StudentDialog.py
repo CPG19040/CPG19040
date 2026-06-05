@@ -131,13 +131,10 @@ class Student:
         sql += '    ,stud.lastname AS "LAST NAME"\n'
         sql += '    ,stud.firstname AS "FIRST NAME"\n'
         sql += '    ,stud.middlename AS "MIDDLE NAME"\n'
-        sql += '    ,sec.sectionname AS "SECTION"\n'
         sql += '    ,stud.gender AS "GENDER"\n'
         sql += 'FROM\n'
         sql += '    cai.tbl_student_info stud\n'
-        sql += 'INNER JOIN\n'
-        sql += '    cai.tbl_section sec\n'
-        sql += '    ON stud.sectionid = sec.sectionid\n'
+        sql += 'WHERE 1=1\n'
 
         sql_params = []
 

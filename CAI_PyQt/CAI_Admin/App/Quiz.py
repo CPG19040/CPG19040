@@ -1017,12 +1017,6 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
                     ctr += 1
 
                 sql = """
-                    UPDATE cai.tbl_quiz
-                    SET PUBLISH = CASE 
-                        WHEN quiznumber = %s AND gradingperiod = %s AND lessonid = %s THEN %s
-                        ELSE false
-                    END;
-
                     WITH QuizCounts AS (
                         SELECT 
                             COUNT(*) AS total,
@@ -1062,12 +1056,29 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
                 """
 
                 params = (
-                    q_num, g_period, l_id, self.checkBoxPublish.isChecked(),
                     q_num, g_period, l_id,
                     q_num, g_period, l_id
                 )
 
                 cur.execute(sql, params)
+
+                if self.checkBoxPublish.isChecked():
+                    sql = """
+                        UPDATE cai.tbl_quiz
+                        SET PUBLISH = CASE 
+                            WHEN quiznumber = %s AND gradingperiod = %s AND lessonid = %s THEN true
+                            ELSE false
+                        END;
+                    """
+                    cur.execute(sql, (q_num, g_period, l_id))
+                    
+                else:
+                    sql = """
+                        UPDATE cai.tbl_quiz
+                        SET PUBLISH = false
+                        WHERE quiznumber = %s AND gradingperiod = %s AND lessonid = %s;
+                    """
+                    cur.execute(sql, (q_num, g_period, l_id))
 
                 mult_easy = self.multiplier_easy.value()
                 mult_average = self.multiplier_average.value()
