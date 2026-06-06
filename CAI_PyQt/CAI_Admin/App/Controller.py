@@ -2,14 +2,14 @@ import os, csv
 
 # PyQt Imports
 from PySide6.QtCore import QSettings, QTimer, QDateTime, QPoint, QEasingCurve, QPropertyAnimation, QParallelAnimationGroup, Qt, QDate
-from PySide6.QtWidgets import QMainWindow, QHeaderView, QDialog, QStyledItemDelegate, QFileDialog, QMessageBox, QApplication, QButtonGroup, QSpacerItem, QSizePolicy
+from PySide6.QtWidgets import QMainWindow, QHeaderView, QDialog, QFileDialog, QMessageBox, QApplication, QButtonGroup
 from PySide6.QtGui import QFontDatabase, QImage, QPixmap, QGuiApplication, QStandardItemModel, QStandardItem
 from shiboken6 import isValid
 
 # Core App Logic/Main Windows
 from App.FormHome import Ui_Home
 from App.Login import Login
-from App.Tools import Card, Utility
+from App.Tools import CardStudent, Utility, CustomMessageBox
 from App.CRUDTools import DatabaseTools
 
 # Dialogs
@@ -79,6 +79,7 @@ class Controller:
             self.gradingperiod_group.addButton(btn, idx)
             btn.clicked.connect(lambda checked, i=idx: self.handle_gp_click(i))
 
+        self.ui.btn_manual.setChecked(True)
         self.get_dynamic_grading_period_dates()
 
         # Search Box: Pass the text directly
@@ -307,7 +308,6 @@ class Controller:
             self.get_dynamic_grading_period_dates()
             self.display_grading_periods()
 
-
     def update_clock(self):
         now = QDateTime.currentDateTime()
         timeNow = now.toString("hh:mm AP")
@@ -436,7 +436,7 @@ class Controller:
             female_row = 0
 
             for index, row in enumerate(students):
-                sid, f_name, m_name, l_name, _, gender, _, img_data = row 
+                sid, f_name, m_name, l_name, _, sectionName, gender, _, img_data = row 
 
                 pixmap = None
                 if img_data:
@@ -445,7 +445,7 @@ class Controller:
                         pixmap = QPixmap.fromImage(image)
 
                 full_name = self.util.formatFullname(f_name, m_name, l_name)
-                card = Card(full_name, sid, pixmap)
+                card = CardStudent(full_name, sid, pixmap, sectionName)
                 card.clicked.connect(self.handle_card_selection)
 
                 gender_clean = str(gender).strip().upper()
@@ -525,7 +525,7 @@ class Controller:
     def edit_student(self, user):
         student_id = self.ui.label_studentId.text().strip()
         if self.util.isEmpty(student_id):
-            QMessageBox.warning(None, "Warning", f"Select a student to update the information.")
+            QMessageBox.warning(self.home_win, "Warning", f"Select a student to update the information.")
             return
 
         editor = StudentEditorDialog(user, student_id)
@@ -538,13 +538,14 @@ class Controller:
         selected_ids = [card.label_studentid.text() for card in self.cards if card.property("selected")]
 
         if not selected_ids:
-            QMessageBox.warning(None, "Warning", "Please select at least one student card to delete.")
+            QMessageBox.warning(self.home_win, "Warning", "Please select at least one student card to delete.")
             return
 
         # Confirm deletion with the user
         count = len(selected_ids)
-        confirm_msg = f"Are you sure you want to delete {count} selected student(s)?"
-        confirm = QMessageBox.question(None, "Confirm Delete", confirm_msg,
+        suffix = "students" if count > 1 else "student"
+        confirm_msg = f"Are you sure you want to delete {count} selected {suffix}?"
+        confirm = QMessageBox.question(self.home_win, "Confirm Delete", confirm_msg,
                                     QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
 
         if confirm == QMessageBox.StandardButton.Yes:
@@ -554,9 +555,9 @@ class Controller:
             if stud.delete_student(tuple(selected_ids), user):
                 self.display_student_cards()
                 self.display_student_info() # Reset labels
-                QMessageBox.information(None, "Deleted", f"Successfully removed {count} students.")
+                QMessageBox.information(self.home_win, "Deleted", f"Successfully removed {count} students.")
             else:
-                QMessageBox.warning(None, "Error", "Could not delete students from the database.")
+                QMessageBox.warning(self.home_win, "Error", "Could not delete students from the database.")
 
     def register_section(self):
         self.sectionObj.txtSectionName.clear()
@@ -587,7 +588,7 @@ class Controller:
     def delete_selected_sections(self):
         sectionId = self.ui.comboBox_Section.currentData()
         sectionName = self.ui.comboBox_Section.currentText()
-        dialog = QMessageBox.warning(None, "Delete Section", 
+        dialog = QMessageBox.warning(self.home_win, "Delete Section", 
                              f"Deleting ({sectionName}) section will also remove all associated students.",
                              QMessageBox.Ok | QMessageBox.Cancel)
 
@@ -659,7 +660,7 @@ class Controller:
         selection = self.ui.table_lesson.selectionModel()
 
         if not selection.hasSelection():
-            QMessageBox.information(self.ui.table_lesson.window(), "No Selection", "Select a lesson to view.")
+            QMessageBox.information(self.home_win, "No Selection", "Select a lesson to view.")
             return
 
         # Get the index of the first selected row
@@ -686,11 +687,11 @@ class Controller:
                 self.lesson_window = WickPlayer(str(file_to_open))
                 self.lesson_window.show()
             else:
-                QMessageBox.warning(self.ui.table_lesson.window(), "File Not Found", 
+                QMessageBox.warning(self.home_win, "File Not Found", 
                                     f"The file does not exist at:\n{file_to_open}")
         else:
-            QMessageBox.warning(self.ui.table_lesson.window(), "Missing Path", 
-                                f"No file path associated with: {lesson_title}")
+            QMessageBox.warning(self.home_win, "Missing Path", 
+                                f"No file path associated with:\n\n{lesson_title}")
 
     def cbLesson_selection_change(self):
         self.display_quiz()
@@ -712,7 +713,7 @@ class Controller:
                 lesson_id = self.ui.table_lesson.model().data(row_index)
 
             if not lesson_id:
-                QMessageBox.information(self.ui.table_lesson.window(), "No Selection", f"Select a lesson to update.")
+                QMessageBox.information(self.home_win, "No Selection", f"Select a lesson to update.")
                 return
 
         lessonDialog = LessonDialog(mode, lesson_id)
@@ -883,13 +884,24 @@ class Controller:
         selection = self.ui.table_users.selectionModel()
 
         if not selection.hasSelection():
-            QMessageBox.information(self.ui.table_users.window(), "No Selection", "Select a user to delete.")
+            QMessageBox.information(self.home_win, "No Selection", "Select a user to delete.")
             return
 
         # Get the index of the first selected row
         selected_row_index = selection.selectedRows()[0].row()
         model = self.ui.table_users.model()
         school_id = model.index(selected_row_index, 1).data()
+        firstname = model.index(selected_row_index, 2).data()
+        middlename = model.index(selected_row_index, 3).data()
+        lastname = model.index(selected_row_index, 4).data()
+
+        confirm_msg = f"Are you sure you want to delete this user?\n\n{self.util.formatFullname(firstname, middlename, lastname)}"
+        confirm = QMessageBox.question(self.home_win, "Confirm Deletion", confirm_msg,
+                        QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
+
+        if confirm == QMessageBox.StandardButton.No:
+            return
+        
         staff = Staff()
         staff.archive_and_delete_staff(user, school_id)
         self.displayUsers()
@@ -1205,7 +1217,9 @@ class Controller:
         error = Lesson().add_all_lessons_from_csv(self.ui.label_lesson_CSV_path.text())
 
         if error:
-            QMessageBox.critical(self.home_win, "Error", error)
+            msgbox = CustomMessageBox(self.home_win)
+            msgbox.information("Warning", error)
+            msgbox.exec()
         
         else:
             QMessageBox.information(self.home_win, "Success", "Successfully imported all the predefined lessons.")

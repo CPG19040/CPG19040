@@ -1,11 +1,12 @@
 import os
 
-from PySide6.QtWidgets import QVBoxLayout, QHBoxLayout, QLabel, QFrame, QFileDialog, QWidget, QMainWindow, QDialog, QComboBox
-from PySide6.QtGui import QPixmap, QPainter, QBrush, QColor, QPen, QRegion, QPainterPath, QFont
-from PySide6.QtCore import Qt, Signal, QDate, QByteArray, QUrl, QRectF
+from PySide6.QtWidgets import QVBoxLayout, QHBoxLayout, QLabel, QFrame, QFileDialog, QWidget, QMainWindow, QDialog, QComboBox, QMessageBox
+from PySide6.QtGui import QPixmap, QPainter, QColor, QPen, QPainterPath, QFont
+from PySide6.QtCore import Qt, Signal, QDate, QUrl, QRectF
 from PySide6.QtWebEngineWidgets import QWebEngineView
 
 from App.CRUDTools import DatabaseTools
+from App.MessageBox import Ui_MessageBox
 
 class Utility:
 
@@ -239,29 +240,29 @@ class Utility:
         return levels.get(index, "")
 
 
-class Card(QFrame):
+class CardStudent(QFrame):
     # Define a signal that carries a string (the student's name)
     clicked = Signal(object, str)
 
     """Custom widget representing a single card."""
-    def __init__(self, name, stud_id, image):
+    def __init__(self, name, stud_id, image, sectionName):
         super().__init__()
         self.setProperty("selected", False) # Initialize property
         self.setFrameShape(QFrame.Shape.StyledPanel)
         self.setFixedSize(16777215, 100)
         self.setCursor(Qt.CursorShape.PointingHandCursor)
         self.setStyleSheet("""
-            Card {
+            CardStudent {
                 background-color: #ffffff;
                 border-radius: 10px;
                 border: 1px solid #ddd;
             }
-            Card:hover {
+            CardStudent:hover {
                 border: 1px solid #3498db;
                 background-color: #f7fbfe;
             }
             /* This style applies when the custom property is true */
-            Card[selected="true"] {
+            CardStudent[selected="true"] {
                 background-color: #e1f5fe;
                 border: 2px solid #3498db;
             }
@@ -292,9 +293,13 @@ class Card(QFrame):
         
         self.label_studentid = QLabel(stud_id)
         self.label_studentid.setStyleSheet("color: #777; font-size: 13px; background-color: transparent;")
+
+        self.label_section = QLabel(sectionName)
+        self.label_section.setStyleSheet("color: #777; font-size: 13px; background-color: transparent;")
         
         info_layout.addWidget(self.name_label)
         info_layout.addWidget(self.label_studentid)
+        info_layout.addWidget(self.label_section)
         info_layout.addStretch()
 
         layout.addWidget(self.photo)
@@ -399,4 +404,18 @@ class NoScrollComboBox(QComboBox):
     def wheelEvent(self, event):
         # Ignore the event so the scroll goes to the parent (the page)
         event.ignore()
+
+
+
+class CustomMessageBox(QDialog, Ui_MessageBox):
+
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setupUi(self)
+
+    def information(self, title, message):
+        self.setWindowTitle(title)
+        self.plainTextEdit.setPlainText(message)
+
+
 

@@ -40,6 +40,12 @@
 	color: black;
 }
 
+QMessageBox QPushButton {
+	font: 10pt &quot;Inter&quot;;
+	height: 30px;
+	padding: 0px 12px;
+}
+
 *[class=&quot;button-green&quot;] {
     border-radius: 15px;
     padding: 0px 10px 0px;
@@ -3683,8 +3689,8 @@ QSpinBox::down-arrow {
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>614</width>
-                <height>624</height>
+                <width>100</width>
+                <height>30</height>
                </rect>
               </property>
               <layout class="QGridLayout" name="gridLayout_stud_card"/>
@@ -5016,8 +5022,8 @@ QPushButton:hover {
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>312</width>
-                <height>502</height>
+                <width>100</width>
+                <height>30</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_13"/>
@@ -5059,8 +5065,8 @@ QPushButton:hover {
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>311</width>
-                <height>502</height>
+                <width>100</width>
+                <height>30</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_12"/>
@@ -5080,8 +5086,8 @@ QPushButton:hover {
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>312</width>
-                <height>502</height>
+                <width>100</width>
+                <height>30</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_11"/>
@@ -7421,13 +7427,13 @@ QPushButton:hover {
                    <widget class="QWidget" name="widget_15" native="true">
                     <property name="styleSheet">
                      <string notr="true">#widget_15 {
-	background: transparent;
+    background: transparent;
 }
 
 QPushButton {
     border: 1px solid #999;
-    padding: 5px 15px;
-	font: 10pt &quot;Inter&quot;;
+    padding: 4px 14px;
+    font: 10pt &quot;Inter&quot;;
     background-color: #f0f0f0;
 }
 
@@ -7443,7 +7449,7 @@ QPushButton:hover {
 
 #btn_manual:checked {
     background-color: #72D582;
-	border: 2px solid #448D50;
+    border: 2px solid #448D50;
     color: #000;
 }
 
@@ -7454,7 +7460,7 @@ QPushButton:hover {
 
 #btn_auto:checked {
     background-color: #72D582;
-	border: 2px solid #448D50;
+    border: 2px solid #448D50;
     color: #000;
 }</string>
                     </property>
@@ -7912,7 +7918,7 @@ QLineEdit:focus {
 font: 12pt &quot;Inter&quot;;</string>
                     </property>
                     <property name="text">
-                     <string>IMPORT ALL PREDEFINED LESSONS</string>
+                     <string>Import All Predefined Lessons</string>
                     </property>
                    </widget>
                   </item>
@@ -7954,6 +7960,25 @@ font: 12pt &quot;Inter&quot;;</string>
                     </property>
                     <property name="cursor">
                      <cursorShape>PointingHandCursor</cursorShape>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">QPushButton {
+	font: 10pt &quot;Inter&quot;;
+	background-color: #e7e7e7;
+	color: black;
+	border-radius: 15px;
+	border: 1px solid rgb(154, 153, 150);
+}
+
+QPushButton:hover {
+	background-color: white;
+}
+
+QPushButton:disabled {
+    background-color: #bdc3c7;
+    color: #7f8c8d;
+    border: 1px solid #95a5a6;
+}</string>
                     </property>
                     <property name="text">
                      <string>Browse</string>

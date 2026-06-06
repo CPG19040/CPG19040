@@ -1,4 +1,4 @@
-import os, csv
+import csv
 
 from pathlib import Path
 
@@ -25,51 +25,76 @@ class Lesson:
             count = record[0]['count']
 
         return count
+    
+    def check_lesson_duplicate(self, chapter, lessonnum, gradingperiod, title):
+        sql = """
+            SELECT
+                COUNT(lesson_id)
+            FROM
+                cai.tbl_lessons
+            WHERE 
+                chapter = %s AND
+                lessonnum = %s AND
+                gradingperiod = %s AND
+                title = %s;
+        """
+        rows = self.db_tools.fetch_all(sql, (chapter, lessonnum, gradingperiod, title))
+
+        if rows and rows[0]["count"] > 0:
+            return True
+
+        return False
 
     def add_all_lessons_from_csv(self, csv_path):
-        err = ""
-
         if not csv_path:
-            err = "No path for the CSV provided."
-            return err
+            return "No path for the CSV provided."
+
+        errors = []
 
         try:
-
             with open(csv_path, mode='r', encoding='utf-8') as f:
                 reader = csv.DictReader(f)
 
-                for row in reader:
-                    errors = []
-                    if not row["TITLE"]: errors.append("Lesson Title is required.")
-                    if not row["GRADING PERIOD"]: errors.append("Grading Period is required.")
-                    if not row["CHAPTER"]: errors.append("Chapter is required.")
-                    if not row["NUMBER"]: errors.append("Lesson Number is required.")
+                sql = """
+                    INSERT INTO cai.tbl_lessons (
+                        chapter, lessonnum, gradingperiod, title, lessonfilename
+                    ) VALUES (%s, %s, %s, %s, %s);
+                """
+
+                for row_idx, row in enumerate(reader, start=1):
+                    row_errors = []
                     
-                    if errors:
-                        err = "\n".join(errors)
-                        return err
+                    # Validation checks
+                    if not row.get("TITLE"):          row_errors.append("Lesson Title is required.")
+                    if not row.get("GRADING PERIOD"): row_errors.append("Grading Period is required.")
+                    if not row.get("CHAPTER"):        row_errors.append("Chapter is required.")
+                    if not row.get("NUMBER"):         row_errors.append("Lesson Number is required.")
+                    
+                    if row_errors:
+                        # Tracks which specific row had the issue
+                        errors.append(f"Row {row_idx}: " + " | ".join(row_errors))
+                        continue  # Skip inserting this row, but keep checking the rest
 
-                    sql = "INSERT INTO cai.tbl_lessons (\n"
-                    sql += "    chapter\n"
-                    sql += "    ,lessonnum\n"
-                    sql += "    ,gradingperiod\n"
-                    sql += "    ,title\n"
-                    sql += "    ,lessonfilename\n"
-                    sql += ")\n"
-                    sql += "VALUES (%s, %s, %s, %s, %s);"
+                    isDuplicate = self.check_lesson_duplicate(row["CHAPTER"], row["NUMBER"], row["GRADING PERIOD"], row["TITLE"])
 
+                    if isDuplicate:
+                        errors.append(f"Row {row_idx}: Lesson '{row['TITLE']}' already exists.")
+                        continue
+
+                    # Execute query safely using parameters
                     self.db_tools.execute_query(sql, (
                         row["CHAPTER"],
                         row["NUMBER"],
                         row["GRADING PERIOD"],
                         row["TITLE"],
-                        f"{row["TITLE"]}.pdf"
+                        f"{row['TITLE']}.pdf"  # Fixed inner double-quotes syntax error
                     ))
                     
         except Exception as e:
-            err = f"\nFailed to save: {str(e)}"
+            errors.append(f"Database/File error: {str(e)}")
 
-        return err
+        # Return all accumulated errors joined by newlines, or an empty string if successful
+        return "\n".join(errors) if errors else ""
       
     def retrieve_lesson_info(self, lesson_id):
         """

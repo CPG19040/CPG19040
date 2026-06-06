@@ -4,7 +4,7 @@ from pathlib import Path
 
 from PySide6.QtGui import QStandardItemModel, QStandardItem, QImage, QPixmap
 from PySide6.QtWidgets import QDialog, QMessageBox, QFileDialog
-from PySide6.QtCore import Qt, QByteArray, QBuffer, QIODevice, QDate
+from PySide6.QtCore import Qt
 
 from App.FormAddNewStudent import Ui_AddNewStudentDialog
 from App.FormEditStudent import Ui_EditStudentDialog
@@ -172,29 +172,33 @@ class Student:
         schoolYear, sectionid, text = params
 
         sql  = 'SELECT\n'
-        sql += '    studentid\n'
-        sql += '    ,firstname\n'
-        sql += '    ,middlename\n'
-        sql += '    ,lastname\n'
-        sql += '    ,sectionid\n'
-        sql += '    ,gender\n'
-        sql += '    ,password\n'
-        sql += '    ,profile_pic\n'
-        sql += 'FROM cai.tbl_student_info\n'
+        sql += '    stud.studentid\n'
+        sql += '    ,stud.firstname\n'
+        sql += '    ,stud.middlename\n'
+        sql += '    ,stud.lastname\n'
+        sql += '    ,stud.sectionid\n'
+        sql += '    ,sec.sectionname\n'
+        sql += '    ,stud.gender\n'
+        sql += '    ,stud.password\n'
+        sql += '    ,stud.profile_pic\n'
+        sql += 'FROM cai.tbl_student_info stud\n'
+        sql += 'LEFT JOIN\n'
+        sql += '    cai.tbl_section sec\n'
+        sql += '    ON stud.sectionid = sec.sectionid\n'
         sql += 'WHERE school_year = %s\n'
 
         params2 = [schoolYear]
 
         if sectionid:
-            sql += '    AND sectionid = %s\n'
+            sql += '    AND stud.sectionid = %s\n'
             params2.append(sectionid)
 
         # Global search across multiple columns
         if text:
             sql += '    AND (\n'
-            sql += '        studentid ILIKE %s OR\n'
-            sql += '        firstname ILIKE %s OR\n'
-            sql += '        lastname ILIKE %s\n'
+            sql += '        stud.studentid ILIKE %s OR\n'
+            sql += '        stud.firstname ILIKE %s OR\n'
+            sql += '        stud.lastname ILIKE %s\n'
             sql += '    )\n'
             
             # Append the search term 3 times to match the 3 placeholders

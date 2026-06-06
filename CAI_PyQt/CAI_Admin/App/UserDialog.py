@@ -67,7 +67,7 @@ class Staff:
 
         if cursor:
             record = cursor.fetchone()
-            if record[0]:
+            if record and record[0]:
                 image = QImage.fromData(bytes(record[0]))
                 if not image.isNull():
                     pixmap = QPixmap.fromImage(image)

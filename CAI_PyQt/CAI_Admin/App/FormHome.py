@@ -46,6 +46,12 @@ class Ui_Home(object):
 "	color: black;\n"
 "}\n"
 "\n"
+"QMessageBox QPushButton {\n"
+"	font: 10pt \"Inter\";\n"
+"	height: 30px;\n"
+"	padding: 0px 12px;\n"
+"}\n"
+"\n"
 "*[class=\"button-green\"] {\n"
 "    border-radius: 15px;\n"
 "    padding: 0px 10px 0px;\n"
@@ -80,11 +86,11 @@ class Ui_Home(object):
 "QScrollArea { \n"
 "    border: none;\n"
 "    border-radius: 20px;\n"
-"	background-color: rgb(246, 245, 244);\n"
+""
+                        "	background-color: rgb(246, 245, 244);\n"
 "}\n"
 "\n"
-"/* 2. THE VIEWPORT (Crucial for transparency/backgrounds"
-                        ") */\n"
+"/* 2. THE VIEWPORT (Crucial for transparency/backgrounds) */\n"
 "QScrollArea QWidget #qt_scrollarea_viewport {\n"
 "    background: transparent;\n"
 "    border-radius: 20px;\n"
@@ -124,13 +130,13 @@ class Ui_Home(object):
 "    border-radius: 5px;\n"
 "}\n"
 "\n"
-"QScrollBar::handle:horizontal:hover {\n"
+"QScrollBar::handle:horizontal:h"
+                        "over {\n"
 "    background: #574939;\n"
 "}\n"
 "\n"
 "/* 5. REMOVE BUTTONS & TRACK BACKGROUNDS */\n"
-"/* This han"
-                        "dles both horizontal and vertical arrows/tracks */\n"
+"/* This handles both horizontal and vertical arrows/tracks */\n"
 "QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical,\n"
 "QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {\n"
 "    border: none;\n"
@@ -1795,7 +1801,7 @@ class Ui_Home(object):
         self.scrollArea_classlist.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
         self.container = QWidget()
         self.container.setObjectName(u"container")
-        self.container.setGeometry(QRect(0, 0, 614, 624))
+        self.container.setGeometry(QRect(0, 0, 100, 30))
         self.gridLayout_stud_card = QGridLayout(self.container)
         self.gridLayout_stud_card.setObjectName(u"gridLayout_stud_card")
         self.scrollArea_classlist.setWidget(self.container)
@@ -2508,7 +2514,7 @@ class Ui_Home(object):
         self.scrollArea_tf.setWidgetResizable(True)
         self.scrollAreaWidgetContents_4 = QWidget()
         self.scrollAreaWidgetContents_4.setObjectName(u"scrollAreaWidgetContents_4")
-        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 312, 502))
+        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 100, 30))
         self.verticalLayout_13 = QVBoxLayout(self.scrollAreaWidgetContents_4)
         self.verticalLayout_13.setObjectName(u"verticalLayout_13")
         self.scrollArea_tf.setWidget(self.scrollAreaWidgetContents_4)
@@ -2534,7 +2540,7 @@ class Ui_Home(object):
         self.scrollArea_mc.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 311, 502))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 100, 30))
         self.verticalLayout_12 = QVBoxLayout(self.scrollAreaWidgetContents_3)
         self.verticalLayout_12.setObjectName(u"verticalLayout_12")
         self.scrollArea_mc.setWidget(self.scrollAreaWidgetContents_3)
@@ -2547,7 +2553,7 @@ class Ui_Home(object):
         self.scrollArea_id.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 312, 502))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 100, 30))
         self.verticalLayout_11 = QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_11.setObjectName(u"verticalLayout_11")
         self.scrollArea_id.setWidget(self.scrollAreaWidgetContents_2)
@@ -3931,13 +3937,13 @@ class Ui_Home(object):
         self.widget_15 = QWidget(self.widget_SY_body_1)
         self.widget_15.setObjectName(u"widget_15")
         self.widget_15.setStyleSheet(u"#widget_15 {\n"
-"	background: transparent;\n"
+"    background: transparent;\n"
 "}\n"
 "\n"
 "QPushButton {\n"
 "    border: 1px solid #999;\n"
-"    padding: 5px 15px;\n"
-"	font: 10pt \"Inter\";\n"
+"    padding: 4px 14px;\n"
+"    font: 10pt \"Inter\";\n"
 "    background-color: #f0f0f0;\n"
 "}\n"
 "\n"
@@ -3953,7 +3959,7 @@ class Ui_Home(object):
 "\n"
 "#btn_manual:checked {\n"
 "    background-color: #72D582;\n"
-"	border: 2px solid #448D50;\n"
+"    border: 2px solid #448D50;\n"
 "    color: #000;\n"
 "}\n"
 "\n"
@@ -3964,7 +3970,7 @@ class Ui_Home(object):
 "\n"
 "#btn_auto:checked {\n"
 "    background-color: #72D582;\n"
-"	border: 2px solid #448D50;\n"
+"    border: 2px solid #448D50;\n"
 "    color: #000;\n"
 "}")
         self.horizontalLayout_29 = QHBoxLayout(self.widget_15)
@@ -4180,6 +4186,23 @@ class Ui_Home(object):
         self.btnBrowseLessonsCSV.setMinimumSize(QSize(100, 30))
         self.btnBrowseLessonsCSV.setMaximumSize(QSize(16777215, 30))
         self.btnBrowseLessonsCSV.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.btnBrowseLessonsCSV.setStyleSheet(u"QPushButton {\n"
+"	font: 10pt \"Inter\";\n"
+"	background-color: #e7e7e7;\n"
+"	color: black;\n"
+"	border-radius: 15px;\n"
+"	border: 1px solid rgb(154, 153, 150);\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color: white;\n"
+"}\n"
+"\n"
+"QPushButton:disabled {\n"
+"    background-color: #bdc3c7;\n"
+"    color: #7f8c8d;\n"
+"    border: 1px solid #95a5a6;\n"
+"}")
 
         self.horizontalLayout_34.addWidget(self.btnBrowseLessonsCSV)
 
@@ -4517,7 +4540,7 @@ class Ui_Home(object):
         self.dateEdit_fourthgrading_start.setDisplayFormat(QCoreApplication.translate("Home", u"yyyy / MM / dd", None))
         self.dateEdit_secondgrading_start.setDisplayFormat(QCoreApplication.translate("Home", u"yyyy / MM / dd", None))
         self.dateEdit_thirdgrading_end.setDisplayFormat(QCoreApplication.translate("Home", u"yyyy / MM / dd", None))
-        self.label_29.setText(QCoreApplication.translate("Home", u"IMPORT ALL PREDEFINED LESSONS", None))
+        self.label_29.setText(QCoreApplication.translate("Home", u"Import All Predefined Lessons", None))
         self.btnBrowseLessonsCSV.setText(QCoreApplication.translate("Home", u"Browse", None))
         self.btnBrowseLessonsCSV.setProperty(u"class", QCoreApplication.translate("Home", u"button-normal", None))
         self.label_lesson_CSV_path.setText("")
