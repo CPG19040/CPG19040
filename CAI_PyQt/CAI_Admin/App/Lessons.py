@@ -25,14 +25,14 @@ class Lesson:
             count = record[0]['count']
 
         return count
-    
+
     def check_lesson_duplicate(self, chapter, lessonnum, gradingperiod, title):
         sql = """
             SELECT
                 COUNT(lesson_id)
             FROM
                 cai.tbl_lessons
-            WHERE 
+            WHERE
                 chapter = %s AND
                 lessonnum = %s AND
                 gradingperiod = %s AND
@@ -63,13 +63,13 @@ class Lesson:
 
                 for row_idx, row in enumerate(reader, start=1):
                     row_errors = []
-                    
+
                     # Validation checks
                     if not row.get("TITLE"):          row_errors.append("Lesson Title is required.")
                     if not row.get("GRADING PERIOD"): row_errors.append("Grading Period is required.")
                     if not row.get("CHAPTER"):        row_errors.append("Chapter is required.")
                     if not row.get("NUMBER"):         row_errors.append("Lesson Number is required.")
-                    
+
                     if row_errors:
                         # Tracks which specific row had the issue
                         errors.append(f"Row {row_idx}: " + " | ".join(row_errors))
@@ -89,13 +89,13 @@ class Lesson:
                         row["TITLE"],
                         f"{row['TITLE']}.pdf"  # Fixed inner double-quotes syntax error
                     ))
-                    
+
         except Exception as e:
             errors.append(f"Database/File error: {str(e)}")
 
         # Return all accumulated errors joined by newlines, or an empty string if successful
         return "\n".join(errors) if errors else ""
-      
+
     def retrieve_lesson_info(self, lesson_id):
         """
         Retrieves detailed information for a specific lesson from the database.
@@ -104,9 +104,9 @@ class Lesson:
             lesson_id (int/str): The unique identifier of the lesson to fetch.
 
         Returns:
-            tuple: A 8-element tuple containing (lesson_id, chapter, lessonnum, 
+            tuple: A 8-element tuple containing (lesson_id, chapter, lessonnum,
                    gradingperiod, title, path_str, lessonimages, lessonfilename).
-                   Returns a tuple of empty strings if no record is found or 
+                   Returns a tuple of empty strings if no record is found or
                    if lesson_id is invalid.
         """
         if not lesson_id:
@@ -134,7 +134,7 @@ class Lesson:
 
         if conn: conn.close()
         return tuple([""] * 8)
-    
+
     def retrieve_lessons_table(self, searchText:str=""):
         sql  = 'SELECT\n'
         sql += '    lesson_id\n'
@@ -189,7 +189,7 @@ class Lesson:
 
         if conn: conn.close()
         return None
-    
+
     def get_absolute_lesson_path(self, db_path_str):
         """
         Combines the dynamic root path with the filename from the database.
@@ -197,10 +197,10 @@ class Lesson:
         # 1. Locate the project root (Assuming current file is in CAI_Admin/App)
         # .parent(App) -> .parent(CAI_Admin) -> .parent(ProjectRoot)
         project_root = Path(__file__).resolve().parent.parent.parent
-        
+
         # 2. Build the path to the Student Lessons folder
         lessons_folder = project_root / "CAI_Student" / "Lessons"
-        
+
         # 3. Join with the filename stored in the DB
         return lessons_folder / db_path_str
 
@@ -225,7 +225,7 @@ class LessonDialog(QDialog, Ui_LessonDialog):
         if mode == 1:
             self.setWindowTitle = "Add Lesson"
             self.btnSave.clicked.connect(self.add_lesson)
-        
+
         elif mode == 2:
             self.setWindowTitle = "Edit Lesson"
             self.btnSave.clicked.connect(lambda: self.update_lesson(lesson_id))
@@ -234,10 +234,10 @@ class LessonDialog(QDialog, Ui_LessonDialog):
 
             index = self.cmbGradingPeriod.findData(gradingPeriod)
             file_path = ''
-        
+
             if path_str:
                 file_path = lesson.get_absolute_lesson_path(path_str)
-            
+
             self.txtLessonTitle.setText(title)
             self.cmbGradingPeriod.setCurrentIndex(index)
             self.txtChapter.setText(f"{chapter}")
@@ -262,19 +262,19 @@ class LessonDialog(QDialog, Ui_LessonDialog):
         chapter = self.txtChapter.text().strip()
         lesson_num = self.txtLessonNumber.text().strip()
         path_str = self.txtLessonPath.text().strip()
-        
+
         errors = []
         if not title: errors.append("Lesson Title is required.")
         if not grading: errors.append("Grading Period is required.")
         if not chapter: errors.append("Chapter is required.")
         if not lesson_num: errors.append("Lesson Number is required.")
-        
+
         if errors:
             QMessageBox.warning(self, "Validation Error", "\n".join(errors))
             return
-        
+
         file_name = ''
-        
+
         if path_str:
             file_name = Path(path_str).name  # Result: "lesson_one.pdf"
 
@@ -299,10 +299,10 @@ class LessonDialog(QDialog, Ui_LessonDialog):
                 self.image_data,
                 f"{title.replace(' ', '_')}.pdf"
             ))
-            
+
             QMessageBox.information(self, "Success", "Lesson added successfully!")
             self.accept()
-            
+
         except Exception as e:
             QMessageBox.critical(self, "Database Error", f"Failed to save: {str(e)}")
 
@@ -315,19 +315,19 @@ class LessonDialog(QDialog, Ui_LessonDialog):
         chapter = self.txtChapter.text().strip()
         lesson_num = self.txtLessonNumber.text().strip()
         path_str = self.txtLessonPath.text().strip()
-        
+
         errors = []
         if not title: errors.append("Lesson Title is required.")
         if not grading: errors.append("Grading Period is required.")
         if not chapter: errors.append("Chapter is required.")
         if not lesson_num: errors.append("Lesson Number is required.")
-        
+
         if errors:
             QMessageBox.warning(self, "Validation Error", "\n".join(errors))
             return
-        
+
         file_name = ''
-        
+
         if path_str:
             file_name = Path(path_str).name  # Result: "lesson_one.pdf"
 
@@ -344,7 +344,7 @@ class LessonDialog(QDialog, Ui_LessonDialog):
 
         try:
             filename = f"{title.replace(' ', '_')}.pdf"
-            
+
             self.db_tools.execute_query(sql, (
                 chapter,
                 lesson_num,
@@ -355,10 +355,10 @@ class LessonDialog(QDialog, Ui_LessonDialog):
                 filename,
                 lesson_id # The ID of the record you are editing
             ))
-            
+
             QMessageBox.information(self, "Success", "Lesson updated successfully!")
             self.accept()
-            
+
         except Exception as e:
             QMessageBox.critical(self, "Database Error", f"Failed to update: {str(e)}")
 

@@ -18,10 +18,10 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
 from PySide6.QtWidgets import (QAbstractItemView, QAbstractScrollArea, QApplication, QCheckBox,
     QComboBox, QDateEdit, QFormLayout, QFrame,
     QGridLayout, QGroupBox, QHBoxLayout, QHeaderView,
-    QLabel, QLineEdit, QMainWindow, QPushButton,
-    QScrollArea, QSizePolicy, QSpacerItem, QSpinBox,
-    QStackedWidget, QTabWidget, QTableView, QTableWidget,
-    QTableWidgetItem, QVBoxLayout, QWidget)
+    QLabel, QLineEdit, QMainWindow, QPlainTextEdit,
+    QPushButton, QScrollArea, QSizePolicy, QSpacerItem,
+    QSpinBox, QStackedWidget, QTabWidget, QTableView,
+    QTableWidget, QTableWidgetItem, QVBoxLayout, QWidget)
 import resources_rc
 
 class Ui_Home(object):
@@ -1801,7 +1801,7 @@ class Ui_Home(object):
         self.scrollArea_classlist.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
         self.container = QWidget()
         self.container.setObjectName(u"container")
-        self.container.setGeometry(QRect(0, 0, 100, 30))
+        self.container.setGeometry(QRect(0, 0, 649, 624))
         self.gridLayout_stud_card = QGridLayout(self.container)
         self.gridLayout_stud_card.setObjectName(u"gridLayout_stud_card")
         self.scrollArea_classlist.setWidget(self.container)
@@ -1851,6 +1851,19 @@ class Ui_Home(object):
         self.btnDeleteStudent.setIcon(icon15)
 
         self.horizontalLayout_17.addWidget(self.btnDeleteStudent)
+
+        self.btnPrintStudentList = QPushButton(self.widget_f)
+        self.btnPrintStudentList.setObjectName(u"btnPrintStudentList")
+        self.btnPrintStudentList.setMinimumSize(QSize(140, 30))
+        self.btnPrintStudentList.setMaximumSize(QSize(16777215, 30))
+        self.btnPrintStudentList.setFont(font)
+        self.btnPrintStudentList.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.btnPrintStudentList.setStyleSheet(u"")
+        icon16 = QIcon()
+        icon16.addFile(u":/Images/Images/printer.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.btnPrintStudentList.setIcon(icon16)
+
+        self.horizontalLayout_17.addWidget(self.btnPrintStudentList)
 
         self.horizontalSpacer_11 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
@@ -2002,9 +2015,9 @@ class Ui_Home(object):
         self.btnLessonView.setMinimumSize(QSize(100, 30))
         self.btnLessonView.setMaximumSize(QSize(16777215, 30))
         self.btnLessonView.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        icon16 = QIcon()
-        icon16.addFile(u":/Images/Images/eye.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.btnLessonView.setIcon(icon16)
+        icon17 = QIcon()
+        icon17.addFile(u":/Images/Images/eye.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.btnLessonView.setIcon(icon17)
 
         self.horizontalLayout_4.addWidget(self.btnLessonView)
 
@@ -2514,7 +2527,7 @@ class Ui_Home(object):
         self.scrollArea_tf.setWidgetResizable(True)
         self.scrollAreaWidgetContents_4 = QWidget()
         self.scrollAreaWidgetContents_4.setObjectName(u"scrollAreaWidgetContents_4")
-        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 100, 30))
+        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 312, 502))
         self.verticalLayout_13 = QVBoxLayout(self.scrollAreaWidgetContents_4)
         self.verticalLayout_13.setObjectName(u"verticalLayout_13")
         self.scrollArea_tf.setWidget(self.scrollAreaWidgetContents_4)
@@ -2540,7 +2553,7 @@ class Ui_Home(object):
         self.scrollArea_mc.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 100, 30))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 311, 502))
         self.verticalLayout_12 = QVBoxLayout(self.scrollAreaWidgetContents_3)
         self.verticalLayout_12.setObjectName(u"verticalLayout_12")
         self.scrollArea_mc.setWidget(self.scrollAreaWidgetContents_3)
@@ -2553,7 +2566,7 @@ class Ui_Home(object):
         self.scrollArea_id.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 100, 30))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 312, 502))
         self.verticalLayout_11 = QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_11.setObjectName(u"verticalLayout_11")
         self.scrollArea_id.setWidget(self.scrollAreaWidgetContents_2)
@@ -3188,6 +3201,7 @@ class Ui_Home(object):
         self.verticalLayout_21.setObjectName(u"verticalLayout_21")
         self.widget_10 = QWidget(self.tab_2)
         self.widget_10.setObjectName(u"widget_10")
+        self.widget_10.setMaximumSize(QSize(16777215, 300))
         self.verticalLayout_20 = QVBoxLayout(self.widget_10)
         self.verticalLayout_20.setSpacing(0)
         self.verticalLayout_20.setObjectName(u"verticalLayout_20")
@@ -3343,6 +3357,18 @@ class Ui_Home(object):
 
         self.horizontalLayout_21.addWidget(self.cb_gp_quiz_idv)
 
+        self.btnPrintQuizScores = QPushButton(self.widget_7)
+        self.btnPrintQuizScores.setObjectName(u"btnPrintQuizScores")
+        self.btnPrintQuizScores.setEnabled(True)
+        self.btnPrintQuizScores.setMinimumSize(QSize(100, 30))
+        self.btnPrintQuizScores.setMaximumSize(QSize(16777215, 30))
+        self.btnPrintQuizScores.setFont(font)
+        self.btnPrintQuizScores.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.btnPrintQuizScores.setStyleSheet(u"")
+        self.btnPrintQuizScores.setIcon(icon16)
+
+        self.horizontalLayout_21.addWidget(self.btnPrintQuizScores)
+
 
         self.verticalLayout_19.addWidget(self.widget_7)
 
@@ -3354,42 +3380,26 @@ class Ui_Home(object):
         self.verticalLayout_18.setContentsMargins(0, 0, 0, 0)
         self.widget_9 = QWidget(self.widget_6)
         self.widget_9.setObjectName(u"widget_9")
+        self.widget_9.setMaximumSize(QSize(16777215, 70))
         self.widget_9.setStyleSheet(u"#widget_9 { \n"
 "	border-left: 1px solid rgb(161, 161, 161);\n"
 "	border-right: 1px solid rgb(161, 161, 161);\n"
 "	background-color: rgb(246, 245, 244);\n"
+"}\n"
+"\n"
+"#plainTextEdit_remarks {\n"
+"	background-color: #FFF;\n"
+"	padding: 0px 5px;\n"
 "}")
         self.horizontalLayout_22 = QHBoxLayout(self.widget_9)
         self.horizontalLayout_22.setObjectName(u"horizontalLayout_22")
-        self.widget_search_idv_2 = QWidget(self.widget_9)
-        self.widget_search_idv_2.setObjectName(u"widget_search_idv_2")
-        self.widget_search_idv_2.setMinimumSize(QSize(0, 30))
-        self.widget_search_idv_2.setMaximumSize(QSize(16777215, 30))
-        self.widget_search_idv_2.setStyleSheet(u"")
-        self.layout_search_idv_2 = QHBoxLayout(self.widget_search_idv_2)
-        self.layout_search_idv_2.setSpacing(0)
-        self.layout_search_idv_2.setObjectName(u"layout_search_idv_2")
-        self.layout_search_idv_2.setContentsMargins(0, 0, 0, 0)
-        self.label_magnifying_idv_2 = QLabel(self.widget_search_idv_2)
-        self.label_magnifying_idv_2.setObjectName(u"label_magnifying_idv_2")
-        self.label_magnifying_idv_2.setMinimumSize(QSize(30, 30))
-        self.label_magnifying_idv_2.setMaximumSize(QSize(30, 30))
-        self.label_magnifying_idv_2.setPixmap(QPixmap(u":/Images/Images/search.png"))
-        self.label_magnifying_idv_2.setScaledContents(True)
-        self.label_magnifying_idv_2.setMargin(5)
+        self.horizontalLayout_22.setContentsMargins(-1, 0, -1, 0)
+        self.plainTextEdit_remarks = QPlainTextEdit(self.widget_9)
+        self.plainTextEdit_remarks.setObjectName(u"plainTextEdit_remarks")
+        self.plainTextEdit_remarks.setMinimumSize(QSize(0, 30))
+        self.plainTextEdit_remarks.setMaximumSize(QSize(16777215, 60))
 
-        self.layout_search_idv_2.addWidget(self.label_magnifying_idv_2)
-
-        self.txt_search_score_d_idv = QLineEdit(self.widget_search_idv_2)
-        self.txt_search_score_d_idv.setObjectName(u"txt_search_score_d_idv")
-        self.txt_search_score_d_idv.setMinimumSize(QSize(0, 30))
-        self.txt_search_score_d_idv.setMaximumSize(QSize(16777215, 30))
-        self.txt_search_score_d_idv.setStyleSheet(u"")
-
-        self.layout_search_idv_2.addWidget(self.txt_search_score_d_idv)
-
-
-        self.horizontalLayout_22.addWidget(self.widget_search_idv_2)
+        self.horizontalLayout_22.addWidget(self.plainTextEdit_remarks)
 
 
         self.verticalLayout_18.addWidget(self.widget_9)
@@ -4407,6 +4417,8 @@ class Ui_Home(object):
         self.btnEditStudent.setProperty(u"class", QCoreApplication.translate("Home", u"button-normal", None))
         self.btnDeleteStudent.setText(QCoreApplication.translate("Home", u"Delete", None))
         self.btnDeleteStudent.setProperty(u"class", QCoreApplication.translate("Home", u"button-normal", None))
+        self.btnPrintStudentList.setText(QCoreApplication.translate("Home", u"Print", None))
+        self.btnPrintStudentList.setProperty(u"class", QCoreApplication.translate("Home", u"button-normal", None))
         self.label_totalStudCount.setText(QCoreApplication.translate("Home", u"0 item", None))
         self.label_totalStudCount.setProperty(u"class", QCoreApplication.translate("Home", u"label-header", None))
         self.widget_search.setProperty(u"class", QCoreApplication.translate("Home", u"widget-search-container", None))
@@ -4497,11 +4509,9 @@ class Ui_Home(object):
         self.cb_gp_quiz_idv.setItemText(0, QCoreApplication.translate("Home", u"Fourth Grading", None))
 
         self.cb_gp_quiz_idv.setProperty(u"class", QCoreApplication.translate("Home", u"combobox-main", None))
-        self.widget_search_idv_2.setProperty(u"class", QCoreApplication.translate("Home", u"widget-search-container", None))
-        self.label_magnifying_idv_2.setText("")
-        self.label_magnifying_idv_2.setProperty(u"class", QCoreApplication.translate("Home", u"label-magnifying-search", None))
-        self.txt_search_score_d_idv.setPlaceholderText(QCoreApplication.translate("Home", u"Search", None))
-        self.txt_search_score_d_idv.setProperty(u"class", QCoreApplication.translate("Home", u"textbox-search", None))
+        self.btnPrintQuizScores.setText(QCoreApplication.translate("Home", u"Print", None))
+        self.btnPrintQuizScores.setProperty(u"class", QCoreApplication.translate("Home", u"button-normal", None))
+        self.plainTextEdit_remarks.setPlaceholderText(QCoreApplication.translate("Home", u"Write teacher's remarks/comments here.", None))
         self.tabWidget_reports.setTabText(self.tabWidget_reports.indexOf(self.tab_2), QCoreApplication.translate("Home", u"Raw scores (Individual)", None))
         self.tabWidget_reports.setTabText(self.tabWidget_reports.indexOf(self.tab_3), QCoreApplication.translate("Home", u"Raw score (All)", None))
         self.label_2.setText("")

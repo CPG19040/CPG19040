@@ -29,7 +29,7 @@ class Student:
             count = record[0]['count']
 
         return count
-    
+
     def getStudentSchoolYear(self, studentid):
         sql = """
             SELECT school_year
@@ -46,7 +46,7 @@ class Student:
                 sy_list = school_year.split('-')
                 sy1 = int(sy_list[0])
                 sy2 = int(sy_list[1])
-        
+
         return sy1, sy2
 
     def get_student_picture(self, studentid, isCircular=False, size=80):
@@ -71,7 +71,7 @@ class Student:
             pixmap = self.util.makeCircularPixmap(pixmap, size)
 
         return pixmap
-    
+
     def search_student(self, text=""):
         sql  = 'SELECT\n'
         sql += '    stud.studentid\n'
@@ -95,7 +95,7 @@ class Student:
             sql += '        stud.middlename ILIKE %s OR\n'
             sql += '        sec.sectionname ILIKE %s\n'
             sql += '    )\n'
-            
+
             search_term = f"%{text}%"
             sql_params.extend([search_term, search_term, search_term, search_term, search_term])
 
@@ -167,7 +167,7 @@ class Student:
 
         if conn: conn.close()
         return None
-    
+
     def refresh_student_cards(self, params):
         schoolYear, sectionid, text = params
 
@@ -200,7 +200,7 @@ class Student:
             sql += '        stud.firstname ILIKE %s OR\n'
             sql += '        stud.lastname ILIKE %s\n'
             sql += '    )\n'
-            
+
             # Append the search term 3 times to match the 3 placeholders
             search_term = f"%{text}%"
             params2.extend([search_term, search_term, search_term])
@@ -267,7 +267,7 @@ class Student:
             self.circular_bar.set_value(0)
 
         return self.circular_bar
-    
+
     def delete_student(self, ids, user):
 
         if isinstance(ids, list):
@@ -313,7 +313,7 @@ class AddNewStudentDialog(QDialog, Ui_AddNewStudentDialog):
 
         self.util = Utility()
         self.db_tools = DatabaseTools()
-        
+
         self.displaySchoolYear()
         self.script_dir = script_dir
         self.profile_pic = None
@@ -443,11 +443,11 @@ class AddNewStudentDialog(QDialog, Ui_AddNewStudentDialog):
         if not csv_path:
             QMessageBox.warning(self, "Validation Error", "Please select a CSV file.")
             return 1
-        
+
         if not Path(csv_path).exists():
             QMessageBox.warning(self, "Validation Error", f"{csv_path}\n\nThe path does not exist.")
             return 1
-        
+
         sy1 = self.spinBox_SY1.value()
         sy2 = self.spinBox_SY2.value()
 
@@ -503,18 +503,18 @@ class AddNewStudentDialog(QDialog, Ui_AddNewStudentDialog):
     def validateGender(self, gender):
         if not gender:
             return ""
-        
+
         clean_gender = str(gender).strip().upper()
-        
+
         lookup = {
-            'M': 'Male', 
+            'M': 'Male',
             'MALE': 'Male',
-            'F': 'Female', 
+            'F': 'Female',
             'FEMALE': 'Female'
         }
-        
+
         return lookup.get(clean_gender, "")
-    
+
     def refresh_student_info(self, student_id):
         sql = 'SELECT\n'
         sql += '    stud.studentid\n'
@@ -568,7 +568,7 @@ class AddNewStudentDialog(QDialog, Ui_AddNewStudentDialog):
         conn.close()
         return tuple([0, 0, 0])
 
-    
+
 
 
 class StudentEditorDialog(QDialog, Ui_EditStudentDialog):
@@ -631,7 +631,7 @@ class StudentEditorDialog(QDialog, Ui_EditStudentDialog):
 
     def displaySchoolYear(self, studentid):
         base_year, next_year = Student().getStudentSchoolYear(studentid)
-        
+
         if not base_year and not next_year:
             _, base_year, next_year = self.util.get_dynamic_school_year_dates()
 

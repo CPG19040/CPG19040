@@ -11,6 +11,7 @@ from App.FormHome import Ui_Home
 from App.Login import Login
 from App.Tools import CardStudent, Utility, CustomMessageBox
 from App.CRUDTools import DatabaseTools
+from App.Report import StudentListReporter, QuizReporter
 
 # Dialogs
 from App.StudentDialog import Student, AddNewStudentDialog, StudentEditorDialog
@@ -124,7 +125,7 @@ class Controller:
         self.ui.btnHome.setChecked(True)
 
         pic = Staff().get_user_profile_pic(user["school_id"])
-        
+
         if pic:
             self.ui.btnUserName.setIcon(pic)
 
@@ -132,6 +133,7 @@ class Controller:
         self.ui.btnAddStudent.clicked.connect(self.register_student)
         self.ui.btnDeleteStudent.clicked.connect(lambda: self.delete_student(user))
         self.ui.btnEditStudent.clicked.connect(lambda: self.edit_student(user))
+        self.ui.btnPrintStudentList.clicked.connect(self.print_student_list)
 
         self.ui.btnAddNewUser.clicked.connect(lambda: self.add_user(user))
         self.ui.btnEditUserInfo.clicked.connect(lambda: self.update_user(user, 2))
@@ -181,6 +183,7 @@ class Controller:
         self.ui.table_student_score_idv.clicked.connect(lambda row: self.handle_report_student_click(row))
         self.ui.cb_gp_quiz_idv.currentIndexChanged.connect(lambda: self.handle_report_student_click(self.reports_selectedRow_idv))
         self.ui.txt_search_score_idv.textChanged.connect(lambda text: self.handle_report_student_idv(text))
+        self.ui.btnPrintQuizScores.clicked.connect(self.generate_quizscores_report)
 
         self.ui.btn_manual.setChecked(True)
         self.ui.btnSaveSettings_SY.clicked.connect(self.saveSchoolYear_gradingPeriod)
@@ -195,7 +198,7 @@ class Controller:
 
         if role == "Admin":
            pass
-            
+
         elif role == "Teacher":
             self.ui.btnEditUserInfo.setVisible(False)
             self.ui.btnDeleteUser.setVisible(False)
@@ -323,7 +326,7 @@ class Controller:
 
         if confirm == QMessageBox.StandardButton.No:
             return
-        
+
         # 1. Clear the persistent session from QSettings
         self.settings.clear()
         self.settings.sync()
@@ -372,7 +375,7 @@ class Controller:
         """
         Args:
             user (dict): The current user
-            mode (int): 
+            mode (int):
             1. User is updating his/her information.
             2. User is updating the information of other user.
         """
@@ -406,12 +409,14 @@ class Controller:
 
     def display_student_cards(self, text=''):
         # Ensure 'text' is always a string, defaulting to the textbox if empty
-        if not text: 
+        if not text:
             text = self.ui.txt_classList_search.text().strip()
 
         schoolYear = f"{self.ui.spinBox_SY1.value()}-{self.ui.spinBox_SY2.value()}"
         sectionid = self.ui.cmb_studSection.currentData()
         params = (schoolYear, sectionid, text)
+
+        self.last_selected_card = None
 
         # UI Optimization: Stop painting until the loop is done
         self.ui.scrollArea_classlist.setUpdatesEnabled(False)
@@ -422,8 +427,12 @@ class Controller:
                 item = self.card_layout.takeAt(0)
                 widget = item.widget()
                 if widget:
+                    # Disconnect signals to be extra safe
+                    try: widget.clicked.disconnect()
+                    except: pass
                     widget.setParent(None)
                     widget.deleteLater()
+
             self.cards.clear()
 
             stud = Student()
@@ -436,7 +445,7 @@ class Controller:
             female_row = 0
 
             for index, row in enumerate(students):
-                sid, f_name, m_name, l_name, _, sectionName, gender, _, img_data = row 
+                sid, f_name, m_name, l_name, _, sectionName, gender, _, img_data = row
 
                 pixmap = None
                 if img_data:
@@ -453,11 +462,11 @@ class Controller:
                 if "MALE" == gender_clean:
                     row_idx = male_row
                     col_idx = 0  # Column 0: Left (Male)
-                    male_row += 1  
+                    male_row += 1
                 else:
                     row_idx = female_row
                     col_idx = 1  # Column 1: Right (Female)
-                    female_row += 1  
+                    female_row += 1
 
                 self.card_layout.addWidget(card, row_idx, col_idx)
                 self.cards.append(card)
@@ -468,6 +477,9 @@ class Controller:
             self.ui.scrollArea_classlist.update()
 
     def display_student_info(self, clicked_card=None, student_id=None):
+        if clicked_card and not isValid(clicked_card):
+            return
+    
         studDialog = AddNewStudentDialog(self.script_dir)
         total, boys, girls = studDialog.update_section_stats(student_id)
         selected_row = studDialog.refresh_student_info(student_id)
@@ -533,6 +545,33 @@ class Controller:
             self.display_student_cards()
             QMessageBox.information(editor, "Updated", f"Student {student_id} information has been updated.")
 
+    def print_student_list(self):
+
+        if self.ui.gridLayout_stud_card.count() == 0:
+            QMessageBox.warning(self.home_win, "Empty Class", "No students found in this section.")
+            return
+
+        section_id = self.ui.cmb_studSection.currentData()
+        section_name = self.ui.cmb_studSection.currentText()
+        default_filename = f"Student_List.pdf"
+
+        if section_id:
+            default_filename = f"Class_List_{section_name.replace(' ', '_')}.pdf"
+
+        # Open File Dialog to pick where to save the PDF
+        output_pdf_path, _ = QFileDialog.getSaveFileName(
+            self.home_win, "Save PDF Report", default_filename, "PDF Files (*.pdf)"
+        )
+
+        if output_pdf_path:
+            reporter = StudentListReporter()
+            success, message = reporter.generate_studentlist_report(section_id, output_pdf_path)
+
+            if success:
+                QMessageBox.information(self.home_win, "Success", message)
+            else:
+                QMessageBox.critical(self.home_win, "Error", message)
+
     def delete_student(self, user):
         # Gather all selected student IDs
         selected_ids = [card.label_studentid.text() for card in self.cards if card.property("selected")]
@@ -588,7 +627,7 @@ class Controller:
     def delete_selected_sections(self):
         sectionId = self.ui.comboBox_Section.currentData()
         sectionName = self.ui.comboBox_Section.currentText()
-        dialog = QMessageBox.warning(self.home_win, "Delete Section", 
+        dialog = QMessageBox.warning(self.home_win, "Delete Section",
                              f"Deleting ({sectionName}) section will also remove all associated students.",
                              QMessageBox.Ok | QMessageBox.Cancel)
 
@@ -640,7 +679,7 @@ class Controller:
                 self.ui.table_lesson.doubleClicked.disconnect()
             except TypeError:
                 pass # Thrown if it wasn't connected before; safe to ignore
-                
+
             # Connect to your new handler function
             self.ui.table_lesson.doubleClicked.connect(self.view_lesson)
             # ----------------------------------------
@@ -681,16 +720,16 @@ class Controller:
 
         if path_str:
             file_to_open = lesson_obj.get_absolute_lesson_path(path_str)
-            
+
             if file_to_open.exists():
-                from App.Tools import WickPlayer 
+                from App.Tools import WickPlayer
                 self.lesson_window = WickPlayer(str(file_to_open))
                 self.lesson_window.show()
             else:
-                QMessageBox.warning(self.home_win, "File Not Found", 
+                QMessageBox.warning(self.home_win, "File Not Found",
                                     f"The file does not exist at:\n{file_to_open}")
         else:
-            QMessageBox.warning(self.home_win, "Missing Path", 
+            QMessageBox.warning(self.home_win, "Missing Path",
                                 f"No file path associated with:\n\n{lesson_title}")
 
     def cbLesson_selection_change(self):
@@ -848,7 +887,7 @@ class Controller:
             if checked:
                 sql = """
                     UPDATE cai.tbl_quiz
-                    SET PUBLISH = CASE 
+                    SET PUBLISH = CASE
                         WHEN quiznumber = %s AND gradingperiod = %s AND lessonid = %s THEN true
                         ELSE false
                     END;
@@ -901,7 +940,7 @@ class Controller:
 
         if confirm == QMessageBox.StandardButton.No:
             return
-        
+
         staff = Staff()
         staff.archive_and_delete_staff(user, school_id)
         self.displayUsers()
@@ -984,7 +1023,7 @@ class Controller:
             header.setSectionResizeMode(QHeaderView.ResizeMode.ResizeToContents)
 
         if conn: conn.close()
-            
+
     def handle_report_student_idv(self, text=""):
         new_model = Student().search_student(text)
         self.ui.table_student_score_idv.sortByColumn(-1, Qt.AscendingOrder)
@@ -997,7 +1036,32 @@ class Controller:
             # header.setSectionResizeMode(0, QHeaderView.ResizeMode.ResizeToContents)
             # header.setSectionResizeMode(4, QHeaderView.ResizeMode.ResizeToContents)
             self.ui.table_student_score_idv.setColumnHidden(5, True) # Hide 'Gender' column
-            
+
+    def generate_quizscores_report(self):
+        if self.reports_selectedRow_idv == None:
+            return
+
+        row = self.reports_selectedRow_idv
+        studentId = row.siblingAtColumn(0).data()
+        remarks = self.ui.plainTextEdit_remarks.toPlainText()
+
+        now = QDateTime.currentDateTime()
+        dateNow = now.toString("yyyy-MM-dd")
+
+        # Open File Dialog to pick where to save the PDF
+        default_filename = f"Quiz_Report_{studentId}_{dateNow}.pdf"
+        output_pdf_path, _ = QFileDialog.getSaveFileName(
+            self.home_win, "Save PDF Report", default_filename, "PDF Files (*.pdf)"
+        )
+
+        reporter = QuizReporter()
+        success, message = reporter.generate_quizscores_report(studentId, remarks, output_pdf_path)
+
+        if success:
+            QMessageBox.information(self.home_win, "Success", message)
+        else:
+            QMessageBox.critical(self.home_win, "Error", message)
+
     def handle_report_student_click(self, row=None):
         if row is not None:
             self.reports_selectedRow_idv = row
@@ -1064,13 +1128,13 @@ class Controller:
         for row in quarters:
             start_date = QDate.fromString(str(row['startdate']), "yyyy-MM-dd")
             end_date = QDate.fromString(str(row['enddate']), "yyyy-MM-dd")
-            
+
             if start_date <= today <= end_date:
                 suffix = {1: "st", 2: "nd", 3: "rd"}.get(row['gpid'], "th")
                 active_quarter = f"{row['gpid']}{suffix} Grading Period"
                 is_break = False
                 break
-                
+
         self.ui.label_gradingperiod.setText(active_quarter)
 
         qss = 'font: 10pt "Inter Medium"; border-radius: 12px; padding: 0px 10px 0px;'
@@ -1081,7 +1145,7 @@ class Controller:
         else:
             qss += 'background-color: #038100; color: white;'
             self.ui.label_gradingperiod.setStyleSheet(qss)
-        
+
         return quarters
 
     def saveSchoolYear_gradingPeriod(self):
@@ -1094,10 +1158,10 @@ class Controller:
             3: {"start": self.ui.dateEdit_thirdgrading_start.date().toPython(), "end": self.ui.dateEdit_thirdgrading_end.date().toPython()},
             4: {"start": self.ui.dateEdit_fourthgrading_start.date().toPython(), "end": self.ui.dateEdit_fourthgrading_end.date().toPython()},
         }
-        
+
         for gpid, dates in ui_schedule.items():
             sql += """
-                UPDATE cai.tbl_grading_period 
+                UPDATE cai.tbl_grading_period
                 SET startdate = %s, enddate = %s
                 WHERE gpid = %s;
             """
@@ -1140,7 +1204,7 @@ class Controller:
                 else:
                     self.ui.dateEdit_fourthgrading_start.setDate(start)
                     self.ui.dateEdit_fourthgrading_end.setDate(end)
-    
+
     def handle_gp_click(self, idx):
         if idx == 1:
             self.ui.widget_SY_body_2.setEnabled(True)
@@ -1189,27 +1253,27 @@ class Controller:
 
     def load_csv_to_table_view(self, file_path, tableView):
         model = QStandardItemModel()
-        
+
         try:
             with open(file_path, mode='r', encoding='utf-8') as file:
                 csv_reader = csv.reader(file)
-                
+
                 headers = next(csv_reader, None)
                 if headers:
                     model.setHorizontalHeaderLabels(headers)
-                
+
                 for row_data in csv_reader:
                     row_items = []
                     for field in row_data:
                         item = QStandardItem(field)
                         # Optional: Disable direct cell editing inside the view
-                        item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsEditable) 
+                        item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsEditable)
                         row_items.append(item)
                     model.appendRow(row_items)
-                    
+
             tableView.setModel(model)
             tableView.resizeColumnsToContents()
-            
+
         except Exception as e:
             print(f"Error reading or displaying CSV: {e}")
 
@@ -1220,7 +1284,7 @@ class Controller:
             msgbox = CustomMessageBox(self.home_win)
             msgbox.information("Warning", error)
             msgbox.exec()
-        
+
         else:
             QMessageBox.information(self.home_win, "Success", "Successfully imported all the predefined lessons.")
 

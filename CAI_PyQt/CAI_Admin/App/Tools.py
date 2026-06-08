@@ -18,14 +18,14 @@ class Utility:
         today = QDate.currentDate()
         current_year = today.year()
         current_month = today.month()
-        
+
         # If today is between Jan and May (e.g., May 2026), the current school year started in June of LAST year (2025).
         # If today is between June and Dec (e.g., June 2026), the current school year started in June of THIS year (2026).
         if current_month < 6:
             base_year = current_year - 1
         else:
             base_year = current_year
-            
+
         next_year = base_year + 1
 
         return today, base_year, next_year
@@ -46,39 +46,39 @@ class Utility:
         """
         # Load the image
         source_pixmap = QPixmap(image_path)
-        
+
         # 1. Create a square transparent canvas
         target = QPixmap(size, size)
         target.fill(Qt.GlobalColor.transparent)
-        
+
         # 2. Scale the source image to fill the square (preserving aspect ratio)
         square_pixmap = source_pixmap.scaled(
-            size, size, 
-            Qt.AspectRatioMode.KeepAspectRatioByExpanding, 
+            size, size,
+            Qt.AspectRatioMode.KeepAspectRatioByExpanding,
             Qt.TransformationMode.SmoothTransformation
         )
-        
+
         # 3. Paint the circle
         painter = QPainter(target)
         painter.setRenderHint(QPainter.RenderHint.Antialiasing)
         painter.setRenderHint(QPainter.RenderHint.SmoothPixmapTransform)
-        
+
         # Create a circular path
         path = QPainterPath()
         path.addEllipse(0, 0, size, size)
         painter.setClipPath(path)
-        
+
         # Draw the image into the clipped area
         # (Offsetting might be needed if the scaled image isn't perfectly square)
         painter.drawPixmap(0, 0, square_pixmap)
         painter.end()
-        
+
         return target
 
     def makeCircularPixmap(self, src_pixmap:QPixmap, size=80):
         """
             Transform an image into cicular shape
-            
+
             Args:
                 src_pixmap (QPixmap): The pixmap object
                 size (float): Width and height of the image
@@ -92,40 +92,40 @@ class Utility:
         # Create a transparent square canvas
         target = QPixmap(size, size)
         target.fill(Qt.GlobalColor.transparent)
-        
+
         # Scale source image to fill the square
         scaled_pixmap = src_pixmap.scaled(
-            size, size, 
-            Qt.AspectRatioMode.KeepAspectRatioByExpanding, 
+            size, size,
+            Qt.AspectRatioMode.KeepAspectRatioByExpanding,
             Qt.TransformationMode.SmoothTransformation
         )
-        
+
         painter = QPainter(target)
         painter.setRenderHint(QPainter.RenderHint.Antialiasing)
         painter.setRenderHint(QPainter.RenderHint.SmoothPixmapTransform)
-        
+
         # Create a circular path
         path = QPainterPath()
         path.addEllipse(0, 0, size, size)
         painter.setClipPath(path)
-        
+
         # Draw the image into the circle (centered)
         delta_x = (scaled_pixmap.width() - size) // 2
         delta_y = (scaled_pixmap.height() - size) // 2
         painter.drawPixmap(0, 0, scaled_pixmap.copy(delta_x, delta_y, size, size))
-        
+
         # # Optional: Add a subtle border
         # painter.setClipping(False) # Stop clipping to draw the border
         # painter.setPen(QPen(Qt.GlobalColor.lightGray, 1))
         # painter.drawEllipse(0, 0, size - 1, size - 1)
-        
+
         painter.end()
         return target
 
     def populate_pulldown(self, pulldown, sql:str, params:tuple=None, add_empty:bool=False):
         """
         Fetches records from the database and populates a QComboBox (pulldown).
-        
+
         Args:
             pulldown: The QComboBox widget to populate.
             sql (str): The SQL SELECT statement.
@@ -146,13 +146,13 @@ class Utility:
             conn = self.db_tools.get_connection()
             with conn.cursor() as cur:
                 cur.execute(sql, params)
-                
+
                 for idx, item in cur:
                     pulldown.addItem(str(item), idx)
 
         except Exception as e:
             print(f"[Error] populate_pulldown(): {e}")
-            
+
         finally:
             if conn:
                 conn.close()
@@ -228,7 +228,7 @@ class Utility:
 
         if order == 1: # Reverse Order
             return f"{lastname}, {firstname} {middleInitial}".title()
-        
+
         if order == 2: # Formal/Legal Order
             return f"{firstname}, {middlename} {lastname}".title()
 
@@ -285,18 +285,18 @@ class CardStudent(QFrame):
         self.photo.setPixmap(circular_pixmap)
         self.photo.setFixedSize(80, 80)
         self.photo.setStyleSheet("background-color: transparent;")
-        
+
         # Information
         info_layout = QVBoxLayout()
         self.name_label = QLabel(name)
         self.name_label.setStyleSheet("font-weight: bold; font-size: 16px; background-color: transparent;")
-        
+
         self.label_studentid = QLabel(stud_id)
         self.label_studentid.setStyleSheet("color: #777; font-size: 13px; background-color: transparent;")
 
         self.label_section = QLabel(sectionName)
         self.label_section.setStyleSheet("color: #777; font-size: 13px; background-color: transparent;")
-        
+
         info_layout.addWidget(self.name_label)
         info_layout.addWidget(self.label_studentid)
         info_layout.addWidget(self.label_section)
@@ -338,12 +338,12 @@ class WickPlayer(QMainWindow):
         self.showMaximized()
 
         self.browser = QWebEngineView()
-        
+
         if os.path.exists(file_path):
             self.browser.setUrl(QUrl.fromLocalFile(file_path))
         else:
             print(f"Error: {file_path} not found.")
-            
+
         self.setCentralWidget(self.browser)
 
 
@@ -363,7 +363,7 @@ class CircularProgress(QWidget):
         height = self.height()
         margin = 10
         rect = QRectF(margin, margin, width - 2*margin, height - 2*margin)
-        
+
         painter = QPainter(self)
         painter.setRenderHint(QPainter.Antialiasing)
 
@@ -380,10 +380,10 @@ class CircularProgress(QWidget):
         color = "#ff4d4d" # Red
         if self.value >= 85: color = "#2ecc71" # Green
         elif self.value >= 70: color = "#f1c40f" # Yellow
-        
+
         pen.setColor(QColor(color))
         painter.setPen(pen)
-        
+
         # Calculate angle: start at 90 degrees (top), span is negative for clockwise
         start_angle = 90 * 16
         span_angle = -self.value * 3.6 * 16
