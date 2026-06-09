@@ -19,6 +19,9 @@ class Login(QWidget, Ui_FormLogin):
         super().__init__()
         self.setupUi(self)
 
+        self.db_tools = DatabaseTools()
+        self.util = Utility()
+
         # Remove OS default window frame
         self.setWindowFlags(Qt.WindowType.FramelessWindowHint)
         self.setMouseTracking(True)
@@ -36,8 +39,7 @@ class Login(QWidget, Ui_FormLogin):
             control.setMouseTracking(True)
             control.installEventFilter(self)
 
-        self.script_dir = os.path.dirname(os.path.abspath(__file__))
-        self.audio_path = os.path.join(self.script_dir, "..", "Audio")
+        self.audio_path = self.util.get_resource_path(os.path.join("..", "Audio"))
         
         self.player = QMediaPlayer()
         self.audio_output = QAudioOutput()
@@ -71,8 +73,7 @@ class Login(QWidget, Ui_FormLogin):
         self.btnLogin.clicked.connect(self.handle_login)
         self.btnBack.clicked.connect(lambda: self.slide_back_to_page(0))
         self.btnShowPassword.clicked.connect(self.toggle_password_visibility)
-        self.db_tools = DatabaseTools()
-        self.util = Utility()
+        
         self.cards = [] # Keep a list of your card widgets
         self.last_selected_card = None
 

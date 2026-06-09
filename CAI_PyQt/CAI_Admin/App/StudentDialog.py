@@ -307,7 +307,7 @@ class Student:
 
 
 class AddNewStudentDialog(QDialog, Ui_AddNewStudentDialog):
-    def __init__(self, script_dir):
+    def __init__(self):
         super().__init__()
         self.setupUi(self)
 
@@ -315,7 +315,6 @@ class AddNewStudentDialog(QDialog, Ui_AddNewStudentDialog):
         self.db_tools = DatabaseTools()
 
         self.displaySchoolYear()
-        self.script_dir = script_dir
         self.profile_pic = None
         self.binaryImage = None
         self.btnUploadPhoto.clicked.connect(self.update_photo)

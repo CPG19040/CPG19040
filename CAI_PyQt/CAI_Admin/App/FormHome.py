@@ -21,7 +21,7 @@ from PySide6.QtWidgets import (QAbstractItemView, QAbstractScrollArea, QApplicat
     QLabel, QLineEdit, QMainWindow, QPlainTextEdit,
     QPushButton, QScrollArea, QSizePolicy, QSpacerItem,
     QSpinBox, QStackedWidget, QTabWidget, QTableView,
-    QTableWidget, QTableWidgetItem, QVBoxLayout, QWidget)
+    QVBoxLayout, QWidget)
 import resources_rc
 
 class Ui_Home(object):
@@ -2266,7 +2266,7 @@ class Ui_Home(object):
 
         self.cbGradingPeriod = QComboBox(self.pageQuiz)
         self.cbGradingPeriod.setObjectName(u"cbGradingPeriod")
-        self.cbGradingPeriod.setMinimumSize(QSize(120, 30))
+        self.cbGradingPeriod.setMinimumSize(QSize(150, 30))
         self.cbGradingPeriod.setMaximumSize(QSize(16777215, 30))
         self.cbGradingPeriod.setStyleSheet(u"")
 
@@ -2279,7 +2279,7 @@ class Ui_Home(object):
 
         self.cbLessonName = QComboBox(self.pageQuiz)
         self.cbLessonName.setObjectName(u"cbLessonName")
-        self.cbLessonName.setMinimumSize(QSize(120, 30))
+        self.cbLessonName.setMinimumSize(QSize(150, 30))
         self.cbLessonName.setMaximumSize(QSize(16777215, 30))
         self.cbLessonName.setStyleSheet(u"")
 
@@ -3086,54 +3086,164 @@ class Ui_Home(object):
 "}")
         self.tab_1 = QWidget()
         self.tab_1.setObjectName(u"tab_1")
+        self.tab_1.setStyleSheet(u"QTableView {\n"
+"    border: 1px solid rgb(161, 161, 161);\n"
+"    gridline-color: #f0f0f0;\n"
+"    background-color: white;\n"
+"    selection-background-color: rgba(38, 162, 105, 0.2);\n"
+"    selection-color: black;\n"
+"    outline: none;\n"
+"}\n"
+"\n"
+"/* Remove the row numbers (Vertical Header) */\n"
+"QHeaderView:vertical {\n"
+"    width: 0px;\n"
+"}\n"
+"\n"
+"QHeaderView::section:vertical {\n"
+"    width: 0px;\n"
+"    border: none;\n"
+"}\n"
+"\n"
+"/* Style the top horizontal header */\n"
+"QHeaderView::section:horizontal {\n"
+"    background-color: rgb(246, 245, 244);  \n"
+"    color: black;\n"
+"    padding: 6px;\n"
+"    font-weight: bold;\n"
+"}\n"
+"\n"
+"/* Custom Scrollbars */\n"
+"QScrollBar:vertical {\n"
+"    border: none;\n"
+"    background: #f8f8f8;\n"
+"    width: 10px;\n"
+"}\n"
+"\n"
+"QScrollBar::handle:vertical {\n"
+"    background: rgb(38, 162, 105);\n"
+"    min-height: 30px;\n"
+"    border-radius: 3px; \n"
+"    margin: 2px;\n"
+"}\n"
+"\n"
+"QScrollBar:horizontal {\n"
+"    border: none;\n"
+"    background"
+                        ": #f8f8f8;\n"
+"    height: 10px;\n"
+"}\n"
+"\n"
+"QScrollBar::handle:horizontal {\n"
+"    background: rgb(38, 162, 105);\n"
+"    min-width: 30px;\n"
+"    border-radius: 3px;\n"
+"    margin: 2px;\n"
+"}\n"
+"\n"
+"/* Remove scrollbar arrows */\n"
+"QScrollBar::add-line, QScrollBar::sub-line {\n"
+"    width: 0px; height: 0px;\n"
+"}\n"
+"\n"
+"*[class=\"button-normal\"] {\n"
+"	font: 10pt \"Inter\";\n"
+"	background-color: #e7e7e7;\n"
+"	color: black;\n"
+"	border-radius: 15px;\n"
+"	border: 1px solid rgb(154, 153, 150);\n"
+"}\n"
+"\n"
+"*[class=\"button-normal\"]:hover {\n"
+"	background-color: white;\n"
+"}\n"
+"\n"
+"*[class=\"button-normal\"]:disabled {\n"
+"    background-color: #bdc3c7;\n"
+"    color: #7f8c8d;\n"
+"    border: 1px solid #95a5a6;\n"
+"}")
         self.verticalLayout_7 = QVBoxLayout(self.tab_1)
         self.verticalLayout_7.setObjectName(u"verticalLayout_7")
-        self.horizontalLayout_9 = QHBoxLayout()
+        self.widget_ReportsFilter = QWidget(self.tab_1)
+        self.widget_ReportsFilter.setObjectName(u"widget_ReportsFilter")
+        self.widget_ReportsFilter.setLayoutDirection(Qt.LeftToRight)
+        self.horizontalLayout_9 = QHBoxLayout(self.widget_ReportsFilter)
         self.horizontalLayout_9.setObjectName(u"horizontalLayout_9")
-        self.label_18 = QLabel(self.tab_1)
+        self.horizontalLayout_9.setContentsMargins(0, 0, 0, 0)
+        self.label_18 = QLabel(self.widget_ReportsFilter)
         self.label_18.setObjectName(u"label_18")
         self.label_18.setMaximumSize(QSize(16777215, 30))
 
         self.horizontalLayout_9.addWidget(self.label_18)
 
-        self.comboBox_ReportsSection = QComboBox(self.tab_1)
+        self.comboBox_ReportsSection = QComboBox(self.widget_ReportsFilter)
         self.comboBox_ReportsSection.setObjectName(u"comboBox_ReportsSection")
-        self.comboBox_ReportsSection.setMinimumSize(QSize(250, 30))
+        self.comboBox_ReportsSection.setMinimumSize(QSize(150, 30))
         self.comboBox_ReportsSection.setMaximumSize(QSize(16777215, 30))
         self.comboBox_ReportsSection.setStyleSheet(u"")
 
         self.horizontalLayout_9.addWidget(self.comboBox_ReportsSection)
+
+        self.label_45 = QLabel(self.widget_ReportsFilter)
+        self.label_45.setObjectName(u"label_45")
+        self.label_45.setMaximumSize(QSize(16777215, 30))
+
+        self.horizontalLayout_9.addWidget(self.label_45)
+
+        self.comboBox_ReportsGradingPeriod = QComboBox(self.widget_ReportsFilter)
+        self.comboBox_ReportsGradingPeriod.setObjectName(u"comboBox_ReportsGradingPeriod")
+        self.comboBox_ReportsGradingPeriod.setMinimumSize(QSize(150, 30))
+        self.comboBox_ReportsGradingPeriod.setMaximumSize(QSize(16777215, 30))
+        self.comboBox_ReportsGradingPeriod.setStyleSheet(u"")
+
+        self.horizontalLayout_9.addWidget(self.comboBox_ReportsGradingPeriod)
+
+        self.label_46 = QLabel(self.widget_ReportsFilter)
+        self.label_46.setObjectName(u"label_46")
+        self.label_46.setMaximumSize(QSize(16777215, 30))
+
+        self.horizontalLayout_9.addWidget(self.label_46)
+
+        self.spin_quiz_no = QSpinBox(self.widget_ReportsFilter)
+        self.spin_quiz_no.setObjectName(u"spin_quiz_no")
+        self.spin_quiz_no.setMinimumSize(QSize(70, 30))
+        self.spin_quiz_no.setMaximumSize(QSize(70, 30))
+        self.spin_quiz_no.setStyleSheet(u"")
+        self.spin_quiz_no.setAlignment(Qt.AlignCenter)
+        self.spin_quiz_no.setMinimum(1)
+        self.spin_quiz_no.setMaximum(999)
+        self.spin_quiz_no.setValue(1)
+
+        self.horizontalLayout_9.addWidget(self.spin_quiz_no)
+
+        self.label_49 = QLabel(self.widget_ReportsFilter)
+        self.label_49.setObjectName(u"label_49")
+        self.label_49.setMaximumSize(QSize(16777215, 30))
+
+        self.horizontalLayout_9.addWidget(self.label_49)
+
+        self.comboBox_ReportsLesson = QComboBox(self.widget_ReportsFilter)
+        self.comboBox_ReportsLesson.setObjectName(u"comboBox_ReportsLesson")
+        self.comboBox_ReportsLesson.setMinimumSize(QSize(200, 30))
+        self.comboBox_ReportsLesson.setMaximumSize(QSize(16777215, 30))
+        self.comboBox_ReportsLesson.setStyleSheet(u"")
+
+        self.horizontalLayout_9.addWidget(self.comboBox_ReportsLesson)
 
         self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_9.addItem(self.horizontalSpacer_4)
 
 
-        self.verticalLayout_7.addLayout(self.horizontalLayout_9)
+        self.verticalLayout_7.addWidget(self.widget_ReportsFilter)
 
-        self.tableWidget = QTableWidget(self.tab_1)
-        self.tableWidget.setObjectName(u"tableWidget")
-        self.tableWidget.setStyleSheet(u"background-color: rgb(246, 245, 244);")
-        self.tableWidget.setSortingEnabled(True)
+        self.table_quizcompletionstat = QTableView(self.tab_1)
+        self.table_quizcompletionstat.setObjectName(u"table_quizcompletionstat")
+        self.table_quizcompletionstat.setStyleSheet(u"background-color: rgb(246, 245, 244);")
+        self.table_quizcompletionstat.setSortingEnabled(True)
 
-        self.verticalLayout_7.addWidget(self.tableWidget)
-
-        self.horizontalLayout_10 = QHBoxLayout()
-        self.horizontalLayout_10.setObjectName(u"horizontalLayout_10")
-        self.horizontalSpacer_7 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.horizontalLayout_10.addItem(self.horizontalSpacer_7)
-
-        self.btnPreview = QPushButton(self.tab_1)
-        self.btnPreview.setObjectName(u"btnPreview")
-        self.btnPreview.setMinimumSize(QSize(100, 30))
-        self.btnPreview.setMaximumSize(QSize(16777215, 30))
-        self.btnPreview.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-
-        self.horizontalLayout_10.addWidget(self.btnPreview)
-
-
-        self.verticalLayout_7.addLayout(self.horizontalLayout_10)
+        self.verticalLayout_7.addWidget(self.table_quizcompletionstat)
 
         self.tabWidget_reports.addTab(self.tab_1, "")
         self.tab_2 = QWidget()
@@ -3359,7 +3469,7 @@ class Ui_Home(object):
 
         self.btnPrintQuizScores = QPushButton(self.widget_7)
         self.btnPrintQuizScores.setObjectName(u"btnPrintQuizScores")
-        self.btnPrintQuizScores.setEnabled(True)
+        self.btnPrintQuizScores.setEnabled(False)
         self.btnPrintQuizScores.setMinimumSize(QSize(100, 30))
         self.btnPrintQuizScores.setMaximumSize(QSize(16777215, 30))
         self.btnPrintQuizScores.setFont(font)
@@ -4489,9 +4599,12 @@ class Ui_Home(object):
         self.label_Adviser.setText("")
         self.label_18.setText(QCoreApplication.translate("Home", u"Section:", None))
         self.comboBox_ReportsSection.setProperty(u"class", QCoreApplication.translate("Home", u"combobox-main", None))
-        self.btnPreview.setText(QCoreApplication.translate("Home", u"Preview", None))
-        self.btnPreview.setProperty(u"class", QCoreApplication.translate("Home", u"button-normal", None))
-        self.tabWidget_reports.setTabText(self.tabWidget_reports.indexOf(self.tab_1), QCoreApplication.translate("Home", u"Class list", None))
+        self.label_45.setText(QCoreApplication.translate("Home", u"Grading Period:", None))
+        self.comboBox_ReportsGradingPeriod.setProperty(u"class", QCoreApplication.translate("Home", u"combobox-main", None))
+        self.label_46.setText(QCoreApplication.translate("Home", u"Quiz No:", None))
+        self.label_49.setText(QCoreApplication.translate("Home", u"Lesson:", None))
+        self.comboBox_ReportsLesson.setProperty(u"class", QCoreApplication.translate("Home", u"combobox-main", None))
+        self.tabWidget_reports.setTabText(self.tabWidget_reports.indexOf(self.tab_1), QCoreApplication.translate("Home", u"Student Progress", None))
         self.widget_search_idv.setProperty(u"class", QCoreApplication.translate("Home", u"widget-search-container", None))
         self.label_magnifying_idv.setText("")
         self.label_magnifying_idv.setProperty(u"class", QCoreApplication.translate("Home", u"label-magnifying-search", None))

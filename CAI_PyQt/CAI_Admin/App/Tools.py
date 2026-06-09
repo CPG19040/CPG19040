@@ -1,4 +1,4 @@
-import os
+import os, sys, subprocess
 
 from PySide6.QtWidgets import QVBoxLayout, QHBoxLayout, QLabel, QFrame, QFileDialog, QWidget, QMainWindow, QDialog, QComboBox, QMessageBox
 from PySide6.QtGui import QPixmap, QPainter, QColor, QPen, QPainterPath, QFont
@@ -12,7 +12,11 @@ class Utility:
 
     def __init__(self):
         self.db_tools = DatabaseTools()
-        self.script_dir = os.path.dirname(os.path.abspath(__file__))
+
+    def get_resource_path(self, relative_path):
+        """ Safely retrieves asset paths across development files and standalone compiled EXEs """
+        base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
+        return os.path.normpath(os.path.join(base_path, relative_path))
 
     def get_dynamic_school_year_dates(self):
         today = QDate.currentDate()
@@ -170,13 +174,16 @@ class Utility:
         selected_period = pulldown_gradingPeroid.currentData()
 
         if selected_period:
-            sql = 'SELECT\n'
-            sql += '    lesson_id\n'
-            sql += '    ,title\n'
-            sql += 'FROM cai.tbl_lessons\n'
-            sql += 'WHERE gradingperiod = %s\n'
-            sql += 'ORDER BY chapter, lessonnum ASC'
-            self.populate_pulldown(pulldown_lessons, sql, params=(selected_period,), add_empty=True)
+            self.populate_lesson_pulldown(selected_period, pulldown_lessons)
+
+    def populate_lesson_pulldown(self, gpid, pulldown_lessons):
+        sql  = 'SELECT\n'
+        sql += '    lesson_id\n'
+        sql += '    ,title\n'
+        sql += 'FROM cai.tbl_lessons\n'
+        sql += 'WHERE gradingperiod = %s\n'
+        sql += 'ORDER BY chapter, lessonnum ASC'
+        self.populate_pulldown(pulldown_lessons, sql, params=(gpid,), add_empty=True)
 
     def isEmpty(self, val):
         """Evaluate if val is NONE, NULL, 'N/A', or ''"""
@@ -274,7 +281,7 @@ class CardStudent(QFrame):
         self.util = Utility()
 
         if self.util.isEmpty(image):
-            path = os.path.join(self.util.script_dir, "..", "Images", "profile_gray.png")
+            path = self.util.get_resource_path(os.path.join("..", "Images", "profile_gray.png"))
             image = self.util.getCircularPixmapFromImagePath(path, 80)
 
         # Layout for the card
@@ -416,6 +423,65 @@ class CustomMessageBox(QDialog, Ui_MessageBox):
     def information(self, title, message):
         self.setWindowTitle(title)
         self.plainTextEdit.setPlainText(message)
+
+
+
+class CrossPlatformPrinter:
+    def __init__(self):
+        self.os_type = sys.platform
+
+    def get_available_printers(self):
+        """Returns a list of connected printer names on the system."""
+        try:
+            if self.os_type == "win32":
+                # Windows fallback (runs via PowerShell without pywin32)
+                cmd = ["powershell", "-Command", "Get-CimInstance Win32_Printer | Select-Object -ExpandProperty Name"]
+                result = subprocess.run(cmd, capture_output=True, text=True, check=True)
+                return [line.strip() for line in result.stdout.splitlines() if line.strip()]
+            else:
+                # Zorin OS / Linux / macOS native printer fetching via CUPS
+                result = subprocess.run(['lpstat', '-a'], capture_output=True, text=True, check=True)
+                # Extracts the printer queue names from the lpstat utility output
+                return [line.split()[0] for line in result.stdout.splitlines() if line]
+        except Exception as e:
+            print(f"Error fetching printers: {e}")
+            return []
+
+    def send_to_printer(self, file_path, printer_name=None):
+        """Sends a document directly to the printer using native OS terminal hooks."""
+        if not os.path.exists(file_path):
+            return False, f"File not found: {file_path}"
+
+        try:
+            # --- ZORIN OS / LINUX / UNIX NATIVE PRINTING ---
+            if self.os_type in ["linux", "darwin"]:
+                # 'lp' is the built-in command to send documents to a printer queue in Zorin OS
+                cmd = ['lp']
+                if printer_name:
+                    cmd.extend(['-d', printer_name])  # Speficy destination printer name
+                cmd.append(file_path)
+                
+                # Fires headlessly without popping up annoying UI dialogs
+                result = subprocess.run(cmd, capture_output=True, text=True, check=True)
+                return True, f"Sent to Zorin OS/CUPS printer queue: {printer_name or 'Default'}"
+
+            # --- WINDOWS FALLBACK ---
+            elif self.os_type == "win32":
+                if printer_name:
+                    cmd = ["powershell", "-Command", f"Start-Process -FilePath '{file_path}' -ArgumentList '/t \"{printer_name}\"' -WindowStyle Hidden"]
+                    subprocess.run(cmd, check=True)
+                else:
+                    os.startfile(file_path, "print")
+                return True, f"Sent to Windows print queue: {printer_name or 'Default'}"
+            
+            else:
+                return False, f"Unsupported OS platform: {self.os_type}"
+
+        except subprocess.CalledProcessError as e:
+            return False, f"System command line printing failed: {e.stderr}"
+        except Exception as e:
+            return False, f"Printing failed: {str(e)}"
+
 
 
 

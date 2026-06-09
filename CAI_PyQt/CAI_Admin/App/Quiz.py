@@ -54,7 +54,7 @@ class Quiz:
 
         if not records:
             return model, average
-        
+
         row_count = len(records)
         sum_score = 0
 
@@ -72,7 +72,7 @@ class Quiz:
 
                 if percent_val:
                     percentage_str = f"{percent_val:.0f}%"
-            
+
             date_taken_str = row_data['datetaken'] if row_data['datetaken'] is not None else ""
 
             row_items = [
@@ -85,13 +85,17 @@ class Quiz:
 
             for col_idx, item in enumerate(row_items):
                 item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsEditable)
+
+                if col_idx in [0, 2, 3, 4]:
+                    item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+
                 model.setItem(row_idx, col_idx, item)
 
             if sum_score and row_count:
                 average = sum_score / row_count
 
         return model, average
-    
+
     def retrieve_quiz(self, q_num, g_period, lesson_id, diff_level):
         """
             Retrieves quizzes from database (Identification, Multiple Choice, True or False)
@@ -236,7 +240,7 @@ class Quiz:
         if conn: conn.close()
 
         return None
-    
+
     def getQuizTotalScore(self, quiznumber, gradingperiod, lessonid):
         """
             Args:
@@ -248,7 +252,7 @@ class Quiz:
                 (easy_score, average_score, hard_score, total_score) (tuple):
         """
         sql = """
-            SELECT 
+            SELECT
                 COUNT(CASE WHEN Q.DIFFICULTYLEVEL = 1 THEN 1 END) * M.EASY_MULTIPLIER AS "easy_score",
                 COUNT(CASE WHEN Q.DIFFICULTYLEVEL = 2 THEN 1 END) * M.AVERAGE_MULTIPLIER AS "average_score",
                 COUNT(CASE WHEN Q.DIFFICULTYLEVEL = 3 THEN 1 END) * M.HARD_MULTIPLIER AS "hard_score",
@@ -285,6 +289,57 @@ class Quiz:
             total_score = record[0]['max_score']
 
         return (easy_score, average_score, hard_score, total_score)
+
+    def retrieve_QuizCompletionStatus(self, sectionid, quiznumber, gradingperiod, lessonid):
+        query = """
+            SELECT
+                s.STUDENTID,
+                s.LASTNAME,
+                s.FIRSTNAME,
+                CASE
+                    WHEN q.SCOREID IS NOT NULL THEN 'Taken'
+                    ELSE 'Not Taken'
+                END AS QUIZ_STATUS,
+                q.QUIZSCORE,
+                TO_CHAR(q.DATETAKEN, 'YYYY/MM/DD, HH12:MI AM') AS DATETAKEN
+            FROM CAI.TBL_STUDENT_INFO s
+            LEFT JOIN CAI.TBL_QUIZSCORES q
+                ON s.STUDENTID = q.STUDENTID
+                AND q.QUIZNUMBER = %s
+                AND q.GRADINGPERIOD = %s
+                AND q.LESSONID = %s
+            WHERE s.SECTIONID = %s
+            ORDER BY s.LASTNAME, s.FIRSTNAME;
+        """
+        records = self.db_tools.fetch_all(query, (quiznumber, gradingperiod, lessonid, sectionid))
+
+        ui_headers = ["STUDENT ID", "LAST NAME", "FIRST NAME", "STATUS", "SCORE", "DATE TAKEN"]
+        model = QStandardItemModel(len(records), len(ui_headers))
+        model.setHorizontalHeaderLabels(ui_headers)
+
+        for row_idx, row_data in enumerate(records):
+            date_taken_str = row_data['datetaken'] if row_data['datetaken'] is not None else ""
+            _, _, _, total_score = self.getQuizTotalScore(quiznumber, gradingperiod, lessonid)
+            score_str = f"{row_data['quizscore']}/{total_score}" if row_data['quizscore'] and total_score else ""
+
+            row_items = [
+                QStandardItem(row_data['studentid']),
+                QStandardItem(row_data['lastname']),
+                QStandardItem(row_data['firstname']),
+                QStandardItem(row_data['quiz_status']),
+                QStandardItem(score_str),
+                QStandardItem(date_taken_str)
+            ]
+
+            for col_idx, item in enumerate(row_items):
+                item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsEditable)
+
+                if col_idx in [0, 3, 4, 5]:
+                    item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+
+                model.setItem(row_idx, col_idx, item)
+
+        return model
 
 
 
@@ -628,7 +683,7 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
             self.widget_builder.setEnabled(False)
             self.widget_quizview.setEnabled(False)
             self.checkBoxPublish.setEnabled(False)
-         
+
         else:
             self.widget_builder.setEnabled(True)
             self.widget_quizview.setEnabled(True)
@@ -849,10 +904,10 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
                         else:
                             self.toggle_validation(w.ans, True)
         return is_valid
-    
+
     def count_quiz(self, quiznumber, gradingperiod, lessonid):
         sql = """
-            SELECT 
+            SELECT
                 COUNT(*) AS quiz_count
             FROM (
                 SELECT QUIZNUMBER FROM CAI.TBL_QUIZIDENTIFICATION
@@ -861,7 +916,7 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
                 UNION ALL
                 SELECT QUIZNUMBER FROM CAI.TBL_QUIZTRUEORFALSE
             ) combined_quizzes
-            WHERE 
+            WHERE
                 QUIZNUMBER = %s AND
                 GRADINGPERIOD = %s AND
                 LESSONID = %s;
@@ -1018,7 +1073,7 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
 
                 sql = """
                     WITH QuizCounts AS (
-                        SELECT 
+                        SELECT
                             COUNT(*) AS total,
                             COUNT(*) FILTER (WHERE DIFFICULTYLEVEL = 1) AS easy,
                             COUNT(*) FILTER (WHERE DIFFICULTYLEVEL = 2) AS average,
@@ -1030,8 +1085,8 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
                             UNION ALL
                             SELECT QUIZNUMBER, GRADINGPERIOD, LESSONID, DIFFICULTYLEVEL FROM CAI.TBL_QUIZTRUEORFALSE
                         ) Q
-                        WHERE Q.QUIZNUMBER = %s 
-                        AND Q.GRADINGPERIOD = %s 
+                        WHERE Q.QUIZNUMBER = %s
+                        AND Q.GRADINGPERIOD = %s
                         AND Q.LESSONID = %s
                     )
                     INSERT INTO CAI.TBL_QUIZ (
@@ -1043,7 +1098,7 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
                         AVERAGE_COUNT,
                         HARD_COUNT
                     )
-                    SELECT 
+                    SELECT
                         %s, %s, %s,
                         C.total, C.easy, C.average, C.hard
                     FROM QuizCounts C
@@ -1065,13 +1120,13 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
                 if self.checkBoxPublish.isChecked():
                     sql = """
                         UPDATE cai.tbl_quiz
-                        SET PUBLISH = CASE 
+                        SET PUBLISH = CASE
                             WHEN quiznumber = %s AND gradingperiod = %s AND lessonid = %s THEN true
                             ELSE false
                         END;
                     """
                     cur.execute(sql, (q_num, g_period, l_id))
-                    
+
                 else:
                     sql = """
                         UPDATE cai.tbl_quiz
@@ -1187,3 +1242,4 @@ class CardQuiz(QFrame, Ui_CardQuiz):
         self.style().unpolish(self)
         self.style().polish(self)
         self.update()
+

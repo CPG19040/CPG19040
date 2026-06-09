@@ -9,7 +9,7 @@ from shiboken6 import isValid
 # Core App Logic/Main Windows
 from App.FormHome import Ui_Home
 from App.Login import Login
-from App.Tools import CardStudent, Utility, CustomMessageBox
+from App.Tools import CardStudent, Utility, CustomMessageBox, CrossPlatformPrinter
 from App.CRUDTools import DatabaseTools
 from App.Report import StudentListReporter, QuizReporter
 
@@ -21,8 +21,7 @@ from App.Lessons import Lesson, LessonDialog
 from App.Quiz import Quiz, CardQuiz
 
 class Controller:
-    def __init__(self, script_dir=''):
-        self.script_dir = script_dir
+    def __init__(self):
         self.settings = QSettings("CAI_System", "CAI_Admin_App")
         self.util = Utility()
         self.db_tools = DatabaseTools()
@@ -83,6 +82,8 @@ class Controller:
         self.ui.btn_manual.setChecked(True)
         self.get_dynamic_grading_period_dates()
 
+        self.util.populate_pulldowns(self.ui.cb_gp_quiz_idv)
+
         # Search Box: Pass the text directly
         self.ui.txt_classList_search.textChanged.connect(self.display_student_cards)
 
@@ -129,38 +130,21 @@ class Controller:
         if pic:
             self.ui.btnUserName.setIcon(pic)
 
+        # Student List
         self.ui.btnRefreshSY.clicked.connect(self.get_dynamic_grading_period_dates)
         self.ui.btnAddStudent.clicked.connect(self.register_student)
         self.ui.btnDeleteStudent.clicked.connect(lambda: self.delete_student(user))
         self.ui.btnEditStudent.clicked.connect(lambda: self.edit_student(user))
         self.ui.btnPrintStudentList.clicked.connect(self.print_student_list)
 
-        self.ui.btnAddNewUser.clicked.connect(lambda: self.add_user(user))
-        self.ui.btnEditUserInfo.clicked.connect(lambda: self.update_user(user, 2))
-        self.ui.btnUserName.clicked.connect(lambda: self.update_user(user))
-        self.ui.btnLogout.clicked.connect(self.logout)
-
-        self.ui.comboBox_Section.currentIndexChanged.connect(self.display_section_info)
-        self.sectionObj = Section(user)
-        self.sectionObj.populate_sections(self.ui.comboBox_Section, False)
-        self.sectionObj.populate_sections(self.ui.cmb_studSection, True)
-
-        self.ui.cmb_studSection.currentIndexChanged.connect(self.handle_student_searching)
-
-        self.ui.btnSectionAdd.clicked.connect(self.register_section)
-        self.ui.btnSectionDelete.clicked.connect(self.delete_selected_sections)
-        self.ui.btnSectionEdit.clicked.connect(self.section_edit)
-
+        # Lesson
         self.ui.btnLessonView.clicked.connect(self.view_lesson)
         self.ui.btnLessonAdd.clicked.connect(lambda: self.showLessonDialog(1))
         self.ui.btnLessonEdit.clicked.connect(lambda: self.showLessonDialog(2))
         self.ui.txtSearchLesson.textChanged.connect(lambda searchText: self.displayLessons(searchText))
         self.ui.btnRefreshLessonTable.clicked.connect(self.displayLessons)
 
-        self.ui.txt_search_user.textChanged.connect(lambda text: self.displayUsers(text))
-        self.ui.btnRefreshUsers.clicked.connect(lambda: self.displayUsers())
-        self.ui.btnDeleteUser.clicked.connect(lambda: self.delete_user(user))
-
+        # Quiz
         self.difficulty_group = QButtonGroup(self.home_win)
         self.difficulty_group.setExclusive(True)
         self.level_map = { 1: self.ui.btnEasy, 2: self.ui.btnAverage, 3: self.ui.btnHard }
@@ -179,12 +163,37 @@ class Controller:
         self.ui.checkBoxPublish.setVisible(False)
         self.ui.btnQuizAdd.clicked.connect(self.showQuizDialog)
 
+        # Sections
+        self.ui.comboBox_Section.currentIndexChanged.connect(self.display_section_info)
+        self.sectionObj = Section(user)
+        self.sectionObj.populate_sections(self.ui.comboBox_Section, False)
+        self.sectionObj.populate_sections(self.ui.cmb_studSection, True)
+        self.ui.cmb_studSection.currentIndexChanged.connect(self.handle_student_searching)
+        self.ui.btnSectionAdd.clicked.connect(self.register_section)
+        self.ui.btnSectionDelete.clicked.connect(self.delete_selected_sections)
+        self.ui.btnSectionEdit.clicked.connect(self.section_edit)
+
+        # Reports
+        self.sectionObj.populate_sections(self.ui.comboBox_ReportsSection, False)
+        self.ui.comboBox_ReportsSection.currentIndexChanged.connect(self.handle_report_stud_prog_filter)
+        self.ui.spin_quiz_no.valueChanged.connect(self.handle_report_stud_prog_filter)
+        self.ui.comboBox_ReportsLesson.currentIndexChanged.connect(self.handle_report_stud_prog_filter)
+        self.ui.comboBox_ReportsGradingPeriod.currentIndexChanged.connect(self.handle_grading_period_change)
         self.reports_selectedRow_idv = None
-        self.ui.table_student_score_idv.clicked.connect(lambda row: self.handle_report_student_click(row))
         self.ui.cb_gp_quiz_idv.currentIndexChanged.connect(lambda: self.handle_report_student_click(self.reports_selectedRow_idv))
         self.ui.txt_search_score_idv.textChanged.connect(lambda text: self.handle_report_student_idv(text))
         self.ui.btnPrintQuizScores.clicked.connect(self.generate_quizscores_report)
 
+        # Users
+        self.ui.btnAddNewUser.clicked.connect(lambda: self.add_user(user))
+        self.ui.btnEditUserInfo.clicked.connect(lambda: self.update_user(user, 2))
+        self.ui.btnUserName.clicked.connect(lambda: self.update_user(user))
+        self.ui.btnLogout.clicked.connect(self.logout)
+        self.ui.txt_search_user.textChanged.connect(lambda text: self.displayUsers(text))
+        self.ui.btnRefreshUsers.clicked.connect(lambda: self.displayUsers())
+        self.ui.btnDeleteUser.clicked.connect(lambda: self.delete_user(user))
+
+        # Utilities
         self.ui.btn_manual.setChecked(True)
         self.ui.btnSaveSettings_SY.clicked.connect(self.saveSchoolYear_gradingPeriod)
         self.ui.btnBrowseLessonsCSV.clicked.connect(self.browse_lessons_csv)
@@ -221,8 +230,6 @@ class Controller:
             self.ui.btnDeleteStudent.setVisible(False)
             self.ui.btnSectionDelete.setVisible(False)
             self.ui.btnDeleteUser.setVisible(False)
-
-            self.ui.btnShowPwdStudent.setVisible(False)
 
         self.login_win.close()
         self.home_win.show()
@@ -299,7 +306,18 @@ class Controller:
             self.display_section_info()
 
         elif index == 6: # Reports
-            self.util.populate_pulldowns(self.ui.cb_gp_quiz_idv)
+            self.util.populate_pulldowns(self.ui.comboBox_ReportsGradingPeriod)
+            gpid = self.ui.comboBox_ReportsGradingPeriod.currentData()
+            query = """
+                SELECT
+                    lesson_id
+                    ,title
+                FROM cai.tbl_lessons
+                WHERE gradingperiod = %s
+                ORDER BY chapter, lessonnum ASC
+            """
+            self.util.populate_pulldown(self.ui.comboBox_ReportsLesson, query, params=(gpid,), add_empty=True)
+
             self.handle_report_student_idv()
 
         elif index == 7: # Users
@@ -345,7 +363,7 @@ class Controller:
         self.login_win.show()
 
     def load_fonts(self):
-        path = os.path.join(self.script_dir, "fonts")
+        path = self.util.get_resource_path(os.path.join("..", "fonts"))
         loaded_count = 0
 
         if os.path.exists(path):
@@ -402,7 +420,7 @@ class Controller:
                     self.displayUsers()
 
     def register_student(self):
-        studDialog = AddNewStudentDialog(self.script_dir)
+        studDialog = AddNewStudentDialog()
 
         if studDialog.exec() == QDialog.DialogCode.Accepted:
             self.display_student_cards()
@@ -480,7 +498,7 @@ class Controller:
         if clicked_card and not isValid(clicked_card):
             return
     
-        studDialog = AddNewStudentDialog(self.script_dir)
+        studDialog = AddNewStudentDialog()
         total, boys, girls = studDialog.update_section_stats(student_id)
         selected_row = studDialog.refresh_student_info(student_id)
         sid = lname = fname = mname = section = gender = contact_person = contact_num = "N/A"
@@ -778,13 +796,15 @@ class Controller:
         selected_period = self.ui.cbGradingPeriod.currentData()
 
         if selected_period:
-            sql = 'SELECT\n'
-            sql += '    lesson_id\n'
-            sql += '    ,title\n'
-            sql += 'FROM cai.tbl_lessons\n'
-            sql += 'WHERE gradingperiod = %s\n'
-            sql += 'ORDER BY chapter, lessonnum ASC'
-            self.util.populate_pulldown(self.ui.cbLessonName, sql, params=(selected_period,), add_empty=True)
+            query = """
+                SELECT
+                    lesson_id
+                    ,title
+                FROM cai.tbl_lessons
+                WHERE gradingperiod = %s
+                ORDER BY chapter, lessonnum ASC
+            """
+            self.util.populate_pulldown(self.ui.cbLessonName, query, params=(selected_period,), add_empty=True)
 
         self.display_quiz()
 
@@ -1024,6 +1044,40 @@ class Controller:
 
         if conn: conn.close()
 
+    def handle_grading_period_change(self):
+        """Fires when Grading Period changes. Updates lessons without loops."""
+        selected_period = self.ui.comboBox_ReportsGradingPeriod.currentData()
+
+        if selected_period:
+            query = """
+                SELECT lesson_id, title
+                FROM cai.tbl_lessons
+                WHERE gradingperiod = %s
+                ORDER BY chapter, lessonnum ASC
+            """
+            self.ui.comboBox_ReportsLesson.blockSignals(True)
+            self.util.populate_pulldown(self.ui.comboBox_ReportsLesson, query, params=(selected_period,))
+            self.ui.comboBox_ReportsLesson.blockSignals(False)
+            
+            self.handle_report_stud_prog_filter()
+
+    def handle_report_stud_prog_filter(self, *args):
+        """
+            Fires to compute and display the final dataset inside the QTableView.
+        """
+        sectionid = self.ui.comboBox_ReportsSection.currentData()
+        selected_period = self.ui.comboBox_ReportsGradingPeriod.currentData()
+        lessonid = self.ui.comboBox_ReportsLesson.currentData()
+        quiz_no = self.ui.spin_quiz_no.value()
+
+        model = Quiz().retrieve_QuizCompletionStatus(sectionid, quiz_no, selected_period, lessonid)
+
+        if model:
+            self.ui.table_quizcompletionstat.setModel(model)
+            self.ui.table_quizcompletionstat.sortByColumn(-1, Qt.AscendingOrder)
+            header = self.ui.table_quizcompletionstat.horizontalHeader()
+            header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+
     def handle_report_student_idv(self, text=""):
         new_model = Student().search_student(text)
         self.ui.table_student_score_idv.sortByColumn(-1, Qt.AscendingOrder)
@@ -1033,9 +1087,12 @@ class Controller:
             self.ui.table_student_score_idv.setModel(new_model)
             header = self.ui.table_student_score_idv.horizontalHeader()
             header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
-            # header.setSectionResizeMode(0, QHeaderView.ResizeMode.ResizeToContents)
-            # header.setSectionResizeMode(4, QHeaderView.ResizeMode.ResizeToContents)
             self.ui.table_student_score_idv.setColumnHidden(5, True) # Hide 'Gender' column
+
+            selection_model = self.ui.table_student_score_idv.selectionModel()
+            selection_model.currentChanged.connect(
+                lambda current, previous: self.handle_report_student_click(current)
+            )
 
     def generate_quizscores_report(self):
         if self.reports_selectedRow_idv == None:
@@ -1058,7 +1115,14 @@ class Controller:
         success, message = reporter.generate_quizscores_report(studentId, remarks, output_pdf_path)
 
         if success:
+            printers = CrossPlatformPrinter().get_available_printers()
+
+            if printers:
+                _success, _message = CrossPlatformPrinter().send_to_printer(output_pdf_path)
+                message = f"{message}\n\n{_message}"
+
             QMessageBox.information(self.home_win, "Success", message)
+
         else:
             QMessageBox.critical(self.home_win, "Error", message)
 
@@ -1087,10 +1151,22 @@ class Controller:
 
         if model:
             self.ui.table_quiz_score_idv.setModel(model)
-            self.ui.table_quiz_score_idv.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+            header = self.ui.table_quiz_score_idv.horizontalHeader()
+            header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
             self.ui.table_quiz_score_idv.sortByColumn(-1, Qt.AscendingOrder)
 
+            header.setSectionResizeMode(0, QHeaderView.ResizeMode.ResizeToContents)
+            header.setSectionResizeMode(2, QHeaderView.ResizeMode.ResizeToContents)
+            header.setSectionResizeMode(3, QHeaderView.ResizeMode.ResizeToContents)
+            header.setSectionResizeMode(4, QHeaderView.ResizeMode.ResizeToContents)
+
+            if not model.index(0, 1).data():
+                self.ui.btnPrintQuizScores.setEnabled(False)
+            else:
+                self.ui.btnPrintQuizScores.setEnabled(True)
+
         self.ui.label_average_percentage.setText(f'{average_percentage:.0f}%')
+        self.ui.plainTextEdit_remarks.clear()
 
     def get_dynamic_grading_period_dates(self):
         today, base_year, next_year = self.util.get_dynamic_school_year_dates()
@@ -1239,8 +1315,7 @@ class Controller:
         file_dialog = QFileDialog(self.home_win)
         file_dialog.setNameFilter("CSV files (*.csv)")
 
-        script_dir = os.path.dirname(os.path.abspath(__file__))
-        csv_path = os.path.join(script_dir, "..", "Templates")
+        csv_path = self.util.get_resource_path(os.path.join("..", "Templates"))
         file_dialog.setDirectory(csv_path)
 
         if file_dialog.exec():

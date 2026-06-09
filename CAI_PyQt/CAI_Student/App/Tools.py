@@ -1,7 +1,7 @@
-import os
-from PySide6.QtWidgets import QVBoxLayout, QHBoxLayout, QLabel, QFrame, QFileDialog, QMainWindow, QWidget, QDialog
-from PySide6.QtGui import QPixmap, QPainter, QBrush, QColor, QPen, QMovie, QPainterPath
-from PySide6.QtCore import Qt, Signal, QBuffer, QByteArray, QIODevice, QUrl, QObject, QEvent
+import os, sys
+from PySide6.QtWidgets import QVBoxLayout, QHBoxLayout, QLabel, QFrame, QFileDialog, QMainWindow, QDialog
+from PySide6.QtGui import QPixmap, QPainter, QPen, QMovie, QPainterPath
+from PySide6.QtCore import Qt, Signal, QUrl, QObject, QEvent
 from PySide6.QtWebEngineWidgets import QWebEngineView
 from App.CRUDTools import DatabaseTools
 from App.CustomizedDialog import Ui_CustomDialog
@@ -10,7 +10,11 @@ class Utility:
 
     def __init__(self):
         self.db_tools = DatabaseTools()
-        self.script_dir = os.path.dirname(os.path.abspath(__file__))
+
+    def get_resource_path(self, relative_path):
+        """ Safely retrieves asset paths across development files and standalone compiled EXEs """
+        base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
+        return os.path.normpath(os.path.join(base_path, relative_path))
 
     def getCircularPixmapFromImagePath(self, image_path, size=100):
         """
@@ -222,7 +226,7 @@ class Card(QFrame):
         self.util = Utility()
 
         if self.util.isEmpty(self.pixMap):
-            path = os.path.join(self.util.script_dir, "..", "Images", "profile_gray.png")
+            path = self.util.get_resource_path(os.path.join("..", "Images", "profile_gray.png"))
             self.pixMap = self.util.getCircularPixmapFromImagePath(path, 80)
 
         # Layout for the card
@@ -280,15 +284,16 @@ class WickPlayer(QMainWindow):
         self.resize(1024, 768)
 
         self.browser = QWebEngineView()
+        self.util = Utility()
         
         # Resolve the path to the HTML file
-        script_dir = os.path.dirname(os.path.abspath(__file__))
-        file_path = os.path.join(script_dir, "..", "Games", html_filename)
+        games_path = self.util.get_resource_path(os.path.join("..", "Games"))
+        file_path = os.path.join(games_path, html_filename)
         
         if os.path.exists(file_path):
             self.browser.setUrl(QUrl.fromLocalFile(file_path))
         else:
-            print(f"Error: {html_filename} not found in {script_dir}")
+            print(f"Error: {html_filename} not found in {games_path}")
             
         self.setCentralWidget(self.browser)
 
@@ -353,8 +358,9 @@ class CustomShapeDialog(QDialog, Ui_CustomDialog):
         # 2. Re-use WindowHandler for dragging
         self.handler = WindowHandler(self)
 
-        script_dir = os.path.dirname(os.path.abspath(__file__))
-        img_path = os.path.join(script_dir, "..", "Images")
+        self.util = Utility()
+
+        img_path = self.util.get_resource_path(os.path.join("..", "Images"))
         file_path = os.path.join(img_path, "happy.gif") # Default
 
         if type == 2:

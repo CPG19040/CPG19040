@@ -19,10 +19,8 @@ class Controller(QObject): # Controller inherits from QObject to handle events.
         super().__init__() # Initialize QObject
 
         self.settings = QSettings("CAI_System", "CAI_Student_App")
-        self.script_dir = os.path.dirname(os.path.abspath(__file__))
-        self.audio_path = os.path.join(self.script_dir, "..", "Audio")
-        sys.path.append(self.script_dir)
         self.util = Utility()
+        self.audio_path = self.util.get_resource_path(os.path.join("..", "Audio"))
 
         self.login_win = Login()
         self.login_win.login_success.connect(self.on_login_success)
@@ -242,7 +240,7 @@ class Controller(QObject): # Controller inherits from QObject to handle events.
 
     def load_fonts(self):
         # Move up (..) from controller.py to access the "fonts" folder in the project root
-        path = os.path.join(self.script_dir, "..", "Fonts")
+        path = self.util.get_resource_path(os.path.join("..", "Fonts"))
         loaded_count = 0
 
         if os.path.exists(path):

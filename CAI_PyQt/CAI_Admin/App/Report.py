@@ -1,4 +1,4 @@
-import os, subprocess
+import os, sys, subprocess
 
 from App.CRUDTools import DatabaseTools
 from App.Tools import Utility
@@ -8,12 +8,11 @@ from docxtpl import DocxTemplate
 
 class StudentListReporter:
     def __init__(self):
-        template_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "Templates")
-        self.studentlist_template_path = os.path.join(template_path, "student_list.docx")
-        self.classlist_template_path = os.path.join(template_path, "class_list.docx")
-
         self.db_tools = DatabaseTools()
         self.util = Utility()
+
+        self.studentlist_template_path = self.util.get_resource_path(os.path.join("..", "Templates", "student_list.docx"))
+        self.classlist_template_path = self.util.get_resource_path(os.path.join("..", "Templates", "class_list.docx"))
 
     def generate_studentlist_report(self, section_id, output_pdf_path):
         """Fetches student data, merges using docxtpl, and converts to PDF."""
@@ -142,11 +141,10 @@ class QuizReporter:
         Generates styled Word Templates from DB and converts them directly to PDF.
     """
     def __init__(self):
-        template_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "Templates")
-        self.quizscores_template_path = os.path.join(template_path, "quiz_report.docx")
-
         self.db_tools = DatabaseTools()
         self.util = Utility()
+
+        self.quizscores_template_path = self.util.get_resource_path(os.path.join("..", "Templates", "quiz_report.docx"))
 
     def generate_quizscores_report(self, studentid, remarks, output_pdf_path):
         """Fetches student data, merges using docxtpl, and converts to PDF."""
@@ -207,7 +205,7 @@ class QuizReporter:
             for idx, model in models.items():
                 for row in range(model.rowCount()):
                     scores[idx].append({
-                        "quiz_no"      : model.index(row, 0).data(),
+                        "quiz_no"      : row + 1,
                         "lesson_id"    : model.index(row, 1).data(),
                         "lesson_title" : model.index(row, 2).data(),
                         "quiz_score"   : model.index(row, 3).data(),
@@ -229,10 +227,10 @@ class QuizReporter:
                 'quizzes2': scores[2],
                 'quizzes3': scores[3],
                 'quizzes4': scores[4],
-                'total1': average_percentage1,
-                'total2': average_percentage2,
-                'total3': average_percentage3,
-                'total4': average_percentage4,
+                'total1': f"{average_percentage1}%",
+                'total2': f"{average_percentage2}%",
+                'total3': f"{average_percentage3}%",
+                'total4': f"{average_percentage4}%",
             }
             doc.render(context)
             doc.save(temp_docx)
