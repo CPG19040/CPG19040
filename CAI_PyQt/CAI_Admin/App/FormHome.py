@@ -181,7 +181,7 @@ class Ui_Home(object):
         self.navigationBar.setObjectName(u"navigationBar")
         self.navigationBar.setMaximumSize(QSize(200, 16777215))
         self.navigationBar.setFont(font)
-        self.navigationBar.setStyleSheet(u"background-color: rgb(61, 61, 61);")
+        self.navigationBar.setStyleSheet(u"background-color: rgb(61, 61, 61); /* Dark Gray or Storm Dust */")
         self.verticalLayout_5 = QVBoxLayout(self.navigationBar)
         self.verticalLayout_5.setSpacing(6)
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
@@ -596,7 +596,9 @@ class Ui_Home(object):
         self.widget_5.setObjectName(u"widget_5")
         self.widget_5.setMinimumSize(QSize(0, 40))
         self.widget_5.setMaximumSize(QSize(16777215, 40))
-        self.widget_5.setStyleSheet(u"background-color: rgb(246, 245, 244); border-radius: 20px;")
+        self.widget_5.setStyleSheet(u"background-color: rgb(246, 245, 244);\n"
+"padding: 0px 10px;\n"
+"border-radius: 20px;")
         self.horizontalLayout_20 = QHBoxLayout(self.widget_5)
         self.horizontalLayout_20.setObjectName(u"horizontalLayout_20")
         self.horizontalLayout_20.setContentsMargins(-1, 2, -1, 2)
@@ -2269,6 +2271,7 @@ class Ui_Home(object):
         self.cbGradingPeriod.setMinimumSize(QSize(150, 30))
         self.cbGradingPeriod.setMaximumSize(QSize(16777215, 30))
         self.cbGradingPeriod.setStyleSheet(u"")
+        self.cbGradingPeriod.setSizeAdjustPolicy(QComboBox.AdjustToContents)
 
         self.headerLayout.addWidget(self.cbGradingPeriod)
 
@@ -2282,6 +2285,7 @@ class Ui_Home(object):
         self.cbLessonName.setMinimumSize(QSize(150, 30))
         self.cbLessonName.setMaximumSize(QSize(16777215, 30))
         self.cbLessonName.setStyleSheet(u"")
+        self.cbLessonName.setSizeAdjustPolicy(QComboBox.AdjustToContents)
 
         self.headerLayout.addWidget(self.cbLessonName)
 
@@ -2814,9 +2818,10 @@ class Ui_Home(object):
 
         self.comboBox_Section = QComboBox(self.pageSections)
         self.comboBox_Section.setObjectName(u"comboBox_Section")
-        self.comboBox_Section.setMinimumSize(QSize(200, 30))
+        self.comboBox_Section.setMinimumSize(QSize(0, 30))
         self.comboBox_Section.setMaximumSize(QSize(16777215, 30))
         self.comboBox_Section.setStyleSheet(u"")
+        self.comboBox_Section.setSizeAdjustPolicy(QComboBox.AdjustToContents)
 
         self.horizontalLayout_8.addWidget(self.comboBox_Section)
 
@@ -3182,6 +3187,7 @@ class Ui_Home(object):
         self.comboBox_ReportsSection.setMinimumSize(QSize(150, 30))
         self.comboBox_ReportsSection.setMaximumSize(QSize(16777215, 30))
         self.comboBox_ReportsSection.setStyleSheet(u"")
+        self.comboBox_ReportsSection.setSizeAdjustPolicy(QComboBox.AdjustToContents)
 
         self.horizontalLayout_9.addWidget(self.comboBox_ReportsSection)
 
@@ -3196,6 +3202,7 @@ class Ui_Home(object):
         self.comboBox_ReportsGradingPeriod.setMinimumSize(QSize(150, 30))
         self.comboBox_ReportsGradingPeriod.setMaximumSize(QSize(16777215, 30))
         self.comboBox_ReportsGradingPeriod.setStyleSheet(u"")
+        self.comboBox_ReportsGradingPeriod.setSizeAdjustPolicy(QComboBox.AdjustToContents)
 
         self.horizontalLayout_9.addWidget(self.comboBox_ReportsGradingPeriod)
 
@@ -3228,6 +3235,7 @@ class Ui_Home(object):
         self.comboBox_ReportsLesson.setMinimumSize(QSize(200, 30))
         self.comboBox_ReportsLesson.setMaximumSize(QSize(16777215, 30))
         self.comboBox_ReportsLesson.setStyleSheet(u"")
+        self.comboBox_ReportsLesson.setSizeAdjustPolicy(QComboBox.AdjustToContents)
 
         self.horizontalLayout_9.addWidget(self.comboBox_ReportsLesson)
 
@@ -3460,11 +3468,11 @@ class Ui_Home(object):
         self.horizontalLayout_21.addWidget(self.labelGradingPeriod_4)
 
         self.cb_gp_quiz_idv = QComboBox(self.widget_7)
-        self.cb_gp_quiz_idv.addItem("")
         self.cb_gp_quiz_idv.setObjectName(u"cb_gp_quiz_idv")
         self.cb_gp_quiz_idv.setMinimumSize(QSize(150, 30))
         self.cb_gp_quiz_idv.setMaximumSize(QSize(16777215, 30))
         self.cb_gp_quiz_idv.setStyleSheet(u"")
+        self.cb_gp_quiz_idv.setSizeAdjustPolicy(QComboBox.AdjustToContents)
 
         self.horizontalLayout_21.addWidget(self.cb_gp_quiz_idv)
 
@@ -4620,8 +4628,6 @@ class Ui_Home(object):
         self.label_lessons_prog_1.setText(QCoreApplication.translate("Home", u"Lessons:", None))
         self.label_lessons_prog.setText(QCoreApplication.translate("Home", u"12/20", None))
         self.labelGradingPeriod_4.setText(QCoreApplication.translate("Home", u"Grading Period:", None))
-        self.cb_gp_quiz_idv.setItemText(0, QCoreApplication.translate("Home", u"Fourth Grading", None))
-
         self.cb_gp_quiz_idv.setProperty(u"class", QCoreApplication.translate("Home", u"combobox-main", None))
         self.btnPrintQuizScores.setText(QCoreApplication.translate("Home", u"Print", None))
         self.btnPrintQuizScores.setProperty(u"class", QCoreApplication.translate("Home", u"button-normal", None))

@@ -344,6 +344,7 @@ class Controller:
                     widget.deleteLater()
 
         record_id, record_mc, record_tf = qUtils.retrieve_quiz()
+        itemCnt = 1
 
         for row in record_id:
             quiz = Quiz("ID")
@@ -352,12 +353,15 @@ class Controller:
             quiz.gradingperiod = row.get("gradingperiod")
             quiz.lessonid = row.get("lessonid")
             quiz.itemno = row.get("itemno", "")
+            quiz.itemnoCnt = itemCnt
             quiz.question = row.get("question", "")
             quiz.correct_answer = row.get("correct_answer", "")
             quiz.imageQ = row.get("imagequestion", None)
             quiz.displayAttributes()
             self.quiz_cards.append(quiz)
             layout_id.addWidget(quiz)
+
+            itemCnt += 1
 
         for row in record_mc:
             quiz = Quiz("MC")
@@ -366,6 +370,7 @@ class Controller:
             quiz.gradingperiod = row.get("gradingperiod")
             quiz.lessonid = row.get("lessonid")
             quiz.itemno = row.get("itemno", "")
+            quiz.itemnoCnt = itemCnt
             quiz.question = row.get("question", "")
             quiz.choice_a = row.get("choice_a")
             quiz.choice_b = row.get("choice_b")
@@ -376,6 +381,8 @@ class Controller:
             self.quiz_cards.append(quiz)
             layout_mc.addWidget(quiz)
 
+            itemCnt += 1
+
         for row in record_tf:
             quiz = Quiz("TF")
             quiz.idKey = row.get("tfkey")
@@ -383,12 +390,15 @@ class Controller:
             quiz.gradingperiod = row.get("gradingperiod")
             quiz.lessonid = row.get("lessonid")
             quiz.itemno = row.get("itemno", "")
+            quiz.itemnoCnt = itemCnt
             quiz.question = row.get("question", "")
             quiz.correct_answer = row.get("correct_answer", "")
             quiz.imageQ = row.get("imagequestion", None)
             quiz.displayAttributes()
             self.quiz_cards.append(quiz)
             layout_tf.addWidget(quiz)
+
+            itemCnt += 1
 
     def save_quiz_answers(self):
         if not hasattr(self, 'quiz_cards') or not self.quiz_cards:

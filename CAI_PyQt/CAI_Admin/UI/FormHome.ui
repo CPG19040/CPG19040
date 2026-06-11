@@ -199,7 +199,7 @@ QLabel {
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(61, 61, 61);</string>
+       <string notr="true">background-color: rgb(61, 61, 61); /* Dark Gray or Storm Dust */</string>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_5">
        <property name="spacing">
@@ -1046,7 +1046,9 @@ QPushButton:hover {
               </size>
              </property>
              <property name="styleSheet">
-              <string notr="true">background-color: rgb(246, 245, 244); border-radius: 20px;</string>
+              <string notr="true">background-color: rgb(246, 245, 244);
+padding: 0px 10px;
+border-radius: 20px;</string>
              </property>
              <layout class="QHBoxLayout" name="horizontalLayout_20">
               <property name="topMargin">
@@ -4552,6 +4554,9 @@ QSpinBox::down-arrow {
             <property name="styleSheet">
              <string notr="true"/>
             </property>
+            <property name="sizeAdjustPolicy">
+             <enum>QComboBox::AdjustToContents</enum>
+            </property>
             <property name="class" stdset="0">
              <string>combobox-main</string>
             </property>
@@ -4580,6 +4585,9 @@ QSpinBox::down-arrow {
             </property>
             <property name="styleSheet">
              <string notr="true"/>
+            </property>
+            <property name="sizeAdjustPolicy">
+             <enum>QComboBox::AdjustToContents</enum>
             </property>
             <property name="class" stdset="0">
              <string>combobox-main</string>
@@ -5539,7 +5547,7 @@ QSpinBox::down-arrow {
            <widget class="QComboBox" name="comboBox_Section">
             <property name="minimumSize">
              <size>
-              <width>200</width>
+              <width>0</width>
               <height>30</height>
              </size>
             </property>
@@ -5551,6 +5559,9 @@ QSpinBox::down-arrow {
             </property>
             <property name="styleSheet">
              <string notr="true"/>
+            </property>
+            <property name="sizeAdjustPolicy">
+             <enum>QComboBox::AdjustToContents</enum>
             </property>
             <property name="class" stdset="0">
              <string>combobox-main</string>
@@ -6070,6 +6081,9 @@ QScrollBar::add-line, QScrollBar::sub-line {
                  <property name="styleSheet">
                   <string notr="true"/>
                  </property>
+                 <property name="sizeAdjustPolicy">
+                  <enum>QComboBox::AdjustToContents</enum>
+                 </property>
                  <property name="class" stdset="0">
                   <string>combobox-main</string>
                  </property>
@@ -6104,6 +6118,9 @@ QScrollBar::add-line, QScrollBar::sub-line {
                  </property>
                  <property name="styleSheet">
                   <string notr="true"/>
+                 </property>
+                 <property name="sizeAdjustPolicy">
+                  <enum>QComboBox::AdjustToContents</enum>
                  </property>
                  <property name="class" stdset="0">
                   <string>combobox-main</string>
@@ -6183,6 +6200,9 @@ QScrollBar::add-line, QScrollBar::sub-line {
                  </property>
                  <property name="styleSheet">
                   <string notr="true"/>
+                 </property>
+                 <property name="sizeAdjustPolicy">
+                  <enum>QComboBox::AdjustToContents</enum>
                  </property>
                  <property name="class" stdset="0">
                   <string>combobox-main</string>
@@ -6642,14 +6662,12 @@ QLabel {
                     <property name="styleSheet">
                      <string notr="true"/>
                     </property>
+                    <property name="sizeAdjustPolicy">
+                     <enum>QComboBox::AdjustToContents</enum>
+                    </property>
                     <property name="class" stdset="0">
                      <string>combobox-main</string>
                     </property>
-                    <item>
-                     <property name="text">
-                      <string>Fourth Grading</string>
-                     </property>
-                    </item>
                    </widget>
                   </item>
                   <item>

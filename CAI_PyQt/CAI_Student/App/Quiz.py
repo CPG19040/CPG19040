@@ -14,14 +14,15 @@ class Quiz(QFrame, Ui_CardQuiz):
         self.db_tools = DatabaseTools()
         self.util = Utility()
 
-        self.quiz_type = quiz_type
-        self.idKey = None
-        self.quiznumber = None
+        self.quiz_type     = quiz_type
+        self.idKey         = None
+        self.quiznumber    = None
         self.gradingperiod = None
-        self.lessonid = None
-        self.itemno = ""
-        self.question = ""
-        self.imageQ = None
+        self.lessonid      = None
+        self.itemno        = ""
+        self.itemnoCnt     = 0
+        self.question      = ""
+        self.imageQ        = None
 
         self.choice_a = ""
         self.choice_b = ""
@@ -47,7 +48,7 @@ class Quiz(QFrame, Ui_CardQuiz):
         """
 
     def displayAttributes(self):
-        self.label_itemno.setText(f"ITEM {self.itemno}")
+        self.label_itemno.setText(f"ITEM {self.itemnoCnt}")
         self.label_question.setText(f"{self.question}")
 
         # Handle Image
