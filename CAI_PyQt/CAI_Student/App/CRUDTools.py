@@ -22,8 +22,8 @@ class DatabaseTools:
         try:
             conn = psycopg2.connect(**self.connection_config)
             with conn.cursor(cursor_factory=extras.RealDictCursor) as cur:
-                # print(cur.mogrify(sql, params).decode('utf-8'))
                 cur.execute(sql, params)
+                # print(cur.mogrify(sql, params).decode('utf-8'))
                 return cur.fetchall()
 
         except Exception as e:
@@ -31,7 +31,7 @@ class DatabaseTools:
             return []
 
         finally:
-            conn.close()
+            if conn: conn.close()
 
     def execute_query(self, sql, params=None):
         """Equivalent to ExecuteNonQuery."""

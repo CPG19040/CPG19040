@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="Images">
+    <file>Images/background_361F1C.svg</file>
+    <file>Images/student-user.png</file>
     <file>Images/Addition.png</file>
     <file>Images/backbtn.png</file>
     <file>Images/backbtnGlow.png</file>
@@ -75,6 +77,8 @@
     <file>Images/teacher.png</file>
     <file>Images/teacherGlow.png</file>
     <file>Images/Time.png</file>
+    <file>Images/tonton-sad.gif</file>
+    <file>Images/tonton-warning.gif</file>
     <file>Images/Wall.svg</file>
     <file>Images/wood_nav_bar.jpeg</file>
     <file>Images/wood_nav_bar_H.jpeg</file>

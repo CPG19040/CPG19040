@@ -583,6 +583,7 @@ class StudentEditorDialog(QDialog, Ui_EditStudentDialog):
         self.image_data = None
         self.user = user
 
+        self.txtContactNum.clear()
         self.displaySchoolYear(studentid)
 
         self.btnUpdate.clicked.connect(lambda: self.edit(studentid))

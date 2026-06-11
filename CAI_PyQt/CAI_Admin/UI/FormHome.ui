@@ -6019,7 +6019,7 @@ QScrollBar::add-line, QScrollBar::sub-line {
 }</string>
            </property>
            <attribute name="title">
-            <string>Student Progress</string>
+            <string>Quiz Tracker</string>
            </attribute>
            <layout class="QVBoxLayout" name="verticalLayout_7">
             <item>
@@ -6209,6 +6209,9 @@ QScrollBar::add-line, QScrollBar::sub-line {
              <widget class="QTableView" name="table_quizcompletionstat">
               <property name="styleSheet">
                <string notr="true">background-color: rgb(246, 245, 244);</string>
+              </property>
+              <property name="selectionBehavior">
+               <enum>QAbstractItemView::SelectRows</enum>
               </property>
               <property name="sortingEnabled">
                <bool>true</bool>

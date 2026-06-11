@@ -98,27 +98,26 @@ class Quiz(QFrame, Ui_CardQuiz):
 
 class QuizUtils:
 
-    def __init__(self):
+    def __init__(self, grading_period):
         self.db_tools = DatabaseTools()
         self.util = Utility()
 
         self.quiznumber     = None
-        self.gradingperiod  = None
+        self.gradingperiod  = grading_period
         self.lessonid       = None
         self.publish        = True
 
         sql  = "SELECT\n"
         sql += "    quiznumber,\n"
-        sql += "    gradingperiod,\n"
         sql += "    lessonid,\n"
         sql += "    publish\n"
         sql += "FROM cai.tbl_quiz\n"
         sql += "WHERE publish = TRUE"
-        record = self.db_tools.fetch_all(sql)
+        sql += "    AND gradingperiod = %s"
+        record = self.db_tools.fetch_all(sql, (grading_period,))
 
         if record:
             self.quiznumber     = record[0].get('quiznumber')
-            self.gradingperiod  = record[0].get('gradingperiod')
             self.lessonid       = record[0].get('lessonid')
             self.publish        = record[0].get('publish')
 
@@ -140,7 +139,7 @@ class QuizUtils:
 
         record_id = record_mc = record_tf = []
 
-        if self.util.isEmpty(self.quiznumber) or self.util.isEmpty(self.gradingperiod) or self.util.isEmpty(self.lessonid):
+        if self.util.isEmpty(self.quiznumber) or not self.gradingperiod or self.util.isEmpty(self.lessonid):
             print("ℹ️ No available quiz.")
             return record_id, record_mc, record_tf
 
@@ -222,7 +221,7 @@ class QuizUtils:
 
     def save_quiz(self, student_id, quiz_cards):
         if not quiz_cards:
-            return 1
+            return False, "Empty quiz."
 
         try:
             conn = self.db_tools.get_connection()
@@ -264,12 +263,11 @@ class QuizUtils:
 
             self.evaluate_quiz(student_id)
 
-            return 0
+            return True, "Successfully saved and evaluated this quiz."
             
         except Exception as e:
             if conn: conn.rollback()
-            print(f"Failed to save: {str(e)}")
-            return 1
+            return False, f"Failed to save: {str(e)}"
 
         finally:
             if conn: conn.close()

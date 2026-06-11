@@ -3241,6 +3241,7 @@ class Ui_Home(object):
         self.table_quizcompletionstat = QTableView(self.tab_1)
         self.table_quizcompletionstat.setObjectName(u"table_quizcompletionstat")
         self.table_quizcompletionstat.setStyleSheet(u"background-color: rgb(246, 245, 244);")
+        self.table_quizcompletionstat.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.table_quizcompletionstat.setSortingEnabled(True)
 
         self.verticalLayout_7.addWidget(self.table_quizcompletionstat)
@@ -4604,7 +4605,7 @@ class Ui_Home(object):
         self.label_46.setText(QCoreApplication.translate("Home", u"Quiz No:", None))
         self.label_49.setText(QCoreApplication.translate("Home", u"Lesson:", None))
         self.comboBox_ReportsLesson.setProperty(u"class", QCoreApplication.translate("Home", u"combobox-main", None))
-        self.tabWidget_reports.setTabText(self.tabWidget_reports.indexOf(self.tab_1), QCoreApplication.translate("Home", u"Student Progress", None))
+        self.tabWidget_reports.setTabText(self.tabWidget_reports.indexOf(self.tab_1), QCoreApplication.translate("Home", u"Quiz Tracker", None))
         self.widget_search_idv.setProperty(u"class", QCoreApplication.translate("Home", u"widget-search-container", None))
         self.label_magnifying_idv.setText("")
         self.label_magnifying_idv.setProperty(u"class", QCoreApplication.translate("Home", u"label-magnifying-search", None))

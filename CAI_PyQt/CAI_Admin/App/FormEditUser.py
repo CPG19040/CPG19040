@@ -107,6 +107,7 @@ class Ui_EditUserDialog(object):
 "    background-color: #7eb4d7;\n"
 "    color: #ffffff;\n"
 "}")
+        EditUserDialog.setModal(True)
         self.verticalLayout = QVBoxLayout(EditUserDialog)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.widget = QWidget(EditUserDialog)

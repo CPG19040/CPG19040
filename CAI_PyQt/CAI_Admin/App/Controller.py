@@ -20,7 +20,11 @@ from App.SectionDialog import Section
 from App.Lessons import Lesson, LessonDialog
 from App.Quiz import Quiz, CardQuiz
 
+
 class Controller:
+
+    GRADING_PERIOD = 0
+
     def __init__(self):
         self.settings = QSettings("CAI_System", "CAI_Admin_App")
         self.util = Utility()
@@ -82,7 +86,7 @@ class Controller:
         self.ui.btn_manual.setChecked(True)
         self.get_dynamic_grading_period_dates()
 
-        self.util.populate_pulldowns(self.ui.cb_gp_quiz_idv)
+        self.util.populate_gradingperiod_pulldown(self.ui.cb_gp_quiz_idv, default_gp=self.GRADING_PERIOD)
 
         # Search Box: Pass the text directly
         self.ui.txt_classList_search.textChanged.connect(self.display_student_cards)
@@ -299,14 +303,14 @@ class Controller:
             self.displayLessons()
 
         elif index == 3: # Quiz
-            self.util.populate_pulldowns(self.ui.cbGradingPeriod, self.ui.cbLessonName)
+            self.util.populate_gradingperiod_pulldown(self.ui.cbGradingPeriod, self.ui.cbLessonName, default_gp=self.GRADING_PERIOD)
             self.display_quiz()
 
         elif index == 5: # Sections
             self.display_section_info()
 
         elif index == 6: # Reports
-            self.util.populate_pulldowns(self.ui.comboBox_ReportsGradingPeriod)
+            self.util.populate_gradingperiod_pulldown(self.ui.comboBox_ReportsGradingPeriod, default_gp=self.GRADING_PERIOD)
             gpid = self.ui.comboBox_ReportsGradingPeriod.currentData()
             query = """
                 SELECT
@@ -316,7 +320,7 @@ class Controller:
                 WHERE gradingperiod = %s
                 ORDER BY chapter, lessonnum ASC
             """
-            self.util.populate_pulldown(self.ui.comboBox_ReportsLesson, query, params=(gpid,), add_empty=True)
+            self.util.populate_pulldown(self.ui.comboBox_ReportsLesson, query, params=(gpid,))
 
             self.handle_report_student_idv()
 
@@ -1208,6 +1212,7 @@ class Controller:
             if start_date <= today <= end_date:
                 suffix = {1: "st", 2: "nd", 3: "rd"}.get(row['gpid'], "th")
                 active_quarter = f"{row['gpid']}{suffix} Grading Period"
+                self.GRADING_PERIOD = row['gpid']
                 is_break = False
                 break
 

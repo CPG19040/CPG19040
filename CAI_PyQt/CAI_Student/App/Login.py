@@ -5,7 +5,7 @@ from PySide6.QtMultimedia import QSoundEffect, QMediaPlayer, QAudioOutput
 
 import os
 from passlib.hash import bcrypt
-from App.Tools import Utility, Card, CustomShapeDialog
+from App.Tools import Utility, StudentCard, CustomShapeDialog
 
 from App.FormLogin import Ui_FormLogin
 from App.CRUDTools import DatabaseTools
@@ -264,7 +264,7 @@ class Login(QWidget, Ui_FormLogin):
                     pixmap = QPixmap.fromImage(image)
 
             full_name = self.util.formatFullname(f_name, m_name, l_name)
-            card = Card(full_name, sid, pixmap, "20px")
+            card = StudentCard(full_name, sid, pixmap, "20px")
 
             card.clicked.connect(self.handle_card_selection)
 

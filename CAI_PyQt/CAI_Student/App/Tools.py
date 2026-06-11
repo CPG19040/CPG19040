@@ -1,7 +1,7 @@
 import os, sys
 from PySide6.QtWidgets import QVBoxLayout, QHBoxLayout, QLabel, QFrame, QFileDialog, QMainWindow, QDialog
 from PySide6.QtGui import QPixmap, QPainter, QPen, QMovie, QPainterPath
-from PySide6.QtCore import Qt, Signal, QUrl, QObject, QEvent
+from PySide6.QtCore import Qt, Signal, QUrl, QObject, QEvent, QDate
 from PySide6.QtWebEngineWidgets import QWebEngineView
 from App.CRUDTools import DatabaseTools
 from App.CustomizedDialog import Ui_CustomDialog
@@ -15,6 +15,22 @@ class Utility:
         """ Safely retrieves asset paths across development files and standalone compiled EXEs """
         base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
         return os.path.normpath(os.path.join(base_path, relative_path))
+    
+    def get_dynamic_school_year_dates(self):
+        today = QDate.currentDate()
+        current_year = today.year()
+        current_month = today.month()
+
+        # If today is between Jan and May (e.g., May 2026), the current school year started in June of LAST year (2025).
+        # If today is between June and Dec (e.g., June 2026), the current school year started in June of THIS year (2026).
+        if current_month < 6:
+            base_year = current_year - 1
+        else:
+            base_year = current_year
+
+        next_year = base_year + 1
+
+        return today, base_year, next_year
 
     def getCircularPixmapFromImagePath(self, image_path, size=100):
         """
@@ -189,7 +205,7 @@ class Utility:
             return f"{firstname[:1].upper()}, {middlename[:1].upper()} {lastname[:1].upper()}".title()
 
 
-class Card(QFrame):
+class StudentCard(QFrame):
     clicked = Signal(object, str)
 
     """Custom widget representing a single card."""
@@ -204,17 +220,17 @@ class Card(QFrame):
         self.setFixedSize(16777215, 100)
         self.setCursor(Qt.CursorShape.PointingHandCursor)
         self.setStyleSheet("""
-            Card {
+            StudentCard {
                 background-color: #ffffff;
                 border-radius: """ + border_radius + """;
                 border: 1px solid #ddd;
             }
-            Card:hover {
+            StudentCard:hover {
                 border: 2px solid #3498db;
                 background-color: #f7fbfe;
             }
             /* This style applies when the custom property is true */
-            Card[selected="true"] {
+            StudentCard[selected="true"] {
                 background-color: #e1f5fe;
                 border: 2px solid #3498db;
             }

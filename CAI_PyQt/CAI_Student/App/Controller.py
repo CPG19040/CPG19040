@@ -1,5 +1,5 @@
-import os, sys
-from PySide6.QtCore import QSettings, QPoint, QEasingCurve, QPropertyAnimation, QParallelAnimationGroup, Qt, QUrl, QEvent, QObject
+import os
+from PySide6.QtCore import QSettings, QPoint, QEasingCurve, QPropertyAnimation, QParallelAnimationGroup, Qt, QUrl, QEvent, QObject, QDate
 from PySide6.QtWidgets import QMainWindow, QButtonGroup
 from PySide6.QtGui import QFontDatabase, QImage, QPixmap
 from PySide6.QtMultimedia import QSoundEffect, QMediaPlayer, QAudioOutput
@@ -8,18 +8,19 @@ from App.Login import Login
 from App.FormHome import Ui_FormHome
 from App.Student import Student
 from App.Tools import Utility, WindowHandler, CustomShapeDialog
+from App.CRUDTools import DatabaseTools
 from App.Lessons import Lessons, LessonCard
 
 
-class Controller(QObject): # Controller inherits from QObject to handle events.
+# Notice: Controller no longer inherits from QObject
+class Controller:
 
-    RESIZE_MARGIN = 8  # The clickable area around the edges (in pixels)
-    
+    GRADING_PERIOD = 0
+
     def __init__(self):
-        super().__init__() # Initialize QObject
-
         self.settings = QSettings("CAI_System", "CAI_Student_App")
         self.util = Utility()
+        self.db_tools = DatabaseTools()
         self.audio_path = self.util.get_resource_path(os.path.join("..", "Audio"))
 
         self.login_win = Login()
@@ -53,6 +54,45 @@ class Controller(QObject): # Controller inherits from QObject to handle events.
         self.ui = Ui_FormHome()
         self.ui.setupUi(self.home_win)
 
+        self.get_dynamic_grading_period_dates()
+
+        # --- EVENT FILTER IMPLEMENTATION ---
+        # 1. Create a dedicated QObject inside show_home to act as the filter
+        self.home_event_filter = QObject(self.home_win)
+
+        # 2. Define the event filter logic dynamically
+        def custom_event_filter(watched_obj, event):
+            if event.type() == QEvent.Type.Enter:
+                if watched_obj == self.ui.btnClose:
+                    self.sounds["exit_sound"].stop()
+                    self.sounds["exit_sound"].play()
+                elif watched_obj == self.ui.btnQuit:
+                    self.sounds["quit_sound"].stop()
+                    self.sounds["quit_sound"].play()
+                elif watched_obj == self.ui.btnLessons:
+                    self.sounds["lesson_sound"].stop()
+                    self.sounds["lesson_sound"].play()
+                elif watched_obj == self.ui.btnQuiz:
+                    self.sounds["quiz_sound"].stop()
+                    self.sounds["quiz_sound"].play()
+                elif watched_obj == self.ui.btnExercise:
+                    self.sounds["exer_sound"].stop()
+                    self.sounds["exer_sound"].play()
+                elif watched_obj == self.ui.btnScores:
+                    self.sounds["scores_sound"].stop()
+                    self.sounds["scores_sound"].play()
+                elif watched_obj == self.ui.btnGames:
+                    self.sounds["games_sound"].stop()
+                    self.sounds["games_sound"].play()
+
+            # Since QObject doesn't have a customized eventFilter parent implementation here,
+            # we just return False to let PySide handle the event naturally.
+            return False
+
+        # 3. Bind the logic to the QObject's eventFilter property
+        self.home_event_filter.eventFilter = custom_event_filter
+        # ----------------------------------------
+
         controls = [
             self.ui.btnMinimize,
             self.ui.btnMaximize,
@@ -67,8 +107,9 @@ class Controller(QObject): # Controller inherits from QObject to handle events.
 
         for control in controls:
             control.setMouseTracking(True)
-            control.installEventFilter(self)
-        
+            # 4. Install the new locally defined filter object instead of 'self'
+            control.installEventFilter(self.home_event_filter)
+
         path = os.path.join(self.audio_path, "bgMusic2.wav")
         self.home_win.player = QMediaPlayer()
         self.home_win.audio_output = QAudioOutput()
@@ -94,10 +135,9 @@ class Controller(QObject): # Controller inherits from QObject to handle events.
 
         for name, filename in sound_files.items():
             path = os.path.normpath(os.path.join(self.audio_path, filename))
-            effect = QSoundEffect(self)
+            effect = QSoundEffect(self.home_event_filter) # Pass the filter or home_win as parent
             effect.setSource(QUrl.fromLocalFile(path))
             effect.setVolume(0.7)
-            
             self.sounds[name] = effect
 
         # Remove OS default window frame
@@ -130,7 +170,6 @@ class Controller(QObject): # Controller inherits from QObject to handle events.
         self.display_lessons()
         self.ui.btnLessons.setChecked(True)
 
-        # Optional: Set the initial active button (Home)
         self.ui.btnLessons.clicked.connect(self.display_lessons)
         self.ui.btnQuiz.clicked.connect(self.displayQuiz)
         self.ui.btnSubmitQuiz.clicked.connect(self.save_quiz_answers)
@@ -142,50 +181,11 @@ class Controller(QObject): # Controller inherits from QObject to handle events.
         self.login_win.close()
         self.home_win.show()
 
-    def eventFilter(self, watched_obj, event):
-
-        if event.type() == QEvent.Type.Enter:
-
-            if watched_obj == self.ui.btnClose:
-                self.sounds["exit_sound"].stop() 
-                self.sounds["exit_sound"].play()
-
-            elif watched_obj == self.ui.btnQuit:
-                self.sounds["quit_sound"].stop() 
-                self.sounds["quit_sound"].play()
-
-            elif watched_obj == self.ui.btnLessons:
-                self.sounds["lesson_sound"].stop() 
-                self.sounds["lesson_sound"].play()
-
-            elif watched_obj == self.ui.btnQuiz:
-                self.sounds["quiz_sound"].stop() 
-                self.sounds["quiz_sound"].play()
-
-            elif watched_obj == self.ui.btnExercise:
-                self.sounds["exer_sound"].stop() 
-                self.sounds["exer_sound"].play()
-
-            elif watched_obj == self.ui.btnScores:
-                self.sounds["scores_sound"].stop() 
-                self.sounds["scores_sound"].play()
-
-            elif watched_obj == self.ui.btnGames:
-                self.sounds["games_sound"].stop() 
-                self.sounds["games_sound"].play()
-        
-        # Always pass the event to the parent class handler so UI functions normally
-        return super().eventFilter(watched_obj, event)
-
     def toggle_maximize(self):
         if self.home_win.isMaximized():
             self.home_win.showNormal()
-            # Optional: Change icon back to 'maximize'
-            # self.btnMaximize.setIcon(QIcon("expand.png"))
         else:
             self.home_win.showMaximized()
-            # Optional: Change icon to 'restore' 
-            # self.btnMaximize.setIcon(QIcon("restore.png"))
 
     def handle_nav_click(self, button, index):
         self.slide_to_page(index)
@@ -196,27 +196,22 @@ class Controller(QObject): # Controller inherits from QObject to handle events.
         if stack.currentIndex() == index:
             return
 
-        # 1. Setup variables
         current_page = stack.currentWidget()
         next_page = stack.widget(index)
         width = stack.width()
 
-        # 2. Prepare next page (move it to the right side off-screen)
         next_page.setGeometry(width, 0, width, stack.height())
         next_page.show()
         next_page.raise_()
 
-        # 3. Create Parallel Animations
         self.anim_group = QParallelAnimationGroup()
 
-        # Slide next page IN (from right to center)
         anim_in = QPropertyAnimation(next_page, b"pos")
         anim_in.setDuration(450)
         anim_in.setStartValue(QPoint(width, 0))
         anim_in.setEndValue(QPoint(0, 0))
         anim_in.setEasingCurve(QEasingCurve.Type.OutCubic)
 
-        # Slide current page OUT (from center to left)
         anim_out = QPropertyAnimation(current_page, b"pos")
         anim_out.setDuration(450)
         anim_out.setStartValue(QPoint(0, 0))
@@ -226,7 +221,6 @@ class Controller(QObject): # Controller inherits from QObject to handle events.
         self.anim_group.addAnimation(anim_in)
         self.anim_group.addAnimation(anim_out)
 
-        # 4. On finish, update the StackedWidget index to "reset" the layout
         self.anim_group.finished.connect(lambda: stack.setCurrentIndex(index))
         self.anim_group.start()
 
@@ -239,7 +233,6 @@ class Controller(QObject): # Controller inherits from QObject to handle events.
         self.login_win.txtPassword.clear()
 
     def load_fonts(self):
-        # Move up (..) from controller.py to access the "fonts" folder in the project root
         path = self.util.get_resource_path(os.path.join("..", "Fonts"))
         loaded_count = 0
 
@@ -248,7 +241,7 @@ class Controller(QObject): # Controller inherits from QObject to handle events.
                 if f.endswith((".ttf", ".otf")):
                     font_path = os.path.join(path, f)
                     font_id = QFontDatabase.addApplicationFont(font_path)
-                    
+
                     if font_id != -1:
                         loaded_count += 1
                     else:
@@ -261,8 +254,33 @@ class Controller(QObject): # Controller inherits from QObject to handle events.
         else:
             print(f"⚠️ Font directory not found at: {path}")
 
-    def display_section_info(self, studentid):
+    def get_dynamic_grading_period_dates(self):
+        today, base_year, next_year = self.util.get_dynamic_school_year_dates()
 
+        sql = """
+            SELECT gpid, gpname, startdate, enddate
+            FROM cai.tbl_grading_period;
+        """
+        quarters = self.db_tools.fetch_all(sql)
+
+        # Determine and display the active grading period
+        active_quarter = "Off-season / Break"
+
+        for row in quarters:
+            start_date = QDate.fromString(str(row['startdate']), "yyyy-MM-dd")
+            end_date = QDate.fromString(str(row['enddate']), "yyyy-MM-dd")
+
+            if start_date <= today <= end_date:
+                suffix = {1: "st", 2: "nd", 3: "rd"}.get(row['gpid'], "th")
+                active_quarter = f"{row['gpid']}{suffix} Grading Period"
+                self.GRADING_PERIOD = row['gpid']
+                break
+
+        self.ui.label_gradingperiod.setText(active_quarter)
+
+        return quarters
+
+    def display_section_info(self, studentid):
         if studentid:
             student = Student()
             result = student.retrieve_one_student_info(studentid)
@@ -282,40 +300,33 @@ class Controller(QObject): # Controller inherits from QObject to handle events.
                     self.ui.label_profilePic.setText("Invalid Image")
 
     def display_lessons(self):
-        layout = self.ui.verticalLayout_5 
-        
-        # Clear existing items
+        layout = self.ui.verticalLayout_5
+
         while layout.count():
             child = layout.takeAt(0)
             if child.widget():
                 child.widget().deleteLater()
 
         lessons = Lessons()
-        record = lessons.retrieve_lesson_info() 
+        record = lessons.retrieve_lesson_info()
 
         for row in record:
             lesson_id, chapter, lessonnum, gradingperiod, title, path_str, lessonimage, _ = row
-            
-            # Convert blob to Pixmap if exists
+
             pixmap = None
             if lessonimage:
                 img = QImage.fromData(bytes(lessonimage))
                 pixmap = QPixmap.fromImage(img)
 
             card = LessonCard(lesson_id, title, lessonnum, chapter, pixmap)
-            
-            # Connect the signal! 
             card.clicked.connect(self.handle_lesson_selection)
-            
-            # Add to layout
             layout.addWidget(card)
 
-        # Add a spacer at the bottom so cards stay at the top
         layout.addStretch()
 
     def displayQuiz(self):
         from App.Quiz import Quiz, QuizUtils
-        qUtils = QuizUtils()
+        qUtils = QuizUtils(self.GRADING_PERIOD)
         self.quiz_cards = []
 
         layout_id = self.ui.verticalLayout_7
@@ -327,18 +338,15 @@ class Controller(QObject): # Controller inherits from QObject to handle events.
             layout.setSpacing(5)
 
             while layout.count():
-                # takeAt removes the layout item, allowing access to the widget
                 item_to_remove = layout.takeAt(0)
                 widget = item_to_remove.widget()
-
                 if widget is not None:
-                    # deleteLater is safer than sip.delete for preventing crashes
                     widget.deleteLater()
 
         record_id, record_mc, record_tf = qUtils.retrieve_quiz()
 
         for row in record_id:
-            quiz = Quiz("ID") # Identification
+            quiz = Quiz("ID")
             quiz.idKey = row.get("idkey")
             quiz.quiznumber = row.get("quiznumber")
             quiz.gradingperiod = row.get("gradingperiod")
@@ -352,7 +360,7 @@ class Controller(QObject): # Controller inherits from QObject to handle events.
             layout_id.addWidget(quiz)
 
         for row in record_mc:
-            quiz = Quiz("MC") # Multiple Choice
+            quiz = Quiz("MC")
             quiz.idKey = row.get("mckey")
             quiz.quiznumber = row.get("quiznumber")
             quiz.gradingperiod = row.get("gradingperiod")
@@ -369,7 +377,7 @@ class Controller(QObject): # Controller inherits from QObject to handle events.
             layout_mc.addWidget(quiz)
 
         for row in record_tf:
-            quiz = Quiz("TF") # True or False
+            quiz = Quiz("TF")
             quiz.idKey = row.get("tfkey")
             quiz.quiznumber = row.get("quiznumber")
             quiz.gradingperiod = row.get("gradingperiod")
@@ -383,17 +391,16 @@ class Controller(QObject): # Controller inherits from QObject to handle events.
             layout_tf.addWidget(quiz)
 
     def save_quiz_answers(self):
-
         if not hasattr(self, 'quiz_cards') or not self.quiz_cards:
             return
-        
+
         from App.Quiz import QuizUtils
-        qUtils = QuizUtils()
+        qUtils = QuizUtils(self.GRADING_PERIOD)
 
         student_id = self.settings.value("studentid")
-        err = qUtils.save_quiz(student_id, self.quiz_cards)
+        success, message = qUtils.save_quiz(student_id, self.quiz_cards)
 
-        if err == 0:
+        if success:
             dialog = CustomShapeDialog("Good Job !!!", parent=self.home_win)
             dialog.exec()
 
@@ -401,16 +408,8 @@ class Controller(QObject): # Controller inherits from QObject to handle events.
         print(f"Selected Lesson ID: {lesson_id}")
 
     def open_game(self):
-        from App.Tools import WickPlayer  # Local import to avoid circular dependencies
-        
-        # Create the window instance. 
-        # We store it as 'self.game_window' so Python's garbage collector 
-        # doesn't delete it immediately after the function finishes.
+        from App.Tools import WickPlayer
         self.game_window = WickPlayer("multipleRooms3-26-2026_13-36-21.html")
-        
-        # Show the game window
         self.game_window.show()
 
-    
 
-  

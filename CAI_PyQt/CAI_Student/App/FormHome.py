@@ -39,6 +39,45 @@ class Ui_FormHome(object):
         self.horizontalLayout_2 = QHBoxLayout(self.widget_WindowsButtons)
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
         self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
+        self.label_gradingperiod = QLabel(self.widget_WindowsButtons)
+        self.label_gradingperiod.setObjectName(u"label_gradingperiod")
+        self.label_gradingperiod.setMinimumSize(QSize(170, 35))
+        self.label_gradingperiod.setMaximumSize(QSize(16777215, 35))
+        self.label_gradingperiod.setStyleSheet(u"#label_gradingperiod {\n"
+"	background-color: #361f1c;\n"
+"	color: rgb(249, 240, 107);\n"
+"	font: 12pt \"Inter SemiBold\";\n"
+"	border-radius: 15px;\n"
+"}")
+        self.label_gradingperiod.setAlignment(Qt.AlignCenter)
+        self.label_gradingperiod.setWordWrap(True)
+        self.label_gradingperiod.setMargin(0)
+        self.label_gradingperiod.setIndent(10)
+
+        self.horizontalLayout_2.addWidget(self.label_gradingperiod)
+
+        self.horizontalSpacer_14 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_2.addItem(self.horizontalSpacer_14)
+
+        self.label_gradingperiod_2 = QLabel(self.widget_WindowsButtons)
+        self.label_gradingperiod_2.setObjectName(u"label_gradingperiod_2")
+        self.label_gradingperiod_2.setMinimumSize(QSize(800, 35))
+        self.label_gradingperiod_2.setMaximumSize(QSize(16777215, 35))
+        self.label_gradingperiod_2.setStyleSheet(u"QLabel {\n"
+"	background-color: #361f1c;\n"
+"	color: #d8bb96; /*rgb(249, 240, 107);*/\n"
+"	font: 12pt \"Inter SemiBold\";\n"
+"	border-radius: 15px;\n"
+"	padding: 0px 10px;\n"
+"}")
+        self.label_gradingperiod_2.setAlignment(Qt.AlignCenter)
+        self.label_gradingperiod_2.setWordWrap(True)
+        self.label_gradingperiod_2.setMargin(0)
+        self.label_gradingperiod_2.setIndent(10)
+
+        self.horizontalLayout_2.addWidget(self.label_gradingperiod_2)
+
         self.horizontalSpacer_13 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_2.addItem(self.horizontalSpacer_13)
@@ -93,44 +132,75 @@ class Ui_FormHome(object):
         self.widget_left_panel.setAutoFillBackground(False)
         self.widget_left_panel.setStyleSheet(u"widget_left_panel { background-color: rgb(205, 171, 143); border-radius: 20px; background-image: url(:/Images/Images/wood_nav_bar.jpeg) 0 0 0 0 stretch stretch; }")
         self.verticalLayout = QVBoxLayout(self.widget_left_panel)
+        self.verticalLayout.setSpacing(17)
         self.verticalLayout.setObjectName(u"verticalLayout")
-        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
-        self.widget_4 = QWidget(self.widget_left_panel)
+        self.verticalLayout.setContentsMargins(0, 50, 0, 0)
+        self.widget_7 = QWidget(self.widget_left_panel)
+        self.widget_7.setObjectName(u"widget_7")
+        self.widget_7.setMinimumSize(QSize(210, 210))
+        self.widget_7.setStyleSheet(u"background-color: transparent;")
+        self.verticalLayout_15 = QVBoxLayout(self.widget_7)
+        self.verticalLayout_15.setSpacing(0)
+        self.verticalLayout_15.setObjectName(u"verticalLayout_15")
+        self.verticalLayout_15.setContentsMargins(0, 0, 0, 0)
+        self.widget_student_info = QWidget(self.widget_7)
+        self.widget_student_info.setObjectName(u"widget_student_info")
+        self.widget_student_info.setStyleSheet(u"#widget_student_info {\n"
+"	background-color: transparent;\n"
+"	border-bottom-right-radius: 15px;\n"
+"	border-bottom-left-radius: 15px;\n"
+"	border-image: url(:/Images/Images/background_361F1C.svg);\n"
+"}")
+        self.verticalLayout_13 = QVBoxLayout(self.widget_student_info)
+        self.verticalLayout_13.setSpacing(0)
+        self.verticalLayout_13.setObjectName(u"verticalLayout_13")
+        self.verticalLayout_13.setContentsMargins(9, 20, -1, 9)
+        self.widget_4 = QWidget(self.widget_student_info)
         self.widget_4.setObjectName(u"widget_4")
+        self.widget_4.setStyleSheet(u"")
         self.horizontalLayout_4 = QHBoxLayout(self.widget_4)
+        self.horizontalLayout_4.setSpacing(0)
         self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
-        self.horizontalLayout_4.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_4.setContentsMargins(0, 0, 0, 15)
         self.horizontalSpacer_2 = QSpacerItem(58, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_4.addItem(self.horizontalSpacer_2)
 
-        self.label_profilePic = QLabel(self.widget_4)
+        self.widget_3 = QWidget(self.widget_4)
+        self.widget_3.setObjectName(u"widget_3")
+        self.widget_3.setMinimumSize(QSize(210, 210))
+        self.widget_3.setMaximumSize(QSize(210, 210))
+        self.widget_3.setStyleSheet(u"background-color: #361f1c;\n"
+"border-radius: 105px;")
+        self.verticalLayout_14 = QVBoxLayout(self.widget_3)
+        self.verticalLayout_14.setSpacing(0)
+        self.verticalLayout_14.setObjectName(u"verticalLayout_14")
+        self.verticalLayout_14.setContentsMargins(5, 0, 0, 0)
+        self.label_profilePic = QLabel(self.widget_3)
         self.label_profilePic.setObjectName(u"label_profilePic")
         self.label_profilePic.setMinimumSize(QSize(200, 200))
         self.label_profilePic.setMaximumSize(QSize(200, 200))
         self.label_profilePic.setStyleSheet(u"background-color: transparent;")
-        self.label_profilePic.setPixmap(QPixmap(u":/Images/Images/no-image.png"))
+        self.label_profilePic.setPixmap(QPixmap(u":/Images/Images/student-user.png"))
         self.label_profilePic.setScaledContents(True)
+        self.label_profilePic.setAlignment(Qt.AlignCenter)
 
-        self.horizontalLayout_4.addWidget(self.label_profilePic)
+        self.verticalLayout_14.addWidget(self.label_profilePic)
+
+
+        self.horizontalLayout_4.addWidget(self.widget_3)
 
         self.horizontalSpacer_3 = QSpacerItem(58, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_4.addItem(self.horizontalSpacer_3)
 
 
-        self.verticalLayout.addWidget(self.widget_4)
+        self.verticalLayout_13.addWidget(self.widget_4)
 
-        self.widget_3 = QWidget(self.widget_left_panel)
-        self.widget_3.setObjectName(u"widget_3")
-        self.widget_3.setMinimumSize(QSize(0, 100))
-        self.widget_3.setStyleSheet(u"background-color: rgba(205, 171, 143, 0.5); border-radius: 15px;")
-        self.verticalLayout_13 = QVBoxLayout(self.widget_3)
-        self.verticalLayout_13.setObjectName(u"verticalLayout_13")
-        self.label_firstname = QLabel(self.widget_3)
+        self.label_firstname = QLabel(self.widget_student_info)
         self.label_firstname.setObjectName(u"label_firstname")
         self.label_firstname.setMinimumSize(QSize(0, 30))
-        self.label_firstname.setStyleSheet(u"#label_firstname { background-color: transparent; color: rgb(255, 255, 255); font: 50 20pt \"Kissy Hugs\"; }")
+        self.label_firstname.setStyleSheet(u"#label_firstname { background-color: transparent; color: rgb(255, 255, 255); font: 20pt \"Kissy Hugs\"; }")
         self.label_firstname.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.label_firstname.setWordWrap(True)
         self.label_firstname.setMargin(0)
@@ -138,7 +208,7 @@ class Ui_FormHome(object):
 
         self.verticalLayout_13.addWidget(self.label_firstname)
 
-        self.label_lastname = QLabel(self.widget_3)
+        self.label_lastname = QLabel(self.widget_student_info)
         self.label_lastname.setObjectName(u"label_lastname")
         self.label_lastname.setMinimumSize(QSize(0, 30))
         font = QFont()
@@ -147,36 +217,39 @@ class Ui_FormHome(object):
         font.setBold(False)
         font.setItalic(False)
         self.label_lastname.setFont(font)
-        self.label_lastname.setStyleSheet(u"#label_lastname { background-color: transparent; font: 50 15pt \"Kissy Hugs\"; color: rgb(255, 255, 255); }")
+        self.label_lastname.setStyleSheet(u"#label_lastname { background-color: transparent; font: 15pt \"Kissy Hugs\"; color: rgb(255, 255, 255); }")
         self.label_lastname.setWordWrap(True)
         self.label_lastname.setMargin(0)
         self.label_lastname.setIndent(10)
 
         self.verticalLayout_13.addWidget(self.label_lastname)
 
-        self.label_studentId = QLabel(self.widget_3)
+        self.label_studentId = QLabel(self.widget_student_info)
         self.label_studentId.setObjectName(u"label_studentId")
         self.label_studentId.setMinimumSize(QSize(0, 30))
         font1 = QFont()
         font1.setFamilies([u"Inter SemiBold"])
         font1.setPointSize(11)
         self.label_studentId.setFont(font1)
-        self.label_studentId.setStyleSheet(u"background-color: transparent; color: rgb(255, 255, 255);")
+        self.label_studentId.setStyleSheet(u"background-color: transparent; color: #d8bb96;")
         self.label_studentId.setIndent(10)
 
         self.verticalLayout_13.addWidget(self.label_studentId)
 
-        self.label_sectionName = QLabel(self.widget_3)
+        self.label_sectionName = QLabel(self.widget_student_info)
         self.label_sectionName.setObjectName(u"label_sectionName")
         self.label_sectionName.setMinimumSize(QSize(0, 30))
         self.label_sectionName.setFont(font1)
-        self.label_sectionName.setStyleSheet(u"background-color: transparent; color: rgb(255, 255, 255);")
+        self.label_sectionName.setStyleSheet(u"background-color: transparent; color: #d8bb96;")
         self.label_sectionName.setIndent(10)
 
         self.verticalLayout_13.addWidget(self.label_sectionName)
 
 
-        self.verticalLayout.addWidget(self.widget_3)
+        self.verticalLayout_15.addWidget(self.widget_student_info)
+
+
+        self.verticalLayout.addWidget(self.widget_7)
 
         self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
@@ -184,10 +257,7 @@ class Ui_FormHome(object):
 
         self.widget_5 = QWidget(self.widget_left_panel)
         self.widget_5.setObjectName(u"widget_5")
-        self.widget_5.setStyleSheet(u"#widget_5 {\n"
-"	background-color: rgba(205, 171, 143, 0.5);\n"
-"	border-radius: 15px;\n"
-"}")
+        self.widget_5.setStyleSheet(u"")
         self.horizontalLayout_5 = QHBoxLayout(self.widget_5)
         self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
         self.horizontalSpacer_4 = QSpacerItem(53, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
@@ -289,7 +359,11 @@ class Ui_FormHome(object):
 
         self.stackedWidget = QStackedWidget(self.widget_right_panel)
         self.stackedWidget.setObjectName(u"stackedWidget")
-        self.stackedWidget.setStyleSheet(u"#stackedWidget { background-color: rgb(225, 208, 195); border-radius: 20px; background-image: url(:/Images/Images/wood_nav_bar_H.jpeg) 0 0 0 0 stretch stretch; }")
+        self.stackedWidget.setStyleSheet(u"#stackedWidget {\n"
+"	background-color: #361f1c;\n"
+"	border-radius: 20px;\n"
+"	background-image: url(:/Images/Images/wood_nav_bar_H.jpeg) 0 0 0 0 stretch stretch;\n"
+"}")
         self.pageLessons = QWidget()
         self.pageLessons.setObjectName(u"pageLessons")
         self.pageLessons.setStyleSheet(u"border-radius: 20px; background-color: transparent;")
@@ -499,7 +573,7 @@ class Ui_FormHome(object):
         self.scrollArea_id.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 18, 18))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 100, 30))
         self.verticalLayout_7 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_7.setObjectName(u"verticalLayout_7")
         self.scrollArea_id.setWidget(self.scrollAreaWidgetContents)
@@ -614,7 +688,7 @@ class Ui_FormHome(object):
         self.scrollArea_mc.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 18, 18))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 100, 30))
         self.verticalLayout_8 = QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_8.setObjectName(u"verticalLayout_8")
         self.scrollArea_mc.setWidget(self.scrollAreaWidgetContents_2)
@@ -729,7 +803,7 @@ class Ui_FormHome(object):
         self.scrollArea_tf.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 18, 18))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 100, 30))
         self.verticalLayout_9 = QVBoxLayout(self.scrollAreaWidgetContents_3)
         self.verticalLayout_9.setObjectName(u"verticalLayout_9")
         self.scrollArea_tf.setWidget(self.scrollAreaWidgetContents_3)
@@ -896,6 +970,8 @@ class Ui_FormHome(object):
 
     def retranslateUi(self, FormHome):
         FormHome.setWindowTitle(QCoreApplication.translate("FormHome", u"Home", None))
+        self.label_gradingperiod.setText(QCoreApplication.translate("FormHome", u"Grading Period", None))
+        self.label_gradingperiod_2.setText(QCoreApplication.translate("FormHome", u"Computer-Aided Instructions System in Mathematics for the Grade 1 Students of La Camelle School", None))
         self.btnMinimize.setText("")
         self.btnMaximize.setText("")
         self.btnClose.setText("")

@@ -1,6 +1,6 @@
 import os, sys, subprocess
 
-from PySide6.QtWidgets import QVBoxLayout, QHBoxLayout, QLabel, QFrame, QFileDialog, QWidget, QMainWindow, QDialog, QComboBox, QMessageBox
+from PySide6.QtWidgets import QVBoxLayout, QHBoxLayout, QLabel, QFrame, QFileDialog, QWidget, QMainWindow, QDialog, QComboBox
 from PySide6.QtGui import QPixmap, QPainter, QColor, QPen, QPainterPath, QFont
 from PySide6.QtCore import Qt, Signal, QDate, QUrl, QRectF
 from PySide6.QtWebEngineWidgets import QWebEngineView
@@ -126,7 +126,7 @@ class Utility:
         painter.end()
         return target
 
-    def populate_pulldown(self, pulldown, sql:str, params:tuple=None, add_empty:bool=False):
+    def populate_pulldown(self, pulldown, sql:str, params:tuple=None, default_value=None, add_empty:bool=False):
         """
         Fetches records from the database and populates a QComboBox (pulldown).
 
@@ -154,6 +154,12 @@ class Utility:
                 for idx, item in cur:
                     pulldown.addItem(str(item), idx)
 
+                if default_value:
+                    idx = pulldown.findData(default_value)
+
+                    if idx != -1:
+                        pulldown.setCurrentIndex(idx)
+
         except Exception as e:
             print(f"[Error] populate_pulldown(): {e}")
 
@@ -161,12 +167,12 @@ class Utility:
             if conn:
                 conn.close()
 
-    def populate_pulldowns(self, pulldown_gradingPeroid, pulldown_lessons=None):
+    def populate_gradingperiod_pulldown(self, pulldown_gradingPeroid, pulldown_lessons=None, default_gp=None):
         sql =  """
             SELECT gpid, gpname
 	        FROM cai.tbl_grading_period;
         """
-        self.populate_pulldown(pulldown_gradingPeroid, sql)
+        self.populate_pulldown(pulldown_gradingPeroid, sql, default_value=default_gp)
 
         if not pulldown_lessons:
             return
@@ -186,15 +192,12 @@ class Utility:
         self.populate_pulldown(pulldown_lessons, sql, params=(gpid,), add_empty=True)
 
     def isEmpty(self, val):
-        """Evaluate if val is NONE, NULL, 'N/A', or ''"""
-        # 1. Handle None or empty objects immediately
+        """Evaluate if val is NONE, NULL, 'N/A', or empty string."""
         if val is None or not str(val).strip():
             return True
 
-        # 2. Convert to string and clean it
         clean_val = str(val).strip().upper()
 
-        # 3. Check against forbidden keywords
         if clean_val in ['NONE', 'NULL', 'N/A', '']:
             return True
 

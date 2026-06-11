@@ -1,10 +1,8 @@
 import os
 import psycopg2
 
-from PySide6.QtGui import QStandardItemModel, QStandardItem, QImage, QPixmap, QKeySequence, QShortcut
-from PySide6.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout,
-                             QHBoxLayout, QLabel, QLineEdit, QComboBox,
-                             QSpinBox, QPushButton, QScrollArea, QButtonGroup,
+from PySide6.QtGui import QStandardItemModel, QStandardItem, QImage, QPixmap, QKeySequence, QShortcut, QColor, QBrush
+from PySide6.QtWidgets import (QHBoxLayout, QLabel, QLineEdit, QButtonGroup,
                              QMessageBox, QFileDialog, QFrame, QDialog)
 from PySide6.QtCore import Qt, QSize, Signal
 
@@ -322,6 +320,8 @@ class Quiz:
             _, _, _, total_score = self.getQuizTotalScore(quiznumber, gradingperiod, lessonid)
             score_str = f"{row_data['quizscore']}/{total_score}" if row_data['quizscore'] and total_score else ""
 
+            is_taken = row_data['quiz_status'] == 'Taken'
+
             row_items = [
                 QStandardItem(row_data['studentid']),
                 QStandardItem(row_data['lastname']),
@@ -336,6 +336,9 @@ class Quiz:
 
                 if col_idx in [0, 3, 4, 5]:
                     item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+
+                if is_taken:
+                    item.setData(QBrush(QColor(145, 234, 168, 190)), Qt.BackgroundRole)
 
                 model.setItem(row_idx, col_idx, item)
 

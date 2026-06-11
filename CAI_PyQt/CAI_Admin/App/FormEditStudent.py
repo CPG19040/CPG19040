@@ -51,26 +51,44 @@ class Ui_EditStudentDialog(object):
 "    border: 1px solid #95a5a6;\n"
 "}\n"
 "\n"
-"QLineEdit {\n"
-"	background-color: rgb(255, 255, 255); \n"
-"	border-radius: 15px;\n"
-"	border: 1px solid #999;\n"
-"	padding: 0px 15px;\n"
+"*[class=\"input-field\"] {\n"
+"	background-color: transparent;\n"
+"}\n"
+"\n"
+"*[class=\"input-field\"] QLineEdit {\n"
+"	background-color: #ffffff;\n"
+"	border: 1px solid #ABABAB;\n"
+"	border-left: none;\n"
+"	border-top-right-radius: 15px;\n"
+"	border-bottom-right-radius: 15px;\n"
+"	padding: 0px 8px;\n"
+"	color: black;\n"
+"}\n"
+"\n"
+"*[class=\"input-field\"] QLabel {\n"
+"	background-color: rgb(192, 191, 188);\n"
+"	border-right: none;\n"
+"	border-top-left-radius: 15px;\n"
+"	border-bottom-left-radius: 15px;\n"
+"	padding-le"
+                        "ft: 8px;\n"
+"	color: black;\n"
 "}\n"
 "\n"
 "QComboBox {\n"
 "    border: 1px solid #999;\n"
-"    border-radius: 15px; /* Fully rounded pills */\n"
-"    padding: 0px 15px 0px;\n"
-"    background-color: #ffffff;\n"
-"    color: #333333;\n"
-"    font: 10pt \"Inter Medium\"; /* Consolidated font settings */\n"
-"    selection-background-color: #7eb4d7;\n"
+"	border-left: none;\n"
+"	border-top-right-radius: 15px;\n"
+"	border-bottom-right-radius: 15px;\n"
+"	padding: 0px 15px 0px;\n"
+"	background-color: #ffffff;\n"
+"	color: #333333;\n"
+"	font: 10pt \"Inter Medium\"; /* Consolidated font settings */\n"
+"	selection-background-color: #7eb4d7;\n"
 "}\n"
 "\n"
 "QComboBox:focus, QLineEdit:focus {\n"
-"    border: 1px s"
-                        "olid #007BFF;\n"
+"    border: 1px solid #007BFF;\n"
 "}\n"
 "\n"
 "QComboBox:hover, QLineEdit:hover {\n"
@@ -94,7 +112,8 @@ class Ui_EditStudentDialog(object):
 "    height: 8px;\n"
 "}\n"
 "\n"
-"QComboBox QAbstractItemView {\n"
+""
+                        "QComboBox QAbstractItemView {\n"
 "    background-color: white !important;\n"
 "    border: 1px solid #999;\n"
 "    selection-background-color: #7eb4d7;\n"
@@ -109,8 +128,7 @@ class Ui_EditStudentDialog(object):
 "}\n"
 "\n"
 "/* Hover state for items inside the dropdown */\n"
-"Q"
-                        "ComboBox QAbstractItemView::item:hover {\n"
+"QComboBox QAbstractItemView::item:hover {\n"
 "    background-color: #7eb4d7;\n"
 "    color: #ffffff;\n"
 "}\n"
@@ -135,7 +153,8 @@ class Ui_EditStudentDialog(object):
 "}\n"
 "\n"
 "QSpinBox::up-button {\n"
-"    subcontrol-origin: border;\n"
+"    subcontrol-origin: bord"
+                        "er;\n"
 "    subcontrol-position: top right;\n"
 "    width: 8px;\n"
 "    height: 8px;\n"
@@ -151,8 +170,7 @@ class Ui_EditStudentDialog(object):
 "    height: 8px;\n"
 "    border-bottom-right-radius: 15px;\n"
 "    padding: 6px 10px 6px 2px;\n"
-"	color: rgb(119,"
-                        " 118, 123);\n"
+"	color: rgb(119, 118, 123);\n"
 "}\n"
 "\n"
 "QSpinBox::up-arrow {\n"
@@ -233,8 +251,8 @@ class Ui_EditStudentDialog(object):
         self.widget_2 = QWidget(EditStudentDialog)
         self.widget_2.setObjectName(u"widget_2")
         self.widget_2.setStyleSheet(u"")
-        self.formLayout_2 = QFormLayout(self.widget_2)
-        self.formLayout_2.setObjectName(u"formLayout_2")
+        self.formLayout = QFormLayout(self.widget_2)
+        self.formLayout.setObjectName(u"formLayout")
         self.widget = QWidget(self.widget_2)
         self.widget.setObjectName(u"widget")
         self.gridLayout = QGridLayout(self.widget)
@@ -262,74 +280,131 @@ class Ui_EditStudentDialog(object):
         self.gridLayout.addItem(self.verticalSpacer_2, 2, 0, 1, 1)
 
 
-        self.formLayout_2.setWidget(1, QFormLayout.ItemRole.LabelRole, self.widget)
+        self.formLayout.setWidget(0, QFormLayout.ItemRole.LabelRole, self.widget)
 
         self.widget_form = QWidget(self.widget_2)
         self.widget_form.setObjectName(u"widget_form")
         self.widget_form.setEnabled(True)
         self.widget_form.setStyleSheet(u"QWidget:disabled { color: rgba(0, 0, 0, 50); /* Very faded text */ background-color: rgba(200, 200, 200, 0); /* Faded background */}")
-        self.formLayout = QFormLayout(self.widget_form)
-        self.formLayout.setObjectName(u"formLayout")
-        self.formLayout.setContentsMargins(0, 0, 0, 0)
-        self.label_8 = QLabel(self.widget_form)
+        self.verticalLayout_2 = QVBoxLayout(self.widget_form)
+        self.verticalLayout_2.setSpacing(0)
+        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
+        self.widget_4 = QWidget(self.widget_form)
+        self.widget_4.setObjectName(u"widget_4")
+        self.horizontalLayout = QHBoxLayout(self.widget_4)
+        self.horizontalLayout.setSpacing(0)
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
+        self.label_8 = QLabel(self.widget_4)
         self.label_8.setObjectName(u"label_8")
+        self.label_8.setMinimumSize(QSize(100, 30))
+        self.label_8.setMaximumSize(QSize(16777215, 30))
+        self.label_8.setAlignment(Qt.AlignCenter)
 
-        self.formLayout.setWidget(0, QFormLayout.ItemRole.LabelRole, self.label_8)
+        self.horizontalLayout.addWidget(self.label_8)
 
-        self.txtFirstName = QLineEdit(self.widget_form)
+        self.txtFirstName = QLineEdit(self.widget_4)
         self.txtFirstName.setObjectName(u"txtFirstName")
         self.txtFirstName.setMinimumSize(QSize(0, 30))
         self.txtFirstName.setMaximumSize(QSize(16777215, 30))
         self.txtFirstName.setStyleSheet(u"")
 
-        self.formLayout.setWidget(0, QFormLayout.ItemRole.FieldRole, self.txtFirstName)
+        self.horizontalLayout.addWidget(self.txtFirstName)
 
-        self.label_9 = QLabel(self.widget_form)
+
+        self.verticalLayout_2.addWidget(self.widget_4)
+
+        self.widget_5 = QWidget(self.widget_form)
+        self.widget_5.setObjectName(u"widget_5")
+        self.horizontalLayout_3 = QHBoxLayout(self.widget_5)
+        self.horizontalLayout_3.setSpacing(0)
+        self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
+        self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
+        self.label_9 = QLabel(self.widget_5)
         self.label_9.setObjectName(u"label_9")
+        self.label_9.setMinimumSize(QSize(100, 30))
+        self.label_9.setMaximumSize(QSize(16777215, 30))
+        self.label_9.setAlignment(Qt.AlignCenter)
 
-        self.formLayout.setWidget(1, QFormLayout.ItemRole.LabelRole, self.label_9)
+        self.horizontalLayout_3.addWidget(self.label_9)
 
-        self.txtMiddleName = QLineEdit(self.widget_form)
+        self.txtMiddleName = QLineEdit(self.widget_5)
         self.txtMiddleName.setObjectName(u"txtMiddleName")
         self.txtMiddleName.setMinimumSize(QSize(0, 30))
         self.txtMiddleName.setMaximumSize(QSize(16777215, 30))
         self.txtMiddleName.setStyleSheet(u"")
 
-        self.formLayout.setWidget(1, QFormLayout.ItemRole.FieldRole, self.txtMiddleName)
+        self.horizontalLayout_3.addWidget(self.txtMiddleName)
 
-        self.label_10 = QLabel(self.widget_form)
+
+        self.verticalLayout_2.addWidget(self.widget_5)
+
+        self.widget_6 = QWidget(self.widget_form)
+        self.widget_6.setObjectName(u"widget_6")
+        self.horizontalLayout_5 = QHBoxLayout(self.widget_6)
+        self.horizontalLayout_5.setSpacing(0)
+        self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
+        self.horizontalLayout_5.setContentsMargins(0, 0, 0, 0)
+        self.label_10 = QLabel(self.widget_6)
         self.label_10.setObjectName(u"label_10")
+        self.label_10.setMinimumSize(QSize(100, 30))
+        self.label_10.setMaximumSize(QSize(16777215, 30))
+        self.label_10.setAlignment(Qt.AlignCenter)
 
-        self.formLayout.setWidget(2, QFormLayout.ItemRole.LabelRole, self.label_10)
+        self.horizontalLayout_5.addWidget(self.label_10)
 
-        self.txtLastName = QLineEdit(self.widget_form)
+        self.txtLastName = QLineEdit(self.widget_6)
         self.txtLastName.setObjectName(u"txtLastName")
         self.txtLastName.setMinimumSize(QSize(0, 30))
         self.txtLastName.setMaximumSize(QSize(16777215, 30))
         self.txtLastName.setStyleSheet(u"")
 
-        self.formLayout.setWidget(2, QFormLayout.ItemRole.FieldRole, self.txtLastName)
+        self.horizontalLayout_5.addWidget(self.txtLastName)
 
-        self.label_11 = QLabel(self.widget_form)
+
+        self.verticalLayout_2.addWidget(self.widget_6)
+
+        self.widget_7 = QWidget(self.widget_form)
+        self.widget_7.setObjectName(u"widget_7")
+        self.horizontalLayout_6 = QHBoxLayout(self.widget_7)
+        self.horizontalLayout_6.setSpacing(0)
+        self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
+        self.horizontalLayout_6.setContentsMargins(0, 0, 0, 0)
+        self.label_11 = QLabel(self.widget_7)
         self.label_11.setObjectName(u"label_11")
+        self.label_11.setMinimumSize(QSize(100, 30))
+        self.label_11.setMaximumSize(QSize(100, 30))
+        self.label_11.setAlignment(Qt.AlignCenter)
 
-        self.formLayout.setWidget(3, QFormLayout.ItemRole.LabelRole, self.label_11)
+        self.horizontalLayout_6.addWidget(self.label_11)
 
-        self.cmbSection = QComboBox(self.widget_form)
+        self.cmbSection = QComboBox(self.widget_7)
         self.cmbSection.setObjectName(u"cmbSection")
         self.cmbSection.setMinimumSize(QSize(0, 30))
         self.cmbSection.setMaximumSize(QSize(16777215, 30))
         self.cmbSection.setStyleSheet(u"")
         self.cmbSection.setEditable(False)
 
-        self.formLayout.setWidget(3, QFormLayout.ItemRole.FieldRole, self.cmbSection)
+        self.horizontalLayout_6.addWidget(self.cmbSection)
 
-        self.label_13 = QLabel(self.widget_form)
+
+        self.verticalLayout_2.addWidget(self.widget_7)
+
+        self.widget_8 = QWidget(self.widget_form)
+        self.widget_8.setObjectName(u"widget_8")
+        self.horizontalLayout_7 = QHBoxLayout(self.widget_8)
+        self.horizontalLayout_7.setSpacing(0)
+        self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
+        self.horizontalLayout_7.setContentsMargins(0, 0, 0, 0)
+        self.label_13 = QLabel(self.widget_8)
         self.label_13.setObjectName(u"label_13")
+        self.label_13.setMinimumSize(QSize(100, 30))
+        self.label_13.setMaximumSize(QSize(100, 30))
+        self.label_13.setAlignment(Qt.AlignCenter)
 
-        self.formLayout.setWidget(4, QFormLayout.ItemRole.LabelRole, self.label_13)
+        self.horizontalLayout_7.addWidget(self.label_13)
 
-        self.cmbGender = QComboBox(self.widget_form)
+        self.cmbGender = QComboBox(self.widget_8)
         self.cmbGender.addItem("")
         self.cmbGender.addItem("")
         self.cmbGender.setObjectName(u"cmbGender")
@@ -338,10 +413,13 @@ class Ui_EditStudentDialog(object):
         self.cmbGender.setStyleSheet(u"")
         self.cmbGender.setEditable(False)
 
-        self.formLayout.setWidget(4, QFormLayout.ItemRole.FieldRole, self.cmbGender)
+        self.horizontalLayout_7.addWidget(self.cmbGender)
 
 
-        self.formLayout_2.setWidget(1, QFormLayout.ItemRole.FieldRole, self.widget_form)
+        self.verticalLayout_2.addWidget(self.widget_8)
+
+
+        self.formLayout.setWidget(0, QFormLayout.ItemRole.FieldRole, self.widget_form)
 
 
         self.verticalLayout.addWidget(self.widget_2)
@@ -367,33 +445,58 @@ class Ui_EditStudentDialog(object):
         self.widget_form_2.setObjectName(u"widget_form_2")
         self.widget_form_2.setEnabled(True)
         self.widget_form_2.setStyleSheet(u"")
-        self.formLayout_3 = QFormLayout(self.widget_form_2)
-        self.formLayout_3.setObjectName(u"formLayout_3")
-        self.txtContactPerson = QLineEdit(self.widget_form_2)
+        self.verticalLayout_3 = QVBoxLayout(self.widget_form_2)
+        self.verticalLayout_3.setObjectName(u"verticalLayout_3")
+        self.widget_9 = QWidget(self.widget_form_2)
+        self.widget_9.setObjectName(u"widget_9")
+        self.horizontalLayout_8 = QHBoxLayout(self.widget_9)
+        self.horizontalLayout_8.setSpacing(0)
+        self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
+        self.horizontalLayout_8.setContentsMargins(0, 0, 0, 0)
+        self.label_22 = QLabel(self.widget_9)
+        self.label_22.setObjectName(u"label_22")
+        self.label_22.setMinimumSize(QSize(130, 30))
+        self.label_22.setMaximumSize(QSize(130, 30))
+        self.label_22.setAlignment(Qt.AlignCenter)
+
+        self.horizontalLayout_8.addWidget(self.label_22)
+
+        self.txtContactPerson = QLineEdit(self.widget_9)
         self.txtContactPerson.setObjectName(u"txtContactPerson")
         self.txtContactPerson.setMinimumSize(QSize(0, 30))
         self.txtContactPerson.setMaximumSize(QSize(16777215, 30))
         self.txtContactPerson.setStyleSheet(u"")
 
-        self.formLayout_3.setWidget(1, QFormLayout.ItemRole.FieldRole, self.txtContactPerson)
+        self.horizontalLayout_8.addWidget(self.txtContactPerson)
 
-        self.label_23 = QLabel(self.widget_form_2)
+
+        self.verticalLayout_3.addWidget(self.widget_9)
+
+        self.widget_10 = QWidget(self.widget_form_2)
+        self.widget_10.setObjectName(u"widget_10")
+        self.horizontalLayout_9 = QHBoxLayout(self.widget_10)
+        self.horizontalLayout_9.setSpacing(0)
+        self.horizontalLayout_9.setObjectName(u"horizontalLayout_9")
+        self.horizontalLayout_9.setContentsMargins(0, 0, 0, 0)
+        self.label_23 = QLabel(self.widget_10)
         self.label_23.setObjectName(u"label_23")
+        self.label_23.setMinimumSize(QSize(130, 30))
+        self.label_23.setMaximumSize(QSize(130, 30))
+        self.label_23.setAlignment(Qt.AlignCenter)
 
-        self.formLayout_3.setWidget(2, QFormLayout.ItemRole.LabelRole, self.label_23)
+        self.horizontalLayout_9.addWidget(self.label_23)
 
-        self.txtContactNum = QLineEdit(self.widget_form_2)
+        self.txtContactNum = QLineEdit(self.widget_10)
         self.txtContactNum.setObjectName(u"txtContactNum")
         self.txtContactNum.setMinimumSize(QSize(0, 30))
         self.txtContactNum.setMaximumSize(QSize(16777215, 30))
         self.txtContactNum.setStyleSheet(u"")
+        self.txtContactNum.setClearButtonEnabled(False)
 
-        self.formLayout_3.setWidget(2, QFormLayout.ItemRole.FieldRole, self.txtContactNum)
+        self.horizontalLayout_9.addWidget(self.txtContactNum)
 
-        self.label_22 = QLabel(self.widget_form_2)
-        self.label_22.setObjectName(u"label_22")
 
-        self.formLayout_3.setWidget(1, QFormLayout.ItemRole.LabelRole, self.label_22)
+        self.verticalLayout_3.addWidget(self.widget_10)
 
 
         self.verticalLayout.addWidget(self.widget_form_2)
@@ -415,7 +518,12 @@ class Ui_EditStudentDialog(object):
         self.txtPassword.setObjectName(u"txtPassword")
         self.txtPassword.setMinimumSize(QSize(0, 30))
         self.txtPassword.setMaximumSize(QSize(16777215, 30))
-        self.txtPassword.setStyleSheet(u"")
+        self.txtPassword.setStyleSheet(u"QLineEdit {\n"
+"	background-color: rgb(255, 255, 255);\n"
+"	border-radius: 15px;\n"
+"	border: 1px solid #999;\n"
+"	padding: 0px 15px;\n"
+"}")
         self.txtPassword.setEchoMode(QLineEdit.PasswordEchoOnEdit)
 
         self.verticalLayout.addWidget(self.txtPassword)
@@ -471,17 +579,25 @@ class Ui_EditStudentDialog(object):
         self.label_profile_pic.setText("")
         self.btnUploadPhoto.setText(QCoreApplication.translate("EditStudentDialog", u"Update photo", None))
         self.btnUploadPhoto.setProperty(u"class", QCoreApplication.translate("EditStudentDialog", u"button-normal", None))
+        self.widget_4.setProperty(u"class", QCoreApplication.translate("EditStudentDialog", u"input-field", None))
         self.label_8.setText(QCoreApplication.translate("EditStudentDialog", u"First name", None))
+        self.widget_5.setProperty(u"class", QCoreApplication.translate("EditStudentDialog", u"input-field", None))
         self.label_9.setText(QCoreApplication.translate("EditStudentDialog", u"Middle name", None))
+        self.widget_6.setProperty(u"class", QCoreApplication.translate("EditStudentDialog", u"input-field", None))
         self.label_10.setText(QCoreApplication.translate("EditStudentDialog", u"Last name", None))
+        self.widget_7.setProperty(u"class", QCoreApplication.translate("EditStudentDialog", u"input-field", None))
         self.label_11.setText(QCoreApplication.translate("EditStudentDialog", u"Section", None))
+        self.widget_8.setProperty(u"class", QCoreApplication.translate("EditStudentDialog", u"input-field", None))
         self.label_13.setText(QCoreApplication.translate("EditStudentDialog", u"Gender", None))
         self.cmbGender.setItemText(0, QCoreApplication.translate("EditStudentDialog", u"Male", None))
         self.cmbGender.setItemText(1, QCoreApplication.translate("EditStudentDialog", u"Female", None))
 
         self.label_24.setText(QCoreApplication.translate("EditStudentDialog", u"Emergency contact", None))
-        self.label_23.setText(QCoreApplication.translate("EditStudentDialog", u"Contact Number", None))
+        self.widget_9.setProperty(u"class", QCoreApplication.translate("EditStudentDialog", u"input-field", None))
         self.label_22.setText(QCoreApplication.translate("EditStudentDialog", u"Contact Person", None))
+        self.widget_10.setProperty(u"class", QCoreApplication.translate("EditStudentDialog", u"input-field", None))
+        self.label_23.setText(QCoreApplication.translate("EditStudentDialog", u"Contact Number", None))
+        self.txtContactNum.setInputMask(QCoreApplication.translate("EditStudentDialog", u"0999 999 9999;*", None))
         self.label_25.setText(QCoreApplication.translate("EditStudentDialog", u"Change Password", None))
         self.txtPassword.setPlaceholderText(QCoreApplication.translate("EditStudentDialog", u"Enter new password", None))
         self.btnCancel.setText(QCoreApplication.translate("EditStudentDialog", u"Cancel", None))
