@@ -31,22 +31,61 @@
 	color: black;
 }
 
+QPushButton[class=&quot;button-green&quot;] {
+	border: 1px solid #0a5128;
+    border-radius: 15px;
+    padding: 0px 10px 0px;
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
+                                stop:0 #1ebd5d, 
+                                stop:1 #107f3f);
+    color: #FFF;
+    font: 10pt &quot;Inter SemiBold&quot;;
+}
+
+QPushButton[class=&quot;button-green&quot;]:hover {
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
+                                stop:0 #2ecc71, 
+                                stop:1 #27AE60);
+}
+
+QPushButton[class=&quot;button-green&quot;]:pressed {
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
+                                stop:0 #0b572a, 
+                                stop:1 #129046); 
+}
+
+QPushButton[class=&quot;button-green&quot;]:disabled {
+    background: #A5D6A7;
+    color: #E8F5E9;
+    opacity: 0.6;
+}
+
 *[class=&quot;button-normal&quot;] {
 	font: 10pt &quot;Inter&quot;;
-	background-color: #e7e7e7;
+	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
+                                stop:0 #ffffff, 
+                                stop:1 #d8ecf6);
 	color: black;
 	border-radius: 15px;
 	border: 1px solid rgb(154, 153, 150);
 }
 
 *[class=&quot;button-normal&quot;]:hover {
-	background-color: white;
+	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
+                                stop:0 #ffffff, 
+                                stop:1 #f2f6f8);
+}
+
+*[class=&quot;button-normal&quot;]:pressed {
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
+                                stop:0 #dce5e9, 
+                                stop:1 #ffffff);
 }
 
 *[class=&quot;button-normal&quot;]:disabled {
-    background-color: #bdc3c7;
-    color: #7f8c8d;
-    border: 1px solid #95a5a6;
+	background: #f5f5f5;
+	border: 1px solid #dcdcdc;
+	color: #aeaeae;
 }
 
 *[class=&quot;input-field&quot;] {
@@ -1054,7 +1093,7 @@ QSpinBox::down-arrow {
         <bool>true</bool>
        </property>
        <property name="class" stdset="0">
-        <string>button-normal</string>
+        <string>button-green</string>
        </property>
       </widget>
      </item>

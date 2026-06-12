@@ -17,11 +17,11 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QAbstractItemView, QAbstractScrollArea, QApplication, QCheckBox,
     QComboBox, QDateEdit, QFormLayout, QFrame,
-    QGridLayout, QGroupBox, QHBoxLayout, QHeaderView,
-    QLabel, QLineEdit, QMainWindow, QPlainTextEdit,
-    QPushButton, QScrollArea, QSizePolicy, QSpacerItem,
-    QSpinBox, QStackedWidget, QTabWidget, QTableView,
-    QVBoxLayout, QWidget)
+    QGridLayout, QHBoxLayout, QHeaderView, QLabel,
+    QLineEdit, QMainWindow, QPlainTextEdit, QPushButton,
+    QScrollArea, QSizePolicy, QSpacerItem, QSpinBox,
+    QStackedWidget, QTabWidget, QTableView, QVBoxLayout,
+    QWidget)
 import resources_rc
 
 class Ui_Home(object):
@@ -52,42 +52,70 @@ class Ui_Home(object):
 "	padding: 0px 12px;\n"
 "}\n"
 "\n"
-"*[class=\"button-green\"] {\n"
+"QPushButton[class=\"button-green\"] {\n"
+"	border: 1px solid #0a5128;\n"
 "    border-radius: 15px;\n"
 "    padding: 0px 10px 0px;\n"
-"    background: #129046;\n"
+"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
+"                                stop:0 #1ebd5d, \n"
+"                                stop:1 #107f3f);\n"
 "    color: #FFF;\n"
-"	font: 10pt \"Inter SemiBold\";\n"
+"    font: 10pt \"Inter SemiBold\";\n"
 "}\n"
 "\n"
-"*[class=\"button-green\"]:hover {\n"
-"    background: #27AE60;\n"
+"QPushButton[class=\"button-green\"]:hover {\n"
+"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
+"                                stop:0 #2ecc71, \n"
+"                                stop:1 #27AE60);\n"
+"}\n"
+"\n"
+"QPushButton[class=\"button-green\"]:pressed {\n"
+"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
+"                                stop:0 #0b572a, \n"
+"                        "
+                        "        stop:1 #129046); \n"
+"}\n"
+"\n"
+"QPushButton[class=\"button-green\"]:disabled {\n"
+"    background: #A5D6A7;\n"
+"    color: #E8F5E9;\n"
+"    opacity: 0.6;\n"
 "}\n"
 "\n"
 "*[class=\"button-normal\"] {\n"
 "	font: 10pt \"Inter\";\n"
-"	background-color: #e7e7e7;\n"
+"	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
+"                                stop:0 #ffffff, \n"
+"                                stop:1 #d8ecf6);\n"
 "	color: black;\n"
 "	border-radius: 15px;\n"
 "	border: 1px solid rgb(154, 153, 150);\n"
 "}\n"
 "\n"
 "*[class=\"button-normal\"]:hover {\n"
-"	background-color: white;\n"
+"	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
+"                                stop:0 #ffffff, \n"
+"                                stop:1 #f2f6f8);\n"
+"}\n"
+"\n"
+"*[class=\"button-normal\"]:pressed {\n"
+"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
+"                                stop:0 #dce5e9, \n"
+"                                stop:1 #ffffff);\n"
 "}\n"
 "\n"
 "*[class=\"button-normal\"]:disabled {\n"
-"    background-color: #bdc3c7;\n"
-"    color: #7f8c8d;\n"
-"    border: 1px solid #95a5a6;\n"
+"	background: #f5f5f5;\n"
+"	border: 1px solid #dcd"
+                        "cdc;\n"
+"	color: #aeaeae;\n"
 "}\n"
 "\n"
 "/* 1. THE MAIN CONTAINER */\n"
 "QScrollArea { \n"
 "    border: none;\n"
 "    border-radius: 20px;\n"
-""
-                        "	background-color: rgb(246, 245, 244);\n"
+"	background-color: rgb(246, 245, 244);\n"
 "}\n"
 "\n"
 "/* 2. THE VIEWPORT (Crucial for transparency/backgrounds) */\n"
@@ -124,14 +152,14 @@ class Ui_Home(object):
 "    border-radius: 5px;\n"
 "}\n"
 "\n"
-"QScrollBar::handle:horizontal {\n"
+"QScrollBar::handl"
+                        "e:horizontal {\n"
 "    background: #7a7a7a;\n"
 "    min-width: 20px;\n"
 "    border-radius: 5px;\n"
 "}\n"
 "\n"
-"QScrollBar::handle:horizontal:h"
-                        "over {\n"
+"QScrollBar::handle:horizontal:hover {\n"
 "    background: #574939;\n"
 "}\n"
 "\n"
@@ -177,20 +205,46 @@ class Ui_Home(object):
         self.horizontalLayout_2 = QHBoxLayout(self.centralwidget)
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
         self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
-        self.navigationBar = QGroupBox(self.centralwidget)
+        self.navigationBar = QWidget(self.centralwidget)
         self.navigationBar.setObjectName(u"navigationBar")
         self.navigationBar.setMaximumSize(QSize(200, 16777215))
         self.navigationBar.setFont(font)
-        self.navigationBar.setStyleSheet(u"background-color: rgb(61, 61, 61); /* Dark Gray or Storm Dust */")
+        self.navigationBar.setStyleSheet(u"#navigationBar, #widget_logo, #line, #line_2 {\n"
+"	background-color: rgb(61, 61, 61); /* Dark Gray or Storm Dust */\n"
+"}\n"
+"\n"
+"QPushButton[class=\"button-left-nav\"] {\n"
+"	border-radius: 0px;\n"
+"	background: transparent;\n"
+"	color: white;\n"
+"	text-align: left;\n"
+"	padding: 0px 10px;\n"
+"	font: 57 10pt \"Inter Medium\";\n"
+"}\n"
+"\n"
+"QPushButton[class=\"button-left-nav\"]:hover {\n"
+" 	background: #5d5d5d;\n"
+"}\n"
+"\n"
+"QPushButton[class=\"button-left-nav\"]:checked {\n"
+"	background-color: #5d5d5d;\n"
+"	color: white;\n"
+"	border-left: 5px solid #FF00FF;\n"
+"}\n"
+"\n"
+"QPushButton[class=\"button-left-nav\"]:hover:!checked {\n"
+"	background-color: #5d5d5d;\n"
+"}")
         self.verticalLayout_5 = QVBoxLayout(self.navigationBar)
-        self.verticalLayout_5.setSpacing(6)
+        self.verticalLayout_5.setSpacing(0)
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
-        self.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
-        self.widget_3 = QWidget(self.navigationBar)
-        self.widget_3.setObjectName(u"widget_3")
-        self.gridLayout_2 = QGridLayout(self.widget_3)
-        self.gridLayout_2.setObjectName(u"gridLayout_2")
-        self.label_20 = QLabel(self.widget_3)
+        self.verticalLayout_5.setContentsMargins(0, 0, 0, 9)
+        self.widget_logo = QWidget(self.navigationBar)
+        self.widget_logo.setObjectName(u"widget_logo")
+        self.widget_logo.setStyleSheet(u"")
+        self.horizontalLayout_10 = QHBoxLayout(self.widget_logo)
+        self.horizontalLayout_10.setObjectName(u"horizontalLayout_10")
+        self.label_20 = QLabel(self.widget_logo)
         self.label_20.setObjectName(u"label_20")
         sizePolicy = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Preferred)
         sizePolicy.setHorizontalStretch(0)
@@ -204,15 +258,15 @@ class Ui_Home(object):
         self.label_20.setScaledContents(True)
         self.label_20.setAlignment(Qt.AlignCenter)
 
-        self.gridLayout_2.addWidget(self.label_20, 0, 0, 1, 1)
+        self.horizontalLayout_10.addWidget(self.label_20)
 
 
-        self.verticalLayout_5.addWidget(self.widget_3)
+        self.verticalLayout_5.addWidget(self.widget_logo)
 
         self.btnHome = QPushButton(self.navigationBar)
         self.btnHome.setObjectName(u"btnHome")
-        self.btnHome.setMinimumSize(QSize(200, 30))
-        self.btnHome.setMaximumSize(QSize(16777215, 30))
+        self.btnHome.setMinimumSize(QSize(200, 40))
+        self.btnHome.setMaximumSize(QSize(16777215, 40))
         font1 = QFont()
         font1.setFamilies([u"Inter Medium"])
         font1.setPointSize(10)
@@ -220,26 +274,7 @@ class Ui_Home(object):
         font1.setItalic(False)
         self.btnHome.setFont(font1)
         self.btnHome.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.btnHome.setStyleSheet(u"QPushButton {\n"
-"	border-radius: 0px;\n"
-"	background: transparent;\n"
-"	color: white;\n"
-"	text-align: left;\n"
-"	padding: 0px 0px 0px 10px;\n"
-"	font: 57 10pt \"Inter Medium\";\n"
-"}\n"
-"QPushButton:hover {\n"
-" 	background: #5d5d5d;\n"
-"}\n"
-"/* This is the highlight state */\n"
-"QPushButton:checked {\n"
-"	background-color: #5d5d5d; /* Highlight color */\n"
-"	color: white;\n"
-"	border-left: 5px solid #FF00FF; /* Active accent line */\n"
-"}\n"
-"QPushButton:hover:!checked {\n"
-"	background-color: #5d5d5d;\n"
-"}")
+        self.btnHome.setStyleSheet(u"")
         icon1 = QIcon()
         icon1.addFile(u":/Images/Images/House-01.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.btnHome.setIcon(icon1)
@@ -249,30 +284,11 @@ class Ui_Home(object):
 
         self.btnStudentList = QPushButton(self.navigationBar)
         self.btnStudentList.setObjectName(u"btnStudentList")
-        self.btnStudentList.setMinimumSize(QSize(200, 30))
-        self.btnStudentList.setMaximumSize(QSize(16777215, 30))
+        self.btnStudentList.setMinimumSize(QSize(200, 40))
+        self.btnStudentList.setMaximumSize(QSize(16777215, 40))
         self.btnStudentList.setFont(font1)
         self.btnStudentList.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.btnStudentList.setStyleSheet(u"QPushButton {\n"
-"	border-radius: 0px;\n"
-"	background: transparent;\n"
-"	color: white;\n"
-"	text-align: left;\n"
-"	padding: 0px 0px 0px 10px;\n"
-"	font: 57 10pt \"Inter Medium\";\n"
-"}\n"
-"QPushButton:hover {\n"
-" 	background: #5d5d5d;\n"
-"}\n"
-"/* This is the highlight state */\n"
-"QPushButton:checked {\n"
-"	background-color: #5d5d5d; /* Highlight color */\n"
-"	color: white;\n"
-"	border-left: 5px solid #FF00FF; /* Active accent line */\n"
-"}\n"
-"QPushButton:hover:!checked {\n"
-"	background-color: #5d5d5d;\n"
-"}")
+        self.btnStudentList.setStyleSheet(u"")
         icon2 = QIcon()
         icon2.addFile(u":/Images/Images/list-color.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.btnStudentList.setIcon(icon2)
@@ -282,30 +298,11 @@ class Ui_Home(object):
 
         self.btnLesson = QPushButton(self.navigationBar)
         self.btnLesson.setObjectName(u"btnLesson")
-        self.btnLesson.setMinimumSize(QSize(200, 30))
-        self.btnLesson.setMaximumSize(QSize(16777215, 30))
+        self.btnLesson.setMinimumSize(QSize(200, 40))
+        self.btnLesson.setMaximumSize(QSize(16777215, 40))
         self.btnLesson.setFont(font1)
         self.btnLesson.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.btnLesson.setStyleSheet(u"QPushButton {\n"
-"	border-radius: 0px;\n"
-"	background: transparent;\n"
-"	color: white;\n"
-"	text-align: left;\n"
-"	padding: 0px 0px 0px 10px;\n"
-"	font: 57 10pt \"Inter Medium\";\n"
-"}\n"
-"QPushButton:hover {\n"
-" 	background: #5d5d5d;\n"
-"}\n"
-"/* This is the highlight state */\n"
-"QPushButton:checked {\n"
-"	background-color: #5d5d5d; /* Highlight color */\n"
-"	color: white;\n"
-"	border-left: 5px solid #FF00FF; /* Active accent line */\n"
-"}\n"
-"QPushButton:hover:!checked {\n"
-"	background-color: #5d5d5d;\n"
-"}")
+        self.btnLesson.setStyleSheet(u"")
         icon3 = QIcon()
         icon3.addFile(u":/Images/Images/books-28.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.btnLesson.setIcon(icon3)
@@ -315,30 +312,11 @@ class Ui_Home(object):
 
         self.btnQuiz = QPushButton(self.navigationBar)
         self.btnQuiz.setObjectName(u"btnQuiz")
-        self.btnQuiz.setMinimumSize(QSize(200, 30))
-        self.btnQuiz.setMaximumSize(QSize(16777215, 30))
+        self.btnQuiz.setMinimumSize(QSize(200, 40))
+        self.btnQuiz.setMaximumSize(QSize(16777215, 40))
         self.btnQuiz.setFont(font1)
         self.btnQuiz.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.btnQuiz.setStyleSheet(u"QPushButton {\n"
-"	border-radius: 0px;\n"
-"	background: transparent;\n"
-"	color: white;\n"
-"	text-align: left;\n"
-"	padding: 0px 0px 0px 10px;\n"
-"	font: 57 10pt \"Inter Medium\";\n"
-"}\n"
-"QPushButton:hover {\n"
-" 	background: #5d5d5d;\n"
-"}\n"
-"/* This is the highlight state */\n"
-"QPushButton:checked {\n"
-"	background-color: #5d5d5d; /* Highlight color */\n"
-"	color: white;\n"
-"	border-left: 5px solid #FF00FF; /* Active accent line */\n"
-"}\n"
-"QPushButton:hover:!checked {\n"
-"	background-color: #5d5d5d;\n"
-"}")
+        self.btnQuiz.setStyleSheet(u"")
         icon4 = QIcon()
         icon4.addFile(u":/Images/Images/05-bulb.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.btnQuiz.setIcon(icon4)
@@ -348,30 +326,11 @@ class Ui_Home(object):
 
         self.btnExercise = QPushButton(self.navigationBar)
         self.btnExercise.setObjectName(u"btnExercise")
-        self.btnExercise.setMinimumSize(QSize(200, 30))
-        self.btnExercise.setMaximumSize(QSize(16777215, 30))
+        self.btnExercise.setMinimumSize(QSize(200, 40))
+        self.btnExercise.setMaximumSize(QSize(16777215, 40))
         self.btnExercise.setFont(font1)
         self.btnExercise.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.btnExercise.setStyleSheet(u"QPushButton {\n"
-"	border-radius: 0px;\n"
-"	background: transparent;\n"
-"	color: white;\n"
-"	text-align: left;\n"
-"	padding: 0px 0px 0px 10px;\n"
-"	font: 57 10pt \"Inter Medium\";\n"
-"}\n"
-"QPushButton:hover {\n"
-" 	background: #5d5d5d;\n"
-"}\n"
-"/* This is the highlight state */\n"
-"QPushButton:checked {\n"
-"	background-color: #5d5d5d; /* Highlight color */\n"
-"	color: white;\n"
-"	border-left: 5px solid #FF00FF; /* Active accent line */\n"
-"}\n"
-"QPushButton:hover:!checked {\n"
-"	background-color: #5d5d5d;\n"
-"}")
+        self.btnExercise.setStyleSheet(u"")
         icon5 = QIcon()
         icon5.addFile(u":/Images/Images/dumbell.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.btnExercise.setIcon(icon5)
@@ -381,30 +340,11 @@ class Ui_Home(object):
 
         self.btnSections = QPushButton(self.navigationBar)
         self.btnSections.setObjectName(u"btnSections")
-        self.btnSections.setMinimumSize(QSize(200, 30))
-        self.btnSections.setMaximumSize(QSize(16777215, 30))
+        self.btnSections.setMinimumSize(QSize(200, 40))
+        self.btnSections.setMaximumSize(QSize(16777215, 40))
         self.btnSections.setFont(font1)
         self.btnSections.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.btnSections.setStyleSheet(u"QPushButton {\n"
-"	border-radius: 0px;\n"
-"	background: transparent;\n"
-"	color: white;\n"
-"	text-align: left;\n"
-"	padding: 0px 0px 0px 10px;\n"
-"	font: 57 10pt \"Inter Medium\";\n"
-"}\n"
-"QPushButton:hover {\n"
-" 	background: #5d5d5d;\n"
-"}\n"
-"/* This is the highlight state */\n"
-"QPushButton:checked {\n"
-"	background-color: #5d5d5d; /* Highlight color */\n"
-"	color: white;\n"
-"	border-left: 5px solid #FF00FF; /* Active accent line */\n"
-"}\n"
-"QPushButton:hover:!checked {\n"
-"	background-color: #5d5d5d;\n"
-"}")
+        self.btnSections.setStyleSheet(u"")
         icon6 = QIcon()
         icon6.addFile(u":/Images/Images/library-90.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.btnSections.setIcon(icon6)
@@ -414,30 +354,11 @@ class Ui_Home(object):
 
         self.btnReports = QPushButton(self.navigationBar)
         self.btnReports.setObjectName(u"btnReports")
-        self.btnReports.setMinimumSize(QSize(200, 30))
-        self.btnReports.setMaximumSize(QSize(16777215, 30))
+        self.btnReports.setMinimumSize(QSize(200, 40))
+        self.btnReports.setMaximumSize(QSize(16777215, 40))
         self.btnReports.setFont(font1)
         self.btnReports.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.btnReports.setStyleSheet(u"QPushButton {\n"
-"	border-radius: 0px;\n"
-"	background: transparent;\n"
-"	color: white;\n"
-"	text-align: left;\n"
-"	padding: 0px 0px 0px 10px;\n"
-"	font: 57 10pt \"Inter Medium\";\n"
-"}\n"
-"QPushButton:hover {\n"
-" 	background: #5d5d5d;\n"
-"}\n"
-"/* This is the highlight state */\n"
-"QPushButton:checked {\n"
-"	background-color: #5d5d5d; /* Highlight color */\n"
-"	color: white;\n"
-"	border-left: 5px solid #FF00FF; /* Active accent line */\n"
-"}\n"
-"QPushButton:hover:!checked {\n"
-"	background-color: #5d5d5d;\n"
-"}")
+        self.btnReports.setStyleSheet(u"")
         icon7 = QIcon()
         icon7.addFile(u":/Images/Images/product-data.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.btnReports.setIcon(icon7)
@@ -493,22 +414,11 @@ class Ui_Home(object):
 
         self.btnLogout = QPushButton(self.navigationBar)
         self.btnLogout.setObjectName(u"btnLogout")
-        self.btnLogout.setMinimumSize(QSize(200, 30))
-        self.btnLogout.setMaximumSize(QSize(16777215, 30))
+        self.btnLogout.setMinimumSize(QSize(200, 40))
+        self.btnLogout.setMaximumSize(QSize(16777215, 40))
         self.btnLogout.setFont(font1)
         self.btnLogout.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.btnLogout.setStyleSheet(u"QPushButton {\n"
-"	border-radius: 0px;\n"
-"	background: transparent;\n"
-"	color: white;\n"
-"	text-align: left;\n"
-"    padding: 0px 0px 0px 10px;\n"
-"	font: 57 10pt \"Inter Medium\";\n"
-"}\n"
-"\n"
-"QPushButton:hover {\n"
-" 	background: #5d5d5d;\n"
-"}")
+        self.btnLogout.setStyleSheet(u"")
         icon9 = QIcon()
         icon9.addFile(u":/Images/Images/logout.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.btnLogout.setIcon(icon9)
@@ -525,22 +435,11 @@ class Ui_Home(object):
 
         self.btnUsers = QPushButton(self.navigationBar)
         self.btnUsers.setObjectName(u"btnUsers")
-        self.btnUsers.setMinimumSize(QSize(200, 30))
-        self.btnUsers.setMaximumSize(QSize(16777215, 30))
+        self.btnUsers.setMinimumSize(QSize(200, 40))
+        self.btnUsers.setMaximumSize(QSize(16777215, 40))
         self.btnUsers.setFont(font1)
         self.btnUsers.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.btnUsers.setStyleSheet(u"QPushButton {\n"
-"	border-radius: 0px;\n"
-"	background: transparent;\n"
-"	color: white;\n"
-"	text-align: left;\n"
-"    padding: 0px 0px 0px 10px;\n"
-"	font: 57 10pt \"Inter Medium\";\n"
-"}\n"
-"\n"
-"QPushButton:hover {\n"
-" 	background: #5d5d5d;\n"
-"}")
+        self.btnUsers.setStyleSheet(u"")
         icon10 = QIcon()
         icon10.addFile(u":/Images/Images/users-61.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.btnUsers.setIcon(icon10)
@@ -550,22 +449,11 @@ class Ui_Home(object):
 
         self.btnUtility = QPushButton(self.navigationBar)
         self.btnUtility.setObjectName(u"btnUtility")
-        self.btnUtility.setMinimumSize(QSize(200, 30))
-        self.btnUtility.setMaximumSize(QSize(16777215, 30))
+        self.btnUtility.setMinimumSize(QSize(200, 40))
+        self.btnUtility.setMaximumSize(QSize(16777215, 40))
         self.btnUtility.setFont(font1)
         self.btnUtility.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.btnUtility.setStyleSheet(u"QPushButton {\n"
-"	border-radius: 0px;\n"
-"	background: transparent;\n"
-"	color: white;\n"
-"	text-align: left;\n"
-"    padding: 0px 0px 0px 10px;\n"
-"	font: 57 10pt \"Inter Medium\";\n"
-"}\n"
-"\n"
-"QPushButton:hover {\n"
-" 	background: #5d5d5d;\n"
-"}")
+        self.btnUtility.setStyleSheet(u"")
         icon11 = QIcon()
         icon11.addFile(u":/Images/Images/settings-125.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.btnUtility.setIcon(icon11)
@@ -1307,13 +1195,13 @@ class Ui_Home(object):
 "QComboBox[class=\"combobox-main\"] {\n"
 "    height: 30px;\n"
 "    border: 1px solid #999;\n"
-"    border-radius: 15px; /* Fully rounded pills */\n"
+"    border-radius: 15px;\n"
 "    padding-left: 10px;\n"
 "    background-color: #ffffff;\n"
 "    color: #333333;\n"
-"    font: 10pt \"I"
-                        "nter Medium\"; /* Consolidated font settings */\n"
-"    selection-background-color: #7eb4d7;\n"
+"    font: 10pt \"Inter Medium\";\n"
+"    sel"
+                        "ection-background-color: #7eb4d7;\n"
 "}\n"
 "\n"
 "QComboBox:focus {\n"
@@ -1329,7 +1217,6 @@ class Ui_Home(object):
 "    subcontrol-position: top right;\n"
 "    width: 30px;\n"
 "    border-left-width: 0px;\n"
-"    /* Match the 15px border-radius of the main control */\n"
 "    border-top-right-radius: 15px;\n"
 "    border-bottom-right-radius: 15px;\n"
 "}\n"
@@ -1346,18 +1233,18 @@ class Ui_Home(object):
 "    border: 1px solid #999;\n"
 "    selection-background-color: #7eb4d7;\n"
 "    selection-color: #ffffff;\n"
-"    outline: 0; /* Removes the ugly dotted focus border */\n"
+"    outline: 0;\n"
 "}\n"
 "\n"
 "QComboBox QAbstractItemView::item {\n"
-"    padding-l"
-                        "eft: 10px;\n"
+"    padding-left: 10px;\n"
 "    border-radius: 4px;\n"
 "    color: #333333;\n"
 "}\n"
 "\n"
 "/* Hover state for items inside the dropdown */\n"
-"QComboBox[class=\"combobox-main\"] QAbstractItemView::item:hover {\n"
+"QComboBox[class=\"combobox-main\"] "
+                        "QAbstractItemView::item:hover {\n"
 "    background-color: #7eb4d7;\n"
 "    color: #ffffff;\n"
 "}\n"
@@ -1393,13 +1280,13 @@ class Ui_Home(object):
 "\n"
 "QSpinBox::down-button {\n"
 "    subcontrol-origin: border;\n"
-"    subcontrol-positi"
-                        "on: bottom right;\n"
+"    subcontrol-position: bottom right;\n"
 "    width: 8px;\n"
 "    height: 8px;\n"
 "    border-bottom-right-radius: 15px;\n"
 "    padding: 6px 10px 6px 2px;\n"
-"	color: rgb(119, 118, 123);\n"
+"	color: rgb(119, 118, 123"
+                        ");\n"
 "}\n"
 "\n"
 "QSpinBox::up-arrow {\n"
@@ -2133,11 +2020,11 @@ class Ui_Home(object):
         self.pageQuiz.setStyleSheet(u"QComboBox[class=\"combobox-main\"] {\n"
 "    height: 30px;\n"
 "    border: 1px solid #999;\n"
-"    border-radius: 15px; /* Fully rounded pills */\n"
+"    border-radius: 15px;\n"
 "    padding-left: 10px;\n"
 "    background-color: #ffffff;\n"
 "    color: #333333;\n"
-"    font: 10pt \"Inter Medium\"; /* Consolidated font settings */\n"
+"    font: 10pt \"Inter Medium\";\n"
 "    selection-background-color: #7eb4d7;\n"
 "}\n"
 "\n"
@@ -2154,7 +2041,6 @@ class Ui_Home(object):
 "    subcontrol-position: top right;\n"
 "    width: 30px;\n"
 "    border-left-width: 0px;\n"
-"    /* Match the 15px border-radius of the main control */\n"
 "    border-top-right-radius: 15px;\n"
 "    border-bottom-right-radius: 15px;\n"
 "}\n"
@@ -2167,12 +2053,12 @@ class Ui_Home(object):
 "}\n"
 "\n"
 "QComboBox QAbstractItemView {\n"
-"    background-color: white"
-                        " !important;\n"
+"    background-color: white !important;\n"
 "    border: 1px solid #999;\n"
 "    selection-background-color: #7eb4d7;\n"
-"    selection-color: #ffffff;\n"
-"    outline: 0; /* Removes the ugly dotted focus border */\n"
+"    selection-color: #ffffff"
+                        ";\n"
+"    outline: 0;\n"
 "}\n"
 "\n"
 "QComboBox QAbstractItemView::item {\n"
@@ -2208,15 +2094,15 @@ class Ui_Home(object):
 "\n"
 "QSpinBox::up-button {\n"
 "    subcontrol-origin: border;\n"
-"    subcontrol-position: to"
-                        "p right;\n"
+"    subcontrol-position: top right;\n"
 "    width: 8px;\n"
 "    height: 8px;\n"
 "    border-top-right-radius: 15px;\n"
 "    padding: 6px 10px 6px 2px;\n"
 "	color: rgb(119, 118, 123);\n"
 "}\n"
-"\n"
+""
+                        "\n"
 "QSpinBox::down-button {\n"
 "    subcontrol-origin: border;\n"
 "    subcontrol-position: bottom right;\n"
@@ -2525,13 +2411,14 @@ class Ui_Home(object):
         self.widget_quiz_2.setObjectName(u"widget_quiz_2")
         self.gridLayout = QGridLayout(self.widget_quiz_2)
         self.gridLayout.setObjectName(u"gridLayout")
+        self.gridLayout.setContentsMargins(0, 0, 0, 0)
         self.scrollArea_tf = QScrollArea(self.widget_quiz_2)
         self.scrollArea_tf.setObjectName(u"scrollArea_tf")
         self.scrollArea_tf.setStyleSheet(u"background-color: rgb(246, 245, 244);")
         self.scrollArea_tf.setWidgetResizable(True)
         self.scrollAreaWidgetContents_4 = QWidget()
         self.scrollAreaWidgetContents_4.setObjectName(u"scrollAreaWidgetContents_4")
-        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 312, 502))
+        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 318, 538))
         self.verticalLayout_13 = QVBoxLayout(self.scrollAreaWidgetContents_4)
         self.verticalLayout_13.setObjectName(u"verticalLayout_13")
         self.scrollArea_tf.setWidget(self.scrollAreaWidgetContents_4)
@@ -2557,7 +2444,7 @@ class Ui_Home(object):
         self.scrollArea_mc.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 311, 502))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 317, 538))
         self.verticalLayout_12 = QVBoxLayout(self.scrollAreaWidgetContents_3)
         self.verticalLayout_12.setObjectName(u"verticalLayout_12")
         self.scrollArea_mc.setWidget(self.scrollAreaWidgetContents_3)
@@ -2570,7 +2457,7 @@ class Ui_Home(object):
         self.scrollArea_id.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 312, 502))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 318, 538))
         self.verticalLayout_11 = QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_11.setObjectName(u"verticalLayout_11")
         self.scrollArea_id.setWidget(self.scrollAreaWidgetContents_2)
@@ -2600,6 +2487,7 @@ class Ui_Home(object):
         self.widget_quiz_3.setObjectName(u"widget_quiz_3")
         self.horizontalLayout_12 = QHBoxLayout(self.widget_quiz_3)
         self.horizontalLayout_12.setObjectName(u"horizontalLayout_12")
+        self.horizontalLayout_12.setContentsMargins(0, 0, 0, 0)
         self.horizontalSpacer_5 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_12.addItem(self.horizontalSpacer_5)
@@ -2701,11 +2589,11 @@ class Ui_Home(object):
         self.pageSections.setStyleSheet(u"QComboBox[class=\"combobox-main\"] {\n"
 "    height: 30px;\n"
 "    border: 1px solid #999;\n"
-"    border-radius: 15px; /* Fully rounded pills */\n"
+"    border-radius: 15px;\n"
 "    padding-left: 10px;\n"
 "    background-color: #ffffff;\n"
 "    color: #333333;\n"
-"    font: 10pt \"Inter Medium\"; /* Consolidated font settings */\n"
+"    font: 10pt \"Inter Medium\";\n"
 "    selection-background-color: #7eb4d7;\n"
 "}\n"
 "\n"
@@ -2722,7 +2610,6 @@ class Ui_Home(object):
 "    subcontrol-position: top right;\n"
 "    width: 30px;\n"
 "    border-left-width: 0px;\n"
-"    /* Match the 15px border-radius of the main control */\n"
 "    border-top-right-radius: 15px;\n"
 "    border-bottom-right-radius: 15px;\n"
 "}\n"
@@ -2735,12 +2622,12 @@ class Ui_Home(object):
 "}\n"
 "\n"
 "QComboBox QAbstractItemView {\n"
-"    background-color: white"
-                        " !important;\n"
+"    background-color: white !important;\n"
 "    border: 1px solid #999;\n"
 "    selection-background-color: #7eb4d7;\n"
-"    selection-color: #ffffff;\n"
-"    outline: 0; /* Removes the ugly dotted focus border */\n"
+"    selection-color: #ffffff"
+                        ";\n"
+"    outline: 0;\n"
 "}\n"
 "\n"
 "QComboBox QAbstractItemView::item {\n"
@@ -2776,15 +2663,15 @@ class Ui_Home(object):
 "\n"
 "QSpinBox::up-button {\n"
 "    subcontrol-origin: border;\n"
-"    subcontrol-position: to"
-                        "p right;\n"
+"    subcontrol-position: top right;\n"
 "    width: 8px;\n"
 "    height: 8px;\n"
 "    border-top-right-radius: 15px;\n"
 "    padding: 6px 10px 6px 2px;\n"
 "	color: rgb(119, 118, 123);\n"
 "}\n"
-"\n"
+""
+                        "\n"
 "QSpinBox::down-button {\n"
 "    subcontrol-origin: border;\n"
 "    subcontrol-position: bottom right;\n"
@@ -3327,14 +3214,18 @@ class Ui_Home(object):
         self.verticalLayout_20.setContentsMargins(0, 0, 0, 0)
         self.widget_stud_tblheader_idv = QWidget(self.widget_10)
         self.widget_stud_tblheader_idv.setObjectName(u"widget_stud_tblheader_idv")
+        self.widget_stud_tblheader_idv.setMinimumSize(QSize(0, 44))
         self.widget_stud_tblheader_idv.setStyleSheet(u"#widget_stud_tblheader_idv { \n"
-"	background-color: rgb(224, 243, 255);\n"
+"	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
+"                                stop:0 #ffffff, \n"
+"                                stop:1 #c6e9ff);\n"
 "	border: 1px solid rgb(98, 160, 234);\n"
 "	border-top-left-radius: 10px;\n"
 "	border-top-right-radius: 10px;\n"
 "}")
         self.horizontalLayout_7 = QHBoxLayout(self.widget_stud_tblheader_idv)
         self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
+        self.horizontalLayout_7.setContentsMargins(-1, 2, -1, 2)
         self.widget_search_idv = QWidget(self.widget_stud_tblheader_idv)
         self.widget_search_idv.setObjectName(u"widget_search_idv")
         self.widget_search_idv.setMinimumSize(QSize(0, 30))
@@ -3389,7 +3280,9 @@ class Ui_Home(object):
         self.widget_7 = QWidget(self.widget_8)
         self.widget_7.setObjectName(u"widget_7")
         self.widget_7.setStyleSheet(u"#widget_7 { \n"
-"	background-color: rgb(224, 243, 255);\n"
+"	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
+"                                stop:0 #ffffff, \n"
+"                                stop:1 #c6e9ff);\n"
 "	border: 1px solid rgb(98, 160, 234);\n"
 "	border-top-left-radius: 10px;\n"
 "    border-top-right-radius: 10px;\n"
@@ -3398,16 +3291,35 @@ class Ui_Home(object):
 "QLabel {\n"
 "	background: transparent;\n"
 "	border: none;\n"
+"}\n"
+"\n"
+"#label_student_icon {\n"
+"	\n"
 "}")
         self.horizontalLayout_21 = QHBoxLayout(self.widget_7)
         self.horizontalLayout_21.setObjectName(u"horizontalLayout_21")
-        self.label_student_icon = QLabel(self.widget_7)
+        self.horizontalLayout_21.setContentsMargins(-1, 5, -1, 5)
+        self.widget_3 = QWidget(self.widget_7)
+        self.widget_3.setObjectName(u"widget_3")
+        self.widget_3.setMinimumSize(QSize(36, 36))
+        self.widget_3.setMaximumSize(QSize(36, 36))
+        self.widget_3.setStyleSheet(u"border-radius: 18px;\n"
+"background-color: rgb(98, 160, 234);")
+        self.horizontalLayout_35 = QHBoxLayout(self.widget_3)
+        self.horizontalLayout_35.setSpacing(0)
+        self.horizontalLayout_35.setObjectName(u"horizontalLayout_35")
+        self.horizontalLayout_35.setContentsMargins(0, 0, 0, 0)
+        self.label_student_icon = QLabel(self.widget_3)
         self.label_student_icon.setObjectName(u"label_student_icon")
         self.label_student_icon.setMaximumSize(QSize(30, 30))
+        self.label_student_icon.setStyleSheet(u"background: transparent;")
         self.label_student_icon.setPixmap(QPixmap(u":/Images/Images/profile_gray.png"))
         self.label_student_icon.setScaledContents(True)
 
-        self.horizontalLayout_21.addWidget(self.label_student_icon)
+        self.horizontalLayout_35.addWidget(self.label_student_icon)
+
+
+        self.horizontalLayout_21.addWidget(self.widget_3)
 
         self.label_student_name = QLabel(self.widget_7)
         self.label_student_name.setObjectName(u"label_student_name")
@@ -3924,14 +3836,16 @@ class Ui_Home(object):
 "}")
         self.tab_settings = QWidget()
         self.tab_settings.setObjectName(u"tab_settings")
-        self.tab_settings.setStyleSheet(u"#widget_SY_header, #widget_GP_header { \n"
-"	background-color: rgb(224, 243, 255);\n"
+        self.tab_settings.setStyleSheet(u"#widget_SY_header, #widget_SY_header_2 { \n"
+"	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
+"                                stop:0 #ffffff, \n"
+"                                stop:1 #c6e9ff);\n"
 "	border: 1px solid rgb(98, 160, 234);\n"
 "	border-top-left-radius: 10px;\n"
 "	border-top-right-radius: 10px;\n"
 "}\n"
 "\n"
-"#widget_SY_body_1, #widget_SY_body_2, #widget_GP_body {\n"
+"#widget_SY_body_1, #widget_SY_body_2, #widget_SY_body_3 {\n"
 "	background-color: #fff;\n"
 "	border: 1px solid #999;\n"
 "	border-top: none;\n"
@@ -4035,15 +3949,32 @@ class Ui_Home(object):
         self.btnSaveSettings_SY.setFont(font12)
         self.btnSaveSettings_SY.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btnSaveSettings_SY.setStyleSheet(u"QPushButton {\n"
+"	border: 1px solid #0a5128;\n"
 "    border-radius: 15px;\n"
 "    padding: 0px 10px 0px;\n"
-"    background: #129046;\n"
+"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
+"                                stop:0 #1ebd5d, \n"
+"                                stop:1 #107f3f);\n"
 "    color: #FFF;\n"
-"	font: 10pt \"Inter SemiBold\";\n"
+"    font: 10pt \"Inter SemiBold\";\n"
 "}\n"
 "\n"
 "QPushButton:hover {\n"
-"    background: #27AE60;\n"
+"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
+"                                stop:0 #2ecc71, \n"
+"                                stop:1 #27AE60);\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
+"                                stop:0 #0b572a, \n"
+"                                stop:1 #129046); \n"
+"}\n"
+"\n"
+"QPushButton:disabled {\n"
+"    background: #A5D6A7;\n"
+"    color: #E8F5E9;\n"
+"    opacity: 0.6;\n"
 "}")
 
         self.horizontalLayout_30.addWidget(self.btnSaveSettings_SY)
@@ -4253,30 +4184,7 @@ class Ui_Home(object):
 
         self.widget_SY_settings_2 = QWidget(self.tab_settings)
         self.widget_SY_settings_2.setObjectName(u"widget_SY_settings_2")
-        self.widget_SY_settings_2.setStyleSheet(u"#widget_SY_header_2 { \n"
-"	background-color: rgb(224, 243, 255);\n"
-"	border: 1px solid rgb(98, 160, 234);\n"
-"	border-top-left-radius: 10px;\n"
-"	border-top-right-radius: 10px;\n"
-"}\n"
-"\n"
-"#widget_SY_body_3 {\n"
-"	background-color: #fff;\n"
-"	border: 1px solid #999;\n"
-"	border-top: none;\n"
-"	border-bottom: none;\n"
-"}\n"
-"\n"
-"QLineEdit {\n"
-"	border: 1px solid #999;\n"
-"	border-radius: 15px;\n"
-"	background-color: #FFF;\n"
-"	padding: 0px 10px;\n"
-"}\n"
-"\n"
-"QLineEdit:focus {\n"
-"	border: 1px solid rgb(53, 132, 228);\n"
-"}")
+        self.widget_SY_settings_2.setStyleSheet(u"")
         self.verticalLayout_29 = QVBoxLayout(self.widget_SY_settings_2)
         self.verticalLayout_29.setSpacing(0)
         self.verticalLayout_29.setObjectName(u"verticalLayout_29")
@@ -4317,20 +4225,30 @@ class Ui_Home(object):
         self.btnBrowseLessonsCSV.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btnBrowseLessonsCSV.setStyleSheet(u"QPushButton {\n"
 "	font: 10pt \"Inter\";\n"
-"	background-color: #e7e7e7;\n"
+"	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
+"                                stop:0 #ffffff, \n"
+"                                stop:1 #d8ecf6);\n"
 "	color: black;\n"
 "	border-radius: 15px;\n"
 "	border: 1px solid rgb(154, 153, 150);\n"
 "}\n"
 "\n"
 "QPushButton:hover {\n"
-"	background-color: white;\n"
+"	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
+"                                stop:0 #ffffff, \n"
+"                                stop:1 #f2f6f8);\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
+"                                stop:0 #dce5e9, \n"
+"                                stop:1 #ffffff);\n"
 "}\n"
 "\n"
 "QPushButton:disabled {\n"
-"    background-color: #bdc3c7;\n"
-"    color: #7f8c8d;\n"
-"    border: 1px solid #95a5a6;\n"
+"	background: #f5f5f5;\n"
+"	border: 1px solid #dcdcdc;\n"
+"	color: #aeaeae;\n"
 "}")
 
         self.horizontalLayout_34.addWidget(self.btnBrowseLessonsCSV)
@@ -4353,15 +4271,32 @@ class Ui_Home(object):
         self.btnImportAllLessons.setFont(font12)
         self.btnImportAllLessons.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btnImportAllLessons.setStyleSheet(u"QPushButton {\n"
+"	border: 1px solid #0a5128;\n"
 "    border-radius: 15px;\n"
 "    padding: 0px 10px 0px;\n"
-"    background: #129046;\n"
+"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
+"                                stop:0 #1ebd5d, \n"
+"                                stop:1 #107f3f);\n"
 "    color: #FFF;\n"
-"	font: 10pt \"Inter SemiBold\";\n"
+"    font: 10pt \"Inter SemiBold\";\n"
 "}\n"
 "\n"
 "QPushButton:hover {\n"
-"    background: #27AE60;\n"
+"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
+"                                stop:0 #2ecc71, \n"
+"                                stop:1 #27AE60);\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
+"                                stop:0 #0b572a, \n"
+"                                stop:1 #129046); \n"
+"}\n"
+"\n"
+"QPushButton:disabled {\n"
+"    background: #A5D6A7;\n"
+"    color: #E8F5E9;\n"
+"    opacity: 0.6;\n"
 "}")
 
         self.horizontalLayout_34.addWidget(self.btnImportAllLessons)
@@ -4443,17 +4378,27 @@ class Ui_Home(object):
         Home.setWindowTitle(QCoreApplication.translate("Home", u"Computer-Aided Instructions System in Mathematics for the Grade 1 Students of La Camelle School", None))
         self.label_20.setText("")
         self.btnHome.setText(QCoreApplication.translate("Home", u"Home", None))
+        self.btnHome.setProperty(u"class", QCoreApplication.translate("Home", u"button-left-nav", None))
         self.btnStudentList.setText(QCoreApplication.translate("Home", u"Student List", None))
+        self.btnStudentList.setProperty(u"class", QCoreApplication.translate("Home", u"button-left-nav", None))
         self.btnLesson.setText(QCoreApplication.translate("Home", u"Lesson", None))
+        self.btnLesson.setProperty(u"class", QCoreApplication.translate("Home", u"button-left-nav", None))
         self.btnQuiz.setText(QCoreApplication.translate("Home", u"Quiz", None))
+        self.btnQuiz.setProperty(u"class", QCoreApplication.translate("Home", u"button-left-nav", None))
         self.btnExercise.setText(QCoreApplication.translate("Home", u"Exercise", None))
+        self.btnExercise.setProperty(u"class", QCoreApplication.translate("Home", u"button-left-nav", None))
         self.btnSections.setText(QCoreApplication.translate("Home", u"Sections", None))
+        self.btnSections.setProperty(u"class", QCoreApplication.translate("Home", u"button-left-nav", None))
         self.btnReports.setText(QCoreApplication.translate("Home", u"Reports", None))
+        self.btnReports.setProperty(u"class", QCoreApplication.translate("Home", u"button-left-nav", None))
         self.btnUserName.setText(QCoreApplication.translate("Home", u"Christopher", None))
         self.labelPosition.setText(QCoreApplication.translate("Home", u"Admin", None))
         self.btnLogout.setText(QCoreApplication.translate("Home", u"Log out", None))
+        self.btnLogout.setProperty(u"class", QCoreApplication.translate("Home", u"button-left-nav", None))
         self.btnUsers.setText(QCoreApplication.translate("Home", u"Users", None))
+        self.btnUsers.setProperty(u"class", QCoreApplication.translate("Home", u"button-left-nav", None))
         self.btnUtility.setText(QCoreApplication.translate("Home", u"Utilities", None))
+        self.btnUtility.setProperty(u"class", QCoreApplication.translate("Home", u"button-left-nav", None))
         self.label_timeAP_3.setText(QCoreApplication.translate("Home", u"Welcome to La Camelle School", None))
         self.label_gradingperiod.setText(QCoreApplication.translate("Home", u"Grading", None))
         self.label_SY.setText(QCoreApplication.translate("Home", u"School Year", None))
@@ -4530,13 +4475,13 @@ class Ui_Home(object):
         self.label_magnifying_stud.setProperty(u"class", QCoreApplication.translate("Home", u"label-magnifying-search", None))
         self.txt_classList_search.setPlaceholderText(QCoreApplication.translate("Home", u"Search", None))
         self.txt_classList_search.setProperty(u"class", QCoreApplication.translate("Home", u"textbox-search", None))
-        self.btnAddStudent.setText(QCoreApplication.translate("Home", u"Add/Import", None))
+        self.btnAddStudent.setText(QCoreApplication.translate("Home", u" Add/Import", None))
         self.btnAddStudent.setProperty(u"class", QCoreApplication.translate("Home", u"button-normal", None))
-        self.btnEditStudent.setText(QCoreApplication.translate("Home", u"Edit", None))
+        self.btnEditStudent.setText(QCoreApplication.translate("Home", u" Edit", None))
         self.btnEditStudent.setProperty(u"class", QCoreApplication.translate("Home", u"button-normal", None))
-        self.btnDeleteStudent.setText(QCoreApplication.translate("Home", u"Delete", None))
+        self.btnDeleteStudent.setText(QCoreApplication.translate("Home", u" Delete", None))
         self.btnDeleteStudent.setProperty(u"class", QCoreApplication.translate("Home", u"button-normal", None))
-        self.btnPrintStudentList.setText(QCoreApplication.translate("Home", u"Print", None))
+        self.btnPrintStudentList.setText(QCoreApplication.translate("Home", u" Print", None))
         self.btnPrintStudentList.setProperty(u"class", QCoreApplication.translate("Home", u"button-normal", None))
         self.label_totalStudCount.setText(QCoreApplication.translate("Home", u"0 item", None))
         self.label_totalStudCount.setProperty(u"class", QCoreApplication.translate("Home", u"label-header", None))
@@ -4554,11 +4499,11 @@ class Ui_Home(object):
 #endif // QT_CONFIG(tooltip)
         self.btnRefreshLessonTable.setText("")
         self.btnRefreshLessonTable.setProperty(u"class", QCoreApplication.translate("Home", u"button-normal", None))
-        self.btnLessonView.setText(QCoreApplication.translate("Home", u"View", None))
+        self.btnLessonView.setText(QCoreApplication.translate("Home", u" View", None))
         self.btnLessonView.setProperty(u"class", QCoreApplication.translate("Home", u"button-normal", None))
-        self.btnLessonEdit.setText(QCoreApplication.translate("Home", u"Edit", None))
+        self.btnLessonEdit.setText(QCoreApplication.translate("Home", u" Edit", None))
         self.btnLessonEdit.setProperty(u"class", QCoreApplication.translate("Home", u"button-normal", None))
-        self.btnLessonAdd.setText(QCoreApplication.translate("Home", u"Add", None))
+        self.btnLessonAdd.setText(QCoreApplication.translate("Home", u" Add", None))
         self.btnLessonAdd.setProperty(u"class", QCoreApplication.translate("Home", u"button-normal", None))
         self.label_lessonTotalCount.setText(QCoreApplication.translate("Home", u"0 item", None))
         self.labelGradingPeriod_2.setText(QCoreApplication.translate("Home", u"Quiz #:", None))
@@ -4629,7 +4574,7 @@ class Ui_Home(object):
         self.label_lessons_prog.setText(QCoreApplication.translate("Home", u"12/20", None))
         self.labelGradingPeriod_4.setText(QCoreApplication.translate("Home", u"Grading Period:", None))
         self.cb_gp_quiz_idv.setProperty(u"class", QCoreApplication.translate("Home", u"combobox-main", None))
-        self.btnPrintQuizScores.setText(QCoreApplication.translate("Home", u"Print", None))
+        self.btnPrintQuizScores.setText(QCoreApplication.translate("Home", u" Print", None))
         self.btnPrintQuizScores.setProperty(u"class", QCoreApplication.translate("Home", u"button-normal", None))
         self.plainTextEdit_remarks.setPlaceholderText(QCoreApplication.translate("Home", u"Write teacher's remarks/comments here.", None))
         self.tabWidget_reports.setTabText(self.tabWidget_reports.indexOf(self.tab_2), QCoreApplication.translate("Home", u"Raw scores (Individual)", None))
@@ -4652,7 +4597,6 @@ class Ui_Home(object):
         self.label_10.setText(QCoreApplication.translate("Home", u"School Year", None))
         self.label_14.setText(QCoreApplication.translate("Home", u"-", None))
         self.btnSaveSettings_SY.setText(QCoreApplication.translate("Home", u"Save", None))
-        self.btnSaveSettings_SY.setProperty(u"class", QCoreApplication.translate("Home", u"button-green", None))
         self.label_60.setText(QCoreApplication.translate("Home", u"Set the dates for each grading period:", None))
         self.btn_manual.setText(QCoreApplication.translate("Home", u"Manual", None))
         self.btn_auto.setText(QCoreApplication.translate("Home", u"Automated", None))
@@ -4672,10 +4616,8 @@ class Ui_Home(object):
         self.dateEdit_thirdgrading_end.setDisplayFormat(QCoreApplication.translate("Home", u"yyyy / MM / dd", None))
         self.label_29.setText(QCoreApplication.translate("Home", u"Import All Predefined Lessons", None))
         self.btnBrowseLessonsCSV.setText(QCoreApplication.translate("Home", u"Browse", None))
-        self.btnBrowseLessonsCSV.setProperty(u"class", QCoreApplication.translate("Home", u"button-normal", None))
         self.label_lesson_CSV_path.setText("")
         self.btnImportAllLessons.setText(QCoreApplication.translate("Home", u"Import", None))
-        self.btnImportAllLessons.setProperty(u"class", QCoreApplication.translate("Home", u"button-green", None))
         self.tabWidget_utility.setTabText(self.tabWidget_utility.indexOf(self.tab_settings), QCoreApplication.translate("Home", u"Settings", None))
         self.tabWidget_utility.setTabText(self.tabWidget_utility.indexOf(self.tab_audit_trail), QCoreApplication.translate("Home", u"Audit Trail", None))
         self.tabWidget_utility.setTabText(self.tabWidget_utility.indexOf(self.tab_archive), QCoreApplication.translate("Home", u"Archive", None))

@@ -134,6 +134,7 @@ class Utility:
             pulldown: The QComboBox widget to populate.
             sql (str): The SQL SELECT statement.
             params (tuple, optional): Parameters for the SQL query to prevent injection.
+            default_value: The underlying data (ID) to select by default.
             add_empty (bool): If True, adds a blank row at the top of the list.
         """
         if not sql:

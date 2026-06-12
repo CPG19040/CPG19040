@@ -15,10 +15,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QComboBox, QDialog, QFormLayout,
-    QGridLayout, QHBoxLayout, QLabel, QLineEdit,
-    QPushButton, QSizePolicy, QSpacerItem, QVBoxLayout,
-    QWidget)
+from PySide6.QtWidgets import (QApplication, QComboBox, QDialog, QGridLayout,
+    QHBoxLayout, QLabel, QLineEdit, QPushButton,
+    QSizePolicy, QSpacerItem, QVBoxLayout, QWidget)
 import resources_rc
 
 class Ui_LessonDialog(object):
@@ -33,48 +32,110 @@ class Ui_LessonDialog(object):
 "	color: black;\n"
 "}\n"
 "\n"
+"QPushButton[class=\"button-green\"] {\n"
+"	border: 1px solid #0a5128;\n"
+"    border-radius: 15px;\n"
+"    padding: 0px 10px 0px;\n"
+"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
+"                                stop:0 #1ebd5d, \n"
+"                                stop:1 #107f3f);\n"
+"    color: #FFF;\n"
+"    font: 10pt \"Inter SemiBold\";\n"
+"}\n"
+"\n"
+"QPushButton[class=\"button-green\"]:hover {\n"
+"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
+"                                stop:0 #2ecc71, \n"
+"                                stop:1 #27AE60);\n"
+"}\n"
+"\n"
+"QPushButton[class=\"button-green\"]:pressed {\n"
+"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
+"                                stop:0 #0b572a, \n"
+"                                stop:1 #129046); \n"
+"}\n"
+"\n"
+"QPushButton[class=\"button-green\"]:disabled {\n"
+"    background: #A5D6A7;\n"
+"    color: #E8F5E9;\n"
+"    opacity:"
+                        " 0.6;\n"
+"}\n"
+"\n"
 "*[class=\"button-normal\"] {\n"
 "	font: 10pt \"Inter\";\n"
-"	background-color: #e7e7e7;\n"
+"	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
+"                                stop:0 #ffffff, \n"
+"                                stop:1 #d8ecf6);\n"
 "	color: black;\n"
 "	border-radius: 15px;\n"
 "	border: 1px solid rgb(154, 153, 150);\n"
 "}\n"
 "\n"
 "*[class=\"button-normal\"]:hover {\n"
-"	background-color: white;\n"
+"	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
+"                                stop:0 #ffffff, \n"
+"                                stop:1 #f2f6f8);\n"
+"}\n"
+"\n"
+"*[class=\"button-normal\"]:pressed {\n"
+"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
+"                                stop:0 #dce5e9, \n"
+"                                stop:1 #ffffff);\n"
 "}\n"
 "\n"
 "*[class=\"button-normal\"]:disabled {\n"
-"    background-color: #bdc3c7;\n"
-"    color: #7f8c8d;\n"
-"    border: 1px solid #95a5a6;\n"
+"	background: #f5f5f5;\n"
+"	border: 1px solid #dcdcdc;\n"
+"	color: #aeaeae;\n"
 "}\n"
 "\n"
-"QLineEdit {\n"
-"	background-color: white; \n"
-"	border-radius: 15px;\n"
+"*[class=\"input-field\"] {\n"
+"	background-color: transparent;\n"
+"}\n"
+"\n"
+"*[class=\"input-field\"] QLineEdit {\n"
+""
+                        "	background-color: #ffffff;\n"
 "	border: 1px solid #999;\n"
-"	padding: 0px 15px;\n"
+"	border-left: none;\n"
+"	border-top-right-radius: 15px;\n"
+"	border-bottom-right-radius: 15px;\n"
+"	padding: 0px 8px;\n"
+"	color: black;\n"
+"}\n"
+"\n"
+"*[class=\"input-field\"] QLabel {\n"
+"	background-color: rgb(192, 191, 188);\n"
+"	border-left: 1px solid #999;\n"
+"	border-top: 1px solid #999;\n"
+"	border-bottom: 1px solid #999;\n"
+"	border-right: none;\n"
+"	border-top-left-radius: 15px;\n"
+"	border-bottom-left-radius: 15px;\n"
+"	padding-left: 8px;\n"
+"	color: black;\n"
 "}\n"
 "\n"
 "QComboBox {\n"
 "    border: 1px solid #999;\n"
-"    border-radius: 15px; /* Fully rounded pills */\n"
-"    padding: 0px 15px 0px;\n"
+"    border-left: none;\n"
+"    padding: 0px 10px;\n"
 "    background-color: #ffffff;\n"
 "    color: #333333;\n"
-"    font: 10pt \"Inter Medium\"; /* Consolidated font settings */\n"
+"    font: 10pt \"Inter Medium\";\n"
 "    selection-background-color: #7eb4d7;\n"
+"	border-top-right-radius: 15px;\n"
+"	border-bottom-right-radius: 15px;\n"
 "}\n"
 "\n"
 "QComboBox:focus, QLineEdit:focus {\n"
-"    border: 1px solid #007BFF;"
-                        "\n"
+"    border: 1px solid #007BFF;\n"
 "}\n"
 "\n"
 "QComboBox:hover, QLineEdit:hover {\n"
-"    border: 1px solid #3498db;\n"
+"    border: 1px solid #"
+                        "3498db;\n"
 "}\n"
 "\n"
 "QComboBox::drop-down {\n"
@@ -109,10 +170,10 @@ class Ui_LessonDialog(object):
 "}\n"
 "\n"
 "/* Hover state for items inside the dropdown */\n"
-"QComboBox QAbs"
-                        "tractItemView::item:hover {\n"
+"QComboBox QAbstractItemView::item:hover {\n"
 "    background-color: #7eb4d7;\n"
-"    color: #ffffff;\n"
+"    color: "
+                        "#ffffff;\n"
 "}")
         self.verticalLayout = QVBoxLayout(LessonDialog)
         self.verticalLayout.setObjectName(u"verticalLayout")
@@ -153,79 +214,122 @@ class Ui_LessonDialog(object):
 
         self.widget_right = QWidget(self.widget)
         self.widget_right.setObjectName(u"widget_right")
-        self.formLayout = QFormLayout(self.widget_right)
-        self.formLayout.setObjectName(u"formLayout")
-        self.label = QLabel(self.widget_right)
+        self.verticalLayout_2 = QVBoxLayout(self.widget_right)
+        self.verticalLayout_2.setSpacing(9)
+        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
+        self.verticalLayout_2.setContentsMargins(0, 9, 0, 0)
+        self.widget_6 = QWidget(self.widget_right)
+        self.widget_6.setObjectName(u"widget_6")
+        self.horizontalLayout_5 = QHBoxLayout(self.widget_6)
+        self.horizontalLayout_5.setSpacing(0)
+        self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
+        self.horizontalLayout_5.setContentsMargins(0, 0, 0, 0)
+        self.label = QLabel(self.widget_6)
         self.label.setObjectName(u"label")
+        self.label.setMinimumSize(QSize(132, 30))
+        self.label.setMaximumSize(QSize(132, 30))
         font = QFont()
         font.setFamilies([u"Inter"])
-        font.setPointSize(11)
+        font.setPointSize(10)
         font.setBold(False)
         font.setItalic(False)
         self.label.setFont(font)
-        self.label.setStyleSheet(u"font: 11pt \"Inter\"; color: rgb(0, 0, 0);")
+        self.label.setStyleSheet(u"")
+        self.label.setAlignment(Qt.AlignCenter)
 
-        self.formLayout.setWidget(0, QFormLayout.ItemRole.LabelRole, self.label)
+        self.horizontalLayout_5.addWidget(self.label)
 
-        self.txtLessonTitle = QLineEdit(self.widget_right)
+        self.txtLessonTitle = QLineEdit(self.widget_6)
         self.txtLessonTitle.setObjectName(u"txtLessonTitle")
         self.txtLessonTitle.setMinimumSize(QSize(0, 30))
         self.txtLessonTitle.setMaximumSize(QSize(16777215, 30))
         self.txtLessonTitle.setStyleSheet(u"")
 
-        self.formLayout.setWidget(0, QFormLayout.ItemRole.FieldRole, self.txtLessonTitle)
+        self.horizontalLayout_5.addWidget(self.txtLessonTitle)
 
-        self.label_2 = QLabel(self.widget_right)
+
+        self.verticalLayout_2.addWidget(self.widget_6)
+
+        self.widget_7 = QWidget(self.widget_right)
+        self.widget_7.setObjectName(u"widget_7")
+        self.horizontalLayout_6 = QHBoxLayout(self.widget_7)
+        self.horizontalLayout_6.setSpacing(0)
+        self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
+        self.horizontalLayout_6.setContentsMargins(0, 0, 0, 0)
+        self.label_2 = QLabel(self.widget_7)
         self.label_2.setObjectName(u"label_2")
+        self.label_2.setMinimumSize(QSize(132, 30))
+        self.label_2.setMaximumSize(QSize(132, 30))
         self.label_2.setFont(font)
-        self.label_2.setStyleSheet(u"font: 11pt \"Inter\"; color: rgb(0, 0, 0);")
+        self.label_2.setStyleSheet(u"")
+        self.label_2.setAlignment(Qt.AlignCenter)
 
-        self.formLayout.setWidget(1, QFormLayout.ItemRole.LabelRole, self.label_2)
+        self.horizontalLayout_6.addWidget(self.label_2)
 
-        self.cmbGradingPeriod = QComboBox(self.widget_right)
+        self.cmbGradingPeriod = QComboBox(self.widget_7)
         self.cmbGradingPeriod.setObjectName(u"cmbGradingPeriod")
         self.cmbGradingPeriod.setMinimumSize(QSize(0, 30))
         self.cmbGradingPeriod.setMaximumSize(QSize(16777215, 30))
         self.cmbGradingPeriod.setStyleSheet(u"")
 
-        self.formLayout.setWidget(1, QFormLayout.ItemRole.FieldRole, self.cmbGradingPeriod)
+        self.horizontalLayout_6.addWidget(self.cmbGradingPeriod)
 
-        self.label_3 = QLabel(self.widget_right)
+
+        self.verticalLayout_2.addWidget(self.widget_7)
+
+        self.widget_8 = QWidget(self.widget_right)
+        self.widget_8.setObjectName(u"widget_8")
+        self.horizontalLayout_7 = QHBoxLayout(self.widget_8)
+        self.horizontalLayout_7.setSpacing(0)
+        self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
+        self.horizontalLayout_7.setContentsMargins(0, 0, 0, 0)
+        self.label_3 = QLabel(self.widget_8)
         self.label_3.setObjectName(u"label_3")
+        self.label_3.setMinimumSize(QSize(132, 30))
+        self.label_3.setMaximumSize(QSize(132, 30))
         self.label_3.setFont(font)
-        self.label_3.setStyleSheet(u"font: 11pt \"Inter\"; color: rgb(0, 0, 0);")
+        self.label_3.setStyleSheet(u"")
+        self.label_3.setAlignment(Qt.AlignCenter)
 
-        self.formLayout.setWidget(2, QFormLayout.ItemRole.LabelRole, self.label_3)
+        self.horizontalLayout_7.addWidget(self.label_3)
 
-        self.txtChapter = QLineEdit(self.widget_right)
+        self.txtChapter = QLineEdit(self.widget_8)
         self.txtChapter.setObjectName(u"txtChapter")
         self.txtChapter.setMinimumSize(QSize(0, 30))
         self.txtChapter.setMaximumSize(QSize(16777215, 30))
         self.txtChapter.setStyleSheet(u"")
 
-        self.formLayout.setWidget(2, QFormLayout.ItemRole.FieldRole, self.txtChapter)
+        self.horizontalLayout_7.addWidget(self.txtChapter)
 
-        self.label_4 = QLabel(self.widget_right)
+
+        self.verticalLayout_2.addWidget(self.widget_8)
+
+        self.widget_9 = QWidget(self.widget_right)
+        self.widget_9.setObjectName(u"widget_9")
+        self.horizontalLayout_8 = QHBoxLayout(self.widget_9)
+        self.horizontalLayout_8.setSpacing(0)
+        self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
+        self.horizontalLayout_8.setContentsMargins(0, 0, 0, 0)
+        self.label_4 = QLabel(self.widget_9)
         self.label_4.setObjectName(u"label_4")
+        self.label_4.setMinimumSize(QSize(132, 30))
+        self.label_4.setMaximumSize(QSize(132, 30))
         self.label_4.setFont(font)
-        self.label_4.setStyleSheet(u"font: 11pt \"Inter\"; color: rgb(0, 0, 0);")
+        self.label_4.setStyleSheet(u"")
+        self.label_4.setAlignment(Qt.AlignCenter)
 
-        self.formLayout.setWidget(3, QFormLayout.ItemRole.LabelRole, self.label_4)
+        self.horizontalLayout_8.addWidget(self.label_4)
 
-        self.txtLessonNumber = QLineEdit(self.widget_right)
+        self.txtLessonNumber = QLineEdit(self.widget_9)
         self.txtLessonNumber.setObjectName(u"txtLessonNumber")
         self.txtLessonNumber.setMinimumSize(QSize(0, 30))
         self.txtLessonNumber.setMaximumSize(QSize(16777215, 30))
         self.txtLessonNumber.setStyleSheet(u"")
 
-        self.formLayout.setWidget(3, QFormLayout.ItemRole.FieldRole, self.txtLessonNumber)
+        self.horizontalLayout_8.addWidget(self.txtLessonNumber)
 
-        self.label_5 = QLabel(self.widget_right)
-        self.label_5.setObjectName(u"label_5")
-        self.label_5.setFont(font)
-        self.label_5.setStyleSheet(u"font: 11pt \"Inter\"; color: rgb(0, 0, 0);")
 
-        self.formLayout.setWidget(4, QFormLayout.ItemRole.LabelRole, self.label_5)
+        self.verticalLayout_2.addWidget(self.widget_9)
 
         self.widget_3 = QWidget(self.widget_right)
         self.widget_3.setObjectName(u"widget_3")
@@ -236,13 +340,8 @@ class Ui_LessonDialog(object):
 "QLineEdit {\n"
 "	background-color: rgb(255, 255, 255); \n"
 "	border: 1px solid #999999;\n"
+"	border-left: none;\n"
 "	border-right: none;\n"
-"	\n"
-"	border-top-left-radius: 15px;\n"
-"	border-bottom-left-radius: 15px;\n"
-"	border-top-right-radius: 0px;\n"
-"	border-bottom-right-radius: 0px;\n"
-"	\n"
 "	padding: 0px 15px;\n"
 "}\n"
 "\n"
@@ -270,11 +369,34 @@ class Ui_LessonDialog(object):
 "\n"
 "#btnBrowse:hover {\n"
 "    background-color: #e0e0e0;\n"
+"}\n"
+"\n"
+"QLabel {\n"
+"	background-color: rgb(192, 191, 188);\n"
+"	border-left: 1px solid #999;\n"
+"	border-top: 1px solid #999;\n"
+"	border-bottom: 1px solid #999;\n"
+"	border-right: none;\n"
+"	border-top-left-radius: 15px;\n"
+"	border-bottom-left-radius"
+                        ": 15px;\n"
+"	padding-left: 8px;\n"
+"	color: black;\n"
 "}")
         self.horizontalLayout_2 = QHBoxLayout(self.widget_3)
         self.horizontalLayout_2.setSpacing(0)
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
         self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
+        self.label_5 = QLabel(self.widget_3)
+        self.label_5.setObjectName(u"label_5")
+        self.label_5.setMinimumSize(QSize(132, 30))
+        self.label_5.setMaximumSize(QSize(132, 30))
+        self.label_5.setFont(font)
+        self.label_5.setStyleSheet(u"")
+        self.label_5.setAlignment(Qt.AlignCenter)
+
+        self.horizontalLayout_2.addWidget(self.label_5)
+
         self.txtLessonPath = QLineEdit(self.widget_3)
         self.txtLessonPath.setObjectName(u"txtLessonPath")
         self.txtLessonPath.setMinimumSize(QSize(0, 30))
@@ -285,14 +407,18 @@ class Ui_LessonDialog(object):
 
         self.btnBrowse = QPushButton(self.widget_3)
         self.btnBrowse.setObjectName(u"btnBrowse")
-        self.btnBrowse.setMinimumSize(QSize(30, 30))
+        self.btnBrowse.setMinimumSize(QSize(50, 30))
         self.btnBrowse.setMaximumSize(QSize(16777215, 30))
         self.btnBrowse.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
         self.horizontalLayout_2.addWidget(self.btnBrowse)
 
 
-        self.formLayout.setWidget(4, QFormLayout.ItemRole.FieldRole, self.widget_3)
+        self.verticalLayout_2.addWidget(self.widget_3)
+
+        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.verticalLayout_2.addItem(self.verticalSpacer)
 
 
         self.horizontalLayout_3.addWidget(self.widget_right)
@@ -310,16 +436,16 @@ class Ui_LessonDialog(object):
 
         self.btnCancel = QPushButton(self.widget_2)
         self.btnCancel.setObjectName(u"btnCancel")
-        self.btnCancel.setMinimumSize(QSize(80, 30))
-        self.btnCancel.setMaximumSize(QSize(80, 30))
+        self.btnCancel.setMinimumSize(QSize(100, 30))
+        self.btnCancel.setMaximumSize(QSize(100, 30))
         self.btnCancel.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
         self.horizontalLayout.addWidget(self.btnCancel)
 
         self.btnSave = QPushButton(self.widget_2)
         self.btnSave.setObjectName(u"btnSave")
-        self.btnSave.setMinimumSize(QSize(80, 30))
-        self.btnSave.setMaximumSize(QSize(80, 30))
+        self.btnSave.setMinimumSize(QSize(100, 30))
+        self.btnSave.setMaximumSize(QSize(100, 30))
         self.btnSave.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
         self.horizontalLayout.addWidget(self.btnSave)
@@ -338,15 +464,19 @@ class Ui_LessonDialog(object):
         self.label_img.setText("")
         self.btnUploadPhoto.setText(QCoreApplication.translate("LessonDialog", u"Update photo", None))
         self.btnUploadPhoto.setProperty(u"class", QCoreApplication.translate("LessonDialog", u"button-normal", None))
+        self.widget_6.setProperty(u"class", QCoreApplication.translate("LessonDialog", u"input-field", None))
         self.label.setText(QCoreApplication.translate("LessonDialog", u"Lesson Title", None))
+        self.widget_7.setProperty(u"class", QCoreApplication.translate("LessonDialog", u"input-field", None))
         self.label_2.setText(QCoreApplication.translate("LessonDialog", u"Grading Period", None))
+        self.widget_8.setProperty(u"class", QCoreApplication.translate("LessonDialog", u"input-field", None))
         self.label_3.setText(QCoreApplication.translate("LessonDialog", u"Chapter", None))
+        self.widget_9.setProperty(u"class", QCoreApplication.translate("LessonDialog", u"input-field", None))
         self.label_4.setText(QCoreApplication.translate("LessonDialog", u"Lesson Number", None))
         self.label_5.setText(QCoreApplication.translate("LessonDialog", u"Path", None))
         self.btnBrowse.setText(QCoreApplication.translate("LessonDialog", u"\u2022\u2022\u2022", None))
         self.btnCancel.setText(QCoreApplication.translate("LessonDialog", u"Cancel", None))
         self.btnCancel.setProperty(u"class", QCoreApplication.translate("LessonDialog", u"button-normal", None))
         self.btnSave.setText(QCoreApplication.translate("LessonDialog", u"Save", None))
-        self.btnSave.setProperty(u"class", QCoreApplication.translate("LessonDialog", u"button-normal", None))
+        self.btnSave.setProperty(u"class", QCoreApplication.translate("LessonDialog", u"button-green", None))
     # retranslateUi
 

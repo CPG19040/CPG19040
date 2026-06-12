@@ -570,7 +570,7 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
         self.btnAddItem_tf.clicked.connect(lambda: self.add_item("True or False", self.layout_trueorfalse))
 
         self.quiz_no.setValue(q_num)
-        self.populate_pulldown_lesson()
+        self.util.populate_gradingperiod_pulldown(self.cbGradingPeriod, self.cbLessonName, default_gp=g_period)
         self.countLayoutChildren()
 
         idx = self.cbGradingPeriod.findData(g_period)

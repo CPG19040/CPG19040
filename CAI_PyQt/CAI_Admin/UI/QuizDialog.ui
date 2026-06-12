@@ -20,71 +20,87 @@
     background-color: rgb(222, 221, 218);
 }
 
-*[class=&quot;button-green&quot;] {
+QPushButton[class=&quot;button-green&quot;] {
+	border: 1px solid #0a5128;
     border-radius: 15px;
     padding: 0px 10px 0px;
-    background: #129046;
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
+                                stop:0 #1ebd5d, 
+                                stop:1 #107f3f);
     color: #FFF;
-	font: 10pt &quot;Inter SemiBold&quot;;
+    font: 10pt &quot;Inter SemiBold&quot;;
 }
 
-*[class=&quot;button-green&quot;]:hover {
-    background: #27AE60;
+QPushButton[class=&quot;button-green&quot;]:hover {
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
+                                stop:0 #2ecc71, 
+                                stop:1 #27AE60);
 }
 
-*[class=&quot;button-green&quot;]:disabled {
-    background: #A5D6A7;
-    color: #E8F5E9;
-    opacity: 0.6;
+QPushButton[class=&quot;button-green&quot;]:pressed {
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
+                                stop:0 #0b572a, 
+                                stop:1 #129046); 
+}
+
+QPushButton[class=&quot;button-green&quot;]:disabled {
+	background: #A5D6A7;
+	border: 1px solid #94c096;
+	color: #E8F5E9;
+	opacity: 0.6;
 }
 
 QComboBox[class=&quot;combobox-main&quot;] {
-	height: 30px;
-	border: 1px solid #999;
-	border-radius: 15px;
+    height: 30px;
+    border: 1px solid #999;
+    border-radius: 15px;
     padding-left: 10px;
     background-color: #ffffff;
     color: #333333;
-    font-size: 12px;
+    font: 10pt &quot;Inter Medium&quot;;
     selection-background-color: #7eb4d7;
-	font: 10pt &quot;Inter&quot;;
 }
 
-QComboBox[class=&quot;combobox-main&quot;]:focus {
-	border: 1px solid #007BFF;
+QComboBox:focus {
+    border: 1px solid #007BFF;
 }
 
-QComboBox[class=&quot;combobox-main&quot;]:hover {
+QComboBox:hover {
     border: 1px solid #3498db;
 }
 
-QComboBox[class=&quot;combobox-main&quot;]::drop-down {
+QComboBox::drop-down {
     subcontrol-origin: padding;
     subcontrol-position: top right;
     width: 30px;
     border-left-width: 0px;
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
 }
 
-QComboBox[class=&quot;combobox-main&quot;]::down-arrow {
+QComboBox::down-arrow {
     image: url(:/Images/Images/caret-down.png);
     border: none;
     width: 8px;
     height: 8px;
 }
 
-QComboBox[class=&quot;combobox-main&quot;] QAbstractItemView {
-    background-color: #ffffff;
+QComboBox QAbstractItemView {
+    background-color: white !important;
+    border: 1px solid #999;
     selection-background-color: #7eb4d7;
     selection-color: #ffffff;
-    border-radius: 5px;
+    outline: 0;
 }
 
-QComboBox[class=&quot;combobox-main&quot;] QAbstractItemView::item {
-    min-height: 35px;
-    padding-left: 10px;
+QComboBox QAbstractItemView::item {
     border-radius: 4px;
+    color: #333333;
+}
+
+QComboBox[class=&quot;combobox-main&quot;] QAbstractItemView::item:hover {
+    background-color: #7eb4d7;
+    color: #ffffff;
 }
 
 QSpinBox {
@@ -230,7 +246,7 @@ QSpinBox::down-arrow:disabled {
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">color: rgb(0, 0, 0); background-color: rgb(246, 245, 244); padding: 0px 10px 0px;</string>
+         <string notr="true"/>
         </property>
         <property name="class" stdset="0">
          <string>combobox-main</string>
@@ -259,7 +275,7 @@ QSpinBox::down-arrow:disabled {
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">color: rgb(0, 0, 0); background-color: rgb(246, 245, 244); padding: 0px 10px 0px;</string>
+         <string notr="true"/>
         </property>
         <property name="class" stdset="0">
          <string>combobox-main</string>

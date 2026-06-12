@@ -86,8 +86,6 @@ class Controller:
         self.ui.btn_manual.setChecked(True)
         self.get_dynamic_grading_period_dates()
 
-        self.util.populate_gradingperiod_pulldown(self.ui.cb_gp_quiz_idv, default_gp=self.GRADING_PERIOD)
-
         # Search Box: Pass the text directly
         self.ui.txt_classList_search.textChanged.connect(self.display_student_cards)
 
@@ -310,8 +308,15 @@ class Controller:
             self.display_section_info()
 
         elif index == 6: # Reports
-            self.util.populate_gradingperiod_pulldown(self.ui.comboBox_ReportsGradingPeriod, default_gp=self.GRADING_PERIOD)
+            query = """
+                SELECT gpid, gpname
+                FROM cai.tbl_grading_period;
+            """
+            self.util.populate_pulldown(self.ui.comboBox_ReportsGradingPeriod, query, default_value=self.GRADING_PERIOD)
+            self.util.populate_pulldown(self.ui.cb_gp_quiz_idv, query, default_value=self.GRADING_PERIOD)
+            
             gpid = self.ui.comboBox_ReportsGradingPeriod.currentData()
+
             query = """
                 SELECT
                     lesson_id

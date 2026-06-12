@@ -46,34 +46,61 @@ QMessageBox QPushButton {
 	padding: 0px 12px;
 }
 
-*[class=&quot;button-green&quot;] {
+QPushButton[class=&quot;button-green&quot;] {
+	border: 1px solid #0a5128;
     border-radius: 15px;
     padding: 0px 10px 0px;
-    background: #129046;
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
+                                stop:0 #1ebd5d, 
+                                stop:1 #107f3f);
     color: #FFF;
-	font: 10pt &quot;Inter SemiBold&quot;;
+    font: 10pt &quot;Inter SemiBold&quot;;
 }
 
-*[class=&quot;button-green&quot;]:hover {
-    background: #27AE60;
+QPushButton[class=&quot;button-green&quot;]:hover {
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
+                                stop:0 #2ecc71, 
+                                stop:1 #27AE60);
+}
+
+QPushButton[class=&quot;button-green&quot;]:pressed {
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
+                                stop:0 #0b572a, 
+                                stop:1 #129046); 
+}
+
+QPushButton[class=&quot;button-green&quot;]:disabled {
+    background: #A5D6A7;
+    color: #E8F5E9;
+    opacity: 0.6;
 }
 
 *[class=&quot;button-normal&quot;] {
 	font: 10pt &quot;Inter&quot;;
-	background-color: #e7e7e7;
+	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
+                                stop:0 #ffffff, 
+                                stop:1 #d8ecf6);
 	color: black;
 	border-radius: 15px;
 	border: 1px solid rgb(154, 153, 150);
 }
 
 *[class=&quot;button-normal&quot;]:hover {
-	background-color: white;
+	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
+                                stop:0 #ffffff, 
+                                stop:1 #f2f6f8);
+}
+
+*[class=&quot;button-normal&quot;]:pressed {
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
+                                stop:0 #dce5e9, 
+                                stop:1 #ffffff);
 }
 
 *[class=&quot;button-normal&quot;]:disabled {
-    background-color: #bdc3c7;
-    color: #7f8c8d;
-    border: 1px solid #95a5a6;
+	background: #f5f5f5;
+	border: 1px solid #dcdcdc;
+	color: #aeaeae;
 }
 
 /* 1. THE MAIN CONTAINER */
@@ -182,7 +209,7 @@ QLabel {
      <number>0</number>
     </property>
     <item>
-     <widget class="QGroupBox" name="navigationBar">
+     <widget class="QWidget" name="navigationBar" native="true">
       <property name="maximumSize">
        <size>
         <width>200</width>
@@ -199,11 +226,36 @@ QLabel {
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(61, 61, 61); /* Dark Gray or Storm Dust */</string>
+       <string notr="true">#navigationBar, #widget_logo, #line, #line_2 {
+	background-color: rgb(61, 61, 61); /* Dark Gray or Storm Dust */
+}
+
+QPushButton[class=&quot;button-left-nav&quot;] {
+	border-radius: 0px;
+	background: transparent;
+	color: white;
+	text-align: left;
+	padding: 0px 10px;
+	font: 57 10pt &quot;Inter Medium&quot;;
+}
+
+QPushButton[class=&quot;button-left-nav&quot;]:hover {
+ 	background: #5d5d5d;
+}
+
+QPushButton[class=&quot;button-left-nav&quot;]:checked {
+	background-color: #5d5d5d;
+	color: white;
+	border-left: 5px solid #FF00FF;
+}
+
+QPushButton[class=&quot;button-left-nav&quot;]:hover:!checked {
+	background-color: #5d5d5d;
+}</string>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_5">
        <property name="spacing">
-        <number>6</number>
+        <number>0</number>
        </property>
        <property name="leftMargin">
         <number>0</number>
@@ -215,12 +267,15 @@ QLabel {
         <number>0</number>
        </property>
        <property name="bottomMargin">
-        <number>0</number>
+        <number>9</number>
        </property>
        <item>
-        <widget class="QWidget" name="widget_3" native="true">
-         <layout class="QGridLayout" name="gridLayout_2">
-          <item row="0" column="0">
+        <widget class="QWidget" name="widget_logo" native="true">
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_10">
+          <item>
            <widget class="QLabel" name="label_20">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
@@ -265,13 +320,13 @@ QLabel {
          <property name="minimumSize">
           <size>
            <width>200</width>
-           <height>30</height>
+           <height>40</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
            <width>16777215</width>
-           <height>30</height>
+           <height>40</height>
           </size>
          </property>
          <property name="font">
@@ -287,26 +342,7 @@ QLabel {
           <cursorShape>PointingHandCursor</cursorShape>
          </property>
          <property name="styleSheet">
-          <string notr="true">QPushButton {
-	border-radius: 0px;
-	background: transparent;
-	color: white;
-	text-align: left;
-	padding: 0px 0px 0px 10px;
-	font: 57 10pt &quot;Inter Medium&quot;;
-}
-QPushButton:hover {
- 	background: #5d5d5d;
-}
-/* This is the highlight state */
-QPushButton:checked {
-	background-color: #5d5d5d; /* Highlight color */
-	color: white;
-	border-left: 5px solid #FF00FF; /* Active accent line */
-}
-QPushButton:hover:!checked {
-	background-color: #5d5d5d;
-}</string>
+          <string notr="true"/>
          </property>
          <property name="text">
           <string>Home</string>
@@ -321,6 +357,9 @@ QPushButton:hover:!checked {
            <height>24</height>
           </size>
          </property>
+         <property name="class" stdset="0">
+          <string>button-left-nav</string>
+         </property>
         </widget>
        </item>
        <item>
@@ -328,13 +367,13 @@ QPushButton:hover:!checked {
          <property name="minimumSize">
           <size>
            <width>200</width>
-           <height>30</height>
+           <height>40</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
            <width>16777215</width>
-           <height>30</height>
+           <height>40</height>
           </size>
          </property>
          <property name="font">
@@ -350,26 +389,7 @@ QPushButton:hover:!checked {
           <cursorShape>PointingHandCursor</cursorShape>
          </property>
          <property name="styleSheet">
-          <string notr="true">QPushButton {
-	border-radius: 0px;
-	background: transparent;
-	color: white;
-	text-align: left;
-	padding: 0px 0px 0px 10px;
-	font: 57 10pt &quot;Inter Medium&quot;;
-}
-QPushButton:hover {
- 	background: #5d5d5d;
-}
-/* This is the highlight state */
-QPushButton:checked {
-	background-color: #5d5d5d; /* Highlight color */
-	color: white;
-	border-left: 5px solid #FF00FF; /* Active accent line */
-}
-QPushButton:hover:!checked {
-	background-color: #5d5d5d;
-}</string>
+          <string notr="true"/>
          </property>
          <property name="text">
           <string>Student List</string>
@@ -384,6 +404,9 @@ QPushButton:hover:!checked {
            <height>24</height>
           </size>
          </property>
+         <property name="class" stdset="0">
+          <string>button-left-nav</string>
+         </property>
         </widget>
        </item>
        <item>
@@ -391,13 +414,13 @@ QPushButton:hover:!checked {
          <property name="minimumSize">
           <size>
            <width>200</width>
-           <height>30</height>
+           <height>40</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
            <width>16777215</width>
-           <height>30</height>
+           <height>40</height>
           </size>
          </property>
          <property name="font">
@@ -413,26 +436,7 @@ QPushButton:hover:!checked {
           <cursorShape>PointingHandCursor</cursorShape>
          </property>
          <property name="styleSheet">
-          <string notr="true">QPushButton {
-	border-radius: 0px;
-	background: transparent;
-	color: white;
-	text-align: left;
-	padding: 0px 0px 0px 10px;
-	font: 57 10pt &quot;Inter Medium&quot;;
-}
-QPushButton:hover {
- 	background: #5d5d5d;
-}
-/* This is the highlight state */
-QPushButton:checked {
-	background-color: #5d5d5d; /* Highlight color */
-	color: white;
-	border-left: 5px solid #FF00FF; /* Active accent line */
-}
-QPushButton:hover:!checked {
-	background-color: #5d5d5d;
-}</string>
+          <string notr="true"/>
          </property>
          <property name="text">
           <string>Lesson</string>
@@ -447,6 +451,9 @@ QPushButton:hover:!checked {
            <height>24</height>
           </size>
          </property>
+         <property name="class" stdset="0">
+          <string>button-left-nav</string>
+         </property>
         </widget>
        </item>
        <item>
@@ -454,13 +461,13 @@ QPushButton:hover:!checked {
          <property name="minimumSize">
           <size>
            <width>200</width>
-           <height>30</height>
+           <height>40</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
            <width>16777215</width>
-           <height>30</height>
+           <height>40</height>
           </size>
          </property>
          <property name="font">
@@ -476,26 +483,7 @@ QPushButton:hover:!checked {
           <cursorShape>PointingHandCursor</cursorShape>
          </property>
          <property name="styleSheet">
-          <string notr="true">QPushButton {
-	border-radius: 0px;
-	background: transparent;
-	color: white;
-	text-align: left;
-	padding: 0px 0px 0px 10px;
-	font: 57 10pt &quot;Inter Medium&quot;;
-}
-QPushButton:hover {
- 	background: #5d5d5d;
-}
-/* This is the highlight state */
-QPushButton:checked {
-	background-color: #5d5d5d; /* Highlight color */
-	color: white;
-	border-left: 5px solid #FF00FF; /* Active accent line */
-}
-QPushButton:hover:!checked {
-	background-color: #5d5d5d;
-}</string>
+          <string notr="true"/>
          </property>
          <property name="text">
           <string>Quiz</string>
@@ -510,6 +498,9 @@ QPushButton:hover:!checked {
            <height>24</height>
           </size>
          </property>
+         <property name="class" stdset="0">
+          <string>button-left-nav</string>
+         </property>
         </widget>
        </item>
        <item>
@@ -517,13 +508,13 @@ QPushButton:hover:!checked {
          <property name="minimumSize">
           <size>
            <width>200</width>
-           <height>30</height>
+           <height>40</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
            <width>16777215</width>
-           <height>30</height>
+           <height>40</height>
           </size>
          </property>
          <property name="font">
@@ -539,26 +530,7 @@ QPushButton:hover:!checked {
           <cursorShape>PointingHandCursor</cursorShape>
          </property>
          <property name="styleSheet">
-          <string notr="true">QPushButton {
-	border-radius: 0px;
-	background: transparent;
-	color: white;
-	text-align: left;
-	padding: 0px 0px 0px 10px;
-	font: 57 10pt &quot;Inter Medium&quot;;
-}
-QPushButton:hover {
- 	background: #5d5d5d;
-}
-/* This is the highlight state */
-QPushButton:checked {
-	background-color: #5d5d5d; /* Highlight color */
-	color: white;
-	border-left: 5px solid #FF00FF; /* Active accent line */
-}
-QPushButton:hover:!checked {
-	background-color: #5d5d5d;
-}</string>
+          <string notr="true"/>
          </property>
          <property name="text">
           <string>Exercise</string>
@@ -573,6 +545,9 @@ QPushButton:hover:!checked {
            <height>24</height>
           </size>
          </property>
+         <property name="class" stdset="0">
+          <string>button-left-nav</string>
+         </property>
         </widget>
        </item>
        <item>
@@ -580,13 +555,13 @@ QPushButton:hover:!checked {
          <property name="minimumSize">
           <size>
            <width>200</width>
-           <height>30</height>
+           <height>40</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
            <width>16777215</width>
-           <height>30</height>
+           <height>40</height>
           </size>
          </property>
          <property name="font">
@@ -602,26 +577,7 @@ QPushButton:hover:!checked {
           <cursorShape>PointingHandCursor</cursorShape>
          </property>
          <property name="styleSheet">
-          <string notr="true">QPushButton {
-	border-radius: 0px;
-	background: transparent;
-	color: white;
-	text-align: left;
-	padding: 0px 0px 0px 10px;
-	font: 57 10pt &quot;Inter Medium&quot;;
-}
-QPushButton:hover {
- 	background: #5d5d5d;
-}
-/* This is the highlight state */
-QPushButton:checked {
-	background-color: #5d5d5d; /* Highlight color */
-	color: white;
-	border-left: 5px solid #FF00FF; /* Active accent line */
-}
-QPushButton:hover:!checked {
-	background-color: #5d5d5d;
-}</string>
+          <string notr="true"/>
          </property>
          <property name="text">
           <string>Sections</string>
@@ -636,6 +592,9 @@ QPushButton:hover:!checked {
            <height>24</height>
           </size>
          </property>
+         <property name="class" stdset="0">
+          <string>button-left-nav</string>
+         </property>
         </widget>
        </item>
        <item>
@@ -643,13 +602,13 @@ QPushButton:hover:!checked {
          <property name="minimumSize">
           <size>
            <width>200</width>
-           <height>30</height>
+           <height>40</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
            <width>16777215</width>
-           <height>30</height>
+           <height>40</height>
           </size>
          </property>
          <property name="font">
@@ -665,26 +624,7 @@ QPushButton:hover:!checked {
           <cursorShape>PointingHandCursor</cursorShape>
          </property>
          <property name="styleSheet">
-          <string notr="true">QPushButton {
-	border-radius: 0px;
-	background: transparent;
-	color: white;
-	text-align: left;
-	padding: 0px 0px 0px 10px;
-	font: 57 10pt &quot;Inter Medium&quot;;
-}
-QPushButton:hover {
- 	background: #5d5d5d;
-}
-/* This is the highlight state */
-QPushButton:checked {
-	background-color: #5d5d5d; /* Highlight color */
-	color: white;
-	border-left: 5px solid #FF00FF; /* Active accent line */
-}
-QPushButton:hover:!checked {
-	background-color: #5d5d5d;
-}</string>
+          <string notr="true"/>
          </property>
          <property name="text">
           <string>Reports</string>
@@ -698,6 +638,9 @@ QPushButton:hover:!checked {
            <width>24</width>
            <height>24</height>
           </size>
+         </property>
+         <property name="class" stdset="0">
+          <string>button-left-nav</string>
          </property>
         </widget>
        </item>
@@ -815,13 +758,13 @@ QPushButton:hover {
          <property name="minimumSize">
           <size>
            <width>200</width>
-           <height>30</height>
+           <height>40</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
            <width>16777215</width>
-           <height>30</height>
+           <height>40</height>
           </size>
          </property>
          <property name="font">
@@ -837,18 +780,7 @@ QPushButton:hover {
           <cursorShape>PointingHandCursor</cursorShape>
          </property>
          <property name="styleSheet">
-          <string notr="true">QPushButton {
-	border-radius: 0px;
-	background: transparent;
-	color: white;
-	text-align: left;
-    padding: 0px 0px 0px 10px;
-	font: 57 10pt &quot;Inter Medium&quot;;
-}
-
-QPushButton:hover {
- 	background: #5d5d5d;
-}</string>
+          <string notr="true"/>
          </property>
          <property name="text">
           <string>Log out</string>
@@ -862,6 +794,9 @@ QPushButton:hover {
            <width>24</width>
            <height>24</height>
           </size>
+         </property>
+         <property name="class" stdset="0">
+          <string>button-left-nav</string>
          </property>
         </widget>
        </item>
@@ -877,13 +812,13 @@ QPushButton:hover {
          <property name="minimumSize">
           <size>
            <width>200</width>
-           <height>30</height>
+           <height>40</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
            <width>16777215</width>
-           <height>30</height>
+           <height>40</height>
           </size>
          </property>
          <property name="font">
@@ -899,18 +834,7 @@ QPushButton:hover {
           <cursorShape>PointingHandCursor</cursorShape>
          </property>
          <property name="styleSheet">
-          <string notr="true">QPushButton {
-	border-radius: 0px;
-	background: transparent;
-	color: white;
-	text-align: left;
-    padding: 0px 0px 0px 10px;
-	font: 57 10pt &quot;Inter Medium&quot;;
-}
-
-QPushButton:hover {
- 	background: #5d5d5d;
-}</string>
+          <string notr="true"/>
          </property>
          <property name="text">
           <string>Users</string>
@@ -925,6 +849,9 @@ QPushButton:hover {
            <height>24</height>
           </size>
          </property>
+         <property name="class" stdset="0">
+          <string>button-left-nav</string>
+         </property>
         </widget>
        </item>
        <item>
@@ -932,13 +859,13 @@ QPushButton:hover {
          <property name="minimumSize">
           <size>
            <width>200</width>
-           <height>30</height>
+           <height>40</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
            <width>16777215</width>
-           <height>30</height>
+           <height>40</height>
           </size>
          </property>
          <property name="font">
@@ -954,18 +881,7 @@ QPushButton:hover {
           <cursorShape>PointingHandCursor</cursorShape>
          </property>
          <property name="styleSheet">
-          <string notr="true">QPushButton {
-	border-radius: 0px;
-	background: transparent;
-	color: white;
-	text-align: left;
-    padding: 0px 0px 0px 10px;
-	font: 57 10pt &quot;Inter Medium&quot;;
-}
-
-QPushButton:hover {
- 	background: #5d5d5d;
-}</string>
+          <string notr="true"/>
          </property>
          <property name="text">
           <string>Utilities</string>
@@ -979,6 +895,9 @@ QPushButton:hover {
            <width>24</width>
            <height>24</height>
           </size>
+         </property>
+         <property name="class" stdset="0">
+          <string>button-left-nav</string>
          </property>
         </widget>
        </item>
@@ -2482,11 +2401,11 @@ border-radius: 20px;</string>
 QComboBox[class=&quot;combobox-main&quot;] {
     height: 30px;
     border: 1px solid #999;
-    border-radius: 15px; /* Fully rounded pills */
+    border-radius: 15px;
     padding-left: 10px;
     background-color: #ffffff;
     color: #333333;
-    font: 10pt &quot;Inter Medium&quot;; /* Consolidated font settings */
+    font: 10pt &quot;Inter Medium&quot;;
     selection-background-color: #7eb4d7;
 }
 
@@ -2503,7 +2422,6 @@ QComboBox::drop-down {
     subcontrol-position: top right;
     width: 30px;
     border-left-width: 0px;
-    /* Match the 15px border-radius of the main control */
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
 }
@@ -2520,7 +2438,7 @@ QComboBox QAbstractItemView {
     border: 1px solid #999;
     selection-background-color: #7eb4d7;
     selection-color: #ffffff;
-    outline: 0; /* Removes the ugly dotted focus border */
+    outline: 0;
 }
 
 QComboBox QAbstractItemView::item {
@@ -3744,7 +3662,7 @@ QSpinBox::down-arrow {
                  <string notr="true"/>
                 </property>
                 <property name="text">
-                 <string>Add/Import</string>
+                 <string> Add/Import</string>
                 </property>
                 <property name="icon">
                  <iconset resource="../resources.qrc">
@@ -3785,7 +3703,7 @@ QSpinBox::down-arrow {
                  <string notr="true"/>
                 </property>
                 <property name="text">
-                 <string>Edit</string>
+                 <string> Edit</string>
                 </property>
                 <property name="icon">
                  <iconset resource="../resources.qrc">
@@ -3826,7 +3744,7 @@ QSpinBox::down-arrow {
                  <string notr="true"/>
                 </property>
                 <property name="text">
-                 <string>Delete</string>
+                 <string> Delete</string>
                 </property>
                 <property name="icon">
                  <iconset resource="../resources.qrc">
@@ -3867,7 +3785,7 @@ QSpinBox::down-arrow {
                  <string notr="true"/>
                 </property>
                 <property name="text">
-                 <string>Print</string>
+                 <string> Print</string>
                 </property>
                 <property name="icon">
                  <iconset resource="../resources.qrc">
@@ -4196,7 +4114,7 @@ QPushButton:hover {
              <cursorShape>PointingHandCursor</cursorShape>
             </property>
             <property name="text">
-             <string>View</string>
+             <string> View</string>
             </property>
             <property name="icon">
              <iconset resource="../resources.qrc">
@@ -4225,7 +4143,7 @@ QPushButton:hover {
              <cursorShape>PointingHandCursor</cursorShape>
             </property>
             <property name="text">
-             <string>Edit</string>
+             <string> Edit</string>
             </property>
             <property name="icon">
              <iconset resource="../resources.qrc">
@@ -4254,7 +4172,7 @@ QPushButton:hover {
              <cursorShape>PointingHandCursor</cursorShape>
             </property>
             <property name="text">
-             <string>Add</string>
+             <string> Add</string>
             </property>
             <property name="icon">
              <iconset resource="../resources.qrc">
@@ -4373,11 +4291,11 @@ QScrollBar::add-line, QScrollBar::sub-line {
         <string notr="true">QComboBox[class=&quot;combobox-main&quot;] {
     height: 30px;
     border: 1px solid #999;
-    border-radius: 15px; /* Fully rounded pills */
+    border-radius: 15px;
     padding-left: 10px;
     background-color: #ffffff;
     color: #333333;
-    font: 10pt &quot;Inter Medium&quot;; /* Consolidated font settings */
+    font: 10pt &quot;Inter Medium&quot;;
     selection-background-color: #7eb4d7;
 }
 
@@ -4394,7 +4312,6 @@ QComboBox::drop-down {
     subcontrol-position: top right;
     width: 30px;
     border-left-width: 0px;
-    /* Match the 15px border-radius of the main control */
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
 }
@@ -4411,7 +4328,7 @@ QComboBox QAbstractItemView {
     border: 1px solid #999;
     selection-background-color: #7eb4d7;
     selection-color: #ffffff;
-    outline: 0; /* Removes the ugly dotted focus border */
+    outline: 0;
 }
 
 QComboBox QAbstractItemView::item {
@@ -5058,6 +4975,18 @@ QPushButton:hover {
         <item>
          <widget class="QWidget" name="widget_quiz_2" native="true">
           <layout class="QGridLayout" name="gridLayout">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
            <item row="4" column="2">
             <widget class="QScrollArea" name="scrollArea_tf">
              <property name="styleSheet">
@@ -5071,8 +5000,8 @@ QPushButton:hover {
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>312</width>
-                <height>502</height>
+                <width>318</width>
+                <height>538</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_13"/>
@@ -5114,8 +5043,8 @@ QPushButton:hover {
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>311</width>
-                <height>502</height>
+                <width>317</width>
+                <height>538</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_12"/>
@@ -5135,8 +5064,8 @@ QPushButton:hover {
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>312</width>
-                <height>502</height>
+                <width>318</width>
+                <height>538</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_11"/>
@@ -5193,6 +5122,18 @@ QPushButton:hover {
         <item>
          <widget class="QWidget" name="widget_quiz_3" native="true">
           <layout class="QHBoxLayout" name="horizontalLayout_12">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
            <item>
             <spacer name="horizontalSpacer_5">
              <property name="orientation">
@@ -5423,11 +5364,11 @@ QPushButton:hover {
         <string notr="true">QComboBox[class=&quot;combobox-main&quot;] {
     height: 30px;
     border: 1px solid #999;
-    border-radius: 15px; /* Fully rounded pills */
+    border-radius: 15px;
     padding-left: 10px;
     background-color: #ffffff;
     color: #333333;
-    font: 10pt &quot;Inter Medium&quot;; /* Consolidated font settings */
+    font: 10pt &quot;Inter Medium&quot;;
     selection-background-color: #7eb4d7;
 }
 
@@ -5444,7 +5385,6 @@ QComboBox::drop-down {
     subcontrol-position: top right;
     width: 30px;
     border-left-width: 0px;
-    /* Match the 15px border-radius of the main control */
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
 }
@@ -5461,7 +5401,7 @@ QComboBox QAbstractItemView {
     border: 1px solid #999;
     selection-background-color: #7eb4d7;
     selection-color: #ffffff;
-    outline: 0; /* Removes the ugly dotted focus border */
+    outline: 0;
 }
 
 QComboBox QAbstractItemView::item {
@@ -6331,15 +6271,29 @@ QScrollBar::add-line, QScrollBar::sub-line {
                </property>
                <item>
                 <widget class="QWidget" name="widget_stud_tblheader_idv" native="true">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>44</height>
+                  </size>
+                 </property>
                  <property name="styleSheet">
                   <string notr="true">#widget_stud_tblheader_idv { 
-	background-color: rgb(224, 243, 255);
+	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
+                                stop:0 #ffffff, 
+                                stop:1 #c6e9ff);
 	border: 1px solid rgb(98, 160, 234);
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
 }</string>
                  </property>
                  <layout class="QHBoxLayout" name="horizontalLayout_7">
+                  <property name="topMargin">
+                   <number>2</number>
+                  </property>
+                  <property name="bottomMargin">
+                   <number>2</number>
+                  </property>
                   <item>
                    <widget class="QWidget" name="widget_search_idv" native="true">
                     <property name="minimumSize">
@@ -6479,7 +6433,9 @@ QScrollBar::add-line, QScrollBar::sub-line {
                 <widget class="QWidget" name="widget_7" native="true">
                  <property name="styleSheet">
                   <string notr="true">#widget_7 { 
-	background-color: rgb(224, 243, 255);
+	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
+                                stop:0 #ffffff, 
+                                stop:1 #c6e9ff);
 	border: 1px solid rgb(98, 160, 234);
 	border-top-left-radius: 10px;
     border-top-right-radius: 10px;
@@ -6488,26 +6444,76 @@ QScrollBar::add-line, QScrollBar::sub-line {
 QLabel {
 	background: transparent;
 	border: none;
+}
+
+#label_student_icon {
+	
 }</string>
                  </property>
                  <layout class="QHBoxLayout" name="horizontalLayout_21">
+                  <property name="topMargin">
+                   <number>5</number>
+                  </property>
+                  <property name="bottomMargin">
+                   <number>5</number>
+                  </property>
                   <item>
-                   <widget class="QLabel" name="label_student_icon">
-                    <property name="maximumSize">
+                   <widget class="QWidget" name="widget_3" native="true">
+                    <property name="minimumSize">
                      <size>
-                      <width>30</width>
-                      <height>30</height>
+                      <width>36</width>
+                      <height>36</height>
                      </size>
                     </property>
-                    <property name="text">
-                     <string/>
+                    <property name="maximumSize">
+                     <size>
+                      <width>36</width>
+                      <height>36</height>
+                     </size>
                     </property>
-                    <property name="pixmap">
-                     <pixmap resource="../resources.qrc">:/Images/Images/profile_gray.png</pixmap>
+                    <property name="styleSheet">
+                     <string notr="true">border-radius: 18px;
+background-color: rgb(98, 160, 234);</string>
                     </property>
-                    <property name="scaledContents">
-                     <bool>true</bool>
-                    </property>
+                    <layout class="QHBoxLayout" name="horizontalLayout_35">
+                     <property name="spacing">
+                      <number>0</number>
+                     </property>
+                     <property name="leftMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="topMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="rightMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="bottomMargin">
+                      <number>0</number>
+                     </property>
+                     <item>
+                      <widget class="QLabel" name="label_student_icon">
+                       <property name="maximumSize">
+                        <size>
+                         <width>30</width>
+                         <height>30</height>
+                        </size>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true">background: transparent;</string>
+                       </property>
+                       <property name="text">
+                        <string/>
+                       </property>
+                       <property name="pixmap">
+                        <pixmap resource="../resources.qrc">:/Images/Images/profile_gray.png</pixmap>
+                       </property>
+                       <property name="scaledContents">
+                        <bool>true</bool>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
                    </widget>
                   </item>
                   <item>
@@ -6703,7 +6709,7 @@ QLabel {
                      <string notr="true"/>
                     </property>
                     <property name="text">
-                     <string>Print</string>
+                     <string> Print</string>
                     </property>
                     <property name="icon">
                      <iconset resource="../resources.qrc">
@@ -7381,14 +7387,16 @@ QSpinBox::down-arrow, QDateEdit::down-arrow {
           </property>
           <widget class="QWidget" name="tab_settings">
            <property name="styleSheet">
-            <string notr="true">#widget_SY_header, #widget_GP_header { 
-	background-color: rgb(224, 243, 255);
+            <string notr="true">#widget_SY_header, #widget_SY_header_2 { 
+	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
+                                stop:0 #ffffff, 
+                                stop:1 #c6e9ff);
 	border: 1px solid rgb(98, 160, 234);
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
 }
 
-#widget_SY_body_1, #widget_SY_body_2, #widget_GP_body {
+#widget_SY_body_1, #widget_SY_body_2, #widget_SY_body_3 {
 	background-color: #fff;
 	border: 1px solid #999;
 	border-top: none;
@@ -7596,22 +7604,36 @@ font: 12pt &quot;Inter&quot;;</string>
                     </property>
                     <property name="styleSheet">
                      <string notr="true">QPushButton {
+	border: 1px solid #0a5128;
     border-radius: 15px;
     padding: 0px 10px 0px;
-    background: #129046;
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
+                                stop:0 #1ebd5d, 
+                                stop:1 #107f3f);
     color: #FFF;
-	font: 10pt &quot;Inter SemiBold&quot;;
+    font: 10pt &quot;Inter SemiBold&quot;;
 }
 
 QPushButton:hover {
-    background: #27AE60;
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
+                                stop:0 #2ecc71, 
+                                stop:1 #27AE60);
+}
+
+QPushButton:pressed {
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
+                                stop:0 #0b572a, 
+                                stop:1 #129046); 
+}
+
+QPushButton:disabled {
+    background: #A5D6A7;
+    color: #E8F5E9;
+    opacity: 0.6;
 }</string>
                     </property>
                     <property name="text">
                      <string>Save</string>
-                    </property>
-                    <property name="class" stdset="0">
-                     <string>button-green</string>
                     </property>
                    </widget>
                   </item>
@@ -8051,30 +8073,7 @@ QPushButton:hover {
             <item>
              <widget class="QWidget" name="widget_SY_settings_2" native="true">
               <property name="styleSheet">
-               <string notr="true">#widget_SY_header_2 { 
-	background-color: rgb(224, 243, 255);
-	border: 1px solid rgb(98, 160, 234);
-	border-top-left-radius: 10px;
-	border-top-right-radius: 10px;
-}
-
-#widget_SY_body_3 {
-	background-color: #fff;
-	border: 1px solid #999;
-	border-top: none;
-	border-bottom: none;
-}
-
-QLineEdit {
-	border: 1px solid #999;
-	border-radius: 15px;
-	background-color: #FFF;
-	padding: 0px 10px;
-}
-
-QLineEdit:focus {
-	border: 1px solid rgb(53, 132, 228);
-}</string>
+               <string notr="true"/>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_29">
                <property name="spacing">
@@ -8184,27 +8183,34 @@ font: 12pt &quot;Inter&quot;;</string>
                     <property name="styleSheet">
                      <string notr="true">QPushButton {
 	font: 10pt &quot;Inter&quot;;
-	background-color: #e7e7e7;
+	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
+                                stop:0 #ffffff, 
+                                stop:1 #d8ecf6);
 	color: black;
 	border-radius: 15px;
 	border: 1px solid rgb(154, 153, 150);
 }
 
 QPushButton:hover {
-	background-color: white;
+	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
+                                stop:0 #ffffff, 
+                                stop:1 #f2f6f8);
+}
+
+QPushButton:pressed {
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
+                                stop:0 #dce5e9, 
+                                stop:1 #ffffff);
 }
 
 QPushButton:disabled {
-    background-color: #bdc3c7;
-    color: #7f8c8d;
-    border: 1px solid #95a5a6;
+	background: #f5f5f5;
+	border: 1px solid #dcdcdc;
+	color: #aeaeae;
 }</string>
                     </property>
                     <property name="text">
                      <string>Browse</string>
-                    </property>
-                    <property name="class" stdset="0">
-                     <string>button-normal</string>
                     </property>
                    </widget>
                   </item>
@@ -8268,22 +8274,36 @@ QPushButton:disabled {
                     </property>
                     <property name="styleSheet">
                      <string notr="true">QPushButton {
+	border: 1px solid #0a5128;
     border-radius: 15px;
     padding: 0px 10px 0px;
-    background: #129046;
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
+                                stop:0 #1ebd5d, 
+                                stop:1 #107f3f);
     color: #FFF;
-	font: 10pt &quot;Inter SemiBold&quot;;
+    font: 10pt &quot;Inter SemiBold&quot;;
 }
 
 QPushButton:hover {
-    background: #27AE60;
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
+                                stop:0 #2ecc71, 
+                                stop:1 #27AE60);
+}
+
+QPushButton:pressed {
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
+                                stop:0 #0b572a, 
+                                stop:1 #129046); 
+}
+
+QPushButton:disabled {
+    background: #A5D6A7;
+    color: #E8F5E9;
+    opacity: 0.6;
 }</string>
                     </property>
                     <property name="text">
                      <string>Import</string>
-                    </property>
-                    <property name="class" stdset="0">
-                     <string>button-green</string>
                     </property>
                    </widget>
                   </item>
