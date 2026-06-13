@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="Images">
+    <file>Images/clear_2.png</file>
+    <file>Images/clear.png</file>
     <file>Images/05-bulb.svg</file>
     <file>Images/admin.png</file>
     <file>Images/books-28.svg</file>

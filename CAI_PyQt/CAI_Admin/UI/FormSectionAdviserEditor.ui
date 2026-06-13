@@ -428,6 +428,9 @@ QScrollBar::add-line, QScrollBar::sub-line {
          <height>16777215</height>
         </size>
        </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
        <property name="text">
         <string>Cancel</string>
        </property>
@@ -449,6 +452,9 @@ QScrollBar::add-line, QScrollBar::sub-line {
          <width>100</width>
          <height>16777215</height>
         </size>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
        </property>
        <property name="text">
         <string>Save</string>

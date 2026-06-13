@@ -240,6 +240,7 @@ class Ui_SectionRegistrationDialog(object):
         self.btnCancel.setObjectName(u"btnCancel")
         self.btnCancel.setMinimumSize(QSize(100, 30))
         self.btnCancel.setMaximumSize(QSize(100, 30))
+        self.btnCancel.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
         self.horizontalLayout_2.addWidget(self.btnCancel)
 
@@ -247,6 +248,7 @@ class Ui_SectionRegistrationDialog(object):
         self.btnSave.setObjectName(u"btnSave")
         self.btnSave.setMinimumSize(QSize(100, 30))
         self.btnSave.setMaximumSize(QSize(100, 30))
+        self.btnSave.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
         self.horizontalLayout_2.addWidget(self.btnSave)
 

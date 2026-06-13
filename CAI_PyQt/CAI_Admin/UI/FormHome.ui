@@ -1152,18 +1152,20 @@ border-radius: 20px;</string>
                       </property>
                       <property name="styleSheet">
                        <string notr="true">#widget_student {
-	background-color: #e4f8ed;
+	border: 1px solid #64bbb6;
 	border-radius: 20px;
+	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
+                                stop:0 #D8F1FF, 
+                                stop:1 #64bbb6);
 }
 
 #widget_14 {
 	background: transparent;
-	border-left: 2px solid rgb(153, 193, 241);
 }
 
 #label_stud {
 	font: 14pt &quot;Inter&quot;;
-	color: rgb(119, 118, 123);
+	color: #4e76a6;
 	background: transparent;
 }
 
@@ -1271,8 +1273,11 @@ border-radius: 20px;</string>
                       </property>
                       <property name="styleSheet">
                        <string notr="true">#widget_lessons {
-	background-color: #f8d9fd;
 	border-radius: 20px;
+	border: 1px solid #da75d7;
+	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
+                                stop:0 #f8d9fd, 
+                                stop:1 #da91e5);
 }
 
 #label_8 {
@@ -1283,12 +1288,11 @@ border-radius: 20px;</string>
 
 #label_lessons_total {
 	background: transparent;
-	color: rgb(36, 31, 49); 
+	color: #000; 
 	font: 20pt &quot;Inter SemiBold&quot;;
 }
 
 #widget_16 {
-	border-left: 2px solid rgb(218, 117, 215);
 	background: transparent;
 }</string>
                       </property>
@@ -1390,8 +1394,11 @@ border-radius: 20px;</string>
                       </property>
                       <property name="styleSheet">
                        <string notr="true">#widget_teachers {
-	background-color: #ffeed9;
 	border-radius: 20px;
+	border: 1px solid #ffbe6f;
+	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
+                                stop:0 #ffeed9, 
+                                stop:1 #e4bc8b);
 }
 
 #label_teachers_total { 
@@ -1402,12 +1409,11 @@ border-radius: 20px;</string>
 
 #label_9 {
 	font: 14pt &quot;Inter&quot;;
-	color: rgb(119, 118, 123);
+	color: #7c684e;
 	background: transparent; 
 }
 
 #widget_18 {
-	border-left: 2px solid rgb(255, 190, 111);
 	background: transparent; 
 }</string>
                       </property>
@@ -2378,26 +2384,6 @@ border-radius: 20px;</string>
 	font: 11pt &quot;Inter&quot;; 
 }
 
-*[class=&quot;label-magnifying-search&quot;] {
-	background-color: rgb(255, 255, 255);
-	border-top-left-radius: 15px;
-	border-bottom-left-radius: 15px;
-	border: 1px solid #999;
-	border-right: none;
-}
-
-*[class=&quot;textbox-search&quot;] {
-	background-color: rgb(255, 255, 255); 
-	border-top-right-radius: 15px;
-	border-bottom-right-radius: 15px;
-	border: 1px solid #999;
-	border-left: none;
-}
-
-*[class=&quot;widget-search-container&quot;] {
-	background: transparent;
-}
-
 QComboBox[class=&quot;combobox-main&quot;] {
     height: 30px;
     border: 1px solid #999;
@@ -3314,6 +3300,18 @@ QSpinBox::down-arrow {
            </size>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_6">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
            <item>
             <widget class="QWidget" name="widget_h" native="true">
              <layout class="QHBoxLayout" name="horizontalLayout_18">
@@ -3491,6 +3489,12 @@ QSpinBox::down-arrow {
               </item>
               <item>
                <widget class="QWidget" name="widget_search_2" native="true">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>30</height>
+                 </size>
+                </property>
                 <property name="maximumSize">
                  <size>
                   <width>16777215</width>
@@ -3498,7 +3502,11 @@ QSpinBox::down-arrow {
                  </size>
                 </property>
                 <property name="styleSheet">
-                 <string notr="true"/>
+                 <string notr="true">*[class=&quot;widget-search-container&quot;] {
+	background-color: #FFF;
+	border: 1px solid #999;
+	border-radius: 15px;
+}</string>
                 </property>
                 <property name="class" stdset="0">
                  <string>widget-search-container</string>
@@ -3508,13 +3516,13 @@ QSpinBox::down-arrow {
                   <number>0</number>
                  </property>
                  <property name="leftMargin">
-                  <number>0</number>
+                  <number>4</number>
                  </property>
                  <property name="topMargin">
                   <number>0</number>
                  </property>
                  <property name="rightMargin">
-                  <number>0</number>
+                  <number>6</number>
                  </property>
                  <property name="bottomMargin">
                   <number>0</number>
@@ -3532,6 +3540,12 @@ QSpinBox::down-arrow {
                      <width>30</width>
                      <height>30</height>
                     </size>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">*[class=&quot;label-magnifying-search&quot;] {
+	background: transparent;
+	border: none;
+}</string>
                    </property>
                    <property name="text">
                     <string/>
@@ -3565,13 +3579,73 @@ QSpinBox::down-arrow {
                     </size>
                    </property>
                    <property name="styleSheet">
-                    <string notr="true"/>
+                    <string notr="true">#txt_classList_search {
+	border: none;
+	background: transparent;
+}</string>
                    </property>
                    <property name="placeholderText">
                     <string>Search</string>
                    </property>
                    <property name="class" stdset="0">
                     <string>textbox-search</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="btnClearSearch_1">
+                   <property name="minimumSize">
+                    <size>
+                     <width>20</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>20</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                   <property name="cursor">
+                    <cursorShape>PointingHandCursor</cursorShape>
+                   </property>
+                   <property name="toolTip">
+                    <string>Clear</string>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">*[class=&quot;button-clear-search&quot;] {
+	border-radius: 10px;
+	background: transparent;
+}
+
+*[class=&quot;button-clear-search&quot;]:hover {
+	background-color: #FFC0C0;
+}
+
+*[class=&quot;button-clear-search&quot;]:pressed {
+	background-color: #FFD2D2;
+}</string>
+                   </property>
+                   <property name="text">
+                    <string/>
+                   </property>
+                   <property name="icon">
+                    <iconset resource="../resources.qrc">
+                     <normaloff>:/Images/Images/clear.png</normaloff>
+                     <normalon>:/Images/Images/clear.png</normalon>
+                     <activeon>:/Images/Images/clear.png</activeon>:/Images/Images/clear.png</iconset>
+                   </property>
+                   <property name="iconSize">
+                    <size>
+                     <width>8</width>
+                     <height>8</height>
+                    </size>
+                   </property>
+                   <property name="default">
+                    <bool>true</bool>
+                   </property>
+                   <property name="class" stdset="0">
+                    <string>button-clear-search</string>
                    </property>
                   </widget>
                  </item>
@@ -3609,8 +3683,8 @@ QSpinBox::down-arrow {
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>649</width>
-                <height>624</height>
+                <width>100</width>
+                <height>30</height>
                </rect>
               </property>
               <layout class="QGridLayout" name="gridLayout_stud_card"/>
@@ -3869,31 +3943,47 @@ QSpinBox::down-arrow {
        </property>
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
-         <widget class="QWidget" name="widget_search" native="true">
+         <widget class="QWidget" name="widget_search_4" native="true">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>30</height>
+           </size>
+          </property>
           <property name="styleSheet">
-           <string notr="true"/>
+           <string notr="true">*[class=&quot;widget-search-container&quot;] {
+	background-color: #FFF;
+	border: 1px solid #999;
+	border-radius: 15px;
+}</string>
           </property>
           <property name="class" stdset="0">
            <string>widget-search-container</string>
           </property>
-          <layout class="QHBoxLayout" name="layout_search">
+          <layout class="QHBoxLayout" name="layout_search_3">
            <property name="spacing">
             <number>0</number>
            </property>
            <property name="leftMargin">
-            <number>0</number>
+            <number>4</number>
            </property>
            <property name="topMargin">
             <number>0</number>
            </property>
            <property name="rightMargin">
-            <number>0</number>
+            <number>6</number>
            </property>
            <property name="bottomMargin">
             <number>0</number>
            </property>
            <item>
-            <widget class="QLabel" name="label_magnifying">
+            <widget class="QLabel" name="label_magnifying_stud_2">
              <property name="minimumSize">
               <size>
                <width>30</width>
@@ -3905,6 +3995,12 @@ QSpinBox::down-arrow {
                <width>30</width>
                <height>30</height>
               </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">*[class=&quot;label-magnifying-search&quot;] {
+	background: transparent;
+	border: none;
+}</string>
              </property>
              <property name="text">
               <string/>
@@ -3931,14 +4027,80 @@ QSpinBox::down-arrow {
                <height>30</height>
               </size>
              </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>30</height>
+              </size>
+             </property>
              <property name="styleSheet">
-              <string notr="true"/>
+              <string notr="true">*[class=&quot;textbox-search&quot;] {
+	border: none;
+	background: transparent;
+}</string>
              </property>
              <property name="placeholderText">
-              <string>Search Lesson</string>
+              <string>Search</string>
              </property>
              <property name="class" stdset="0">
               <string>textbox-search</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="btnClearSearch_2">
+             <property name="minimumSize">
+              <size>
+               <width>20</width>
+               <height>20</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>20</width>
+               <height>20</height>
+              </size>
+             </property>
+             <property name="cursor">
+              <cursorShape>PointingHandCursor</cursorShape>
+             </property>
+             <property name="toolTip">
+              <string>Clear</string>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">*[class=&quot;button-clear-search&quot;] {
+	border-radius: 10px;
+	background: transparent;
+}
+
+*[class=&quot;button-clear-search&quot;]:hover {
+	background-color: #FFC0C0;
+}
+
+*[class=&quot;button-clear-search&quot;]:pressed {
+	background-color: #FFD2D2;
+}</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="../resources.qrc">
+               <normaloff>:/Images/Images/clear.png</normaloff>
+               <normalon>:/Images/Images/clear.png</normalon>
+               <activeon>:/Images/Images/clear.png</activeon>:/Images/Images/clear.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>8</width>
+               <height>8</height>
+              </size>
+             </property>
+             <property name="default">
+              <bool>true</bool>
+             </property>
+             <property name="class" stdset="0">
+              <string>button-clear-search</string>
              </property>
             </widget>
            </item>
@@ -5000,8 +5162,8 @@ QPushButton:hover {
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>318</width>
-                <height>538</height>
+                <width>100</width>
+                <height>30</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_13"/>
@@ -5043,8 +5205,8 @@ QPushButton:hover {
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>317</width>
-                <height>538</height>
+                <width>100</width>
+                <height>30</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_12"/>
@@ -5064,8 +5226,8 @@ QPushButton:hover {
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>318</width>
-                <height>538</height>
+                <width>100</width>
+                <height>30</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_11"/>
@@ -5201,31 +5363,47 @@ QPushButton:hover {
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_10">
         <item>
-         <widget class="QWidget" name="widget_search_3" native="true">
+         <widget class="QWidget" name="widget_search_5" native="true">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>30</height>
+           </size>
+          </property>
           <property name="styleSheet">
-           <string notr="true"/>
+           <string notr="true">*[class=&quot;widget-search-container&quot;] {
+	background-color: #FFF;
+	border: 1px solid #999;
+	border-radius: 15px;
+}</string>
           </property>
           <property name="class" stdset="0">
            <string>widget-search-container</string>
           </property>
-          <layout class="QHBoxLayout" name="horizontalLayout_23">
+          <layout class="QHBoxLayout" name="layout_search_4">
            <property name="spacing">
             <number>0</number>
            </property>
            <property name="leftMargin">
-            <number>0</number>
+            <number>4</number>
            </property>
            <property name="topMargin">
             <number>0</number>
            </property>
            <property name="rightMargin">
-            <number>0</number>
+            <number>6</number>
            </property>
            <property name="bottomMargin">
             <number>0</number>
            </property>
            <item>
-            <widget class="QLabel" name="label_magnifying_exer">
+            <widget class="QLabel" name="label_magnifying_stud_3">
              <property name="minimumSize">
               <size>
                <width>30</width>
@@ -5237,6 +5415,12 @@ QPushButton:hover {
                <width>30</width>
                <height>30</height>
               </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">*[class=&quot;label-magnifying-search&quot;] {
+	background: transparent;
+	border: none;
+}</string>
              </property>
              <property name="text">
               <string/>
@@ -5263,14 +5447,80 @@ QPushButton:hover {
                <height>30</height>
               </size>
              </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>30</height>
+              </size>
+             </property>
              <property name="styleSheet">
-              <string notr="true"/>
+              <string notr="true">*[class=&quot;textbox-search&quot;] {
+	border: none;
+	background: transparent;
+}</string>
              </property>
              <property name="placeholderText">
               <string>Search</string>
              </property>
              <property name="class" stdset="0">
               <string>textbox-search</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="btnClearSearch_3">
+             <property name="minimumSize">
+              <size>
+               <width>20</width>
+               <height>20</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>20</width>
+               <height>20</height>
+              </size>
+             </property>
+             <property name="cursor">
+              <cursorShape>PointingHandCursor</cursorShape>
+             </property>
+             <property name="toolTip">
+              <string>Clear</string>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">*[class=&quot;button-clear-search&quot;] {
+	border-radius: 10px;
+	background: transparent;
+}
+
+*[class=&quot;button-clear-search&quot;]:hover {
+	background-color: #FFC0C0;
+}
+
+*[class=&quot;button-clear-search&quot;]:pressed {
+	background-color: #FFD2D2;
+}</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="../resources.qrc">
+               <normaloff>:/Images/Images/clear.png</normaloff>
+               <normalon>:/Images/Images/clear.png</normalon>
+               <activeon>:/Images/Images/clear.png</activeon>:/Images/Images/clear.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>8</width>
+               <height>8</height>
+              </size>
+             </property>
+             <property name="default">
+              <bool>true</bool>
+             </property>
+             <property name="class" stdset="0">
+              <string>button-clear-search</string>
              </property>
             </widget>
            </item>
@@ -6295,7 +6545,7 @@ QScrollBar::add-line, QScrollBar::sub-line {
                    <number>2</number>
                   </property>
                   <item>
-                   <widget class="QWidget" name="widget_search_idv" native="true">
+                   <widget class="QWidget" name="widget_search_6" native="true">
                     <property name="minimumSize">
                      <size>
                       <width>0</width>
@@ -6309,29 +6559,33 @@ QScrollBar::add-line, QScrollBar::sub-line {
                      </size>
                     </property>
                     <property name="styleSheet">
-                     <string notr="true"/>
+                     <string notr="true">*[class=&quot;widget-search-container&quot;] {
+	background-color: #FFF;
+	border: 1px solid #999;
+	border-radius: 15px;
+}</string>
                     </property>
                     <property name="class" stdset="0">
                      <string>widget-search-container</string>
                     </property>
-                    <layout class="QHBoxLayout" name="layout_search_idv">
+                    <layout class="QHBoxLayout" name="layout_search_5">
                      <property name="spacing">
                       <number>0</number>
                      </property>
                      <property name="leftMargin">
-                      <number>0</number>
+                      <number>4</number>
                      </property>
                      <property name="topMargin">
                       <number>0</number>
                      </property>
                      <property name="rightMargin">
-                      <number>0</number>
+                      <number>6</number>
                      </property>
                      <property name="bottomMargin">
                       <number>0</number>
                      </property>
                      <item>
-                      <widget class="QLabel" name="label_magnifying_idv">
+                      <widget class="QLabel" name="label_magnifying_stud_4">
                        <property name="minimumSize">
                         <size>
                          <width>30</width>
@@ -6343,6 +6597,12 @@ QScrollBar::add-line, QScrollBar::sub-line {
                          <width>30</width>
                          <height>30</height>
                         </size>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true">*[class=&quot;label-magnifying-search&quot;] {
+	background: transparent;
+	border: none;
+}</string>
                        </property>
                        <property name="text">
                         <string/>
@@ -6376,13 +6636,73 @@ QScrollBar::add-line, QScrollBar::sub-line {
                         </size>
                        </property>
                        <property name="styleSheet">
-                        <string notr="true"/>
+                        <string notr="true">*[class=&quot;textbox-search&quot;] {
+	border: none;
+	background: transparent;
+}</string>
                        </property>
                        <property name="placeholderText">
                         <string>Search</string>
                        </property>
                        <property name="class" stdset="0">
                         <string>textbox-search</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QPushButton" name="btnClearSearch_4">
+                       <property name="minimumSize">
+                        <size>
+                         <width>20</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>20</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                       <property name="cursor">
+                        <cursorShape>PointingHandCursor</cursorShape>
+                       </property>
+                       <property name="toolTip">
+                        <string>Clear</string>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true">*[class=&quot;button-clear-search&quot;] {
+	border-radius: 10px;
+	background: transparent;
+}
+
+*[class=&quot;button-clear-search&quot;]:hover {
+	background-color: #FFC0C0;
+}
+
+*[class=&quot;button-clear-search&quot;]:pressed {
+	background-color: #FFD2D2;
+}</string>
+                       </property>
+                       <property name="text">
+                        <string/>
+                       </property>
+                       <property name="icon">
+                        <iconset resource="../resources.qrc">
+                         <normaloff>:/Images/Images/clear.png</normaloff>
+                         <normalon>:/Images/Images/clear.png</normalon>
+                         <activeon>:/Images/Images/clear.png</activeon>:/Images/Images/clear.png</iconset>
+                       </property>
+                       <property name="iconSize">
+                        <size>
+                         <width>8</width>
+                         <height>8</height>
+                        </size>
+                       </property>
+                       <property name="default">
+                        <bool>true</bool>
+                       </property>
+                       <property name="class" stdset="0">
+                        <string>button-clear-search</string>
                        </property>
                       </widget>
                      </item>
@@ -6461,18 +6781,18 @@ QLabel {
                    <widget class="QWidget" name="widget_3" native="true">
                     <property name="minimumSize">
                      <size>
-                      <width>36</width>
-                      <height>36</height>
+                      <width>34</width>
+                      <height>34</height>
                      </size>
                     </property>
                     <property name="maximumSize">
                      <size>
-                      <width>36</width>
-                      <height>36</height>
+                      <width>34</width>
+                      <height>34</height>
                      </size>
                     </property>
                     <property name="styleSheet">
-                     <string notr="true">border-radius: 18px;
+                     <string notr="true">border-radius: 17px;
 background-color: rgb(98, 160, 234);</string>
                     </property>
                     <layout class="QHBoxLayout" name="horizontalLayout_35">
@@ -6862,11 +7182,11 @@ background-color: rgb(98, 160, 234);</string>
             <number>0</number>
            </property>
            <item>
-            <widget class="QWidget" name="widget_search_section" native="true">
+            <widget class="QWidget" name="widget_search_7" native="true">
              <property name="minimumSize">
               <size>
-               <width>100</width>
-               <height>0</height>
+               <width>0</width>
+               <height>30</height>
               </size>
              </property>
              <property name="maximumSize">
@@ -6875,24 +7195,34 @@ background-color: rgb(98, 160, 234);</string>
                <height>30</height>
               </size>
              </property>
-             <layout class="QHBoxLayout" name="horizontalLayout_3">
+             <property name="styleSheet">
+              <string notr="true">*[class=&quot;widget-search-container&quot;] {
+	background-color: #FFF;
+	border: 1px solid #999;
+	border-radius: 15px;
+}</string>
+             </property>
+             <property name="class" stdset="0">
+              <string>widget-search-container</string>
+             </property>
+             <layout class="QHBoxLayout" name="layout_search_6">
               <property name="spacing">
                <number>0</number>
               </property>
               <property name="leftMargin">
-               <number>0</number>
+               <number>4</number>
               </property>
               <property name="topMargin">
                <number>0</number>
               </property>
               <property name="rightMargin">
-               <number>0</number>
+               <number>6</number>
               </property>
               <property name="bottomMargin">
                <number>0</number>
               </property>
               <item>
-               <widget class="QLabel" name="label_2">
+               <widget class="QLabel" name="label_magnifying_stud_5">
                 <property name="minimumSize">
                  <size>
                   <width>30</width>
@@ -6906,7 +7236,10 @@ background-color: rgb(98, 160, 234);</string>
                  </size>
                 </property>
                 <property name="styleSheet">
-                 <string notr="true"/>
+                 <string notr="true">*[class=&quot;label-magnifying-search&quot;] {
+	background: transparent;
+	border: none;
+}</string>
                 </property>
                 <property name="text">
                  <string/>
@@ -6940,13 +7273,73 @@ background-color: rgb(98, 160, 234);</string>
                  </size>
                 </property>
                 <property name="styleSheet">
-                 <string notr="true"/>
+                 <string notr="true">*[class=&quot;textbox-search&quot;] {
+	border: none;
+	background: transparent;
+}</string>
                 </property>
                 <property name="placeholderText">
                  <string>Search</string>
                 </property>
                 <property name="class" stdset="0">
                  <string>textbox-search</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="btnClearSearch_5">
+                <property name="minimumSize">
+                 <size>
+                  <width>20</width>
+                  <height>20</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>20</width>
+                  <height>20</height>
+                 </size>
+                </property>
+                <property name="cursor">
+                 <cursorShape>PointingHandCursor</cursorShape>
+                </property>
+                <property name="toolTip">
+                 <string>Clear</string>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">*[class=&quot;button-clear-search&quot;] {
+	border-radius: 10px;
+	background: transparent;
+}
+
+*[class=&quot;button-clear-search&quot;]:hover {
+	background-color: #FFC0C0;
+}
+
+*[class=&quot;button-clear-search&quot;]:pressed {
+	background-color: #FFD2D2;
+}</string>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset resource="../resources.qrc">
+                  <normaloff>:/Images/Images/clear.png</normaloff>
+                  <normalon>:/Images/Images/clear.png</normalon>
+                  <activeon>:/Images/Images/clear.png</activeon>:/Images/Images/clear.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>8</width>
+                  <height>8</height>
+                 </size>
+                </property>
+                <property name="default">
+                 <bool>true</bool>
+                </property>
+                <property name="class" stdset="0">
+                 <string>button-clear-search</string>
                 </property>
                </widget>
               </item>

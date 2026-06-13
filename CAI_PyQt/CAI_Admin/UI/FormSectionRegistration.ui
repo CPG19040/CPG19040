@@ -335,6 +335,9 @@ QComboBox QAbstractItemView::item:hover {
          <height>30</height>
         </size>
        </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
        <property name="text">
         <string>Cancel</string>
        </property>
@@ -356,6 +359,9 @@ QComboBox QAbstractItemView::item:hover {
          <width>100</width>
          <height>30</height>
         </size>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
        </property>
        <property name="text">
         <string>Save</string>

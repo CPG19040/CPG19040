@@ -330,6 +330,7 @@ class Ui_EditStudentDialog(object):
         self.verticalLayout_2 = QVBoxLayout(self.widget_form)
         self.verticalLayout_2.setSpacing(0)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
+        self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.widget_4 = QWidget(self.widget_form)
         self.widget_4.setObjectName(u"widget_4")
         self.horizontalLayout = QHBoxLayout(self.widget_4)

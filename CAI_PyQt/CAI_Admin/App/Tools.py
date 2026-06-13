@@ -464,7 +464,7 @@ class CrossPlatformPrinter:
                 if printer_name:
                     cmd.extend(['-d', printer_name])  # Speficy destination printer name
                 cmd.append(file_path)
-                
+
                 # Fires headlessly without popping up annoying UI dialogs
                 result = subprocess.run(cmd, capture_output=True, text=True, check=True)
                 return True, f"Sent to Zorin OS/CUPS printer queue: {printer_name or 'Default'}"
@@ -477,7 +477,7 @@ class CrossPlatformPrinter:
                 else:
                     os.startfile(file_path, "print")
                 return True, f"Sent to Windows print queue: {printer_name or 'Default'}"
-            
+
             else:
                 return False, f"Unsupported OS platform: {self.os_type}"
 

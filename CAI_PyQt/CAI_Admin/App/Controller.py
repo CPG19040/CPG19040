@@ -138,6 +138,7 @@ class Controller:
         self.ui.btnDeleteStudent.clicked.connect(lambda: self.delete_student(user))
         self.ui.btnEditStudent.clicked.connect(lambda: self.edit_student(user))
         self.ui.btnPrintStudentList.clicked.connect(self.print_student_list)
+        self.ui.btnClearSearch_1.clicked.connect(lambda: self.ui.txt_classList_search.clear())
 
         # Lesson
         self.ui.btnLessonView.clicked.connect(self.view_lesson)
@@ -145,6 +146,7 @@ class Controller:
         self.ui.btnLessonEdit.clicked.connect(lambda: self.showLessonDialog(2))
         self.ui.txtSearchLesson.textChanged.connect(lambda searchText: self.displayLessons(searchText))
         self.ui.btnRefreshLessonTable.clicked.connect(self.displayLessons)
+        self.ui.btnClearSearch_2.clicked.connect(lambda: self.ui.txtSearchLesson.clear())
 
         # Quiz
         self.difficulty_group = QButtonGroup(self.home_win)
@@ -165,6 +167,9 @@ class Controller:
         self.ui.checkBoxPublish.setVisible(False)
         self.ui.btnQuizAdd.clicked.connect(self.showQuizDialog)
 
+        # Exercise
+        self.ui.btnClearSearch_3.clicked.connect(lambda: self.ui.txtSearchExercise.clear())
+
         # Sections
         self.ui.comboBox_Section.currentIndexChanged.connect(self.display_section_info)
         self.sectionObj = Section(user)
@@ -184,6 +189,7 @@ class Controller:
         self.reports_selectedRow_idv = None
         self.ui.cb_gp_quiz_idv.currentIndexChanged.connect(lambda: self.handle_report_student_click(self.reports_selectedRow_idv))
         self.ui.txt_search_score_idv.textChanged.connect(lambda text: self.handle_report_student_idv(text))
+        self.ui.btnClearSearch_4.clicked.connect(lambda: self.ui.txt_search_score_idv.clear())
         self.ui.btnPrintQuizScores.clicked.connect(self.generate_quizscores_report)
 
         # Users
@@ -192,6 +198,7 @@ class Controller:
         self.ui.btnUserName.clicked.connect(lambda: self.update_user(user))
         self.ui.btnLogout.clicked.connect(self.logout)
         self.ui.txt_search_user.textChanged.connect(lambda text: self.displayUsers(text))
+        self.ui.btnClearSearch_5.clicked.connect(lambda: self.ui.txt_search_user.clear())
         self.ui.btnRefreshUsers.clicked.connect(lambda: self.displayUsers())
         self.ui.btnDeleteUser.clicked.connect(lambda: self.delete_user(user))
 
@@ -308,6 +315,7 @@ class Controller:
             self.display_section_info()
 
         elif index == 6: # Reports
+            self.get_dynamic_grading_period_dates()
             query = """
                 SELECT gpid, gpname
                 FROM cai.tbl_grading_period;
@@ -327,6 +335,10 @@ class Controller:
             """
             self.util.populate_pulldown(self.ui.comboBox_ReportsLesson, query, params=(gpid,))
 
+            self.ui.label_student_icon.setPixmap(QPixmap(u":/Images/Images/profile_gray.png"))
+            self.ui.label_student_name.clear()
+            self.ui.label_average_percentage.setText("0%")
+            self.ui.btnPrintQuizScores.setEnabled(False)
             self.handle_report_student_idv()
 
         elif index == 7: # Users
@@ -1087,7 +1099,26 @@ class Controller:
             header = self.ui.table_quizcompletionstat.horizontalHeader()
             header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
 
+    # def handle_report_student_idv(self, text=""):
+    #     new_model = Student().search_student(text)
+    #     self.ui.table_student_score_idv.sortByColumn(-1, Qt.AscendingOrder)
+    #     self.ui.table_quiz_score_idv.sortByColumn(-1, Qt.AscendingOrder)
+
+    #     if new_model:
+    #         self.ui.table_student_score_idv.setModel(new_model)
+    #         header = self.ui.table_student_score_idv.horizontalHeader()
+    #         header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+    #         self.ui.table_student_score_idv.setColumnHidden(5, True) # Hide 'Gender' column
+
+    #         selection_model = self.ui.table_student_score_idv.selectionModel()
+    #         selection_model.currentChanged.connect(
+    #             lambda current, previous: self.handle_report_student_click(current)
+    #         )
+
     def handle_report_student_idv(self, text=""):
+        # 1. Reset selection state since the underlying model/data is changing
+        self.reports_selectedRow_idv = None
+        
         new_model = Student().search_student(text)
         self.ui.table_student_score_idv.sortByColumn(-1, Qt.AscendingOrder)
         self.ui.table_quiz_score_idv.sortByColumn(-1, Qt.AscendingOrder)
@@ -1098,10 +1129,9 @@ class Controller:
             header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
             self.ui.table_student_score_idv.setColumnHidden(5, True) # Hide 'Gender' column
 
+            # 2. Safely connect the new selection model
             selection_model = self.ui.table_student_score_idv.selectionModel()
-            selection_model.currentChanged.connect(
-                lambda current, previous: self.handle_report_student_click(current)
-            )
+            selection_model.currentChanged.connect(self.handle_report_student_click)
 
     def generate_quizscores_report(self):
         if self.reports_selectedRow_idv == None:
@@ -1136,18 +1166,22 @@ class Controller:
             QMessageBox.critical(self.home_win, "Error", message)
 
     def handle_report_student_click(self, row=None):
-        if row is not None:
-            self.reports_selectedRow_idv = row
 
-        if row == None:
+        if row is None or not row.isValid():
+            # Optional: Clear student details UI here if nothing is selected
+            self.ui.label_student_name.setText("")
+            self.ui.label_average_percentage.setText("0%")
+            self.ui.btnPrintQuizScores.setEnabled(False)
             return
-        
-        row = self.reports_selectedRow_idv
+
+        self.reports_selectedRow_idv = row
+
         gradingperiod = self.ui.cb_gp_quiz_idv.currentData()
         studentId = row.siblingAtColumn(0).data()
         lastName = row.siblingAtColumn(1).data()
         firstName = row.siblingAtColumn(2).data()
         middleName = row.siblingAtColumn(3).data()
+        
         stud_name = self.util.formatFullname(firstName, middleName, lastName)
         self.ui.label_student_name.setText(stud_name)
 
@@ -1174,7 +1208,11 @@ class Controller:
             else:
                 self.ui.btnPrintQuizScores.setEnabled(True)
 
-        self.ui.label_average_percentage.setText(f'{average_percentage:.0f}%')
+        if average_percentage is not None:
+            self.ui.label_average_percentage.setText(f'{average_percentage:.2f}%')
+        else:
+            self.ui.label_average_percentage.setText('0%')
+        
         self.ui.plainTextEdit_remarks.clear()
 
     def get_dynamic_grading_period_dates(self):
