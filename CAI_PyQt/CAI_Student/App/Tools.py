@@ -361,6 +361,22 @@ class WindowHandler(QObject):
 
 
 class CustomShapeDialog(QDialog, Ui_CustomDialog):
+    """
+    A custom, frameless, modal dialog box used for displaying styled alerts with 
+    animated GIF icons and messaging.
+
+    This dialog features a translucent, rounded-corner design, supports custom window 
+    dragging behavior via a WindowHandler, and dynamically adapts its visual theme 
+    (Success, Sad/Error, or Warning) based on the provided type argument.
+
+    Args:
+        message (str): The text message to display inside the dialog box.
+        parent (QWidget, optional): The parent widget for memory management and window centering. Defaults to None.
+        type (int, optional): The semantic state of the dialog which alters the displayed GIF.
+            1 = Success/Happy (Default)
+            2 = Sad/Error
+            3 = Warning
+    """
 
     def __init__(self, message, parent=None, type=1):
         super().__init__(parent)

@@ -23,53 +23,76 @@ class Quiz:
         Formatted to populate a QStandardItemModel for the UI.
 
         Returns:
-            model (QStandardItemModel):
+            model (QStandardItemModel): The populated UI model.
+            average (float): The student's average percentage score.
         """
-
+        # Optimized SQL combining quiz details and total score calculations in a single trip
         sql = """
-            SELECT
-                qs.quiznumber,
-                q.lessonid,
-                l.title,
-                qs.quizscore,
-                q.total_items,
-                TO_CHAR(qs.datetaken, 'YYYY/MM/DD, HH12:MI AM') AS datetaken
-            FROM cai.tbl_quiz AS q, cai.tbl_quizscores AS qs, cai.tbl_lessons AS l
-            WHERE qs.studentid = %s
-                AND qs.gradingperiod = %s
-                AND q.quiznumber = qs.quiznumber
-                AND q.lessonid = qs.lessonid
-                AND qs.lessonid = l.lesson_id
-            ORDER BY qs.datetaken DESC;
+            WITH QuizTotals AS (
+                SELECT 
+                    Q.QUIZNUMBER, 
+                    Q.LESSONID,
+                    (COUNT(CASE WHEN Q.DIFFICULTYLEVEL = 1 THEN 1 END) * M.EASY_MULTIPLIER) +
+                    (COUNT(CASE WHEN Q.DIFFICULTYLEVEL = 2 THEN 1 END) * M.AVERAGE_MULTIPLIER) +
+                    (COUNT(CASE WHEN Q.DIFFICULTYLEVEL = 3 THEN 1 END) * M.HARD_MULTIPLIER) AS max_score
+                FROM (
+                    SELECT QUIZNUMBER, LESSONID, GRADINGPERIOD, DIFFICULTYLEVEL FROM CAI.TBL_QUIZIDENTIFICATION
+                    UNION ALL
+                    SELECT QUIZNUMBER, LESSONID, GRADINGPERIOD, DIFFICULTYLEVEL FROM CAI.TBL_QUIZMULTIPLECHOICE
+                    UNION ALL
+                    SELECT QUIZNUMBER, LESSONID, GRADINGPERIOD, DIFFICULTYLEVEL FROM CAI.TBL_QUIZTRUEORFALSE
+                ) Q
+                JOIN CAI.TBL_SCOREMULTIPLIER M ON Q.QUIZNUMBER = M.QUIZNUMBER AND Q.LESSONID = M.LESSONID
+                WHERE Q.GRADINGPERIOD = %s
+                GROUP BY Q.QUIZNUMBER, Q.LESSONID, M.EASY_MULTIPLIER, M.AVERAGE_MULTIPLIER, M.HARD_MULTIPLIER
+            )
+            SELECT DISTINCT *
+            FROM (
+                SELECT
+                    qs.quiznumber,
+                    q.lessonid,
+                    l.title,
+                    qs.quizscore,
+                    COALESCE(qt.max_score, 0) AS total_score,
+                    TO_CHAR(qs.datetaken, 'YYYY/MM/DD, HH12:MI AM') AS datetaken
+                FROM cai.tbl_quizscores AS qs
+                JOIN cai.tbl_quiz AS q ON q.quiznumber = qs.quiznumber AND q.lessonid = qs.lessonid
+                JOIN cai.tbl_lessons AS l ON qs.lessonid = l.lesson_id
+                LEFT JOIN QuizTotals qt ON q.quiznumber = qt.quiznumber AND q.lessonid = qt.lessonid
+                WHERE qs.studentid = %s
+                    AND qs.gradingperiod = %s
+                    AND qs.quizscore <= qt.max_score
+                ORDER BY qs.datetaken DESC
+            );
         """
 
-        records = self.db_tools.fetch_all(sql, (studentId, gradingperiod))
+        # Pass gradingperiod twice: once for the Common Table Expression (CTE) and once for the main WHERE clause
+        records = self.db_tools.fetch_all(sql, (gradingperiod, studentId, gradingperiod))
 
         ui_headers = ["QUIZ #", "LESSON TITLE", "SCORE", "PERCENTAGE", "DATE TAKEN"]
         model = QStandardItemModel(len(records), len(ui_headers))
         model.setHorizontalHeaderLabels(ui_headers)
-        average = 0
+        average = 0.0
 
         if not records:
             return model, average
 
         row_count = len(records)
-        sum_score = 0
+        sum_score = 0.0
 
         for row_idx, row_data in enumerate(records):
-            _, _, _, total_score = self.getQuizTotalScore(row_data['quiznumber'], gradingperiod, row_data['lessonid'])
-            quiz_num_str = f"{row_data['quiznumber']}"
-            score_str = f"{row_data['quizscore']}/{total_score}" if row_data['quizscore'] and total_score else ""
-
+            total_score = row_data['total_score']
+            quiz_score = row_data['quizscore']
+            
+            quiz_num_str = str(row_data['quiznumber'])
+            score_str = f"{quiz_score}/{total_score}" if quiz_score is not None and total_score else ""
             percentage_str = ""
 
-            # Ensure total_score is greater than 0 and score doesn't exceed total
-            if total_score > 0 and 0 <= row_data['quizscore'] <= total_score:
-                percent_val = (row_data['quizscore'] / total_score) * 100
+            # Validate score bounds and avoid DivisionByZero
+            if total_score > 0 and quiz_score is not None and 0 <= quiz_score <= total_score:
+                percent_val = (quiz_score / total_score) * 100
                 sum_score += percent_val
-
-                if percent_val:
-                    percentage_str = f"{percent_val:.0f}%"
+                percentage_str = f"{percent_val:.2f}%"
 
             date_taken_str = row_data['datetaken'] if row_data['datetaken'] is not None else ""
 
@@ -89,8 +112,9 @@ class Quiz:
 
                 model.setItem(row_idx, col_idx, item)
 
-            if sum_score and row_count:
-                average = sum_score / row_count
+        # Calculate the final average exactly once outside the loop
+        if row_count > 0:
+            average = sum_score / row_count
 
         return model, average
 

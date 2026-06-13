@@ -221,21 +221,23 @@ class Student:
         """
             This calculates the percentage for every quiz and adds a "Status" label based on their performance.
         """
-        sql  = "SELECT\n"
-        sql += "    studentid,\n"
-        sql += "    lessonid,\n"
-        sql += "    quizscore,\n"
-        sql += "    totalitems,\n"
-        sql += "    ROUND((quizscore::numeric / totalitems) * 100, 2) AS percentage,\n"
-        sql += "    CASE\n"
-        sql += "        WHEN (quizscore::numeric / totalitems) >= 0.85 THEN 'Mastered'\n"
-        sql += "        WHEN (quizscore::numeric / totalitems) >= 0.70 THEN 'Developing'\n"
-        sql += "        ELSE 'Needs Review'\n"
-        sql += "    END AS status,\n"
-        sql += "    datetaken::DATE AS date_only\n"
-        sql += "FROM cai.tbl_quizscores\n"
-        sql += "WHERE studentid = %s\n"
-        sql += "ORDER BY datetaken DESC;\n"
+        query = """
+            SELECT
+                studentid,
+                lessonid,
+                quizscore,
+                totalitems,
+                ROUND((quizscore::numeric / totalitems) * 100, 2) AS percentage,
+                CASE
+                    WHEN (quizscore::numeric / totalitems) >= 0.85 THEN 'Mastered'
+                    WHEN (quizscore::numeric / totalitems) >= 0.70 THEN 'Developing'
+                    ELSE 'Needs Review'
+                END AS status,
+                datetaken::DATE AS date_only
+            FROM cai.tbl_quizscores
+            WHERE studentid = %s
+            ORDER BY datetaken DESC;
+        """
 
     def getProgressOvertime(self):
         """
@@ -249,6 +251,52 @@ class Student:
         sql += "WHERE studentid = %s AND gradingperiod = %s\n"
         sql += "GROUP BY datetaken::DATE\n"
         sql += "ORDER BY day ASC;\n"
+
+    def get_top3_scorer(self, gradingperiod):
+        query = """
+            WITH QuizTotals AS (
+                SELECT 
+                    Q.QUIZNUMBER, 
+                    Q.LESSONID,
+                    (COUNT(CASE WHEN Q.DIFFICULTYLEVEL = 1 THEN 1 END) * M.EASY_MULTIPLIER) +
+                    (COUNT(CASE WHEN Q.DIFFICULTYLEVEL = 2 THEN 1 END) * M.AVERAGE_MULTIPLIER) +
+                    (COUNT(CASE WHEN Q.DIFFICULTYLEVEL = 3 THEN 1 END) * M.HARD_MULTIPLIER) AS max_score
+                FROM (
+                    SELECT QUIZNUMBER, LESSONID, GRADINGPERIOD, DIFFICULTYLEVEL FROM CAI.TBL_QUIZIDENTIFICATION
+                    UNION ALL
+                    SELECT QUIZNUMBER, LESSONID, GRADINGPERIOD, DIFFICULTYLEVEL FROM CAI.TBL_QUIZMULTIPLECHOICE
+                    UNION ALL
+                    SELECT QUIZNUMBER, LESSONID, GRADINGPERIOD, DIFFICULTYLEVEL FROM CAI.TBL_QUIZTRUEORFALSE
+                ) Q
+                JOIN CAI.TBL_SCOREMULTIPLIER M ON Q.QUIZNUMBER = M.QUIZNUMBER AND Q.LESSONID = M.LESSONID
+                WHERE Q.GRADINGPERIOD = %s
+                GROUP BY Q.QUIZNUMBER, Q.LESSONID, M.EASY_MULTIPLIER, M.AVERAGE_MULTIPLIER, M.HARD_MULTIPLIER
+            ),
+            StudentPercentages AS (
+                SELECT
+                    qs.studentid,
+                    ((qs.quizscore::FLOAT / NULLIF(qt.max_score, 0)) * 100) AS quiz_percentage
+                FROM cai.tbl_quizscores qs
+                JOIN QuizTotals qt ON qs.quiznumber = qt.quiznumber AND qs.lessonid = qt.lessonid
+                WHERE qs.gradingperiod = %s
+                    AND qs.quizscore <= qt.max_score
+            )
+            SELECT 
+                s.studentid,
+                s.firstname,
+                s.middlename,
+                s.lastname,
+                ROUND(AVG(sp.quiz_percentage)::numeric, 2) AS average_final_grade
+            FROM StudentPercentages sp
+            JOIN CAI.TBL_STUDENT_INFO s ON sp.studentid = s.studentid
+            GROUP BY s.studentid, s.firstname, s.middlename, s.lastname
+            ORDER BY average_final_grade DESC
+            LIMIT 3;
+        """
+
+        top3 = self.db_tools.fetch_all(query, (gradingperiod, gradingperiod))
+
+        return top3
 
     def get_student_progress(self, studentid, gradingperiod):
         sql  = "SELECT\n"

@@ -2,6 +2,8 @@ from App.CardQuiz import Ui_CardQuiz
 from App.Tools import Utility
 from App.CRUDTools import DatabaseTools
 
+from psycopg2.extras import execute_values
+
 from PySide6.QtWidgets import (QFrame, QLineEdit, QRadioButton, QButtonGroup, QMessageBox)
 from PySide6.QtGui import (QImage, QPixmap, QCursor)
 from PySide6.QtCore import (Qt, QSize)
@@ -222,35 +224,31 @@ class QuizUtils:
 
     def save_quiz(self, student_id, quiz_cards):
         if not quiz_cards:
-            return False, "Empty quiz."
+            return 3, "Empty quiz."
 
+        conn = None
         try:
             conn = self.db_tools.get_connection()
             conn.autocommit = False
 
             with conn.cursor() as cur:
-
+                insert_data = []
                 for card in quiz_cards:
+                    delete_sql = """
+                        DELETE FROM cai.tbl_answers
+                        WHERE assmt_key = %s AND quiztype = %s AND quiznumber = %s AND studentid = %s;
+                    """
+                    cur.execute(delete_sql, (card.idKey, card.quiz_type, card.quiznumber, student_id))
+
                     student_ans = card.get_answer().strip().lower()
+
+                    if student_ans == "":
+                        return 2, "Oops! Please answer all the questions."
+                
                     is_correct = (card.correct_answer.strip().lower() == student_ans)
                     remark = "Correct" if is_correct else "Incorrect"
-
-                    sql = """
-                        DELETE FROM cai.tbl_answers
-                        WHERE 
-                            assmt_key = %s AND
-                            quiztype = %s AND
-                            quiznumber = %s AND
-                            studentid = %s;
-
-                        INSERT INTO cai.tbl_answers (
-                            assmt_key, quiztype, quiznumber, itemno, answer, studentid, remarks
-                        ) VALUES (%s, %s, %s, %s, %s, %s, %s);
-                    """
                     
-                    cur.execute(sql, (
-                        card.idKey, card.quiz_type, card.quiznumber, student_id,
-
+                    insert_data.append((
                         card.idKey,
                         card.quiz_type,
                         card.quiznumber,
@@ -260,16 +258,22 @@ class QuizUtils:
                         remark
                     ))
 
+                insert_sql = """
+                    INSERT INTO cai.tbl_answers (
+                        assmt_key, quiztype, quiznumber, itemno, answer, studentid, remarks
+                    ) VALUES %s;
+                """
+                execute_values(cur, insert_sql, insert_data)
+
+                self.evaluate_quiz(student_id)
+
             conn.commit()
-
-            self.evaluate_quiz(student_id)
-
-            return True, "Successfully saved and evaluated this quiz."
+            return 1, "Successfully saved and evaluated this quiz."
             
         except Exception as e:
             if conn: conn.rollback()
-            return False, f"Failed to save: {str(e)}"
-
+            return 3, f"❌ Failed to save: {str(e)}"
+        
         finally:
             if conn: conn.close()
 

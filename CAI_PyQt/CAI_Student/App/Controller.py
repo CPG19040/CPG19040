@@ -410,8 +410,17 @@ class Controller:
         student_id = self.settings.value("studentid")
         success, message = qUtils.save_quiz(student_id, self.quiz_cards)
 
-        if success:
+        if success == 1: # Success, customized message for student
             dialog = CustomShapeDialog("Good Job !!!", parent=self.home_win)
+            dialog.exec()
+
+        elif success == 2: # Failed, customized message for student
+            dialog = CustomShapeDialog(message, parent=self.home_win, type=3)
+            dialog.exec()
+
+        else:
+            print(message) # Failed, message for developers
+            dialog = CustomShapeDialog("Something went wrong.", parent=self.home_win, type=2)
             dialog.exec()
 
     def handle_lesson_selection(self, clicked_card, lesson_id):

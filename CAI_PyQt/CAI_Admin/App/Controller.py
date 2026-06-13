@@ -248,6 +248,49 @@ class Controller:
         self.ui.label_student_total.setText(f"{Student().count()}")
         self.ui.label_teachers_total.setText(f"{Staff().count()}")
 
+        student = Student()
+        top3 = student.get_top3_scorer(self.GRADING_PERIOD)
+
+        podium_widgets = [
+            {
+                "avatar": self.ui.label_profile, 
+                "name": self.ui.label_stud_name, 
+                "score": self.ui.label_student_score
+            },
+            {
+                "avatar": self.ui.label_profile_2, 
+                "name": self.ui.label_stud_name_2, 
+                "score": self.ui.label_student_score_2
+            },
+            {
+                "avatar": self.ui.label_profile_3, 
+                "name": self.ui.label_stud_name_3, 
+                "score": self.ui.label_student_score_3
+            }
+        ]
+
+        avatar_width = self.ui.label_profile.width()
+
+        for rank_idx, widgets in enumerate(podium_widgets):
+
+            if rank_idx < len(top3):
+                data = top3[rank_idx]
+                
+                profile_pic = student.get_student_picture(data['studentid'], size=avatar_width)
+                circular_pic = self.util.makeCircularPixmap(profile_pic, avatar_width)
+                
+                middle_name = data.get('middlename', '')
+                full_name = self.util.formatFullname(data['firstname'], middle_name, data['lastname'])
+                
+                widgets["avatar"].setPixmap(circular_pic)
+                widgets["name"].setText(full_name)
+                widgets["score"].setText(f"{data['average_final_grade']}%")
+                
+            else:
+                # widgets["avatar"].clear()
+                widgets["name"].setText("No Data")
+                widgets["score"].setText("—")
+
     def handle_student_searching(self):
         searchStr = self.ui.txt_classList_search.text().strip()
         self.display_student_cards(searchStr)
