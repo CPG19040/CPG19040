@@ -292,6 +292,7 @@ class Controller:
                 widgets["score"].setText("—")
 
     def handle_student_searching(self):
+        self.display_student_info()
         searchStr = self.ui.txt_classList_search.text().strip()
         self.display_student_cards(searchStr)
 
@@ -397,6 +398,7 @@ class Controller:
         now = QDateTime.currentDateTime()
         timeNow = now.toString("hh:mm AP")
         time, ap = timeNow.split()
+        self.ui.label_month.setText(now.toString("MMM"))
         self.ui.label_day.setText(now.toString("d"))
         self.ui.label_time.setText(time)
         self.ui.label_timeAP.setText(ap)
@@ -521,7 +523,7 @@ class Controller:
             students = stud.refresh_student_cards(params)
 
             count = len(students)
-            self.ui.label_totalStudCount.setText(f"{count} {'item' if count == 1 else 'items'}")
+            self.ui.label_totalStudCount.setText(f"{count} {'Student' if count <= 1 else 'Students'}")
 
             male_row = 0
             female_row = 0
@@ -553,6 +555,8 @@ class Controller:
                 self.card_layout.addWidget(card, row_idx, col_idx)
                 self.cards.append(card)
 
+                self.display_student_info()
+
         finally:
             # Resume painting the UI and force a refresh
             self.ui.scrollArea_classlist.setUpdatesEnabled(True)
@@ -561,11 +565,29 @@ class Controller:
     def display_student_info(self, clicked_card=None, student_id=None):
         if clicked_card and not isValid(clicked_card):
             return
+
+        sid = lname = fname = mname = section = gender = contact_person = contact_num = "N/A"
+
+        if not clicked_card and not student_id:
+            self.ui.label_section.setText(section)
+            self.ui.label_studentCount.setText('0')
+            self.ui.label_boyCount.setText('0')
+            self.ui.label_girlCount.setText('0')
+    
+            self.ui.label_studentId.setText(f"{sid}")
+            self.ui.label_studentLastName.setText(f"{lname}")
+            self.ui.label_studentFirstName.setText(f"{fname}")
+            self.ui.label_studentMiddleName.setText(f"{mname}")
+            self.ui.label_studentGender.setText(f"{gender}")
+    
+            self.ui.label_contact_person.setText(f"{contact_person}")
+            self.ui.label_contact_number.setText(f"{contact_num}")
+
+            return
     
         studDialog = AddNewStudentDialog()
         total, boys, girls = studDialog.update_section_stats(student_id)
         selected_row = studDialog.refresh_student_info(student_id)
-        sid = lname = fname = mname = section = gender = contact_person = contact_num = "N/A"
         self.last_selected_card = None # Reset
 
         if selected_row:
@@ -1189,9 +1211,12 @@ class Controller:
 
         # Open File Dialog to pick where to save the PDF
         default_filename = f"Quiz_Report_{studentId}_{dateNow}.pdf"
-        output_pdf_path, _ = QFileDialog.getSaveFileName(
+        output_pdf_path, _x = QFileDialog.getSaveFileName(
             self.home_win, "Save PDF Report", default_filename, "PDF Files (*.pdf)"
         )
+
+        if not output_pdf_path:
+            return
 
         reporter = QuizReporter()
         success, message = reporter.generate_quizscores_report(studentId, remarks, output_pdf_path)

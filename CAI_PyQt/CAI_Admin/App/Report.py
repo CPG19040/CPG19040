@@ -5,6 +5,7 @@ from App.Tools import Utility
 
 from docxtpl import DocxTemplate
 
+downloads_dir = os.path.expanduser("~/Downloads")
 
 class StudentListReporter:
     def __init__(self):
@@ -75,7 +76,7 @@ class StudentListReporter:
                 })
 
             # 4. Render the template using docxtpl
-            temp_docx = os.path.abspath("temp_output.docx")
+            temp_docx = os.path.join(downloads_dir, "temp_output.docx")
 
             if not section_id:
                 doc = DocxTemplate(self.studentlist_template_path)
@@ -213,7 +214,7 @@ class QuizReporter:
                         "date_taken"   : model.index(row, 5).data()
                     })
 
-            temp_docx = os.path.abspath("temp_output.docx")
+            temp_docx = os.path.join(downloads_dir, "temp_output.docx")
 
             doc = DocxTemplate(self.quizscores_template_path)
             context = {

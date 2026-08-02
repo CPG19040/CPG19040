@@ -2535,16 +2535,6 @@ QSpinBox::down-arrow {
             </widget>
            </item>
            <item>
-            <widget class="Line" name="line_6">
-             <property name="styleSheet">
-              <string notr="true">background-color: rgb(222, 221, 218);</string>
-             </property>
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-            </widget>
-           </item>
-           <item>
             <widget class="QFrame" name="grp_SectionInfo">
              <property name="maximumSize">
               <size>
@@ -2562,7 +2552,7 @@ QSpinBox::down-arrow {
               </font>
              </property>
              <property name="styleSheet">
-              <string notr="true"/>
+              <string notr="true">border-radius: 15px; background-color: rgb(255, 255, 255);</string>
              </property>
              <layout class="QFormLayout" name="formLayout_2">
               <item row="1" column="0">
@@ -2806,16 +2796,6 @@ QSpinBox::down-arrow {
             </widget>
            </item>
            <item>
-            <widget class="Line" name="line_5">
-             <property name="styleSheet">
-              <string notr="true">background-color: rgb(222, 221, 218);</string>
-             </property>
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-            </widget>
-           </item>
-           <item>
             <widget class="QFrame" name="frame_student_info">
              <property name="font">
               <font>
@@ -2827,9 +2807,9 @@ QSpinBox::down-arrow {
               </font>
              </property>
              <property name="styleSheet">
-              <string notr="true"/>
+              <string notr="true">border-radius: 15px; background-color: rgb(255, 255, 255);</string>
              </property>
-             <layout class="QFormLayout" name="formLayout_3">
+             <layout class="QFormLayout" name="formLayout">
               <item row="0" column="0">
                <widget class="QLabel" name="label_43">
                 <property name="maximumSize">
@@ -2851,7 +2831,7 @@ QSpinBox::down-arrow {
                  <string notr="true"/>
                 </property>
                 <property name="text">
-                 <string>Student Id:</string>
+                 <string>ID:</string>
                 </property>
                 <property name="class" stdset="0">
                  <string>label-faded</string>
@@ -2936,7 +2916,7 @@ QSpinBox::down-arrow {
                 </property>
                </widget>
               </item>
-              <item row="3" column="0">
+              <item row="2" column="0">
                <widget class="QLabel" name="label_38">
                 <property name="maximumSize">
                  <size>
@@ -2964,7 +2944,7 @@ QSpinBox::down-arrow {
                 </property>
                </widget>
               </item>
-              <item row="3" column="1">
+              <item row="2" column="1">
                <widget class="QLabel" name="label_studentFirstName">
                 <property name="maximumSize">
                  <size>
@@ -2989,7 +2969,7 @@ QSpinBox::down-arrow {
                 </property>
                </widget>
               </item>
-              <item row="4" column="0">
+              <item row="3" column="0">
                <widget class="QLabel" name="label_41">
                 <property name="maximumSize">
                  <size>
@@ -3017,7 +2997,7 @@ QSpinBox::down-arrow {
                 </property>
                </widget>
               </item>
-              <item row="4" column="1">
+              <item row="3" column="1">
                <widget class="QLabel" name="label_studentMiddleName">
                 <property name="maximumSize">
                  <size>
@@ -3042,7 +3022,7 @@ QSpinBox::down-arrow {
                 </property>
                </widget>
               </item>
-              <item row="5" column="0">
+              <item row="4" column="0">
                <widget class="QLabel" name="label_37">
                 <property name="maximumSize">
                  <size>
@@ -3070,7 +3050,7 @@ QSpinBox::down-arrow {
                 </property>
                </widget>
               </item>
-              <item row="5" column="1">
+              <item row="4" column="1">
                <widget class="QLabel" name="label_studentGender">
                 <property name="maximumSize">
                  <size>
@@ -3130,16 +3110,6 @@ QSpinBox::down-arrow {
             </widget>
            </item>
            <item>
-            <widget class="Line" name="line_4">
-             <property name="styleSheet">
-              <string notr="true">background-color: rgb(222, 221, 218);</string>
-             </property>
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-            </widget>
-           </item>
-           <item>
             <widget class="QFrame" name="frame_contact_info">
              <property name="font">
               <font>
@@ -3151,7 +3121,7 @@ QSpinBox::down-arrow {
               </font>
              </property>
              <property name="styleSheet">
-              <string notr="true"/>
+              <string notr="true">border-radius: 15px; background-color: rgb(255, 255, 255);</string>
              </property>
              <layout class="QFormLayout" name="formLayout_4">
               <item row="0" column="0">
@@ -3169,7 +3139,7 @@ QSpinBox::down-arrow {
                  <string notr="true"/>
                 </property>
                 <property name="text">
-                 <string>Contact person:</string>
+                 <string>Name:</string>
                 </property>
                 <property name="class" stdset="0">
                  <string>label-faded</string>
@@ -3191,7 +3161,7 @@ QSpinBox::down-arrow {
                  <string notr="true"/>
                 </property>
                 <property name="text">
-                 <string>Contact number:</string>
+                 <string>Mobile:</string>
                 </property>
                 <property name="class" stdset="0">
                  <string>label-faded</string>
@@ -3656,6 +3626,103 @@ QSpinBox::down-arrow {
             </widget>
            </item>
            <item>
+            <widget class="Line" name="line_8">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QWidget" name="widget_19" native="true">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>30</height>
+              </size>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_3">
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QLabel" name="label_47">
+                <property name="maximumSize">
+                 <size>
+                  <width>100</width>
+                  <height>20</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <family>Inter</family>
+                  <pointsize>10</pointsize>
+                  <weight>50</weight>
+                  <italic>false</italic>
+                  <bold>false</bold>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true"/>
+                </property>
+                <property name="text">
+                 <string>Showing:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_totalStudCount">
+                <property name="maximumSize">
+                 <size>
+                  <width>100</width>
+                  <height>20</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <family>Inter SemiBold</family>
+                  <pointsize>10</pointsize>
+                  <weight>50</weight>
+                  <italic>false</italic>
+                  <bold>false</bold>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">background-color: transparent; font: 10pt &quot;Inter SemiBold&quot;;</string>
+                </property>
+                <property name="text">
+                 <string>0 Student</string>
+                </property>
+                <property name="class" stdset="0">
+                 <string>label-header</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_27">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>509</width>
+                  <height>27</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
             <widget class="QScrollArea" name="scrollArea_classlist">
              <property name="autoFillBackground">
               <bool>true</bool>
@@ -3683,8 +3750,8 @@ QSpinBox::down-arrow {
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>100</width>
-                <height>30</height>
+                <width>778</width>
+                <height>597</height>
                </rect>
               </property>
               <layout class="QGridLayout" name="gridLayout_stud_card"/>
@@ -3882,34 +3949,6 @@ QSpinBox::down-arrow {
                  </size>
                 </property>
                </spacer>
-              </item>
-              <item>
-               <widget class="QLabel" name="label_totalStudCount">
-                <property name="maximumSize">
-                 <size>
-                  <width>100</width>
-                  <height>20</height>
-                 </size>
-                </property>
-                <property name="font">
-                 <font>
-                  <family>Inter</family>
-                  <pointsize>10</pointsize>
-                  <weight>50</weight>
-                  <italic>false</italic>
-                  <bold>false</bold>
-                 </font>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true">background-color: transparent;</string>
-                </property>
-                <property name="text">
-                 <string>0 item</string>
-                </property>
-                <property name="class" stdset="0">
-                 <string>label-header</string>
-                </property>
-               </widget>
               </item>
              </layout>
             </widget>

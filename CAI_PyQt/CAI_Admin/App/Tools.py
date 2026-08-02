@@ -483,6 +483,7 @@ class CrossPlatformPrinter:
 
         except subprocess.CalledProcessError as e:
             return False, f"System command line printing failed: {e.stderr}"
+        
         except Exception as e:
             return False, f"Printing failed: {str(e)}"
 
