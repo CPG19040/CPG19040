@@ -1560,34 +1560,13 @@ class Ui_Home(object):
 
         self.horizontalLayout_18.addWidget(self.label_32)
 
-        self.spinBox_SY1 = QSpinBox(self.widget_h)
-        self.spinBox_SY1.setObjectName(u"spinBox_SY1")
-        self.spinBox_SY1.setMinimumSize(QSize(80, 30))
-        self.spinBox_SY1.setMaximumSize(QSize(80, 30))
-        self.spinBox_SY1.setStyleSheet(u"")
-        self.spinBox_SY1.setAlignment(Qt.AlignCenter)
-        self.spinBox_SY1.setMinimum(2000)
-        self.spinBox_SY1.setMaximum(3000)
+        self.cmb_school_year = QComboBox(self.widget_h)
+        self.cmb_school_year.setObjectName(u"cmb_school_year")
+        self.cmb_school_year.setMinimumSize(QSize(120, 30))
+        self.cmb_school_year.setMaximumSize(QSize(16777215, 30))
+        self.cmb_school_year.setStyleSheet(u"")
 
-        self.horizontalLayout_18.addWidget(self.spinBox_SY1)
-
-        self.label_26 = QLabel(self.widget_h)
-        self.label_26.setObjectName(u"label_26")
-        self.label_26.setMaximumSize(QSize(15, 16777215))
-        self.label_26.setAlignment(Qt.AlignCenter)
-
-        self.horizontalLayout_18.addWidget(self.label_26)
-
-        self.spinBox_SY2 = QSpinBox(self.widget_h)
-        self.spinBox_SY2.setObjectName(u"spinBox_SY2")
-        self.spinBox_SY2.setMinimumSize(QSize(80, 30))
-        self.spinBox_SY2.setMaximumSize(QSize(80, 30))
-        self.spinBox_SY2.setStyleSheet(u"")
-        self.spinBox_SY2.setAlignment(Qt.AlignCenter)
-        self.spinBox_SY2.setMinimum(2000)
-        self.spinBox_SY2.setMaximum(3000)
-
-        self.horizontalLayout_18.addWidget(self.spinBox_SY2)
+        self.horizontalLayout_18.addWidget(self.cmb_school_year)
 
         self.btnRefreshSY = QPushButton(self.widget_h)
         self.btnRefreshSY.setObjectName(u"btnRefreshSY")
@@ -4636,7 +4615,8 @@ class Ui_Home(object):
         self.label_contact_person.setText(QCoreApplication.translate("Home", u"null", None))
         self.label_contact_number.setText(QCoreApplication.translate("Home", u"null", None))
         self.label_32.setText(QCoreApplication.translate("Home", u"School Year:", None))
-        self.label_26.setText(QCoreApplication.translate("Home", u"-", None))
+        self.cmb_school_year.setPlaceholderText("")
+        self.cmb_school_year.setProperty(u"class", QCoreApplication.translate("Home", u"combobox-main", None))
         self.btnRefreshSY.setText("")
         self.btnRefreshSY.setProperty(u"class", QCoreApplication.translate("Home", u"button-normal", None))
         self.cmb_studSection.setPlaceholderText(QCoreApplication.translate("Home", u"Select Section", None))

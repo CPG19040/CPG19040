@@ -3323,74 +3323,27 @@ QSpinBox::down-arrow {
                </widget>
               </item>
               <item>
-               <widget class="QSpinBox" name="spinBox_SY1">
+               <widget class="QComboBox" name="cmb_school_year">
                 <property name="minimumSize">
                  <size>
-                  <width>80</width>
+                  <width>120</width>
                   <height>30</height>
                  </size>
                 </property>
                 <property name="maximumSize">
                  <size>
-                  <width>80</width>
+                  <width>16777215</width>
                   <height>30</height>
                  </size>
                 </property>
                 <property name="styleSheet">
                  <string notr="true"/>
                 </property>
-                <property name="alignment">
-                 <set>Qt::AlignCenter</set>
+                <property name="placeholderText">
+                 <string/>
                 </property>
-                <property name="minimum">
-                 <number>2000</number>
-                </property>
-                <property name="maximum">
-                 <number>3000</number>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLabel" name="label_26">
-                <property name="maximumSize">
-                 <size>
-                  <width>15</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>-</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignCenter</set>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QSpinBox" name="spinBox_SY2">
-                <property name="minimumSize">
-                 <size>
-                  <width>80</width>
-                  <height>30</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>80</width>
-                  <height>30</height>
-                 </size>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true"/>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignCenter</set>
-                </property>
-                <property name="minimum">
-                 <number>2000</number>
-                </property>
-                <property name="maximum">
-                 <number>3000</number>
+                <property name="class" stdset="0">
+                 <string>combobox-main</string>
                 </property>
                </widget>
               </item>

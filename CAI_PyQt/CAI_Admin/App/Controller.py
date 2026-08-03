@@ -89,9 +89,8 @@ class Controller:
         # Search Box: Pass the text directly
         self.ui.txt_classList_search.textChanged.connect(self.display_student_cards)
 
-        # Spin Boxes: Used a lambda to ignore the 'value' integer they send
-        self.ui.spinBox_SY1.valueChanged.connect(lambda: self.handle_student_searching())
-        self.ui.spinBox_SY2.valueChanged.connect(lambda: self.handle_student_searching())
+        # Used a lambda to ignore the 'value' integer they send
+        self.ui.cmb_school_year.currentIndexChanged.connect(lambda: self.handle_student_searching())
 
         self.ui.btnUserName.setText(f"{user['firstname']} {user['lastname']}")
         self.ui.labelPosition.setText(user['position_name'])
@@ -496,7 +495,7 @@ class Controller:
         if not text:
             text = self.ui.txt_classList_search.text().strip()
 
-        schoolYear = f"{self.ui.spinBox_SY1.value()}-{self.ui.spinBox_SY2.value()}"
+        schoolYear = self.ui.cmb_school_year.currentText()
         sectionid = self.ui.cmb_studSection.currentData()
         params = (schoolYear, sectionid, text)
 
@@ -1290,8 +1289,17 @@ class Controller:
         self.ui.spinBox_SY_start.setValue(base_year)
         self.ui.spinBox_SY_end.setValue(next_year)
 
-        self.ui.spinBox_SY1.setValue(base_year)
-        self.ui.spinBox_SY2.setValue(next_year)
+        query = """
+            SELECT 
+                ROW_NUMBER() OVER (ORDER BY school_year DESC) AS idx,
+                school_year
+            FROM (
+                SELECT DISTINCT school_year
+                FROM cai.tbl_student_info
+            ) sub
+            ORDER BY idx
+        """
+        self.util.populate_pulldown(self.ui.cmb_school_year, query)
 
         quarters = []
 
