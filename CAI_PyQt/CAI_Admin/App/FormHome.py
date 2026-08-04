@@ -1456,7 +1456,7 @@ class Ui_Home(object):
         self.scrollArea_classlist.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
         self.container = QWidget()
         self.container.setObjectName(u"container")
-        self.container.setGeometry(QRect(0, 0, 778, 597))
+        self.container.setGeometry(QRect(0, 0, 769, 597))
         self.gridLayout_stud_card = QGridLayout(self.container)
         self.gridLayout_stud_card.setObjectName(u"gridLayout_stud_card")
         self.scrollArea_classlist.setWidget(self.container)
@@ -1481,19 +1481,6 @@ class Ui_Home(object):
 
         self.horizontalLayout_17.addWidget(self.btnAddStudent)
 
-        self.btnEditStudent = QPushButton(self.widget_f)
-        self.btnEditStudent.setObjectName(u"btnEditStudent")
-        self.btnEditStudent.setMinimumSize(QSize(130, 30))
-        self.btnEditStudent.setMaximumSize(QSize(16777215, 30))
-        self.btnEditStudent.setFont(font)
-        self.btnEditStudent.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.btnEditStudent.setStyleSheet(u"")
-        icon15 = QIcon()
-        icon15.addFile(u":/Images/Images/pencil.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.btnEditStudent.setIcon(icon15)
-
-        self.horizontalLayout_17.addWidget(self.btnEditStudent)
-
         self.btnDeleteStudent = QPushButton(self.widget_f)
         self.btnDeleteStudent.setObjectName(u"btnDeleteStudent")
         self.btnDeleteStudent.setMinimumSize(QSize(140, 30))
@@ -1501,9 +1488,9 @@ class Ui_Home(object):
         self.btnDeleteStudent.setFont(font)
         self.btnDeleteStudent.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btnDeleteStudent.setStyleSheet(u"")
-        icon16 = QIcon()
-        icon16.addFile(u":/Images/Images/trash.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.btnDeleteStudent.setIcon(icon16)
+        icon15 = QIcon()
+        icon15.addFile(u":/Images/Images/trash.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.btnDeleteStudent.setIcon(icon15)
 
         self.horizontalLayout_17.addWidget(self.btnDeleteStudent)
 
@@ -1514,9 +1501,9 @@ class Ui_Home(object):
         self.btnPrintStudentList.setFont(font)
         self.btnPrintStudentList.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btnPrintStudentList.setStyleSheet(u"")
-        icon17 = QIcon()
-        icon17.addFile(u":/Images/Images/printer.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.btnPrintStudentList.setIcon(icon17)
+        icon16 = QIcon()
+        icon16.addFile(u":/Images/Images/printer.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.btnPrintStudentList.setIcon(icon16)
 
         self.horizontalLayout_17.addWidget(self.btnPrintStudentList)
 
@@ -1536,15 +1523,21 @@ class Ui_Home(object):
         self.verticalLayout_3 = QVBoxLayout(self.InformationPanel)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
-        self.label_16 = QLabel(self.InformationPanel)
+        self.sub_info_panel = QWidget(self.InformationPanel)
+        self.sub_info_panel.setObjectName(u"sub_info_panel")
+        self.sub_info_panel.setMinimumSize(QSize(0, 100))
+        self.verticalLayout_9 = QVBoxLayout(self.sub_info_panel)
+        self.verticalLayout_9.setObjectName(u"verticalLayout_9")
+        self.verticalLayout_9.setContentsMargins(-1, -1, 0, -1)
+        self.label_16 = QLabel(self.sub_info_panel)
         self.label_16.setObjectName(u"label_16")
         self.label_16.setMinimumSize(QSize(0, 30))
         self.label_16.setFont(font8)
         self.label_16.setStyleSheet(u"background-color: transparent; color: rgb(253, 64, 115); font: 57 14pt \"Inter Medium\";")
 
-        self.verticalLayout_3.addWidget(self.label_16)
+        self.verticalLayout_9.addWidget(self.label_16)
 
-        self.grp_SectionInfo = QFrame(self.InformationPanel)
+        self.grp_SectionInfo = QFrame(self.sub_info_panel)
         self.grp_SectionInfo.setObjectName(u"grp_SectionInfo")
         self.grp_SectionInfo.setMaximumSize(QSize(16777215, 130))
         self.grp_SectionInfo.setFont(font)
@@ -1621,17 +1614,17 @@ class Ui_Home(object):
         self.formLayout_2.setWidget(0, QFormLayout.ItemRole.FieldRole, self.label_section)
 
 
-        self.verticalLayout_3.addWidget(self.grp_SectionInfo)
+        self.verticalLayout_9.addWidget(self.grp_SectionInfo)
 
-        self.label_17 = QLabel(self.InformationPanel)
+        self.label_17 = QLabel(self.sub_info_panel)
         self.label_17.setObjectName(u"label_17")
         self.label_17.setMinimumSize(QSize(0, 30))
         self.label_17.setFont(font8)
         self.label_17.setStyleSheet(u"background-color: transparent; color: rgb(253, 64, 115); font: 57 14pt \"Inter Medium\";")
 
-        self.verticalLayout_3.addWidget(self.label_17)
+        self.verticalLayout_9.addWidget(self.label_17)
 
-        self.frame_student_info = QFrame(self.InformationPanel)
+        self.frame_student_info = QFrame(self.sub_info_panel)
         self.frame_student_info.setObjectName(u"frame_student_info")
         self.frame_student_info.setFont(font)
         self.frame_student_info.setStyleSheet(u"border-radius: 15px; background-color: rgb(255, 255, 255);")
@@ -1718,18 +1711,18 @@ class Ui_Home(object):
         self.formLayout.setWidget(4, QFormLayout.ItemRole.FieldRole, self.label_studentGender)
 
 
-        self.verticalLayout_3.addWidget(self.frame_student_info)
+        self.verticalLayout_9.addWidget(self.frame_student_info)
 
-        self.label_51 = QLabel(self.InformationPanel)
+        self.label_51 = QLabel(self.sub_info_panel)
         self.label_51.setObjectName(u"label_51")
         self.label_51.setMinimumSize(QSize(0, 30))
         self.label_51.setMaximumSize(QSize(16777215, 20))
         self.label_51.setFont(font8)
         self.label_51.setStyleSheet(u"background-color: transparent; color: rgb(253, 64, 115); font: 57 14pt \"Inter Medium\";")
 
-        self.verticalLayout_3.addWidget(self.label_51)
+        self.verticalLayout_9.addWidget(self.label_51)
 
-        self.frame_contact_info = QFrame(self.InformationPanel)
+        self.frame_contact_info = QFrame(self.sub_info_panel)
         self.frame_contact_info.setObjectName(u"frame_contact_info")
         self.frame_contact_info.setFont(font)
         self.frame_contact_info.setStyleSheet(u"border-radius: 15px; background-color: rgb(255, 255, 255);")
@@ -1766,11 +1759,35 @@ class Ui_Home(object):
         self.formLayout_4.setWidget(1, QFormLayout.ItemRole.FieldRole, self.label_contact_number)
 
 
-        self.verticalLayout_3.addWidget(self.frame_contact_info)
+        self.verticalLayout_9.addWidget(self.frame_contact_info)
+
+        self.widget_21 = QWidget(self.sub_info_panel)
+        self.widget_21.setObjectName(u"widget_21")
+        self.horizontalLayout_23 = QHBoxLayout(self.widget_21)
+        self.horizontalLayout_23.setObjectName(u"horizontalLayout_23")
+        self.horizontalLayout_23.setContentsMargins(-1, 12, -1, -1)
+        self.btnEditStudent = QPushButton(self.widget_21)
+        self.btnEditStudent.setObjectName(u"btnEditStudent")
+        self.btnEditStudent.setMinimumSize(QSize(130, 30))
+        self.btnEditStudent.setMaximumSize(QSize(130, 30))
+        self.btnEditStudent.setFont(font)
+        self.btnEditStudent.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.btnEditStudent.setStyleSheet(u"")
+        icon17 = QIcon()
+        icon17.addFile(u":/Images/Images/pencil.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.btnEditStudent.setIcon(icon17)
+
+        self.horizontalLayout_23.addWidget(self.btnEditStudent)
+
+
+        self.verticalLayout_9.addWidget(self.widget_21)
 
         self.verticalSpacer_7 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
-        self.verticalLayout_3.addItem(self.verticalSpacer_7)
+        self.verticalLayout_9.addItem(self.verticalSpacer_7)
+
+
+        self.verticalLayout_3.addWidget(self.sub_info_panel)
 
         self.widget_2 = QWidget(self.InformationPanel)
         self.widget_2.setObjectName(u"widget_2")
@@ -1963,7 +1980,7 @@ class Ui_Home(object):
         self.btnLessonEdit.setMinimumSize(QSize(100, 30))
         self.btnLessonEdit.setMaximumSize(QSize(16777215, 30))
         self.btnLessonEdit.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.btnLessonEdit.setIcon(icon15)
+        self.btnLessonEdit.setIcon(icon17)
 
         self.horizontalLayout_4.addWidget(self.btnLessonEdit)
 
@@ -2466,7 +2483,7 @@ class Ui_Home(object):
         self.scrollArea_tf.setWidgetResizable(True)
         self.scrollAreaWidgetContents_4 = QWidget()
         self.scrollAreaWidgetContents_4.setObjectName(u"scrollAreaWidgetContents_4")
-        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 23, 18))
+        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 100, 30))
         self.verticalLayout_13 = QVBoxLayout(self.scrollAreaWidgetContents_4)
         self.verticalLayout_13.setObjectName(u"verticalLayout_13")
         self.scrollArea_tf.setWidget(self.scrollAreaWidgetContents_4)
@@ -2492,7 +2509,7 @@ class Ui_Home(object):
         self.scrollArea_mc.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 23, 18))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 100, 30))
         self.verticalLayout_12 = QVBoxLayout(self.scrollAreaWidgetContents_3)
         self.verticalLayout_12.setObjectName(u"verticalLayout_12")
         self.scrollArea_mc.setWidget(self.scrollAreaWidgetContents_3)
@@ -2505,7 +2522,7 @@ class Ui_Home(object):
         self.scrollArea_id.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 24, 18))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 100, 30))
         self.verticalLayout_11 = QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_11.setObjectName(u"verticalLayout_11")
         self.scrollArea_id.setWidget(self.scrollAreaWidgetContents_2)
@@ -3513,7 +3530,7 @@ class Ui_Home(object):
         self.btnPrintQuizScores.setFont(font)
         self.btnPrintQuizScores.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btnPrintQuizScores.setStyleSheet(u"")
-        self.btnPrintQuizScores.setIcon(icon17)
+        self.btnPrintQuizScores.setIcon(icon16)
 
         self.horizontalLayout_21.addWidget(self.btnPrintQuizScores)
 
@@ -4581,6 +4598,9 @@ class Ui_Home(object):
         self.label_32.setText(QCoreApplication.translate("Home", u"School Year:", None))
         self.cmb_school_year.setPlaceholderText("")
         self.cmb_school_year.setProperty(u"class", QCoreApplication.translate("Home", u"combobox-main", None))
+#if QT_CONFIG(tooltip)
+        self.btnRefreshSY.setToolTip(QCoreApplication.translate("Home", u"Refresh the school year", None))
+#endif // QT_CONFIG(tooltip)
         self.btnRefreshSY.setText("")
         self.btnRefreshSY.setProperty(u"class", QCoreApplication.translate("Home", u"button-normal", None))
         self.cmb_studSection.setPlaceholderText(QCoreApplication.translate("Home", u"Select Section", None))
@@ -4600,8 +4620,6 @@ class Ui_Home(object):
         self.label_totalStudCount.setProperty(u"class", QCoreApplication.translate("Home", u"label-header", None))
         self.btnAddStudent.setText(QCoreApplication.translate("Home", u" Add/Import", None))
         self.btnAddStudent.setProperty(u"class", QCoreApplication.translate("Home", u"button-normal", None))
-        self.btnEditStudent.setText(QCoreApplication.translate("Home", u" Edit", None))
-        self.btnEditStudent.setProperty(u"class", QCoreApplication.translate("Home", u"button-normal", None))
         self.btnDeleteStudent.setText(QCoreApplication.translate("Home", u" Delete", None))
         self.btnDeleteStudent.setProperty(u"class", QCoreApplication.translate("Home", u"button-normal", None))
         self.btnPrintStudentList.setText(QCoreApplication.translate("Home", u" Print", None))
@@ -4642,6 +4660,8 @@ class Ui_Home(object):
         self.label_56.setProperty(u"class", QCoreApplication.translate("Home", u"label-faded", None))
         self.label_contact_person.setText(QCoreApplication.translate("Home", u"null", None))
         self.label_contact_number.setText(QCoreApplication.translate("Home", u"null", None))
+        self.btnEditStudent.setText(QCoreApplication.translate("Home", u" Edit", None))
+        self.btnEditStudent.setProperty(u"class", QCoreApplication.translate("Home", u"button-normal", None))
         self.widget_search_4.setProperty(u"class", QCoreApplication.translate("Home", u"widget-search-container", None))
         self.label_magnifying_stud_2.setText("")
         self.label_magnifying_stud_2.setProperty(u"class", QCoreApplication.translate("Home", u"label-magnifying-search", None))

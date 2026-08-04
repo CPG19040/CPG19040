@@ -581,6 +581,8 @@ class Controller:
             self.ui.label_contact_person.setText(f"{contact_person}")
             self.ui.label_contact_number.setText(f"{contact_num}")
 
+            self.util.animate_slide(self.ui.sub_info_panel, show=False, direction="right")
+
             return
     
         studDialog = AddNewStudentDialog()
@@ -618,6 +620,8 @@ class Controller:
 
         self.ui.label_contact_person.setText(f"{contact_person}")
         self.ui.label_contact_number.setText(f"{contact_num}")
+
+        self.util.animate_slide(self.ui.sub_info_panel, show=True, direction="right")
 
         # if not self.util.isEmpty(sid):
         #     layout = self.ui.verticalLayout_14

@@ -2,7 +2,7 @@ import os, sys, subprocess
 
 from PySide6.QtWidgets import QVBoxLayout, QHBoxLayout, QLabel, QFrame, QFileDialog, QWidget, QMainWindow, QDialog, QComboBox
 from PySide6.QtGui import QPixmap, QPainter, QColor, QPen, QPainterPath, QFont
-from PySide6.QtCore import Qt, Signal, QDate, QUrl, QRectF
+from PySide6.QtCore import Qt, Signal, QDate, QUrl, QRectF, QPoint, QPropertyAnimation, QEasingCurve
 from PySide6.QtWebEngineWidgets import QWebEngineView
 
 from App.CRUDTools import DatabaseTools
@@ -249,6 +249,71 @@ class Utility:
     def getDifficultyLevel(self, index):
         levels = { 1: "Easy", 2: "Average", 3: "Hard" }
         return levels.get(index, "")
+
+    def animate_slide(self, widget, show: bool, direction: str = "right", duration: int = 350):
+        """
+        Slides any QWidget smoothly into or out of view relative to its parent.
+        """
+        parent = widget.parentWidget()
+        if not parent:
+            return
+
+        # Ensure layout doesn't interfere with fixed positional animation
+        widget.raise_()
+
+        w_width = widget.width()
+        w_height = widget.height()
+        p_width = parent.width()
+        p_height = parent.height()
+
+        # Cache standard resting position relative to parent layout
+        if show:
+            widget.setVisible(True)
+
+        # Base Y/X stays aligned with its resting coordinate inside parent
+        curr_x = widget.x()
+        curr_y = widget.y()
+
+        # Define explicit off-screen vs on-screen target coordinates
+        if direction == "right":
+            offscreen_point = QPoint(p_width, curr_y)
+            # If the panel sits docked to the right edge when fully visible:
+            onscreen_point = QPoint(p_width - w_width, curr_y)
+        elif direction == "left":
+            offscreen_point = QPoint(-w_width, curr_y)
+            onscreen_point = QPoint(0, curr_y)
+        elif direction == "bottom":
+            offscreen_point = QPoint(curr_x, p_height)
+            onscreen_point = QPoint(curr_x, p_height - w_height)
+        elif direction == "top":
+            offscreen_point = QPoint(curr_x, -w_height)
+            onscreen_point = QPoint(curr_x, 0)
+
+        # Set explicit start and end coordinates
+        start_point = widget.pos() if widget.isVisible() else (offscreen_point if show else onscreen_point)
+        end_point = onscreen_point if show else offscreen_point
+
+        # Manage animation instance per widget
+        if not hasattr(widget, "_slide_anim"):
+            widget._slide_anim = QPropertyAnimation(widget, b"pos")
+
+        anim = widget._slide_anim
+        anim.stop()
+        
+        try:
+            anim.finished.disconnect()
+        except (RuntimeError, TypeError):
+            pass
+
+        anim.setDuration(duration)
+        anim.setStartValue(start_point)
+        anim.setEndValue(end_point)
+        anim.setEasingCurve(QEasingCurve.Type.OutCubic)
+
+        if not show:
+            anim.finished.connect(lambda: widget.setVisible(False))
+
+        anim.start()
 
 
 class CardStudent(QFrame):
