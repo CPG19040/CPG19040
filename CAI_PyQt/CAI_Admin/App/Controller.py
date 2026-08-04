@@ -69,7 +69,15 @@ class Controller:
         self.ui.setupUi(self.home_win)
         # self.home_win.showMaximized()
 
-        # Setup UI
+        # SETUP UI
+        # Timer for Clock
+        self.timer = QTimer()
+        self.timer.timeout.connect(self.update_clock)
+        self.timer.start(1000)
+
+        self.ui.btnUserName.setText(f"{user['firstname']} {user['lastname']}")
+        self.ui.labelPosition.setText(user['position_name'])
+        
         self.card_layout = self.ui.gridLayout_stud_card
         self.card_layout.setAlignment(Qt.AlignmentFlag.AlignTop)
         self.card_layout.setSpacing(10)
@@ -85,22 +93,13 @@ class Controller:
 
         self.ui.btn_manual.setChecked(True)
         self.get_dynamic_grading_period_dates()
+        self.displayDashboard()
 
         # Search Box: Pass the text directly
         self.ui.txt_classList_search.textChanged.connect(self.display_student_cards)
 
         # Used a lambda to ignore the 'value' integer they send
         self.ui.cmb_school_year.currentIndexChanged.connect(lambda: self.handle_student_searching())
-
-        self.ui.btnUserName.setText(f"{user['firstname']} {user['lastname']}")
-        self.ui.labelPosition.setText(user['position_name'])
-
-        # Timer for Clock
-        self.timer = QTimer()
-        self.timer.timeout.connect(self.update_clock)
-        self.timer.start(1000)
-
-        self.displayDashboard()
 
         self.nav_group = QButtonGroup(self.home_win)
         self.nav_group.setExclusive(True)
@@ -397,7 +396,7 @@ class Controller:
         now = QDateTime.currentDateTime()
         timeNow = now.toString("hh:mm AP")
         time, ap = timeNow.split()
-        self.ui.label_month.setText(now.toString("MMM"))
+        self.ui.label_month.setText(now.toString("MMM").upper())
         self.ui.label_day.setText(now.toString("d"))
         self.ui.label_time.setText(time)
         self.ui.label_timeAP.setText(ap)

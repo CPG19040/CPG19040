@@ -1090,7 +1090,7 @@ class Ui_Home(object):
         self.widget_datetime.setMaximumSize(QSize(211, 16777215))
         self.label_month = QLabel(self.widget_datetime)
         self.label_month.setObjectName(u"label_month")
-        self.label_month.setGeometry(QRect(80, 10, 50, 34))
+        self.label_month.setGeometry(QRect(59, 10, 91, 34))
         font5 = QFont()
         font5.setFamilies([u"Inter Medium"])
         font5.setPointSize(18)
@@ -1287,260 +1287,6 @@ class Ui_Home(object):
 "}")
         self.horizontalLayout_15 = QHBoxLayout(self.pageClassList)
         self.horizontalLayout_15.setObjectName(u"horizontalLayout_15")
-        self.InformationPanel = QWidget(self.pageClassList)
-        self.InformationPanel.setObjectName(u"InformationPanel")
-        self.InformationPanel.setStyleSheet(u"")
-        self.verticalLayout_3 = QVBoxLayout(self.InformationPanel)
-        self.verticalLayout_3.setObjectName(u"verticalLayout_3")
-        self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
-        self.label_16 = QLabel(self.InformationPanel)
-        self.label_16.setObjectName(u"label_16")
-        self.label_16.setMinimumSize(QSize(0, 30))
-        self.label_16.setFont(font8)
-        self.label_16.setStyleSheet(u"background-color: transparent; color: rgb(253, 64, 115); font: 57 14pt \"Inter Medium\";")
-
-        self.verticalLayout_3.addWidget(self.label_16)
-
-        self.grp_SectionInfo = QFrame(self.InformationPanel)
-        self.grp_SectionInfo.setObjectName(u"grp_SectionInfo")
-        self.grp_SectionInfo.setMaximumSize(QSize(16777215, 130))
-        self.grp_SectionInfo.setFont(font)
-        self.grp_SectionInfo.setStyleSheet(u"border-radius: 15px; background-color: rgb(255, 255, 255);")
-        self.formLayout_2 = QFormLayout(self.grp_SectionInfo)
-        self.formLayout_2.setObjectName(u"formLayout_2")
-        self.label_33 = QLabel(self.grp_SectionInfo)
-        self.label_33.setObjectName(u"label_33")
-        self.label_33.setMaximumSize(QSize(16777215, 20))
-        font9 = QFont()
-        font9.setFamilies([u"Inter"])
-        font9.setPointSize(11)
-        font9.setBold(False)
-        font9.setItalic(False)
-        self.label_33.setFont(font9)
-        self.label_33.setStyleSheet(u"")
-
-        self.formLayout_2.setWidget(1, QFormLayout.ItemRole.LabelRole, self.label_33)
-
-        self.label_34 = QLabel(self.grp_SectionInfo)
-        self.label_34.setObjectName(u"label_34")
-        self.label_34.setMaximumSize(QSize(16777215, 20))
-        self.label_34.setFont(font9)
-        self.label_34.setStyleSheet(u"")
-
-        self.formLayout_2.setWidget(2, QFormLayout.ItemRole.LabelRole, self.label_34)
-
-        self.label_28 = QLabel(self.grp_SectionInfo)
-        self.label_28.setObjectName(u"label_28")
-        self.label_28.setMaximumSize(QSize(16777215, 20))
-        self.label_28.setFont(font9)
-        self.label_28.setStyleSheet(u"")
-
-        self.formLayout_2.setWidget(3, QFormLayout.ItemRole.LabelRole, self.label_28)
-
-        self.label_studentCount = QLabel(self.grp_SectionInfo)
-        self.label_studentCount.setObjectName(u"label_studentCount")
-        self.label_studentCount.setMaximumSize(QSize(16777215, 20))
-        self.label_studentCount.setFont(font9)
-        self.label_studentCount.setStyleSheet(u"color: rgb(18, 18, 18); background-color: transparent;")
-
-        self.formLayout_2.setWidget(1, QFormLayout.ItemRole.FieldRole, self.label_studentCount)
-
-        self.label_girlCount = QLabel(self.grp_SectionInfo)
-        self.label_girlCount.setObjectName(u"label_girlCount")
-        self.label_girlCount.setMaximumSize(QSize(16777215, 20))
-        self.label_girlCount.setFont(font9)
-        self.label_girlCount.setStyleSheet(u"color: rgb(18, 18, 18); background-color: transparent;")
-
-        self.formLayout_2.setWidget(2, QFormLayout.ItemRole.FieldRole, self.label_girlCount)
-
-        self.label_boyCount = QLabel(self.grp_SectionInfo)
-        self.label_boyCount.setObjectName(u"label_boyCount")
-        self.label_boyCount.setMaximumSize(QSize(16777215, 20))
-        self.label_boyCount.setFont(font9)
-        self.label_boyCount.setStyleSheet(u"color: rgb(18, 18, 18); background-color: transparent;")
-
-        self.formLayout_2.setWidget(3, QFormLayout.ItemRole.FieldRole, self.label_boyCount)
-
-        self.label_35 = QLabel(self.grp_SectionInfo)
-        self.label_35.setObjectName(u"label_35")
-        self.label_35.setMaximumSize(QSize(16777215, 20))
-        self.label_35.setFont(font9)
-        self.label_35.setStyleSheet(u"")
-
-        self.formLayout_2.setWidget(0, QFormLayout.ItemRole.LabelRole, self.label_35)
-
-        self.label_section = QLabel(self.grp_SectionInfo)
-        self.label_section.setObjectName(u"label_section")
-        self.label_section.setMaximumSize(QSize(16777215, 20))
-        self.label_section.setFont(font9)
-        self.label_section.setStyleSheet(u"color: rgb(18, 18, 18); background-color: transparent;")
-
-        self.formLayout_2.setWidget(0, QFormLayout.ItemRole.FieldRole, self.label_section)
-
-
-        self.verticalLayout_3.addWidget(self.grp_SectionInfo)
-
-        self.label_17 = QLabel(self.InformationPanel)
-        self.label_17.setObjectName(u"label_17")
-        self.label_17.setMinimumSize(QSize(0, 30))
-        self.label_17.setFont(font8)
-        self.label_17.setStyleSheet(u"background-color: transparent; color: rgb(253, 64, 115); font: 57 14pt \"Inter Medium\";")
-
-        self.verticalLayout_3.addWidget(self.label_17)
-
-        self.frame_student_info = QFrame(self.InformationPanel)
-        self.frame_student_info.setObjectName(u"frame_student_info")
-        self.frame_student_info.setFont(font)
-        self.frame_student_info.setStyleSheet(u"border-radius: 15px; background-color: rgb(255, 255, 255);")
-        self.formLayout = QFormLayout(self.frame_student_info)
-        self.formLayout.setObjectName(u"formLayout")
-        self.label_43 = QLabel(self.frame_student_info)
-        self.label_43.setObjectName(u"label_43")
-        self.label_43.setMaximumSize(QSize(95, 20))
-        self.label_43.setFont(font9)
-        self.label_43.setStyleSheet(u"")
-
-        self.formLayout.setWidget(0, QFormLayout.ItemRole.LabelRole, self.label_43)
-
-        self.label_studentId = QLabel(self.frame_student_info)
-        self.label_studentId.setObjectName(u"label_studentId")
-        self.label_studentId.setMaximumSize(QSize(16777215, 20))
-        self.label_studentId.setFont(font9)
-        self.label_studentId.setStyleSheet(u"color: rgb(18, 18, 18); background-color: transparent;")
-
-        self.formLayout.setWidget(0, QFormLayout.ItemRole.FieldRole, self.label_studentId)
-
-        self.label_36 = QLabel(self.frame_student_info)
-        self.label_36.setObjectName(u"label_36")
-        self.label_36.setMaximumSize(QSize(95, 20))
-        self.label_36.setFont(font9)
-        self.label_36.setStyleSheet(u"")
-
-        self.formLayout.setWidget(1, QFormLayout.ItemRole.LabelRole, self.label_36)
-
-        self.label_studentLastName = QLabel(self.frame_student_info)
-        self.label_studentLastName.setObjectName(u"label_studentLastName")
-        self.label_studentLastName.setMaximumSize(QSize(16777215, 20))
-        self.label_studentLastName.setFont(font9)
-        self.label_studentLastName.setStyleSheet(u"color: rgb(18, 18, 18); background-color: transparent;")
-
-        self.formLayout.setWidget(1, QFormLayout.ItemRole.FieldRole, self.label_studentLastName)
-
-        self.label_38 = QLabel(self.frame_student_info)
-        self.label_38.setObjectName(u"label_38")
-        self.label_38.setMaximumSize(QSize(95, 20))
-        self.label_38.setFont(font9)
-        self.label_38.setStyleSheet(u"")
-
-        self.formLayout.setWidget(2, QFormLayout.ItemRole.LabelRole, self.label_38)
-
-        self.label_studentFirstName = QLabel(self.frame_student_info)
-        self.label_studentFirstName.setObjectName(u"label_studentFirstName")
-        self.label_studentFirstName.setMaximumSize(QSize(16777215, 20))
-        self.label_studentFirstName.setFont(font9)
-        self.label_studentFirstName.setStyleSheet(u"color: rgb(18, 18, 18); background-color: transparent;")
-
-        self.formLayout.setWidget(2, QFormLayout.ItemRole.FieldRole, self.label_studentFirstName)
-
-        self.label_41 = QLabel(self.frame_student_info)
-        self.label_41.setObjectName(u"label_41")
-        self.label_41.setMaximumSize(QSize(95, 20))
-        self.label_41.setFont(font9)
-        self.label_41.setStyleSheet(u"")
-
-        self.formLayout.setWidget(3, QFormLayout.ItemRole.LabelRole, self.label_41)
-
-        self.label_studentMiddleName = QLabel(self.frame_student_info)
-        self.label_studentMiddleName.setObjectName(u"label_studentMiddleName")
-        self.label_studentMiddleName.setMaximumSize(QSize(16777215, 20))
-        self.label_studentMiddleName.setFont(font9)
-        self.label_studentMiddleName.setStyleSheet(u"color: rgb(18, 18, 18); background-color: transparent;")
-
-        self.formLayout.setWidget(3, QFormLayout.ItemRole.FieldRole, self.label_studentMiddleName)
-
-        self.label_37 = QLabel(self.frame_student_info)
-        self.label_37.setObjectName(u"label_37")
-        self.label_37.setMaximumSize(QSize(95, 20))
-        self.label_37.setFont(font9)
-        self.label_37.setStyleSheet(u"")
-
-        self.formLayout.setWidget(4, QFormLayout.ItemRole.LabelRole, self.label_37)
-
-        self.label_studentGender = QLabel(self.frame_student_info)
-        self.label_studentGender.setObjectName(u"label_studentGender")
-        self.label_studentGender.setMaximumSize(QSize(16777215, 20))
-        self.label_studentGender.setFont(font9)
-        self.label_studentGender.setStyleSheet(u"color: rgb(18, 18, 18); background-color: transparent;")
-
-        self.formLayout.setWidget(4, QFormLayout.ItemRole.FieldRole, self.label_studentGender)
-
-
-        self.verticalLayout_3.addWidget(self.frame_student_info)
-
-        self.label_51 = QLabel(self.InformationPanel)
-        self.label_51.setObjectName(u"label_51")
-        self.label_51.setMinimumSize(QSize(0, 30))
-        self.label_51.setMaximumSize(QSize(16777215, 20))
-        self.label_51.setFont(font8)
-        self.label_51.setStyleSheet(u"background-color: transparent; color: rgb(253, 64, 115); font: 57 14pt \"Inter Medium\";")
-
-        self.verticalLayout_3.addWidget(self.label_51)
-
-        self.frame_contact_info = QFrame(self.InformationPanel)
-        self.frame_contact_info.setObjectName(u"frame_contact_info")
-        self.frame_contact_info.setFont(font)
-        self.frame_contact_info.setStyleSheet(u"border-radius: 15px; background-color: rgb(255, 255, 255);")
-        self.formLayout_4 = QFormLayout(self.frame_contact_info)
-        self.formLayout_4.setObjectName(u"formLayout_4")
-        self.label_59 = QLabel(self.frame_contact_info)
-        self.label_59.setObjectName(u"label_59")
-        self.label_59.setFont(font9)
-        self.label_59.setStyleSheet(u"")
-
-        self.formLayout_4.setWidget(0, QFormLayout.ItemRole.LabelRole, self.label_59)
-
-        self.label_56 = QLabel(self.frame_contact_info)
-        self.label_56.setObjectName(u"label_56")
-        self.label_56.setFont(font9)
-        self.label_56.setStyleSheet(u"")
-
-        self.formLayout_4.setWidget(1, QFormLayout.ItemRole.LabelRole, self.label_56)
-
-        self.label_contact_person = QLabel(self.frame_contact_info)
-        self.label_contact_person.setObjectName(u"label_contact_person")
-        self.label_contact_person.setMaximumSize(QSize(16777215, 20))
-        self.label_contact_person.setFont(font9)
-        self.label_contact_person.setStyleSheet(u"color: rgb(18, 18, 18); background-color: transparent;")
-
-        self.formLayout_4.setWidget(0, QFormLayout.ItemRole.FieldRole, self.label_contact_person)
-
-        self.label_contact_number = QLabel(self.frame_contact_info)
-        self.label_contact_number.setObjectName(u"label_contact_number")
-        self.label_contact_number.setMaximumSize(QSize(16777215, 20))
-        self.label_contact_number.setFont(font9)
-        self.label_contact_number.setStyleSheet(u"color: rgb(18, 18, 18); background-color: transparent;")
-
-        self.formLayout_4.setWidget(1, QFormLayout.ItemRole.FieldRole, self.label_contact_number)
-
-
-        self.verticalLayout_3.addWidget(self.frame_contact_info)
-
-        self.verticalSpacer_7 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
-
-        self.verticalLayout_3.addItem(self.verticalSpacer_7)
-
-        self.widget_2 = QWidget(self.InformationPanel)
-        self.widget_2.setObjectName(u"widget_2")
-        self.widget_2.setMaximumSize(QSize(16777215, 200))
-        self.verticalLayout_22 = QVBoxLayout(self.widget_2)
-        self.verticalLayout_22.setObjectName(u"verticalLayout_22")
-        self.verticalLayout_22.setContentsMargins(0, 0, 0, 0)
-
-        self.verticalLayout_3.addWidget(self.widget_2)
-
-
-        self.horizontalLayout_15.addWidget(self.InformationPanel)
-
         self.widget_table_stud = QWidget(self.pageClassList)
         self.widget_table_stud.setObjectName(u"widget_table_stud")
         self.widget_table_stud.setMinimumSize(QSize(494, 0))
@@ -1682,12 +1428,12 @@ class Ui_Home(object):
         self.label_totalStudCount = QLabel(self.widget_19)
         self.label_totalStudCount.setObjectName(u"label_totalStudCount")
         self.label_totalStudCount.setMaximumSize(QSize(100, 20))
-        font10 = QFont()
-        font10.setFamilies([u"Inter SemiBold"])
-        font10.setPointSize(10)
-        font10.setBold(False)
-        font10.setItalic(False)
-        self.label_totalStudCount.setFont(font10)
+        font9 = QFont()
+        font9.setFamilies([u"Inter SemiBold"])
+        font9.setPointSize(10)
+        font9.setBold(False)
+        font9.setItalic(False)
+        self.label_totalStudCount.setFont(font9)
         self.label_totalStudCount.setStyleSheet(u"background-color: transparent; font: 10pt \"Inter SemiBold\";")
 
         self.horizontalLayout_3.addWidget(self.label_totalStudCount)
@@ -1783,6 +1529,260 @@ class Ui_Home(object):
 
 
         self.horizontalLayout_15.addWidget(self.widget_table_stud)
+
+        self.InformationPanel = QWidget(self.pageClassList)
+        self.InformationPanel.setObjectName(u"InformationPanel")
+        self.InformationPanel.setStyleSheet(u"")
+        self.verticalLayout_3 = QVBoxLayout(self.InformationPanel)
+        self.verticalLayout_3.setObjectName(u"verticalLayout_3")
+        self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
+        self.label_16 = QLabel(self.InformationPanel)
+        self.label_16.setObjectName(u"label_16")
+        self.label_16.setMinimumSize(QSize(0, 30))
+        self.label_16.setFont(font8)
+        self.label_16.setStyleSheet(u"background-color: transparent; color: rgb(253, 64, 115); font: 57 14pt \"Inter Medium\";")
+
+        self.verticalLayout_3.addWidget(self.label_16)
+
+        self.grp_SectionInfo = QFrame(self.InformationPanel)
+        self.grp_SectionInfo.setObjectName(u"grp_SectionInfo")
+        self.grp_SectionInfo.setMaximumSize(QSize(16777215, 130))
+        self.grp_SectionInfo.setFont(font)
+        self.grp_SectionInfo.setStyleSheet(u"border-radius: 15px; background-color: rgb(255, 255, 255);")
+        self.formLayout_2 = QFormLayout(self.grp_SectionInfo)
+        self.formLayout_2.setObjectName(u"formLayout_2")
+        self.label_33 = QLabel(self.grp_SectionInfo)
+        self.label_33.setObjectName(u"label_33")
+        self.label_33.setMaximumSize(QSize(16777215, 20))
+        font10 = QFont()
+        font10.setFamilies([u"Inter"])
+        font10.setPointSize(11)
+        font10.setBold(False)
+        font10.setItalic(False)
+        self.label_33.setFont(font10)
+        self.label_33.setStyleSheet(u"")
+
+        self.formLayout_2.setWidget(1, QFormLayout.ItemRole.LabelRole, self.label_33)
+
+        self.label_34 = QLabel(self.grp_SectionInfo)
+        self.label_34.setObjectName(u"label_34")
+        self.label_34.setMaximumSize(QSize(16777215, 20))
+        self.label_34.setFont(font10)
+        self.label_34.setStyleSheet(u"")
+
+        self.formLayout_2.setWidget(2, QFormLayout.ItemRole.LabelRole, self.label_34)
+
+        self.label_28 = QLabel(self.grp_SectionInfo)
+        self.label_28.setObjectName(u"label_28")
+        self.label_28.setMaximumSize(QSize(16777215, 20))
+        self.label_28.setFont(font10)
+        self.label_28.setStyleSheet(u"")
+
+        self.formLayout_2.setWidget(3, QFormLayout.ItemRole.LabelRole, self.label_28)
+
+        self.label_studentCount = QLabel(self.grp_SectionInfo)
+        self.label_studentCount.setObjectName(u"label_studentCount")
+        self.label_studentCount.setMaximumSize(QSize(16777215, 20))
+        self.label_studentCount.setFont(font10)
+        self.label_studentCount.setStyleSheet(u"color: rgb(18, 18, 18); background-color: transparent;")
+
+        self.formLayout_2.setWidget(1, QFormLayout.ItemRole.FieldRole, self.label_studentCount)
+
+        self.label_girlCount = QLabel(self.grp_SectionInfo)
+        self.label_girlCount.setObjectName(u"label_girlCount")
+        self.label_girlCount.setMaximumSize(QSize(16777215, 20))
+        self.label_girlCount.setFont(font10)
+        self.label_girlCount.setStyleSheet(u"color: rgb(18, 18, 18); background-color: transparent;")
+
+        self.formLayout_2.setWidget(2, QFormLayout.ItemRole.FieldRole, self.label_girlCount)
+
+        self.label_boyCount = QLabel(self.grp_SectionInfo)
+        self.label_boyCount.setObjectName(u"label_boyCount")
+        self.label_boyCount.setMaximumSize(QSize(16777215, 20))
+        self.label_boyCount.setFont(font10)
+        self.label_boyCount.setStyleSheet(u"color: rgb(18, 18, 18); background-color: transparent;")
+
+        self.formLayout_2.setWidget(3, QFormLayout.ItemRole.FieldRole, self.label_boyCount)
+
+        self.label_35 = QLabel(self.grp_SectionInfo)
+        self.label_35.setObjectName(u"label_35")
+        self.label_35.setMaximumSize(QSize(16777215, 20))
+        self.label_35.setFont(font10)
+        self.label_35.setStyleSheet(u"")
+
+        self.formLayout_2.setWidget(0, QFormLayout.ItemRole.LabelRole, self.label_35)
+
+        self.label_section = QLabel(self.grp_SectionInfo)
+        self.label_section.setObjectName(u"label_section")
+        self.label_section.setMaximumSize(QSize(16777215, 20))
+        self.label_section.setFont(font10)
+        self.label_section.setStyleSheet(u"color: rgb(18, 18, 18); background-color: transparent;")
+
+        self.formLayout_2.setWidget(0, QFormLayout.ItemRole.FieldRole, self.label_section)
+
+
+        self.verticalLayout_3.addWidget(self.grp_SectionInfo)
+
+        self.label_17 = QLabel(self.InformationPanel)
+        self.label_17.setObjectName(u"label_17")
+        self.label_17.setMinimumSize(QSize(0, 30))
+        self.label_17.setFont(font8)
+        self.label_17.setStyleSheet(u"background-color: transparent; color: rgb(253, 64, 115); font: 57 14pt \"Inter Medium\";")
+
+        self.verticalLayout_3.addWidget(self.label_17)
+
+        self.frame_student_info = QFrame(self.InformationPanel)
+        self.frame_student_info.setObjectName(u"frame_student_info")
+        self.frame_student_info.setFont(font)
+        self.frame_student_info.setStyleSheet(u"border-radius: 15px; background-color: rgb(255, 255, 255);")
+        self.formLayout = QFormLayout(self.frame_student_info)
+        self.formLayout.setObjectName(u"formLayout")
+        self.label_43 = QLabel(self.frame_student_info)
+        self.label_43.setObjectName(u"label_43")
+        self.label_43.setMaximumSize(QSize(95, 20))
+        self.label_43.setFont(font10)
+        self.label_43.setStyleSheet(u"")
+
+        self.formLayout.setWidget(0, QFormLayout.ItemRole.LabelRole, self.label_43)
+
+        self.label_studentId = QLabel(self.frame_student_info)
+        self.label_studentId.setObjectName(u"label_studentId")
+        self.label_studentId.setMaximumSize(QSize(16777215, 20))
+        self.label_studentId.setFont(font10)
+        self.label_studentId.setStyleSheet(u"color: rgb(18, 18, 18); background-color: transparent;")
+
+        self.formLayout.setWidget(0, QFormLayout.ItemRole.FieldRole, self.label_studentId)
+
+        self.label_36 = QLabel(self.frame_student_info)
+        self.label_36.setObjectName(u"label_36")
+        self.label_36.setMaximumSize(QSize(95, 20))
+        self.label_36.setFont(font10)
+        self.label_36.setStyleSheet(u"")
+
+        self.formLayout.setWidget(1, QFormLayout.ItemRole.LabelRole, self.label_36)
+
+        self.label_studentLastName = QLabel(self.frame_student_info)
+        self.label_studentLastName.setObjectName(u"label_studentLastName")
+        self.label_studentLastName.setMaximumSize(QSize(16777215, 20))
+        self.label_studentLastName.setFont(font10)
+        self.label_studentLastName.setStyleSheet(u"color: rgb(18, 18, 18); background-color: transparent;")
+
+        self.formLayout.setWidget(1, QFormLayout.ItemRole.FieldRole, self.label_studentLastName)
+
+        self.label_38 = QLabel(self.frame_student_info)
+        self.label_38.setObjectName(u"label_38")
+        self.label_38.setMaximumSize(QSize(95, 20))
+        self.label_38.setFont(font10)
+        self.label_38.setStyleSheet(u"")
+
+        self.formLayout.setWidget(2, QFormLayout.ItemRole.LabelRole, self.label_38)
+
+        self.label_studentFirstName = QLabel(self.frame_student_info)
+        self.label_studentFirstName.setObjectName(u"label_studentFirstName")
+        self.label_studentFirstName.setMaximumSize(QSize(16777215, 20))
+        self.label_studentFirstName.setFont(font10)
+        self.label_studentFirstName.setStyleSheet(u"color: rgb(18, 18, 18); background-color: transparent;")
+
+        self.formLayout.setWidget(2, QFormLayout.ItemRole.FieldRole, self.label_studentFirstName)
+
+        self.label_41 = QLabel(self.frame_student_info)
+        self.label_41.setObjectName(u"label_41")
+        self.label_41.setMaximumSize(QSize(95, 20))
+        self.label_41.setFont(font10)
+        self.label_41.setStyleSheet(u"")
+
+        self.formLayout.setWidget(3, QFormLayout.ItemRole.LabelRole, self.label_41)
+
+        self.label_studentMiddleName = QLabel(self.frame_student_info)
+        self.label_studentMiddleName.setObjectName(u"label_studentMiddleName")
+        self.label_studentMiddleName.setMaximumSize(QSize(16777215, 20))
+        self.label_studentMiddleName.setFont(font10)
+        self.label_studentMiddleName.setStyleSheet(u"color: rgb(18, 18, 18); background-color: transparent;")
+
+        self.formLayout.setWidget(3, QFormLayout.ItemRole.FieldRole, self.label_studentMiddleName)
+
+        self.label_37 = QLabel(self.frame_student_info)
+        self.label_37.setObjectName(u"label_37")
+        self.label_37.setMaximumSize(QSize(95, 20))
+        self.label_37.setFont(font10)
+        self.label_37.setStyleSheet(u"")
+
+        self.formLayout.setWidget(4, QFormLayout.ItemRole.LabelRole, self.label_37)
+
+        self.label_studentGender = QLabel(self.frame_student_info)
+        self.label_studentGender.setObjectName(u"label_studentGender")
+        self.label_studentGender.setMaximumSize(QSize(16777215, 20))
+        self.label_studentGender.setFont(font10)
+        self.label_studentGender.setStyleSheet(u"color: rgb(18, 18, 18); background-color: transparent;")
+
+        self.formLayout.setWidget(4, QFormLayout.ItemRole.FieldRole, self.label_studentGender)
+
+
+        self.verticalLayout_3.addWidget(self.frame_student_info)
+
+        self.label_51 = QLabel(self.InformationPanel)
+        self.label_51.setObjectName(u"label_51")
+        self.label_51.setMinimumSize(QSize(0, 30))
+        self.label_51.setMaximumSize(QSize(16777215, 20))
+        self.label_51.setFont(font8)
+        self.label_51.setStyleSheet(u"background-color: transparent; color: rgb(253, 64, 115); font: 57 14pt \"Inter Medium\";")
+
+        self.verticalLayout_3.addWidget(self.label_51)
+
+        self.frame_contact_info = QFrame(self.InformationPanel)
+        self.frame_contact_info.setObjectName(u"frame_contact_info")
+        self.frame_contact_info.setFont(font)
+        self.frame_contact_info.setStyleSheet(u"border-radius: 15px; background-color: rgb(255, 255, 255);")
+        self.formLayout_4 = QFormLayout(self.frame_contact_info)
+        self.formLayout_4.setObjectName(u"formLayout_4")
+        self.label_59 = QLabel(self.frame_contact_info)
+        self.label_59.setObjectName(u"label_59")
+        self.label_59.setFont(font10)
+        self.label_59.setStyleSheet(u"")
+
+        self.formLayout_4.setWidget(0, QFormLayout.ItemRole.LabelRole, self.label_59)
+
+        self.label_56 = QLabel(self.frame_contact_info)
+        self.label_56.setObjectName(u"label_56")
+        self.label_56.setFont(font10)
+        self.label_56.setStyleSheet(u"")
+
+        self.formLayout_4.setWidget(1, QFormLayout.ItemRole.LabelRole, self.label_56)
+
+        self.label_contact_person = QLabel(self.frame_contact_info)
+        self.label_contact_person.setObjectName(u"label_contact_person")
+        self.label_contact_person.setMaximumSize(QSize(16777215, 20))
+        self.label_contact_person.setFont(font10)
+        self.label_contact_person.setStyleSheet(u"color: rgb(18, 18, 18); background-color: transparent;")
+
+        self.formLayout_4.setWidget(0, QFormLayout.ItemRole.FieldRole, self.label_contact_person)
+
+        self.label_contact_number = QLabel(self.frame_contact_info)
+        self.label_contact_number.setObjectName(u"label_contact_number")
+        self.label_contact_number.setMaximumSize(QSize(16777215, 20))
+        self.label_contact_number.setFont(font10)
+        self.label_contact_number.setStyleSheet(u"color: rgb(18, 18, 18); background-color: transparent;")
+
+        self.formLayout_4.setWidget(1, QFormLayout.ItemRole.FieldRole, self.label_contact_number)
+
+
+        self.verticalLayout_3.addWidget(self.frame_contact_info)
+
+        self.verticalSpacer_7 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.verticalLayout_3.addItem(self.verticalSpacer_7)
+
+        self.widget_2 = QWidget(self.InformationPanel)
+        self.widget_2.setObjectName(u"widget_2")
+        self.widget_2.setMaximumSize(QSize(16777215, 200))
+        self.verticalLayout_22 = QVBoxLayout(self.widget_2)
+        self.verticalLayout_22.setObjectName(u"verticalLayout_22")
+        self.verticalLayout_22.setContentsMargins(0, 0, 0, 0)
+
+        self.verticalLayout_3.addWidget(self.widget_2)
+
+
+        self.horizontalLayout_15.addWidget(self.InformationPanel)
 
         self.stackedWidget.addWidget(self.pageClassList)
         self.pageLesson = QWidget()
@@ -2466,7 +2466,7 @@ class Ui_Home(object):
         self.scrollArea_tf.setWidgetResizable(True)
         self.scrollAreaWidgetContents_4 = QWidget()
         self.scrollAreaWidgetContents_4.setObjectName(u"scrollAreaWidgetContents_4")
-        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 100, 30))
+        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 23, 18))
         self.verticalLayout_13 = QVBoxLayout(self.scrollAreaWidgetContents_4)
         self.verticalLayout_13.setObjectName(u"verticalLayout_13")
         self.scrollArea_tf.setWidget(self.scrollAreaWidgetContents_4)
@@ -2492,7 +2492,7 @@ class Ui_Home(object):
         self.scrollArea_mc.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 100, 30))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 23, 18))
         self.verticalLayout_12 = QVBoxLayout(self.scrollAreaWidgetContents_3)
         self.verticalLayout_12.setObjectName(u"verticalLayout_12")
         self.scrollArea_mc.setWidget(self.scrollAreaWidgetContents_3)
@@ -2505,7 +2505,7 @@ class Ui_Home(object):
         self.scrollArea_id.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 100, 30))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 24, 18))
         self.verticalLayout_11 = QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_11.setObjectName(u"verticalLayout_11")
         self.scrollArea_id.setWidget(self.scrollAreaWidgetContents_2)
@@ -4091,7 +4091,7 @@ class Ui_Home(object):
         self.btnSaveSettings_SY.setObjectName(u"btnSaveSettings_SY")
         self.btnSaveSettings_SY.setMinimumSize(QSize(130, 30))
         self.btnSaveSettings_SY.setMaximumSize(QSize(16777215, 30))
-        self.btnSaveSettings_SY.setFont(font10)
+        self.btnSaveSettings_SY.setFont(font9)
         self.btnSaveSettings_SY.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btnSaveSettings_SY.setStyleSheet(u"QPushButton {\n"
 "	border: 1px solid #0a5128;\n"
@@ -4413,7 +4413,7 @@ class Ui_Home(object):
         self.btnImportAllLessons.setObjectName(u"btnImportAllLessons")
         self.btnImportAllLessons.setMinimumSize(QSize(130, 30))
         self.btnImportAllLessons.setMaximumSize(QSize(16777215, 30))
-        self.btnImportAllLessons.setFont(font10)
+        self.btnImportAllLessons.setFont(font9)
         self.btnImportAllLessons.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btnImportAllLessons.setStyleSheet(u"QPushButton {\n"
 "	border: 1px solid #0a5128;\n"
@@ -4573,11 +4573,39 @@ class Ui_Home(object):
         self.label_stud_name_3.setText(QCoreApplication.translate("Home", u"Gian Santos", None))
         self.label_student_score_3.setText(QCoreApplication.translate("Home", u"00.00%", None))
         self.label_student_place_3.setText(QCoreApplication.translate("Home", u"3rd", None))
-        self.label_month.setText(QCoreApplication.translate("Home", u"Mar", None))
+        self.label_month.setText(QCoreApplication.translate("Home", u"MAR", None))
         self.label_day.setText(QCoreApplication.translate("Home", u"00", None))
         self.label_19.setText("")
         self.label_time.setText(QCoreApplication.translate("Home", u"00:00", None))
         self.label_timeAP.setText(QCoreApplication.translate("Home", u"AM", None))
+        self.label_32.setText(QCoreApplication.translate("Home", u"School Year:", None))
+        self.cmb_school_year.setPlaceholderText("")
+        self.cmb_school_year.setProperty(u"class", QCoreApplication.translate("Home", u"combobox-main", None))
+        self.btnRefreshSY.setText("")
+        self.btnRefreshSY.setProperty(u"class", QCoreApplication.translate("Home", u"button-normal", None))
+        self.cmb_studSection.setPlaceholderText(QCoreApplication.translate("Home", u"Select Section", None))
+        self.cmb_studSection.setProperty(u"class", QCoreApplication.translate("Home", u"combobox-main", None))
+        self.widget_search_2.setProperty(u"class", QCoreApplication.translate("Home", u"widget-search-container", None))
+        self.label_magnifying_stud.setText("")
+        self.label_magnifying_stud.setProperty(u"class", QCoreApplication.translate("Home", u"label-magnifying-search", None))
+        self.txt_classList_search.setPlaceholderText(QCoreApplication.translate("Home", u"Search", None))
+        self.txt_classList_search.setProperty(u"class", QCoreApplication.translate("Home", u"textbox-search", None))
+#if QT_CONFIG(tooltip)
+        self.btnClearSearch_1.setToolTip(QCoreApplication.translate("Home", u"Clear", None))
+#endif // QT_CONFIG(tooltip)
+        self.btnClearSearch_1.setText("")
+        self.btnClearSearch_1.setProperty(u"class", QCoreApplication.translate("Home", u"button-clear-search", None))
+        self.label_47.setText(QCoreApplication.translate("Home", u"Showing:", None))
+        self.label_totalStudCount.setText(QCoreApplication.translate("Home", u"0 Student", None))
+        self.label_totalStudCount.setProperty(u"class", QCoreApplication.translate("Home", u"label-header", None))
+        self.btnAddStudent.setText(QCoreApplication.translate("Home", u" Add/Import", None))
+        self.btnAddStudent.setProperty(u"class", QCoreApplication.translate("Home", u"button-normal", None))
+        self.btnEditStudent.setText(QCoreApplication.translate("Home", u" Edit", None))
+        self.btnEditStudent.setProperty(u"class", QCoreApplication.translate("Home", u"button-normal", None))
+        self.btnDeleteStudent.setText(QCoreApplication.translate("Home", u" Delete", None))
+        self.btnDeleteStudent.setProperty(u"class", QCoreApplication.translate("Home", u"button-normal", None))
+        self.btnPrintStudentList.setText(QCoreApplication.translate("Home", u" Print", None))
+        self.btnPrintStudentList.setProperty(u"class", QCoreApplication.translate("Home", u"button-normal", None))
         self.label_16.setText(QCoreApplication.translate("Home", u"Section Information", None))
         self.label_33.setText(QCoreApplication.translate("Home", u"No. of students:", None))
         self.label_33.setProperty(u"class", QCoreApplication.translate("Home", u"label-faded", None))
@@ -4614,34 +4642,6 @@ class Ui_Home(object):
         self.label_56.setProperty(u"class", QCoreApplication.translate("Home", u"label-faded", None))
         self.label_contact_person.setText(QCoreApplication.translate("Home", u"null", None))
         self.label_contact_number.setText(QCoreApplication.translate("Home", u"null", None))
-        self.label_32.setText(QCoreApplication.translate("Home", u"School Year:", None))
-        self.cmb_school_year.setPlaceholderText("")
-        self.cmb_school_year.setProperty(u"class", QCoreApplication.translate("Home", u"combobox-main", None))
-        self.btnRefreshSY.setText("")
-        self.btnRefreshSY.setProperty(u"class", QCoreApplication.translate("Home", u"button-normal", None))
-        self.cmb_studSection.setPlaceholderText(QCoreApplication.translate("Home", u"Select Section", None))
-        self.cmb_studSection.setProperty(u"class", QCoreApplication.translate("Home", u"combobox-main", None))
-        self.widget_search_2.setProperty(u"class", QCoreApplication.translate("Home", u"widget-search-container", None))
-        self.label_magnifying_stud.setText("")
-        self.label_magnifying_stud.setProperty(u"class", QCoreApplication.translate("Home", u"label-magnifying-search", None))
-        self.txt_classList_search.setPlaceholderText(QCoreApplication.translate("Home", u"Search", None))
-        self.txt_classList_search.setProperty(u"class", QCoreApplication.translate("Home", u"textbox-search", None))
-#if QT_CONFIG(tooltip)
-        self.btnClearSearch_1.setToolTip(QCoreApplication.translate("Home", u"Clear", None))
-#endif // QT_CONFIG(tooltip)
-        self.btnClearSearch_1.setText("")
-        self.btnClearSearch_1.setProperty(u"class", QCoreApplication.translate("Home", u"button-clear-search", None))
-        self.label_47.setText(QCoreApplication.translate("Home", u"Showing:", None))
-        self.label_totalStudCount.setText(QCoreApplication.translate("Home", u"0 Student", None))
-        self.label_totalStudCount.setProperty(u"class", QCoreApplication.translate("Home", u"label-header", None))
-        self.btnAddStudent.setText(QCoreApplication.translate("Home", u" Add/Import", None))
-        self.btnAddStudent.setProperty(u"class", QCoreApplication.translate("Home", u"button-normal", None))
-        self.btnEditStudent.setText(QCoreApplication.translate("Home", u" Edit", None))
-        self.btnEditStudent.setProperty(u"class", QCoreApplication.translate("Home", u"button-normal", None))
-        self.btnDeleteStudent.setText(QCoreApplication.translate("Home", u" Delete", None))
-        self.btnDeleteStudent.setProperty(u"class", QCoreApplication.translate("Home", u"button-normal", None))
-        self.btnPrintStudentList.setText(QCoreApplication.translate("Home", u" Print", None))
-        self.btnPrintStudentList.setProperty(u"class", QCoreApplication.translate("Home", u"button-normal", None))
         self.widget_search_4.setProperty(u"class", QCoreApplication.translate("Home", u"widget-search-container", None))
         self.label_magnifying_stud_2.setText("")
         self.label_magnifying_stud_2.setProperty(u"class", QCoreApplication.translate("Home", u"label-magnifying-search", None))

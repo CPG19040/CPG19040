@@ -290,7 +290,10 @@ class Quiz:
                 SELECT QUIZNUMBER, LESSONID, GRADINGPERIOD, DIFFICULTYLEVEL FROM CAI.TBL_QUIZTRUEORFALSE
             ) Q
 
-            JOIN CAI.TBL_SCOREMULTIPLIER M ON Q.QUIZNUMBER = M.QUIZNUMBER AND Q.LESSONID = M.LESSONID
+            JOIN CAI.TBL_SCOREMULTIPLIER M 
+                ON Q.QUIZNUMBER = M.QUIZNUMBER 
+                AND Q.LESSONID = M.LESSONID 
+                AND Q.GRADINGPERIOD = M.GRADINGPERIOD
             WHERE q.quiznumber = %s
                 AND q.gradingperiod = %s
                 AND q.lessonid = %s
