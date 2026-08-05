@@ -322,8 +322,8 @@ class Quiz:
                 S.LASTNAME,
                 S.FIRSTNAME,
                 CASE
-                    WHEN Q.SCOREID IS NOT NULL THEN 'TAKEN'
-                    ELSE 'NOT TAKEN'
+                    WHEN Q.SCOREID IS NOT NULL THEN 'Completed'
+                    ELSE 'Not Taken'
                 END AS QUIZ_STATUS,
                 Q.QUIZSCORE,
                 TO_CHAR(Q.DATETAKEN, 'YYYY/MM/DD, HH12:MI AM') AS DATETAKEN
@@ -342,13 +342,14 @@ class Quiz:
         ui_headers = ["STUDENT ID", "LAST NAME", "FIRST NAME", "STATUS", "SCORE", "DATE TAKEN"]
         model = QStandardItemModel(len(records), len(ui_headers))
         model.setHorizontalHeaderLabels(ui_headers)
+        rows_completed = []
 
         for row_idx, row_data in enumerate(records):
             date_taken_str = row_data['datetaken'] if row_data['datetaken'] is not None else ""
             _, _, _, total_score = self.getQuizTotalScore(quiznumber, gradingperiod, lessonid)
             score_str = f"{row_data['quizscore']}/{total_score}" if row_data['quizscore'] and total_score else ""
 
-            is_taken = row_data['quiz_status'] == 'Taken'
+            is_taken = row_data['quiz_status'] == 'Completed'
 
             row_items = [
                 QStandardItem(row_data['studentid']),
@@ -366,11 +367,12 @@ class Quiz:
                     item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
 
                 if is_taken:
-                    item.setData(QBrush(QColor(145, 234, 168, 190)), Qt.BackgroundRole)
+                    # item.setData(QBrush(QColor(145, 234, 168, 190)), Qt.BackgroundRole)
+                    rows_completed.append(row_idx)
 
                 model.setItem(row_idx, col_idx, item)
 
-        return model
+        return model, rows_completed
 
 
 

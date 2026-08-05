@@ -2,7 +2,7 @@ import os, csv
 
 # PyQt Imports
 from PySide6.QtCore import QSettings, QTimer, QDateTime, QPoint, QEasingCurve, QPropertyAnimation, QParallelAnimationGroup, Qt, QDate
-from PySide6.QtWidgets import QMainWindow, QHeaderView, QDialog, QFileDialog, QMessageBox, QApplication, QButtonGroup
+from PySide6.QtWidgets import QMainWindow, QHeaderView, QDialog, QFileDialog, QMessageBox, QApplication, QButtonGroup, QLabel
 from PySide6.QtGui import QFontDatabase, QImage, QPixmap, QGuiApplication, QStandardItemModel, QStandardItem
 from shiboken6 import isValid
 
@@ -1174,10 +1174,23 @@ class Controller:
         lessonid = self.ui.comboBox_ReportsLesson.currentData()
         quiz_no = self.ui.spin_quiz_no.value()
 
-        model = Quiz().retrieve_QuizCompletionStatus(sectionid, quiz_no, selected_period, lessonid, self.ui.cmb_school_year_2.currentText())
+        model, rows_completed = Quiz().retrieve_QuizCompletionStatus(sectionid, quiz_no, selected_period, lessonid, self.ui.cmb_school_year_2.currentText())
 
         if model:
             self.ui.table_quizcompletionstat.setModel(model)
+
+            for row in rows_completed:
+                status_label = QLabel("Completed", self.ui.table_quizcompletionstat)
+                status_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+                status_label.setStyleSheet("""
+                    QLabel {
+                        background-color: rgb(145, 234, 168);
+                        border-radius: 14px;
+                    }
+                """)
+                index = model.index(row, 3)
+                self.ui.table_quizcompletionstat.setIndexWidget(index, status_label)
+
             self.ui.table_quizcompletionstat.sortByColumn(-1, Qt.AscendingOrder)
             header = self.ui.table_quizcompletionstat.horizontalHeader()
             header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
