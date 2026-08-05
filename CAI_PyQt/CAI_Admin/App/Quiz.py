@@ -315,28 +315,29 @@ class Quiz:
 
         return (easy_score, average_score, hard_score, total_score)
 
-    def retrieve_QuizCompletionStatus(self, sectionid, quiznumber, gradingperiod, lessonid):
+    def retrieve_QuizCompletionStatus(self, sectionid, quiznumber, gradingperiod, lessonid, school_year):
         query = """
             SELECT
-                s.STUDENTID,
-                s.LASTNAME,
-                s.FIRSTNAME,
+                S.STUDENTID,
+                S.LASTNAME,
+                S.FIRSTNAME,
                 CASE
-                    WHEN q.SCOREID IS NOT NULL THEN 'Taken'
-                    ELSE 'Not Taken'
+                    WHEN Q.SCOREID IS NOT NULL THEN 'TAKEN'
+                    ELSE 'NOT TAKEN'
                 END AS QUIZ_STATUS,
-                q.QUIZSCORE,
-                TO_CHAR(q.DATETAKEN, 'YYYY/MM/DD, HH12:MI AM') AS DATETAKEN
-            FROM CAI.TBL_STUDENT_INFO s
-            LEFT JOIN CAI.TBL_QUIZSCORES q
-                ON s.STUDENTID = q.STUDENTID
-                AND q.QUIZNUMBER = %s
-                AND q.GRADINGPERIOD = %s
-                AND q.LESSONID = %s
-            WHERE s.SECTIONID = %s
-            ORDER BY s.LASTNAME, s.FIRSTNAME;
+                Q.QUIZSCORE,
+                TO_CHAR(Q.DATETAKEN, 'YYYY/MM/DD, HH12:MI AM') AS DATETAKEN
+            FROM CAI.TBL_STUDENT_INFO S
+            LEFT JOIN CAI.TBL_QUIZSCORES Q
+                ON S.STUDENTID = Q.STUDENTID
+                AND Q.QUIZNUMBER = %s
+                AND Q.GRADINGPERIOD = %s
+                AND Q.LESSONID = %s
+            WHERE S.SECTIONID = %s
+                AND S.SCHOOL_YEAR = %s
+            ORDER BY S.LASTNAME, S.FIRSTNAME;
         """
-        records = self.db_tools.fetch_all(query, (quiznumber, gradingperiod, lessonid, sectionid))
+        records = self.db_tools.fetch_all(query, (quiznumber, gradingperiod, lessonid, sectionid, school_year))
 
         ui_headers = ["STUDENT ID", "LAST NAME", "FIRST NAME", "STATUS", "SCORE", "DATE TAKEN"]
         model = QStandardItemModel(len(records), len(ui_headers))

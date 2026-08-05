@@ -1456,7 +1456,7 @@ class Ui_Home(object):
         self.scrollArea_classlist.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
         self.container = QWidget()
         self.container.setObjectName(u"container")
-        self.container.setGeometry(QRect(0, 0, 769, 597))
+        self.container.setGeometry(QRect(0, 0, 100, 30))
         self.gridLayout_stud_card = QGridLayout(self.container)
         self.gridLayout_stud_card.setObjectName(u"gridLayout_stud_card")
         self.scrollArea_classlist.setWidget(self.container)
@@ -3158,27 +3158,81 @@ class Ui_Home(object):
 "}")
         self.verticalLayout_7 = QVBoxLayout(self.tab_1)
         self.verticalLayout_7.setObjectName(u"verticalLayout_7")
-        self.widget_ReportsFilter = QWidget(self.tab_1)
-        self.widget_ReportsFilter.setObjectName(u"widget_ReportsFilter")
-        self.widget_ReportsFilter.setLayoutDirection(Qt.LeftToRight)
-        self.horizontalLayout_9 = QHBoxLayout(self.widget_ReportsFilter)
-        self.horizontalLayout_9.setObjectName(u"horizontalLayout_9")
-        self.horizontalLayout_9.setContentsMargins(0, 0, 0, 0)
-        self.label_18 = QLabel(self.widget_ReportsFilter)
+        self.widget_22 = QWidget(self.tab_1)
+        self.widget_22.setObjectName(u"widget_22")
+        self.widget_22.setMinimumSize(QSize(0, 10))
+        self.horizontalLayout_36 = QHBoxLayout(self.widget_22)
+        self.horizontalLayout_36.setObjectName(u"horizontalLayout_36")
+        self.horizontalLayout_36.setContentsMargins(0, 0, 0, 0)
+        self.widget_20 = QWidget(self.widget_22)
+        self.widget_20.setObjectName(u"widget_20")
+        self.widget_20.setMinimumSize(QSize(0, 0))
+        self.formLayout_3 = QFormLayout(self.widget_20)
+        self.formLayout_3.setObjectName(u"formLayout_3")
+        self.formLayout_3.setContentsMargins(0, 0, 0, 0)
+        self.label_48 = QLabel(self.widget_20)
+        self.label_48.setObjectName(u"label_48")
+        self.label_48.setMaximumSize(QSize(100, 20))
+        self.label_48.setFont(font)
+        self.label_48.setStyleSheet(u"")
+
+        self.formLayout_3.setWidget(0, QFormLayout.ItemRole.LabelRole, self.label_48)
+
+        self.cmb_school_year_2 = QComboBox(self.widget_20)
+        self.cmb_school_year_2.setObjectName(u"cmb_school_year_2")
+        self.cmb_school_year_2.setMinimumSize(QSize(120, 30))
+        self.cmb_school_year_2.setMaximumSize(QSize(16777215, 30))
+        self.cmb_school_year_2.setStyleSheet(u"")
+
+        self.formLayout_3.setWidget(0, QFormLayout.ItemRole.FieldRole, self.cmb_school_year_2)
+
+        self.label_18 = QLabel(self.widget_20)
         self.label_18.setObjectName(u"label_18")
         self.label_18.setMaximumSize(QSize(16777215, 30))
 
-        self.horizontalLayout_9.addWidget(self.label_18)
+        self.formLayout_3.setWidget(1, QFormLayout.ItemRole.LabelRole, self.label_18)
 
-        self.comboBox_ReportsSection = QComboBox(self.widget_ReportsFilter)
+        self.comboBox_ReportsSection = QComboBox(self.widget_20)
         self.comboBox_ReportsSection.setObjectName(u"comboBox_ReportsSection")
         self.comboBox_ReportsSection.setMinimumSize(QSize(150, 30))
         self.comboBox_ReportsSection.setMaximumSize(QSize(16777215, 30))
         self.comboBox_ReportsSection.setStyleSheet(u"")
         self.comboBox_ReportsSection.setSizeAdjustPolicy(QComboBox.AdjustToContents)
 
-        self.horizontalLayout_9.addWidget(self.comboBox_ReportsSection)
+        self.formLayout_3.setWidget(1, QFormLayout.ItemRole.FieldRole, self.comboBox_ReportsSection)
 
+
+        self.horizontalLayout_36.addWidget(self.widget_20)
+
+        self.widget_23 = QWidget(self.widget_22)
+        self.widget_23.setObjectName(u"widget_23")
+        self.widget_23.setMinimumSize(QSize(0, 50))
+        self.widget_23.setStyleSheet(u"#widget_23 {\n"
+"	background-color: rgb(192, 191, 188);\n"
+"	border-radius: 15px;\n"
+"	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
+"                                stop:0 #ffffff, \n"
+"                                stop:1 #c6e9ff);\n"
+"}\n"
+"\n"
+"#widget_ReportsFilter {\n"
+"	background-color: transparent;\n"
+"}")
+        self.verticalLayout_30 = QVBoxLayout(self.widget_23)
+        self.verticalLayout_30.setObjectName(u"verticalLayout_30")
+        self.label_50 = QLabel(self.widget_23)
+        self.label_50.setObjectName(u"label_50")
+        self.label_50.setMaximumSize(QSize(16777215, 30))
+        self.label_50.setStyleSheet(u"font: 11pt \"Inter SemiBold\";")
+
+        self.verticalLayout_30.addWidget(self.label_50)
+
+        self.widget_ReportsFilter = QWidget(self.widget_23)
+        self.widget_ReportsFilter.setObjectName(u"widget_ReportsFilter")
+        self.widget_ReportsFilter.setLayoutDirection(Qt.LeftToRight)
+        self.horizontalLayout_9 = QHBoxLayout(self.widget_ReportsFilter)
+        self.horizontalLayout_9.setObjectName(u"horizontalLayout_9")
+        self.horizontalLayout_9.setContentsMargins(0, 0, 0, 0)
         self.label_45 = QLabel(self.widget_ReportsFilter)
         self.label_45.setObjectName(u"label_45")
         self.label_45.setMaximumSize(QSize(16777215, 30))
@@ -3232,7 +3286,13 @@ class Ui_Home(object):
         self.horizontalLayout_9.addItem(self.horizontalSpacer_4)
 
 
-        self.verticalLayout_7.addWidget(self.widget_ReportsFilter)
+        self.verticalLayout_30.addWidget(self.widget_ReportsFilter)
+
+
+        self.horizontalLayout_36.addWidget(self.widget_23)
+
+
+        self.verticalLayout_7.addWidget(self.widget_22)
 
         self.table_quizcompletionstat = QTableView(self.tab_1)
         self.table_quizcompletionstat.setObjectName(u"table_quizcompletionstat")
@@ -3326,7 +3386,22 @@ class Ui_Home(object):
 "}")
         self.horizontalLayout_7 = QHBoxLayout(self.widget_stud_tblheader_idv)
         self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
-        self.horizontalLayout_7.setContentsMargins(-1, 2, -1, 2)
+        self.label_52 = QLabel(self.widget_stud_tblheader_idv)
+        self.label_52.setObjectName(u"label_52")
+        self.label_52.setMaximumSize(QSize(100, 20))
+        self.label_52.setFont(font)
+        self.label_52.setStyleSheet(u"")
+
+        self.horizontalLayout_7.addWidget(self.label_52)
+
+        self.cmb_school_year_3 = QComboBox(self.widget_stud_tblheader_idv)
+        self.cmb_school_year_3.setObjectName(u"cmb_school_year_3")
+        self.cmb_school_year_3.setMinimumSize(QSize(120, 30))
+        self.cmb_school_year_3.setMaximumSize(QSize(16777215, 30))
+        self.cmb_school_year_3.setStyleSheet(u"")
+
+        self.horizontalLayout_7.addWidget(self.cmb_school_year_3)
+
         self.widget_search_6 = QWidget(self.widget_stud_tblheader_idv)
         self.widget_search_6.setObjectName(u"widget_search_6")
         self.widget_search_6.setMinimumSize(QSize(0, 30))
@@ -4738,14 +4813,21 @@ class Ui_Home(object):
         self.btnSectionEdit.setProperty(u"class", QCoreApplication.translate("Home", u"button-normal", None))
         self.label_5.setText(QCoreApplication.translate("Home", u"Adviser:", None))
         self.label_Adviser.setText("")
+        self.label_48.setText(QCoreApplication.translate("Home", u"School Year:", None))
+        self.cmb_school_year_2.setPlaceholderText("")
+        self.cmb_school_year_2.setProperty(u"class", QCoreApplication.translate("Home", u"combobox-main", None))
         self.label_18.setText(QCoreApplication.translate("Home", u"Section:", None))
         self.comboBox_ReportsSection.setProperty(u"class", QCoreApplication.translate("Home", u"combobox-main", None))
+        self.label_50.setText(QCoreApplication.translate("Home", u"Quiz Selector", None))
         self.label_45.setText(QCoreApplication.translate("Home", u"Grading Period:", None))
         self.comboBox_ReportsGradingPeriod.setProperty(u"class", QCoreApplication.translate("Home", u"combobox-main", None))
         self.label_46.setText(QCoreApplication.translate("Home", u"Quiz No:", None))
         self.label_49.setText(QCoreApplication.translate("Home", u"Lesson:", None))
         self.comboBox_ReportsLesson.setProperty(u"class", QCoreApplication.translate("Home", u"combobox-main", None))
         self.tabWidget_reports.setTabText(self.tabWidget_reports.indexOf(self.tab_1), QCoreApplication.translate("Home", u"Quiz Tracker", None))
+        self.label_52.setText(QCoreApplication.translate("Home", u"School Year:", None))
+        self.cmb_school_year_3.setPlaceholderText("")
+        self.cmb_school_year_3.setProperty(u"class", QCoreApplication.translate("Home", u"combobox-main", None))
         self.widget_search_6.setProperty(u"class", QCoreApplication.translate("Home", u"widget-search-container", None))
         self.label_magnifying_stud_4.setText("")
         self.label_magnifying_stud_4.setProperty(u"class", QCoreApplication.translate("Home", u"label-magnifying-search", None))

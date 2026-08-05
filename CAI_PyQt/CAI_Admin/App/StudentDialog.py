@@ -72,7 +72,7 @@ class Student:
 
         return pixmap
 
-    def search_student(self, text=""):
+    def search_student(self, school_year, text=""):
         sql  = 'SELECT\n'
         sql += '    stud.studentid\n'
         sql += '    ,stud.lastname\n'
@@ -99,6 +99,9 @@ class Student:
             search_term = f"%{text}%"
             sql_params.extend([search_term, search_term, search_term, search_term, search_term])
 
+        sql += 'WHERE stud.school_year = %s\n'
+        sql_params.append(school_year)
+        
         sql += 'ORDER BY\n'
         sql += '    stud.lastname, stud.firstname ASC'
 

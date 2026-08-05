@@ -265,9 +265,8 @@ class QuizUtils:
                 """
                 execute_values(cur, insert_sql, insert_data)
 
-                self.evaluate_quiz(student_id)
-
             conn.commit()
+            self.evaluate_quiz(student_id)
             return 1, "Successfully saved and evaluated this quiz."
             
         except Exception as e:

@@ -180,13 +180,15 @@ class Controller:
 
         # Reports
         self.sectionObj.populate_sections(self.ui.comboBox_ReportsSection, False)
+        self.ui.cmb_school_year_2.currentIndexChanged.connect(self.handle_report_stud_prog_filter)
         self.ui.comboBox_ReportsSection.currentIndexChanged.connect(self.handle_report_stud_prog_filter)
         self.ui.spin_quiz_no.valueChanged.connect(self.handle_report_stud_prog_filter)
         self.ui.comboBox_ReportsLesson.currentIndexChanged.connect(self.handle_report_stud_prog_filter)
         self.ui.comboBox_ReportsGradingPeriod.currentIndexChanged.connect(self.handle_grading_period_change)
         self.reports_selectedRow_idv = None
-        self.ui.cb_gp_quiz_idv.currentIndexChanged.connect(lambda: self.handle_report_student_click(self.reports_selectedRow_idv))
-        self.ui.txt_search_score_idv.textChanged.connect(lambda text: self.handle_report_student_idv(text))
+        self.ui.cb_gp_quiz_idv.currentIndexChanged.connect(lambda: self.handle_report_student_click())
+        self.ui.cmb_school_year_3.currentIndexChanged.connect(lambda: self.handle_report_student_idv())
+        self.ui.txt_search_score_idv.textChanged.connect(lambda: self.handle_report_student_idv())
         self.ui.btnClearSearch_4.clicked.connect(lambda: self.ui.txt_search_score_idv.clear())
         self.ui.btnPrintQuizScores.clicked.connect(self.generate_quizscores_report)
 
@@ -358,6 +360,20 @@ class Controller:
 
         elif index == 6: # Reports
             self.get_dynamic_grading_period_dates()
+
+            query = """
+                SELECT 
+                    ROW_NUMBER() OVER (ORDER BY school_year DESC) AS idx,
+                    school_year
+                FROM (
+                    SELECT DISTINCT school_year
+                    FROM cai.tbl_student_info
+                ) sub
+                ORDER BY idx
+            """
+            self.util.populate_pulldown(self.ui.cmb_school_year_2, query)
+            self.util.populate_pulldown(self.ui.cmb_school_year_3, query)
+
             query = """
                 SELECT gpid, gpname
                 FROM cai.tbl_grading_period;
@@ -1158,7 +1174,7 @@ class Controller:
         lessonid = self.ui.comboBox_ReportsLesson.currentData()
         quiz_no = self.ui.spin_quiz_no.value()
 
-        model = Quiz().retrieve_QuizCompletionStatus(sectionid, quiz_no, selected_period, lessonid)
+        model = Quiz().retrieve_QuizCompletionStatus(sectionid, quiz_no, selected_period, lessonid, self.ui.cmb_school_year_2.currentText())
 
         if model:
             self.ui.table_quizcompletionstat.setModel(model)
@@ -1182,11 +1198,13 @@ class Controller:
     #             lambda current, previous: self.handle_report_student_click(current)
     #         )
 
-    def handle_report_student_idv(self, text=""):
+    def handle_report_student_idv(self):
         # 1. Reset selection state since the underlying model/data is changing
         self.reports_selectedRow_idv = None
+        school_year = self.ui.cmb_school_year_3.currentText()
+        text = self.ui.txt_search_score_idv.text().strip()
         
-        new_model = Student().search_student(text)
+        new_model = Student().search_student(school_year, text)
         self.ui.table_student_score_idv.sortByColumn(-1, Qt.AscendingOrder)
         self.ui.table_quiz_score_idv.sortByColumn(-1, Qt.AscendingOrder)
 
