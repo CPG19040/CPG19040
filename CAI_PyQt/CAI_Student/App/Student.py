@@ -94,16 +94,26 @@ class Student:
                     ELSE 'Not Taken'
                 END AS QUIZ_STATUS,
                 QS.QUIZSCORE,
+                COALESCE(
+                    (Q.EASY_COUNT * M.EASY_MULTIPLIER) +
+                    (Q.AVERAGE_COUNT * M.AVERAGE_MULTIPLIER) +
+                    (Q.HARD_COUNT * M.HARD_MULTIPLIER), 
+                    0
+                ) AS TOTALSCORE,
                 TO_CHAR(QS.DATETAKEN, 'YYYY/MM/DD, HH12:MI AM') AS DATETAKEN
             FROM CAI.TBL_STUDENT_INFO S
             CROSS JOIN CAI.TBL_QUIZ Q
+            LEFT JOIN CAI.TBL_SCOREMULTIPLIER M
+                ON Q.QUIZNUMBER = M.QUIZNUMBER
+                AND Q.GRADINGPERIOD = M.GRADINGPERIOD
+                AND Q.LESSONID = M.LESSONID
             LEFT JOIN CAI.TBL_QUIZSCORES QS 
                 ON S.STUDENTID = QS.STUDENTID
-            AND Q.QUIZNUMBER = QS.QUIZNUMBER
-            AND Q.GRADINGPERIOD = QS.GRADINGPERIOD
-            AND Q.LESSONID = QS.LESSONID
+                AND Q.QUIZNUMBER = QS.QUIZNUMBER
+                AND Q.GRADINGPERIOD = QS.GRADINGPERIOD
+                AND Q.LESSONID = QS.LESSONID
             WHERE S.STUDENTID = %s
-            AND Q.PUBLISH = TRUE;
+                AND Q.PUBLISH = TRUE;
         """
 
         record = self.db_tools.fetch_all(query, (studentid,))

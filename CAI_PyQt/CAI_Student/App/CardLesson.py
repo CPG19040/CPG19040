@@ -40,7 +40,7 @@ class Ui_CardLesson(object):
 "	border: 1px solid #ddd;\n"
 "}\n"
 "#widget_2:hover {\n"
-"	border: 2px solid #946544;\n"
+"	border: 2px solid #cd99d0;\n"
 "	background-color: #f7fbfe;\n"
 "}\n"
 "/* This style applies when the custom property is true */\n"

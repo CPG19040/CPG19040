@@ -368,7 +368,7 @@ class Ui_FormHome(object):
         self.stackedWidget = QStackedWidget(self.widget_right_panel)
         self.stackedWidget.setObjectName(u"stackedWidget")
         self.stackedWidget.setStyleSheet(u"#stackedWidget {\n"
-"	background-color: #eacca6;\n"
+"	background-color: #654c5b;\n"
 "	border-radius: 20px;\n"
 "}")
         self.pageLessons = QWidget()
@@ -407,7 +407,7 @@ class Ui_FormHome(object):
 "}\n"
 "\n"
 "QScrollBar::handle:vertical:hover {\n"
-"    background: #574939;\n"
+"    background: #9a4076;\n"
 "}\n"
 "\n"
 "/* 4. HORIZONTAL SCROLLBAR */\n"
@@ -533,7 +533,7 @@ class Ui_FormHome(object):
 "}\n"
 "\n"
 "QScrollBar::handle:vertical:hover {\n"
-"    background: #574939;\n"
+"    background: #9a4076;\n"
 "}\n"
 "\n"
 "/* 4. HORIZONTAL SCROLLBAR */\n"
@@ -648,7 +648,7 @@ class Ui_FormHome(object):
 "}\n"
 "\n"
 "QScrollBar::handle:vertical:hover {\n"
-"    background: #574939;\n"
+"    background: #9a4076;\n"
 "}\n"
 "\n"
 "/* 4. HORIZONTAL SCROLLBAR */\n"
@@ -763,7 +763,7 @@ class Ui_FormHome(object):
 "}\n"
 "\n"
 "QScrollBar::handle:vertical:hover {\n"
-"    background: #574939;\n"
+"    background: #9a4076;\n"
 "}\n"
 "\n"
 "/* 4. HORIZONTAL SCROLLBAR */\n"
@@ -849,7 +849,7 @@ class Ui_FormHome(object):
         self.stackedWidget.addWidget(self.pageQuiz)
         self.page_quiz_results = QWidget()
         self.page_quiz_results.setObjectName(u"page_quiz_results")
-        self.page_quiz_results.setStyleSheet(u"")
+        self.page_quiz_results.setStyleSheet(u"background: transparent;")
         self.verticalLayout_17 = QVBoxLayout(self.page_quiz_results)
         self.verticalLayout_17.setObjectName(u"verticalLayout_17")
         self.verticalSpacer_3 = QSpacerItem(20, 50, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Preferred)
@@ -860,29 +860,52 @@ class Ui_FormHome(object):
         self.widget_9.setObjectName(u"widget_9")
         self.verticalLayout_16 = QVBoxLayout(self.widget_9)
         self.verticalLayout_16.setObjectName(u"verticalLayout_16")
+        self.label_score = QLabel(self.widget_9)
+        self.label_score.setObjectName(u"label_score")
+        self.label_score.setStyleSheet(u"font: 35pt \"Biscuit Glitch\"; \n"
+"color: rgb(249, 240, 107);")
+        self.label_score.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_16.addWidget(self.label_score)
+
         self.label_message = QLabel(self.widget_9)
         self.label_message.setObjectName(u"label_message")
         self.label_message.setStyleSheet(u"font: 30pt \"Biscuit Glitch\"; \n"
-"color: rgb(38, 162, 105);")
+"color: rgb(87, 227, 137);")
         self.label_message.setAlignment(Qt.AlignCenter)
 
         self.verticalLayout_16.addWidget(self.label_message)
 
         self.widget_8 = QWidget(self.widget_9)
         self.widget_8.setObjectName(u"widget_8")
-        self.widget_8.setStyleSheet(u"#btn_review, #btn_retake {\n"
-"	border-image: url(:/Images/Images/button_wood.png);\n"
+        self.widget_8.setStyleSheet(u"#btn_review {\n"
+"	border-image: url(:/Images/Images/button_wood_skyblue.png);\n"
 "	color: #FFF;\n"
 "	font: 14pt \"Biscuit Glitch\";\n"
 "	padding: 0px 20px;\n"
 "}\n"
 "\n"
-"#btn_review:hover, #btn_retake:hover {\n"
-"	border-image: url(:/Images/Images/button_wood_glow.png);\n"
+"#btn_review:hover {\n"
+"	border-image: url(:/Images/Images/button_wood_skyblue_glow.png);\n"
 "}\n"
 "\n"
-"#btn_review:pressed, #btn_retake:pressed {\n"
-"	border-image: url(:/Images/Images/button_wood.png);\n"
+"#btn_review:pressed {\n"
+"	border-image: url(:/Images/Images/button_wood_skyblue.png);\n"
+"}\n"
+"\n"
+"#btn_retake {\n"
+"	border-image: url(:/Images/Images/button_wood_yellowgreen.png);\n"
+"	color: #FFF;\n"
+"	font: 14pt \"Biscuit Glitch\";\n"
+"	padding: 0px 20px;\n"
+"}\n"
+"\n"
+"#btn_retake:hover {\n"
+"	border-image: url(:/Images/Images/button_wood_yellowgreen_glow.png);\n"
+"}\n"
+"\n"
+"#btn_retake:pressed {\n"
+"	border-image: url(:/Images/Images/button_wood_yellowgreen.png);\n"
 "}")
         self.horizontalLayout_9 = QHBoxLayout(self.widget_8)
         self.horizontalLayout_9.setObjectName(u"horizontalLayout_9")
@@ -892,7 +915,7 @@ class Ui_FormHome(object):
 
         self.btn_review = QPushButton(self.widget_8)
         self.btn_review.setObjectName(u"btn_review")
-        self.btn_review.setMinimumSize(QSize(150, 50))
+        self.btn_review.setMinimumSize(QSize(197, 50))
         self.btn_review.setMaximumSize(QSize(16777215, 50))
         self.btn_review.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
@@ -900,8 +923,8 @@ class Ui_FormHome(object):
 
         self.btn_retake = QPushButton(self.widget_8)
         self.btn_retake.setObjectName(u"btn_retake")
-        self.btn_retake.setMinimumSize(QSize(140, 50))
-        self.btn_retake.setMaximumSize(QSize(140, 16777215))
+        self.btn_retake.setMinimumSize(QSize(197, 50))
+        self.btn_retake.setMaximumSize(QSize(16777215, 50))
         self.btn_retake.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
         self.horizontalLayout_9.addWidget(self.btn_retake)
@@ -923,12 +946,15 @@ class Ui_FormHome(object):
         self.stackedWidget.addWidget(self.page_quiz_results)
         self.pageExercise = QWidget()
         self.pageExercise.setObjectName(u"pageExercise")
+        self.pageExercise.setStyleSheet(u"background: transparent;")
         self.stackedWidget.addWidget(self.pageExercise)
         self.pageScores = QWidget()
         self.pageScores.setObjectName(u"pageScores")
+        self.pageScores.setStyleSheet(u"background: transparent;")
         self.stackedWidget.addWidget(self.pageScores)
         self.pageGames = QWidget()
         self.pageGames.setObjectName(u"pageGames")
+        self.pageGames.setStyleSheet(u"background: transparent;")
         self.horizontalLayout_6 = QHBoxLayout(self.pageGames)
         self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
         self.widget_6 = QWidget(self.pageGames)
@@ -1071,6 +1097,7 @@ class Ui_FormHome(object):
         self.label_lastname_3.setText(QCoreApplication.translate("FormHome", u"Multiple Choice", None))
         self.label_lastname_4.setText(QCoreApplication.translate("FormHome", u"True or False", None))
         self.btnSubmitQuiz.setText(QCoreApplication.translate("FormHome", u"Submit", None))
+        self.label_score.setText(QCoreApplication.translate("FormHome", u"0/0", None))
         self.label_message.setText(QCoreApplication.translate("FormHome", u"You have completed this quiz.", None))
         self.btn_review.setText(QCoreApplication.translate("FormHome", u"See your answers", None))
         self.btn_retake.setText(QCoreApplication.translate("FormHome", u"Try again", None))

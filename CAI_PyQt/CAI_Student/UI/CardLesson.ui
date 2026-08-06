@@ -59,7 +59,7 @@
 	border: 1px solid #ddd;
 }
 #widget_2:hover {
-	border: 2px solid #946544;
+	border: 2px solid #cd99d0;
 	background-color: #f7fbfe;
 }
 /* This style applies when the custom property is true */

@@ -193,10 +193,12 @@ class Controller:
 
     def handle_nav_click(self, button, index):
         sid = self.settings.value("studentid")
-        isTaken, _ = Student().get_quiz_status(sid)
+        isTaken, record = Student().get_quiz_status(sid)
 
         if isTaken and index == 1:
             index = 2
+
+        self.ui.label_score.setText(f"{record['quizscore']}/{record['totalscore']}")
         
         self.slide_to_page(index)
         button.setChecked(True)
