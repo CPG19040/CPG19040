@@ -1456,7 +1456,7 @@ class Ui_Home(object):
         self.scrollArea_classlist.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
         self.container = QWidget()
         self.container.setObjectName(u"container")
-        self.container.setGeometry(QRect(0, 0, 100, 30))
+        self.container.setGeometry(QRect(0, 0, 788, 597))
         self.gridLayout_stud_card = QGridLayout(self.container)
         self.gridLayout_stud_card.setObjectName(u"gridLayout_stud_card")
         self.scrollArea_classlist.setWidget(self.container)
@@ -1532,8 +1532,8 @@ class Ui_Home(object):
         self.label_16 = QLabel(self.sub_info_panel)
         self.label_16.setObjectName(u"label_16")
         self.label_16.setMinimumSize(QSize(0, 30))
-        self.label_16.setFont(font8)
-        self.label_16.setStyleSheet(u"background-color: transparent; color: rgb(253, 64, 115); font: 57 14pt \"Inter Medium\";")
+        self.label_16.setFont(font2)
+        self.label_16.setStyleSheet(u"background-color: transparent; color: rgb(253, 64, 115); font: 12pt \"Inter Medium\";")
 
         self.verticalLayout_9.addWidget(self.label_16)
 
@@ -1619,8 +1619,8 @@ class Ui_Home(object):
         self.label_17 = QLabel(self.sub_info_panel)
         self.label_17.setObjectName(u"label_17")
         self.label_17.setMinimumSize(QSize(0, 30))
-        self.label_17.setFont(font8)
-        self.label_17.setStyleSheet(u"background-color: transparent; color: rgb(253, 64, 115); font: 57 14pt \"Inter Medium\";")
+        self.label_17.setFont(font2)
+        self.label_17.setStyleSheet(u"background-color: transparent; color: rgb(253, 64, 115); font: 12pt \"Inter Medium\";")
 
         self.verticalLayout_9.addWidget(self.label_17)
 
@@ -1717,8 +1717,8 @@ class Ui_Home(object):
         self.label_51.setObjectName(u"label_51")
         self.label_51.setMinimumSize(QSize(0, 30))
         self.label_51.setMaximumSize(QSize(16777215, 20))
-        self.label_51.setFont(font8)
-        self.label_51.setStyleSheet(u"background-color: transparent; color: rgb(253, 64, 115); font: 57 14pt \"Inter Medium\";")
+        self.label_51.setFont(font2)
+        self.label_51.setStyleSheet(u"background-color: transparent; color: rgb(253, 64, 115); font: 12pt \"Inter Medium\";")
 
         self.verticalLayout_9.addWidget(self.label_51)
 
@@ -1735,13 +1735,6 @@ class Ui_Home(object):
 
         self.formLayout_4.setWidget(0, QFormLayout.ItemRole.LabelRole, self.label_59)
 
-        self.label_56 = QLabel(self.frame_contact_info)
-        self.label_56.setObjectName(u"label_56")
-        self.label_56.setFont(font10)
-        self.label_56.setStyleSheet(u"")
-
-        self.formLayout_4.setWidget(1, QFormLayout.ItemRole.LabelRole, self.label_56)
-
         self.label_contact_person = QLabel(self.frame_contact_info)
         self.label_contact_person.setObjectName(u"label_contact_person")
         self.label_contact_person.setMaximumSize(QSize(16777215, 20))
@@ -1749,6 +1742,13 @@ class Ui_Home(object):
         self.label_contact_person.setStyleSheet(u"color: rgb(18, 18, 18); background-color: transparent;")
 
         self.formLayout_4.setWidget(0, QFormLayout.ItemRole.FieldRole, self.label_contact_person)
+
+        self.label_56 = QLabel(self.frame_contact_info)
+        self.label_56.setObjectName(u"label_56")
+        self.label_56.setFont(font10)
+        self.label_56.setStyleSheet(u"")
+
+        self.formLayout_4.setWidget(1, QFormLayout.ItemRole.LabelRole, self.label_56)
 
         self.label_contact_number = QLabel(self.frame_contact_info)
         self.label_contact_number.setObjectName(u"label_contact_number")
@@ -3281,15 +3281,15 @@ class Ui_Home(object):
 
         self.horizontalLayout_9.addWidget(self.comboBox_ReportsLesson)
 
-        self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.horizontalLayout_9.addItem(self.horizontalSpacer_4)
-
 
         self.verticalLayout_30.addWidget(self.widget_ReportsFilter)
 
 
         self.horizontalLayout_36.addWidget(self.widget_23)
+
+        self.horizontalSpacer_7 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_36.addItem(self.horizontalSpacer_7)
 
 
         self.verticalLayout_7.addWidget(self.widget_22)
@@ -3388,7 +3388,7 @@ class Ui_Home(object):
         self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
         self.label_52 = QLabel(self.widget_stud_tblheader_idv)
         self.label_52.setObjectName(u"label_52")
-        self.label_52.setMaximumSize(QSize(100, 20))
+        self.label_52.setMaximumSize(QSize(100, 30))
         self.label_52.setFont(font)
         self.label_52.setStyleSheet(u"")
 
@@ -3401,6 +3401,21 @@ class Ui_Home(object):
         self.cmb_school_year_3.setStyleSheet(u"")
 
         self.horizontalLayout_7.addWidget(self.cmb_school_year_3)
+
+        self.labelGradingPeriod_4 = QLabel(self.widget_stud_tblheader_idv)
+        self.labelGradingPeriod_4.setObjectName(u"labelGradingPeriod_4")
+        self.labelGradingPeriod_4.setMaximumSize(QSize(16777215, 30))
+
+        self.horizontalLayout_7.addWidget(self.labelGradingPeriod_4)
+
+        self.cb_gp_quiz_idv = QComboBox(self.widget_stud_tblheader_idv)
+        self.cb_gp_quiz_idv.setObjectName(u"cb_gp_quiz_idv")
+        self.cb_gp_quiz_idv.setMinimumSize(QSize(150, 30))
+        self.cb_gp_quiz_idv.setMaximumSize(QSize(16777215, 30))
+        self.cb_gp_quiz_idv.setStyleSheet(u"")
+        self.cb_gp_quiz_idv.setSizeAdjustPolicy(QComboBox.AdjustToContents)
+
+        self.horizontalLayout_7.addWidget(self.cb_gp_quiz_idv)
 
         self.widget_search_6 = QWidget(self.widget_stud_tblheader_idv)
         self.widget_search_6.setObjectName(u"widget_search_6")
@@ -3471,6 +3486,7 @@ class Ui_Home(object):
         self.table_student_score_idv = QTableView(self.widget_10)
         self.table_student_score_idv.setObjectName(u"table_student_score_idv")
         self.table_student_score_idv.setStyleSheet(u"")
+        self.table_student_score_idv.setSelectionMode(QAbstractItemView.SingleSelection)
         self.table_student_score_idv.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.table_student_score_idv.setSortingEnabled(True)
         self.table_student_score_idv.verticalHeader().setVisible(False)
@@ -3582,21 +3598,6 @@ class Ui_Home(object):
 
         self.horizontalLayout_21.addItem(self.horizontalSpacer_15)
 
-        self.labelGradingPeriod_4 = QLabel(self.widget_7)
-        self.labelGradingPeriod_4.setObjectName(u"labelGradingPeriod_4")
-        self.labelGradingPeriod_4.setMaximumSize(QSize(16777215, 30))
-
-        self.horizontalLayout_21.addWidget(self.labelGradingPeriod_4)
-
-        self.cb_gp_quiz_idv = QComboBox(self.widget_7)
-        self.cb_gp_quiz_idv.setObjectName(u"cb_gp_quiz_idv")
-        self.cb_gp_quiz_idv.setMinimumSize(QSize(150, 30))
-        self.cb_gp_quiz_idv.setMaximumSize(QSize(16777215, 30))
-        self.cb_gp_quiz_idv.setStyleSheet(u"")
-        self.cb_gp_quiz_idv.setSizeAdjustPolicy(QComboBox.AdjustToContents)
-
-        self.horizontalLayout_21.addWidget(self.cb_gp_quiz_idv)
-
         self.btnPrintQuizScores = QPushButton(self.widget_7)
         self.btnPrintQuizScores.setObjectName(u"btnPrintQuizScores")
         self.btnPrintQuizScores.setEnabled(False)
@@ -3660,9 +3661,6 @@ class Ui_Home(object):
         self.verticalLayout_21.addWidget(self.widget_8)
 
         self.tabWidget_reports.addTab(self.tab_2, "")
-        self.tab_3 = QWidget()
-        self.tab_3.setObjectName(u"tab_3")
-        self.tabWidget_reports.addTab(self.tab_3, "")
 
         self.verticalLayout_4.addWidget(self.tabWidget_reports)
 
@@ -4731,9 +4729,9 @@ class Ui_Home(object):
         self.label_51.setText(QCoreApplication.translate("Home", u"Emergency Contact", None))
         self.label_59.setText(QCoreApplication.translate("Home", u"Name:", None))
         self.label_59.setProperty(u"class", QCoreApplication.translate("Home", u"label-faded", None))
+        self.label_contact_person.setText(QCoreApplication.translate("Home", u"null", None))
         self.label_56.setText(QCoreApplication.translate("Home", u"Mobile:", None))
         self.label_56.setProperty(u"class", QCoreApplication.translate("Home", u"label-faded", None))
-        self.label_contact_person.setText(QCoreApplication.translate("Home", u"null", None))
         self.label_contact_number.setText(QCoreApplication.translate("Home", u"null", None))
         self.btnEditStudent.setText(QCoreApplication.translate("Home", u" Edit", None))
         self.btnEditStudent.setProperty(u"class", QCoreApplication.translate("Home", u"button-normal", None))
@@ -4828,6 +4826,8 @@ class Ui_Home(object):
         self.label_52.setText(QCoreApplication.translate("Home", u"School Year:", None))
         self.cmb_school_year_3.setPlaceholderText("")
         self.cmb_school_year_3.setProperty(u"class", QCoreApplication.translate("Home", u"combobox-main", None))
+        self.labelGradingPeriod_4.setText(QCoreApplication.translate("Home", u"Grading Period:", None))
+        self.cb_gp_quiz_idv.setProperty(u"class", QCoreApplication.translate("Home", u"combobox-main", None))
         self.widget_search_6.setProperty(u"class", QCoreApplication.translate("Home", u"widget-search-container", None))
         self.label_magnifying_stud_4.setText("")
         self.label_magnifying_stud_4.setProperty(u"class", QCoreApplication.translate("Home", u"label-magnifying-search", None))
@@ -4846,13 +4846,10 @@ class Ui_Home(object):
         self.label_lessons_prog_icon.setText("")
         self.label_lessons_prog_1.setText(QCoreApplication.translate("Home", u"Lessons:", None))
         self.label_lessons_prog.setText(QCoreApplication.translate("Home", u"12/20", None))
-        self.labelGradingPeriod_4.setText(QCoreApplication.translate("Home", u"Grading Period:", None))
-        self.cb_gp_quiz_idv.setProperty(u"class", QCoreApplication.translate("Home", u"combobox-main", None))
         self.btnPrintQuizScores.setText(QCoreApplication.translate("Home", u" Print", None))
         self.btnPrintQuizScores.setProperty(u"class", QCoreApplication.translate("Home", u"button-normal", None))
         self.plainTextEdit_remarks.setPlaceholderText(QCoreApplication.translate("Home", u"Write teacher's remarks/comments here.", None))
-        self.tabWidget_reports.setTabText(self.tabWidget_reports.indexOf(self.tab_2), QCoreApplication.translate("Home", u"Raw scores (Individual)", None))
-        self.tabWidget_reports.setTabText(self.tabWidget_reports.indexOf(self.tab_3), QCoreApplication.translate("Home", u"Raw score (All)", None))
+        self.tabWidget_reports.setTabText(self.tabWidget_reports.indexOf(self.tab_2), QCoreApplication.translate("Home", u"Raw scores", None))
         self.widget_search_7.setProperty(u"class", QCoreApplication.translate("Home", u"widget-search-container", None))
         self.label_magnifying_stud_5.setText("")
         self.label_magnifying_stud_5.setProperty(u"class", QCoreApplication.translate("Home", u"label-magnifying-search", None))

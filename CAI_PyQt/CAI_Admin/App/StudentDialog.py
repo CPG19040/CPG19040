@@ -103,7 +103,7 @@ class Student:
         sql_params.append(school_year)
         
         sql += 'ORDER BY\n'
-        sql += '    stud.lastname, stud.firstname ASC'
+        sql += '    sec.sectionname, stud.lastname, stud.firstname ASC'
 
         sql_params = tuple(sql_params) if sql_params else None
         cursor, conn = self.db_tools.retrieve_records(sql, sql_params)

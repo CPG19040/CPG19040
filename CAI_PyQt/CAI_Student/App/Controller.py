@@ -26,6 +26,9 @@ class Controller:
         self.login_win = Login()
         self.login_win.login_success.connect(self.on_login_success)
 
+        self.today, self.base_year, self.next_year = self.util.get_dynamic_school_year_dates()
+        self.school_year = f"{self.base_year}-{self.next_year}"
+
         self.load_fonts()
         self.check_session()
 
@@ -157,9 +160,9 @@ class Controller:
         self.nav_map = {
             self.ui.btnLessons: 0,
             self.ui.btnQuiz: 1,
-            self.ui.btnExercise: 2,
-            self.ui.btnScores: 3,
-            self.ui.btnGames: 4,
+            self.ui.btnExercise: 3,
+            self.ui.btnScores: 4,
+            self.ui.btnGames: 5,
         }
 
         for btn, idx in self.nav_map.items():
@@ -172,6 +175,7 @@ class Controller:
 
         self.ui.btnLessons.clicked.connect(self.display_lessons)
         self.ui.btnQuiz.clicked.connect(self.displayQuiz)
+        self.ui.btn_retake.clicked.connect(lambda: self.slide_to_page(1))
         self.ui.btnSubmitQuiz.clicked.connect(self.save_quiz_answers)
         self.ui.btnQuit.clicked.connect(self.logout)
         self.ui.btnAddition.clicked.connect(self.open_game)
@@ -188,6 +192,12 @@ class Controller:
             self.home_win.showMaximized()
 
     def handle_nav_click(self, button, index):
+        sid = self.settings.value("studentid")
+        isTaken, _ = Student().get_quiz_status(sid)
+
+        if isTaken and index == 1:
+            index = 2
+        
         self.slide_to_page(index)
         button.setChecked(True)
 
@@ -255,7 +265,6 @@ class Controller:
             print(f"⚠️ Font directory not found at: {path}")
 
     def get_dynamic_grading_period_dates(self):
-        today, base_year, next_year = self.util.get_dynamic_school_year_dates()
 
         sql = """
             SELECT gpid, gpname, startdate, enddate
@@ -270,7 +279,7 @@ class Controller:
             start_date = QDate.fromString(str(row['startdate']), "yyyy-MM-dd")
             end_date = QDate.fromString(str(row['enddate']), "yyyy-MM-dd")
 
-            if start_date <= today <= end_date:
+            if start_date <= self.today <= end_date:
                 suffix = {1: "st", 2: "nd", 3: "rd"}.get(row['gpid'], "th")
                 active_quarter = f"{row['gpid']}{suffix} Grading Period"
                 self.GRADING_PERIOD = row['gpid']

@@ -1,5 +1,8 @@
 <RCC>
   <qresource prefix="Images">
+    <file>Images/button_wood_glow.png</file>
+    <file>Images/LoginWall.jpg</file>
+    <file>Images/header.jpg</file>
     <file>Images/background_361F1C.svg</file>
     <file>Images/student-user.png</file>
     <file>Images/Addition.png</file>
@@ -89,5 +92,6 @@
     <file>Images/wood_round_max2.png</file>
     <file>Images/wood_round_min.png</file>
     <file>Images/wood_round_min2.png</file>
+    <file>Images/title_wood.png</file>
   </qresource>
 </RCC>

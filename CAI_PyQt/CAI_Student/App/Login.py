@@ -66,6 +66,11 @@ class Login(QWidget, Ui_FormLogin):
             
             self.sounds[name] = effect
 
+        _, self.base_year, self.next_year = self.util.get_dynamic_school_year_dates()
+        self.school_year = f"{self.base_year}-{self.next_year}"
+
+        self.label_school_year.setText(self.school_year)
+
         self.btnClose.clicked.connect(self.close)
         self.btnMinimize.clicked.connect(self.showMinimized)
         self.btnMaximize.clicked.connect(self.toggle_maximize)
@@ -247,9 +252,10 @@ class Login(QWidget, Ui_FormLogin):
         self.cards.clear()
 
         # 2. Fetch data
-        student = Student()
+        
         sectionid = item.data(Qt.ItemDataRole.UserRole)
-        students = student.retrieve_student_info(sectionid)
+        student = Student()
+        students = student.retrieve_student_info(self.school_year, sectionid)
 
         # 3. Add new cards
         columns = 2

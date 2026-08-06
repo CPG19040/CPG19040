@@ -32,16 +32,63 @@ class Ui_FormLogin(object):
         self.verticalLayout_3 = QVBoxLayout(FormLogin)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
-        self.widget_8 = QWidget(FormLogin)
-        self.widget_8.setObjectName(u"widget_8")
-        self.horizontalLayout_2 = QHBoxLayout(self.widget_8)
+        self.widget_header = QWidget(FormLogin)
+        self.widget_header.setObjectName(u"widget_header")
+        self.widget_header.setAutoFillBackground(False)
+        self.widget_header.setStyleSheet(u"#widget_header {\n"
+"	\n"
+"	border-image: url(:/Images/Images/header.jpg);\n"
+"}")
+        self.horizontalLayout_2 = QHBoxLayout(self.widget_header)
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
-        self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_2.setContentsMargins(9, 2, 9, 2)
+        self.label_1 = QLabel(self.widget_header)
+        self.label_1.setObjectName(u"label_1")
+        self.label_1.setMaximumSize(QSize(300, 16777215))
+        font = QFont()
+        font.setFamilies([u"Inter SemiBold"])
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        self.label_1.setFont(font)
+        self.label_1.setStyleSheet(u"color: #FFF; font: 12pt \"Inter SemiBold\";")
+
+        self.horizontalLayout_2.addWidget(self.label_1)
+
+        self.label_school_year = QLabel(self.widget_header)
+        self.label_school_year.setObjectName(u"label_school_year")
+        self.label_school_year.setMaximumSize(QSize(300, 16777215))
+        font1 = QFont()
+        font1.setFamilies([u"Kissy Hugs"])
+        font1.setPointSize(12)
+        font1.setBold(False)
+        font1.setItalic(False)
+        self.label_school_year.setFont(font1)
+        self.label_school_year.setStyleSheet(u"color: #FFF; font: 12pt \"Kissy Hugs\";")
+
+        self.horizontalLayout_2.addWidget(self.label_school_year)
+
+        self.horizontalSpacer_14 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_2.addItem(self.horizontalSpacer_14)
+
+        self.label_5 = QLabel(self.widget_header)
+        self.label_5.setObjectName(u"label_5")
+        self.label_5.setMinimumSize(QSize(0, 34))
+        self.label_5.setMaximumSize(QSize(300, 34))
+        font2 = QFont()
+        font2.setFamilies([u"Kissy Hugs"])
+        font2.setPointSize(14)
+        self.label_5.setFont(font2)
+        self.label_5.setStyleSheet(u"color: #FFF; background: #5f3801; padding: 0px 15px; border-radius: 17px;")
+
+        self.horizontalLayout_2.addWidget(self.label_5)
+
         self.horizontalSpacer_13 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_2.addItem(self.horizontalSpacer_13)
 
-        self.btnMinimize = QPushButton(self.widget_8)
+        self.btnMinimize = QPushButton(self.widget_header)
         self.btnMinimize.setObjectName(u"btnMinimize")
         self.btnMinimize.setMinimumSize(QSize(40, 40))
         self.btnMinimize.setMaximumSize(QSize(40, 40))
@@ -51,7 +98,7 @@ class Ui_FormLogin(object):
 
         self.horizontalLayout_2.addWidget(self.btnMinimize)
 
-        self.btnMaximize = QPushButton(self.widget_8)
+        self.btnMaximize = QPushButton(self.widget_header)
         self.btnMaximize.setObjectName(u"btnMaximize")
         self.btnMaximize.setMinimumSize(QSize(40, 40))
         self.btnMaximize.setMaximumSize(QSize(40, 40))
@@ -61,7 +108,7 @@ class Ui_FormLogin(object):
 
         self.horizontalLayout_2.addWidget(self.btnMaximize)
 
-        self.btnClose = QPushButton(self.widget_8)
+        self.btnClose = QPushButton(self.widget_header)
         self.btnClose.setObjectName(u"btnClose")
         self.btnClose.setMinimumSize(QSize(40, 40))
         self.btnClose.setMaximumSize(QSize(40, 40))
@@ -72,7 +119,7 @@ class Ui_FormLogin(object):
         self.horizontalLayout_2.addWidget(self.btnClose)
 
 
-        self.verticalLayout_3.addWidget(self.widget_8)
+        self.verticalLayout_3.addWidget(self.widget_header)
 
         self.stackedWidget = QStackedWidget(FormLogin)
         self.stackedWidget.setObjectName(u"stackedWidget")
@@ -100,11 +147,11 @@ class Ui_FormLogin(object):
         self.label_2.setObjectName(u"label_2")
         self.label_2.setMinimumSize(QSize(50, 50))
         self.label_2.setMaximumSize(QSize(50, 50))
-        font = QFont()
-        font.setFamilies([u"Kissy Hugs"])
-        font.setPointSize(20)
-        font.setBold(True)
-        self.label_2.setFont(font)
+        font3 = QFont()
+        font3.setFamilies([u"Kissy Hugs"])
+        font3.setPointSize(20)
+        font3.setBold(True)
+        self.label_2.setFont(font3)
         self.label_2.setStyleSheet(u"color: rgb(5, 28, 84); border-image: url(:/Images/Images/blue-button.png);")
         self.label_2.setTextFormat(Qt.PlainText)
         self.label_2.setScaledContents(True)
@@ -115,10 +162,7 @@ class Ui_FormLogin(object):
         self.label = QLabel(self.widget_20)
         self.label.setObjectName(u"label")
         self.label.setMaximumSize(QSize(300, 16777215))
-        font1 = QFont()
-        font1.setFamilies([u"Kissy Hugs"])
-        font1.setPointSize(14)
-        self.label.setFont(font1)
+        self.label.setFont(font2)
         self.label.setStyleSheet(u"color: #88490f;")
 
         self.horizontalLayout_10.addWidget(self.label)
@@ -133,10 +177,10 @@ class Ui_FormLogin(object):
         self.list_sections = QListWidget(self.widget)
         self.list_sections.setObjectName(u"list_sections")
         self.list_sections.setMaximumSize(QSize(300, 16777215))
-        font2 = QFont()
-        font2.setFamilies([u"Inter Medium"])
-        font2.setPointSize(13)
-        self.list_sections.setFont(font2)
+        font4 = QFont()
+        font4.setFamilies([u"Inter Medium"])
+        font4.setPointSize(13)
+        self.list_sections.setFont(font4)
         self.list_sections.setFocusPolicy(Qt.TabFocus)
         self.list_sections.setStyleSheet(u"/* 1. THE LIST CONTAINER */\n"
 "QListWidget {\n"
@@ -275,7 +319,7 @@ class Ui_FormLogin(object):
         self.label_3.setObjectName(u"label_3")
         self.label_3.setMinimumSize(QSize(50, 50))
         self.label_3.setMaximumSize(QSize(50, 50))
-        self.label_3.setFont(font)
+        self.label_3.setFont(font3)
         self.label_3.setStyleSheet(u"color: rgb(5, 28, 84); border-image: url(:/Images/Images/blue-button.png);")
         self.label_3.setTextFormat(Qt.PlainText)
         self.label_3.setScaledContents(True)
@@ -286,7 +330,7 @@ class Ui_FormLogin(object):
         self.label_26 = QLabel(self.widget_19)
         self.label_26.setObjectName(u"label_26")
         self.label_26.setMaximumSize(QSize(300, 16777215))
-        self.label_26.setFont(font1)
+        self.label_26.setFont(font2)
         self.label_26.setStyleSheet(u"color: #88490f;")
         self.label_26.setMargin(4)
 
@@ -392,7 +436,7 @@ class Ui_FormLogin(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 634, 535))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 634, 531))
         self.scrollAreaWidgetContents.setStyleSheet(u"")
         self.gridLayout = QGridLayout(self.scrollAreaWidgetContents)
         self.gridLayout.setObjectName(u"gridLayout")
@@ -422,11 +466,11 @@ class Ui_FormLogin(object):
         self.btnBack.setObjectName(u"btnBack")
         self.btnBack.setMinimumSize(QSize(100, 50))
         self.btnBack.setMaximumSize(QSize(100, 50))
-        font3 = QFont()
-        font3.setFamilies([u"Kissy Hugs"])
-        font3.setPointSize(16)
-        font3.setBold(False)
-        self.btnBack.setFont(font3)
+        font5 = QFont()
+        font5.setFamilies([u"Kissy Hugs"])
+        font5.setPointSize(16)
+        font5.setBold(False)
+        self.btnBack.setFont(font5)
         self.btnBack.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btnBack.setStyleSheet(u"QPushButton {\n"
 "	border-image: url(:/Images/Images/leftArrowWood.png);\n"
@@ -464,7 +508,7 @@ class Ui_FormLogin(object):
         self.label_profile_pic.setObjectName(u"label_profile_pic")
         self.label_profile_pic.setMinimumSize(QSize(150, 150))
         self.label_profile_pic.setMaximumSize(QSize(150, 150))
-        self.label_profile_pic.setFont(font)
+        self.label_profile_pic.setFont(font3)
         self.label_profile_pic.setStyleSheet(u"color: rgb(5, 28, 84); border-image: url(:/Images/Images/profile_gray.png);")
         self.label_profile_pic.setTextFormat(Qt.PlainText)
         self.label_profile_pic.setScaledContents(True)
@@ -485,12 +529,12 @@ class Ui_FormLogin(object):
         self.labelFullName = QLabel(self.widget_3)
         self.labelFullName.setObjectName(u"labelFullName")
         self.labelFullName.setMaximumSize(QSize(500, 16777215))
-        font4 = QFont()
-        font4.setFamilies([u"Kissy Hugs"])
-        font4.setPointSize(20)
-        font4.setBold(False)
-        font4.setItalic(False)
-        self.labelFullName.setFont(font4)
+        font6 = QFont()
+        font6.setFamilies([u"Kissy Hugs"])
+        font6.setPointSize(20)
+        font6.setBold(False)
+        font6.setItalic(False)
+        self.labelFullName.setFont(font6)
         self.labelFullName.setStyleSheet(u"font: 63 20pt \"Kissy Hugs\"; color: rgb(165, 29, 45);")
         self.labelFullName.setAlignment(Qt.AlignCenter)
         self.labelFullName.setMargin(4)
@@ -509,7 +553,7 @@ class Ui_FormLogin(object):
         self.label_4.setObjectName(u"label_4")
         self.label_4.setMinimumSize(QSize(50, 50))
         self.label_4.setMaximumSize(QSize(50, 50))
-        self.label_4.setFont(font)
+        self.label_4.setFont(font3)
         self.label_4.setStyleSheet(u"color: rgb(5, 28, 84); border-image: url(:/Images/Images/blue-button.png);")
         self.label_4.setTextFormat(Qt.PlainText)
         self.label_4.setScaledContents(True)
@@ -520,7 +564,7 @@ class Ui_FormLogin(object):
         self.label_27 = QLabel(self.widget_2)
         self.label_27.setObjectName(u"label_27")
         self.label_27.setMaximumSize(QSize(300, 16777215))
-        self.label_27.setFont(font1)
+        self.label_27.setFont(font2)
         self.label_27.setStyleSheet(u"color: #88490f;")
         self.label_27.setMargin(4)
 
@@ -558,12 +602,12 @@ class Ui_FormLogin(object):
         self.txtPassword.setObjectName(u"txtPassword")
         self.txtPassword.setMinimumSize(QSize(350, 40))
         self.txtPassword.setMaximumSize(QSize(1000, 40))
-        font5 = QFont()
-        font5.setFamilies([u"Inter SemiBold"])
-        font5.setPointSize(20)
-        font5.setBold(False)
-        font5.setItalic(False)
-        self.txtPassword.setFont(font5)
+        font7 = QFont()
+        font7.setFamilies([u"Inter SemiBold"])
+        font7.setPointSize(20)
+        font7.setBold(False)
+        font7.setItalic(False)
+        self.txtPassword.setFont(font7)
         self.txtPassword.setStyleSheet(u"#txtPassword {\n"
 "	border: none;\n"
 "	background: transparent;\n"
@@ -584,11 +628,11 @@ class Ui_FormLogin(object):
         self.btnShowPassword.setObjectName(u"btnShowPassword")
         self.btnShowPassword.setMinimumSize(QSize(50, 50))
         self.btnShowPassword.setMaximumSize(QSize(50, 50))
-        font6 = QFont()
-        font6.setFamilies([u"Kissy Hugs"])
-        font6.setPointSize(20)
-        font6.setBold(False)
-        self.btnShowPassword.setFont(font6)
+        font8 = QFont()
+        font8.setFamilies([u"Kissy Hugs"])
+        font8.setPointSize(20)
+        font8.setBold(False)
+        self.btnShowPassword.setFont(font8)
         self.btnShowPassword.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btnShowPassword.setStyleSheet(u"#btnShowPassword {\n"
 "	border-image: url(:/Images/Images/closed_eye.png);\n"
@@ -617,10 +661,10 @@ class Ui_FormLogin(object):
         self.btnLogin.setObjectName(u"btnLogin")
         self.btnLogin.setMinimumSize(QSize(200, 60))
         self.btnLogin.setMaximumSize(QSize(200, 16777215))
-        self.btnLogin.setFont(font6)
+        self.btnLogin.setFont(font8)
         self.btnLogin.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btnLogin.setStyleSheet(u"QPushButton {\n"
-"	border-image: url(:/Images/Images/btnWood.png);\n"
+"	border-image: url(:/Images/Images/button_wood.png);\n"
 "	border-radius: 10px;\n"
 "	color: white;\n"
 "	font-family: 'Kissy Hugs';\n"
@@ -628,11 +672,11 @@ class Ui_FormLogin(object):
 "}\n"
 "\n"
 "QPushButton:hover {\n"
-" 	border-image: url(:/Images/Images/btnWoodGlow.png);\n"
+" 	border-image: url(:/Images/Images/button_wood_glow.png);\n"
 "}\n"
 "\n"
 "QPushButton:pressed {\n"
-" 	border-image: url(:/Images/Images/btnWood.png);\n"
+" 	border-image: url(:/Images/Images/button_wood.png);\n"
 "}")
 
         self.horizontalLayout_6.addWidget(self.btnLogin)
@@ -666,6 +710,9 @@ class Ui_FormLogin(object):
 
     def retranslateUi(self, FormLogin):
         FormLogin.setWindowTitle(QCoreApplication.translate("FormLogin", u"Login", None))
+        self.label_1.setText(QCoreApplication.translate("FormLogin", u"School Year:", None))
+        self.label_school_year.setText(QCoreApplication.translate("FormLogin", u"0000-0000", None))
+        self.label_5.setText(QCoreApplication.translate("FormLogin", u"LOGIN", None))
         self.btnMinimize.setText("")
         self.btnMaximize.setText("")
         self.btnClose.setText("")

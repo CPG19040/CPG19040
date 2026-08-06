@@ -25,8 +25,8 @@ class Student:
         conn.close()
         return list()
 
-    def retrieve_student_info(self, sectionid):
-        sql = 'SELECT\n'
+    def retrieve_student_info(self, school_year, sectionid):
+        sql  = 'SELECT\n'
         sql += '    studentid\n'
         sql += '    ,firstname \n'
         sql += '    ,middlename\n'
@@ -37,8 +37,9 @@ class Student:
         sql += '    ,profile_pic\n'
         sql += 'FROM cai.tbl_student_info\n'
         sql += 'WHERE sectionid = %s\n'
+        sql += '    AND school_year = %s\n'
         sql += 'ORDER BY lastname ASC'
-        cursor, conn = self.db_tools.retrieve_records(sql, (sectionid,))
+        cursor, conn = self.db_tools.retrieve_records(sql, (sectionid, school_year))
 
         if cursor:
             records = cursor.fetchall()
@@ -84,3 +85,30 @@ class Student:
 
         conn.close()
         return tuple([""] * 10)
+
+    def get_quiz_status(self, studentid):
+        query = """
+            SELECT
+                CASE
+                    WHEN QS.SCOREID IS NOT NULL THEN 'Completed'
+                    ELSE 'Not Taken'
+                END AS QUIZ_STATUS,
+                QS.QUIZSCORE,
+                TO_CHAR(QS.DATETAKEN, 'YYYY/MM/DD, HH12:MI AM') AS DATETAKEN
+            FROM CAI.TBL_STUDENT_INFO S
+            CROSS JOIN CAI.TBL_QUIZ Q
+            LEFT JOIN CAI.TBL_QUIZSCORES QS 
+                ON S.STUDENTID = QS.STUDENTID
+            AND Q.QUIZNUMBER = QS.QUIZNUMBER
+            AND Q.GRADINGPERIOD = QS.GRADINGPERIOD
+            AND Q.LESSONID = QS.LESSONID
+            WHERE S.STUDENTID = %s
+            AND Q.PUBLISH = TRUE;
+        """
+
+        record = self.db_tools.fetch_all(query, (studentid,))
+
+        if record:
+            return record[0]['quiz_status'] == 'Completed', record[0]
+
+        return False, dict()

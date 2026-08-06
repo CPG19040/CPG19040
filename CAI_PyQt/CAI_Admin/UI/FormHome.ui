@@ -2936,8 +2936,8 @@ QSpinBox::down-arrow {
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>100</width>
-                <height>30</height>
+                <width>788</width>
+                <height>597</height>
                </rect>
               </property>
               <layout class="QGridLayout" name="gridLayout_stud_card"/>
@@ -3142,14 +3142,14 @@ QSpinBox::down-arrow {
                 <property name="font">
                  <font>
                   <family>Inter Medium</family>
-                  <pointsize>14</pointsize>
-                  <weight>7</weight>
+                  <pointsize>12</pointsize>
+                  <weight>50</weight>
                   <italic>false</italic>
                   <bold>false</bold>
                  </font>
                 </property>
                 <property name="styleSheet">
-                 <string notr="true">background-color: transparent; color: rgb(253, 64, 115); font: 57 14pt &quot;Inter Medium&quot;;</string>
+                 <string notr="true">background-color: transparent; color: rgb(253, 64, 115); font: 12pt &quot;Inter Medium&quot;;</string>
                 </property>
                 <property name="text">
                  <string>Section Information</string>
@@ -3403,14 +3403,14 @@ QSpinBox::down-arrow {
                 <property name="font">
                  <font>
                   <family>Inter Medium</family>
-                  <pointsize>14</pointsize>
-                  <weight>7</weight>
+                  <pointsize>12</pointsize>
+                  <weight>50</weight>
                   <italic>false</italic>
                   <bold>false</bold>
                  </font>
                 </property>
                 <property name="styleSheet">
-                 <string notr="true">background-color: transparent; color: rgb(253, 64, 115); font: 57 14pt &quot;Inter Medium&quot;;</string>
+                 <string notr="true">background-color: transparent; color: rgb(253, 64, 115); font: 12pt &quot;Inter Medium&quot;;</string>
                 </property>
                 <property name="text">
                  <string>Student Information</string>
@@ -3717,14 +3717,14 @@ QSpinBox::down-arrow {
                 <property name="font">
                  <font>
                   <family>Inter Medium</family>
-                  <pointsize>14</pointsize>
-                  <weight>7</weight>
+                  <pointsize>12</pointsize>
+                  <weight>50</weight>
                   <italic>false</italic>
                   <bold>false</bold>
                  </font>
                 </property>
                 <property name="styleSheet">
-                 <string notr="true">background-color: transparent; color: rgb(253, 64, 115); font: 57 14pt &quot;Inter Medium&quot;;</string>
+                 <string notr="true">background-color: transparent; color: rgb(253, 64, 115); font: 12pt &quot;Inter Medium&quot;;</string>
                 </property>
                 <property name="text">
                  <string>Emergency Contact</string>
@@ -3768,28 +3768,6 @@ QSpinBox::down-arrow {
                    </property>
                   </widget>
                  </item>
-                 <item row="1" column="0">
-                  <widget class="QLabel" name="label_56">
-                   <property name="font">
-                    <font>
-                     <family>Inter</family>
-                     <pointsize>11</pointsize>
-                     <weight>50</weight>
-                     <italic>false</italic>
-                     <bold>false</bold>
-                    </font>
-                   </property>
-                   <property name="styleSheet">
-                    <string notr="true"/>
-                   </property>
-                   <property name="text">
-                    <string>Mobile:</string>
-                   </property>
-                   <property name="class" stdset="0">
-                    <string>label-faded</string>
-                   </property>
-                  </widget>
-                 </item>
                  <item row="0" column="1">
                   <widget class="QLabel" name="label_contact_person">
                    <property name="maximumSize">
@@ -3812,6 +3790,28 @@ QSpinBox::down-arrow {
                    </property>
                    <property name="text">
                     <string>null</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="0">
+                  <widget class="QLabel" name="label_56">
+                   <property name="font">
+                    <font>
+                     <family>Inter</family>
+                     <pointsize>11</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true"/>
+                   </property>
+                   <property name="text">
+                    <string>Mobile:</string>
+                   </property>
+                   <property name="class" stdset="0">
+                    <string>label-faded</string>
                    </property>
                   </widget>
                  </item>
@@ -6551,24 +6551,24 @@ QScrollBar::add-line, QScrollBar::sub-line {
                        </property>
                       </widget>
                      </item>
-                     <item>
-                      <spacer name="horizontalSpacer_4">
-                       <property name="orientation">
-                        <enum>Qt::Horizontal</enum>
-                       </property>
-                       <property name="sizeHint" stdset="0">
-                        <size>
-                         <width>40</width>
-                         <height>20</height>
-                        </size>
-                       </property>
-                      </spacer>
-                     </item>
                     </layout>
                    </widget>
                   </item>
                  </layout>
                 </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_7">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
                </item>
               </layout>
              </widget>
@@ -6650,7 +6650,7 @@ QScrollBar::add-line, QScrollBar::sub-line {
 }</string>
            </property>
            <attribute name="title">
-            <string>Raw scores (Individual)</string>
+            <string>Raw scores</string>
            </attribute>
            <layout class="QVBoxLayout" name="verticalLayout_21">
             <item>
@@ -6701,7 +6701,7 @@ QScrollBar::add-line, QScrollBar::sub-line {
                     <property name="maximumSize">
                      <size>
                       <width>100</width>
-                      <height>20</height>
+                      <height>30</height>
                      </size>
                     </property>
                     <property name="font">
@@ -6740,6 +6740,44 @@ QScrollBar::add-line, QScrollBar::sub-line {
                     </property>
                     <property name="placeholderText">
                      <string/>
+                    </property>
+                    <property name="class" stdset="0">
+                     <string>combobox-main</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="labelGradingPeriod_4">
+                    <property name="maximumSize">
+                     <size>
+                      <width>16777215</width>
+                      <height>30</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>Grading Period:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QComboBox" name="cb_gp_quiz_idv">
+                    <property name="minimumSize">
+                     <size>
+                      <width>150</width>
+                      <height>30</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>16777215</width>
+                      <height>30</height>
+                     </size>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true"/>
+                    </property>
+                    <property name="sizeAdjustPolicy">
+                     <enum>QComboBox::AdjustToContents</enum>
                     </property>
                     <property name="class" stdset="0">
                      <string>combobox-main</string>
@@ -6918,6 +6956,9 @@ QScrollBar::add-line, QScrollBar::sub-line {
                 <widget class="QTableView" name="table_student_score_idv">
                  <property name="styleSheet">
                   <string notr="true"/>
+                 </property>
+                 <property name="selectionMode">
+                  <enum>QAbstractItemView::SingleSelection</enum>
                  </property>
                  <property name="selectionBehavior">
                   <enum>QAbstractItemView::SelectRows</enum>
@@ -7161,44 +7202,6 @@ background-color: rgb(98, 160, 234);</string>
                    </spacer>
                   </item>
                   <item>
-                   <widget class="QLabel" name="labelGradingPeriod_4">
-                    <property name="maximumSize">
-                     <size>
-                      <width>16777215</width>
-                      <height>30</height>
-                     </size>
-                    </property>
-                    <property name="text">
-                     <string>Grading Period:</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QComboBox" name="cb_gp_quiz_idv">
-                    <property name="minimumSize">
-                     <size>
-                      <width>150</width>
-                      <height>30</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>16777215</width>
-                      <height>30</height>
-                     </size>
-                    </property>
-                    <property name="styleSheet">
-                     <string notr="true"/>
-                    </property>
-                    <property name="sizeAdjustPolicy">
-                     <enum>QComboBox::AdjustToContents</enum>
-                    </property>
-                    <property name="class" stdset="0">
-                     <string>combobox-main</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
                    <widget class="QPushButton" name="btnPrintQuizScores">
                     <property name="enabled">
                      <bool>false</bool>
@@ -7335,11 +7338,6 @@ background-color: rgb(98, 160, 234);</string>
              </widget>
             </item>
            </layout>
-          </widget>
-          <widget class="QWidget" name="tab_3">
-           <attribute name="title">
-            <string>Raw score (All)</string>
-           </attribute>
           </widget>
          </widget>
         </item>

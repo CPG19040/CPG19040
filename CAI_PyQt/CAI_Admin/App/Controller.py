@@ -186,7 +186,8 @@ class Controller:
         self.ui.comboBox_ReportsLesson.currentIndexChanged.connect(self.handle_report_stud_prog_filter)
         self.ui.comboBox_ReportsGradingPeriod.currentIndexChanged.connect(self.handle_grading_period_change)
         self.reports_selectedRow_idv = None
-        self.ui.cb_gp_quiz_idv.currentIndexChanged.connect(lambda: self.handle_report_student_click())
+        self.initialize_table_quiz_score_idv()
+        self.ui.cb_gp_quiz_idv.currentIndexChanged.connect(lambda: self.cb_gp_quiz_idv_selectionChanged())
         self.ui.cmb_school_year_3.currentIndexChanged.connect(lambda: self.handle_report_student_idv())
         self.ui.txt_search_score_idv.textChanged.connect(lambda: self.handle_report_student_idv())
         self.ui.btnClearSearch_4.clicked.connect(lambda: self.ui.txt_search_score_idv.clear())
@@ -397,6 +398,7 @@ class Controller:
             self.ui.label_student_name.clear()
             self.ui.label_average_percentage.setText("0%")
             self.ui.btnPrintQuizScores.setEnabled(False)
+            self.initialize_table_quiz_score_idv()
             self.handle_report_student_idv()
 
         elif index == 7: # Users
@@ -1266,6 +1268,14 @@ class Controller:
         else:
             QMessageBox.critical(self.home_win, "Error", message)
 
+    def cb_gp_quiz_idv_selectionChanged(self):
+        selected_rows = self.ui.table_student_score_idv.selectionModel().selectedRows()
+
+        if selected_rows:
+            # Get index of the first selected row
+            row_index = selected_rows[0]
+            self.handle_report_student_click(row_index)
+
     def handle_report_student_click(self, row=None):
 
         if row is None or not row.isValid():
@@ -1520,4 +1530,12 @@ class Controller:
 
         else:
             QMessageBox.information(self.home_win, "Success", "Successfully imported all the predefined lessons.")
+
+    def initialize_table_quiz_score_idv(self):
+        # Reports
+        headers = ["QUIZ #", "LESSON TITLE", "SCORE", "PERCENTAGE", "DATE TAKEN"]
+        model = QStandardItemModel(0, len(headers))
+        model.setHorizontalHeaderLabels(headers)
+        self.ui.table_quiz_score_idv.setModel(model)
+        self.ui.table_quiz_score_idv.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
 
