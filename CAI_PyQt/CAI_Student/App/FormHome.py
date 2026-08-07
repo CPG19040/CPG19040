@@ -1014,7 +1014,7 @@ class Ui_FormHome(object):
         self.scrollArea_quiz_answer.setWidgetResizable(True)
         self.scrollAreaWidgetContents_5 = QWidget()
         self.scrollAreaWidgetContents_5.setObjectName(u"scrollAreaWidgetContents_5")
-        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 100, 30))
+        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 1038, 486))
         self.gridLayout_2 = QGridLayout(self.scrollAreaWidgetContents_5)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
         self.scrollArea_quiz_answer.setWidget(self.scrollAreaWidgetContents_5)
@@ -1025,17 +1025,105 @@ class Ui_FormHome(object):
         self.verticalLayout_17.addWidget(self.widget_9)
 
         self.stackedWidget.addWidget(self.page_quiz_results)
-        self.page_review_quiz = QWidget()
-        self.page_review_quiz.setObjectName(u"page_review_quiz")
-        self.page_review_quiz.setStyleSheet(u"background: transparent;")
-        self.stackedWidget.addWidget(self.page_review_quiz)
         self.pageExercise = QWidget()
         self.pageExercise.setObjectName(u"pageExercise")
         self.pageExercise.setStyleSheet(u"background: transparent;")
+        self.label_message_3 = QLabel(self.pageExercise)
+        self.label_message_3.setObjectName(u"label_message_3")
+        self.label_message_3.setGeometry(QRect(370, 190, 269, 46))
+        self.label_message_3.setStyleSheet(u"font: 25pt \"Biscuit Glitch\"; color: #FFF;")
+        self.label_message_3.setAlignment(Qt.AlignCenter)
         self.stackedWidget.addWidget(self.pageExercise)
         self.pageScores = QWidget()
         self.pageScores.setObjectName(u"pageScores")
         self.pageScores.setStyleSheet(u"background: transparent;")
+        self.verticalLayout_19 = QVBoxLayout(self.pageScores)
+        self.verticalLayout_19.setObjectName(u"verticalLayout_19")
+        self.scrollArea_scores = QScrollArea(self.pageScores)
+        self.scrollArea_scores.setObjectName(u"scrollArea_scores")
+        self.scrollArea_scores.setStyleSheet(u"/* 1. THE MAIN CONTAINER */\n"
+"QScrollArea { \n"
+"    border: none;\n"
+"    border-radius: 20px; \n"
+"    background-color: transparent;\n"
+"}\n"
+"\n"
+"/* 2. THE VIEWPORT (Crucial for transparency/backgrounds) */\n"
+"QScrollArea QWidget #qt_scrollarea_viewport {\n"
+"    background: transparent;\n"
+"    border-radius: 20px;\n"
+"}\n"
+"\n"
+"/* 3. VERTICAL SCROLLBAR */\n"
+"QScrollBar:vertical {\n"
+"    border: none;\n"
+"    background: #ffffff;\n"
+"    width: 10px;\n"
+"    margin: 0px;\n"
+"    border-radius: 5px;\n"
+"}\n"
+"\n"
+"QScrollBar::handle:vertical {\n"
+"    background: #7a7a7a;\n"
+"    min-height: 20px;\n"
+"    border-radius: 5px;\n"
+"}\n"
+"\n"
+"QScrollBar::handle:vertical:hover {\n"
+"    background: #9a4076;\n"
+"}\n"
+"\n"
+"/* 4. HORIZONTAL SCROLLBAR */\n"
+"QScrollBar:horizontal {\n"
+"    border: none;\n"
+"    background: #ffffff;\n"
+"    height: 10px; /* Note: height, not width */\n"
+"    margin: 0px;\n"
+"    border-radius: 5px;\n"
+"}\n"
+"\n"
+"QScrollBar::handle:horizontal {\n"
+"    background: #7a7a7a;\n"
+""
+                        "    min-width: 20px;\n"
+"    border-radius: 5px;\n"
+"}\n"
+"\n"
+"QScrollBar::handle:horizontal:hover {\n"
+"    background: #574939;\n"
+"}\n"
+"\n"
+"/* 5. REMOVE BUTTONS & TRACK BACKGROUNDS */\n"
+"/* This handles both horizontal and vertical arrows/tracks */\n"
+"QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical,\n"
+"QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {\n"
+"    border: none;\n"
+"    background: none;\n"
+"    width: 0px;\n"
+"    height: 0px;\n"
+"}\n"
+"\n"
+"QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical,\n"
+"QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {\n"
+"    background: none;\n"
+"}\n"
+"\n"
+"/* 6. THE CORNER WIDGET \n"
+"   (The small square where both bars meet) */\n"
+"QScrollArea QWidget #qt_scrollarea_corner {\n"
+"    background: transparent;\n"
+"    border: none;\n"
+"}")
+        self.scrollArea_scores.setWidgetResizable(True)
+        self.layout_scores = QWidget()
+        self.layout_scores.setObjectName(u"layout_scores")
+        self.layout_scores.setGeometry(QRect(0, 0, 1038, 637))
+        self.gridLayout_3 = QGridLayout(self.layout_scores)
+        self.gridLayout_3.setObjectName(u"gridLayout_3")
+        self.scrollArea_scores.setWidget(self.layout_scores)
+
+        self.verticalLayout_19.addWidget(self.scrollArea_scores)
+
         self.stackedWidget.addWidget(self.pageScores)
         self.pageGames = QWidget()
         self.pageGames.setObjectName(u"pageGames")
@@ -1186,6 +1274,7 @@ class Ui_FormHome(object):
         self.btn_retake.setText(QCoreApplication.translate("FormHome", u"Try again", None))
         self.label_score.setText(QCoreApplication.translate("FormHome", u"0/0", None))
         self.label_message_2.setText(QCoreApplication.translate("FormHome", u"questions correct", None))
+        self.label_message_3.setText(QCoreApplication.translate("FormHome", u"Exercise Page", None))
         self.btnColors.setText("")
         self.btnAddition.setText("")
         self.btnMultiplication.setText("")

@@ -10,7 +10,9 @@ from App.Student import Student
 from App.Tools import Utility, WindowHandler, CustomShapeDialog
 from App.CRUDTools import DatabaseTools
 from App.Lessons import Lessons, LessonCard
+from App.MyScores import CardScores
 from App.Quiz import Quiz, QuizUtils
+from App.MyScores import MyScores
 
 
 # Notice: Controller no longer inherits from QObject
@@ -161,9 +163,9 @@ class Controller:
         self.nav_map = {
             self.ui.btnLessons: 0,
             self.ui.btnQuiz: 1,
-            self.ui.btnExercise: 4,
-            self.ui.btnScores: 5,
-            self.ui.btnGames: 6
+            self.ui.btnExercise: 3,
+            self.ui.btnScores: 4,
+            self.ui.btnGames: 5
         }
 
         for btn, idx in self.nav_map.items():
@@ -202,6 +204,9 @@ class Controller:
                 self.displayQuizAnswers()
             else:
                 self.displayQuiz()
+
+        elif index == 4:
+            self.display_myscores()
 
         self.ui.label_score.setText(f"{record['quizscore']}/{record['totalscore']}")
         
@@ -460,6 +465,57 @@ class Controller:
             grid_col = index % NUM_COLUMNS
 
             layout.addWidget(quiz, grid_row, grid_col)
+
+            itemCnt += 1
+
+    def display_myscores(self):
+        layout = self.ui.gridLayout_3
+        layout.setAlignment(Qt.AlignmentFlag.AlignTop)
+
+        while layout.count():
+            child = layout.takeAt(0)
+            if child.widget():
+                child.widget().deleteLater()
+
+        myscores    = MyScores()
+        student_id  = self.settings.value("studentid")
+        record      = myscores.get_scores(student_id, self.GRADING_PERIOD)
+        row_count   = len(record)
+        itemCnt     = 1
+        NUM_COLUMNS = 3
+
+        for row in record:
+            quiznumber     = row['quiznumber']
+            lesson_id      = row['lessonid']
+            title          = row['title'] 
+            quizscore      = row['quizscore'] 
+            total_score    = row['total_score'] 
+            date_taken     = row['datetaken']
+            average        = 0.0
+            sum_score      = 0.0
+            score_str      = f"{quizscore}/{total_score}" if quizscore is not None and total_score else ""
+            percentage_str = ""
+
+            # Validate score bounds and avoid DivisionByZero
+            if total_score > 0 and quizscore is not None and 0 <= quizscore <= total_score:
+                percent_val = (quizscore / total_score) * 100
+                sum_score += percent_val
+                percentage_str = f"{percent_val:.2f}%"
+
+            date_taken_str = date_taken if date_taken is not None else ""
+    
+            # Calculate the final average exactly once outside the loop
+            if row_count > 0:
+                average = sum_score / row_count
+
+            card = CardScores(quiznumber, lesson_id, title, score_str)
+            card.clicked.connect(self.handle_lesson_selection)
+
+            index = itemCnt - 1
+            grid_row = index // NUM_COLUMNS
+            grid_col = index % NUM_COLUMNS
+
+            layout.addWidget(card, grid_row, grid_col)
 
             itemCnt += 1
 
