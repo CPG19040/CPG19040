@@ -383,12 +383,12 @@ class QuizUtils:
                     """
                     cur.execute(delete_sql, (card.idKey, card.quiz_type, card.quiznumber, student_id))
 
-                    student_ans = card.get_answer().strip().lower()
+                    student_ans = card.get_answer().strip()
 
                     if student_ans == "":
                         return 2, "Oops! Please answer all the questions."
                 
-                    is_correct = (card.correct_answer.strip().lower() == student_ans)
+                    is_correct = (card.correct_answer.strip().lower() == student_ans.lower())
                     remark = "Correct" if is_correct else "Incorrect"
                     
                     insert_data.append((
