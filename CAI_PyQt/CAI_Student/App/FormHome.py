@@ -157,14 +157,16 @@ class Ui_FormHome(object):
 "	background-color: transparent;\n"
 "	border-bottom-right-radius: 15px;\n"
 "	border-bottom-left-radius: 15px;\n"
-"	border-image: url(:/Images/Images/background_361F1C.svg);\n"
+"	border-image: url(:/Images/Images/slab2.png);\n"
 "}")
         self.verticalLayout_13 = QVBoxLayout(self.widget_student_info)
         self.verticalLayout_13.setSpacing(0)
         self.verticalLayout_13.setObjectName(u"verticalLayout_13")
-        self.verticalLayout_13.setContentsMargins(9, 20, -1, 9)
+        self.verticalLayout_13.setContentsMargins(9, 20, -1, 29)
         self.widget_4 = QWidget(self.widget_student_info)
         self.widget_4.setObjectName(u"widget_4")
+        self.widget_4.setMinimumSize(QSize(260, 260))
+        self.widget_4.setMaximumSize(QSize(260, 260))
         self.widget_4.setStyleSheet(u"")
         self.horizontalLayout_4 = QHBoxLayout(self.widget_4)
         self.horizontalLayout_4.setSpacing(0)
@@ -176,9 +178,9 @@ class Ui_FormHome(object):
 
         self.widget_3 = QWidget(self.widget_4)
         self.widget_3.setObjectName(u"widget_3")
-        self.widget_3.setMinimumSize(QSize(210, 210))
-        self.widget_3.setMaximumSize(QSize(210, 210))
-        self.widget_3.setStyleSheet(u"background-color: #361f1c;\n"
+        self.widget_3.setMinimumSize(QSize(211, 215))
+        self.widget_3.setMaximumSize(QSize(215, 215))
+        self.widget_3.setStyleSheet(u"background-color: #c5562c;\n"
 "border-radius: 105px;")
         self.verticalLayout_14 = QVBoxLayout(self.widget_3)
         self.verticalLayout_14.setSpacing(0)
@@ -580,7 +582,7 @@ class Ui_FormHome(object):
         self.scrollArea_id.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 333, 516))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 100, 30))
         self.verticalLayout_7 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_7.setObjectName(u"verticalLayout_7")
         self.scrollArea_id.setWidget(self.scrollAreaWidgetContents)
@@ -695,7 +697,7 @@ class Ui_FormHome(object):
         self.scrollArea_mc.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 334, 516))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 100, 30))
         self.verticalLayout_8 = QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_8.setObjectName(u"verticalLayout_8")
         self.scrollArea_mc.setWidget(self.scrollAreaWidgetContents_2)
@@ -810,7 +812,7 @@ class Ui_FormHome(object):
         self.scrollArea_tf.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 333, 516))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 100, 30))
         self.verticalLayout_9 = QVBoxLayout(self.scrollAreaWidgetContents_3)
         self.verticalLayout_9.setObjectName(u"verticalLayout_9")
         self.scrollArea_tf.setWidget(self.scrollAreaWidgetContents_3)
@@ -852,48 +854,40 @@ class Ui_FormHome(object):
         self.page_quiz_results.setStyleSheet(u"background: transparent;")
         self.verticalLayout_17 = QVBoxLayout(self.page_quiz_results)
         self.verticalLayout_17.setObjectName(u"verticalLayout_17")
-        self.verticalSpacer_3 = QSpacerItem(20, 50, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Preferred)
-
-        self.verticalLayout_17.addItem(self.verticalSpacer_3)
-
         self.widget_9 = QWidget(self.page_quiz_results)
         self.widget_9.setObjectName(u"widget_9")
-        self.verticalLayout_16 = QVBoxLayout(self.widget_9)
+        self.verticalLayout_18 = QVBoxLayout(self.widget_9)
+        self.verticalLayout_18.setObjectName(u"verticalLayout_18")
+        self.verticalLayout_18.setContentsMargins(0, 0, 0, 0)
+        self.widget_11 = QWidget(self.widget_9)
+        self.widget_11.setObjectName(u"widget_11")
+        self.widget_11.setStyleSheet(u"")
+        self.verticalLayout_16 = QVBoxLayout(self.widget_11)
         self.verticalLayout_16.setObjectName(u"verticalLayout_16")
-        self.label_score = QLabel(self.widget_9)
-        self.label_score.setObjectName(u"label_score")
-        self.label_score.setStyleSheet(u"font: 35pt \"Biscuit Glitch\"; \n"
-"color: rgb(249, 240, 107);")
-        self.label_score.setAlignment(Qt.AlignCenter)
-
-        self.verticalLayout_16.addWidget(self.label_score)
-
-        self.label_message = QLabel(self.widget_9)
+        self.verticalLayout_16.setContentsMargins(9, 9, 9, 9)
+        self.widget_12 = QWidget(self.widget_11)
+        self.widget_12.setObjectName(u"widget_12")
+        self.horizontalLayout_11 = QHBoxLayout(self.widget_12)
+        self.horizontalLayout_11.setObjectName(u"horizontalLayout_11")
+        self.horizontalLayout_11.setContentsMargins(0, 0, 0, 0)
+        self.label_message = QLabel(self.widget_12)
         self.label_message.setObjectName(u"label_message")
         self.label_message.setStyleSheet(u"font: 30pt \"Biscuit Glitch\"; \n"
 "color: rgb(87, 227, 137);")
         self.label_message.setAlignment(Qt.AlignCenter)
 
-        self.verticalLayout_16.addWidget(self.label_message)
+        self.horizontalLayout_11.addWidget(self.label_message)
 
-        self.widget_8 = QWidget(self.widget_9)
-        self.widget_8.setObjectName(u"widget_8")
-        self.widget_8.setStyleSheet(u"#btn_review {\n"
-"	border-image: url(:/Images/Images/button_wood_skyblue.png);\n"
-"	color: #FFF;\n"
-"	font: 14pt \"Biscuit Glitch\";\n"
-"	padding: 0px 20px;\n"
-"}\n"
-"\n"
-"#btn_review:hover {\n"
-"	border-image: url(:/Images/Images/button_wood_skyblue_glow.png);\n"
-"}\n"
-"\n"
-"#btn_review:pressed {\n"
-"	border-image: url(:/Images/Images/button_wood_skyblue.png);\n"
-"}\n"
-"\n"
-"#btn_retake {\n"
+        self.horizontalSpacer_8 = QSpacerItem(456, 75, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_11.addItem(self.horizontalSpacer_8)
+
+        self.btn_retake = QPushButton(self.widget_12)
+        self.btn_retake.setObjectName(u"btn_retake")
+        self.btn_retake.setMinimumSize(QSize(170, 50))
+        self.btn_retake.setMaximumSize(QSize(16777215, 50))
+        self.btn_retake.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.btn_retake.setStyleSheet(u"#btn_retake {\n"
 "	border-image: url(:/Images/Images/button_wood_yellowgreen.png);\n"
 "	color: #FFF;\n"
 "	font: 14pt \"Biscuit Glitch\";\n"
@@ -907,43 +901,134 @@ class Ui_FormHome(object):
 "#btn_retake:pressed {\n"
 "	border-image: url(:/Images/Images/button_wood_yellowgreen.png);\n"
 "}")
-        self.horizontalLayout_9 = QHBoxLayout(self.widget_8)
-        self.horizontalLayout_9.setObjectName(u"horizontalLayout_9")
+
+        self.horizontalLayout_11.addWidget(self.btn_retake)
+
+
+        self.verticalLayout_16.addWidget(self.widget_12)
+
+        self.widget_10 = QWidget(self.widget_11)
+        self.widget_10.setObjectName(u"widget_10")
+        self.horizontalLayout_10 = QHBoxLayout(self.widget_10)
+        self.horizontalLayout_10.setObjectName(u"horizontalLayout_10")
+        self.horizontalLayout_10.setContentsMargins(0, 0, 0, 0)
+        self.label_score = QLabel(self.widget_10)
+        self.label_score.setObjectName(u"label_score")
+        self.label_score.setStyleSheet(u"font: 25pt \"Biscuit Glitch\"; color: rgb(249, 240, 107);")
+        self.label_score.setAlignment(Qt.AlignCenter)
+
+        self.horizontalLayout_10.addWidget(self.label_score)
+
+        self.label_message_2 = QLabel(self.widget_10)
+        self.label_message_2.setObjectName(u"label_message_2")
+        self.label_message_2.setStyleSheet(u"font: 25pt \"Biscuit Glitch\"; color: #FFF;")
+        self.label_message_2.setAlignment(Qt.AlignCenter)
+
+        self.horizontalLayout_10.addWidget(self.label_message_2)
+
         self.horizontalSpacer_7 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
-        self.horizontalLayout_9.addItem(self.horizontalSpacer_7)
-
-        self.btn_review = QPushButton(self.widget_8)
-        self.btn_review.setObjectName(u"btn_review")
-        self.btn_review.setMinimumSize(QSize(197, 50))
-        self.btn_review.setMaximumSize(QSize(16777215, 50))
-        self.btn_review.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-
-        self.horizontalLayout_9.addWidget(self.btn_review)
-
-        self.btn_retake = QPushButton(self.widget_8)
-        self.btn_retake.setObjectName(u"btn_retake")
-        self.btn_retake.setMinimumSize(QSize(197, 50))
-        self.btn_retake.setMaximumSize(QSize(16777215, 50))
-        self.btn_retake.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-
-        self.horizontalLayout_9.addWidget(self.btn_retake)
-
-        self.horizontalSpacer_8 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.horizontalLayout_9.addItem(self.horizontalSpacer_8)
+        self.horizontalLayout_10.addItem(self.horizontalSpacer_7)
 
 
-        self.verticalLayout_16.addWidget(self.widget_8)
+        self.verticalLayout_16.addWidget(self.widget_10)
 
-        self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
-        self.verticalLayout_16.addItem(self.verticalSpacer_2)
+        self.verticalLayout_18.addWidget(self.widget_11)
+
+        self.scrollArea_quiz_answer = QScrollArea(self.widget_9)
+        self.scrollArea_quiz_answer.setObjectName(u"scrollArea_quiz_answer")
+        self.scrollArea_quiz_answer.setStyleSheet(u"/* 1. THE MAIN CONTAINER */\n"
+"QScrollArea { \n"
+"    border: none;\n"
+"    border-radius: 20px; \n"
+"    background-color: transparent;\n"
+"}\n"
+"\n"
+"/* 2. THE VIEWPORT (Crucial for transparency/backgrounds) */\n"
+"QScrollArea QWidget #qt_scrollarea_viewport {\n"
+"    background: transparent;\n"
+"    border-radius: 20px;\n"
+"}\n"
+"\n"
+"/* 3. VERTICAL SCROLLBAR */\n"
+"QScrollBar:vertical {\n"
+"    border: none;\n"
+"    background: #ffffff;\n"
+"    width: 10px;\n"
+"    margin: 0px;\n"
+"    border-radius: 5px;\n"
+"}\n"
+"\n"
+"QScrollBar::handle:vertical {\n"
+"    background: #7a7a7a;\n"
+"    min-height: 20px;\n"
+"    border-radius: 5px;\n"
+"}\n"
+"\n"
+"QScrollBar::handle:vertical:hover {\n"
+"    background: #9a4076;\n"
+"}\n"
+"\n"
+"/* 4. HORIZONTAL SCROLLBAR */\n"
+"QScrollBar:horizontal {\n"
+"    border: none;\n"
+"    background: #ffffff;\n"
+"    height: 10px; /* Note: height, not width */\n"
+"    margin: 0px;\n"
+"    border-radius: 5px;\n"
+"}\n"
+"\n"
+"QScrollBar::handle:horizontal {\n"
+"    background: #7a7a7a;\n"
+""
+                        "    min-width: 20px;\n"
+"    border-radius: 5px;\n"
+"}\n"
+"\n"
+"QScrollBar::handle:horizontal:hover {\n"
+"    background: #574939;\n"
+"}\n"
+"\n"
+"/* 5. REMOVE BUTTONS & TRACK BACKGROUNDS */\n"
+"/* This handles both horizontal and vertical arrows/tracks */\n"
+"QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical,\n"
+"QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {\n"
+"    border: none;\n"
+"    background: none;\n"
+"    width: 0px;\n"
+"    height: 0px;\n"
+"}\n"
+"\n"
+"QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical,\n"
+"QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {\n"
+"    background: none;\n"
+"}\n"
+"\n"
+"/* 6. THE CORNER WIDGET \n"
+"   (The small square where both bars meet) */\n"
+"QScrollArea QWidget #qt_scrollarea_corner {\n"
+"    background: transparent;\n"
+"    border: none;\n"
+"}")
+        self.scrollArea_quiz_answer.setWidgetResizable(True)
+        self.scrollAreaWidgetContents_5 = QWidget()
+        self.scrollAreaWidgetContents_5.setObjectName(u"scrollAreaWidgetContents_5")
+        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 100, 30))
+        self.gridLayout_2 = QGridLayout(self.scrollAreaWidgetContents_5)
+        self.gridLayout_2.setObjectName(u"gridLayout_2")
+        self.scrollArea_quiz_answer.setWidget(self.scrollAreaWidgetContents_5)
+
+        self.verticalLayout_18.addWidget(self.scrollArea_quiz_answer)
 
 
         self.verticalLayout_17.addWidget(self.widget_9)
 
         self.stackedWidget.addWidget(self.page_quiz_results)
+        self.page_review_quiz = QWidget()
+        self.page_review_quiz.setObjectName(u"page_review_quiz")
+        self.page_review_quiz.setStyleSheet(u"background: transparent;")
+        self.stackedWidget.addWidget(self.page_review_quiz)
         self.pageExercise = QWidget()
         self.pageExercise.setObjectName(u"pageExercise")
         self.pageExercise.setStyleSheet(u"background: transparent;")
@@ -1097,10 +1182,10 @@ class Ui_FormHome(object):
         self.label_lastname_3.setText(QCoreApplication.translate("FormHome", u"Multiple Choice", None))
         self.label_lastname_4.setText(QCoreApplication.translate("FormHome", u"True or False", None))
         self.btnSubmitQuiz.setText(QCoreApplication.translate("FormHome", u"Submit", None))
-        self.label_score.setText(QCoreApplication.translate("FormHome", u"0/0", None))
-        self.label_message.setText(QCoreApplication.translate("FormHome", u"You have completed this quiz.", None))
-        self.btn_review.setText(QCoreApplication.translate("FormHome", u"See your answers", None))
+        self.label_message.setText(QCoreApplication.translate("FormHome", u"QUIZ COMPLETED!", None))
         self.btn_retake.setText(QCoreApplication.translate("FormHome", u"Try again", None))
+        self.label_score.setText(QCoreApplication.translate("FormHome", u"0/0", None))
+        self.label_message_2.setText(QCoreApplication.translate("FormHome", u"questions correct", None))
         self.btnColors.setText("")
         self.btnAddition.setText("")
         self.btnMultiplication.setText("")

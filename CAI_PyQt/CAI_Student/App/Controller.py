@@ -10,6 +10,7 @@ from App.Student import Student
 from App.Tools import Utility, WindowHandler, CustomShapeDialog
 from App.CRUDTools import DatabaseTools
 from App.Lessons import Lessons, LessonCard
+from App.Quiz import Quiz, QuizUtils
 
 
 # Notice: Controller no longer inherits from QObject
@@ -160,9 +161,9 @@ class Controller:
         self.nav_map = {
             self.ui.btnLessons: 0,
             self.ui.btnQuiz: 1,
-            self.ui.btnExercise: 3,
-            self.ui.btnScores: 4,
-            self.ui.btnGames: 5,
+            self.ui.btnExercise: 4,
+            self.ui.btnScores: 5,
+            self.ui.btnGames: 6
         }
 
         for btn, idx in self.nav_map.items():
@@ -174,8 +175,7 @@ class Controller:
         self.ui.btnLessons.setChecked(True)
 
         self.ui.btnLessons.clicked.connect(self.display_lessons)
-        self.ui.btnQuiz.clicked.connect(self.displayQuiz)
-        self.ui.btn_retake.clicked.connect(lambda: self.slide_to_page(1))
+        self.ui.btn_retake.clicked.connect(lambda: self.slide_to_page(101))
         self.ui.btnSubmitQuiz.clicked.connect(self.save_quiz_answers)
         self.ui.btnQuit.clicked.connect(self.logout)
         self.ui.btnAddition.clicked.connect(self.open_game)
@@ -195,8 +195,13 @@ class Controller:
         sid = self.settings.value("studentid")
         isTaken, record = Student().get_quiz_status(sid)
 
-        if isTaken and index == 1:
-            index = 2
+        # Take Quiz
+        if index == 1:
+            if isTaken:
+                index = 2
+                self.displayQuizAnswers()
+            else:
+                self.displayQuiz()
 
         self.ui.label_score.setText(f"{record['quizscore']}/{record['totalscore']}")
         
@@ -207,6 +212,10 @@ class Controller:
         stack = self.ui.stackedWidget
         if stack.currentIndex() == index:
             return
+
+        if index == 101:
+            index = 1 # Back to [Take Quiz]
+            self.displayQuiz()
 
         current_page = stack.currentWidget()
         next_page = stack.widget(index)
@@ -336,7 +345,6 @@ class Controller:
         layout.addStretch()
 
     def displayQuiz(self):
-        from App.Quiz import Quiz, QuizUtils
         qUtils = QuizUtils(self.GRADING_PERIOD)
         self.quiz_cards = []
 
@@ -411,6 +419,50 @@ class Controller:
 
             itemCnt += 1
 
+    def displayQuizAnswers(self):
+        qUtils = QuizUtils(self.GRADING_PERIOD)
+        self.quiz_cards = []
+
+        layout = self.ui.gridLayout_2
+        layout.setAlignment(Qt.AlignmentFlag.AlignTop)
+        layout.setSpacing(5)
+
+        while layout.count():
+            item_to_remove = layout.takeAt(0)
+            widget = item_to_remove.widget()
+            if widget is not None:
+                widget.deleteLater()
+
+        student_id = self.settings.value("studentid")
+        record = qUtils.retrieve_quiz_answer(student_id)
+        itemCnt = 1
+        NUM_COLUMNS = 3
+
+        for row in record:
+            quiz = Quiz("RV")
+            quiz.idKey = row.get("idkey")
+            quiz.quiznumber = row.get("quiznumber")
+            quiz.gradingperiod = row.get("gradingperiod")
+            quiz.lessonid = row.get("lessonid")
+            quiz.itemno = row.get("itemno", "")
+            quiz.itemnoCnt = itemCnt
+            quiz.question = row.get("question", "")
+            quiz.user_answer = row.get("user_answer", "")
+            quiz.correct_answer = row.get("correct_answer", "")
+            quiz.remarks = row.get("remarks", "")
+            quiz.imageQ = row.get("imagequestion", None)
+            quiz.displayAttributes()
+            self.quiz_cards.append(quiz)
+            layout.addWidget(quiz)
+
+            index = itemCnt - 1
+            grid_row = index // NUM_COLUMNS
+            grid_col = index % NUM_COLUMNS
+
+            layout.addWidget(quiz, grid_row, grid_col)
+
+            itemCnt += 1
+
     def save_quiz_answers(self):
         if not hasattr(self, 'quiz_cards') or not self.quiz_cards:
             return
@@ -424,6 +476,11 @@ class Controller:
         if success == 1: # Success, customized message for student
             dialog = CustomShapeDialog("Good Job !!!", parent=self.home_win)
             dialog.exec()
+
+            sid = self.settings.value("studentid")
+            _, record = Student().get_quiz_status(sid)
+            self.ui.label_score.setText(f"{record['quizscore']}/{record['totalscore']}")
+            self.slide_to_page(2)
 
         elif success == 2: # Failed, customized message for student
             dialog = CustomShapeDialog(message, parent=self.home_win, type=3)

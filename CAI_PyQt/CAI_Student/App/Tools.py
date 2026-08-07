@@ -149,14 +149,12 @@ class Utility:
                 pulldown.addItem(item, idx)
 
     def isEmpty(self, val):
-        # 1. Handle None or empty objects immediately
+        """Evaluate if val is NONE, NULL, 'N/A', or empty string."""
         if val is None or not str(val).strip():
             return True
 
-        # 2. Convert to string and clean it
         clean_val = str(val).strip().upper()
 
-        # 3. Check against forbidden keywords
         if clean_val in ['NONE', 'NULL', 'N/A', '']:
             return True
 

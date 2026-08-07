@@ -502,10 +502,12 @@ class Ui_FormLogin(object):
 
         self.widget_7 = QWidget(self.widget_6)
         self.widget_7.setObjectName(u"widget_7")
-        self.horizontalLayout_9 = QHBoxLayout(self.widget_7)
-        self.horizontalLayout_9.setObjectName(u"horizontalLayout_9")
+        self.widget_7.setMinimumSize(QSize(240, 240))
+        self.widget_7.setMaximumSize(QSize(240, 16777215))
+        self.widget_7.setStyleSheet(u"")
         self.label_profile_pic = QLabel(self.widget_7)
         self.label_profile_pic.setObjectName(u"label_profile_pic")
+        self.label_profile_pic.setGeometry(QRect(47, 46, 150, 150))
         self.label_profile_pic.setMinimumSize(QSize(150, 150))
         self.label_profile_pic.setMaximumSize(QSize(150, 150))
         self.label_profile_pic.setFont(font3)
@@ -513,9 +515,14 @@ class Ui_FormLogin(object):
         self.label_profile_pic.setTextFormat(Qt.PlainText)
         self.label_profile_pic.setScaledContents(True)
         self.label_profile_pic.setAlignment(Qt.AlignCenter)
-
-        self.horizontalLayout_9.addWidget(self.label_profile_pic)
-
+        self.label_profile_pic_frame = QLabel(self.widget_7)
+        self.label_profile_pic_frame.setObjectName(u"label_profile_pic_frame")
+        self.label_profile_pic_frame.setGeometry(QRect(10, 10, 221, 221))
+        self.label_profile_pic_frame.setFont(font3)
+        self.label_profile_pic_frame.setStyleSheet(u"border-image: url(:/Images/Images/frame.png);")
+        self.label_profile_pic_frame.setTextFormat(Qt.PlainText)
+        self.label_profile_pic_frame.setScaledContents(True)
+        self.label_profile_pic_frame.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout_8.addWidget(self.widget_7)
 
@@ -722,6 +729,7 @@ class Ui_FormLogin(object):
         self.label_26.setText(QCoreApplication.translate("FormLogin", u"Select your name", None))
         self.btnBack.setText(QCoreApplication.translate("FormLogin", u"Back", None))
         self.label_profile_pic.setText("")
+        self.label_profile_pic_frame.setText("")
         self.labelFullName.setText(QCoreApplication.translate("FormLogin", u"Juan De La Cruz", None))
         self.label_4.setText(QCoreApplication.translate("FormLogin", u"3", None))
         self.label_27.setText(QCoreApplication.translate("FormLogin", u"What's your password?", None))

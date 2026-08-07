@@ -4,7 +4,7 @@ from App.CRUDTools import DatabaseTools
 
 from psycopg2.extras import execute_values
 
-from PySide6.QtWidgets import (QFrame, QLineEdit, QRadioButton, QButtonGroup, QMessageBox)
+from PySide6.QtWidgets import (QFrame, QLineEdit, QRadioButton, QButtonGroup, QLabel, QHBoxLayout, QSizePolicy, QSpacerItem)
 from PySide6.QtGui import (QImage, QPixmap, QCursor)
 from PySide6.QtCore import (Qt, QSize)
 
@@ -16,21 +16,23 @@ class Quiz(QFrame, Ui_CardQuiz):
         self.db_tools = DatabaseTools()
         self.util = Utility()
 
-        self.quiz_type     = quiz_type
-        self.idKey         = None
-        self.quiznumber    = None
-        self.gradingperiod = None
-        self.lessonid      = None
-        self.itemno        = ""
-        self.itemnoCnt     = 0
-        self.question      = ""
-        self.imageQ        = None
+        self.quiz_type      = quiz_type
+        self.idKey          = None
+        self.quiznumber     = None
+        self.gradingperiod  = None
+        self.lessonid       = None
+        self.itemno         = ""
+        self.itemnoCnt      = 0
+        self.question       = ""
+        self.imageQ         = None
 
-        self.choice_a = ""
-        self.choice_b = ""
-        self.choice_c = ""
+        self.choice_a       = ""
+        self.choice_b       = ""
+        self.choice_c       = ""
 
+        self.user_answer    = ""
         self.correct_answer = ""
+        self.remarks        = ""
 
         self.input_css = """
             /* Styling the input field */
@@ -70,7 +72,7 @@ class Quiz(QFrame, Ui_CardQuiz):
             self.ans_input.setStyleSheet(self.input_css)
             self.verticalLayout_2.addWidget(self.ans_input)
 
-        else:
+        elif self.quiz_type in ["MC", "TF"]:
             self.button_group = QButtonGroup(self)
             labels = [self.choice_a, self.choice_b, self.choice_c] if self.quiz_type == "MC" else ["True", "False"]
 
@@ -83,6 +85,38 @@ class Quiz(QFrame, Ui_CardQuiz):
                 self.button_group.addButton(radio, i) # Assign an ID (0, 1, 2)
                 self.verticalLayout_2.addWidget(radio)
                 self.opts.append(radio)
+
+        else:
+            layout_ans_1 = QHBoxLayout()
+            layout_ans_2 = QHBoxLayout()
+
+            lbl_1 = QLabel("Your Answer:")
+            lbl_2 = QLabel("Correct Answer:")
+
+            self.lable_user_ans = QLabel(self.user_answer)
+            self.lable_correct_ans = QLabel(self.correct_answer)
+
+            bg_color = "#C4E8C9"
+
+            if self.remarks == "Incorrect":
+                bg_color = "#F0C2C6"
+
+            qss = f'background-color: {bg_color}; min-height: 30px; border-radius: 10px; padding: 0px 10px; font: 11pt "Inter Medium";'
+            lbl_1.setStyleSheet('font: 11pt "Inter Medium"')
+            lbl_2.setStyleSheet('font: 11pt "Inter Medium"')
+            self.lable_user_ans.setStyleSheet(qss)
+            self.lable_correct_ans.setStyleSheet(qss)
+
+            layout_ans_1.addWidget(lbl_1)
+            layout_ans_1.addWidget(self.lable_user_ans)
+            layout_ans_1.addItem(QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum))
+
+            layout_ans_2.addWidget(lbl_2)
+            layout_ans_2.addWidget(self.lable_correct_ans)
+            layout_ans_2.addItem(QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum))
+
+            self.verticalLayout_2.addLayout(layout_ans_1)
+            self.verticalLayout_2.addLayout(layout_ans_2)
 
     def get_answer(self):
         """Returns the current input value of the card."""
@@ -221,6 +255,115 @@ class QuizUtils:
                     record_tf = record
 
         return record_id, record_mc, record_tf
+
+    def retrieve_quiz_answer(self, studentid:str):
+        """
+            Retrieves quizzes from database (Identification, Multiple Choice, True or False)
+
+            Args:
+                studentid (str): Student Id
+
+            Returns:
+                record (list[RealDictCursor]): list of dict for QScrollArea
+
+            Raises:
+                N/A
+        """
+
+        record = []
+
+        if self.util.isEmpty(self.quiznumber) or not self.gradingperiod or self.util.isEmpty(self.lessonid):
+            print("ℹ️ No available quiz.")
+            return record
+
+        query = """
+            SELECT
+                'ID' AS QUIZTYPE,
+                Q.IDKEY AS ASSMT_KEY,
+                Q.QUIZNUMBER,
+                Q.GRADINGPERIOD,
+                Q.LESSONID,
+                Q.ITEMNO,
+                Q.QUESTION,
+                Q.IMAGEQUESTION,
+                Q.CORRECT_ANSWER,
+                COALESCE(ANS.ANSWER, '') AS USER_ANSWER,
+                ANS.REMARKS
+            FROM
+                CAI.TBL_QUIZIDENTIFICATION Q
+            LEFT JOIN 
+                CAI.TBL_ANSWERS ANS ON Q.IDKEY = ANS.ASSMT_KEY 
+                AND ANS.QUIZTYPE = 'ID'
+                AND ANS.STUDENTID = %s
+            WHERE
+                Q.QUIZNUMBER = %s
+                AND Q.GRADINGPERIOD = %s
+                AND Q.LESSONID = %s
+
+            UNION ALL
+
+            SELECT
+                'MC' AS QUIZTYPE,
+                Q.MCKEY AS ASSMT_KEY,
+                Q.QUIZNUMBER,
+                Q.GRADINGPERIOD,
+                Q.LESSONID,
+                Q.ITEMNO,
+                Q.QUESTION,
+                Q.IMAGEQUESTION,
+                Q.CORRECT_ANSWER,
+                COALESCE(ANS.ANSWER, '') AS USER_ANSWER,
+                ANS.REMARKS
+            FROM
+                CAI.TBL_QUIZMULTIPLECHOICE Q
+            LEFT JOIN 
+                CAI.TBL_ANSWERS ANS ON Q.MCKEY = ANS.ASSMT_KEY 
+                AND ANS.QUIZTYPE = 'MC'
+                AND ANS.STUDENTID = %s
+            WHERE
+                Q.QUIZNUMBER = %s
+                AND Q.GRADINGPERIOD = %s
+                AND Q.LESSONID = %s
+
+            UNION ALL
+
+            SELECT
+                'TF' AS QUIZTYPE,
+                Q.TFKEY AS ASSMT_KEY,
+                Q.QUIZNUMBER,
+                Q.GRADINGPERIOD,
+                Q.LESSONID,
+                Q.ITEMNO,
+                Q.QUESTION,
+                Q.IMAGEQUESTION,
+                Q.CORRECT_ANSWER,
+                COALESCE(ANS.ANSWER, '') AS USER_ANSWER,
+                ANS.REMARKS
+            FROM
+                CAI.TBL_QUIZTRUEORFALSE Q
+            LEFT JOIN 
+                CAI.TBL_ANSWERS ANS ON Q.TFKEY = ANS.ASSMT_KEY 
+                AND ANS.QUIZTYPE = 'TF'
+                AND ANS.STUDENTID = %s
+            WHERE
+                Q.QUIZNUMBER = %s
+                AND Q.GRADINGPERIOD = %s
+                AND Q.LESSONID = %s
+
+            ORDER BY ITEMNO;
+        """
+
+        result = self.db_tools.fetch_all(query, (
+                studentid, self.quiznumber, self.gradingperiod, self.lessonid,
+                studentid, self.quiznumber, self.gradingperiod, self.lessonid,
+                studentid, self.quiznumber, self.gradingperiod, self.lessonid
+            )
+        )
+
+        if result:
+            record = result
+
+        return record
 
     def save_quiz(self, student_id, quiz_cards):
         if not quiz_cards:

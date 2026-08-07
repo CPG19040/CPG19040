@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="Images">
+    <file>Images/slab2.png</file>
+    <file>Images/frame.png</file>
     <file>Images/Addition.png</file>
     <file>Images/backbtn.png</file>
     <file>Images/backbtnGlow.png</file>
