@@ -61,7 +61,7 @@ class MyScores:
 class CardScores(QWidget):
     clicked = Signal(object, int)
 
-    def __init__(self, quiznumber, lesson_id, lesson_name, score_str):
+    def __init__(self, quiznumber, lesson_id, lesson_name, score_str, percent_val, percentage_str):
         super().__init__()
         self.ui = Ui_CardScores()
         self.ui.setupUi(self)
@@ -74,6 +74,8 @@ class CardScores(QWidget):
         self.ui.label_LessonName.setText(lesson_name)
         self.ui.label_quiznum.setText(str(quiznumber))
         self.ui.label_score.setText(str(score_str))
+        self.ui.progressBar_score.setValue(percent_val)
+        self.ui.label_percentage.setText(f"Percentage: {percentage_str}")
 
     def mousePressEvent(self, event):
         # When the user clicks the card, emit the signal

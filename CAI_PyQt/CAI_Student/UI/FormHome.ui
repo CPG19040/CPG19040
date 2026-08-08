@@ -486,7 +486,7 @@ border-radius: 105px;</string>
                    <string>Phineas</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                   <set>Qt::AlignCenter</set>
                   </property>
                   <property name="wordWrap">
                    <bool>true</bool>
@@ -522,6 +522,9 @@ border-radius: 105px;</string>
                   <property name="text">
                    <string>Flynn</string>
                   </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
                   <property name="wordWrap">
                    <bool>true</bool>
                   </property>
@@ -553,6 +556,9 @@ border-radius: 105px;</string>
                   <property name="text">
                    <string>2026-0001-STU</string>
                   </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
                   <property name="indent">
                    <number>10</number>
                   </property>
@@ -577,6 +583,9 @@ border-radius: 105px;</string>
                   </property>
                   <property name="text">
                    <string>Honesty</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
                   </property>
                   <property name="indent">
                    <number>10</number>
@@ -1798,8 +1807,8 @@ QScrollArea QWidget #qt_scrollarea_corner {
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>1038</width>
-                      <height>486</height>
+                      <width>100</width>
+                      <height>30</height>
                      </rect>
                     </property>
                     <layout class="QGridLayout" name="gridLayout_2"/>
@@ -1924,8 +1933,8 @@ QScrollArea QWidget #qt_scrollarea_corner {
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>1038</width>
-                   <height>637</height>
+                   <width>100</width>
+                   <height>30</height>
                   </rect>
                  </property>
                  <layout class="QGridLayout" name="gridLayout_3"/>

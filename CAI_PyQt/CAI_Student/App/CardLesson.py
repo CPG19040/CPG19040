@@ -75,7 +75,7 @@ class Ui_CardLesson(object):
         self.label_LessonNumber.setMinimumSize(QSize(90, 50))
         self.label_LessonNumber.setMaximumSize(QSize(100, 50))
         self.label_LessonNumber.setLayoutDirection(Qt.LeftToRight)
-        self.label_LessonNumber.setStyleSheet(u"font: 20pt \"Kissy Hugs\"; color: rgb(255, 255, 255); border-image: url(:/Images/Images/button_wood.png);")
+        self.label_LessonNumber.setStyleSheet(u"font: 20pt \"Kissy Hugs\"; color: rgb(255, 255, 255); border-image: url(:/Images/Images/wood_round.png);")
         self.label_LessonNumber.setScaledContents(True)
         self.label_LessonNumber.setAlignment(Qt.AlignCenter)
 
@@ -83,10 +83,12 @@ class Ui_CardLesson(object):
 
         self.label_LessonName = QLabel(self.widget_3)
         self.label_LessonName.setObjectName(u"label_LessonName")
-        self.label_LessonName.setMinimumSize(QSize(0, 26))
-        self.label_LessonName.setMaximumSize(QSize(16777215, 26))
+        self.label_LessonName.setMinimumSize(QSize(0, 50))
+        self.label_LessonName.setMaximumSize(QSize(16777215, 50))
         self.label_LessonName.setLayoutDirection(Qt.LeftToRight)
-        self.label_LessonName.setStyleSheet(u"font: 63 14pt \"Inter Medium\"; color: rgb(99, 69, 44);")
+        self.label_LessonName.setStyleSheet(u"font: 20pt \"Biscuit Glitch\";\n"
+"color: rgb(53, 132, 228);\n"
+"padding: 0px 10px;")
         self.label_LessonName.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
 
         self.horizontalLayout_2.addWidget(self.label_LessonName)

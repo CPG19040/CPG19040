@@ -495,6 +495,7 @@ class Controller:
             sum_score      = 0.0
             score_str      = f"{quizscore}/{total_score}" if quizscore is not None and total_score else ""
             percentage_str = ""
+            percent_val    = 0.0
 
             # Validate score bounds and avoid DivisionByZero
             if total_score > 0 and quizscore is not None and 0 <= quizscore <= total_score:
@@ -508,7 +509,7 @@ class Controller:
             if row_count > 0:
                 average = sum_score / row_count
 
-            card = CardScores(quiznumber, lesson_id, title, score_str)
+            card = CardScores(quiznumber, lesson_id, title, score_str, percent_val, percentage_str)
             card.clicked.connect(self.handle_lesson_selection)
 
             index = itemCnt - 1
