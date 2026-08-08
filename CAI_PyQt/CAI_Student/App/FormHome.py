@@ -432,7 +432,7 @@ class Ui_FormHome(object):
 "}\n"
 "\n"
 "QScrollBar::handle:horizontal:hover {\n"
-"    background: #574939;\n"
+"    background: #9a4076;\n"
 "}\n"
 "\n"
 "/* 5. REMOVE BUTTONS & TRACK BACKGROUNDS */\n"
@@ -558,7 +558,7 @@ class Ui_FormHome(object):
 "}\n"
 "\n"
 "QScrollBar::handle:horizontal:hover {\n"
-"    background: #574939;\n"
+"    background: #9a4076;\n"
 "}\n"
 "\n"
 "/* 5. REMOVE BUTTONS & TRACK BACKGROUNDS */\n"
@@ -585,7 +585,7 @@ class Ui_FormHome(object):
         self.scrollArea_id.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 100, 30))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 333, 516))
         self.verticalLayout_7 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_7.setObjectName(u"verticalLayout_7")
         self.scrollArea_id.setWidget(self.scrollAreaWidgetContents)
@@ -673,7 +673,7 @@ class Ui_FormHome(object):
 "}\n"
 "\n"
 "QScrollBar::handle:horizontal:hover {\n"
-"    background: #574939;\n"
+"    background: #9a4076;\n"
 "}\n"
 "\n"
 "/* 5. REMOVE BUTTONS & TRACK BACKGROUNDS */\n"
@@ -700,7 +700,7 @@ class Ui_FormHome(object):
         self.scrollArea_mc.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 100, 30))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 334, 516))
         self.verticalLayout_8 = QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_8.setObjectName(u"verticalLayout_8")
         self.scrollArea_mc.setWidget(self.scrollAreaWidgetContents_2)
@@ -788,7 +788,7 @@ class Ui_FormHome(object):
 "}\n"
 "\n"
 "QScrollBar::handle:horizontal:hover {\n"
-"    background: #574939;\n"
+"    background: #9a4076;\n"
 "}\n"
 "\n"
 "/* 5. REMOVE BUTTONS & TRACK BACKGROUNDS */\n"
@@ -815,7 +815,7 @@ class Ui_FormHome(object):
         self.scrollArea_tf.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 100, 30))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 333, 516))
         self.verticalLayout_9 = QVBoxLayout(self.scrollAreaWidgetContents_3)
         self.verticalLayout_9.setObjectName(u"verticalLayout_9")
         self.scrollArea_tf.setWidget(self.scrollAreaWidgetContents_3)
@@ -1017,7 +1017,7 @@ class Ui_FormHome(object):
         self.scrollArea_quiz_answer.setWidgetResizable(True)
         self.scrollAreaWidgetContents_5 = QWidget()
         self.scrollAreaWidgetContents_5.setObjectName(u"scrollAreaWidgetContents_5")
-        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 100, 30))
+        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 1038, 486))
         self.gridLayout_2 = QGridLayout(self.scrollAreaWidgetContents_5)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
         self.scrollArea_quiz_answer.setWidget(self.scrollAreaWidgetContents_5)
@@ -1093,7 +1093,7 @@ class Ui_FormHome(object):
 "}\n"
 "\n"
 "QScrollBar::handle:horizontal:hover {\n"
-"    background: #574939;\n"
+"    background: #9a4076;\n"
 "}\n"
 "\n"
 "/* 5. REMOVE BUTTONS & TRACK BACKGROUNDS */\n"
@@ -1120,7 +1120,7 @@ class Ui_FormHome(object):
         self.scrollArea_scores.setWidgetResizable(True)
         self.layout_scores = QWidget()
         self.layout_scores.setObjectName(u"layout_scores")
-        self.layout_scores.setGeometry(QRect(0, 0, 100, 30))
+        self.layout_scores.setGeometry(QRect(0, 0, 1038, 637))
         self.gridLayout_3 = QGridLayout(self.layout_scores)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
         self.scrollArea_scores.setWidget(self.layout_scores)

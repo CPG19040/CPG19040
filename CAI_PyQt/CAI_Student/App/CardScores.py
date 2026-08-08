@@ -112,7 +112,7 @@ class Ui_CardScores(object):
         self.label_LessonName.setObjectName(u"label_LessonName")
         self.label_LessonName.setMinimumSize(QSize(0, 26))
         self.label_LessonName.setLayoutDirection(Qt.LeftToRight)
-        self.label_LessonName.setStyleSheet(u"font: 14pt \"Inter Medium\"; color: rgb(99, 69, 44);")
+        self.label_LessonName.setStyleSheet(u"font: 14pt \"Inter Medium\"; color: rgb(99, 69, 44); padding: 0px 10px;")
         self.label_LessonName.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.label_LessonName.setWordWrap(False)
 
@@ -135,8 +135,7 @@ class Ui_CardScores(object):
 
         self.label_score = QLabel(self.widget_4)
         self.label_score.setObjectName(u"label_score")
-        self.label_score.setMinimumSize(QSize(0, 26))
-        self.label_score.setMaximumSize(QSize(16777215, 26))
+        self.label_score.setMaximumSize(QSize(16777215, 40))
         self.label_score.setLayoutDirection(Qt.LeftToRight)
         self.label_score.setStyleSheet(u"font: 22pt \"Biscuit Glitch\"; color: rgb(230, 97, 0);")
         self.label_score.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
@@ -154,12 +153,12 @@ class Ui_CardScores(object):
 "}")
         self.horizontalLayout_4 = QHBoxLayout(self.widget_progress)
         self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
-        self.horizontalLayout_4.setContentsMargins(18, 12, 18, 12)
+        self.horizontalLayout_4.setContentsMargins(24, 13, 24, 13)
         self.progressBar_score = QProgressBar(self.widget_progress)
         self.progressBar_score.setObjectName(u"progressBar_score")
         self.progressBar_score.setStyleSheet(u"QProgressBar {\n"
 "	border-radius: 10px;\n"
-"	background-color: white;\n"
+"	background-color: #5f2845;\n"
 "}\n"
 "\n"
 "QProgressBar::chunk {\n"
@@ -186,7 +185,22 @@ class Ui_CardScores(object):
 
         self.verticalLayout.addWidget(self.widget_4)
 
-        self.label_percentage = QLabel(self.widget)
+        self.widget_3 = QWidget(self.widget)
+        self.widget_3.setObjectName(u"widget_3")
+        self.horizontalLayout_5 = QHBoxLayout(self.widget_3)
+        self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
+        self.horizontalLayout_5.setContentsMargins(0, 0, 0, 0)
+        self.label_4 = QLabel(self.widget_3)
+        self.label_4.setObjectName(u"label_4")
+        self.label_4.setMinimumSize(QSize(0, 26))
+        self.label_4.setMaximumSize(QSize(16777215, 26))
+        self.label_4.setLayoutDirection(Qt.LeftToRight)
+        self.label_4.setStyleSheet(u"font: 12pt \"Inter Medium\"; color: rgb(99, 69, 44);")
+        self.label_4.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+
+        self.horizontalLayout_5.addWidget(self.label_4)
+
+        self.label_percentage = QLabel(self.widget_3)
         self.label_percentage.setObjectName(u"label_percentage")
         self.label_percentage.setMinimumSize(QSize(0, 26))
         self.label_percentage.setLayoutDirection(Qt.LeftToRight)
@@ -194,7 +208,14 @@ class Ui_CardScores(object):
         self.label_percentage.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.label_percentage.setWordWrap(False)
 
-        self.verticalLayout.addWidget(self.label_percentage)
+        self.horizontalLayout_5.addWidget(self.label_percentage)
+
+        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_5.addItem(self.horizontalSpacer_2)
+
+
+        self.verticalLayout.addWidget(self.widget_3)
 
 
         self.horizontalLayout_3.addWidget(self.widget)
@@ -216,6 +237,7 @@ class Ui_CardScores(object):
         self.label_LessonName.setText(QCoreApplication.translate("CardScores", u"Lesson Name", None))
         self.label_2.setText(QCoreApplication.translate("CardScores", u"Score:", None))
         self.label_score.setText(QCoreApplication.translate("CardScores", u"0/0", None))
-        self.label_percentage.setText(QCoreApplication.translate("CardScores", u"Percentage: 0.0%", None))
+        self.label_4.setText(QCoreApplication.translate("CardScores", u"Percentage:", None))
+        self.label_percentage.setText(QCoreApplication.translate("CardScores", u"0.0%", None))
     # retranslateUi
 

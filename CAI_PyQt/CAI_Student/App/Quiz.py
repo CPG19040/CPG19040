@@ -62,6 +62,9 @@ class Quiz(QFrame, Ui_CardQuiz):
                 pixmap = QPixmap.fromImage(image)
                 self.label_q_image.setPixmap(pixmap)
 
+        else:
+            self.label_q_image.setVisible(False)
+
         self.init_answers()
 
     def init_answers(self):

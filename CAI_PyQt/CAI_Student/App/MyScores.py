@@ -75,7 +75,7 @@ class CardScores(QWidget):
         self.ui.label_quiznum.setText(str(quiznumber))
         self.ui.label_score.setText(str(score_str))
         self.ui.progressBar_score.setValue(percent_val)
-        self.ui.label_percentage.setText(f"Percentage: {percentage_str}")
+        self.ui.label_percentage.setText(percentage_str)
 
     def mousePressEvent(self, event):
         # When the user clicks the card, emit the signal

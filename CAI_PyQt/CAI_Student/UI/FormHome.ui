@@ -926,7 +926,7 @@ QScrollBar::handle:horizontal {
 }
 
 QScrollBar::handle:horizontal:hover {
-    background: #574939;
+    background: #9a4076;
 }
 
 /* 5. REMOVE BUTTONS &amp; TRACK BACKGROUNDS */
@@ -1116,7 +1116,7 @@ QScrollBar::handle:horizontal {
 }
 
 QScrollBar::handle:horizontal:hover {
-    background: #574939;
+    background: #9a4076;
 }
 
 /* 5. REMOVE BUTTONS &amp; TRACK BACKGROUNDS */
@@ -1149,8 +1149,8 @@ QScrollArea QWidget #qt_scrollarea_corner {
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>100</width>
-                         <height>30</height>
+                         <width>333</width>
+                         <height>516</height>
                         </rect>
                        </property>
                        <layout class="QVBoxLayout" name="verticalLayout_7"/>
@@ -1279,7 +1279,7 @@ QScrollBar::handle:horizontal {
 }
 
 QScrollBar::handle:horizontal:hover {
-    background: #574939;
+    background: #9a4076;
 }
 
 /* 5. REMOVE BUTTONS &amp; TRACK BACKGROUNDS */
@@ -1312,8 +1312,8 @@ QScrollArea QWidget #qt_scrollarea_corner {
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>100</width>
-                         <height>30</height>
+                         <width>334</width>
+                         <height>516</height>
                         </rect>
                        </property>
                        <layout class="QVBoxLayout" name="verticalLayout_8"/>
@@ -1442,7 +1442,7 @@ QScrollBar::handle:horizontal {
 }
 
 QScrollBar::handle:horizontal:hover {
-    background: #574939;
+    background: #9a4076;
 }
 
 /* 5. REMOVE BUTTONS &amp; TRACK BACKGROUNDS */
@@ -1475,8 +1475,8 @@ QScrollArea QWidget #qt_scrollarea_corner {
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>100</width>
-                         <height>30</height>
+                         <width>333</width>
+                         <height>516</height>
                         </rect>
                        </property>
                        <layout class="QVBoxLayout" name="verticalLayout_9"/>
@@ -1807,8 +1807,8 @@ QScrollArea QWidget #qt_scrollarea_corner {
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>100</width>
-                      <height>30</height>
+                      <width>1038</width>
+                      <height>486</height>
                      </rect>
                     </property>
                     <layout class="QGridLayout" name="gridLayout_2"/>
@@ -1900,7 +1900,7 @@ QScrollBar::handle:horizontal {
 }
 
 QScrollBar::handle:horizontal:hover {
-    background: #574939;
+    background: #9a4076;
 }
 
 /* 5. REMOVE BUTTONS &amp; TRACK BACKGROUNDS */
@@ -1933,8 +1933,8 @@ QScrollArea QWidget #qt_scrollarea_corner {
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>100</width>
-                   <height>30</height>
+                   <width>1038</width>
+                   <height>637</height>
                   </rect>
                  </property>
                  <layout class="QGridLayout" name="gridLayout_3"/>
