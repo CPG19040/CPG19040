@@ -165,13 +165,13 @@ class Ui_FormHome(object):
         self.verticalLayout_13.setContentsMargins(9, 20, -1, 29)
         self.widget_4 = QWidget(self.widget_student_info)
         self.widget_4.setObjectName(u"widget_4")
-        self.widget_4.setMinimumSize(QSize(260, 260))
-        self.widget_4.setMaximumSize(QSize(260, 260))
+        self.widget_4.setMinimumSize(QSize(260, 250))
+        self.widget_4.setMaximumSize(QSize(260, 250))
         self.widget_4.setStyleSheet(u"")
         self.horizontalLayout_4 = QHBoxLayout(self.widget_4)
         self.horizontalLayout_4.setSpacing(0)
         self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
-        self.horizontalLayout_4.setContentsMargins(0, 0, 0, 15)
+        self.horizontalLayout_4.setContentsMargins(0, 0, 0, 5)
         self.horizontalSpacer_2 = QSpacerItem(58, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_4.addItem(self.horizontalSpacer_2)
@@ -463,6 +463,7 @@ class Ui_FormHome(object):
         self.lessonWidget.setGeometry(QRect(0, 0, 1038, 637))
         self.lessonWidget.setStyleSheet(u"#scrollAreaWidgetContents_2 { background-color: transparent; }")
         self.verticalLayout_5 = QVBoxLayout(self.lessonWidget)
+        self.verticalLayout_5.setSpacing(8)
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
         self.scrollArea.setWidget(self.lessonWidget)
 
@@ -893,7 +894,7 @@ class Ui_FormHome(object):
         self.btn_retake.setStyleSheet(u"#btn_retake {\n"
 "	border-image: url(:/Images/Images/button_wood_yellowgreen.png);\n"
 "	color: #FFF;\n"
-"	font: 14pt \"Biscuit Glitch\";\n"
+"	font: 16pt \"Biscuit Glitch\";\n"
 "	padding: 0px 20px;\n"
 "}\n"
 "\n"
@@ -1019,6 +1020,7 @@ class Ui_FormHome(object):
         self.scrollAreaWidgetContents_5.setObjectName(u"scrollAreaWidgetContents_5")
         self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 1038, 486))
         self.gridLayout_2 = QGridLayout(self.scrollAreaWidgetContents_5)
+        self.gridLayout_2.setSpacing(8)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
         self.scrollArea_quiz_answer.setWidget(self.scrollAreaWidgetContents_5)
 
@@ -1120,8 +1122,9 @@ class Ui_FormHome(object):
         self.scrollArea_scores.setWidgetResizable(True)
         self.layout_scores = QWidget()
         self.layout_scores.setObjectName(u"layout_scores")
-        self.layout_scores.setGeometry(QRect(0, 0, 1038, 637))
+        self.layout_scores.setGeometry(QRect(0, 0, 100, 30))
         self.gridLayout_3 = QGridLayout(self.layout_scores)
+        self.gridLayout_3.setSpacing(8)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
         self.scrollArea_scores.setWidget(self.layout_scores)
 

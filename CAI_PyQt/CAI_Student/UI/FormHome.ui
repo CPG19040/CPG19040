@@ -346,13 +346,13 @@
                   <property name="minimumSize">
                    <size>
                     <width>260</width>
-                    <height>260</height>
+                    <height>250</height>
                    </size>
                   </property>
                   <property name="maximumSize">
                    <size>
                     <width>260</width>
-                    <height>260</height>
+                    <height>250</height>
                    </size>
                   </property>
                   <property name="styleSheet">
@@ -372,7 +372,7 @@
                     <number>0</number>
                    </property>
                    <property name="bottomMargin">
-                    <number>15</number>
+                    <number>5</number>
                    </property>
                    <item>
                     <spacer name="horizontalSpacer_2">
@@ -969,7 +969,11 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
                  <property name="styleSheet">
                   <string notr="true">#scrollAreaWidgetContents_2 { background-color: transparent; }</string>
                  </property>
-                 <layout class="QVBoxLayout" name="verticalLayout_5"/>
+                 <layout class="QVBoxLayout" name="verticalLayout_5">
+                  <property name="spacing">
+                   <number>8</number>
+                  </property>
+                 </layout>
                 </widget>
                </widget>
               </item>
@@ -1643,7 +1647,7 @@ color: rgb(87, 227, 137);</string>
                           <string notr="true">#btn_retake {
 	border-image: url(:/Images/Images/button_wood_yellowgreen.png);
 	color: #FFF;
-	font: 14pt &quot;Biscuit Glitch&quot;;
+	font: 16pt &quot;Biscuit Glitch&quot;;
 	padding: 0px 20px;
 }
 
@@ -1811,7 +1815,11 @@ QScrollArea QWidget #qt_scrollarea_corner {
                       <height>486</height>
                      </rect>
                     </property>
-                    <layout class="QGridLayout" name="gridLayout_2"/>
+                    <layout class="QGridLayout" name="gridLayout_2">
+                     <property name="spacing">
+                      <number>8</number>
+                     </property>
+                    </layout>
                    </widget>
                   </widget>
                  </item>
@@ -1933,11 +1941,15 @@ QScrollArea QWidget #qt_scrollarea_corner {
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>1038</width>
-                   <height>637</height>
+                   <width>100</width>
+                   <height>30</height>
                   </rect>
                  </property>
-                 <layout class="QGridLayout" name="gridLayout_3"/>
+                 <layout class="QGridLayout" name="gridLayout_3">
+                  <property name="spacing">
+                   <number>8</number>
+                  </property>
+                 </layout>
                 </widget>
                </widget>
               </item>

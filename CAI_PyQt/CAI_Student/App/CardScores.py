@@ -24,8 +24,8 @@ class Ui_CardScores(object):
     def setupUi(self, CardScores):
         if not CardScores.objectName():
             CardScores.setObjectName(u"CardScores")
-        CardScores.resize(459, 164)
-        CardScores.setMaximumSize(QSize(16777215, 164))
+        CardScores.resize(508, 168)
+        CardScores.setMaximumSize(QSize(16777215, 186))
         CardScores.setFocusPolicy(Qt.StrongFocus)
         CardScores.setStyleSheet(u"#CardLesson { background-color: transparent; }")
         self.horizontalLayout = QHBoxLayout(CardScores)
@@ -93,11 +93,20 @@ class Ui_CardScores(object):
 
         self.horizontalLayout_3.addWidget(self.widget_6)
 
+        self.line = QFrame(self.widget_2)
+        self.line.setObjectName(u"line")
+        self.line.setStyleSheet(u"background-color: rgb(255, 255, 255);")
+        self.line.setFrameShape(QFrame.Shape.VLine)
+        self.line.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.horizontalLayout_3.addWidget(self.line)
+
         self.widget = QWidget(self.widget_2)
         self.widget.setObjectName(u"widget")
         self.verticalLayout = QVBoxLayout(self.widget)
-        self.verticalLayout.setSpacing(0)
+        self.verticalLayout.setSpacing(6)
         self.verticalLayout.setObjectName(u"verticalLayout")
+        self.verticalLayout.setContentsMargins(-1, 0, -1, 0)
         self.label_1 = QLabel(self.widget)
         self.label_1.setObjectName(u"label_1")
         self.label_1.setMinimumSize(QSize(0, 26))
@@ -110,16 +119,17 @@ class Ui_CardScores(object):
 
         self.label_LessonName = QLabel(self.widget)
         self.label_LessonName.setObjectName(u"label_LessonName")
-        self.label_LessonName.setMinimumSize(QSize(0, 26))
+        self.label_LessonName.setMinimumSize(QSize(0, 30))
         self.label_LessonName.setLayoutDirection(Qt.LeftToRight)
         self.label_LessonName.setStyleSheet(u"font: 14pt \"Inter Medium\"; color: rgb(99, 69, 44); padding: 0px 10px;")
         self.label_LessonName.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
-        self.label_LessonName.setWordWrap(False)
+        self.label_LessonName.setWordWrap(True)
 
         self.verticalLayout.addWidget(self.label_LessonName)
 
         self.widget_4 = QWidget(self.widget)
         self.widget_4.setObjectName(u"widget_4")
+        self.widget_4.setMinimumSize(QSize(0, 50))
         self.horizontalLayout_2 = QHBoxLayout(self.widget_4)
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
         self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
@@ -137,7 +147,7 @@ class Ui_CardScores(object):
         self.label_score.setObjectName(u"label_score")
         self.label_score.setMaximumSize(QSize(16777215, 40))
         self.label_score.setLayoutDirection(Qt.LeftToRight)
-        self.label_score.setStyleSheet(u"font: 22pt \"Biscuit Glitch\"; color: rgb(230, 97, 0);")
+        self.label_score.setStyleSheet(u"font: 22pt \"Biscuit Glitch\"; color: rgb(46, 194, 126);")
         self.label_score.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
 
         self.horizontalLayout_2.addWidget(self.label_score)
@@ -156,6 +166,7 @@ class Ui_CardScores(object):
         self.horizontalLayout_4.setContentsMargins(24, 13, 24, 13)
         self.progressBar_score = QProgressBar(self.widget_progress)
         self.progressBar_score.setObjectName(u"progressBar_score")
+        self.progressBar_score.setMaximumSize(QSize(16777215, 20))
         self.progressBar_score.setStyleSheet(u"QProgressBar {\n"
 "	border-radius: 10px;\n"
 "	background-color: #5f2845;\n"
