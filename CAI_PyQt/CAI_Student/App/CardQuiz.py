@@ -32,7 +32,7 @@ class Ui_CardQuiz(object):
         self.Card.setObjectName(u"Card")
         self.Card.setStyleSheet(u"#Card {\n"
 "	font: 15pt \"Inter\";\n"
-"	background-color: #FFF;\n"
+"	background-color: #f9eecf;\n"
 "	color: rgb(54, 37, 26);\n"
 "	border-radius: 10px;\n"
 "	border: 1px solid #ddd;\n"

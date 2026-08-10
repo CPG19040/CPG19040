@@ -34,7 +34,7 @@
      <property name="styleSheet">
       <string notr="true">#Card {
 	font: 15pt &quot;Inter&quot;;
-	background-color: #FFF;
+	background-color: #f9eecf;
 	color: rgb(54, 37, 26);
 	border-radius: 10px;
 	border: 1px solid #ddd;

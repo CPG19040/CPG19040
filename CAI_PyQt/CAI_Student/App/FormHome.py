@@ -1016,6 +1016,7 @@ class Ui_FormHome(object):
 "    border: none;\n"
 "}")
         self.scrollArea_quiz_answer.setWidgetResizable(True)
+        self.scrollArea_quiz_answer.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
         self.scrollAreaWidgetContents_5 = QWidget()
         self.scrollAreaWidgetContents_5.setObjectName(u"scrollAreaWidgetContents_5")
         self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 1038, 486))

@@ -77,22 +77,22 @@ class CardScores(QWidget):
         self.ui.progressBar_score.setValue(percent_val)
         self.ui.label_percentage.setText(percentage_str)
 
-    def mousePressEvent(self, event):
-        # When the user clicks the card, emit the signal
-        if event.button() == Qt.MouseButton.LeftButton:
-            self.clicked.emit(self, self.lesson_id)
+    # def mousePressEvent(self, event):
+    #     # When the user clicks the card, emit the signal
+    #     if event.button() == Qt.MouseButton.LeftButton:
+    #         self.clicked.emit(self, self.lesson_id)
 
-    def focusInEvent(self, event):
-        """Triggered when the card gains focus (e.g., via Tab key)."""
-        if not self.property("selected"):
-            self.clicked.emit(self, self.lesson_id)
-        super().focusInEvent(event)
+    # def focusInEvent(self, event):
+    #     """Triggered when the card gains focus (e.g., via Tab key)."""
+    #     if not self.property("selected"):
+    #         self.clicked.emit(self, self.lesson_id)
+    #     super().focusInEvent(event)
 
-    def set_selected(self, selected: bool):
-        """Updates the property and refreshes the style."""
-        self.setProperty("selected", selected)
-        self.style().unpolish(self)
-        self.style().polish(self)
-        self.update()
+    # def set_selected(self, selected: bool):
+    #     """Updates the property and refreshes the style."""
+    #     self.setProperty("selected", selected)
+    #     self.style().unpolish(self)
+    #     self.style().polish(self)
+    #     self.update()
 
 

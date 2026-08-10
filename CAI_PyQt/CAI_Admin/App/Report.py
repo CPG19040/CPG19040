@@ -228,10 +228,10 @@ class QuizReporter:
                 'quizzes2': scores[2],
                 'quizzes3': scores[3],
                 'quizzes4': scores[4],
-                'total1': f"{average_percentage1}%",
-                'total2': f"{average_percentage2}%",
-                'total3': f"{average_percentage3}%",
-                'total4': f"{average_percentage4}%",
+                'total1': f"{average_percentage1:.2f}%",
+                'total2': f"{average_percentage2:.2f}%",
+                'total3': f"{average_percentage3:.2f}%",
+                'total4': f"{average_percentage4:.2f}%",
             }
             doc.render(context)
             doc.save(temp_docx)
