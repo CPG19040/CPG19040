@@ -2914,7 +2914,7 @@ QSpinBox::down-arrow {
               <bool>true</bool>
              </property>
              <property name="styleSheet">
-              <string notr="true">background-color: rgb(246, 245, 244);</string>
+              <string notr="true">background-color: transparent;</string>
              </property>
              <property name="frameShape">
               <enum>QFrame::StyledPanel</enum>

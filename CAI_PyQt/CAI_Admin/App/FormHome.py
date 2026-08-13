@@ -1448,7 +1448,7 @@ class Ui_Home(object):
         self.scrollArea_classlist = QScrollArea(self.widget_table_stud)
         self.scrollArea_classlist.setObjectName(u"scrollArea_classlist")
         self.scrollArea_classlist.setAutoFillBackground(True)
-        self.scrollArea_classlist.setStyleSheet(u"background-color: rgb(246, 245, 244);")
+        self.scrollArea_classlist.setStyleSheet(u"background-color: transparent;")
         self.scrollArea_classlist.setFrameShape(QFrame.StyledPanel)
         self.scrollArea_classlist.setFrameShadow(QFrame.Plain)
         self.scrollArea_classlist.setSizeAdjustPolicy(QAbstractScrollArea.AdjustIgnored)

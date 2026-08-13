@@ -554,7 +554,7 @@ class Controller:
                         pixmap = QPixmap.fromImage(image)
 
                 full_name = self.util.formatFullname(f_name, m_name, l_name)
-                card = CardStudent(full_name, sid, pixmap, sectionName)
+                card = CardStudent(full_name, sid, pixmap, sectionName, gender)
                 card.clicked.connect(self.handle_card_selection)
 
                 gender_clean = str(gender).strip().upper()

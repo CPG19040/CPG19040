@@ -321,30 +321,39 @@ class CardStudent(QFrame):
     clicked = Signal(object, str)
 
     """Custom widget representing a single card."""
-    def __init__(self, name, stud_id, image, sectionName):
+    def __init__(self, name, stud_id, image, sectionName, gender):
         super().__init__()
+
         self.setProperty("selected", False) # Initialize property
         self.setFrameShape(QFrame.Shape.StyledPanel)
         self.setFixedSize(16777215, 100)
         self.setCursor(Qt.CursorShape.PointingHandCursor)
-        self.setStyleSheet("""
-            CardStudent {
-                background-color: #ffffff;
+
+        bgColor     = "#E1F5FE"
+        borderColor = "#3498DB"
+
+        if gender.upper() == "FEMALE":
+            bgColor     = "#FFE5F0"
+            borderColor = "#E55B90"
+            
+        self.setStyleSheet(f"""
+            CardStudent {{
+                background-color: #FFFFFF;
                 border-radius: 10px;
                 border: 1px solid #ddd;
-            }
-            CardStudent:hover {
-                border: 1px solid #3498db;
-                background-color: #f7fbfe;
-            }
+            }}
+            CardStudent:hover {{
+                border: 1px solid {borderColor};
+                background-color: {bgColor};
+            }}
             /* This style applies when the custom property is true */
-            CardStudent[selected="true"] {
-                background-color: #e1f5fe;
-                border: 2px solid #3498db;
-            }
-            QLabel {
+            CardStudent[selected="true"] {{
+                border: 2px solid {borderColor};
+                background-color: {bgColor};
+            }}
+            QLabel {{
                 color: #333;
-            }
+            }}
         """)
 
         self.util = Utility()
