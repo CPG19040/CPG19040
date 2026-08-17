@@ -61,7 +61,7 @@ class Ui_CardScores(object):
         self.label_3.setMinimumSize(QSize(0, 26))
         self.label_3.setMaximumSize(QSize(16777215, 26))
         self.label_3.setLayoutDirection(Qt.LeftToRight)
-        self.label_3.setStyleSheet(u"font: 12pt \"Inter Medium\"; color: rgb(99, 69, 44);")
+        self.label_3.setStyleSheet(u"font: 12pt \"Inter Medium\"; color: rgb(181, 131, 90);")
         self.label_3.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
 
         self.verticalLayout_4.addWidget(self.label_3)
@@ -112,7 +112,7 @@ class Ui_CardScores(object):
         self.label_1.setMinimumSize(QSize(0, 26))
         self.label_1.setMaximumSize(QSize(16777215, 26))
         self.label_1.setLayoutDirection(Qt.LeftToRight)
-        self.label_1.setStyleSheet(u"font: 12pt \"Inter Medium\"; color: rgb(99, 69, 44);")
+        self.label_1.setStyleSheet(u"font: 12pt \"Inter Medium\"; color: rgb(181, 131, 90);")
         self.label_1.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
 
         self.verticalLayout.addWidget(self.label_1)
@@ -138,7 +138,7 @@ class Ui_CardScores(object):
         self.label_2.setMinimumSize(QSize(0, 26))
         self.label_2.setMaximumSize(QSize(16777215, 26))
         self.label_2.setLayoutDirection(Qt.LeftToRight)
-        self.label_2.setStyleSheet(u"font: 12pt \"Inter Medium\"; color: rgb(99, 69, 44);")
+        self.label_2.setStyleSheet(u"font: 12pt \"Inter Medium\"; color: rgb(181, 131, 90);")
         self.label_2.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
 
         self.horizontalLayout_2.addWidget(self.label_2)
@@ -206,7 +206,7 @@ class Ui_CardScores(object):
         self.label_4.setMinimumSize(QSize(0, 26))
         self.label_4.setMaximumSize(QSize(16777215, 26))
         self.label_4.setLayoutDirection(Qt.LeftToRight)
-        self.label_4.setStyleSheet(u"font: 12pt \"Inter Medium\"; color: rgb(99, 69, 44);")
+        self.label_4.setStyleSheet(u"font: 12pt \"Inter Medium\"; color: rgb(181, 131, 90);")
         self.label_4.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
 
         self.horizontalLayout_5.addWidget(self.label_4)
