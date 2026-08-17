@@ -7,7 +7,7 @@ from PySide6.QtMultimedia import QSoundEffect, QMediaPlayer, QAudioOutput
 from App.Login import Login
 from App.FormHome import Ui_FormHome
 from App.Student import Student
-from App.Tools import Utility, WindowHandler, CustomShapeDialog
+from App.Tools import Utility, WindowHandler, CustomShapeDialog, WickPlayer
 from App.CRUDTools import DatabaseTools
 from App.Lessons import Lessons, LessonCard
 from App.MyScores import CardScores
@@ -327,10 +327,17 @@ class Controller:
     def display_lessons(self):
         layout = self.ui.verticalLayout_5
 
+        # Clear old widgets properly
         while layout.count():
             child = layout.takeAt(0)
-            if child.widget():
-                child.widget().deleteLater()
+            widget = child.widget()
+            if widget:
+                # Safely disconnect any custom clicked signals
+                try:
+                    widget.clicked.disconnect()
+                except (TypeError, RuntimeError):
+                    pass
+                widget.deleteLater()
 
         lessons = Lessons()
         record = lessons.retrieve_lesson_info()
@@ -344,7 +351,12 @@ class Controller:
                 pixmap = QPixmap.fromImage(img)
 
             card = LessonCard(lesson_id, title, lessonnum, chapter, pixmap)
-            card.clicked.connect(self.handle_lesson_selection)
+            
+            # FIX: Absorb the signal's boolean 'checked' arg with '_'
+            # and capture variables explicitly in the lambda scope
+            card.clicked.connect(
+                lambda _, c=card, lid=lesson_id: self.handle_lesson_selection(c, lid)
+            )
             layout.addWidget(card)
 
         layout.addStretch()
@@ -510,7 +522,7 @@ class Controller:
                 average = sum_score / row_count
 
             card = CardScores(quiznumber, lesson_id, title, score_str, percent_val, percentage_str)
-            card.clicked.connect(self.handle_lesson_selection)
+            # card.clicked.connect(self.handle_lesson_selection)
 
             index = itemCnt - 1
             grid_row = index // NUM_COLUMNS
@@ -550,10 +562,25 @@ class Controller:
 
     def handle_lesson_selection(self, clicked_card, lesson_id):
         print(f"Selected Lesson ID: {lesson_id}")
+        
+        # If a window is already open, close it first
+        if hasattr(self, 'game_window') and self.game_window is not None:
+            self.game_window.close()
+            
+        lesson = Lessons()
+        record = lesson.retrieve_lesson_info(lesson_id)
+
+        if not record:
+            return
+
+        lessonid, chapter, lessonnum, gradingperiod, title, path_str, lessonimages, lessonfilename = record[0]
+        
+        self.game_window = WickPlayer("Lessons", path_str)
+        self.game_window.show()
 
     def open_game(self):
-        from App.Tools import WickPlayer
-        self.game_window = WickPlayer("multipleRooms3-26-2026_13-36-21.html")
+        self.game_window = WickPlayer("Games", "multipleRooms3-26-2026_13-36-21.html")
         self.game_window.show()
+
 
 

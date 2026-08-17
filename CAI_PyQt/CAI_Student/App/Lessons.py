@@ -9,7 +9,7 @@ class Lessons:
     def __init__(self):
         self.db_tools = DatabaseTools()
 
-    def retrieve_lesson_info(self):
+    def retrieve_lesson_info(self, lessonid=None):
         """
         Fetches detailed metadata for all lessons from the database.
 
@@ -18,6 +18,8 @@ class Lessons:
                 title, path_str, lessonimages, lessonfilename). 
                 Returns an 8-element tuple of empty strings if no record is found.
         """
+
+        params = []
         
         sql = """
             SELECT 
@@ -35,9 +37,16 @@ class Lessons:
                 cai.tbl_grading_period gp ON l.gradingperiod = gp.gpid
             WHERE 
                 CURRENT_DATE BETWEEN gp.startdate AND gp.enddate
+        """
+
+        if lessonid:
+            sql += "    AND l.lesson_id = %s"
+            params.append(lessonid)
+
+        sql += """
             ORDER BY gradingperiod, chapter, lessonnum ASC;
         """
-        cursor, conn = self.db_tools.retrieve_records(sql)
+        cursor, conn = self.db_tools.retrieve_records(sql, tuple(params))
 
         if cursor:
             records = cursor.fetchall()
