@@ -3,7 +3,6 @@ from PySide6.QtWidgets import QVBoxLayout, QHBoxLayout, QLabel, QFrame, QFileDia
 from PySide6.QtGui import QPixmap, QPainter, QPen, QMovie, QPainterPath
 from PySide6.QtCore import Qt, Signal, QUrl, QObject, QEvent, QDate
 from PySide6.QtWebEngineWidgets import QWebEngineView
-from PySide6.QtWebEngineCore import QWebEngineScript
 from App.CRUDTools import DatabaseTools
 from App.CustomizedDialog import Ui_CustomDialog
 
@@ -293,46 +292,25 @@ class StudentCard(QFrame):
 
 
 class WickPlayer(QMainWindow):
-    def __init__(self, folder, html_filename):
+
+    def __init__(self, folder:str, html_filename:str):
         super().__init__()
         self.setWindowTitle("Wick Animation Player")
         self.resize(1024, 768)
+        self.showMaximized()
 
         self.browser = QWebEngineView()
-        
-        self._inject_canvas_optimization()
-
         self.util = Utility()
         
-        games_path = self.util.get_resource_path(os.path.join("..", folder))
-        file_path = os.path.join(games_path, html_filename)
+        _path = self.util.get_resource_path(os.path.join("..", folder))
+        file_path = os.path.join(_path, html_filename)
         
         if os.path.exists(file_path):
             self.browser.setUrl(QUrl.fromLocalFile(file_path))
         else:
-            print(f"Error: {html_filename} not found in {games_path}")
+            print(f"Error: {html_filename} not found in {_path}")
             
         self.setCentralWidget(self.browser)
-
-    def _inject_canvas_optimization(self):
-        js_code = """
-        (function() {
-            const originalGetContext = HTMLCanvasElement.prototype.getContext;
-            HTMLCanvasElement.prototype.getContext = function(type, attributes) {
-                if (type === '2d') {
-                    attributes = attributes || {};
-                    attributes.willReadFrequently = false;
-                }
-                return originalGetContext.call(this, type, attributes);
-            };
-        })();
-        """
-        script = QWebEngineScript()
-        script.setSourceCode(js_code)
-        script.setInjectionPoint(QWebEngineScript.DocumentCreation)
-        script.setWorldId(QWebEngineScript.MainWorld)
-        script.setRunsOnSubFrames(True)
-        self.browser.page().scripts().insert(script)
 
               
 class WindowHandler(QObject):

@@ -84,12 +84,6 @@ class LessonCard(QWidget):
         if event.button() == Qt.MouseButton.LeftButton:
             self.clicked.emit(self, self.lesson_id)
 
-    def focusInEvent(self, event):
-        """Triggered when the card gains focus (e.g., via Tab key)."""
-        if not self.property("selected"):
-            self.clicked.emit(self, self.lesson_id)
-        super().focusInEvent(event)
-
     def set_selected(self, selected: bool):
         """Updates the property and refreshes the style."""
         self.setProperty("selected", selected)

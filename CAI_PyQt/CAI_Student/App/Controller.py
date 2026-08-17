@@ -493,10 +493,9 @@ class Controller:
         student_id  = self.settings.value("studentid")
         record      = myscores.get_scores(student_id, self.GRADING_PERIOD)
         row_count   = len(record)
-        itemCnt     = 1
         NUM_COLUMNS = 3
 
-        for row in record:
+        for index, row in enumerate(record):
             quiznumber     = row['quiznumber']
             lesson_id      = row['lessonid']
             title          = row['title'] 
@@ -524,13 +523,10 @@ class Controller:
             card = CardScores(quiznumber, lesson_id, title, score_str, percent_val, percentage_str)
             # card.clicked.connect(self.handle_lesson_selection)
 
-            index = itemCnt - 1
             grid_row = index // NUM_COLUMNS
             grid_col = index % NUM_COLUMNS
 
             layout.addWidget(card, grid_row, grid_col)
-
-            itemCnt += 1
 
     def save_quiz_answers(self):
         if not hasattr(self, 'quiz_cards') or not self.quiz_cards:
@@ -573,9 +569,14 @@ class Controller:
         if not record:
             return
 
-        lessonid, chapter, lessonnum, gradingperiod, title, path_str, lessonimages, lessonfilename = record[0]
+        filename = record[0][5]
+
+        if not filename:
+            dialog = CustomShapeDialog("The file does not exist.", parent=self.home_win, type=2)
+            dialog.exec()
+            return
         
-        self.game_window = WickPlayer("Lessons", path_str)
+        self.game_window = WickPlayer("Lessons", filename)
         self.game_window.show()
 
     def open_game(self):
