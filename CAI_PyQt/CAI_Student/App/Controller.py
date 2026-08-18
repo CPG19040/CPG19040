@@ -560,8 +560,8 @@ class Controller:
         print(f"Selected Lesson ID: {lesson_id}")
         
         # If a window is already open, close it first
-        if hasattr(self, 'game_window') and self.game_window is not None:
-            self.game_window.close()
+        if hasattr(self, 'lesson_window') and self.lesson_window is not None:
+            self.lesson_window.close()
             
         lesson = Lessons()
         record = lesson.retrieve_lesson_info(lesson_id)
@@ -575,11 +575,16 @@ class Controller:
             dialog = CustomShapeDialog("The file does not exist.", parent=self.home_win, type=2)
             dialog.exec()
             return
-        
-        self.game_window = WickPlayer("Lessons", filename)
-        self.game_window.show()
+
+        self.home_win.player.stop()
+        self.lesson_window = WickPlayer("Lessons", filename)
+        self.lesson_window.show()
 
     def open_game(self):
+
+        if hasattr(self, 'game_window') and self.game_window is not None:
+            self.game_window.close()
+
         self.game_window = WickPlayer("Games", "multipleRooms3-26-2026_13-36-21.html")
         self.game_window.show()
 
