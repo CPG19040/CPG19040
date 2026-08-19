@@ -180,7 +180,8 @@ class Controller:
         self.ui.btn_retake.clicked.connect(lambda: self.slide_to_page(101))
         self.ui.btnSubmitQuiz.clicked.connect(self.save_quiz_answers)
         self.ui.btnQuit.clicked.connect(self.logout)
-        self.ui.btnAddition.clicked.connect(self.open_game)
+        self.ui.btnAddition.clicked.connect(lambda _, mode="addition": self.open_game(mode))
+        self.ui.btnSubtraction.clicked.connect(lambda _, mode="subtraction": self.open_game(mode))
 
         self.display_section_info(user["studentid"])
 
@@ -580,12 +581,23 @@ class Controller:
         self.lesson_window = WickPlayer("Lessons", filename)
         self.lesson_window.show()
 
-    def open_game(self):
+    def open_game(self, mode):
 
         if hasattr(self, 'game_window') and self.game_window is not None:
             self.game_window.close()
 
-        self.game_window = WickPlayer("Games", "multipleRooms3-26-2026_13-36-21.html")
+        filename = ""
+
+        if mode == "addition":
+            filename = "gameAddition.html"
+
+        if mode == "subtraction":
+            filename = "gameSubtraction.swf"
+
+        if not filename:
+            return
+        
+        self.game_window = WickPlayer("Games", filename)
         self.game_window.show()
 
 

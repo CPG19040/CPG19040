@@ -312,6 +312,24 @@ class WickPlayer(QMainWindow):
             
         self.setCentralWidget(self.browser)
 
+    def closeEvent(self, event):
+        """Triggers automatically when the game window closes."""
+        self.fetch_and_save_score()
+        event.accept()
+
+    def fetch_and_save_score(self):
+        """Queries JavaScript for the score variable or localStorage."""
+        
+        js_code = "window.score || localStorage.getItem('highScore') || 0;"
+        self.browser.page().runJavaScript(js_code, self.save_score_to_json)
+
+    def save_score_to_json(self, current_score):
+        try:
+            print('==============', current_score)
+            current_score = int(current_score)
+        except (ValueError, TypeError):
+            current_score = 0
+
               
 class WindowHandler(QObject):
     def __init__(self, window):
