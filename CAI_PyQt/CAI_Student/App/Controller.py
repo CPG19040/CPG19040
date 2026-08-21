@@ -592,11 +592,12 @@ class Controller:
             filename = "gameAddition.html"
 
         if mode == "subtraction":
-            filename = "gameSubtraction.swf"
+            filename = "gameSubtraction.html"
 
         if not filename:
             return
-        
+
+        self.home_win.player.stop()
         self.game_window = WickPlayer("Games", filename)
         self.game_window.show()
 
