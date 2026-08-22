@@ -182,6 +182,8 @@ class Controller:
         self.ui.btnQuit.clicked.connect(self.logout)
         self.ui.btnAddition.clicked.connect(lambda _, mode="addition": self.open_game(mode))
         self.ui.btnSubtraction.clicked.connect(lambda _, mode="subtraction": self.open_game(mode))
+        self.ui.btnMultiplication.clicked.connect(lambda _, mode="multiplication": self.open_game(mode))
+        self.ui.btnDivision.clicked.connect(lambda _, mode="division": self.open_game(mode))
 
         self.display_section_info(user["studentid"])
 
@@ -594,7 +596,14 @@ class Controller:
         if mode == "subtraction":
             filename = "gameSubtraction.html"
 
+        if mode == "multiplication":
+            filename = "gameMultiplication.html"
+
+        if mode == "division":
+            filename = "gameDivision.html"
+
         if not filename:
+            print("[WARNING] Unable to load the game. No filename provided.")
             return
 
         self.home_win.player.stop()
