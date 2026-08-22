@@ -184,6 +184,7 @@ class Controller:
         self.ui.btnSubtraction.clicked.connect(lambda _, mode="subtraction": self.open_game(mode))
         self.ui.btnMultiplication.clicked.connect(lambda _, mode="multiplication": self.open_game(mode))
         self.ui.btnDivision.clicked.connect(lambda _, mode="division": self.open_game(mode))
+        self.ui.btnTime.clicked.connect(lambda _, mode="time": self.open_game(mode))
 
         self.display_section_info(user["studentid"])
 
@@ -601,6 +602,9 @@ class Controller:
 
         if mode == "division":
             filename = "gameDivision.html"
+
+        if mode == "time":
+            filename = "gameTime.html"
 
         if not filename:
             print("[WARNING] Unable to load the game. No filename provided.")
