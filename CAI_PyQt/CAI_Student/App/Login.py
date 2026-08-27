@@ -45,7 +45,7 @@ class Login(QWidget, Ui_FormLogin):
         self.audio_output = QAudioOutput()
         self.player.setAudioOutput(self.audio_output)
         self.player.setSource(QUrl.fromLocalFile(os.path.join(self.audio_path, "bgMusic.wav")))
-        self.audio_output.setVolume(0.7)
+        self.audio_output.setVolume(0.5)
         self.player.play()
         self.sounds = {}
 

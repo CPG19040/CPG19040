@@ -121,7 +121,7 @@ class Controller:
         self.home_win.audio_output = QAudioOutput()
         self.home_win.player.setAudioOutput(self.home_win.audio_output)
         self.home_win.player.setSource(QUrl.fromLocalFile(path))
-        self.home_win.audio_output.setVolume(0.7)
+        self.home_win.audio_output.setVolume(0.5)
         self.login_win.player.stop()
         self.home_win.player.play()
 
@@ -354,7 +354,7 @@ class Controller:
                 img = QImage.fromData(bytes(lessonimage))
                 pixmap = QPixmap.fromImage(img)
 
-            card = LessonCard(lesson_id, title, lessonnum, chapter, pixmap)
+            card = LessonCard(lesson_id, title, lessonnum, chapter, gradingperiod, pixmap)
             
             # FIX: Absorb the signal's boolean 'checked' arg with '_'
             # and capture variables explicitly in the lambda scope

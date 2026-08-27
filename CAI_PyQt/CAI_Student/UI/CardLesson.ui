@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>414</width>
+    <width>470</width>
     <height>172</height>
    </rect>
   </property>
@@ -220,7 +220,7 @@ padding: 0px 10px;</string>
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label_Chapter_2">
+          <widget class="QLabel" name="label_GradingPeriod">
            <property name="minimumSize">
             <size>
              <width>0</width>

@@ -61,7 +61,7 @@ class Lessons:
 class LessonCard(QWidget):
     clicked = Signal(object, int)
 
-    def __init__(self, lesson_id, lesson_name, lesson_num, chapter, pixmap=None):
+    def __init__(self, lesson_id, lesson_name, lesson_num, chapter, gradingperiod, pixmap=None):
         super().__init__()
         self.ui = Ui_CardLesson()
         self.ui.setupUi(self)
@@ -74,6 +74,11 @@ class LessonCard(QWidget):
         self.ui.label_LessonName.setText(lesson_name)
         self.ui.label_LessonNumber.setText(f"{lesson_num}")
         self.ui.label_Chapter.setText(f"Chapter {chapter}")
+
+        suffix = {1: "First", 2: "Second", 3: "Third"}.get(gradingperiod, "Fourth")
+        active_quarter = f"{suffix} Grading"
+
+        self.ui.label_GradingPeriod.setText(active_quarter)
         
         if pixmap:
             pixmap = self.util.makeCircularPixmap(pixmap, self.ui.label_LessonImage.width(), 10)

@@ -23,7 +23,7 @@ class Ui_CardLesson(object):
     def setupUi(self, CardLesson):
         if not CardLesson.objectName():
             CardLesson.setObjectName(u"CardLesson")
-        CardLesson.resize(414, 172)
+        CardLesson.resize(470, 172)
         CardLesson.setMaximumSize(QSize(16777215, 172))
         CardLesson.setFocusPolicy(Qt.StrongFocus)
         CardLesson.setStyleSheet(u"#CardLesson { background-color: transparent; }")
@@ -106,15 +106,15 @@ class Ui_CardLesson(object):
 
         self.verticalLayout.addWidget(self.label_Chapter)
 
-        self.label_Chapter_2 = QLabel(self.widget)
-        self.label_Chapter_2.setObjectName(u"label_Chapter_2")
-        self.label_Chapter_2.setMinimumSize(QSize(0, 26))
-        self.label_Chapter_2.setMaximumSize(QSize(16777215, 26))
-        self.label_Chapter_2.setLayoutDirection(Qt.LeftToRight)
-        self.label_Chapter_2.setStyleSheet(u"font: 11pt \"Inter\"; color: rgb(134, 94, 60);")
-        self.label_Chapter_2.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+        self.label_GradingPeriod = QLabel(self.widget)
+        self.label_GradingPeriod.setObjectName(u"label_GradingPeriod")
+        self.label_GradingPeriod.setMinimumSize(QSize(0, 26))
+        self.label_GradingPeriod.setMaximumSize(QSize(16777215, 26))
+        self.label_GradingPeriod.setLayoutDirection(Qt.LeftToRight)
+        self.label_GradingPeriod.setStyleSheet(u"font: 11pt \"Inter\"; color: rgb(134, 94, 60);")
+        self.label_GradingPeriod.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
 
-        self.verticalLayout.addWidget(self.label_Chapter_2)
+        self.verticalLayout.addWidget(self.label_GradingPeriod)
 
         self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
@@ -138,6 +138,6 @@ class Ui_CardLesson(object):
         self.label_LessonNumber.setText(QCoreApplication.translate("CardLesson", u"000", None))
         self.label_LessonName.setText(QCoreApplication.translate("CardLesson", u"Lesson Name", None))
         self.label_Chapter.setText(QCoreApplication.translate("CardLesson", u"Chapter 1", None))
-        self.label_Chapter_2.setText(QCoreApplication.translate("CardLesson", u"First Grading", None))
+        self.label_GradingPeriod.setText(QCoreApplication.translate("CardLesson", u"First Grading", None))
     # retranslateUi
 
