@@ -726,8 +726,15 @@ border-radius: 105px;</string>
                 <cursorShape>PointingHandCursor</cursorShape>
                </property>
                <property name="styleSheet">
-                <string notr="true">#btnLessons { border-image: url(:/Images/Images/btnLessons.png); }
-#btnLessons:hover, #btnLessons:checked {  border-image: url(:/Images/Images/btnLessonsGlow.png) 0 0 0 0 stretch; }
+                <string notr="true">#btnLessons {
+	border-image: url(:/Images/Images/btnLessonsInactive.png);
+}
+#btnLessons:hover {
+	border-image: url(:/Images/Images/btnLessonsGlow.png) 0 0 0 0 stretch;
+}
+#btnLessons:checked { 
+	border-image: url(:/Images/Images/btnLessons.png) 0 0 0 0 stretch; 
+}
 </string>
                </property>
                <property name="text">
@@ -753,8 +760,15 @@ border-radius: 105px;</string>
                 <cursorShape>PointingHandCursor</cursorShape>
                </property>
                <property name="styleSheet">
-                <string notr="true">#btnQuiz { border-image: url(:/Images/Images/btnQuiz.png) 0 0 0 stretch stretch; }
-#btnQuiz:hover, #btnQuiz:checked {  border-image: url(:/Images/Images/btnQuizGlow.png) 0 0 0 stretch stretch; }
+                <string notr="true">#btnQuiz {
+	border-image: url(:/Images/Images/btnQuizInactive.png) 0 0 0 stretch stretch;
+}
+#btnQuiz:hover {
+	border-image: url(:/Images/Images/btnQuizGlow.png) 0 0 0 stretch stretch;
+}
+#btnQuiz:checked { 
+	border-image: url(:/Images/Images/btnQuiz.png) 0 0 0 stretch stretch;
+}
 </string>
                </property>
                <property name="text">
@@ -780,8 +794,15 @@ border-radius: 105px;</string>
                 <cursorShape>PointingHandCursor</cursorShape>
                </property>
                <property name="styleSheet">
-                <string notr="true">#btnExercise { border-image: url(:/Images/Images/btnExercises.png); }
-#btnExercise:hover, #btnExercise:checked {  border-image: url(:/Images/Images/btnExercisesGlow.png); }
+                <string notr="true">#btnExercise {
+	border-image: url(:/Images/Images/btnExercisesInactive.png);
+}
+#btnExercise:hover {
+	border-image: url(:/Images/Images/btnExercisesGlow.png);
+}
+#btnExercise:checked { 
+	border-image: url(:/Images/Images/btnExercises.png);
+}
 </string>
                </property>
                <property name="text">
@@ -807,8 +828,15 @@ border-radius: 105px;</string>
                 <cursorShape>PointingHandCursor</cursorShape>
                </property>
                <property name="styleSheet">
-                <string notr="true">#btnScores { border-image: url(:/Images/Images/btnScores.png); }
-#btnScores:hover, #btnScores:checked { border-image: url(:/Images/Images/btnScoresGlow.png); }
+                <string notr="true">#btnScores {
+	border-image: url(:/Images/Images/btnScoresInactive.png);
+}
+#btnScores:hover {
+	border-image: url(:/Images/Images/btnScoresGlow.png);
+}
+#btnScores:checked {
+	border-image: url(:/Images/Images/btnScores.png);
+}
 </string>
                </property>
                <property name="text">
@@ -834,8 +862,15 @@ border-radius: 105px;</string>
                 <cursorShape>PointingHandCursor</cursorShape>
                </property>
                <property name="styleSheet">
-                <string notr="true">#btnGames { border-image: url(:/Images/Images/buttonGames.png); }
-#btnGames:hover, #btnGames:checked { border-image: url(:/Images/Images/buttonGamesGlow.png); }
+                <string notr="true">#btnGames {
+	border-image: url(:/Images/Images/buttonGamesInactive.png);
+}
+#btnGames:hover {
+	border-image: url(:/Images/Images/buttonGamesGlow.png);
+}
+#btnGames:checked {
+	border-image: url(:/Images/Images/buttonGames.png);
+}
 </string>
                </property>
                <property name="text">
@@ -1153,8 +1188,8 @@ QScrollArea QWidget #qt_scrollarea_corner {
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>333</width>
-                         <height>516</height>
+                         <width>100</width>
+                         <height>30</height>
                         </rect>
                        </property>
                        <layout class="QVBoxLayout" name="verticalLayout_7"/>
@@ -1316,8 +1351,8 @@ QScrollArea QWidget #qt_scrollarea_corner {
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>334</width>
-                         <height>516</height>
+                         <width>100</width>
+                         <height>30</height>
                         </rect>
                        </property>
                        <layout class="QVBoxLayout" name="verticalLayout_8"/>
@@ -1479,8 +1514,8 @@ QScrollArea QWidget #qt_scrollarea_corner {
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>333</width>
-                         <height>516</height>
+                         <width>100</width>
+                         <height>30</height>
                         </rect>
                        </property>
                        <layout class="QVBoxLayout" name="verticalLayout_9"/>
@@ -1814,8 +1849,8 @@ QScrollArea QWidget #qt_scrollarea_corner {
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>1038</width>
-                      <height>486</height>
+                      <width>100</width>
+                      <height>30</height>
                      </rect>
                     </property>
                     <layout class="QGridLayout" name="gridLayout_2">

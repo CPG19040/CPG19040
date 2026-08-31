@@ -1,7 +1,5 @@
 <RCC>
   <qresource prefix="Images">
-    <file>Images/slab2.png</file>
-    <file>Images/frame.png</file>
     <file>Images/Addition.png</file>
     <file>Images/backbtn.png</file>
     <file>Images/backbtnGlow.png</file>
@@ -11,21 +9,26 @@
     <file>Images/blue-play-button-hi.png</file>
     <file>Images/btnExercises.png</file>
     <file>Images/btnExercisesGlow.png</file>
+    <file>Images/btnExercisesInactive.png</file>
     <file>Images/btnLessons.png</file>
     <file>Images/btnLessonsGlow.png</file>
+    <file>Images/btnLessonsInactive.png</file>
     <file>Images/btnMap.png</file>
     <file>Images/btnMapGlow.png</file>
     <file>Images/btnQuit.png</file>
     <file>Images/btnQuitGlow.png</file>
     <file>Images/btnQuiz.png</file>
     <file>Images/btnQuizGlow.png</file>
+    <file>Images/btnQuizInactive.png</file>
     <file>Images/btnScores.png</file>
     <file>Images/btnScoresGlow.png</file>
+    <file>Images/btnScoresInactive.png</file>
     <file>Images/btnWood.png</file>
     <file>Images/btnWoodGlow.png</file>
     <file>Images/buttonBlue.png</file>
     <file>Images/buttonGames.png</file>
     <file>Images/buttonGamesGlow.png</file>
+    <file>Images/buttonGamesInactive.png</file>
     <file>Images/buttonGreen.png</file>
     <file>Images/button_wood.png</file>
     <file>Images/button_wood_glow.png</file>
@@ -43,6 +46,7 @@
     <file>Images/eye.png</file>
     <file>Images/eye2.png</file>
     <file>Images/fraction.png</file>
+    <file>Images/frame.png</file>
     <file>Images/happy.gif</file>
     <file>Images/happy.png</file>
     <file>Images/header.jpg</file>
@@ -67,6 +71,7 @@
     <file>Images/Shapes.png</file>
     <file>Images/sideNavBar.svg</file>
     <file>Images/slab.png</file>
+    <file>Images/slab2.png</file>
     <file>Images/speaker.png</file>
     <file>Images/speakerBig.png</file>
     <file>Images/student-user.png</file>

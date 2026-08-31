@@ -325,7 +325,7 @@ class WickPlayer(QMainWindow):
 
     def save_score_to_json(self, current_score):
         try:
-            print('==============', current_score)
+            print('🌟', current_score, '🌟')
             current_score = int(current_score)
         except (ValueError, TypeError):
             current_score = 0

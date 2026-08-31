@@ -313,8 +313,15 @@ class Ui_FormHome(object):
         self.btnLessons.setMinimumSize(QSize(131, 90))
         self.btnLessons.setMaximumSize(QSize(131, 90))
         self.btnLessons.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.btnLessons.setStyleSheet(u"#btnLessons { border-image: url(:/Images/Images/btnLessons.png); }\n"
-"#btnLessons:hover, #btnLessons:checked {  border-image: url(:/Images/Images/btnLessonsGlow.png) 0 0 0 0 stretch; }\n"
+        self.btnLessons.setStyleSheet(u"#btnLessons {\n"
+"	border-image: url(:/Images/Images/btnLessonsInactive.png);\n"
+"}\n"
+"#btnLessons:hover {\n"
+"	border-image: url(:/Images/Images/btnLessonsGlow.png) 0 0 0 0 stretch;\n"
+"}\n"
+"#btnLessons:checked { \n"
+"	border-image: url(:/Images/Images/btnLessons.png) 0 0 0 0 stretch; \n"
+"}\n"
 "")
 
         self.horizontalLayout.addWidget(self.btnLessons)
@@ -324,8 +331,15 @@ class Ui_FormHome(object):
         self.btnQuiz.setMinimumSize(QSize(131, 90))
         self.btnQuiz.setMaximumSize(QSize(131, 90))
         self.btnQuiz.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.btnQuiz.setStyleSheet(u"#btnQuiz { border-image: url(:/Images/Images/btnQuiz.png) 0 0 0 stretch stretch; }\n"
-"#btnQuiz:hover, #btnQuiz:checked {  border-image: url(:/Images/Images/btnQuizGlow.png) 0 0 0 stretch stretch; }\n"
+        self.btnQuiz.setStyleSheet(u"#btnQuiz {\n"
+"	border-image: url(:/Images/Images/btnQuizInactive.png) 0 0 0 stretch stretch;\n"
+"}\n"
+"#btnQuiz:hover {\n"
+"	border-image: url(:/Images/Images/btnQuizGlow.png) 0 0 0 stretch stretch;\n"
+"}\n"
+"#btnQuiz:checked { \n"
+"	border-image: url(:/Images/Images/btnQuiz.png) 0 0 0 stretch stretch;\n"
+"}\n"
 "")
 
         self.horizontalLayout.addWidget(self.btnQuiz)
@@ -335,8 +349,15 @@ class Ui_FormHome(object):
         self.btnExercise.setMinimumSize(QSize(131, 90))
         self.btnExercise.setMaximumSize(QSize(131, 90))
         self.btnExercise.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.btnExercise.setStyleSheet(u"#btnExercise { border-image: url(:/Images/Images/btnExercises.png); }\n"
-"#btnExercise:hover, #btnExercise:checked {  border-image: url(:/Images/Images/btnExercisesGlow.png); }\n"
+        self.btnExercise.setStyleSheet(u"#btnExercise {\n"
+"	border-image: url(:/Images/Images/btnExercisesInactive.png);\n"
+"}\n"
+"#btnExercise:hover {\n"
+"	border-image: url(:/Images/Images/btnExercisesGlow.png);\n"
+"}\n"
+"#btnExercise:checked { \n"
+"	border-image: url(:/Images/Images/btnExercises.png);\n"
+"}\n"
 "")
 
         self.horizontalLayout.addWidget(self.btnExercise)
@@ -346,8 +367,15 @@ class Ui_FormHome(object):
         self.btnScores.setMinimumSize(QSize(131, 90))
         self.btnScores.setMaximumSize(QSize(131, 90))
         self.btnScores.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.btnScores.setStyleSheet(u"#btnScores { border-image: url(:/Images/Images/btnScores.png); }\n"
-"#btnScores:hover, #btnScores:checked { border-image: url(:/Images/Images/btnScoresGlow.png); }\n"
+        self.btnScores.setStyleSheet(u"#btnScores {\n"
+"	border-image: url(:/Images/Images/btnScoresInactive.png);\n"
+"}\n"
+"#btnScores:hover {\n"
+"	border-image: url(:/Images/Images/btnScoresGlow.png);\n"
+"}\n"
+"#btnScores:checked {\n"
+"	border-image: url(:/Images/Images/btnScores.png);\n"
+"}\n"
 "")
 
         self.horizontalLayout.addWidget(self.btnScores)
@@ -357,8 +385,15 @@ class Ui_FormHome(object):
         self.btnGames.setMinimumSize(QSize(131, 90))
         self.btnGames.setMaximumSize(QSize(131, 90))
         self.btnGames.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.btnGames.setStyleSheet(u"#btnGames { border-image: url(:/Images/Images/buttonGames.png); }\n"
-"#btnGames:hover, #btnGames:checked { border-image: url(:/Images/Images/buttonGamesGlow.png); }\n"
+        self.btnGames.setStyleSheet(u"#btnGames {\n"
+"	border-image: url(:/Images/Images/buttonGamesInactive.png);\n"
+"}\n"
+"#btnGames:hover {\n"
+"	border-image: url(:/Images/Images/buttonGamesGlow.png);\n"
+"}\n"
+"#btnGames:checked {\n"
+"	border-image: url(:/Images/Images/buttonGames.png);\n"
+"}\n"
 "")
 
         self.horizontalLayout.addWidget(self.btnGames)
@@ -586,7 +621,7 @@ class Ui_FormHome(object):
         self.scrollArea_id.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 333, 516))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 100, 30))
         self.verticalLayout_7 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_7.setObjectName(u"verticalLayout_7")
         self.scrollArea_id.setWidget(self.scrollAreaWidgetContents)
@@ -701,7 +736,7 @@ class Ui_FormHome(object):
         self.scrollArea_mc.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 334, 516))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 100, 30))
         self.verticalLayout_8 = QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_8.setObjectName(u"verticalLayout_8")
         self.scrollArea_mc.setWidget(self.scrollAreaWidgetContents_2)
@@ -816,7 +851,7 @@ class Ui_FormHome(object):
         self.scrollArea_tf.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 333, 516))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 100, 30))
         self.verticalLayout_9 = QVBoxLayout(self.scrollAreaWidgetContents_3)
         self.verticalLayout_9.setObjectName(u"verticalLayout_9")
         self.scrollArea_tf.setWidget(self.scrollAreaWidgetContents_3)
@@ -1019,7 +1054,7 @@ class Ui_FormHome(object):
         self.scrollArea_quiz_answer.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
         self.scrollAreaWidgetContents_5 = QWidget()
         self.scrollAreaWidgetContents_5.setObjectName(u"scrollAreaWidgetContents_5")
-        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 1038, 486))
+        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 100, 30))
         self.gridLayout_2 = QGridLayout(self.scrollAreaWidgetContents_5)
         self.gridLayout_2.setSpacing(8)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
