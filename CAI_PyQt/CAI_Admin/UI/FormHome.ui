@@ -1543,10 +1543,12 @@ border-radius: 20px;</string>
                     </size>
                    </property>
                    <property name="styleSheet">
-                    <string notr="true">#widget_top_scorers {
+                    <string notr="true">/*
+#widget_top_scorers {
 	border-radius: 10px;
 	background-color: rgb(255, 255, 255);
 }
+*/
 
 #widget_student {
 	background-color: rgb(255, 190, 111);
@@ -2936,8 +2938,8 @@ QSpinBox::down-arrow {
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>494</width>
-                <height>18</height>
+                <width>100</width>
+                <height>30</height>
                </rect>
               </property>
               <layout class="QGridLayout" name="gridLayout_stud_card"/>
@@ -5181,8 +5183,8 @@ QPushButton:hover {
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>23</width>
-                <height>18</height>
+                <width>100</width>
+                <height>30</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_13"/>
@@ -5224,8 +5226,8 @@ QPushButton:hover {
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>23</width>
-                <height>18</height>
+                <width>100</width>
+                <height>30</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_12"/>
@@ -5245,8 +5247,8 @@ QPushButton:hover {
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>24</width>
-                <height>18</height>
+                <width>100</width>
+                <height>30</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_11"/>

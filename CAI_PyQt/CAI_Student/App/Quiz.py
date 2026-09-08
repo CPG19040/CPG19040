@@ -13,6 +13,9 @@ class Quiz(QFrame, Ui_CardQuiz):
     def __init__(self, quiz_type):
         super().__init__()
         self.setupUi(self)
+
+        self.verticalLayout_2.setAlignment(Qt.AlignmentFlag.AlignTop)
+
         self.db_tools = DatabaseTools()
         self.util = Utility()
 
@@ -35,19 +38,33 @@ class Quiz(QFrame, Ui_CardQuiz):
         self.remarks        = ""
 
         self.input_css = """
-            /* Styling the input field */
             QLineEdit {
-                border: 3px solid #ABABAB;
+                border: 2px solid #bba3b1;
                 border-radius: 10px;
-                background-color: #FFF;
-                padding: 0px 10px 0px;
+                background-color: #ffffff;
+                color: #3b1d2e;
+                padding: 0px 12px;
                 height: 35px;
-                font: 11pt "Inter";
+                font: 16pt "Inter";
             }
 
-            /* Highlight when typing (focus) */
+            QLineEdit:hover {
+                border: 2px solid #8c687d;
+            }
+
             QLineEdit:focus {
-                border: 3px solid #007BFF;
+                border: 2px solid #654c5b;
+                background-color: #fffcfd;
+            }
+
+            QLineEdit::placeholder {
+                color: #9e8493;
+            }
+
+            QLineEdit:disabled {
+                background-color: #f0e6eb;
+                border-color: #d1c2cb;
+                color: #9e8c96;
             }
         """
 
@@ -83,7 +100,40 @@ class Quiz(QFrame, Ui_CardQuiz):
             for i, text in enumerate(labels):
                 radio = QRadioButton(text)
                 radio.setMinimumSize(QSize(0, 30))
-                radio.setStyleSheet("font: 11pt \"Inter\"; background-color: #93E6D7; border-radius: 10px; padding: 0px 10px 0px;")
+                radio.setStyleSheet("""
+                    QRadioButton {
+                        font: 16pt "Inter";
+                        color: #3b1d2e;
+                        background-color: #f8dbe8;
+                        border: 1px solid #c99fb7;
+                        border-radius: 10px;
+                        padding: 6px 12px;
+                    }
+
+                    QRadioButton:hover {
+                        background-color: #f2bee0;
+                        border-color: #a86c8f;
+                    }
+
+                    QRadioButton:checked {
+                        background-color: #e39bc7;
+                        font-weight: bold;
+                    }
+
+                    QRadioButton::indicator {
+                        width: 16px;
+                        height: 16px;
+                        border-radius: 9px;
+                        border: 2px solid #7a4361;
+                        background-color: #ffffff;
+                    }
+
+                    QRadioButton::indicator:checked {
+                        background-color: #5c2343;
+                        border: 2px solid #5c2343;
+                    }
+                """
+                )
                 radio.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
                 self.button_group.addButton(radio, i) # Assign an ID (0, 1, 2)
                 self.verticalLayout_2.addWidget(radio)
@@ -99,14 +149,14 @@ class Quiz(QFrame, Ui_CardQuiz):
             self.lable_user_ans = QLabel(self.user_answer)
             self.lable_correct_ans = QLabel(self.correct_answer)
 
-            bg_color = "#C4E8C9"
+            bg_color = "#69d091"
 
             if self.remarks == "Incorrect":
-                bg_color = "#F0C2C6"
+                bg_color = "#ff6872"
 
-            qss = f'background-color: {bg_color}; min-height: 30px; border-radius: 10px; padding: 0px 10px; font: 11pt "Inter Medium";'
-            lbl_1.setStyleSheet('font: 11pt "Inter Medium"')
-            lbl_2.setStyleSheet('font: 11pt "Inter Medium"')
+            qss = f'background-color: {bg_color}; min-height: 30px; border-radius: 10px; padding: 0px 10px; font: 16pt "Inter Medium";'
+            lbl_1.setStyleSheet('font: 14pt "Inter"; color: #866b7b;')
+            lbl_2.setStyleSheet('font: 14pt "Inter"; color: #866b7b;')
             self.lable_user_ans.setStyleSheet(qss)
             self.lable_correct_ans.setStyleSheet(qss)
 

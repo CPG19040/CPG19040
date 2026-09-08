@@ -386,6 +386,15 @@ class Controller:
         record_id, record_mc, record_tf = qUtils.retrieve_quiz()
         itemCnt = 1
 
+        if not record_id:
+            self.ui.tabWidget_quiz.removeTab(0)
+
+        if not record_mc:
+            self.ui.tabWidget_quiz.removeTab(1)
+        
+        if not record_tf:
+            self.ui.tabWidget_quiz.removeTab(2)
+
         for row in record_id:
             quiz = Quiz("ID")
             quiz.idKey = row.get("idkey")
@@ -444,7 +453,7 @@ class Controller:
         qUtils = QuizUtils(self.GRADING_PERIOD)
         self.quiz_cards = []
 
-        layout = self.ui.gridLayout_2
+        layout = self.ui.verticalLayout_4
         layout.setAlignment(Qt.AlignmentFlag.AlignTop)
         layout.setSpacing(5)
 
@@ -480,7 +489,7 @@ class Controller:
             grid_row = index // NUM_COLUMNS
             grid_col = index % NUM_COLUMNS
 
-            layout.addWidget(quiz, grid_row, grid_col)
+            # layout.addWidget(quiz)
 
             itemCnt += 1
 

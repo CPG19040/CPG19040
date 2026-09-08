@@ -17,8 +17,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QFrame, QGridLayout, QHBoxLayout,
     QLabel, QMainWindow, QPushButton, QScrollArea,
-    QSizePolicy, QSpacerItem, QStackedWidget, QVBoxLayout,
-    QWidget)
+    QSizePolicy, QSpacerItem, QStackedWidget, QTabWidget,
+    QVBoxLayout, QWidget)
 import resources_rc
 
 class Ui_FormHome(object):
@@ -39,9 +39,8 @@ class Ui_FormHome(object):
         self.centralwidget.setObjectName(u"centralwidget")
         self.centralwidget.setStyleSheet(u"#centralwidget { border-image: url(:/Images/Images/Wall.svg) 0 0 0 0 stretch stretch; }\n"
 "")
-        self.verticalLayout_4 = QVBoxLayout(self.centralwidget)
-        self.verticalLayout_4.setObjectName(u"verticalLayout_4")
-        self.verticalLayout_4.setContentsMargins(9, -1, -1, -1)
+        self.verticalLayout_6 = QVBoxLayout(self.centralwidget)
+        self.verticalLayout_6.setObjectName(u"verticalLayout_6")
         self.widget_WindowsButtons = QWidget(self.centralwidget)
         self.widget_WindowsButtons.setObjectName(u"widget_WindowsButtons")
         self.horizontalLayout_2 = QHBoxLayout(self.widget_WindowsButtons)
@@ -121,7 +120,7 @@ class Ui_FormHome(object):
         self.horizontalLayout_2.addWidget(self.btnClose)
 
 
-        self.verticalLayout_4.addWidget(self.widget_WindowsButtons)
+        self.verticalLayout_6.addWidget(self.widget_WindowsButtons)
 
         self.widget_2 = QWidget(self.centralwidget)
         self.widget_2.setObjectName(u"widget_2")
@@ -509,7 +508,9 @@ class Ui_FormHome(object):
         self.pageQuiz.setObjectName(u"pageQuiz")
         self.pageQuiz.setStyleSheet(u"background: transparent;")
         self.verticalLayout_12 = QVBoxLayout(self.pageQuiz)
+        self.verticalLayout_12.setSpacing(0)
         self.verticalLayout_12.setObjectName(u"verticalLayout_12")
+        self.verticalLayout_12.setContentsMargins(0, 0, 0, 0)
         self.frame_4 = QFrame(self.pageQuiz)
         self.frame_4.setObjectName(u"frame_4")
         self.frame_4.setFrameShape(QFrame.StyledPanel)
@@ -517,33 +518,50 @@ class Ui_FormHome(object):
         self.horizontalLayout_7 = QHBoxLayout(self.frame_4)
         self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
         self.horizontalLayout_7.setContentsMargins(0, 0, 0, 0)
-        self.frame = QFrame(self.frame_4)
-        self.frame.setObjectName(u"frame")
-        self.frame.setFrameShape(QFrame.StyledPanel)
-        self.frame.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_6 = QVBoxLayout(self.frame)
-        self.verticalLayout_6.setObjectName(u"verticalLayout_6")
-        self.verticalLayout_6.setContentsMargins(0, 0, 0, 0)
-        self.label_lastname_2 = QLabel(self.frame)
-        self.label_lastname_2.setObjectName(u"label_lastname_2")
-        self.label_lastname_2.setMinimumSize(QSize(0, 35))
-        font2 = QFont()
-        font2.setFamilies([u"Kissy Hugs"])
-        font2.setPointSize(13)
-        font2.setBold(False)
-        font2.setItalic(False)
-        self.label_lastname_2.setFont(font2)
-        self.label_lastname_2.setStyleSheet(u"background-color: transparent; font: 13pt \"Kissy Hugs\"; color: #FFF; border-image: url(:/Images/Images/button_wood.png);")
-        self.label_lastname_2.setTextFormat(Qt.PlainText)
-        self.label_lastname_2.setScaledContents(True)
-        self.label_lastname_2.setAlignment(Qt.AlignCenter)
-        self.label_lastname_2.setWordWrap(True)
-        self.label_lastname_2.setMargin(0)
-        self.label_lastname_2.setIndent(10)
-
-        self.verticalLayout_6.addWidget(self.label_lastname_2)
-
-        self.scrollArea_id = QScrollArea(self.frame)
+        self.tabWidget_quiz = QTabWidget(self.frame_4)
+        self.tabWidget_quiz.setObjectName(u"tabWidget_quiz")
+        self.tabWidget_quiz.setCursor(QCursor(Qt.CursorShape.ArrowCursor))
+        self.tabWidget_quiz.setStyleSheet(u"/* Container Frame */\n"
+"QTabWidget::pane {\n"
+"	border: 1px solid #4a3743;\n"
+"	top: -1px; /* Align pane seam with tab bar */\n"
+"	background-color: #654c5b;\n"
+"}\n"
+"\n"
+"/* Tab Bar Placement */\n"
+"QTabBar::tab {\n"
+"    background-color: #503b47;\n"
+"    color: #e0d8dc;\n"
+"    padding: 8px 16px;\n"
+"    margin-right: 4px;\n"
+"    border-top-left-radius: 20px;\n"
+"    border-top-right-radius: 20px;\n"
+"    border: 1px solid #4a3743;\n"
+"    border-bottom: none;\n"
+"	width: 200px;\n"
+"}\n"
+"\n"
+"/* Hovered Tab */\n"
+"QTabBar::tab:hover {\n"
+"    background-color: #5a4351;\n"
+"    color: #ffffff;\n"
+"}\n"
+"\n"
+"/* Active Selected Tab */\n"
+"QTabBar::tab:selected {\n"
+"    background-color: #654c5b; /* Matches pane background */\n"
+"    color: #ffffff;\n"
+"    font-weight: bold;\n"
+"    border-bottom: 1px solid #654c5b; /* Merges tab into the pane seamlessly */\n"
+"}")
+        self.tabWidget_quiz.setTabPosition(QTabWidget.North)
+        self.tabWidget_quiz.setTabShape(QTabWidget.Rounded)
+        self.tabWidget_quiz.setIconSize(QSize(30, 30))
+        self.tab = QWidget()
+        self.tab.setObjectName(u"tab")
+        self.verticalLayout_20 = QVBoxLayout(self.tab)
+        self.verticalLayout_20.setObjectName(u"verticalLayout_20")
+        self.scrollArea_id = QScrollArea(self.tab)
         self.scrollArea_id.setObjectName(u"scrollArea_id")
         self.scrollArea_id.setStyleSheet(u"/* 1. THE MAIN CONTAINER */\n"
 "QScrollArea { \n"
@@ -621,44 +639,19 @@ class Ui_FormHome(object):
         self.scrollArea_id.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 100, 30))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 1034, 529))
         self.verticalLayout_7 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_7.setObjectName(u"verticalLayout_7")
         self.scrollArea_id.setWidget(self.scrollAreaWidgetContents)
 
-        self.verticalLayout_6.addWidget(self.scrollArea_id)
+        self.verticalLayout_20.addWidget(self.scrollArea_id)
 
-
-        self.horizontalLayout_7.addWidget(self.frame)
-
-        self.line_2 = QFrame(self.frame_4)
-        self.line_2.setObjectName(u"line_2")
-        self.line_2.setStyleSheet(u"border: 2px solid brown;")
-        self.line_2.setFrameShape(QFrame.Shape.VLine)
-        self.line_2.setFrameShadow(QFrame.Shadow.Sunken)
-
-        self.horizontalLayout_7.addWidget(self.line_2)
-
-        self.frame_2 = QFrame(self.frame_4)
-        self.frame_2.setObjectName(u"frame_2")
-        self.frame_2.setFrameShape(QFrame.StyledPanel)
-        self.frame_2.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_10 = QVBoxLayout(self.frame_2)
-        self.verticalLayout_10.setObjectName(u"verticalLayout_10")
-        self.verticalLayout_10.setContentsMargins(0, 0, 0, 0)
-        self.label_lastname_3 = QLabel(self.frame_2)
-        self.label_lastname_3.setObjectName(u"label_lastname_3")
-        self.label_lastname_3.setMinimumSize(QSize(0, 35))
-        self.label_lastname_3.setFont(font2)
-        self.label_lastname_3.setStyleSheet(u"background-color: transparent; font: 13pt \"Kissy Hugs\"; color: #FFF; border-image: url(:/Images/Images/button_wood.png);")
-        self.label_lastname_3.setAlignment(Qt.AlignCenter)
-        self.label_lastname_3.setWordWrap(True)
-        self.label_lastname_3.setMargin(0)
-        self.label_lastname_3.setIndent(10)
-
-        self.verticalLayout_10.addWidget(self.label_lastname_3)
-
-        self.scrollArea_mc = QScrollArea(self.frame_2)
+        self.tabWidget_quiz.addTab(self.tab, "")
+        self.tab_2 = QWidget()
+        self.tab_2.setObjectName(u"tab_2")
+        self.verticalLayout_21 = QVBoxLayout(self.tab_2)
+        self.verticalLayout_21.setObjectName(u"verticalLayout_21")
+        self.scrollArea_mc = QScrollArea(self.tab_2)
         self.scrollArea_mc.setObjectName(u"scrollArea_mc")
         self.scrollArea_mc.setStyleSheet(u"/* 1. THE MAIN CONTAINER */\n"
 "QScrollArea { \n"
@@ -736,44 +729,19 @@ class Ui_FormHome(object):
         self.scrollArea_mc.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 100, 30))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 1034, 529))
         self.verticalLayout_8 = QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_8.setObjectName(u"verticalLayout_8")
         self.scrollArea_mc.setWidget(self.scrollAreaWidgetContents_2)
 
-        self.verticalLayout_10.addWidget(self.scrollArea_mc)
+        self.verticalLayout_21.addWidget(self.scrollArea_mc)
 
-
-        self.horizontalLayout_7.addWidget(self.frame_2)
-
-        self.line_3 = QFrame(self.frame_4)
-        self.line_3.setObjectName(u"line_3")
-        self.line_3.setStyleSheet(u"border: 2px solid brown;")
-        self.line_3.setFrameShape(QFrame.Shape.VLine)
-        self.line_3.setFrameShadow(QFrame.Shadow.Sunken)
-
-        self.horizontalLayout_7.addWidget(self.line_3)
-
-        self.frame_3 = QFrame(self.frame_4)
-        self.frame_3.setObjectName(u"frame_3")
-        self.frame_3.setFrameShape(QFrame.StyledPanel)
-        self.frame_3.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_11 = QVBoxLayout(self.frame_3)
-        self.verticalLayout_11.setObjectName(u"verticalLayout_11")
-        self.verticalLayout_11.setContentsMargins(0, 0, 0, 0)
-        self.label_lastname_4 = QLabel(self.frame_3)
-        self.label_lastname_4.setObjectName(u"label_lastname_4")
-        self.label_lastname_4.setMinimumSize(QSize(0, 35))
-        self.label_lastname_4.setFont(font2)
-        self.label_lastname_4.setStyleSheet(u"background-color: transparent; font: 13pt \"Kissy Hugs\"; color: #FFF; border-image: url(:/Images/Images/button_wood.png);")
-        self.label_lastname_4.setAlignment(Qt.AlignCenter)
-        self.label_lastname_4.setWordWrap(True)
-        self.label_lastname_4.setMargin(0)
-        self.label_lastname_4.setIndent(10)
-
-        self.verticalLayout_11.addWidget(self.label_lastname_4)
-
-        self.scrollArea_tf = QScrollArea(self.frame_3)
+        self.tabWidget_quiz.addTab(self.tab_2, "")
+        self.tab_3 = QWidget()
+        self.tab_3.setObjectName(u"tab_3")
+        self.verticalLayout_22 = QVBoxLayout(self.tab_3)
+        self.verticalLayout_22.setObjectName(u"verticalLayout_22")
+        self.scrollArea_tf = QScrollArea(self.tab_3)
         self.scrollArea_tf.setObjectName(u"scrollArea_tf")
         self.scrollArea_tf.setStyleSheet(u"/* 1. THE MAIN CONTAINER */\n"
 "QScrollArea { \n"
@@ -851,15 +819,16 @@ class Ui_FormHome(object):
         self.scrollArea_tf.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 100, 30))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 1034, 529))
         self.verticalLayout_9 = QVBoxLayout(self.scrollAreaWidgetContents_3)
         self.verticalLayout_9.setObjectName(u"verticalLayout_9")
         self.scrollArea_tf.setWidget(self.scrollAreaWidgetContents_3)
 
-        self.verticalLayout_11.addWidget(self.scrollArea_tf)
+        self.verticalLayout_22.addWidget(self.scrollArea_tf)
 
+        self.tabWidget_quiz.addTab(self.tab_3, "")
 
-        self.horizontalLayout_7.addWidget(self.frame_3)
+        self.horizontalLayout_7.addWidget(self.tabWidget_quiz)
 
 
         self.verticalLayout_12.addWidget(self.frame_4)
@@ -1055,9 +1024,8 @@ class Ui_FormHome(object):
         self.scrollAreaWidgetContents_5 = QWidget()
         self.scrollAreaWidgetContents_5.setObjectName(u"scrollAreaWidgetContents_5")
         self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 100, 30))
-        self.gridLayout_2 = QGridLayout(self.scrollAreaWidgetContents_5)
-        self.gridLayout_2.setSpacing(8)
-        self.gridLayout_2.setObjectName(u"gridLayout_2")
+        self.verticalLayout_4 = QVBoxLayout(self.scrollAreaWidgetContents_5)
+        self.verticalLayout_4.setObjectName(u"verticalLayout_4")
         self.scrollArea_quiz_answer.setWidget(self.scrollAreaWidgetContents_5)
 
         self.verticalLayout_18.addWidget(self.scrollArea_quiz_answer)
@@ -1278,13 +1246,14 @@ class Ui_FormHome(object):
         self.horizontalLayout_3.addWidget(self.widget_right_panel)
 
 
-        self.verticalLayout_4.addWidget(self.widget_2)
+        self.verticalLayout_6.addWidget(self.widget_2)
 
         FormHome.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(FormHome)
 
         self.stackedWidget.setCurrentIndex(0)
+        self.tabWidget_quiz.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(FormHome)
@@ -1308,9 +1277,9 @@ class Ui_FormHome(object):
         self.btnExercise.setText("")
         self.btnScores.setText("")
         self.btnGames.setText("")
-        self.label_lastname_2.setText(QCoreApplication.translate("FormHome", u"Identification", None))
-        self.label_lastname_3.setText(QCoreApplication.translate("FormHome", u"Multiple Choice", None))
-        self.label_lastname_4.setText(QCoreApplication.translate("FormHome", u"True or False", None))
+        self.tabWidget_quiz.setTabText(self.tabWidget_quiz.indexOf(self.tab), QCoreApplication.translate("FormHome", u"Indentification", None))
+        self.tabWidget_quiz.setTabText(self.tabWidget_quiz.indexOf(self.tab_2), QCoreApplication.translate("FormHome", u"Multiple Choice", None))
+        self.tabWidget_quiz.setTabText(self.tabWidget_quiz.indexOf(self.tab_3), QCoreApplication.translate("FormHome", u"True or False", None))
         self.btnSubmitQuiz.setText(QCoreApplication.translate("FormHome", u"Submit", None))
         self.label_message.setText(QCoreApplication.translate("FormHome", u"QUIZ COMPLETED!", None))
         self.btn_retake.setText(QCoreApplication.translate("FormHome", u"Try again", None))
