@@ -149,16 +149,32 @@ class Quiz(QFrame, Ui_CardQuiz):
             self.lable_user_ans = QLabel(self.user_answer)
             self.lable_correct_ans = QLabel(self.correct_answer)
 
-            bg_color = "#69d091"
+            bg_color = "#69D091"
 
             if self.remarks == "Incorrect":
-                bg_color = "#ff6872"
+                bg_color = "#FF6872"
 
-            qss = f'background-color: {bg_color}; min-height: 30px; border-radius: 10px; padding: 0px 10px; font: 16pt "Inter Medium";'
-            lbl_1.setStyleSheet('font: 14pt "Inter"; color: #866b7b;')
-            lbl_2.setStyleSheet('font: 14pt "Inter"; color: #866b7b;')
+            qss = f'''
+                QLabel {{
+                    background-color: {bg_color};
+                    min-height: 30px;
+                    border-radius: 10px;
+                    padding: 0px 10px;
+                    font: 16pt "Inter Medium";
+                }}
+            '''
+            lbl_1.setStyleSheet('font: 14pt "Inter"; color: #866B7B;')
+            lbl_2.setStyleSheet('font: 14pt "Inter"; color: #866B7B;')
             self.lable_user_ans.setStyleSheet(qss)
-            self.lable_correct_ans.setStyleSheet(qss)
+            self.lable_correct_ans.setStyleSheet('''
+                QLabel {
+                    background-color: #69D091;
+                    min-height: 30px;
+                    border-radius: 10px;
+                    padding: 0px 10px;
+                    font: 16pt "Inter Medium";
+                }
+            ''')
 
             layout_ans_1.addWidget(lbl_1)
             layout_ans_1.addWidget(self.lable_user_ans)
