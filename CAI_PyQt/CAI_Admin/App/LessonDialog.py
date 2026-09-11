@@ -24,9 +24,9 @@ class Ui_LessonDialog(object):
     def setupUi(self, LessonDialog):
         if not LessonDialog.objectName():
             LessonDialog.setObjectName(u"LessonDialog")
-        LessonDialog.resize(900, 351)
-        LessonDialog.setMinimumSize(QSize(697, 351))
-        LessonDialog.setMaximumSize(QSize(900, 351))
+        LessonDialog.resize(939, 383)
+        LessonDialog.setMinimumSize(QSize(939, 383))
+        LessonDialog.setMaximumSize(QSize(939, 383))
         LessonDialog.setStyleSheet(u"* {\n"
 "	background-color: rgb(222, 221, 218); \n"
 "	color: black;\n"
@@ -188,8 +188,8 @@ class Ui_LessonDialog(object):
         self.gridLayout.setObjectName(u"gridLayout")
         self.label_img = QLabel(self.widget_4)
         self.label_img.setObjectName(u"label_img")
-        self.label_img.setMinimumSize(QSize(200, 200))
-        self.label_img.setMaximumSize(QSize(200, 200))
+        self.label_img.setMinimumSize(QSize(300, 300))
+        self.label_img.setMaximumSize(QSize(300, 300))
         self.label_img.setStyleSheet(u"background-color: rgb(246, 245, 244);")
         self.label_img.setPixmap(QPixmap(u":/Images/Images/no-image2.png"))
         self.label_img.setScaledContents(True)
@@ -342,7 +342,7 @@ class Ui_LessonDialog(object):
 "	border: 1px solid #999999;\n"
 "	border-left: none;\n"
 "	border-right: none;\n"
-"	padding: 0px 15px;\n"
+"	padding: 0px 8px;\n"
 "}\n"
 "\n"
 "QLineEdit:hover {\n"
@@ -378,8 +378,8 @@ class Ui_LessonDialog(object):
 "	border-bottom: 1px solid #999;\n"
 "	border-right: none;\n"
 "	border-top-left-radius: 15px;\n"
-"	border-bottom-left-radius"
-                        ": 15px;\n"
+"	border-bottom-left-radius:"
+                        " 15px;\n"
 "	padding-left: 8px;\n"
 "	color: black;\n"
 "}")
@@ -420,13 +420,7 @@ class Ui_LessonDialog(object):
 
         self.verticalLayout_2.addItem(self.verticalSpacer)
 
-
-        self.horizontalLayout_3.addWidget(self.widget_right)
-
-
-        self.verticalLayout.addWidget(self.widget)
-
-        self.widget_2 = QWidget(LessonDialog)
+        self.widget_2 = QWidget(self.widget_right)
         self.widget_2.setObjectName(u"widget_2")
         self.horizontalLayout = QHBoxLayout(self.widget_2)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
@@ -451,7 +445,13 @@ class Ui_LessonDialog(object):
         self.horizontalLayout.addWidget(self.btnSave)
 
 
-        self.verticalLayout.addWidget(self.widget_2)
+        self.verticalLayout_2.addWidget(self.widget_2)
+
+
+        self.horizontalLayout_3.addWidget(self.widget_right)
+
+
+        self.verticalLayout.addWidget(self.widget)
 
 
         self.retranslateUi(LessonDialog)

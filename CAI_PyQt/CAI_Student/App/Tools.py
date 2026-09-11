@@ -202,12 +202,18 @@ class Utility:
         if order == 3: # Monogram or Initialized Style
             return f"{firstname[:1].upper()}, {middlename[:1].upper()} {lastname[:1].upper()}".title()
 
+    def find_tab_by_name(self, tab_widget, name):
+        for i in range(tab_widget.count()):
+            if tab_widget.tabText(i) == name:
+                return i
+        return -1
+
 
 class StudentCard(QFrame):
     clicked = Signal(object, str)
 
-    """Custom widget representing a single card."""
     def __init__(self, name, stud_id, image, border_radius='10px'):
+        """Custom widget representing a single card."""
         super().__init__()
 
         self.fullName = name

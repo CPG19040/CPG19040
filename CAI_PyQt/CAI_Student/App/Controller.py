@@ -211,7 +211,8 @@ class Controller:
 
         elif index == 4:
             self.display_myscores()
-            self.ui.label_score.setText(f"{record['quizscore']}/{record['totalscore']}")
+
+        self.ui.label_score.setText(f"{record['quizscore']}/{record['totalscore']}")
         
         self.slide_to_page(index)
         button.setChecked(True)
@@ -392,15 +393,17 @@ class Controller:
         record_id, record_mc, record_tf = qUtils.retrieve_quiz()
         itemCnt = 1
 
-        # Remove tabs from HIGHEST index to LOWEST index
-        if not record_tf:
-            self.ui.tabWidget_quiz.removeTab(2)
-        
-        if not record_mc:
-            self.ui.tabWidget_quiz.removeTab(1)
+        index = self.util.find_tab_by_name(self.ui.tabWidget_quiz, "Indentification")
+        if index != -1 and not record_id:
+            self.ui.tabWidget_quiz.removeTab(index)
 
-        if not record_id:
-            self.ui.tabWidget_quiz.removeTab(0)
+        index = self.util.find_tab_by_name(self.ui.tabWidget_quiz, "Multiple Choice")
+        if index != -1 and not record_mc:
+            self.ui.tabWidget_quiz.removeTab(index)
+
+        index = self.util.find_tab_by_name(self.ui.tabWidget_quiz, "True or False")
+        if index != -1 and not record_tf:
+            self.ui.tabWidget_quiz.removeTab(index)
 
         for row in record_id:
             quiz = Quiz("ID")

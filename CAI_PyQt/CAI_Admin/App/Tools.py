@@ -1,8 +1,9 @@
 import os, sys, subprocess
+from pathlib import Path
 
 from PySide6.QtWidgets import QVBoxLayout, QHBoxLayout, QLabel, QFrame, QFileDialog, QWidget, QMainWindow, QDialog, QComboBox
 from PySide6.QtGui import QPixmap, QPainter, QColor, QPen, QPainterPath, QFont
-from PySide6.QtCore import Qt, Signal, QDate, QUrl, QRectF, QPoint, QPropertyAnimation, QEasingCurve
+from PySide6.QtCore import QIODevice, Qt, Signal, QDate, QUrl, QRectF, QPoint, QPropertyAnimation, QEasingCurve, QFile
 from PySide6.QtWebEngineWidgets import QWebEngineView
 
 from App.CRUDTools import DatabaseTools
@@ -33,6 +34,26 @@ class Utility:
         next_year = base_year + 1
 
         return today, base_year, next_year
+
+    def read_image_file_bytes(self, file_name: str) -> bytes:
+        """Reads an image file and returns its byte content."""
+
+        script_dir = Path(__file__).parent.resolve()
+        cai_admin_dir = script_dir.parent
+        full_path = cai_admin_dir / "LessonImages" / file_name
+
+        if not os.path.exists(full_path):
+            print(f"[Warning] read_image_file_bytes(): File not found: {full_path}")
+            return b""
+        
+        file = QFile(str(full_path))
+
+        if file.open(QIODevice.ReadOnly):
+            file_bytes = file.readAll().data()
+            file.close()
+            return file_bytes
+        
+        return b""
 
     def getCircularPixmapFromImagePath(self, image_path, size=100):
         """

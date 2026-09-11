@@ -14,6 +14,7 @@ class Lesson:
 
     def __init__(self):
         self.db_tools = DatabaseTools()
+        self.util = Utility()
 
     def count(self):
         sql = "SELECT COUNT(*) FROM cai.tbl_lessons;"
@@ -55,12 +56,6 @@ class Lesson:
             with open(csv_path, mode='r', encoding='utf-8') as f:
                 reader = csv.DictReader(f)
 
-                sql = """
-                    INSERT INTO cai.tbl_lessons (
-                        chapter, lessonnum, gradingperiod, title, lessonfilename
-                    ) VALUES (%s, %s, %s, %s, %s);
-                """
-
                 for row_idx, row in enumerate(reader, start=1):
                     row_errors = []
 
@@ -81,14 +76,28 @@ class Lesson:
                         errors.append(f"Row {row_idx}: Lesson '{row['TITLE']}' already exists.")
                         continue
 
-                    # Execute query safely using parameters
-                    self.db_tools.execute_query(sql, (
+                    lessonImage = self.util.read_image_file_bytes(row["IMAGE"])
+                    sql  = "INSERT INTO cai.tbl_lessons (\n"
+                    sql += "    chapter\n"
+                    sql += "    ,lessonnum\n"
+                    sql += "    ,gradingperiod\n"
+                    sql += "    ,title\n"
+                    sql += "    ,lessonfilename\n"
+                    sql += "    ,lessonimages\n" if lessonImage else "\n"
+                    sql += ") VALUES (%s, %s, %s, %s, %s"
+                    sql += ", %s" if lessonImage else ""
+                    sql += ");"
+
+                    params = (
                         row["CHAPTER"],
                         row["NUMBER"],
                         row["GRADING PERIOD"],
                         row["TITLE"],
-                        f"{row['TITLE']}.pdf"  # Fixed inner double-quotes syntax error
-                    ))
+                        f"{row['TITLE']}.pdf"
+                    )
+
+                    params = params + (lessonImage,) if lessonImage else params
+                    self.db_tools.execute_query(sql, params)
 
         except Exception as e:
             errors.append(f"Database/File error: {str(e)}")
