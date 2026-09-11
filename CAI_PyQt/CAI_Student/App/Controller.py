@@ -211,20 +211,26 @@ class Controller:
 
         elif index == 4:
             self.display_myscores()
-
-        self.ui.label_score.setText(f"{record['quizscore']}/{record['totalscore']}")
+            self.ui.label_score.setText(f"{record['quizscore']}/{record['totalscore']}")
         
         self.slide_to_page(index)
         button.setChecked(True)
 
     def slide_to_page(self, index):
         stack = self.ui.stackedWidget
+        
         if stack.currentIndex() == index:
             return
 
         if index == 101:
             index = 1 # Back to [Take Quiz]
             self.displayQuiz()
+
+        elif index == 2:
+            sid = self.settings.value("studentid")
+            _, record = Student().get_quiz_status(sid)
+            self.ui.label_score.setText(f"{record['quizscore']}/{record['totalscore']}")
+            self.displayQuizAnswers()
 
         current_page = stack.currentWidget()
         next_page = stack.widget(index)
@@ -386,14 +392,15 @@ class Controller:
         record_id, record_mc, record_tf = qUtils.retrieve_quiz()
         itemCnt = 1
 
-        if not record_id:
-            self.ui.tabWidget_quiz.removeTab(0)
-
-        if not record_mc:
-            self.ui.tabWidget_quiz.removeTab(1)
-        
+        # Remove tabs from HIGHEST index to LOWEST index
         if not record_tf:
             self.ui.tabWidget_quiz.removeTab(2)
+        
+        if not record_mc:
+            self.ui.tabWidget_quiz.removeTab(1)
+
+        if not record_id:
+            self.ui.tabWidget_quiz.removeTab(0)
 
         for row in record_id:
             quiz = Quiz("ID")
@@ -554,10 +561,6 @@ class Controller:
         if success == 1: # Success, customized message for student
             dialog = CustomShapeDialog("Good Job !!!", parent=self.home_win)
             dialog.exec()
-
-            sid = self.settings.value("studentid")
-            _, record = Student().get_quiz_status(sid)
-            self.ui.label_score.setText(f"{record['quizscore']}/{record['totalscore']}")
             self.slide_to_page(2)
 
         elif success == 2: # Failed, customized message for student
