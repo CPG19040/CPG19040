@@ -45,6 +45,7 @@ class Controller:
                 "lastname": self.settings.value("lastname"),
                 "gender": self.settings.value("gender"),
                 "section": self.settings.value("section"),
+                "bg_music_mute": False
             }
             self.show_home(user)
         else:
@@ -123,7 +124,14 @@ class Controller:
         self.home_win.player.setSource(QUrl.fromLocalFile(path))
         self.home_win.audio_output.setVolume(0.5)
         self.login_win.player.stop()
-        self.home_win.player.play()
+
+        is_muted = self.settings.value("bg_music_mute", False, type=bool)
+        if not is_muted:
+            self.home_win.player.play()
+            self.ui.btnSound.setChecked(False)
+        else:
+            self.home_win.player.stop()
+            self.ui.btnSound.setChecked(True)
 
         self.sounds = {}
 
@@ -152,6 +160,7 @@ class Controller:
 
         self.window_handler = WindowHandler(self.home_win)
 
+        self.ui.btnSound.clicked.connect(lambda checked: self.toggle_sound(checked))
         self.ui.btnClose.clicked.connect(self.home_win.close)
         self.ui.btnMinimize.clicked.connect(self.home_win.showMinimized)
         self.ui.btnMaximize.clicked.connect(self.toggle_maximize)
@@ -315,6 +324,19 @@ class Controller:
         self.ui.label_gradingperiod.setText(active_quarter)
 
         return quarters
+
+    def toggle_sound(self, checked):
+        self.settings.setValue("bg_music_mute", checked)
+        self.settings.sync()
+
+        if checked:
+            # Mute the audio
+            self.home_win.player.stop()
+            self.ui.btnSound.setChecked(True)
+        else:
+            # Unmute the audio
+            self.home_win.player.play()
+            self.ui.btnSound.setChecked(False)
 
     def display_section_info(self, studentid):
         if studentid:

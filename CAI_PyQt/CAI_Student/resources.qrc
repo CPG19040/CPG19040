@@ -73,7 +73,9 @@
     <file>Images/slab.png</file>
     <file>Images/slab2.png</file>
     <file>Images/speaker.png</file>
-    <file>Images/speakerBig.png</file>
+    <file>Images/speaker_glow.png</file>
+    <file>Images/speaker_mute.png</file>
+    <file>Images/speaker_mute_glow.png</file>
     <file>Images/student-user.png</file>
     <file>Images/Subtraction.png</file>
     <file>Images/teacher.png</file>

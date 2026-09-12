@@ -267,6 +267,46 @@ class Ui_FormHome(object):
 
         self.verticalLayout.addItem(self.verticalSpacer)
 
+        self.widget_8 = QWidget(self.widget_left_panel)
+        self.widget_8.setObjectName(u"widget_8")
+        self.widget_8.setStyleSheet(u"")
+        self.horizontalLayout_9 = QHBoxLayout(self.widget_8)
+        self.horizontalLayout_9.setObjectName(u"horizontalLayout_9")
+        self.horizontalSpacer_9 = QSpacerItem(53, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_9.addItem(self.horizontalSpacer_9)
+
+        self.btnSound = QPushButton(self.widget_8)
+        self.btnSound.setObjectName(u"btnSound")
+        self.btnSound.setMinimumSize(QSize(50, 50))
+        self.btnSound.setMaximumSize(QSize(50, 50))
+        self.btnSound.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.btnSound.setStyleSheet(u"#btnSound {\n"
+"    border-image: url(:/Images/Images/speaker.png);\n"
+"}\n"
+"\n"
+"#btnSound:hover {\n"
+"    border-image: url(:/Images/Images/speaker_glow.png);\n"
+"}\n"
+"\n"
+"#btnSound:checked {\n"
+"    border-image: url(:/Images/Images/speaker_mute.png);\n"
+"}\n"
+"\n"
+"#btnSound:checked:hover {\n"
+"    border-image: url(:/Images/Images/speaker_mute_glow.png);\n"
+"}")
+        self.btnSound.setCheckable(True)
+
+        self.horizontalLayout_9.addWidget(self.btnSound)
+
+        self.horizontalSpacer_10 = QSpacerItem(53, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_9.addItem(self.horizontalSpacer_10)
+
+
+        self.verticalLayout.addWidget(self.widget_8)
+
         self.widget_5 = QWidget(self.widget_left_panel)
         self.widget_5.setObjectName(u"widget_5")
         self.widget_5.setStyleSheet(u"")
@@ -639,7 +679,7 @@ class Ui_FormHome(object):
         self.scrollArea_id.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 1034, 529))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 72, 18))
         self.verticalLayout_7 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_7.setObjectName(u"verticalLayout_7")
         self.scrollArea_id.setWidget(self.scrollAreaWidgetContents)
@@ -1015,7 +1055,7 @@ class Ui_FormHome(object):
         self.scrollArea_quiz_answer.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
         self.scrollAreaWidgetContents_5 = QWidget()
         self.scrollAreaWidgetContents_5.setObjectName(u"scrollAreaWidgetContents_5")
-        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 1038, 558))
+        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 100, 30))
         self.verticalLayout_4 = QVBoxLayout(self.scrollAreaWidgetContents_5)
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
         self.scrollArea_quiz_answer.setWidget(self.scrollAreaWidgetContents_5)
@@ -1118,7 +1158,7 @@ class Ui_FormHome(object):
         self.scrollArea_scores.setWidgetResizable(True)
         self.layout_scores = QWidget()
         self.layout_scores.setObjectName(u"layout_scores")
-        self.layout_scores.setGeometry(QRect(0, 0, 72, 18))
+        self.layout_scores.setGeometry(QRect(0, 0, 100, 30))
         self.gridLayout_3 = QGridLayout(self.layout_scores)
         self.gridLayout_3.setSpacing(8)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
@@ -1263,6 +1303,10 @@ class Ui_FormHome(object):
         self.label_lastname.setText(QCoreApplication.translate("FormHome", u"Flynn", None))
         self.label_studentId.setText(QCoreApplication.translate("FormHome", u"2026-0001-STU", None))
         self.label_sectionName.setText(QCoreApplication.translate("FormHome", u"Honesty", None))
+#if QT_CONFIG(tooltip)
+        self.btnSound.setToolTip(QCoreApplication.translate("FormHome", u"Background Music", None))
+#endif // QT_CONFIG(tooltip)
+        self.btnSound.setText("")
         self.btnQuit.setText("")
         self.btnLessons.setText("")
         self.btnQuiz.setText("")
