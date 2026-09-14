@@ -39,13 +39,7 @@ class Controller:
         sid = self.settings.value("studentid")
         if sid:
             user = {
-                "studentid": sid,
-                "firstname": self.settings.value("firstname"),
-                "middlename": self.settings.value("middlename"),
-                "lastname": self.settings.value("lastname"),
-                "gender": self.settings.value("gender"),
-                "section": self.settings.value("section"),
-                "bg_music_mute": False
+                "studentid": sid
             }
             self.show_home(user)
         else:
@@ -125,13 +119,12 @@ class Controller:
         self.home_win.audio_output.setVolume(0.5)
         self.login_win.player.stop()
 
-        is_muted = self.settings.value("bg_music_mute", False, type=bool)
-        if not is_muted:
-            self.home_win.player.play()
-            self.ui.btnSound.setChecked(False)
-        else:
+        if self.login_win.btnSound.isChecked():
             self.home_win.player.stop()
             self.ui.btnSound.setChecked(True)
+        else:
+            self.home_win.player.play()
+            self.ui.btnSound.setChecked(False)
 
         self.sounds = {}
 
@@ -275,8 +268,16 @@ class Controller:
         self.home_win.player.stop()
         self.home_win.close()
         self.login_win.show()
-        self.login_win.player.play()
         self.login_win.txtPassword.clear()
+
+        self.settings.setValue("bg_music_mute", self.ui.btnSound.isChecked())
+
+        if self.ui.btnSound.isChecked():
+            self.login_win.player.stop()
+            self.login_win.btnSound.setChecked(True)
+        else:
+            self.login_win.player.play()
+            self.login_win.btnSound.setChecked(False)
 
     def load_fonts(self):
         path = self.util.get_resource_path(os.path.join("..", "Fonts"))
@@ -327,7 +328,6 @@ class Controller:
 
     def toggle_sound(self, checked):
         self.settings.setValue("bg_music_mute", checked)
-        self.settings.sync()
 
         if checked:
             # Mute the audio

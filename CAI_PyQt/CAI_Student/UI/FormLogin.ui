@@ -511,6 +511,51 @@ QListWidget QCornerWidget {
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QPushButton" name="btnSound">
+            <property name="minimumSize">
+             <size>
+              <width>50</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>50</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="toolTip">
+             <string>Background Music</string>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">#btnSound {
+    border-image: url(:/Images/Images/speaker.png);
+}
+
+#btnSound:hover {
+    border-image: url(:/Images/Images/speaker_glow.png);
+}
+
+#btnSound:checked {
+    border-image: url(:/Images/Images/speaker_mute.png);
+}
+
+#btnSound:checked:hover {
+    border-image: url(:/Images/Images/speaker_mute_glow.png);
+}</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
          </layout>
         </widget>
        </item>

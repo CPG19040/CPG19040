@@ -1,5 +1,5 @@
 from PySide6.QtWidgets import QWidget, QListWidgetItem, QLineEdit
-from PySide6.QtCore import Qt, Signal, QPropertyAnimation, QParallelAnimationGroup, QEasingCurve, QPoint, QUrl, QEvent
+from PySide6.QtCore import Qt, Signal, QPropertyAnimation, QParallelAnimationGroup, QEasingCurve, QPoint, QUrl, QEvent, QSettings
 from PySide6.QtGui import QImage, QPixmap
 from PySide6.QtMultimedia import QSoundEffect, QMediaPlayer, QAudioOutput
 
@@ -18,6 +18,8 @@ class Login(QWidget, Ui_FormLogin):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+
+        self.settings = QSettings("CAI_System", "CAI_Student_App")
 
         self.db_tools = DatabaseTools()
         self.util = Utility()
@@ -46,7 +48,15 @@ class Login(QWidget, Ui_FormLogin):
         self.player.setAudioOutput(self.audio_output)
         self.player.setSource(QUrl.fromLocalFile(os.path.join(self.audio_path, "bgMusic.wav")))
         self.audio_output.setVolume(0.5)
-        self.player.play()
+
+        is_muted = self.settings.value("bg_music_mute", False, type=bool)
+        if is_muted:
+            self.player.stop()
+            self.btnSound.setChecked(True)
+        else:
+            self.player.play()
+            self.btnSound.setChecked(False)
+                    
         self.sounds = {}
 
         # Initialize sound effects
@@ -86,6 +96,7 @@ class Login(QWidget, Ui_FormLogin):
         record = self.student.retrieve_sections()
         self.list_sections.clear()
         self.list_sections.currentItemChanged.connect(self.display_student_cards)
+        self.btnSound.clicked.connect(lambda checked: self.toggle_sound(checked))
 
         for index_data, item_name in record:
             # Create the visual item
@@ -380,6 +391,18 @@ class Login(QWidget, Ui_FormLogin):
 
         self.anim_group.finished.connect(lambda: stack.setCurrentIndex(index))
         self.anim_group.start()
+
+    def toggle_sound(self, checked):
+        self.settings.setValue("bg_music_mute", checked)
+
+        if checked:
+            # Mute the audio
+            self.player.stop()
+            self.btnSound.setChecked(True)
+        else:
+            # Unmute the audio
+            self.player.play()
+            self.btnSound.setChecked(False)
 
     def toggle_password_visibility(self):
         if self.txtPassword.echoMode() == QLineEdit.EchoMode.Password:

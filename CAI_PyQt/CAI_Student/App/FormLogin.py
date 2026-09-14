@@ -298,6 +298,30 @@ class Ui_FormLogin(object):
 
         self.verticalLayout.addWidget(self.list_sections)
 
+        self.btnSound = QPushButton(self.widget)
+        self.btnSound.setObjectName(u"btnSound")
+        self.btnSound.setMinimumSize(QSize(50, 50))
+        self.btnSound.setMaximumSize(QSize(50, 50))
+        self.btnSound.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.btnSound.setStyleSheet(u"#btnSound {\n"
+"    border-image: url(:/Images/Images/speaker.png);\n"
+"}\n"
+"\n"
+"#btnSound:hover {\n"
+"    border-image: url(:/Images/Images/speaker_glow.png);\n"
+"}\n"
+"\n"
+"#btnSound:checked {\n"
+"    border-image: url(:/Images/Images/speaker_mute.png);\n"
+"}\n"
+"\n"
+"#btnSound:checked:hover {\n"
+"    border-image: url(:/Images/Images/speaker_mute_glow.png);\n"
+"}")
+        self.btnSound.setCheckable(True)
+
+        self.verticalLayout.addWidget(self.btnSound)
+
 
         self.horizontalLayout.addWidget(self.widget)
 
@@ -725,6 +749,10 @@ class Ui_FormLogin(object):
         self.btnClose.setText("")
         self.label_2.setText(QCoreApplication.translate("FormLogin", u"1", None))
         self.label.setText(QCoreApplication.translate("FormLogin", u"Select your section", None))
+#if QT_CONFIG(tooltip)
+        self.btnSound.setToolTip(QCoreApplication.translate("FormLogin", u"Background Music", None))
+#endif // QT_CONFIG(tooltip)
+        self.btnSound.setText("")
         self.label_3.setText(QCoreApplication.translate("FormLogin", u"2", None))
         self.label_26.setText(QCoreApplication.translate("FormLogin", u"Select your name", None))
         self.btnBack.setText(QCoreApplication.translate("FormLogin", u"Back", None))
