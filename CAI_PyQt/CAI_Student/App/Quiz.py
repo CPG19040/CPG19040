@@ -77,6 +77,7 @@ class Quiz(QFrame, Ui_CardQuiz):
             image = QImage.fromData(bytes(self.imageQ))
             if not image.isNull():
                 pixmap = QPixmap.fromImage(image)
+                pixmap = self.util.makeCircularPixmap(pixmap, self.label_q_image.width(), 10)
                 self.label_q_image.setPixmap(pixmap)
 
         else:
