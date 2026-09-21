@@ -263,7 +263,7 @@ class AddUserDialog(QDialog, Ui_AddNewUserDialog):
             self.label_profile_pic.setPixmap(self.util.makeCircularPixmap(self.profile_pic, w))
 
     def register_user(self, user:dict):
-        # 1. Collect data
+        # Collect data
         data = {
             "fname": self.lineEdit_firstname.text().strip(),
             "mname": self.lineEdit_middlename.text().strip(),
@@ -275,31 +275,31 @@ class AddUserDialog(QDialog, Ui_AddNewUserDialog):
             "contact_number": self.txtContactNum.text().strip()
         }
 
-        # 2. Basic Validation: Required Fields
+        # Basic Validation: Required Fields
         required_fields = ["fname", "lname", "uname", "pwd"]
         if not all(data[field] for field in required_fields):
             QMessageBox.warning(self, "Validation Error", "All fields except Middle Name are required.")
             return
 
-        # 3. Format Validation: Names (No numbers allowed)
+        # Format Validation: Names (No numbers allowed)
         name_regex = r"^[a-zA-Z\s.-]+$"
         if not re.match(name_regex, data["fname"]) or not re.match(name_regex, data["lname"]):
             QMessageBox.warning(self, "Validation Error", "Names should only contain letters.")
             return
 
-        # 4. Format Validation: Password Strength
+        # Format Validation: Password Strength
         if len(data["pwd"]) < 6:
             QMessageBox.warning(self, "Validation Error", "Password must be at least 6 characters long.")
             return
 
-        # 5. Database Validation: Duplicate Username
+        # Database Validation: Duplicate Username
         check_query = "SELECT COUNT(*) FROM cai.tbl_staff_info WHERE username = %s"
         exists = self.db.fetch_all(check_query, (data["uname"],))
         if exists and exists[0]['count'] > 0:
             QMessageBox.warning(self, "Validation Error", f"Username '{data['uname']}' is already taken.")
             return
 
-        # 6. Proceed to Registration
+        # Proceed to Registration
         try:
             sql = """
                 INSERT INTO cai.tbl_staff_info(

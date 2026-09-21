@@ -405,12 +405,12 @@ class CustomShapeDialog(QDialog, Ui_CustomDialog):
         super().__init__(parent)
         self.setupUi(self)
 
-        # 1. Essential Flags
+        # Essential Flags
         self.setWindowFlags(Qt.WindowType.FramelessWindowHint | Qt.WindowType.Dialog)
         self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground) # For rounded corners
         self.setModal(True)
 
-        # 2. Re-use WindowHandler for dragging
+        # Re-use WindowHandler for dragging
         self.handler = WindowHandler(self)
 
         self.util = Utility()
@@ -426,7 +426,7 @@ class CustomShapeDialog(QDialog, Ui_CustomDialog):
 
         movie = QMovie(file_path)
 
-        # 3. Content
+        # Content
         self.label_gif.setMovie(movie)
         movie.start()
         self.label_message.setText(str(message))

@@ -203,14 +203,14 @@ class Lesson:
         """
         Combines the dynamic root path with the filename from the database.
         """
-        # 1. Locate the project root (Assuming current file is in CAI_Admin/App)
+        # Locate the project root (Assuming current file is in CAI_Admin/App)
         # .parent(App) -> .parent(CAI_Admin) -> .parent(ProjectRoot)
         project_root = Path(__file__).resolve().parent.parent.parent
 
-        # 2. Build the path to the Student Lessons folder
+        # Build the path to the Student Lessons folder
         lessons_folder = project_root / "CAI_Student" / "Lessons"
 
-        # 3. Join with the filename stored in the DB
+        # Join with the filename stored in the DB
         return lessons_folder / db_path_str
 
 

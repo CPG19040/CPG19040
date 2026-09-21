@@ -25,7 +25,7 @@ class Login(QMainWindow, Ui_FormLogin):
 
     def authenticate_user(self, username, password):
         try:
-            query = "SELECT\n"
+            query  = "SELECT\n"
             query += "  A.school_id\n"
             query += "  ,A.username\n"
             query += "  ,A.firstname\n"

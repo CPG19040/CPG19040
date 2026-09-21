@@ -95,10 +95,7 @@ class Controller:
         self.get_dynamic_grading_period_dates()
         self.displayDashboard()
 
-        # Search Box: Pass the text directly
         self.ui.txt_classList_search.textChanged.connect(self.display_student_cards)
-
-        # Used a lambda to ignore the 'value' integer they send
         self.ui.cmb_school_year.currentIndexChanged.connect(lambda: self.handle_student_searching())
 
         self.nav_group = QButtonGroup(self.home_win)
@@ -122,7 +119,6 @@ class Controller:
             self.nav_group.addButton(btn)
             btn.clicked.connect(lambda checked, i=idx: self.handle_nav_click(i))
 
-        # Optional: Set the initial active button (Home)
         self.ui.btnHome.setChecked(True)
 
         pic = Staff().get_user_profile_pic(user["school_id"])
@@ -219,6 +215,7 @@ class Controller:
            pass
 
         elif role == "Teacher":
+            self.ui.btnAddNewUser.setVisible(False)
             self.ui.btnEditUserInfo.setVisible(False)
             self.ui.btnDeleteUser.setVisible(False)
 
@@ -299,20 +296,18 @@ class Controller:
 
     def slide_to_page(self, index):
         stack = self.ui.stackedWidget
+
         if stack.currentIndex() == index:
             return
 
-        # 1. Setup variables
         current_page = stack.currentWidget()
         next_page = stack.widget(index)
         width = stack.width()
 
-        # 2. Prepare next page (move it to the right side off-screen)
         next_page.setGeometry(width, 0, width, stack.height())
         next_page.show()
         next_page.raise_()
 
-        # 3. Create Parallel Animations
         self.anim_group = QParallelAnimationGroup()
 
         # Slide next page IN (from right to center)
@@ -332,7 +327,7 @@ class Controller:
         self.anim_group.addAnimation(anim_in)
         self.anim_group.addAnimation(anim_out)
 
-        # 4. On finish, update the StackedWidget index to "reset" the layout
+        # On finish, update the StackedWidget index to "reset" the layout
         self.anim_group.finished.connect(lambda: stack.setCurrentIndex(index))
         self.anim_group.start()
 
@@ -427,21 +422,17 @@ class Controller:
         if confirm == QMessageBox.StandardButton.No:
             return
 
-        # 1. Clear the persistent session from QSettings
         self.settings.clear()
         self.settings.sync()
 
-        # 2. Close all top-level windows (Home, Dialogs, etc.)
-        # We use [:] to create a snapshot of the list to avoid iteration errors
+        # Use [:] to create a snapshot of the list to avoid iteration errors
         for widget in QApplication.topLevelWidgets()[:]:
             widget.close()
 
-        # 3. Reset the Login Window fields (Security best practice)
         self.login_win.txtUsername.clear()
         self.login_win.txtPassword.clear()
         self.login_win.txtUsername.setFocus()
 
-        # 4. Show the login window again
         self.login_win.show()
 
     def load_fonts(self):
@@ -611,7 +602,7 @@ class Controller:
         if selected_row:
             sid, lname, fname, mname, section, gender, *_, contact_person, contact_num = selected_row
 
-        # 1. Unselect the previous card
+        # Unselect the previous card
         if self.last_selected_card:
             # shiboken.isValid(obj) checks if the C++ object still exists
             if isValid(self.last_selected_card):
@@ -620,7 +611,7 @@ class Controller:
                 # If it's gone, clear the reference
                 self.last_selected_card = None
 
-        # 2. Select the new card
+        # Select the new card
         if clicked_card:
             clicked_card.set_selected(True)
             self.last_selected_card = clicked_card
@@ -1197,24 +1188,8 @@ class Controller:
             header = self.ui.table_quizcompletionstat.horizontalHeader()
             header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
 
-    # def handle_report_student_idv(self, text=""):
-    #     new_model = Student().search_student(text)
-    #     self.ui.table_student_score_idv.sortByColumn(-1, Qt.AscendingOrder)
-    #     self.ui.table_quiz_score_idv.sortByColumn(-1, Qt.AscendingOrder)
-
-    #     if new_model:
-    #         self.ui.table_student_score_idv.setModel(new_model)
-    #         header = self.ui.table_student_score_idv.horizontalHeader()
-    #         header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
-    #         self.ui.table_student_score_idv.setColumnHidden(5, True) # Hide 'Gender' column
-
-    #         selection_model = self.ui.table_student_score_idv.selectionModel()
-    #         selection_model.currentChanged.connect(
-    #             lambda current, previous: self.handle_report_student_click(current)
-    #         )
-
     def handle_report_student_idv(self):
-        # 1. Reset selection state since the underlying model/data is changing
+        # Reset selection state since the underlying model/data is changing
         self.reports_selectedRow_idv = None
         school_year = self.ui.cmb_school_year_3.currentText()
         text = self.ui.txt_search_score_idv.text().strip()
@@ -1229,7 +1204,7 @@ class Controller:
             header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
             self.ui.table_student_score_idv.setColumnHidden(5, True) # Hide 'Gender' column
 
-            # 2. Safely connect the new selection model
+            # Safely connect the new selection model
             selection_model = self.ui.table_student_score_idv.selectionModel()
             selection_model.currentChanged.connect(self.handle_report_student_click)
 

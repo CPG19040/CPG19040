@@ -249,7 +249,7 @@ class Login(QWidget, Ui_FormLogin):
         layout.setAlignment(Qt.AlignmentFlag.AlignTop)
         layout.setSpacing(10)
 
-        # 1. Efficiently clear existing cards
+        # Efficiently clear existing cards
         while layout.count():
             # takeAt removes the layout item, allowing access to the widget
             item_to_remove = layout.takeAt(0)
@@ -262,13 +262,11 @@ class Login(QWidget, Ui_FormLogin):
         # Clear the list tracking the cards
         self.cards.clear()
 
-        # 2. Fetch data
-        
         sectionid = item.data(Qt.ItemDataRole.UserRole)
         student = Student()
         students = student.retrieve_student_info(self.school_year, sectionid)
 
-        # 3. Add new cards
+        # Add new cards
         columns = 2
         for i, row in enumerate(students):
             sid, f_name, m_name, l_name, _, gender, _, img_data = row # Unpacking for clarity
@@ -294,17 +292,17 @@ class Login(QWidget, Ui_FormLogin):
             self.cards.append(card)
 
     def handle_card_selection(self, clicked_card, student_id):
-        # 1. Store the reference and clear all other cards immediately
+        # Store the reference and clear all other cards immediately
         self.last_selected_card = clicked_card
 
         for card in self.cards:
             if card != clicked_card:
                 card.set_selected(False)
 
-        # 2. Select the clicked card (Visual state)
+        # Select the clicked card (Visual state)
         clicked_card.set_selected(True)
 
-        # 3. Update Page 2 UI with the selected student's info
+        # Update Page 2 UI with the selected student's info
         # Using the attributes stored in your Card object
         self.labelFullName.setText(clicked_card.fullName)
         circular_pixmap = self.util.makeCircularPixmap(clicked_card.pixMap, size=150)
@@ -313,7 +311,7 @@ class Login(QWidget, Ui_FormLogin):
         # Optional: If you need the ID for database queries on Page 2
         self.current_student_id = student_id 
 
-        # 4. Trigger the transition to the Math section (Page 2)
+        # Trigger the transition to the Math section (Page 2)
         self.slide_to_page(1)
 
     def slide_to_page(self, index):
@@ -321,17 +319,14 @@ class Login(QWidget, Ui_FormLogin):
         if stack.currentIndex() == index:
             return
 
-        # 1. Setup variables
         current_page = stack.currentWidget()
         next_page = stack.widget(index)
         width = stack.width()
 
-        # 2. Prepare next page (move it to the right side off-screen)
         next_page.setGeometry(width, 0, width, stack.height())
         next_page.show()
         next_page.raise_()
 
-        # 3. Create Parallel Animations
         self.anim_group = QParallelAnimationGroup()
 
         # Slide next page IN (from right to center)
@@ -351,7 +346,7 @@ class Login(QWidget, Ui_FormLogin):
         self.anim_group.addAnimation(anim_in)
         self.anim_group.addAnimation(anim_out)
 
-        # 4. On finish, update the StackedWidget index to "reset" the layout
+        # On finish, update the StackedWidget index to "reset" the layout
         self.anim_group.finished.connect(lambda: stack.setCurrentIndex(index))
         self.anim_group.start()
 
@@ -365,7 +360,7 @@ class Login(QWidget, Ui_FormLogin):
         prev_page = stack.widget(index)
         width = stack.width()
 
-        # 1. Prepare previous page (place it to the LEFT off-screen)
+        # Prepare previous page (place it to the LEFT off-screen)
         prev_page.setGeometry(-width, 0, width, stack.height())
         prev_page.show()
         prev_page.raise_()

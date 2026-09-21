@@ -15,7 +15,6 @@ from App.Quiz import Quiz, QuizUtils
 from App.MyScores import MyScores
 
 
-# Notice: Controller no longer inherits from QObject
 class Controller:
 
     GRADING_PERIOD = 0
@@ -57,11 +56,8 @@ class Controller:
 
         self.get_dynamic_grading_period_dates()
 
-        # --- EVENT FILTER IMPLEMENTATION ---
-        # 1. Create a dedicated QObject inside show_home to act as the filter
         self.home_event_filter = QObject(self.home_win)
 
-        # 2. Define the event filter logic dynamically
         def custom_event_filter(watched_obj, event):
             if event.type() == QEvent.Type.Enter:
                 if watched_obj == self.ui.btnClose:
@@ -86,13 +82,9 @@ class Controller:
                     self.sounds["games_sound"].stop()
                     self.sounds["games_sound"].play()
 
-            # Since QObject doesn't have a customized eventFilter parent implementation here,
-            # we just return False to let PySide handle the event naturally.
             return False
 
-        # 3. Bind the logic to the QObject's eventFilter property
         self.home_event_filter.eventFilter = custom_event_filter
-        # ----------------------------------------
 
         controls = [
             self.ui.btnMinimize,
@@ -108,7 +100,6 @@ class Controller:
 
         for control in controls:
             control.setMouseTracking(True)
-            # 4. Install the new locally defined filter object instead of 'self'
             control.installEventFilter(self.home_event_filter)
 
         path = os.path.join(self.audio_path, "bgMusic2.wav")
@@ -385,8 +376,6 @@ class Controller:
 
             card = LessonCard(lesson_id, title, lessonnum, chapter, gradingperiod, pixmap)
             
-            # FIX: Absorb the signal's boolean 'checked' arg with '_'
-            # and capture variables explicitly in the lambda scope
             card.clicked.connect(
                 lambda _, c=card, lid=lesson_id: self.handle_lesson_selection(c, lid)
             )

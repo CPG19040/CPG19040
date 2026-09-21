@@ -18,7 +18,6 @@ class StudentListReporter:
     def generate_studentlist_report(self, section_id, output_pdf_path):
         """Fetches student data, merges using docxtpl, and converts to PDF."""
 
-        # 1. Fetch data from PostgreSQL
         query = """
             SELECT
                 s.userid,
@@ -60,11 +59,9 @@ class StudentListReporter:
             if not students:
                 return False, "No students found in this section."
 
-            # 2. Extract header variables
             school_year = students[0]['school_year']
             section_name = students[0]['sectionname']
 
-            # 3. Build the student list array
             student_rows = []
             for idx, student in enumerate(students, start=1):
                 student_rows.append({
@@ -75,7 +72,6 @@ class StudentListReporter:
                     'sectionname': student['sectionname']
                 })
 
-            # 4. Render the template using docxtpl
             temp_docx = os.path.join(downloads_dir, "temp_output.docx")
 
             if not section_id:
@@ -99,7 +95,6 @@ class StudentListReporter:
                 doc.render(context)
                 doc.save(temp_docx)
 
-            # 5. Convert Docx to PDF via LibreOffice Headless
             try:
                 output_dir = os.path.dirname(os.path.abspath(output_pdf_path))
 
@@ -160,7 +155,6 @@ class QuizReporter:
         if not (model1 and model2 and model3 and model4):
             return False, "No quiz scores record found."
 
-        # 1. Fetch data from PostgreSQL
         query = """
             SELECT
                 s.userid,
@@ -192,7 +186,6 @@ class QuizReporter:
             if not students:
                 return False, "No students found in this section."
 
-            # 2. Extract header variables
             first_name = students[0]['firstname']
             middle_name = students[0]['middlename']
             last_name = students[0]['lastname']
