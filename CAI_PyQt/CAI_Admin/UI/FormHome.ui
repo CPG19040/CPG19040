@@ -439,7 +439,7 @@ QPushButton[class=&quot;button-left-nav&quot;]:hover:!checked {
           <string notr="true"/>
          </property>
          <property name="text">
-          <string>Lesson</string>
+          <string>Lessons</string>
          </property>
          <property name="icon">
           <iconset resource="../resources.qrc">
@@ -721,7 +721,7 @@ QPushButton[class=&quot;button-left-nav&quot;]:hover:!checked {
           <string notr="true"/>
          </property>
          <property name="text">
-          <string>Utilities</string>
+          <string>Settings and Utilities</string>
          </property>
          <property name="icon">
           <iconset resource="../resources.qrc">
