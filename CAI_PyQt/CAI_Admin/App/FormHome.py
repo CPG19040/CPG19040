@@ -20,8 +20,8 @@ from PySide6.QtWidgets import (QAbstractItemView, QAbstractScrollArea, QApplicat
     QGridLayout, QHBoxLayout, QHeaderView, QLabel,
     QLineEdit, QMainWindow, QPlainTextEdit, QPushButton,
     QScrollArea, QSizePolicy, QSpacerItem, QSpinBox,
-    QStackedWidget, QTabWidget, QTableView, QVBoxLayout,
-    QWidget)
+    QStackedWidget, QTabWidget, QTableView, QTextEdit,
+    QVBoxLayout, QWidget)
 import resources_rc
 
 class Ui_Home(object):
@@ -1444,6 +1444,45 @@ class Ui_Home(object):
 
         self.horizontalLayout_3.addItem(self.horizontalSpacer_27)
 
+        self.btnAddStudent = QPushButton(self.widget_19)
+        self.btnAddStudent.setObjectName(u"btnAddStudent")
+        self.btnAddStudent.setMinimumSize(QSize(130, 30))
+        self.btnAddStudent.setMaximumSize(QSize(16777215, 30))
+        self.btnAddStudent.setFont(font)
+        self.btnAddStudent.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.btnAddStudent.setStyleSheet(u"")
+        icon14 = QIcon()
+        icon14.addFile(u":/Images/Images/plus.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.btnAddStudent.setIcon(icon14)
+
+        self.horizontalLayout_3.addWidget(self.btnAddStudent)
+
+        self.btnDeleteStudent = QPushButton(self.widget_19)
+        self.btnDeleteStudent.setObjectName(u"btnDeleteStudent")
+        self.btnDeleteStudent.setMinimumSize(QSize(140, 30))
+        self.btnDeleteStudent.setMaximumSize(QSize(16777215, 30))
+        self.btnDeleteStudent.setFont(font)
+        self.btnDeleteStudent.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.btnDeleteStudent.setStyleSheet(u"")
+        icon15 = QIcon()
+        icon15.addFile(u":/Images/Images/trash.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.btnDeleteStudent.setIcon(icon15)
+
+        self.horizontalLayout_3.addWidget(self.btnDeleteStudent)
+
+        self.btnPrintStudentList = QPushButton(self.widget_19)
+        self.btnPrintStudentList.setObjectName(u"btnPrintStudentList")
+        self.btnPrintStudentList.setMinimumSize(QSize(140, 30))
+        self.btnPrintStudentList.setMaximumSize(QSize(16777215, 30))
+        self.btnPrintStudentList.setFont(font)
+        self.btnPrintStudentList.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.btnPrintStudentList.setStyleSheet(u"")
+        icon16 = QIcon()
+        icon16.addFile(u":/Images/Images/printer.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.btnPrintStudentList.setIcon(icon16)
+
+        self.horizontalLayout_3.addWidget(self.btnPrintStudentList)
+
 
         self.verticalLayout_6.addWidget(self.widget_19)
 
@@ -1458,7 +1497,7 @@ class Ui_Home(object):
         self.scrollArea_classlist.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
         self.container = QWidget()
         self.container.setObjectName(u"container")
-        self.container.setGeometry(QRect(0, 0, 100, 30))
+        self.container.setGeometry(QRect(0, 0, 788, 627))
         self.gridLayout_stud_card = QGridLayout(self.container)
         self.gridLayout_stud_card.setObjectName(u"gridLayout_stud_card")
         self.scrollArea_classlist.setWidget(self.container)
@@ -1470,49 +1509,6 @@ class Ui_Home(object):
         self.horizontalLayout_17 = QHBoxLayout(self.widget_f)
         self.horizontalLayout_17.setObjectName(u"horizontalLayout_17")
         self.horizontalLayout_17.setContentsMargins(0, 0, 0, 0)
-        self.btnAddStudent = QPushButton(self.widget_f)
-        self.btnAddStudent.setObjectName(u"btnAddStudent")
-        self.btnAddStudent.setMinimumSize(QSize(130, 30))
-        self.btnAddStudent.setMaximumSize(QSize(16777215, 30))
-        self.btnAddStudent.setFont(font)
-        self.btnAddStudent.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.btnAddStudent.setStyleSheet(u"")
-        icon14 = QIcon()
-        icon14.addFile(u":/Images/Images/plus.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.btnAddStudent.setIcon(icon14)
-
-        self.horizontalLayout_17.addWidget(self.btnAddStudent)
-
-        self.btnDeleteStudent = QPushButton(self.widget_f)
-        self.btnDeleteStudent.setObjectName(u"btnDeleteStudent")
-        self.btnDeleteStudent.setMinimumSize(QSize(140, 30))
-        self.btnDeleteStudent.setMaximumSize(QSize(16777215, 30))
-        self.btnDeleteStudent.setFont(font)
-        self.btnDeleteStudent.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.btnDeleteStudent.setStyleSheet(u"")
-        icon15 = QIcon()
-        icon15.addFile(u":/Images/Images/trash.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.btnDeleteStudent.setIcon(icon15)
-
-        self.horizontalLayout_17.addWidget(self.btnDeleteStudent)
-
-        self.btnPrintStudentList = QPushButton(self.widget_f)
-        self.btnPrintStudentList.setObjectName(u"btnPrintStudentList")
-        self.btnPrintStudentList.setMinimumSize(QSize(140, 30))
-        self.btnPrintStudentList.setMaximumSize(QSize(16777215, 30))
-        self.btnPrintStudentList.setFont(font)
-        self.btnPrintStudentList.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.btnPrintStudentList.setStyleSheet(u"")
-        icon16 = QIcon()
-        icon16.addFile(u":/Images/Images/printer.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.btnPrintStudentList.setIcon(icon16)
-
-        self.horizontalLayout_17.addWidget(self.btnPrintStudentList)
-
-        self.horizontalSpacer_11 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.horizontalLayout_17.addItem(self.horizontalSpacer_11)
-
 
         self.verticalLayout_6.addWidget(self.widget_f)
 
@@ -2485,7 +2481,7 @@ class Ui_Home(object):
         self.scrollArea_tf.setWidgetResizable(True)
         self.scrollAreaWidgetContents_4 = QWidget()
         self.scrollAreaWidgetContents_4.setObjectName(u"scrollAreaWidgetContents_4")
-        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 100, 30))
+        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 23, 18))
         self.verticalLayout_13 = QVBoxLayout(self.scrollAreaWidgetContents_4)
         self.verticalLayout_13.setObjectName(u"verticalLayout_13")
         self.scrollArea_tf.setWidget(self.scrollAreaWidgetContents_4)
@@ -2511,7 +2507,7 @@ class Ui_Home(object):
         self.scrollArea_mc.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 100, 30))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 23, 18))
         self.verticalLayout_12 = QVBoxLayout(self.scrollAreaWidgetContents_3)
         self.verticalLayout_12.setObjectName(u"verticalLayout_12")
         self.scrollArea_mc.setWidget(self.scrollAreaWidgetContents_3)
@@ -2524,7 +2520,7 @@ class Ui_Home(object):
         self.scrollArea_id.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 100, 30))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 24, 18))
         self.verticalLayout_11 = QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_11.setObjectName(u"verticalLayout_11")
         self.scrollArea_id.setWidget(self.scrollAreaWidgetContents_2)
@@ -4591,6 +4587,19 @@ class Ui_Home(object):
         self.verticalLayout_16.addWidget(self.table_student_archive)
 
         self.tabWidget_utility.addTab(self.tab_archive, "")
+        self.tab_about = QWidget()
+        self.tab_about.setObjectName(u"tab_about")
+        self.verticalLayout_32 = QVBoxLayout(self.tab_about)
+        self.verticalLayout_32.setSpacing(0)
+        self.verticalLayout_32.setObjectName(u"verticalLayout_32")
+        self.verticalLayout_32.setContentsMargins(0, 0, 0, 0)
+        self.textEdit = QTextEdit(self.tab_about)
+        self.textEdit.setObjectName(u"textEdit")
+        self.textEdit.setStyleSheet(u"border: 0px; background: transparent;")
+
+        self.verticalLayout_32.addWidget(self.textEdit)
+
+        self.tabWidget_utility.addTab(self.tab_about, "")
 
         self.verticalLayout_14.addWidget(self.tabWidget_utility)
 
@@ -4900,5 +4909,30 @@ class Ui_Home(object):
         self.tabWidget_utility.setTabText(self.tabWidget_utility.indexOf(self.tab_settings), QCoreApplication.translate("Home", u"Settings", None))
         self.tabWidget_utility.setTabText(self.tabWidget_utility.indexOf(self.tab_audit_trail), QCoreApplication.translate("Home", u"Audit Trail", None))
         self.tabWidget_utility.setTabText(self.tabWidget_utility.indexOf(self.tab_archive), QCoreApplication.translate("Home", u"Archive", None))
+        self.textEdit.setHtml(QCoreApplication.translate("Home", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'Inter'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
+"<h1 align=\"center\" style=\" margin-top:18px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:xx-large; font-weight:600;\">About the Computer-Aided Instruction (CAI) System</span></h1>\n"
+"<h2 style=\" margin-top:16px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:x-large; font-weight:600;\">System Overview</span></h2>\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The <span style=\" font-weight:600;\">Computer-Aided Instruction (CAI) System</span> is an interact"
+                        "ive, technology-driven educational platform designed to streamline classroom management, enhance student engagement, and deliver comprehensive academic performance analytics. Built with a focus on usability and precision, the system bridges the gap between assessment and actionable learning insights.</p>\n"
+"<h2 style=\" margin-top:16px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:x-large; font-weight:600;\">Key Features</span></h2>\n"
+"<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;\"><li style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">Student &amp; Class Management:</span> Seamlessly organize student rosters, track class lists, and manage demographic profiles with built-in search and filtering tools.</li>\n"
+"<li style=\" margin-top:12px; margin-bottom:12px; margin-left:0px"
+                        "; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">Interactive Assessments &amp; Scoring:</span> Automate quiz and exam scoring with instant calculation of student percentages, overall averages, and performance metrics.</li>\n"
+"<li style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">Granular Reporting:</span> View detailed individual and group score histories broken down by grading periods to easily track progress over time.</li>\n"
+"<li style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">Visual Insights:</span> Monitor student activity with personalized profiles, custom avatar integration, and dynamic status indicators.</li>\n"
+"<li style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" f"
+                        "ont-weight:600;\">Export &amp; Print Capabilities:</span> Generate and print student score summaries and quiz reports directly from the application for record-keeping and offline evaluation.</li></ul>\n"
+"<h2 style=\" margin-top:16px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:x-large; font-weight:600;\">Technical Architecture</span></h2>\n"
+"<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;\"><li style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">User Interface:</span> Developed using <span style=\" font-weight:600;\">PySide6 / PyQt (Qt for Python)</span> for a responsive, modern desktop experience.</li>\n"
+"<li style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">Database &amp; "
+                        "Data Management:</span> Powered by structured SQL queries with parameterized database connectors to guarantee fast data retrieval and maximum security against SQL injection.</li>\n"
+"<li style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">Modular MVC Design:</span> Built on a decoupled Model-View-Controller pattern to ensure system stability, speed, and easy scalability for future modules.</li></ul>\n"
+"<h2 style=\" margin-top:16px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:x-large; font-weight:600;\">Purpose &amp; Goal</span></h2>\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The primary objective of this CAI system is to empower educators with modern digital tools that reduce administrative workload, eliminate manual scoring errors, and provide clear da"
+                        "ta visualization\u2014allowing teachers to focus on what matters most: <span style=\" font-weight:600;\">guiding and inspiring students.</span></p></body></html>", None))
+        self.tabWidget_utility.setTabText(self.tabWidget_utility.indexOf(self.tab_about), QCoreApplication.translate("Home", u"About", None))
     # retranslateUi
 
