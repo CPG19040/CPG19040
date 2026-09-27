@@ -1659,153 +1659,222 @@ border-radius: 20px;</string>
                   <height>16777215</height>
                  </size>
                 </property>
-                <widget class="QLabel" name="label_month">
-                 <property name="geometry">
-                  <rect>
-                   <x>59</x>
-                   <y>10</y>
-                   <width>91</width>
-                   <height>34</height>
-                  </rect>
+                <layout class="QVBoxLayout" name="verticalLayout_34">
+                 <property name="spacing">
+                  <number>0</number>
                  </property>
-                 <property name="font">
-                  <font>
-                   <family>Inter Medium</family>
-                   <pointsize>18</pointsize>
-                   <weight>7</weight>
-                   <italic>false</italic>
-                   <bold>false</bold>
-                  </font>
+                 <property name="leftMargin">
+                  <number>0</number>
                  </property>
-                 <property name="styleSheet">
-                  <string notr="true">color: rgb(255, 255, 255); background-color: transparent; font: 57 18pt &quot;Inter Medium&quot;;</string>
+                 <property name="topMargin">
+                  <number>9</number>
                  </property>
-                 <property name="text">
-                  <string>MAR</string>
+                 <property name="rightMargin">
+                  <number>0</number>
                  </property>
-                 <property name="alignment">
-                  <set>Qt::AlignCenter</set>
+                 <property name="bottomMargin">
+                  <number>0</number>
                  </property>
-                </widget>
-                <widget class="QLabel" name="label_day">
-                 <property name="geometry">
-                  <rect>
-                   <x>60</x>
-                   <y>50</y>
-                   <width>87</width>
-                   <height>82</height>
-                  </rect>
-                 </property>
-                 <property name="font">
-                  <font>
-                   <family>Inter Medium</family>
-                   <pointsize>50</pointsize>
-                   <weight>50</weight>
-                   <italic>false</italic>
-                   <bold>false</bold>
-                  </font>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">QLabel { color: rgb(36, 31, 49); background-color: transparent; font: 50pt &quot;Inter Medium&quot;; }</string>
-                 </property>
-                 <property name="text">
-                  <string>00</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignCenter</set>
-                 </property>
-                </widget>
-                <widget class="QLabel" name="label_19">
-                 <property name="geometry">
-                  <rect>
-                   <x>30</x>
-                   <y>10</y>
-                   <width>151</width>
-                   <height>151</height>
-                  </rect>
-                 </property>
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">background-color: rgba(191, 64, 64, 0);</string>
-                 </property>
-                 <property name="text">
-                  <string/>
-                 </property>
-                 <property name="pixmap">
-                  <pixmap resource="../resources.qrc">:/Images/Images/calendar_widget.png</pixmap>
-                 </property>
-                 <property name="scaledContents">
-                  <bool>true</bool>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignCenter</set>
-                 </property>
-                </widget>
-                <widget class="QWidget" name="horizontalLayoutWidget">
-                 <property name="geometry">
-                  <rect>
-                   <x>30</x>
-                   <y>170</y>
-                   <width>155</width>
-                   <height>51</height>
-                  </rect>
-                 </property>
-                 <layout class="QHBoxLayout" name="horizontalLayout_16">
-                  <item>
-                   <widget class="QLabel" name="label_time">
-                    <property name="font">
-                     <font>
-                      <family>Inter Medium</family>
-                      <pointsize>30</pointsize>
-                      <weight>7</weight>
-                      <italic>false</italic>
-                      <bold>false</bold>
-                     </font>
+                 <item>
+                  <widget class="QWidget" name="widget_25" native="true">
+                   <layout class="QHBoxLayout" name="horizontalLayout_40">
+                    <property name="spacing">
+                     <number>0</number>
                     </property>
-                    <property name="styleSheet">
-                     <string notr="true">QLabel { color: rgb(36, 31, 49); background-color: transparent; font: 57 30pt &quot;Inter Medium&quot;; }</string>
+                    <property name="leftMargin">
+                     <number>0</number>
                     </property>
-                    <property name="text">
-                     <string>00:00</string>
+                    <property name="topMargin">
+                     <number>0</number>
                     </property>
-                    <property name="alignment">
-                     <set>Qt::AlignCenter</set>
+                    <property name="rightMargin">
+                     <number>0</number>
                     </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QLabel" name="label_timeAP">
-                    <property name="font">
-                     <font>
-                      <family>Inter Medium</family>
-                      <pointsize>14</pointsize>
-                      <weight>7</weight>
-                      <italic>false</italic>
-                      <bold>false</bold>
-                     </font>
+                    <property name="bottomMargin">
+                     <number>0</number>
                     </property>
-                    <property name="styleSheet">
-                     <string notr="true">QLabel { color: rgb(36, 31, 49); background-color: transparent; font: 57 14pt &quot;Inter Medium&quot;; }</string>
-                    </property>
-                    <property name="text">
-                     <string>AM</string>
-                    </property>
-                    <property name="alignment">
-                     <set>Qt::AlignCenter</set>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
-                </widget>
-                <zorder>label_19</zorder>
-                <zorder>label_month</zorder>
-                <zorder>label_day</zorder>
-                <zorder>horizontalLayoutWidget</zorder>
+                    <item>
+                     <widget class="QWidget" name="widget_date" native="true">
+                      <property name="minimumSize">
+                       <size>
+                        <width>150</width>
+                        <height>150</height>
+                       </size>
+                      </property>
+                      <property name="maximumSize">
+                       <size>
+                        <width>150</width>
+                        <height>150</height>
+                       </size>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">#widget_date {
+	border-image: url(:/Images/Images/calendar_widget.png);
+}</string>
+                      </property>
+                      <layout class="QVBoxLayout" name="verticalLayout_33">
+                       <property name="topMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="bottomMargin">
+                        <number>27</number>
+                       </property>
+                       <item>
+                        <widget class="QLabel" name="label_month">
+                         <property name="font">
+                          <font>
+                           <family>Inter Medium</family>
+                           <pointsize>18</pointsize>
+                           <weight>7</weight>
+                           <italic>false</italic>
+                           <bold>false</bold>
+                          </font>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">color: rgb(255, 255, 255); background-color: transparent; font: 57 18pt &quot;Inter Medium&quot;; margin-bottom: 3px;</string>
+                         </property>
+                         <property name="text">
+                          <string>MAR</string>
+                         </property>
+                         <property name="alignment">
+                          <set>Qt::AlignCenter</set>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QLabel" name="label_day">
+                         <property name="font">
+                          <font>
+                           <family>Inter Medium</family>
+                           <pointsize>50</pointsize>
+                           <weight>50</weight>
+                           <italic>false</italic>
+                           <bold>false</bold>
+                          </font>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">QLabel {
+	color: rgb(36, 31, 49);
+	background-color: transparent;
+	font: 50pt &quot;Inter Medium&quot;;
+}</string>
+                         </property>
+                         <property name="text">
+                          <string>00</string>
+                         </property>
+                         <property name="alignment">
+                          <set>Qt::AlignCenter</set>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QWidget" name="horizontalWidget" native="true">
+                   <property name="minimumSize">
+                    <size>
+                     <width>0</width>
+                     <height>52</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>52</height>
+                    </size>
+                   </property>
+                   <layout class="QHBoxLayout" name="horizontalLayout_16">
+                    <item>
+                     <spacer name="horizontalSpacer_4">
+                      <property name="orientation">
+                       <enum>Qt::Horizontal</enum>
+                      </property>
+                      <property name="sizeHint" stdset="0">
+                       <size>
+                        <width>40</width>
+                        <height>20</height>
+                       </size>
+                      </property>
+                     </spacer>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="label_time">
+                      <property name="font">
+                       <font>
+                        <family>Inter Medium</family>
+                        <pointsize>30</pointsize>
+                        <weight>7</weight>
+                        <italic>false</italic>
+                        <bold>false</bold>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">QLabel { color: rgb(36, 31, 49); background-color: transparent; font: 57 30pt &quot;Inter Medium&quot;; }</string>
+                      </property>
+                      <property name="text">
+                       <string>00:00</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignCenter</set>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="label_timeAP">
+                      <property name="font">
+                       <font>
+                        <family>Inter Medium</family>
+                        <pointsize>14</pointsize>
+                        <weight>7</weight>
+                        <italic>false</italic>
+                        <bold>false</bold>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">QLabel { color: rgb(36, 31, 49); background-color: transparent; font: 57 14pt &quot;Inter Medium&quot;; }</string>
+                      </property>
+                      <property name="text">
+                       <string>AM</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignCenter</set>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <spacer name="horizontalSpacer_6">
+                      <property name="orientation">
+                       <enum>Qt::Horizontal</enum>
+                      </property>
+                      <property name="sizeHint" stdset="0">
+                       <size>
+                        <width>40</width>
+                        <height>20</height>
+                       </size>
+                      </property>
+                     </spacer>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="verticalSpacer_2">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>40</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
                </widget>
               </item>
              </layout>
@@ -2504,8 +2573,8 @@ QSpinBox::down-arrow {
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>100</width>
-                <height>30</height>
+                <width>484</width>
+                <height>18</height>
                </rect>
               </property>
               <layout class="QGridLayout" name="gridLayout_stud_card"/>
@@ -4626,8 +4695,8 @@ QPushButton:hover {
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>100</width>
-                <height>30</height>
+                <width>18</width>
+                <height>18</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_13"/>
@@ -4669,8 +4738,8 @@ QPushButton:hover {
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>100</width>
-                <height>30</height>
+                <width>18</width>
+                <height>18</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_12"/>
@@ -4690,8 +4759,8 @@ QPushButton:hover {
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>100</width>
-                <height>30</height>
+                <width>18</width>
+                <height>18</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_11"/>
@@ -7238,8 +7307,8 @@ QRadioButton::indicator:checked {
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>961</width>
-                 <height>665</height>
+                 <width>463</width>
+                 <height>581</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_10">

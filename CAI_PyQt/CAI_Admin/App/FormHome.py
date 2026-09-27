@@ -838,44 +838,73 @@ class Ui_Home(object):
         self.widget_datetime.setObjectName(u"widget_datetime")
         self.widget_datetime.setMinimumSize(QSize(211, 221))
         self.widget_datetime.setMaximumSize(QSize(211, 16777215))
-        self.label_month = QLabel(self.widget_datetime)
+        self.verticalLayout_34 = QVBoxLayout(self.widget_datetime)
+        self.verticalLayout_34.setSpacing(0)
+        self.verticalLayout_34.setObjectName(u"verticalLayout_34")
+        self.verticalLayout_34.setContentsMargins(0, 9, 0, 0)
+        self.widget_25 = QWidget(self.widget_datetime)
+        self.widget_25.setObjectName(u"widget_25")
+        self.horizontalLayout_40 = QHBoxLayout(self.widget_25)
+        self.horizontalLayout_40.setSpacing(0)
+        self.horizontalLayout_40.setObjectName(u"horizontalLayout_40")
+        self.horizontalLayout_40.setContentsMargins(0, 0, 0, 0)
+        self.widget_date = QWidget(self.widget_25)
+        self.widget_date.setObjectName(u"widget_date")
+        self.widget_date.setMinimumSize(QSize(150, 150))
+        self.widget_date.setMaximumSize(QSize(150, 150))
+        self.widget_date.setStyleSheet(u"#widget_date {\n"
+"	border-image: url(:/Images/Images/calendar_widget.png);\n"
+"}")
+        self.verticalLayout_33 = QVBoxLayout(self.widget_date)
+        self.verticalLayout_33.setObjectName(u"verticalLayout_33")
+        self.verticalLayout_33.setContentsMargins(-1, 0, -1, 27)
+        self.label_month = QLabel(self.widget_date)
         self.label_month.setObjectName(u"label_month")
-        self.label_month.setGeometry(QRect(59, 10, 91, 34))
         font4 = QFont()
         font4.setFamilies([u"Inter Medium"])
         font4.setPointSize(18)
         font4.setBold(False)
         font4.setItalic(False)
         self.label_month.setFont(font4)
-        self.label_month.setStyleSheet(u"color: rgb(255, 255, 255); background-color: transparent; font: 57 18pt \"Inter Medium\";")
+        self.label_month.setStyleSheet(u"color: rgb(255, 255, 255); background-color: transparent; font: 57 18pt \"Inter Medium\"; margin-bottom: 3px;")
         self.label_month.setAlignment(Qt.AlignCenter)
-        self.label_day = QLabel(self.widget_datetime)
+
+        self.verticalLayout_33.addWidget(self.label_month)
+
+        self.label_day = QLabel(self.widget_date)
         self.label_day.setObjectName(u"label_day")
-        self.label_day.setGeometry(QRect(60, 50, 87, 82))
         font5 = QFont()
         font5.setFamilies([u"Inter Medium"])
         font5.setPointSize(50)
         font5.setBold(False)
         font5.setItalic(False)
         self.label_day.setFont(font5)
-        self.label_day.setStyleSheet(u"QLabel { color: rgb(36, 31, 49); background-color: transparent; font: 50pt \"Inter Medium\"; }")
+        self.label_day.setStyleSheet(u"QLabel {\n"
+"	color: rgb(36, 31, 49);\n"
+"	background-color: transparent;\n"
+"	font: 50pt \"Inter Medium\";\n"
+"}")
         self.label_day.setAlignment(Qt.AlignCenter)
-        self.label_19 = QLabel(self.widget_datetime)
-        self.label_19.setObjectName(u"label_19")
-        self.label_19.setGeometry(QRect(30, 10, 151, 151))
-        sizePolicy.setHeightForWidth(self.label_19.sizePolicy().hasHeightForWidth())
-        self.label_19.setSizePolicy(sizePolicy)
-        self.label_19.setStyleSheet(u"background-color: rgba(191, 64, 64, 0);")
-        self.label_19.setPixmap(QPixmap(u":/Images/Images/calendar_widget.png"))
-        self.label_19.setScaledContents(True)
-        self.label_19.setAlignment(Qt.AlignCenter)
-        self.horizontalLayoutWidget = QWidget(self.widget_datetime)
-        self.horizontalLayoutWidget.setObjectName(u"horizontalLayoutWidget")
-        self.horizontalLayoutWidget.setGeometry(QRect(30, 170, 155, 51))
-        self.horizontalLayout_16 = QHBoxLayout(self.horizontalLayoutWidget)
+
+        self.verticalLayout_33.addWidget(self.label_day)
+
+
+        self.horizontalLayout_40.addWidget(self.widget_date)
+
+
+        self.verticalLayout_34.addWidget(self.widget_25)
+
+        self.horizontalWidget = QWidget(self.widget_datetime)
+        self.horizontalWidget.setObjectName(u"horizontalWidget")
+        self.horizontalWidget.setMinimumSize(QSize(0, 52))
+        self.horizontalWidget.setMaximumSize(QSize(16777215, 52))
+        self.horizontalLayout_16 = QHBoxLayout(self.horizontalWidget)
         self.horizontalLayout_16.setObjectName(u"horizontalLayout_16")
-        self.horizontalLayout_16.setContentsMargins(0, 0, 0, 0)
-        self.label_time = QLabel(self.horizontalLayoutWidget)
+        self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_16.addItem(self.horizontalSpacer_4)
+
+        self.label_time = QLabel(self.horizontalWidget)
         self.label_time.setObjectName(u"label_time")
         font6 = QFont()
         font6.setFamilies([u"Inter Medium"])
@@ -888,7 +917,7 @@ class Ui_Home(object):
 
         self.horizontalLayout_16.addWidget(self.label_time)
 
-        self.label_timeAP = QLabel(self.horizontalLayoutWidget)
+        self.label_timeAP = QLabel(self.horizontalWidget)
         self.label_timeAP.setObjectName(u"label_timeAP")
         font7 = QFont()
         font7.setFamilies([u"Inter Medium"])
@@ -901,10 +930,17 @@ class Ui_Home(object):
 
         self.horizontalLayout_16.addWidget(self.label_timeAP)
 
-        self.label_19.raise_()
-        self.label_month.raise_()
-        self.label_day.raise_()
-        self.horizontalLayoutWidget.raise_()
+        self.horizontalSpacer_6 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_16.addItem(self.horizontalSpacer_6)
+
+
+        self.verticalLayout_34.addWidget(self.horizontalWidget)
+
+        self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.verticalLayout_34.addItem(self.verticalSpacer_2)
+
 
         self.horizontalLayout_24.addWidget(self.widget_datetime)
 
@@ -1245,7 +1281,7 @@ class Ui_Home(object):
         self.scrollArea_classlist.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
         self.container = QWidget()
         self.container.setObjectName(u"container")
-        self.container.setGeometry(QRect(0, 0, 100, 30))
+        self.container.setGeometry(QRect(0, 0, 484, 18))
         self.gridLayout_stud_card = QGridLayout(self.container)
         self.gridLayout_stud_card.setObjectName(u"gridLayout_stud_card")
         self.scrollArea_classlist.setWidget(self.container)
@@ -2233,7 +2269,7 @@ class Ui_Home(object):
         self.scrollArea_tf.setWidgetResizable(True)
         self.scrollAreaWidgetContents_4 = QWidget()
         self.scrollAreaWidgetContents_4.setObjectName(u"scrollAreaWidgetContents_4")
-        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 100, 30))
+        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 18, 18))
         self.verticalLayout_13 = QVBoxLayout(self.scrollAreaWidgetContents_4)
         self.verticalLayout_13.setObjectName(u"verticalLayout_13")
         self.scrollArea_tf.setWidget(self.scrollAreaWidgetContents_4)
@@ -2259,7 +2295,7 @@ class Ui_Home(object):
         self.scrollArea_mc.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 100, 30))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 18, 18))
         self.verticalLayout_12 = QVBoxLayout(self.scrollAreaWidgetContents_3)
         self.verticalLayout_12.setObjectName(u"verticalLayout_12")
         self.scrollArea_mc.setWidget(self.scrollAreaWidgetContents_3)
@@ -2272,7 +2308,7 @@ class Ui_Home(object):
         self.scrollArea_id.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 100, 30))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 18, 18))
         self.verticalLayout_11 = QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_11.setObjectName(u"verticalLayout_11")
         self.scrollArea_id.setWidget(self.scrollAreaWidgetContents_2)
@@ -3778,7 +3814,7 @@ class Ui_Home(object):
         self.scrollArea_settings.setWidgetResizable(True)
         self.scrollAreaWidgetContents_5 = QWidget()
         self.scrollAreaWidgetContents_5.setObjectName(u"scrollAreaWidgetContents_5")
-        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 961, 665))
+        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 463, 581))
         self.verticalLayout_10 = QVBoxLayout(self.scrollAreaWidgetContents_5)
         self.verticalLayout_10.setObjectName(u"verticalLayout_10")
         self.verticalLayout_10.setContentsMargins(0, 0, 0, 0)
@@ -4473,7 +4509,6 @@ class Ui_Home(object):
         self.label_1.setText(QCoreApplication.translate("Home", u"Ranking", None))
         self.label_month.setText(QCoreApplication.translate("Home", u"MAR", None))
         self.label_day.setText(QCoreApplication.translate("Home", u"00", None))
-        self.label_19.setText("")
         self.label_time.setText(QCoreApplication.translate("Home", u"00:00", None))
         self.label_timeAP.setText(QCoreApplication.translate("Home", u"AM", None))
         self.label_32.setText(QCoreApplication.translate("Home", u"School Year:", None))
