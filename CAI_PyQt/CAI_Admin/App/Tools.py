@@ -1,4 +1,4 @@
-import os, sys, subprocess
+import os, sys, subprocess, csv
 from pathlib import Path
 
 from PySide6.QtWidgets import QVBoxLayout, QHBoxLayout, QLabel, QFrame, QFileDialog, QWidget, QMainWindow, QDialog, QComboBox
@@ -336,6 +336,58 @@ class Utility:
             anim.finished.connect(lambda: widget.setVisible(False))
 
         anim.start()
+
+    def validate_gender(self, gender):
+        if not gender:
+            return ""
+
+        clean_gender = str(gender).strip().upper()
+
+        lookup = {
+            'M': 'Male',
+            'MALE': 'Male',
+            'F': 'Female',
+            'FEMALE': 'Female'
+        }
+
+        return lookup.get(clean_gender, "")
+
+    def export_classlist_template(self, parent:QDialog=None):
+        file_path, _ = QFileDialog.getSaveFileName(
+            parent,
+            "Save CSV Template",
+            "student_import_template.csv",  # Default file name
+            "CSV Files (*.csv);;All Files (*)"
+        )
+
+        if not file_path:
+            print("Export cancelled by user.")
+            return "Cancelled"
+
+        headers = [
+            "LAST NAME", 
+            "FIRST NAME", 
+            "MIDDLE NAME", 
+            "GENDER", 
+            "PASSWORD", 
+            "CONTACT PERSON", 
+            "CONTACT NUMBER"
+        ]
+        
+        try:
+            with open(file_path, mode='w', newline='', encoding='utf-8') as file:
+                writer = csv.writer(file)
+                writer.writerow(headers)
+            
+            message = f"Template successfully saved to:\n{file_path}"
+            print(f"Successfully exported template to '{file_path}'")
+            
+        except Exception as e:
+            message = f"Failed to save file:\n{str(e)}"
+            print(f"Error exporting template: {e}")
+
+        return message
+
 
 
 class CardStudent(QFrame):

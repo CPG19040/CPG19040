@@ -567,7 +567,7 @@ class AddNewStudentDialog(QDialog, Ui_AddNewStudentDialog):
                     row['MIDDLE NAME'],
                     section,
                     bcrypt.hash(row['PASSWORD']),
-                    self.validateGender(row['GENDER']),
+                    self.util.validate_gender(row['GENDER']),
                     row['CONTACT PERSON'],
                     row['CONTACT NUMBER']
                     )
@@ -576,21 +576,6 @@ class AddNewStudentDialog(QDialog, Ui_AddNewStudentDialog):
                 self.progressBar.setValue(i)
 
         return 0
-
-    def validateGender(self, gender):
-        if not gender:
-            return ""
-
-        clean_gender = str(gender).strip().upper()
-
-        lookup = {
-            'M': 'Male',
-            'MALE': 'Male',
-            'F': 'Female',
-            'FEMALE': 'Female'
-        }
-
-        return lookup.get(clean_gender, "")
 
     def refresh_student_info(self, student_id):
         sql = 'SELECT\n'

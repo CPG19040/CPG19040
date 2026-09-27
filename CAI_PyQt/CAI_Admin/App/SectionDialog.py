@@ -1,6 +1,11 @@
+import psycopg2, csv
+from passlib.hash import bcrypt
+from pathlib import Path
+
 from PySide6.QtGui import QStandardItemModel, QStandardItem
 from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QDialog, QMessageBox, QHeaderView, QComboBox
+from PySide6.QtWidgets import QDialog, QMessageBox, QHeaderView, QComboBox, QFileDialog
+
 from App.CRUDTools import DatabaseTools
 from App.Tools import Utility
 from App.FormSectionRegistration import Ui_SectionRegistrationDialog
@@ -14,7 +19,17 @@ class Section(QDialog, Ui_SectionRegistrationDialog):
         self.user = user
         self.utility = Utility()
         self.db_tools = DatabaseTools()
+
+        self.progressBar.setVisible(False)
+        _, self.base_year, self.next_year = self.utility.get_dynamic_school_year_dates()
+        self.label_sy.setText(f"School Year: {self.base_year} - {self.next_year}")
+        self.txtCSVPath.clear()
+        self.widget_CSV.setEnabled(False)
+
         self.populate_teachers(self.cmb_teacher, True)
+        self.btnExportTemplate.clicked.connect(lambda: self.utility.export_classlist_template(parent=self))
+        self.rb_importCSV.toggled.connect(lambda checked: self.update_state(not checked))
+        self.btnBrowseCSV.clicked.connect(self.browse_csv)
         self.btnSave.clicked.connect(self.register)
         self.btnCancel.clicked.connect(self.reject)
 
@@ -40,56 +55,152 @@ class Section(QDialog, Ui_SectionRegistrationDialog):
         if conn: conn.close()
         return class_advisor
 
+    def update_state(self, checked):
+        self.widget_CSV.setEnabled(not checked)
+
+    def browse_csv(self):
+        file_dialog = QFileDialog(self)
+        file_dialog.setNameFilter("CSV files (*.csv)")
+
+        if file_dialog.exec():
+            selected_files = file_dialog.selectedFiles()
+
+            if selected_files:
+                self.txtCSVPath.setText(selected_files[0])
+
+    def import_from_csv(self, csv_path, sectionid):
+
+        if not sectionid:
+            QMessageBox.warning(self, "Validation Error", "Please select a section.")
+            return 1
+
+        if not csv_path:
+            QMessageBox.warning(self, "Validation Error", "Please select a CSV file.")
+            return 1
+
+        if not Path(csv_path).exists():
+            QMessageBox.warning(self, "Validation Error", f"{csv_path}\n\nThe path does not exist.")
+            return 1
+
+        self.progressBar.setVisible(True)
+
+        with open(csv_path, mode='r', encoding='utf-8') as f:
+            total_rows = sum(1 for line in f) - 1 # Subtract 1 for header
+
+        self.progressBar.setMaximum(total_rows)
+        self.progressBar.setValue(0)
+
+        with open(csv_path, mode='r', encoding='utf-8') as f:
+            reader = csv.DictReader(f)
+
+            query = """
+                INSERT INTO cai.tbl_student_info (
+                    school_year
+                    ,studentid
+                    ,lastname
+                    ,firstname
+                    ,middlename
+                    ,sectionid
+                    ,password
+                    ,gender
+                    ,contact_person
+                    ,contact_number
+                )
+                VALUES (%s,
+                    to_char(CURRENT_DATE, 'YYYY') || '-' || lpad(nextval('cai.student_id_seq')::text, 4, '0') || '-STU',
+                    %s, %s, %s, %s, %s, %s, %s, %s);
+            """
+
+            for i, row in enumerate(reader, 1):
+                self.db_tools.execute_query(query, (
+                    f"{self.base_year}-{self.next_year}",
+                    row['LAST NAME'],
+                    row['FIRST NAME'],
+                    row['MIDDLE NAME'],
+                    sectionid,
+                    bcrypt.hash(row['PASSWORD']),
+                    self.utility.validate_gender(row['GENDER']),
+                    row['CONTACT PERSON'],
+                    row['CONTACT NUMBER']
+                    )
+                )
+
+                self.progressBar.setValue(i)
+
+        return 0
+
     def register(self):
         section_name = self.txtSectionName.text().strip()
         teacher_id = self.cmb_teacher.currentData()
+        is_importing = self.rb_importCSV.isChecked()
+        csv_path = self.txtCSVPath.text().strip()
 
-        # 1. Validation
         if not section_name:
             QMessageBox.warning(self, "Input Error", "Please enter a section name.")
             return
 
+        if is_importing and not csv_path:
+            QMessageBox.warning(self, "Input Error", "Please select a CSV file to import.")
+            return
+
         conn = None
         try:
-            # 2. Get connection and start transaction
             conn = self.db_tools.get_connection()
             conn.autocommit = False 
             
             with conn.cursor() as cur:
-                # 3. Check for duplicates (Case-Insensitive)
-                cur.execute("SELECT 1 FROM cai.tbl_section WHERE UPPER(sectionname) = UPPER(%s)", (section_name,))
-                if cur.fetchone():
-                    QMessageBox.warning(self, "Duplicate Entry", f"Section '{section_name}' already exists.")
-                    return
-
-                # 4. Insert Section
                 cur.execute(
-                    "INSERT INTO cai.tbl_section (sectionname, teacherid) VALUES (%s, %s) RETURNING sectionid", 
-                    (section_name, teacher_id)
+                    "SELECT sectionid FROM cai.tbl_section WHERE UPPER(sectionname) = UPPER(%s)", 
+                    (section_name,)
                 )
-                new_id = cur.fetchone()[0]
+                row = cur.fetchone()
 
-                # 5. Insert Audit Trail
-                action_str = f"Registered new section: {section_name} (ID: {new_id})"
+                if row and row[0]:
+                    if not is_importing:
+                        QMessageBox.warning(self, "Duplicate Entry", f"Section '{section_name}' already exists.")
+                        return
+                    else:
+                        new_id = row[0]
+                else:
+                    cur.execute(
+                        "INSERT INTO cai.tbl_section (sectionname, teacherid) VALUES (%s, %s) RETURNING sectionid", 
+                        (section_name, teacher_id)
+                    )
+                    new_id = cur.fetchone()[0]
+
+                if is_importing:
+                    ret = self.import_from_csv(csv_path, new_id)
+                    if ret != 0:
+                        raise Exception("Failed to import students from the CSV file.")
+                    self.progressBar.setVisible(False)
+
+                action_str = f"Registered/Updated section: {section_name} (ID: {new_id})"
                 audit_sql = """
                     INSERT INTO cai.tbl_audit_trail (user_id, username, action) 
                     VALUES (%s, %s, %s)
                 """
                 cur.execute(audit_sql, (self.user["school_id"], self.user["username"], action_str))
 
-            # 6. Commit if everything succeeded
             conn.commit()
-            QMessageBox.information(self, "Success", f"Section '{section_name}' added successfully.")
+            QMessageBox.information(self, "Success", f"Section '{section_name}' processed successfully.")
             self.refresh_section_table()
             self.accept()
 
         except Exception as e:
-            # 7. Rollback if anything failed
-            if conn: conn.rollback()
-            QMessageBox.critical(self, "Error", f"Failed to register section: {e}")
-
+            # Rollback transaction on failure
+            if conn:
+                try:
+                    conn.rollback()
+                except Exception:
+                    pass
+            QMessageBox.critical(self, "Database Error", f"An error occurred: {str(e)}")
+            
         finally:
-            if conn: conn.close()
+            if conn:
+                try:
+                    conn.close()
+                except Exception:
+                    pass
 
     def refresh_section_table(self):
         sql = "SELECT\n"

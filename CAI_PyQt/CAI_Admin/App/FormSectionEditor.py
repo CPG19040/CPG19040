@@ -300,7 +300,7 @@ class Ui_SectionEditorDialog(object):
 
     def retranslateUi(self, SectionEditorDialog):
         SectionEditorDialog.setWindowTitle(QCoreApplication.translate("SectionEditorDialog", u"Sections Editor", None))
-        self.label_8.setText(QCoreApplication.translate("SectionEditorDialog", u"Sectin Id:", None))
+        self.label_8.setText(QCoreApplication.translate("SectionEditorDialog", u"Section Id:", None))
         self.label_sectionId.setText("")
         self.widget.setProperty(u"class", QCoreApplication.translate("SectionEditorDialog", u"input-field", None))
         self.label_9.setText(QCoreApplication.translate("SectionEditorDialog", u"Name:", None))

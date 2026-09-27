@@ -15,18 +15,19 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QComboBox, QDialog, QHBoxLayout,
-    QLabel, QLineEdit, QPushButton, QSizePolicy,
-    QSpacerItem, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QComboBox, QDialog, QFrame,
+    QHBoxLayout, QLabel, QLineEdit, QProgressBar,
+    QPushButton, QRadioButton, QSizePolicy, QSpacerItem,
+    QVBoxLayout, QWidget)
 import resources_rc
 
 class Ui_SectionRegistrationDialog(object):
     def setupUi(self, SectionRegistrationDialog):
         if not SectionRegistrationDialog.objectName():
             SectionRegistrationDialog.setObjectName(u"SectionRegistrationDialog")
-        SectionRegistrationDialog.resize(590, 187)
-        SectionRegistrationDialog.setMinimumSize(QSize(590, 187))
-        SectionRegistrationDialog.setMaximumSize(QSize(590, 187))
+        SectionRegistrationDialog.resize(620, 300)
+        SectionRegistrationDialog.setMinimumSize(QSize(620, 300))
+        SectionRegistrationDialog.setMaximumSize(QSize(1000, 300))
         SectionRegistrationDialog.setStyleSheet(u"* {\n"
 "	background-color: rgb(222, 221, 218); \n"
 "	color: black;\n"
@@ -117,6 +118,16 @@ class Ui_SectionRegistrationDialog(object):
 "	color: black;\n"
 "}\n"
 "\n"
+"QProgressBar {\n"
+"	border-radius: 10px;\n"
+"	background-color: white;\n"
+"}\n"
+"\n"
+"QProgressBar::chunk {\n"
+"	background-color: #007BFF;\n"
+"	border-radius: 10px;\n"
+"}\n"
+"\n"
 "QComboBox {\n"
 "    border: 1px solid #999;\n"
 "    border-left: none;\n"
@@ -126,7 +137,8 @@ class Ui_SectionRegistrationDialog(object):
 "    font: 10pt \"Inter Medium\";\n"
 "    selection-background-color: #7eb4d7;\n"
 "	border-top-right-radius: 15px;\n"
-"	border-bottom-right-radius: 15px;\n"
+"	border-bottom-r"
+                        "ight-radius: 15px;\n"
 "}\n"
 "\n"
 "QComboBox:focus, QLineEdit:focus {\n"
@@ -134,8 +146,7 @@ class Ui_SectionRegistrationDialog(object):
 "}\n"
 "\n"
 "QComboBox:hover, QLineEdit:hover {\n"
-"    border: 1px solid #"
-                        "3498db;\n"
+"    border: 1px solid #3498db;\n"
 "}\n"
 "\n"
 "QComboBox::drop-down {\n"
@@ -166,24 +177,32 @@ class Ui_SectionRegistrationDialog(object):
 "QComboBox QAbstractItemView::item {\n"
 "    padding: 0px 15px;\n"
 "    border-radius: 4px;\n"
-"    color: #333333;\n"
+""
+                        "    color: #333333;\n"
 "}\n"
 "\n"
 "/* Hover state for items inside the dropdown */\n"
 "QComboBox QAbstractItemView::item:hover {\n"
 "    background-color: #7eb4d7;\n"
-"    color: "
-                        "#ffffff;\n"
+"    color: #ffffff;\n"
 "}")
         self.verticalLayout = QVBoxLayout(SectionRegistrationDialog)
         self.verticalLayout.setObjectName(u"verticalLayout")
-        self.widget = QWidget(SectionRegistrationDialog)
-        self.widget.setObjectName(u"widget")
-        self.horizontalLayout = QHBoxLayout(self.widget)
+        self.label_sy = QLabel(SectionRegistrationDialog)
+        self.label_sy.setObjectName(u"label_sy")
+
+        self.verticalLayout.addWidget(self.label_sy)
+
+        self.verticalLayout_2 = QVBoxLayout()
+        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
+        self.verticalLayout_2.setContentsMargins(-1, -1, -1, 20)
+        self.widget_1 = QWidget(SectionRegistrationDialog)
+        self.widget_1.setObjectName(u"widget_1")
+        self.horizontalLayout = QHBoxLayout(self.widget_1)
         self.horizontalLayout.setSpacing(0)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
-        self.label_9 = QLabel(self.widget)
+        self.label_9 = QLabel(self.widget_1)
         self.label_9.setObjectName(u"label_9")
         self.label_9.setMinimumSize(QSize(100, 30))
         self.label_9.setMaximumSize(QSize(100, 30))
@@ -191,7 +210,7 @@ class Ui_SectionRegistrationDialog(object):
 
         self.horizontalLayout.addWidget(self.label_9)
 
-        self.txtSectionName = QLineEdit(self.widget)
+        self.txtSectionName = QLineEdit(self.widget_1)
         self.txtSectionName.setObjectName(u"txtSectionName")
         self.txtSectionName.setMinimumSize(QSize(0, 30))
         self.txtSectionName.setStyleSheet(u"background-color: rgb(246, 245, 244); padding: 0px 10px 0px;")
@@ -199,7 +218,7 @@ class Ui_SectionRegistrationDialog(object):
         self.horizontalLayout.addWidget(self.txtSectionName)
 
 
-        self.verticalLayout.addWidget(self.widget)
+        self.verticalLayout_2.addWidget(self.widget_1)
 
         self.widget_2 = QWidget(SectionRegistrationDialog)
         self.widget_2.setObjectName(u"widget_2")
@@ -224,7 +243,123 @@ class Ui_SectionRegistrationDialog(object):
         self.horizontalLayout_3.addWidget(self.cmb_teacher)
 
 
-        self.verticalLayout.addWidget(self.widget_2)
+        self.verticalLayout_2.addWidget(self.widget_2)
+
+
+        self.verticalLayout.addLayout(self.verticalLayout_2)
+
+        self.line = QFrame(SectionRegistrationDialog)
+        self.line.setObjectName(u"line")
+        self.line.setFrameShape(QFrame.Shape.HLine)
+        self.line.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.verticalLayout.addWidget(self.line)
+
+        self.horizontalLayout_4 = QHBoxLayout()
+        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
+        self.horizontalLayout_4.setContentsMargins(-1, 9, -1, 9)
+        self.rb_importCSV = QRadioButton(SectionRegistrationDialog)
+        self.rb_importCSV.setObjectName(u"rb_importCSV")
+        self.rb_importCSV.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+
+        self.horizontalLayout_4.addWidget(self.rb_importCSV)
+
+        self.btnExportTemplate = QPushButton(SectionRegistrationDialog)
+        self.btnExportTemplate.setObjectName(u"btnExportTemplate")
+        self.btnExportTemplate.setMinimumSize(QSize(30, 30))
+        self.btnExportTemplate.setMaximumSize(QSize(30, 30))
+        icon = QIcon()
+        icon.addFile(u":/Images/Images/export.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.btnExportTemplate.setIcon(icon)
+
+        self.horizontalLayout_4.addWidget(self.btnExportTemplate)
+
+
+        self.verticalLayout.addLayout(self.horizontalLayout_4)
+
+        self.widget_CSV = QWidget(SectionRegistrationDialog)
+        self.widget_CSV.setObjectName(u"widget_CSV")
+        self.widget_CSV.setEnabled(False)
+        self.widget_CSV.setMinimumSize(QSize(100, 0))
+        self.widget_CSV.setStyleSheet(u"#label_14 {\n"
+"	background-color: rgb(192, 191, 188);\n"
+"	border-left: 1px solid #999;\n"
+"	border-top: 1px solid #999;\n"
+"	border-bottom: 1px solid #999;\n"
+"	border-right: none;\n"
+"	border-top-left-radius: 15px;\n"
+"	border-bottom-left-radius: 15px;\n"
+"	padding-left: 8px;\n"
+"	color: black;\n"
+"}\n"
+"\n"
+"QLineEdit {\n"
+"	background-color: #ffffff;\n"
+"	color: black;\n"
+"	border: 1px solid #999;\n"
+"	border-right: none;\n"
+"	border-left: none;\n"
+"	padding: 0px 10px;\n"
+"}\n"
+"\n"
+"#btnBrowseCSV {\n"
+"	font: 10pt \"Inter\";\n"
+"	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
+"                                stop:0 #ffffff, \n"
+"                                stop:1 #d8ecf6);\n"
+"	color: black;\n"
+"	border: 1px solid rgb(154, 153, 150);\n"
+"	border-top-right-radius: 15px;\n"
+"	border-bottom-right-radius: 15px;\n"
+"}\n"
+"\n"
+"#btnBrowseCSV:hover {\n"
+"	background-color: #FFF;\n"
+"}\n"
+"\n"
+"#btnBrowseCSV:disabled, #label_14:disabled {\n"
+"	background-color: rgb(192, 191, 188);\n"
+"	border: none;"
+                        "\n"
+"	color: #aeaeae;\n"
+"}\n"
+"\n"
+"#widget_CSV QLineEdit:disabled {\n"
+"	background-color: #f5f5f5;\n"
+"	border: none;\n"
+"	color: #aeaeae;\n"
+"}")
+        self.horizontalLayout_11 = QHBoxLayout(self.widget_CSV)
+        self.horizontalLayout_11.setSpacing(0)
+        self.horizontalLayout_11.setObjectName(u"horizontalLayout_11")
+        self.horizontalLayout_11.setContentsMargins(0, 0, 0, 0)
+        self.label_14 = QLabel(self.widget_CSV)
+        self.label_14.setObjectName(u"label_14")
+        self.label_14.setMinimumSize(QSize(100, 30))
+        self.label_14.setMaximumSize(QSize(100, 30))
+        self.label_14.setAlignment(Qt.AlignCenter)
+
+        self.horizontalLayout_11.addWidget(self.label_14)
+
+        self.txtCSVPath = QLineEdit(self.widget_CSV)
+        self.txtCSVPath.setObjectName(u"txtCSVPath")
+        self.txtCSVPath.setMinimumSize(QSize(0, 30))
+        self.txtCSVPath.setMaximumSize(QSize(16777215, 30))
+        self.txtCSVPath.setStyleSheet(u"")
+
+        self.horizontalLayout_11.addWidget(self.txtCSVPath)
+
+        self.btnBrowseCSV = QPushButton(self.widget_CSV)
+        self.btnBrowseCSV.setObjectName(u"btnBrowseCSV")
+        self.btnBrowseCSV.setMinimumSize(QSize(100, 30))
+        self.btnBrowseCSV.setMaximumSize(QSize(100, 30))
+        self.btnBrowseCSV.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.btnBrowseCSV.setStyleSheet(u"")
+
+        self.horizontalLayout_11.addWidget(self.btnBrowseCSV)
+
+
+        self.verticalLayout.addWidget(self.widget_CSV)
 
         self.verticalSpacer = QSpacerItem(20, 56, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
@@ -232,6 +367,16 @@ class Ui_SectionRegistrationDialog(object):
 
         self.horizontalLayout_2 = QHBoxLayout()
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
+        self.progressBar = QProgressBar(SectionRegistrationDialog)
+        self.progressBar.setObjectName(u"progressBar")
+        self.progressBar.setMinimumSize(QSize(0, 20))
+        self.progressBar.setMaximumSize(QSize(16777215, 20))
+        self.progressBar.setValue(24)
+        self.progressBar.setAlignment(Qt.AlignCenter)
+        self.progressBar.setTextVisible(True)
+
+        self.horizontalLayout_2.addWidget(self.progressBar)
+
         self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_2.addItem(self.horizontalSpacer_2)
@@ -266,10 +411,20 @@ class Ui_SectionRegistrationDialog(object):
 
     def retranslateUi(self, SectionRegistrationDialog):
         SectionRegistrationDialog.setWindowTitle(QCoreApplication.translate("SectionRegistrationDialog", u"Section Registration", None))
-        self.widget.setProperty(u"class", QCoreApplication.translate("SectionRegistrationDialog", u"input-field", None))
+        self.label_sy.setText(QCoreApplication.translate("SectionRegistrationDialog", u"School Year: 0000-0000", None))
+        self.widget_1.setProperty(u"class", QCoreApplication.translate("SectionRegistrationDialog", u"input-field", None))
         self.label_9.setText(QCoreApplication.translate("SectionRegistrationDialog", u"Name", None))
         self.widget_2.setProperty(u"class", QCoreApplication.translate("SectionRegistrationDialog", u"input-field", None))
         self.label_10.setText(QCoreApplication.translate("SectionRegistrationDialog", u"Adviser", None))
+        self.rb_importCSV.setText(QCoreApplication.translate("SectionRegistrationDialog", u"Import students from CSV", None))
+#if QT_CONFIG(tooltip)
+        self.btnExportTemplate.setToolTip(QCoreApplication.translate("SectionRegistrationDialog", u"Export Template", None))
+#endif // QT_CONFIG(tooltip)
+        self.btnExportTemplate.setText("")
+        self.widget_CSV.setProperty(u"class", "")
+        self.label_14.setText(QCoreApplication.translate("SectionRegistrationDialog", u"Template:", None))
+        self.label_14.setProperty(u"class", QCoreApplication.translate("SectionRegistrationDialog", u"input-field", None))
+        self.btnBrowseCSV.setText(QCoreApplication.translate("SectionRegistrationDialog", u"Browse", None))
         self.btnCancel.setText(QCoreApplication.translate("SectionRegistrationDialog", u"Cancel", None))
         self.btnCancel.setProperty(u"class", QCoreApplication.translate("SectionRegistrationDialog", u"button-normal", None))
         self.btnSave.setText(QCoreApplication.translate("SectionRegistrationDialog", u"Save", None))

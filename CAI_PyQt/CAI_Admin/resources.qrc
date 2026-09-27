@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="Images">
+    <file>Images/export.png</file>
     <file>Images/ranking.png</file>
     <file>Images/users-61.svg</file>
     <file>Images/undo.png</file>
