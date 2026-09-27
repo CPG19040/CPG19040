@@ -8,6 +8,7 @@ from PySide6.QtWebEngineWidgets import QWebEngineView
 
 from App.CRUDTools import DatabaseTools
 from App.MessageBox import Ui_MessageBox
+from App.CardRanking import Ui_CardRanking
 
 class Utility:
 
@@ -583,5 +584,70 @@ class CrossPlatformPrinter:
             return False, f"Printing failed: {str(e)}"
 
 
+
+class CardRanking(QWidget, Ui_CardRanking):
+
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setupUi(self)
+
+        self.bgColor      ="#34A25B"
+        self.bgColor2     ="#57C27B"
+        self.student_rank = 1
+        self.name         = ""
+        self.avatar       = None
+        self.score        = ""
+        self.suffix       = "st"
+
+    def set_ranking_info(self):
+
+        if self.student_rank == 2:
+            self.bgColor = "#5C5890"
+            self.bgColor2 = "#7E74B0"
+            self.suffix = "nd"
+
+        elif self.student_rank == 3:
+            self.bgColor = "#FEC000"
+            self.bgColor2 = "#EFA60B"
+            self.suffix = "rd"
+
+        self.qss = f"""
+            #widget_27 {{
+                background-color: {self.bgColor};
+                border-radius: 18px;
+            }}
+
+            #widget_26 {{
+                background: transparent;
+            }}
+
+            #label_stud_name {{
+                color: #FFF;
+                background-color: transparent;
+                font: 12pt "Inter Medium";
+            }}
+
+            #label_student_score {{
+                font: 20pt "Inter SemiBold";
+                background: transparent;
+                color: #FFF;
+            }}
+
+            #label_student_place {{
+                font: 12pt "Inter SemiBold";
+                border-radius: 12px;
+                background-color: {self.bgColor2};
+                color: #FFF;
+            }}
+        """
+
+        self.widget_27.setStyleSheet(self.qss)
+
+        if self.avatar:
+            self.label_profile.setPixmap(self.avatar)
+            
+        self.label_stud_name.setText(self.name)
+        self.label_student_score.setText(f"{self.score}%")
+        self.label_student_place.setText(f"{self.student_rank}{self.suffix}")
 
 

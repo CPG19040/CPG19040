@@ -101,7 +101,7 @@ class Student:
 
         sql += 'WHERE stud.school_year = %s\n'
         sql_params.append(school_year)
-        
+
         sql += 'ORDER BY\n'
         sql += '    sec.sectionname, stud.lastname, stud.firstname ASC'
 
@@ -255,11 +255,14 @@ class Student:
         sql += "GROUP BY datetaken::DATE\n"
         sql += "ORDER BY day ASC;\n"
 
-    def get_top3_scorer(self, gradingperiod):
+    def get_top3rd_ranking(self, gradingperiod):
+        # RANK() creates competition ranking (e.g., 1, 1, 3)
+        # DENSE_RANK() creates dense ranking (e.g., 1, 1, 2)
+
         query = """
             WITH QuizTotals AS (
-                SELECT 
-                    Q.QUIZNUMBER, 
+                SELECT
+                    Q.QUIZNUMBER,
                     Q.LESSONID,
                     (COUNT(CASE WHEN Q.DIFFICULTYLEVEL = 1 THEN 1 END) * M.EASY_MULTIPLIER) +
                     (COUNT(CASE WHEN Q.DIFFICULTYLEVEL = 2 THEN 1 END) * M.AVERAGE_MULTIPLIER) +
@@ -283,18 +286,42 @@ class Student:
                 JOIN QuizTotals qt ON qs.quiznumber = qt.quiznumber AND qs.lessonid = qt.lessonid
                 WHERE qs.gradingperiod = %s
                     AND qs.quizscore <= qt.max_score
+            ),
+            StudentAverages AS (
+                SELECT
+                    s.studentid,
+                    s.firstname,
+                    s.middlename,
+                    s.lastname,
+                    ROUND(AVG(sp.quiz_percentage)::numeric, 2) AS average_final_grade
+                FROM StudentPercentages sp
+                JOIN CAI.TBL_STUDENT_INFO s ON sp.studentid = s.studentid
+                GROUP BY s.studentid, s.firstname, s.middlename, s.lastname
+            ),
+            RankedStudents AS (
+                SELECT
+                    studentid,
+                    firstname,
+                    middlename,
+                    lastname,
+                    average_final_grade,
+                    DENSE_RANK() OVER (ORDER BY average_final_grade DESC) AS student_rank
+                FROM StudentAverages
             )
-            SELECT 
-                s.studentid,
-                s.firstname,
-                s.middlename,
-                s.lastname,
-                ROUND(AVG(sp.quiz_percentage)::numeric, 2) AS average_final_grade
-            FROM StudentPercentages sp
-            JOIN CAI.TBL_STUDENT_INFO s ON sp.studentid = s.studentid
-            GROUP BY s.studentid, s.firstname, s.middlename, s.lastname
-            ORDER BY average_final_grade DESC
-            LIMIT 3;
+            SELECT
+                student_rank,
+                studentid,
+                firstname,
+                middlename,
+                lastname,
+                average_final_grade
+            FROM RankedStudents
+            WHERE student_rank <= 3
+                AND average_final_grade >= (
+                                                SELECT passing_score
+                                                FROM cai.tbl_grading_system
+                                                WHERE category = 'Quiz'
+                                            );
         """
 
         top3 = self.db_tools.fetch_all(query, (gradingperiod, gradingperiod))

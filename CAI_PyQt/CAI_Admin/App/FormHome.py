@@ -16,12 +16,12 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QAbstractItemView, QAbstractScrollArea, QApplication, QCheckBox,
-    QComboBox, QDateEdit, QFormLayout, QFrame,
-    QGridLayout, QHBoxLayout, QHeaderView, QLabel,
-    QLineEdit, QMainWindow, QPlainTextEdit, QPushButton,
-    QScrollArea, QSizePolicy, QSpacerItem, QSpinBox,
-    QStackedWidget, QTabWidget, QTableView, QTextEdit,
-    QVBoxLayout, QWidget)
+    QComboBox, QDateEdit, QDoubleSpinBox, QFormLayout,
+    QFrame, QGridLayout, QHBoxLayout, QHeaderView,
+    QLabel, QLineEdit, QMainWindow, QPlainTextEdit,
+    QPushButton, QScrollArea, QSizePolicy, QSpacerItem,
+    QSpinBox, QStackedWidget, QTabWidget, QTableView,
+    QTextEdit, QVBoxLayout, QWidget)
 import resources_rc
 
 class Ui_Home(object):
@@ -324,20 +324,6 @@ class Ui_Home(object):
 
         self.verticalLayout_5.addWidget(self.btnQuiz)
 
-        self.btnExercise = QPushButton(self.navigationBar)
-        self.btnExercise.setObjectName(u"btnExercise")
-        self.btnExercise.setMinimumSize(QSize(200, 40))
-        self.btnExercise.setMaximumSize(QSize(16777215, 40))
-        self.btnExercise.setFont(font1)
-        self.btnExercise.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.btnExercise.setStyleSheet(u"")
-        icon5 = QIcon()
-        icon5.addFile(u":/Images/Images/dumbell.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.btnExercise.setIcon(icon5)
-        self.btnExercise.setIconSize(QSize(24, 24))
-
-        self.verticalLayout_5.addWidget(self.btnExercise)
-
         self.btnSections = QPushButton(self.navigationBar)
         self.btnSections.setObjectName(u"btnSections")
         self.btnSections.setMinimumSize(QSize(200, 40))
@@ -345,9 +331,9 @@ class Ui_Home(object):
         self.btnSections.setFont(font1)
         self.btnSections.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btnSections.setStyleSheet(u"")
-        icon6 = QIcon()
-        icon6.addFile(u":/Images/Images/library-90.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.btnSections.setIcon(icon6)
+        icon5 = QIcon()
+        icon5.addFile(u":/Images/Images/library-90.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.btnSections.setIcon(icon5)
         self.btnSections.setIconSize(QSize(24, 24))
 
         self.verticalLayout_5.addWidget(self.btnSections)
@@ -359,9 +345,9 @@ class Ui_Home(object):
         self.btnReports.setFont(font1)
         self.btnReports.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btnReports.setStyleSheet(u"")
-        icon7 = QIcon()
-        icon7.addFile(u":/Images/Images/product-data.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.btnReports.setIcon(icon7)
+        icon6 = QIcon()
+        icon6.addFile(u":/Images/Images/product-data.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.btnReports.setIcon(icon6)
         self.btnReports.setIconSize(QSize(24, 24))
 
         self.verticalLayout_5.addWidget(self.btnReports)
@@ -373,9 +359,9 @@ class Ui_Home(object):
         self.btnUsers.setFont(font1)
         self.btnUsers.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btnUsers.setStyleSheet(u"")
-        icon8 = QIcon()
-        icon8.addFile(u":/Images/Images/users-61.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.btnUsers.setIcon(icon8)
+        icon7 = QIcon()
+        icon7.addFile(u":/Images/Images/users-61.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.btnUsers.setIcon(icon7)
         self.btnUsers.setIconSize(QSize(24, 24))
 
         self.verticalLayout_5.addWidget(self.btnUsers)
@@ -387,9 +373,9 @@ class Ui_Home(object):
         self.btnUtility.setFont(font1)
         self.btnUtility.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btnUtility.setStyleSheet(u"")
-        icon9 = QIcon()
-        icon9.addFile(u":/Images/Images/settings-125.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.btnUtility.setIcon(icon9)
+        icon8 = QIcon()
+        icon8.addFile(u":/Images/Images/settings-125.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.btnUtility.setIcon(icon8)
         self.btnUtility.setIconSize(QSize(24, 24))
 
         self.verticalLayout_5.addWidget(self.btnUtility)
@@ -423,9 +409,9 @@ class Ui_Home(object):
 "QPushButton:hover {\n"
 " 	background: #5d5d5d;\n"
 "}")
-        icon10 = QIcon()
-        icon10.addFile(u":/Images/Images/icon-user-7.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.btnUserName.setIcon(icon10)
+        icon9 = QIcon()
+        icon9.addFile(u":/Images/Images/icon-user-7.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.btnUserName.setIcon(icon9)
         self.btnUserName.setIconSize(QSize(30, 30))
 
         self.verticalLayout_5.addWidget(self.btnUserName)
@@ -447,9 +433,9 @@ class Ui_Home(object):
         self.btnLogout.setFont(font1)
         self.btnLogout.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btnLogout.setStyleSheet(u"")
-        icon11 = QIcon()
-        icon11.addFile(u":/Images/Images/logout.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.btnLogout.setIcon(icon11)
+        icon10 = QIcon()
+        icon10.addFile(u":/Images/Images/logout.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.btnLogout.setIcon(icon10)
         self.btnLogout.setIconSize(QSize(24, 24))
 
         self.verticalLayout_5.addWidget(self.btnLogout)
@@ -765,11 +751,48 @@ class Ui_Home(object):
 
         self.verticalLayout_36.addItem(self.verticalSpacer_3)
 
-        self.widget_top_scorers = QWidget(self.widget_13)
-        self.widget_top_scorers.setObjectName(u"widget_top_scorers")
-        self.widget_top_scorers.setMinimumSize(QSize(0, 220))
-        self.widget_top_scorers.setMaximumSize(QSize(16777215, 220))
-        self.widget_top_scorers.setStyleSheet(u"/*\n"
+        self.frame_ranking_title = QFrame(self.widget_13)
+        self.frame_ranking_title.setObjectName(u"frame_ranking_title")
+        self.frame_ranking_title.setMinimumSize(QSize(0, 30))
+        self.frame_ranking_title.setStyleSheet(u"#frame_ranking_title {\n"
+"	background-color: transparent; border-bottom: 1px solid rgb(146, 146, 146);\n"
+"}")
+        self.frame_ranking_title.setFrameShape(QFrame.StyledPanel)
+        self.frame_ranking_title.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_13 = QHBoxLayout(self.frame_ranking_title)
+        self.horizontalLayout_13.setObjectName(u"horizontalLayout_13")
+        self.horizontalLayout_13.setContentsMargins(0, 0, 0, 0)
+        self.label = QLabel(self.frame_ranking_title)
+        self.label.setObjectName(u"label")
+        self.label.setMinimumSize(QSize(30, 30))
+        self.label.setMaximumSize(QSize(30, 30))
+        self.label.setPixmap(QPixmap(u":/Images/Images/ranking.png"))
+        self.label.setScaledContents(True)
+
+        self.horizontalLayout_13.addWidget(self.label)
+
+        self.label_1 = QLabel(self.frame_ranking_title)
+        self.label_1.setObjectName(u"label_1")
+        self.label_1.setMinimumSize(QSize(0, 30))
+        self.label_1.setMaximumSize(QSize(16777215, 30))
+        self.label_1.setFont(font2)
+        self.label_1.setStyleSheet(u"QLabel {\n"
+"    color: rgb(36, 31, 49);\n"
+"    background-color: transparent;\n"
+"    font: 12pt \"Inter Medium\";\n"
+"}")
+        self.label_1.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+
+        self.horizontalLayout_13.addWidget(self.label_1)
+
+
+        self.verticalLayout_36.addWidget(self.frame_ranking_title)
+
+        self.scrollArea_Ranking = QScrollArea(self.widget_13)
+        self.scrollArea_Ranking.setObjectName(u"scrollArea_Ranking")
+        self.scrollArea_Ranking.setMinimumSize(QSize(0, 220))
+        self.scrollArea_Ranking.setMaximumSize(QSize(16777215, 220))
+        self.scrollArea_Ranking.setStyleSheet(u"/*\n"
 "#widget_top_scorers {\n"
 "	border-radius: 10px;\n"
 "	background-color: rgb(255, 255, 255);\n"
@@ -797,291 +820,16 @@ class Ui_Home(object):
 "	color: rgb(36, 31, 49); \n"
 "	font: 20pt \"Inter SemiBold\";\n"
 "}")
-        self.horizontalLayout_42 = QHBoxLayout(self.widget_top_scorers)
-        self.horizontalLayout_42.setSpacing(10)
-        self.horizontalLayout_42.setObjectName(u"horizontalLayout_42")
-        self.horizontalSpacer_22 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.scrollArea_Ranking.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.scrollArea_Ranking.setWidgetResizable(True)
+        self.scrollAreaWidgetContents = QWidget()
+        self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 730, 220))
+        self.HBoxLayout_Ranking = QHBoxLayout(self.scrollAreaWidgetContents)
+        self.HBoxLayout_Ranking.setObjectName(u"HBoxLayout_Ranking")
+        self.scrollArea_Ranking.setWidget(self.scrollAreaWidgetContents)
 
-        self.horizontalLayout_42.addItem(self.horizontalSpacer_22)
-
-        self.widget_27 = QWidget(self.widget_top_scorers)
-        self.widget_27.setObjectName(u"widget_27")
-        self.widget_27.setMinimumSize(QSize(0, 200))
-        self.widget_27.setMaximumSize(QSize(16777215, 200))
-        self.widget_27.setStyleSheet(u"#widget_27 {\n"
-"	background-color: #34a25b;\n"
-"	border-radius: 20px;\n"
-"}\n"
-"\n"
-"#widget_26 {\n"
-"	background: transparent;\n"
-"}\n"
-"\n"
-"#label_stud_name {\n"
-"	color: #FFF;\n"
-"	background-color: transparent;\n"
-"	font: 12pt \"Inter Medium\";\n"
-"}\n"
-"\n"
-"#label_student_score {\n"
-"	font: 20pt \"Inter SemiBold\";\n"
-"	background: transparent;\n"
-"	color: #FFF;\n"
-"}\n"
-"\n"
-"#label_student_place {\n"
-"	font: 12pt \"Inter SemiBold\";\n"
-"	border-radius: 12px;\n"
-"	background-color: #57c27b;\n"
-"	color: #FFF;\n"
-"}")
-        self.verticalLayout_37 = QVBoxLayout(self.widget_27)
-        self.verticalLayout_37.setObjectName(u"verticalLayout_37")
-        self.verticalLayout_37.setContentsMargins(-1, 10, -1, 10)
-        self.widget_26 = QWidget(self.widget_27)
-        self.widget_26.setObjectName(u"widget_26")
-        self.horizontalLayout_41 = QHBoxLayout(self.widget_26)
-        self.horizontalLayout_41.setSpacing(0)
-        self.horizontalLayout_41.setObjectName(u"horizontalLayout_41")
-        self.horizontalLayout_41.setContentsMargins(0, 0, 0, 0)
-        self.horizontalSpacer_13 = QSpacerItem(20, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.horizontalLayout_41.addItem(self.horizontalSpacer_13)
-
-        self.label_profile = QLabel(self.widget_26)
-        self.label_profile.setObjectName(u"label_profile")
-        sizePolicy.setHeightForWidth(self.label_profile.sizePolicy().hasHeightForWidth())
-        self.label_profile.setSizePolicy(sizePolicy)
-        self.label_profile.setMinimumSize(QSize(80, 80))
-        self.label_profile.setMaximumSize(QSize(80, 80))
-        self.label_profile.setStyleSheet(u"background-color: transparent;")
-        self.label_profile.setPixmap(QPixmap(u":/Images/Images/profile_gray.png"))
-        self.label_profile.setScaledContents(True)
-        self.label_profile.setAlignment(Qt.AlignCenter)
-
-        self.horizontalLayout_41.addWidget(self.label_profile)
-
-        self.horizontalSpacer_14 = QSpacerItem(20, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.horizontalLayout_41.addItem(self.horizontalSpacer_14)
-
-
-        self.verticalLayout_37.addWidget(self.widget_26)
-
-        self.label_stud_name = QLabel(self.widget_27)
-        self.label_stud_name.setObjectName(u"label_stud_name")
-        self.label_stud_name.setFont(font2)
-        self.label_stud_name.setStyleSheet(u"")
-        self.label_stud_name.setAlignment(Qt.AlignCenter)
-
-        self.verticalLayout_37.addWidget(self.label_stud_name)
-
-        self.label_student_score = QLabel(self.widget_27)
-        self.label_student_score.setObjectName(u"label_student_score")
-        self.label_student_score.setFont(font3)
-        self.label_student_score.setAlignment(Qt.AlignCenter)
-
-        self.verticalLayout_37.addWidget(self.label_student_score)
-
-        self.label_student_place = QLabel(self.widget_27)
-        self.label_student_place.setObjectName(u"label_student_place")
-        font4 = QFont()
-        font4.setFamilies([u"Inter SemiBold"])
-        font4.setPointSize(12)
-        font4.setBold(False)
-        font4.setItalic(False)
-        self.label_student_place.setFont(font4)
-        self.label_student_place.setAlignment(Qt.AlignCenter)
-
-        self.verticalLayout_37.addWidget(self.label_student_place)
-
-
-        self.horizontalLayout_42.addWidget(self.widget_27)
-
-        self.widget_28 = QWidget(self.widget_top_scorers)
-        self.widget_28.setObjectName(u"widget_28")
-        self.widget_28.setMinimumSize(QSize(0, 200))
-        self.widget_28.setMaximumSize(QSize(16777215, 200))
-        self.widget_28.setStyleSheet(u"#widget_28 {\n"
-"	background-color: #5c5890;\n"
-"	border-radius: 20px;\n"
-"}\n"
-"\n"
-"#widget_29 {\n"
-"	background: transparent;\n"
-"}\n"
-"\n"
-"#label_stud_name_2 {\n"
-"	color: #FFF;\n"
-"	background-color: transparent;\n"
-"	font: 12pt \"Inter Medium\";\n"
-"}\n"
-"\n"
-"#label_student_score_2 {\n"
-"	font: 20pt \"Inter SemiBold\";\n"
-"	background: transparent;\n"
-"	color: #FFF;\n"
-"}\n"
-"\n"
-"#label_student_place_2 {\n"
-"	font: 12pt \"Inter SemiBold\";\n"
-"	border-radius: 12px;\n"
-"	background-color: #7e74b0;\n"
-"	color: #FFF;\n"
-"}")
-        self.verticalLayout_38 = QVBoxLayout(self.widget_28)
-        self.verticalLayout_38.setObjectName(u"verticalLayout_38")
-        self.verticalLayout_38.setContentsMargins(-1, 10, -1, 10)
-        self.widget_29 = QWidget(self.widget_28)
-        self.widget_29.setObjectName(u"widget_29")
-        self.horizontalLayout_43 = QHBoxLayout(self.widget_29)
-        self.horizontalLayout_43.setSpacing(0)
-        self.horizontalLayout_43.setObjectName(u"horizontalLayout_43")
-        self.horizontalLayout_43.setContentsMargins(0, 0, 0, 0)
-        self.horizontalSpacer_16 = QSpacerItem(20, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.horizontalLayout_43.addItem(self.horizontalSpacer_16)
-
-        self.label_profile_2 = QLabel(self.widget_29)
-        self.label_profile_2.setObjectName(u"label_profile_2")
-        sizePolicy.setHeightForWidth(self.label_profile_2.sizePolicy().hasHeightForWidth())
-        self.label_profile_2.setSizePolicy(sizePolicy)
-        self.label_profile_2.setMinimumSize(QSize(80, 80))
-        self.label_profile_2.setMaximumSize(QSize(80, 80))
-        self.label_profile_2.setStyleSheet(u"background-color: transparent;")
-        self.label_profile_2.setPixmap(QPixmap(u":/Images/Images/profile_gray.png"))
-        self.label_profile_2.setScaledContents(True)
-        self.label_profile_2.setAlignment(Qt.AlignCenter)
-
-        self.horizontalLayout_43.addWidget(self.label_profile_2)
-
-        self.horizontalSpacer_17 = QSpacerItem(20, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.horizontalLayout_43.addItem(self.horizontalSpacer_17)
-
-
-        self.verticalLayout_38.addWidget(self.widget_29)
-
-        self.label_stud_name_2 = QLabel(self.widget_28)
-        self.label_stud_name_2.setObjectName(u"label_stud_name_2")
-        self.label_stud_name_2.setFont(font2)
-        self.label_stud_name_2.setStyleSheet(u"")
-        self.label_stud_name_2.setAlignment(Qt.AlignCenter)
-
-        self.verticalLayout_38.addWidget(self.label_stud_name_2)
-
-        self.label_student_score_2 = QLabel(self.widget_28)
-        self.label_student_score_2.setObjectName(u"label_student_score_2")
-        self.label_student_score_2.setFont(font3)
-        self.label_student_score_2.setAlignment(Qt.AlignCenter)
-
-        self.verticalLayout_38.addWidget(self.label_student_score_2)
-
-        self.label_student_place_2 = QLabel(self.widget_28)
-        self.label_student_place_2.setObjectName(u"label_student_place_2")
-        self.label_student_place_2.setFont(font4)
-        self.label_student_place_2.setAlignment(Qt.AlignCenter)
-
-        self.verticalLayout_38.addWidget(self.label_student_place_2)
-
-
-        self.horizontalLayout_42.addWidget(self.widget_28)
-
-        self.widget_30 = QWidget(self.widget_top_scorers)
-        self.widget_30.setObjectName(u"widget_30")
-        self.widget_30.setMinimumSize(QSize(0, 200))
-        self.widget_30.setMaximumSize(QSize(16777215, 200))
-        self.widget_30.setStyleSheet(u"#widget_30 {\n"
-"	background-color: #fec000;\n"
-"	border-radius: 20px;\n"
-"}\n"
-"\n"
-"#widget_31 {\n"
-"	background: transparent;\n"
-"}\n"
-"\n"
-"#label_stud_name_3 {\n"
-"	color: #FFF;\n"
-"	background-color: transparent;\n"
-"	font: 12pt \"Inter Medium\";\n"
-"}\n"
-"\n"
-"#label_student_score_3 {\n"
-"	font: 20pt \"Inter SemiBold\";\n"
-"	background: transparent;\n"
-"	color: #FFF;\n"
-"}\n"
-"\n"
-"#label_student_place_3 {\n"
-"	font: 12pt \"Inter SemiBold\";\n"
-"	border-radius: 12px;\n"
-"	background-color: #efa60b;\n"
-"	color: #FFF;\n"
-"}")
-        self.verticalLayout_39 = QVBoxLayout(self.widget_30)
-        self.verticalLayout_39.setObjectName(u"verticalLayout_39")
-        self.verticalLayout_39.setContentsMargins(-1, 10, -1, 10)
-        self.widget_31 = QWidget(self.widget_30)
-        self.widget_31.setObjectName(u"widget_31")
-        self.horizontalLayout_44 = QHBoxLayout(self.widget_31)
-        self.horizontalLayout_44.setSpacing(0)
-        self.horizontalLayout_44.setObjectName(u"horizontalLayout_44")
-        self.horizontalLayout_44.setContentsMargins(0, 0, 0, 0)
-        self.horizontalSpacer_18 = QSpacerItem(20, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.horizontalLayout_44.addItem(self.horizontalSpacer_18)
-
-        self.label_profile_3 = QLabel(self.widget_31)
-        self.label_profile_3.setObjectName(u"label_profile_3")
-        sizePolicy.setHeightForWidth(self.label_profile_3.sizePolicy().hasHeightForWidth())
-        self.label_profile_3.setSizePolicy(sizePolicy)
-        self.label_profile_3.setMinimumSize(QSize(80, 80))
-        self.label_profile_3.setMaximumSize(QSize(80, 80))
-        self.label_profile_3.setStyleSheet(u"background-color: transparent;")
-        self.label_profile_3.setPixmap(QPixmap(u":/Images/Images/profile_gray.png"))
-        self.label_profile_3.setScaledContents(True)
-        self.label_profile_3.setAlignment(Qt.AlignCenter)
-
-        self.horizontalLayout_44.addWidget(self.label_profile_3)
-
-        self.horizontalSpacer_19 = QSpacerItem(20, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.horizontalLayout_44.addItem(self.horizontalSpacer_19)
-
-
-        self.verticalLayout_39.addWidget(self.widget_31)
-
-        self.label_stud_name_3 = QLabel(self.widget_30)
-        self.label_stud_name_3.setObjectName(u"label_stud_name_3")
-        self.label_stud_name_3.setFont(font2)
-        self.label_stud_name_3.setStyleSheet(u"")
-        self.label_stud_name_3.setAlignment(Qt.AlignCenter)
-
-        self.verticalLayout_39.addWidget(self.label_stud_name_3)
-
-        self.label_student_score_3 = QLabel(self.widget_30)
-        self.label_student_score_3.setObjectName(u"label_student_score_3")
-        self.label_student_score_3.setFont(font3)
-        self.label_student_score_3.setAlignment(Qt.AlignCenter)
-
-        self.verticalLayout_39.addWidget(self.label_student_score_3)
-
-        self.label_student_place_3 = QLabel(self.widget_30)
-        self.label_student_place_3.setObjectName(u"label_student_place_3")
-        self.label_student_place_3.setFont(font4)
-        self.label_student_place_3.setAlignment(Qt.AlignCenter)
-
-        self.verticalLayout_39.addWidget(self.label_student_place_3)
-
-
-        self.horizontalLayout_42.addWidget(self.widget_30)
-
-        self.horizontalSpacer_21 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.horizontalLayout_42.addItem(self.horizontalSpacer_21)
-
-
-        self.verticalLayout_36.addWidget(self.widget_top_scorers)
+        self.verticalLayout_36.addWidget(self.scrollArea_Ranking)
 
 
         self.horizontalLayout_24.addWidget(self.widget_13)
@@ -1093,23 +841,23 @@ class Ui_Home(object):
         self.label_month = QLabel(self.widget_datetime)
         self.label_month.setObjectName(u"label_month")
         self.label_month.setGeometry(QRect(59, 10, 91, 34))
-        font5 = QFont()
-        font5.setFamilies([u"Inter Medium"])
-        font5.setPointSize(18)
-        font5.setBold(False)
-        font5.setItalic(False)
-        self.label_month.setFont(font5)
+        font4 = QFont()
+        font4.setFamilies([u"Inter Medium"])
+        font4.setPointSize(18)
+        font4.setBold(False)
+        font4.setItalic(False)
+        self.label_month.setFont(font4)
         self.label_month.setStyleSheet(u"color: rgb(255, 255, 255); background-color: transparent; font: 57 18pt \"Inter Medium\";")
         self.label_month.setAlignment(Qt.AlignCenter)
         self.label_day = QLabel(self.widget_datetime)
         self.label_day.setObjectName(u"label_day")
         self.label_day.setGeometry(QRect(60, 50, 87, 82))
-        font6 = QFont()
-        font6.setFamilies([u"Inter Medium"])
-        font6.setPointSize(50)
-        font6.setBold(False)
-        font6.setItalic(False)
-        self.label_day.setFont(font6)
+        font5 = QFont()
+        font5.setFamilies([u"Inter Medium"])
+        font5.setPointSize(50)
+        font5.setBold(False)
+        font5.setItalic(False)
+        self.label_day.setFont(font5)
         self.label_day.setStyleSheet(u"QLabel { color: rgb(36, 31, 49); background-color: transparent; font: 50pt \"Inter Medium\"; }")
         self.label_day.setAlignment(Qt.AlignCenter)
         self.label_19 = QLabel(self.widget_datetime)
@@ -1129,12 +877,12 @@ class Ui_Home(object):
         self.horizontalLayout_16.setContentsMargins(0, 0, 0, 0)
         self.label_time = QLabel(self.horizontalLayoutWidget)
         self.label_time.setObjectName(u"label_time")
-        font7 = QFont()
-        font7.setFamilies([u"Inter Medium"])
-        font7.setPointSize(30)
-        font7.setBold(False)
-        font7.setItalic(False)
-        self.label_time.setFont(font7)
+        font6 = QFont()
+        font6.setFamilies([u"Inter Medium"])
+        font6.setPointSize(30)
+        font6.setBold(False)
+        font6.setItalic(False)
+        self.label_time.setFont(font6)
         self.label_time.setStyleSheet(u"QLabel { color: rgb(36, 31, 49); background-color: transparent; font: 57 30pt \"Inter Medium\"; }")
         self.label_time.setAlignment(Qt.AlignCenter)
 
@@ -1142,12 +890,12 @@ class Ui_Home(object):
 
         self.label_timeAP = QLabel(self.horizontalLayoutWidget)
         self.label_timeAP.setObjectName(u"label_timeAP")
-        font8 = QFont()
-        font8.setFamilies([u"Inter Medium"])
-        font8.setPointSize(14)
-        font8.setBold(False)
-        font8.setItalic(False)
-        self.label_timeAP.setFont(font8)
+        font7 = QFont()
+        font7.setFamilies([u"Inter Medium"])
+        font7.setPointSize(14)
+        font7.setBold(False)
+        font7.setItalic(False)
+        self.label_timeAP.setFont(font7)
         self.label_timeAP.setStyleSheet(u"QLabel { color: rgb(36, 31, 49); background-color: transparent; font: 57 14pt \"Inter Medium\"; }")
         self.label_timeAP.setAlignment(Qt.AlignCenter)
 
@@ -1321,9 +1069,9 @@ class Ui_Home(object):
         self.btnRefreshSY.setMinimumSize(QSize(30, 30))
         self.btnRefreshSY.setMaximumSize(QSize(30, 30))
         self.btnRefreshSY.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        icon12 = QIcon()
-        icon12.addFile(u":/Images/Images/undo.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.btnRefreshSY.setIcon(icon12)
+        icon11 = QIcon()
+        icon11.addFile(u":/Images/Images/undo.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.btnRefreshSY.setIcon(icon11)
         self.btnRefreshSY.setIconSize(QSize(22, 22))
 
         self.horizontalLayout_18.addWidget(self.btnRefreshSY)
@@ -1391,11 +1139,11 @@ class Ui_Home(object):
 "*[class=\"button-clear-search\"]:pressed {\n"
 "	background-color: #FFD2D2;\n"
 "}")
-        icon13 = QIcon()
-        icon13.addFile(u":/Images/Images/clear.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        icon13.addFile(u":/Images/Images/clear.png", QSize(), QIcon.Mode.Normal, QIcon.State.On)
-        icon13.addFile(u":/Images/Images/clear.png", QSize(), QIcon.Mode.Active, QIcon.State.On)
-        self.btnClearSearch_1.setIcon(icon13)
+        icon12 = QIcon()
+        icon12.addFile(u":/Images/Images/clear.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        icon12.addFile(u":/Images/Images/clear.png", QSize(), QIcon.Mode.Normal, QIcon.State.On)
+        icon12.addFile(u":/Images/Images/clear.png", QSize(), QIcon.Mode.Active, QIcon.State.On)
+        self.btnClearSearch_1.setIcon(icon12)
         self.btnClearSearch_1.setIconSize(QSize(8, 8))
 
         self.layout_search_2.addWidget(self.btnClearSearch_1)
@@ -1430,12 +1178,12 @@ class Ui_Home(object):
         self.label_totalStudCount = QLabel(self.widget_19)
         self.label_totalStudCount.setObjectName(u"label_totalStudCount")
         self.label_totalStudCount.setMaximumSize(QSize(100, 20))
-        font9 = QFont()
-        font9.setFamilies([u"Inter SemiBold"])
-        font9.setPointSize(10)
-        font9.setBold(False)
-        font9.setItalic(False)
-        self.label_totalStudCount.setFont(font9)
+        font8 = QFont()
+        font8.setFamilies([u"Inter SemiBold"])
+        font8.setPointSize(10)
+        font8.setBold(False)
+        font8.setItalic(False)
+        self.label_totalStudCount.setFont(font8)
         self.label_totalStudCount.setStyleSheet(u"background-color: transparent; font: 10pt \"Inter SemiBold\";")
 
         self.horizontalLayout_3.addWidget(self.label_totalStudCount)
@@ -1451,9 +1199,9 @@ class Ui_Home(object):
         self.btnAddStudent.setFont(font)
         self.btnAddStudent.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btnAddStudent.setStyleSheet(u"")
-        icon14 = QIcon()
-        icon14.addFile(u":/Images/Images/plus.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.btnAddStudent.setIcon(icon14)
+        icon13 = QIcon()
+        icon13.addFile(u":/Images/Images/plus.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.btnAddStudent.setIcon(icon13)
 
         self.horizontalLayout_3.addWidget(self.btnAddStudent)
 
@@ -1464,9 +1212,9 @@ class Ui_Home(object):
         self.btnDeleteStudent.setFont(font)
         self.btnDeleteStudent.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btnDeleteStudent.setStyleSheet(u"")
-        icon15 = QIcon()
-        icon15.addFile(u":/Images/Images/trash.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.btnDeleteStudent.setIcon(icon15)
+        icon14 = QIcon()
+        icon14.addFile(u":/Images/Images/trash.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.btnDeleteStudent.setIcon(icon14)
 
         self.horizontalLayout_3.addWidget(self.btnDeleteStudent)
 
@@ -1477,9 +1225,9 @@ class Ui_Home(object):
         self.btnPrintStudentList.setFont(font)
         self.btnPrintStudentList.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btnPrintStudentList.setStyleSheet(u"")
-        icon16 = QIcon()
-        icon16.addFile(u":/Images/Images/printer.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.btnPrintStudentList.setIcon(icon16)
+        icon15 = QIcon()
+        icon15.addFile(u":/Images/Images/printer.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.btnPrintStudentList.setIcon(icon15)
 
         self.horizontalLayout_3.addWidget(self.btnPrintStudentList)
 
@@ -1497,7 +1245,7 @@ class Ui_Home(object):
         self.scrollArea_classlist.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
         self.container = QWidget()
         self.container.setObjectName(u"container")
-        self.container.setGeometry(QRect(0, 0, 788, 627))
+        self.container.setGeometry(QRect(0, 0, 100, 30))
         self.gridLayout_stud_card = QGridLayout(self.container)
         self.gridLayout_stud_card.setObjectName(u"gridLayout_stud_card")
         self.scrollArea_classlist.setWidget(self.container)
@@ -1545,12 +1293,12 @@ class Ui_Home(object):
         self.label_33 = QLabel(self.grp_SectionInfo)
         self.label_33.setObjectName(u"label_33")
         self.label_33.setMaximumSize(QSize(16777215, 20))
-        font10 = QFont()
-        font10.setFamilies([u"Inter"])
-        font10.setPointSize(11)
-        font10.setBold(False)
-        font10.setItalic(False)
-        self.label_33.setFont(font10)
+        font9 = QFont()
+        font9.setFamilies([u"Inter"])
+        font9.setPointSize(11)
+        font9.setBold(False)
+        font9.setItalic(False)
+        self.label_33.setFont(font9)
         self.label_33.setStyleSheet(u"")
 
         self.formLayout_2.setWidget(1, QFormLayout.ItemRole.LabelRole, self.label_33)
@@ -1558,7 +1306,7 @@ class Ui_Home(object):
         self.label_34 = QLabel(self.grp_SectionInfo)
         self.label_34.setObjectName(u"label_34")
         self.label_34.setMaximumSize(QSize(16777215, 20))
-        self.label_34.setFont(font10)
+        self.label_34.setFont(font9)
         self.label_34.setStyleSheet(u"")
 
         self.formLayout_2.setWidget(2, QFormLayout.ItemRole.LabelRole, self.label_34)
@@ -1566,7 +1314,7 @@ class Ui_Home(object):
         self.label_28 = QLabel(self.grp_SectionInfo)
         self.label_28.setObjectName(u"label_28")
         self.label_28.setMaximumSize(QSize(16777215, 20))
-        self.label_28.setFont(font10)
+        self.label_28.setFont(font9)
         self.label_28.setStyleSheet(u"")
 
         self.formLayout_2.setWidget(3, QFormLayout.ItemRole.LabelRole, self.label_28)
@@ -1574,7 +1322,7 @@ class Ui_Home(object):
         self.label_studentCount = QLabel(self.grp_SectionInfo)
         self.label_studentCount.setObjectName(u"label_studentCount")
         self.label_studentCount.setMaximumSize(QSize(16777215, 20))
-        self.label_studentCount.setFont(font10)
+        self.label_studentCount.setFont(font9)
         self.label_studentCount.setStyleSheet(u"color: rgb(18, 18, 18); background-color: transparent;")
 
         self.formLayout_2.setWidget(1, QFormLayout.ItemRole.FieldRole, self.label_studentCount)
@@ -1582,7 +1330,7 @@ class Ui_Home(object):
         self.label_girlCount = QLabel(self.grp_SectionInfo)
         self.label_girlCount.setObjectName(u"label_girlCount")
         self.label_girlCount.setMaximumSize(QSize(16777215, 20))
-        self.label_girlCount.setFont(font10)
+        self.label_girlCount.setFont(font9)
         self.label_girlCount.setStyleSheet(u"color: rgb(18, 18, 18); background-color: transparent;")
 
         self.formLayout_2.setWidget(2, QFormLayout.ItemRole.FieldRole, self.label_girlCount)
@@ -1590,7 +1338,7 @@ class Ui_Home(object):
         self.label_boyCount = QLabel(self.grp_SectionInfo)
         self.label_boyCount.setObjectName(u"label_boyCount")
         self.label_boyCount.setMaximumSize(QSize(16777215, 20))
-        self.label_boyCount.setFont(font10)
+        self.label_boyCount.setFont(font9)
         self.label_boyCount.setStyleSheet(u"color: rgb(18, 18, 18); background-color: transparent;")
 
         self.formLayout_2.setWidget(3, QFormLayout.ItemRole.FieldRole, self.label_boyCount)
@@ -1598,7 +1346,7 @@ class Ui_Home(object):
         self.label_35 = QLabel(self.grp_SectionInfo)
         self.label_35.setObjectName(u"label_35")
         self.label_35.setMaximumSize(QSize(16777215, 20))
-        self.label_35.setFont(font10)
+        self.label_35.setFont(font9)
         self.label_35.setStyleSheet(u"")
 
         self.formLayout_2.setWidget(0, QFormLayout.ItemRole.LabelRole, self.label_35)
@@ -1606,7 +1354,7 @@ class Ui_Home(object):
         self.label_section = QLabel(self.grp_SectionInfo)
         self.label_section.setObjectName(u"label_section")
         self.label_section.setMaximumSize(QSize(16777215, 20))
-        self.label_section.setFont(font10)
+        self.label_section.setFont(font9)
         self.label_section.setStyleSheet(u"color: rgb(18, 18, 18); background-color: transparent;")
 
         self.formLayout_2.setWidget(0, QFormLayout.ItemRole.FieldRole, self.label_section)
@@ -1631,7 +1379,7 @@ class Ui_Home(object):
         self.label_43 = QLabel(self.frame_student_info)
         self.label_43.setObjectName(u"label_43")
         self.label_43.setMaximumSize(QSize(95, 20))
-        self.label_43.setFont(font10)
+        self.label_43.setFont(font9)
         self.label_43.setStyleSheet(u"")
 
         self.formLayout.setWidget(0, QFormLayout.ItemRole.LabelRole, self.label_43)
@@ -1639,7 +1387,7 @@ class Ui_Home(object):
         self.label_studentId = QLabel(self.frame_student_info)
         self.label_studentId.setObjectName(u"label_studentId")
         self.label_studentId.setMaximumSize(QSize(16777215, 20))
-        self.label_studentId.setFont(font10)
+        self.label_studentId.setFont(font9)
         self.label_studentId.setStyleSheet(u"color: rgb(18, 18, 18); background-color: transparent;")
 
         self.formLayout.setWidget(0, QFormLayout.ItemRole.FieldRole, self.label_studentId)
@@ -1647,7 +1395,7 @@ class Ui_Home(object):
         self.label_36 = QLabel(self.frame_student_info)
         self.label_36.setObjectName(u"label_36")
         self.label_36.setMaximumSize(QSize(95, 20))
-        self.label_36.setFont(font10)
+        self.label_36.setFont(font9)
         self.label_36.setStyleSheet(u"")
 
         self.formLayout.setWidget(1, QFormLayout.ItemRole.LabelRole, self.label_36)
@@ -1655,7 +1403,7 @@ class Ui_Home(object):
         self.label_studentLastName = QLabel(self.frame_student_info)
         self.label_studentLastName.setObjectName(u"label_studentLastName")
         self.label_studentLastName.setMaximumSize(QSize(16777215, 20))
-        self.label_studentLastName.setFont(font10)
+        self.label_studentLastName.setFont(font9)
         self.label_studentLastName.setStyleSheet(u"color: rgb(18, 18, 18); background-color: transparent;")
 
         self.formLayout.setWidget(1, QFormLayout.ItemRole.FieldRole, self.label_studentLastName)
@@ -1663,7 +1411,7 @@ class Ui_Home(object):
         self.label_38 = QLabel(self.frame_student_info)
         self.label_38.setObjectName(u"label_38")
         self.label_38.setMaximumSize(QSize(95, 20))
-        self.label_38.setFont(font10)
+        self.label_38.setFont(font9)
         self.label_38.setStyleSheet(u"")
 
         self.formLayout.setWidget(2, QFormLayout.ItemRole.LabelRole, self.label_38)
@@ -1671,7 +1419,7 @@ class Ui_Home(object):
         self.label_studentFirstName = QLabel(self.frame_student_info)
         self.label_studentFirstName.setObjectName(u"label_studentFirstName")
         self.label_studentFirstName.setMaximumSize(QSize(16777215, 20))
-        self.label_studentFirstName.setFont(font10)
+        self.label_studentFirstName.setFont(font9)
         self.label_studentFirstName.setStyleSheet(u"color: rgb(18, 18, 18); background-color: transparent;")
 
         self.formLayout.setWidget(2, QFormLayout.ItemRole.FieldRole, self.label_studentFirstName)
@@ -1679,7 +1427,7 @@ class Ui_Home(object):
         self.label_41 = QLabel(self.frame_student_info)
         self.label_41.setObjectName(u"label_41")
         self.label_41.setMaximumSize(QSize(95, 20))
-        self.label_41.setFont(font10)
+        self.label_41.setFont(font9)
         self.label_41.setStyleSheet(u"")
 
         self.formLayout.setWidget(3, QFormLayout.ItemRole.LabelRole, self.label_41)
@@ -1687,7 +1435,7 @@ class Ui_Home(object):
         self.label_studentMiddleName = QLabel(self.frame_student_info)
         self.label_studentMiddleName.setObjectName(u"label_studentMiddleName")
         self.label_studentMiddleName.setMaximumSize(QSize(16777215, 20))
-        self.label_studentMiddleName.setFont(font10)
+        self.label_studentMiddleName.setFont(font9)
         self.label_studentMiddleName.setStyleSheet(u"color: rgb(18, 18, 18); background-color: transparent;")
 
         self.formLayout.setWidget(3, QFormLayout.ItemRole.FieldRole, self.label_studentMiddleName)
@@ -1695,7 +1443,7 @@ class Ui_Home(object):
         self.label_37 = QLabel(self.frame_student_info)
         self.label_37.setObjectName(u"label_37")
         self.label_37.setMaximumSize(QSize(95, 20))
-        self.label_37.setFont(font10)
+        self.label_37.setFont(font9)
         self.label_37.setStyleSheet(u"")
 
         self.formLayout.setWidget(4, QFormLayout.ItemRole.LabelRole, self.label_37)
@@ -1703,7 +1451,7 @@ class Ui_Home(object):
         self.label_studentGender = QLabel(self.frame_student_info)
         self.label_studentGender.setObjectName(u"label_studentGender")
         self.label_studentGender.setMaximumSize(QSize(16777215, 20))
-        self.label_studentGender.setFont(font10)
+        self.label_studentGender.setFont(font9)
         self.label_studentGender.setStyleSheet(u"color: rgb(18, 18, 18); background-color: transparent;")
 
         self.formLayout.setWidget(4, QFormLayout.ItemRole.FieldRole, self.label_studentGender)
@@ -1728,7 +1476,7 @@ class Ui_Home(object):
         self.formLayout_4.setObjectName(u"formLayout_4")
         self.label_59 = QLabel(self.frame_contact_info)
         self.label_59.setObjectName(u"label_59")
-        self.label_59.setFont(font10)
+        self.label_59.setFont(font9)
         self.label_59.setStyleSheet(u"")
 
         self.formLayout_4.setWidget(0, QFormLayout.ItemRole.LabelRole, self.label_59)
@@ -1736,14 +1484,14 @@ class Ui_Home(object):
         self.label_contact_person = QLabel(self.frame_contact_info)
         self.label_contact_person.setObjectName(u"label_contact_person")
         self.label_contact_person.setMaximumSize(QSize(16777215, 20))
-        self.label_contact_person.setFont(font10)
+        self.label_contact_person.setFont(font9)
         self.label_contact_person.setStyleSheet(u"color: rgb(18, 18, 18); background-color: transparent;")
 
         self.formLayout_4.setWidget(0, QFormLayout.ItemRole.FieldRole, self.label_contact_person)
 
         self.label_56 = QLabel(self.frame_contact_info)
         self.label_56.setObjectName(u"label_56")
-        self.label_56.setFont(font10)
+        self.label_56.setFont(font9)
         self.label_56.setStyleSheet(u"")
 
         self.formLayout_4.setWidget(1, QFormLayout.ItemRole.LabelRole, self.label_56)
@@ -1751,7 +1499,7 @@ class Ui_Home(object):
         self.label_contact_number = QLabel(self.frame_contact_info)
         self.label_contact_number.setObjectName(u"label_contact_number")
         self.label_contact_number.setMaximumSize(QSize(16777215, 20))
-        self.label_contact_number.setFont(font10)
+        self.label_contact_number.setFont(font9)
         self.label_contact_number.setStyleSheet(u"color: rgb(18, 18, 18); background-color: transparent;")
 
         self.formLayout_4.setWidget(1, QFormLayout.ItemRole.FieldRole, self.label_contact_number)
@@ -1771,9 +1519,9 @@ class Ui_Home(object):
         self.btnEditStudent.setFont(font)
         self.btnEditStudent.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btnEditStudent.setStyleSheet(u"")
-        icon17 = QIcon()
-        icon17.addFile(u":/Images/Images/pencil.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.btnEditStudent.setIcon(icon17)
+        icon16 = QIcon()
+        icon16.addFile(u":/Images/Images/pencil.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.btnEditStudent.setIcon(icon16)
 
         self.horizontalLayout_23.addWidget(self.btnEditStudent)
 
@@ -1878,7 +1626,7 @@ class Ui_Home(object):
 "*[class=\"button-clear-search\"]:pressed {\n"
 "	background-color: #FFD2D2;\n"
 "}")
-        self.btnClearSearch_2.setIcon(icon13)
+        self.btnClearSearch_2.setIcon(icon12)
         self.btnClearSearch_2.setIconSize(QSize(8, 8))
 
         self.layout_search_3.addWidget(self.btnClearSearch_2)
@@ -1953,7 +1701,7 @@ class Ui_Home(object):
         self.btnRefreshLessonTable.setObjectName(u"btnRefreshLessonTable")
         self.btnRefreshLessonTable.setMinimumSize(QSize(30, 30))
         self.btnRefreshLessonTable.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.btnRefreshLessonTable.setIcon(icon12)
+        self.btnRefreshLessonTable.setIcon(icon11)
         self.btnRefreshLessonTable.setIconSize(QSize(18, 18))
 
         self.horizontalLayout_4.addWidget(self.btnRefreshLessonTable)
@@ -1967,9 +1715,9 @@ class Ui_Home(object):
         self.btnLessonView.setMinimumSize(QSize(100, 30))
         self.btnLessonView.setMaximumSize(QSize(16777215, 30))
         self.btnLessonView.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        icon18 = QIcon()
-        icon18.addFile(u":/Images/Images/eye.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.btnLessonView.setIcon(icon18)
+        icon17 = QIcon()
+        icon17.addFile(u":/Images/Images/eye.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.btnLessonView.setIcon(icon17)
 
         self.horizontalLayout_4.addWidget(self.btnLessonView)
 
@@ -1978,7 +1726,7 @@ class Ui_Home(object):
         self.btnLessonEdit.setMinimumSize(QSize(100, 30))
         self.btnLessonEdit.setMaximumSize(QSize(16777215, 30))
         self.btnLessonEdit.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.btnLessonEdit.setIcon(icon17)
+        self.btnLessonEdit.setIcon(icon16)
 
         self.horizontalLayout_4.addWidget(self.btnLessonEdit)
 
@@ -1987,7 +1735,7 @@ class Ui_Home(object):
         self.btnLessonAdd.setMinimumSize(QSize(100, 30))
         self.btnLessonAdd.setMaximumSize(QSize(16777215, 30))
         self.btnLessonAdd.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.btnLessonAdd.setIcon(icon14)
+        self.btnLessonAdd.setIcon(icon13)
 
         self.horizontalLayout_4.addWidget(self.btnLessonAdd)
 
@@ -2445,6 +2193,10 @@ class Ui_Home(object):
 
         self.horizontalLayout.addWidget(self.multiplier_hard)
 
+        self.horizontalSpacer_11 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout.addItem(self.horizontalSpacer_11)
+
         self.label_3 = QLabel(self.widget_quiz_1)
         self.label_3.setObjectName(u"label_3")
         self.label_3.setMinimumSize(QSize(0, 30))
@@ -2481,7 +2233,7 @@ class Ui_Home(object):
         self.scrollArea_tf.setWidgetResizable(True)
         self.scrollAreaWidgetContents_4 = QWidget()
         self.scrollAreaWidgetContents_4.setObjectName(u"scrollAreaWidgetContents_4")
-        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 23, 18))
+        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 100, 30))
         self.verticalLayout_13 = QVBoxLayout(self.scrollAreaWidgetContents_4)
         self.verticalLayout_13.setObjectName(u"verticalLayout_13")
         self.scrollArea_tf.setWidget(self.scrollAreaWidgetContents_4)
@@ -2490,12 +2242,12 @@ class Ui_Home(object):
 
         self.label_13 = QLabel(self.widget_quiz_2)
         self.label_13.setObjectName(u"label_13")
-        font11 = QFont()
-        font11.setFamilies([u"Inter SemiBold"])
-        font11.setPointSize(14)
-        font11.setBold(False)
-        font11.setItalic(False)
-        self.label_13.setFont(font11)
+        font10 = QFont()
+        font10.setFamilies([u"Inter SemiBold"])
+        font10.setPointSize(14)
+        font10.setBold(False)
+        font10.setItalic(False)
+        self.label_13.setFont(font10)
         self.label_13.setStyleSheet(u"font: 63 14pt \"Inter SemiBold\";")
         self.label_13.setAlignment(Qt.AlignCenter)
 
@@ -2507,7 +2259,7 @@ class Ui_Home(object):
         self.scrollArea_mc.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 23, 18))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 100, 30))
         self.verticalLayout_12 = QVBoxLayout(self.scrollAreaWidgetContents_3)
         self.verticalLayout_12.setObjectName(u"verticalLayout_12")
         self.scrollArea_mc.setWidget(self.scrollAreaWidgetContents_3)
@@ -2520,7 +2272,7 @@ class Ui_Home(object):
         self.scrollArea_id.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 24, 18))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 100, 30))
         self.verticalLayout_11 = QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_11.setObjectName(u"verticalLayout_11")
         self.scrollArea_id.setWidget(self.scrollAreaWidgetContents_2)
@@ -2529,7 +2281,7 @@ class Ui_Home(object):
 
         self.label_11 = QLabel(self.widget_quiz_2)
         self.label_11.setObjectName(u"label_11")
-        self.label_11.setFont(font11)
+        self.label_11.setFont(font10)
         self.label_11.setStyleSheet(u"font: 14pt \"Inter SemiBold\";")
         self.label_11.setAlignment(Qt.AlignCenter)
 
@@ -2537,7 +2289,7 @@ class Ui_Home(object):
 
         self.label_12 = QLabel(self.widget_quiz_2)
         self.label_12.setObjectName(u"label_12")
-        self.label_12.setFont(font11)
+        self.label_12.setFont(font10)
         self.label_12.setStyleSheet(u"font: 63 14pt \"Inter SemiBold\";")
         self.label_12.setAlignment(Qt.AlignCenter)
 
@@ -2567,122 +2319,6 @@ class Ui_Home(object):
         self.verticalLayout_8.addWidget(self.widget_quiz_3)
 
         self.stackedWidget.addWidget(self.pageQuiz)
-        self.pageExercise = QWidget()
-        self.pageExercise.setObjectName(u"pageExercise")
-        self.pageExercise.setStyleSheet(u"*[class=\"label-magnifying-search\"] {\n"
-"	background-color: rgb(255, 255, 255);\n"
-"	border-top-left-radius: 15px;\n"
-"	border-bottom-left-radius: 15px;\n"
-"	border: 1px solid #999;\n"
-"	border-right: none;\n"
-"}\n"
-"\n"
-"*[class=\"textbox-search\"] {\n"
-"	background-color: rgb(255, 255, 255); \n"
-"	border-top-right-radius: 15px;\n"
-"	border-bottom-right-radius: 15px;\n"
-"	border: 1px solid #999;\n"
-"	border-left: none;\n"
-"}\n"
-"\n"
-"*[class=\"widget-search-container\"] {\n"
-"	background: transparent;\n"
-"}")
-        self.verticalLayout_10 = QVBoxLayout(self.pageExercise)
-        self.verticalLayout_10.setObjectName(u"verticalLayout_10")
-        self.widget_search_5 = QWidget(self.pageExercise)
-        self.widget_search_5.setObjectName(u"widget_search_5")
-        self.widget_search_5.setMinimumSize(QSize(0, 30))
-        self.widget_search_5.setMaximumSize(QSize(16777215, 30))
-        self.widget_search_5.setStyleSheet(u"*[class=\"widget-search-container\"] {\n"
-"	background-color: #FFF;\n"
-"	border: 1px solid #999;\n"
-"	border-radius: 15px;\n"
-"}")
-        self.layout_search_4 = QHBoxLayout(self.widget_search_5)
-        self.layout_search_4.setSpacing(0)
-        self.layout_search_4.setObjectName(u"layout_search_4")
-        self.layout_search_4.setContentsMargins(4, 0, 6, 0)
-        self.label_magnifying_stud_3 = QLabel(self.widget_search_5)
-        self.label_magnifying_stud_3.setObjectName(u"label_magnifying_stud_3")
-        self.label_magnifying_stud_3.setMinimumSize(QSize(30, 30))
-        self.label_magnifying_stud_3.setMaximumSize(QSize(30, 30))
-        self.label_magnifying_stud_3.setStyleSheet(u"*[class=\"label-magnifying-search\"] {\n"
-"	background: transparent;\n"
-"	border: none;\n"
-"}")
-        self.label_magnifying_stud_3.setPixmap(QPixmap(u":/Images/Images/search.png"))
-        self.label_magnifying_stud_3.setScaledContents(True)
-        self.label_magnifying_stud_3.setMargin(5)
-
-        self.layout_search_4.addWidget(self.label_magnifying_stud_3)
-
-        self.txtSearchExercise = QLineEdit(self.widget_search_5)
-        self.txtSearchExercise.setObjectName(u"txtSearchExercise")
-        self.txtSearchExercise.setMinimumSize(QSize(0, 30))
-        self.txtSearchExercise.setMaximumSize(QSize(16777215, 30))
-        self.txtSearchExercise.setStyleSheet(u"*[class=\"textbox-search\"] {\n"
-"	border: none;\n"
-"	background: transparent;\n"
-"}")
-
-        self.layout_search_4.addWidget(self.txtSearchExercise)
-
-        self.btnClearSearch_3 = QPushButton(self.widget_search_5)
-        self.btnClearSearch_3.setObjectName(u"btnClearSearch_3")
-        self.btnClearSearch_3.setMinimumSize(QSize(20, 20))
-        self.btnClearSearch_3.setMaximumSize(QSize(20, 20))
-        self.btnClearSearch_3.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.btnClearSearch_3.setStyleSheet(u"*[class=\"button-clear-search\"] {\n"
-"	border-radius: 10px;\n"
-"	background: transparent;\n"
-"}\n"
-"\n"
-"*[class=\"button-clear-search\"]:hover {\n"
-"	background-color: #FFC0C0;\n"
-"}\n"
-"\n"
-"*[class=\"button-clear-search\"]:pressed {\n"
-"	background-color: #FFD2D2;\n"
-"}")
-        self.btnClearSearch_3.setIcon(icon13)
-        self.btnClearSearch_3.setIconSize(QSize(8, 8))
-
-        self.layout_search_4.addWidget(self.btnClearSearch_3)
-
-
-        self.verticalLayout_10.addWidget(self.widget_search_5)
-
-        self.verticalSpacer_2 = QSpacerItem(195, 588, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
-
-        self.verticalLayout_10.addItem(self.verticalSpacer_2)
-
-        self.horizontalLayout_13 = QHBoxLayout()
-        self.horizontalLayout_13.setObjectName(u"horizontalLayout_13")
-        self.horizontalSpacer_6 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.horizontalLayout_13.addItem(self.horizontalSpacer_6)
-
-        self.btnExerciseEdit = QPushButton(self.pageExercise)
-        self.btnExerciseEdit.setObjectName(u"btnExerciseEdit")
-        self.btnExerciseEdit.setMinimumSize(QSize(100, 30))
-        self.btnExerciseEdit.setMaximumSize(QSize(16777215, 30))
-        self.btnExerciseEdit.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-
-        self.horizontalLayout_13.addWidget(self.btnExerciseEdit)
-
-        self.btnExerciseAdd = QPushButton(self.pageExercise)
-        self.btnExerciseAdd.setObjectName(u"btnExerciseAdd")
-        self.btnExerciseAdd.setMinimumSize(QSize(100, 30))
-        self.btnExerciseAdd.setMaximumSize(QSize(16777215, 30))
-        self.btnExerciseAdd.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-
-        self.horizontalLayout_13.addWidget(self.btnExerciseAdd)
-
-
-        self.verticalLayout_10.addLayout(self.horizontalLayout_13)
-
-        self.stackedWidget.addWidget(self.pageExercise)
         self.pageSections = QWidget()
         self.pageSections.setObjectName(u"pageSections")
         self.pageSections.setStyleSheet(u"QComboBox[class=\"combobox-main\"] {\n"
@@ -3470,7 +3106,7 @@ class Ui_Home(object):
 "*[class=\"button-clear-search\"]:pressed {\n"
 "	background-color: #FFD2D2;\n"
 "}")
-        self.btnClearSearch_4.setIcon(icon13)
+        self.btnClearSearch_4.setIcon(icon12)
         self.btnClearSearch_4.setIconSize(QSize(8, 8))
 
         self.layout_search_5.addWidget(self.btnClearSearch_4)
@@ -3604,7 +3240,7 @@ class Ui_Home(object):
         self.btnPrintQuizScores.setFont(font)
         self.btnPrintQuizScores.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btnPrintQuizScores.setStyleSheet(u"")
-        self.btnPrintQuizScores.setIcon(icon16)
+        self.btnPrintQuizScores.setIcon(icon15)
 
         self.horizontalLayout_21.addWidget(self.btnPrintQuizScores)
 
@@ -3746,7 +3382,7 @@ class Ui_Home(object):
 "*[class=\"button-clear-search\"]:pressed {\n"
 "	background-color: #FFD2D2;\n"
 "}")
-        self.btnClearSearch_5.setIcon(icon13)
+        self.btnClearSearch_5.setIcon(icon12)
         self.btnClearSearch_5.setIconSize(QSize(8, 8))
 
         self.layout_search_6.addWidget(self.btnClearSearch_5)
@@ -3791,7 +3427,7 @@ class Ui_Home(object):
         self.btnRefreshUsers.setMaximumSize(QSize(30, 30))
         self.btnRefreshUsers.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btnRefreshUsers.setStyleSheet(u"")
-        self.btnRefreshUsers.setIcon(icon12)
+        self.btnRefreshUsers.setIcon(icon11)
         self.btnRefreshUsers.setIconSize(QSize(20, 20))
 
         self.horizontalLayout_19.addWidget(self.btnRefreshUsers)
@@ -3879,6 +3515,7 @@ class Ui_Home(object):
         self.pageUtilities.setStyleSheet(u"")
         self.verticalLayout_14 = QVBoxLayout(self.pageUtilities)
         self.verticalLayout_14.setObjectName(u"verticalLayout_14")
+        self.verticalLayout_14.setContentsMargins(0, -1, 0, -1)
         self.tabWidget_utility = QTabWidget(self.pageUtilities)
         self.tabWidget_utility.setObjectName(u"tabWidget_utility")
         self.tabWidget_utility.setStyleSheet(u"QTableView {\n"
@@ -4021,7 +3658,9 @@ class Ui_Home(object):
 "    color: #ffffff;\n"
 "}\n"
 "\n"
-"QSpinBox, QDateEdit {\n"
+"QSpinBox, \n"
+"QDoubleSpinBox,\n"
+"QDateEdit {\n"
 "	font: 10pt \"Inter Medium\";\n"
 "    height: 30px;\n"
 "    border: 1px solid #999;\n"
@@ -4032,26 +3671,34 @@ class Ui_Home(object):
 "    selection-background-color: #7eb4d7;\n"
 "}\n"
 "\n"
-"QSpinBox:focus, QDateEdit:focus {\n"
+"QSpinBox:focus, \n"
+"QDoubleSpinBox:focus,\n"
+"QDateEdit:focus {\n"
 "    border: 1px solid #007BFF;\n"
 "}\n"
 "\n"
-"QSpinBox:hover, QDateEdit:hover {\n"
+"QSpinBox:hover, \n"
+"QDoubleSpinBox:hover,\n"
+"QDateEdit:hover {\n"
 "    border: 1px solid #3498db;\n"
 "}\n"
 "\n"
-"QSpinBox::up-button, QDateEdit::up-button {\n"
+"QSpinBox::up-button,\n"
+"QDoubleSpinBox::up-button,\n"
+"QDateEd"
+                        "it::up-button {\n"
 "    subcontrol-origin: border;\n"
 "    subcontrol-position: top right;\n"
 "    width: 8px;\n"
-"    hei"
-                        "ght: 8px;\n"
+"    height: 8px;\n"
 "    border-top-right-radius: 15px;\n"
 "    padding: 6px 10px 6px 2px;\n"
 "	color: rgb(119, 118, 123);\n"
 "}\n"
 "\n"
-"QSpinBox::down-button, QDateEdit::down-button {\n"
+"QSpinBox::down-button,\n"
+"QDoubleSpinBox::down-button,\n"
+"QDateEdit::down-button {\n"
 "    subcontrol-origin: border;\n"
 "    subcontrol-position: bottom right;\n"
 "    width: 8px;\n"
@@ -4061,29 +3708,38 @@ class Ui_Home(object):
 "	color: rgb(119, 118, 123);\n"
 "}\n"
 "\n"
-"QSpinBox::up-arrow, QDateEdit::up-arrow {\n"
+"QSpinBox::up-arrow,\n"
+"QDoubleSpinBox::up-arrow,\n"
+"QDateEdit::up-arrow {\n"
 "    image: url(:/Images/Images/caret-up.png);\n"
 "    width: 8px;\n"
 "    height: 8px;\n"
 "}\n"
 "\n"
-"QSpinBox::down-arrow, QDateEdit::down-arrow {\n"
+"QSpinBox::down-arrow,\n"
+"QDoubleSpinBox::down-arrow,\n"
+"QDateEdit::down-arrow {\n"
 "    image: url(:/Images/Images/caret-down.png);\n"
 "    width: 8px;\n"
 "    height: 8px;\n"
 "}")
         self.tab_settings = QWidget()
         self.tab_settings.setObjectName(u"tab_settings")
-        self.tab_settings.setStyleSheet(u"#widget_SY_header, #widget_SY_header_2 { \n"
-"	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
-"                                stop:0 #ffffff, \n"
-"                                stop:1 #c6e9ff);\n"
+        self.tab_settings.setStyleSheet(u"#widget_SY_header,\n"
+"#widget_SY_header_2,\n"
+"#widget_SY_header_3 {\n"
+"	background: qlineargradient(x1:0, y1:0, x2:0, y2:1,\n"
+"			stop:0 #ffffff,\n"
+"			stop:1 #c6e9ff);\n"
 "	border: 1px solid rgb(98, 160, 234);\n"
 "	border-top-left-radius: 10px;\n"
 "	border-top-right-radius: 10px;\n"
 "}\n"
 "\n"
-"#widget_SY_body_1, #widget_SY_body_2, #widget_SY_body_3 {\n"
+"#widget_SY_body_1,\n"
+"#widget_SY_body_2,\n"
+"#widget_SY_body_3,\n"
+"#widget_SY_body_4 {\n"
 "	background-color: #fff;\n"
 "	border: 1px solid #999;\n"
 "	border-top: none;\n"
@@ -4094,8 +3750,8 @@ class Ui_Home(object):
 "}\n"
 "\n"
 "QRadioButton {\n"
-"    color: black;\n"
-"    spacing: 8px;\n"
+"	color: black;\n"
+"	spacing: 8px;\n"
 "	padding: 0px 10px;\n"
 "	background: transparent;\n"
 "	font: 10pt \"Inter Medium\";\n"
@@ -4107,16 +3763,26 @@ class Ui_Home(object):
 "}\n"
 "\n"
 "QRadioButton::indicator:hover {\n"
-"    border-color: #3b82f6;\n"
+"	border-color: #3b82f6;\n"
 "}\n"
 "\n"
 "QRadioButton::indicator:checked {\n"
-"    border-color: #3b82f6;\n"
-"    background-color: blue;\n"
+"	border-color: #3b82f6;\n"
+"	background-color: blue;\n"
 "}")
         self.verticalLayout_27 = QVBoxLayout(self.tab_settings)
         self.verticalLayout_27.setObjectName(u"verticalLayout_27")
-        self.widget_SY_settings = QWidget(self.tab_settings)
+        self.verticalLayout_27.setContentsMargins(-1, -1, 9, -1)
+        self.scrollArea_settings = QScrollArea(self.tab_settings)
+        self.scrollArea_settings.setObjectName(u"scrollArea_settings")
+        self.scrollArea_settings.setWidgetResizable(True)
+        self.scrollAreaWidgetContents_5 = QWidget()
+        self.scrollAreaWidgetContents_5.setObjectName(u"scrollAreaWidgetContents_5")
+        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 961, 665))
+        self.verticalLayout_10 = QVBoxLayout(self.scrollAreaWidgetContents_5)
+        self.verticalLayout_10.setObjectName(u"verticalLayout_10")
+        self.verticalLayout_10.setContentsMargins(0, 0, 0, 0)
+        self.widget_SY_settings = QWidget(self.scrollAreaWidgetContents_5)
         self.widget_SY_settings.setObjectName(u"widget_SY_settings")
         self.verticalLayout_28 = QVBoxLayout(self.widget_SY_settings)
         self.verticalLayout_28.setSpacing(0)
@@ -4133,12 +3799,12 @@ class Ui_Home(object):
         self.label_10.setObjectName(u"label_10")
         self.label_10.setMinimumSize(QSize(0, 30))
         self.label_10.setMaximumSize(QSize(16777215, 30))
-        font12 = QFont()
-        font12.setFamilies([u"Inter"])
-        font12.setPointSize(12)
-        font12.setBold(False)
-        font12.setItalic(False)
-        self.label_10.setFont(font12)
+        font11 = QFont()
+        font11.setFamilies([u"Inter"])
+        font11.setPointSize(12)
+        font11.setBold(False)
+        font11.setItalic(False)
+        self.label_10.setFont(font11)
         self.label_10.setStyleSheet(u"background: transparent; \n"
 "font: 12pt \"Inter\";")
 
@@ -4179,7 +3845,7 @@ class Ui_Home(object):
         self.btnSaveSettings_SY.setObjectName(u"btnSaveSettings_SY")
         self.btnSaveSettings_SY.setMinimumSize(QSize(130, 30))
         self.btnSaveSettings_SY.setMaximumSize(QSize(16777215, 30))
-        self.btnSaveSettings_SY.setFont(font9)
+        self.btnSaveSettings_SY.setFont(font8)
         self.btnSaveSettings_SY.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btnSaveSettings_SY.setStyleSheet(u"QPushButton {\n"
 "	border: 1px solid #0a5128;\n"
@@ -4413,9 +4079,9 @@ class Ui_Home(object):
         self.verticalLayout_28.addWidget(self.widget_SY_body_2)
 
 
-        self.verticalLayout_27.addWidget(self.widget_SY_settings)
+        self.verticalLayout_10.addWidget(self.widget_SY_settings)
 
-        self.widget_SY_settings_2 = QWidget(self.tab_settings)
+        self.widget_SY_settings_2 = QWidget(self.scrollAreaWidgetContents_5)
         self.widget_SY_settings_2.setObjectName(u"widget_SY_settings_2")
         self.widget_SY_settings_2.setStyleSheet(u"")
         self.verticalLayout_29 = QVBoxLayout(self.widget_SY_settings_2)
@@ -4433,7 +4099,7 @@ class Ui_Home(object):
         self.label_29.setObjectName(u"label_29")
         self.label_29.setMinimumSize(QSize(0, 30))
         self.label_29.setMaximumSize(QSize(16777215, 30))
-        self.label_29.setFont(font12)
+        self.label_29.setFont(font11)
         self.label_29.setStyleSheet(u"background: transparent; \n"
 "font: 12pt \"Inter\";")
 
@@ -4501,7 +4167,7 @@ class Ui_Home(object):
         self.btnImportAllLessons.setObjectName(u"btnImportAllLessons")
         self.btnImportAllLessons.setMinimumSize(QSize(130, 30))
         self.btnImportAllLessons.setMaximumSize(QSize(16777215, 30))
-        self.btnImportAllLessons.setFont(font9)
+        self.btnImportAllLessons.setFont(font8)
         self.btnImportAllLessons.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btnImportAllLessons.setStyleSheet(u"QPushButton {\n"
 "	border: 1px solid #0a5128;\n"
@@ -4543,7 +4209,151 @@ class Ui_Home(object):
         self.verticalLayout_29.addWidget(self.tableView_LessonsCSV)
 
 
-        self.verticalLayout_27.addWidget(self.widget_SY_settings_2)
+        self.verticalLayout_10.addWidget(self.widget_SY_settings_2)
+
+        self.widget_SY_settings_3 = QWidget(self.scrollAreaWidgetContents_5)
+        self.widget_SY_settings_3.setObjectName(u"widget_SY_settings_3")
+        self.verticalLayout_31 = QVBoxLayout(self.widget_SY_settings_3)
+        self.verticalLayout_31.setSpacing(0)
+        self.verticalLayout_31.setObjectName(u"verticalLayout_31")
+        self.verticalLayout_31.setContentsMargins(0, 0, 0, 0)
+        self.widget_SY_header_3 = QWidget(self.widget_SY_settings_3)
+        self.widget_SY_header_3.setObjectName(u"widget_SY_header_3")
+        self.widget_SY_header_3.setMinimumSize(QSize(0, 50))
+        self.widget_SY_header_3.setMaximumSize(QSize(16777215, 50))
+        self.widget_SY_header_3.setStyleSheet(u"")
+        self.horizontalLayout_37 = QHBoxLayout(self.widget_SY_header_3)
+        self.horizontalLayout_37.setObjectName(u"horizontalLayout_37")
+        self.label_53 = QLabel(self.widget_SY_header_3)
+        self.label_53.setObjectName(u"label_53")
+        self.label_53.setMinimumSize(QSize(0, 30))
+        self.label_53.setMaximumSize(QSize(16777215, 30))
+        self.label_53.setFont(font11)
+        self.label_53.setStyleSheet(u"background: transparent; \n"
+"font: 12pt \"Inter\";")
+
+        self.horizontalLayout_37.addWidget(self.label_53)
+
+        self.horizontalSpacer_28 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_37.addItem(self.horizontalSpacer_28)
+
+        self.btnSaveSettings_quiz = QPushButton(self.widget_SY_header_3)
+        self.btnSaveSettings_quiz.setObjectName(u"btnSaveSettings_quiz")
+        self.btnSaveSettings_quiz.setMinimumSize(QSize(130, 30))
+        self.btnSaveSettings_quiz.setMaximumSize(QSize(16777215, 30))
+        self.btnSaveSettings_quiz.setFont(font8)
+        self.btnSaveSettings_quiz.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.btnSaveSettings_quiz.setStyleSheet(u"QPushButton {\n"
+"	border: 1px solid #0a5128;\n"
+"    border-radius: 15px;\n"
+"    padding: 0px 10px 0px;\n"
+"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
+"                                stop:0 #1ebd5d, \n"
+"                                stop:1 #107f3f);\n"
+"    color: #FFF;\n"
+"    font: 10pt \"Inter SemiBold\";\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
+"                                stop:0 #2ecc71, \n"
+"                                stop:1 #27AE60);\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
+"                                stop:0 #0b572a, \n"
+"                                stop:1 #129046); \n"
+"}\n"
+"\n"
+"QPushButton:disabled {\n"
+"    background: #A5D6A7;\n"
+"    color: #E8F5E9;\n"
+"    opacity: 0.6;\n"
+"}")
+
+        self.horizontalLayout_37.addWidget(self.btnSaveSettings_quiz)
+
+
+        self.verticalLayout_31.addWidget(self.widget_SY_header_3)
+
+        self.widget_SY_body_4 = QWidget(self.widget_SY_settings_3)
+        self.widget_SY_body_4.setObjectName(u"widget_SY_body_4")
+        self.widget_SY_body_4.setStyleSheet(u"")
+        self.horizontalLayout_38 = QHBoxLayout(self.widget_SY_body_4)
+        self.horizontalLayout_38.setObjectName(u"horizontalLayout_38")
+        self.label_61 = QLabel(self.widget_SY_body_4)
+        self.label_61.setObjectName(u"label_61")
+        self.label_61.setMinimumSize(QSize(0, 30))
+        self.label_61.setMaximumSize(QSize(16777215, 30))
+
+        self.horizontalLayout_38.addWidget(self.label_61)
+
+        self.widget_24 = QWidget(self.widget_SY_body_4)
+        self.widget_24.setObjectName(u"widget_24")
+        self.widget_24.setStyleSheet(u"#widget_15 {\n"
+"    background: transparent;\n"
+"}\n"
+"\n"
+"QPushButton {\n"
+"    border: 1px solid #999;\n"
+"    padding: 4px 14px;\n"
+"    font: 10pt \"Inter\";\n"
+"    background-color: #f0f0f0;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: #e0e0e0;\n"
+"}\n"
+"\n"
+"#btn_manual {\n"
+"    border-top-left-radius: 15px;\n"
+"    border-bottom-left-radius: 15px;\n"
+"    border-right: none;\n"
+"}\n"
+"\n"
+"#btn_manual:checked {\n"
+"    background-color: #72D582;\n"
+"    border: 2px solid #448D50;\n"
+"    color: #000;\n"
+"}\n"
+"\n"
+"#btn_auto {\n"
+"    border-top-right-radius: 15px;\n"
+"    border-bottom-right-radius: 15px;\n"
+"}\n"
+"\n"
+"#btn_auto:checked {\n"
+"    background-color: #72D582;\n"
+"    border: 2px solid #448D50;\n"
+"    color: #000;\n"
+"}")
+        self.horizontalLayout_39 = QHBoxLayout(self.widget_24)
+        self.horizontalLayout_39.setSpacing(0)
+        self.horizontalLayout_39.setObjectName(u"horizontalLayout_39")
+        self.horizontalLayout_39.setContentsMargins(0, 0, 0, 0)
+
+        self.horizontalLayout_38.addWidget(self.widget_24)
+
+        self.doubleSpinBox_passing = QDoubleSpinBox(self.widget_SY_body_4)
+        self.doubleSpinBox_passing.setObjectName(u"doubleSpinBox_passing")
+
+        self.horizontalLayout_38.addWidget(self.doubleSpinBox_passing)
+
+        self.horizontalSpacer_29 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_38.addItem(self.horizontalSpacer_29)
+
+
+        self.verticalLayout_31.addWidget(self.widget_SY_body_4)
+
+
+        self.verticalLayout_10.addWidget(self.widget_SY_settings_3)
+
+        self.scrollArea_settings.setWidget(self.scrollAreaWidgetContents_5)
+
+        self.verticalLayout_27.addWidget(self.scrollArea_settings)
 
         self.tabWidget_utility.addTab(self.tab_settings, "")
         self.tab_audit_trail = QWidget()
@@ -4615,7 +4425,6 @@ class Ui_Home(object):
         self.btnRefreshSY.setDefault(True)
         self.btnClearSearch_1.setDefault(True)
         self.btnClearSearch_2.setDefault(True)
-        self.btnClearSearch_3.setDefault(True)
         self.tabWidget_reports.setCurrentIndex(0)
         self.btnClearSearch_4.setDefault(True)
         self.btnClearSearch_5.setDefault(True)
@@ -4636,8 +4445,6 @@ class Ui_Home(object):
         self.btnLesson.setProperty(u"class", QCoreApplication.translate("Home", u"button-left-nav", None))
         self.btnQuiz.setText(QCoreApplication.translate("Home", u"Quiz", None))
         self.btnQuiz.setProperty(u"class", QCoreApplication.translate("Home", u"button-left-nav", None))
-        self.btnExercise.setText(QCoreApplication.translate("Home", u"Exercise", None))
-        self.btnExercise.setProperty(u"class", QCoreApplication.translate("Home", u"button-left-nav", None))
         self.btnSections.setText(QCoreApplication.translate("Home", u"Sections", None))
         self.btnSections.setProperty(u"class", QCoreApplication.translate("Home", u"button-left-nav", None))
         self.btnReports.setText(QCoreApplication.translate("Home", u"Reports", None))
@@ -4662,18 +4469,8 @@ class Ui_Home(object):
         self.label_27.setText("")
         self.label_9.setText(QCoreApplication.translate("Home", u"Teachers", None))
         self.label_teachers_total.setText(QCoreApplication.translate("Home", u"0", None))
-        self.label_profile.setText("")
-        self.label_stud_name.setText(QCoreApplication.translate("Home", u"Juan De La Cruz", None))
-        self.label_student_score.setText(QCoreApplication.translate("Home", u"00.00%", None))
-        self.label_student_place.setText(QCoreApplication.translate("Home", u"1st", None))
-        self.label_profile_2.setText("")
-        self.label_stud_name_2.setText(QCoreApplication.translate("Home", u"Annie Batumbakal", None))
-        self.label_student_score_2.setText(QCoreApplication.translate("Home", u"00.00%", None))
-        self.label_student_place_2.setText(QCoreApplication.translate("Home", u"2nd", None))
-        self.label_profile_3.setText("")
-        self.label_stud_name_3.setText(QCoreApplication.translate("Home", u"Gian Santos", None))
-        self.label_student_score_3.setText(QCoreApplication.translate("Home", u"00.00%", None))
-        self.label_student_place_3.setText(QCoreApplication.translate("Home", u"3rd", None))
+        self.label.setText("")
+        self.label_1.setText(QCoreApplication.translate("Home", u"Ranking", None))
         self.label_month.setText(QCoreApplication.translate("Home", u"MAR", None))
         self.label_day.setText(QCoreApplication.translate("Home", u"00", None))
         self.label_19.setText("")
@@ -4780,7 +4577,7 @@ class Ui_Home(object):
         self.checkBoxPublish.setText(QCoreApplication.translate("Home", u"Publish", None))
         self.label_7.setText(QCoreApplication.translate("Home", u"Total Score:", None))
         self.label_totalScore.setText(QCoreApplication.translate("Home", u"000", None))
-        self.label_6.setText(QCoreApplication.translate("Home", u"Diffuculty:", None))
+        self.label_6.setText(QCoreApplication.translate("Home", u"Difficulty:", None))
         self.btnEasy.setText(QCoreApplication.translate("Home", u"Easy", None))
         self.btnAverage.setText(QCoreApplication.translate("Home", u"Average", None))
         self.btnHard.setText(QCoreApplication.translate("Home", u"Hard", None))
@@ -4798,20 +4595,6 @@ class Ui_Home(object):
         self.label_12.setText(QCoreApplication.translate("Home", u"Multiple Choice", None))
         self.btnQuizAdd.setText(QCoreApplication.translate("Home", u"Add or Edit", None))
         self.btnQuizAdd.setProperty(u"class", QCoreApplication.translate("Home", u"button-normal", None))
-        self.widget_search_5.setProperty(u"class", QCoreApplication.translate("Home", u"widget-search-container", None))
-        self.label_magnifying_stud_3.setText("")
-        self.label_magnifying_stud_3.setProperty(u"class", QCoreApplication.translate("Home", u"label-magnifying-search", None))
-        self.txtSearchExercise.setPlaceholderText(QCoreApplication.translate("Home", u"Search", None))
-        self.txtSearchExercise.setProperty(u"class", QCoreApplication.translate("Home", u"textbox-search", None))
-#if QT_CONFIG(tooltip)
-        self.btnClearSearch_3.setToolTip(QCoreApplication.translate("Home", u"Clear", None))
-#endif // QT_CONFIG(tooltip)
-        self.btnClearSearch_3.setText("")
-        self.btnClearSearch_3.setProperty(u"class", QCoreApplication.translate("Home", u"button-clear-search", None))
-        self.btnExerciseEdit.setText(QCoreApplication.translate("Home", u"Edit", None))
-        self.btnExerciseEdit.setProperty(u"class", QCoreApplication.translate("Home", u"button-normal", None))
-        self.btnExerciseAdd.setText(QCoreApplication.translate("Home", u"Add", None))
-        self.btnExerciseAdd.setProperty(u"class", QCoreApplication.translate("Home", u"button-normal", None))
         self.label_4.setText(QCoreApplication.translate("Home", u"Section:", None))
         self.comboBox_Section.setProperty(u"class", QCoreApplication.translate("Home", u"combobox-main", None))
         self.btnSectionAdd.setText(QCoreApplication.translate("Home", u"Add new section", None))
@@ -4906,6 +4689,9 @@ class Ui_Home(object):
         self.btnBrowseLessonsCSV.setText(QCoreApplication.translate("Home", u"Browse", None))
         self.label_lesson_CSV_path.setText("")
         self.btnImportAllLessons.setText(QCoreApplication.translate("Home", u"Import", None))
+        self.label_53.setText(QCoreApplication.translate("Home", u"Quiz", None))
+        self.btnSaveSettings_quiz.setText(QCoreApplication.translate("Home", u"Save", None))
+        self.label_61.setText(QCoreApplication.translate("Home", u"Passing Score:", None))
         self.tabWidget_utility.setTabText(self.tabWidget_utility.indexOf(self.tab_settings), QCoreApplication.translate("Home", u"Settings", None))
         self.tabWidget_utility.setTabText(self.tabWidget_utility.indexOf(self.tab_audit_trail), QCoreApplication.translate("Home", u"Audit Trail", None))
         self.tabWidget_utility.setTabText(self.tabWidget_utility.indexOf(self.tab_archive), QCoreApplication.translate("Home", u"Archive", None))

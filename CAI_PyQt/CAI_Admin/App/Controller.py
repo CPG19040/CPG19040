@@ -2,14 +2,14 @@ import os, csv
 
 # PyQt Imports
 from PySide6.QtCore import QSettings, QTimer, QDateTime, QPoint, QEasingCurve, QPropertyAnimation, QParallelAnimationGroup, Qt, QDate
-from PySide6.QtWidgets import QMainWindow, QHeaderView, QDialog, QFileDialog, QMessageBox, QApplication, QButtonGroup, QLabel
+from PySide6.QtWidgets import QMainWindow, QHeaderView, QDialog, QFileDialog, QMessageBox, QApplication, QButtonGroup, QLabel, QSizePolicy, QSpacerItem
 from PySide6.QtGui import QFontDatabase, QImage, QPixmap, QGuiApplication, QStandardItemModel, QStandardItem
 from shiboken6 import isValid
 
 # Core App Logic/Main Windows
 from App.FormHome import Ui_Home
 from App.Login import Login
-from App.Tools import CardStudent, Utility, CustomMessageBox, CrossPlatformPrinter
+from App.Tools import CardStudent, Utility, CustomMessageBox, CrossPlatformPrinter, CardRanking
 from App.CRUDTools import DatabaseTools
 from App.Report import StudentListReporter, QuizReporter
 
@@ -77,6 +77,8 @@ class Controller:
 
         self.ui.btnUserName.setText(f"{user['firstname']} {user['lastname']}")
         self.ui.labelPosition.setText(user['position_name'])
+
+        self.ui.HBoxLayout_Ranking.setAlignment(Qt.AlignmentFlag.AlignCenter)
         
         self.card_layout = self.ui.gridLayout_stud_card
         self.card_layout.setAlignment(Qt.AlignmentFlag.AlignTop)
@@ -107,11 +109,10 @@ class Controller:
             self.ui.btnStudentList: 1,
             self.ui.btnLesson: 2,
             self.ui.btnQuiz: 3,
-            self.ui.btnExercise: 4,
-            self.ui.btnSections: 5,
-            self.ui.btnReports: 6,
-            self.ui.btnUsers: 7,
-            self.ui.btnUtility: 8,
+            self.ui.btnSections: 4,
+            self.ui.btnReports: 5,
+            self.ui.btnUsers: 6,
+            self.ui.btnUtility: 7,
         }
 
         for btn, idx in self.nav_map.items():
@@ -161,9 +162,6 @@ class Controller:
         self.ui.checkBoxPublish.setVisible(False)
         self.ui.btnQuizAdd.clicked.connect(self.showQuizDialog)
 
-        # Exercise
-        self.ui.btnClearSearch_3.clicked.connect(lambda: self.ui.txtSearchExercise.clear())
-
         # Sections
         self.ui.comboBox_Section.currentIndexChanged.connect(self.display_section_info)
         self.sectionObj = Section(user)
@@ -204,6 +202,7 @@ class Controller:
         self.ui.btnSaveSettings_SY.clicked.connect(self.saveSchoolYear_gradingPeriod)
         self.ui.btnBrowseLessonsCSV.clicked.connect(self.browse_lessons_csv)
         self.ui.btnImportAllLessons.clicked.connect(self.import_lessons)
+        self.ui.btnSaveSettings_quiz.clicked.connect(self.update_passing_score)
 
         #=============================================================
         #  Application-Level Privileges (Role-Based Access Control)
@@ -242,52 +241,45 @@ class Controller:
         self.home_win.show()
 
     def displayDashboard(self):
+        
         self.ui.label_lessons_total.setText(f"{Lesson().count()}")
         self.ui.label_student_total.setText(f"{Student().count()}")
         self.ui.label_teachers_total.setText(f"{Staff().count()}")
 
         student = Student()
-        top3 = student.get_top3_scorer(self.GRADING_PERIOD)
+        top3 = student.get_top3rd_ranking(self.GRADING_PERIOD)
 
-        podium_widgets = [
-            {
-                "avatar": self.ui.label_profile, 
-                "name": self.ui.label_stud_name, 
-                "score": self.ui.label_student_score
-            },
-            {
-                "avatar": self.ui.label_profile_2, 
-                "name": self.ui.label_stud_name_2, 
-                "score": self.ui.label_student_score_2
-            },
-            {
-                "avatar": self.ui.label_profile_3, 
-                "name": self.ui.label_stud_name_3, 
-                "score": self.ui.label_student_score_3
-            }
-        ]
+        self.horizontalSpacer1 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.horizontalSpacer2 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
-        avatar_width = self.ui.label_profile.width()
+        while self.ui.HBoxLayout_Ranking.count():
+            item = self.ui.HBoxLayout_Ranking.takeAt(0)
+            widget = item.widget()
 
-        for rank_idx, widgets in enumerate(podium_widgets):
+            if widget:
+                try: widget.clicked.disconnect()
+                except: pass
+                widget.setParent(None)
+                widget.deleteLater()
+        
+        self.ui.HBoxLayout_Ranking.addItem(self.horizontalSpacer1)
 
-            if rank_idx < len(top3):
-                data = top3[rank_idx]
-                
-                profile_pic = student.get_student_picture(data['studentid'], size=avatar_width)
-                circular_pic = self.util.makeCircularPixmap(profile_pic, avatar_width)
-                
-                middle_name = data.get('middlename', '')
-                full_name = self.util.formatFullname(data['firstname'], middle_name, data['lastname'])
-                
-                widgets["avatar"].setPixmap(circular_pic)
-                widgets["name"].setText(full_name)
-                widgets["score"].setText(f"{data['average_final_grade']}%")
-                
-            else:
-                # widgets["avatar"].clear()
-                widgets["name"].setText("No Data")
-                widgets["score"].setText("—")
+        for row in top3:
+            card_ranking = CardRanking()
+            avatar_width = card_ranking.label_profile.width()
+            profile_pic  = student.get_student_picture(row['studentid'], size=avatar_width)
+            circular_pic = self.util.makeCircularPixmap(profile_pic, avatar_width)
+            middle_name  = row.get('middlename', '')
+            full_name    = self.util.formatFullname(row['firstname'], middle_name, row['lastname'])
+            
+            card_ranking.avatar = circular_pic
+            card_ranking.name   = full_name
+            card_ranking.score  = row['average_final_grade']
+            card_ranking.student_rank = row['student_rank']
+            card_ranking.set_ranking_info()
+            self.ui.HBoxLayout_Ranking.addWidget(card_ranking)
+
+        self.ui.HBoxLayout_Ranking.addItem(self.horizontalSpacer2)
 
     def handle_student_searching(self):
         self.display_student_info()
@@ -351,10 +343,10 @@ class Controller:
             self.util.populate_gradingperiod_pulldown(self.ui.cbGradingPeriod, self.ui.cbLessonName, default_gp=self.GRADING_PERIOD)
             self.display_quiz()
 
-        elif index == 5: # Sections
+        elif index == 4: # Sections
             self.display_section_info()
 
-        elif index == 6: # Reports
+        elif index == 5: # Reports
             self.get_dynamic_grading_period_dates()
 
             query = """
@@ -396,14 +388,15 @@ class Controller:
             self.initialize_table_quiz_score_idv()
             self.handle_report_student_idv()
 
-        elif index == 7: # Users
+        elif index == 6: # Users
             self.displayUsers()
 
-        elif index == 8: # Utilities
+        elif index == 7: # Utilities
             self.displayAuditTrail()
             self.displayArchive()
             self.get_dynamic_grading_period_dates()
             self.display_grading_periods()
+            self.display_passing_score()
 
     def update_clock(self):
         now = QDateTime.currentDateTime()
@@ -1453,6 +1446,24 @@ class Controller:
                     self.ui.dateEdit_fourthgrading_end.setDate(end)
 
             self.ui.widget_SY_body_2.setEnabled(False)
+
+    def display_passing_score(self):
+        query = "SELECT passing_score FROM cai.tbl_grading_system WHERE category = 'Quiz';"
+        result = self.db_tools.fetch_all(query)
+
+        if result:
+            passing_score = result[0]['passing_score']
+            self.ui.doubleSpinBox_passing.setValue(passing_score)
+
+    def update_passing_score(self):
+        new_passing_score = self.ui.doubleSpinBox_passing.value()
+        query = "UPDATE cai.tbl_grading_system SET passing_score = %s WHERE category = 'Quiz';"
+        err = self.db_tools.execute_query(query, (new_passing_score,))
+
+        if not err:
+            QMessageBox.information(self.home_win, "Update", "Passing score updated successfully.")
+        else:
+            QMessageBox.critical(self.home_win, "Update", "Failed to update passing score.")
 
     def browse_lessons_csv(self):
         file_dialog = QFileDialog(self.home_win)

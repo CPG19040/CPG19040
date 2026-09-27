@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1016</width>
+    <width>1114</width>
     <height>689</height>
    </rect>
   </property>
@@ -103,7 +103,7 @@ QComboBox[class=&quot;combobox-main&quot;] QAbstractItemView::item:hover {
     color: #ffffff;
 }
 
-QSpinBox {
+QSpinBox, QDoubleSpinBox {
     height: 30px;
     border: 1px solid #999;
     border-radius: 15px;
@@ -115,15 +115,15 @@ QSpinBox {
 	font: 10pt &quot;Inter&quot;;
 }
 
-QSpinBox:focus {
+QSpinBox:focus, QDoubleSpinBox:focus {
     border: 1px solid #007BFF;
 }
 
-QSpinBox:hover {
+QSpinBox:hover, QDoubleSpinBox:hover {
     border: 1px solid #3498db;
 }
 
-QSpinBox::up-button {
+QSpinBox::up-button, QDoubleSpinBox::up-button {
     subcontrol-origin: border;
     subcontrol-position: top right;
     width: 8px;
@@ -133,7 +133,7 @@ QSpinBox::up-button {
 	color: rgb(119, 118, 123);
 }
 
-QSpinBox::down-button {
+QSpinBox::down-button, QDoubleSpinBox::down-button {
     subcontrol-origin: border;
     subcontrol-position: bottom right;
     width: 8px;
@@ -143,29 +143,29 @@ QSpinBox::down-button {
 	color: rgb(119, 118, 123);
 }
 
-QSpinBox::up-arrow {
+QSpinBox::up-arrow, QDoubleSpinBox::up-arrow {
     image: url(:/Images/Images/caret-up.png);
     width: 8px;
     height: 8px;
 }
 
-QSpinBox::down-arrow {
+QSpinBox::down-arrow, QDoubleSpinBox::down-arrow {
     image: url(:/Images/Images/caret-down.png);
     width: 8px;
     height: 8px;
 }
 
-QSpinBox:disabled {
+QSpinBox:disabled, QDoubleSpinBox:disabled {
     background-color: #f5f5f5;
     border: 1px solid #dcdcdc;
     color: #aaaaaa;
 }
 
-QSpinBox::up-arrow:disabled {
+QSpinBox::up-arrow:disabled, QDoubleSpinBox::up-arrow:disabled {
     image: url(:/Images/Images/caret-up-disabled.png);
 }
 
-QSpinBox::down-arrow:disabled {
+QSpinBox::down-arrow:disabled, QDoubleSpinBox::down-arrow:disabled {
     image: url(:/Images/Images/caret-down-disabled.png);
 }
 </string>
@@ -475,7 +475,7 @@ QCheckBox:disabled {
          </size>
         </property>
         <property name="text">
-         <string>Diffuculty:</string>
+         <string>Difficulty:</string>
         </property>
        </widget>
       </item>
@@ -657,7 +657,7 @@ QPushButton#btnHard:checked:disabled {
        </widget>
       </item>
       <item>
-       <spacer name="horizontalSpacer_3">
+       <spacer name="horizontalSpacer_6">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
         </property>
@@ -818,6 +818,19 @@ QPushButton#btnHard:checked:disabled {
        </widget>
       </item>
       <item>
+       <spacer name="horizontalSpacer_3">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
        <widget class="QLabel" name="label_4">
         <property name="text">
          <string>Score:</string>
@@ -826,6 +839,9 @@ QPushButton#btnHard:checked:disabled {
       </item>
       <item>
        <widget class="QLabel" name="label_scoreperlevel">
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(255, 255, 255); padding: 0px 10px 0px; border-radius: 15px;</string>
+        </property>
         <property name="text">
          <string>000</string>
         </property>
@@ -1060,7 +1076,7 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>323</width>
+              <width>355</width>
               <height>545</height>
              </rect>
             </property>
@@ -1194,7 +1210,7 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>322</width>
+              <width>356</width>
               <height>545</height>
              </rect>
             </property>
@@ -1328,7 +1344,7 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>323</width>
+              <width>355</width>
               <height>545</height>
              </rect>
             </property>

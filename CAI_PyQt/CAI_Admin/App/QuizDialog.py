@@ -25,7 +25,7 @@ class Ui_QuizCreatorDialog(object):
     def setupUi(self, QuizCreatorDialog):
         if not QuizCreatorDialog.objectName():
             QuizCreatorDialog.setObjectName(u"QuizCreatorDialog")
-        QuizCreatorDialog.resize(1016, 689)
+        QuizCreatorDialog.resize(1114, 689)
         QuizCreatorDialog.setStyleSheet(u"* {\n"
 "    color: black;\n"
 "    font: 10pt \"Inter\";\n"
@@ -117,7 +117,7 @@ class Ui_QuizCreatorDialog(object):
 "    color: #ffffff;\n"
 "}\n"
 "\n"
-"QSpinBox {\n"
+"QSpinBox, QDoubleSpinBox {\n"
 "    height: 30px;\n"
 "    border: 1px solid #999;\n"
 "    border-radius: 15px;\n"
@@ -129,26 +129,26 @@ class Ui_QuizCreatorDialog(object):
 "	font: 10pt \"Inter\";\n"
 "}\n"
 "\n"
-"QSpinBox:focus {\n"
+"QSpinBox:focus, QDoubleSpinBox:focus {\n"
 "    border: 1px solid #007BFF;\n"
 "}\n"
 "\n"
-"QSpinBox:hover {\n"
+"QSpinBox:hover, QDoubleSpinBox:hover {\n"
 "    border: 1px solid #3498db;\n"
 "}\n"
 "\n"
-"QSpinBox::up-button {\n"
+"QSpinBox::up-button, QDoubleSpinBox::up-button {\n"
 "    subcontrol-origin: border;\n"
 "    subcontrol-position: top right;\n"
 "    width: 8px;\n"
 "    height: 8px;\n"
-"    border-top-right-radius: 15px;\n"
+"    bor"
+                        "der-top-right-radius: 15px;\n"
 "    padding: 6px 10px 6px 2px;\n"
-"	color: rgb(119, 118"
-                        ", 123);\n"
+"	color: rgb(119, 118, 123);\n"
 "}\n"
 "\n"
-"QSpinBox::down-button {\n"
+"QSpinBox::down-button, QDoubleSpinBox::down-button {\n"
 "    subcontrol-origin: border;\n"
 "    subcontrol-position: bottom right;\n"
 "    width: 8px;\n"
@@ -158,29 +158,30 @@ class Ui_QuizCreatorDialog(object):
 "	color: rgb(119, 118, 123);\n"
 "}\n"
 "\n"
-"QSpinBox::up-arrow {\n"
+"QSpinBox::up-arrow, QDoubleSpinBox::up-arrow {\n"
 "    image: url(:/Images/Images/caret-up.png);\n"
 "    width: 8px;\n"
 "    height: 8px;\n"
 "}\n"
 "\n"
-"QSpinBox::down-arrow {\n"
+"QSpinBox::down-arrow, QDoubleSpinBox::down-arrow {\n"
 "    image: url(:/Images/Images/caret-down.png);\n"
 "    width: 8px;\n"
 "    height: 8px;\n"
 "}\n"
 "\n"
-"QSpinBox:disabled {\n"
+"QSpinBox:disabled, QDoubleSpinBox:disabled {\n"
 "    background-color: #f5f5f5;\n"
 "    border: 1px solid #dcdcdc;\n"
 "    color: #aaaaaa;\n"
 "}\n"
 "\n"
-"QSpinBox::up-arrow:disabled {\n"
+"QSpinBox::up-arrow:disabled, QDoubleSpinBox::up-arrow:disabled {\n"
 "    image: url(:/Images/Images/caret-up-disabled.png);\n"
 "}\n"
 "\n"
-"QSpinBox::down-arrow:disabled {\n"
+"QSpinBox::down"
+                        "-arrow:disabled, QDoubleSpinBox::down-arrow:disabled {\n"
 "    image: url(:/Images/Images/caret-down-disabled.png);\n"
 "}\n"
 "")
@@ -458,9 +459,9 @@ class Ui_QuizCreatorDialog(object):
 
         self.horizontalLayout.addWidget(self.widget_2)
 
-        self.horizontalSpacer_3 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.horizontalSpacer_6 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
-        self.horizontalLayout.addItem(self.horizontalSpacer_3)
+        self.horizontalLayout.addItem(self.horizontalSpacer_6)
 
         self.label_18 = QLabel(self.widget_builder)
         self.label_18.setObjectName(u"label_18")
@@ -523,6 +524,10 @@ class Ui_QuizCreatorDialog(object):
 
         self.horizontalLayout.addWidget(self.multiplier_hard)
 
+        self.horizontalSpacer_3 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout.addItem(self.horizontalSpacer_3)
+
         self.label_4 = QLabel(self.widget_builder)
         self.label_4.setObjectName(u"label_4")
 
@@ -530,6 +535,7 @@ class Ui_QuizCreatorDialog(object):
 
         self.label_scoreperlevel = QLabel(self.widget_builder)
         self.label_scoreperlevel.setObjectName(u"label_scoreperlevel")
+        self.label_scoreperlevel.setStyleSheet(u"background-color: rgb(255, 255, 255); padding: 0px 10px 0px; border-radius: 15px;")
 
         self.horizontalLayout.addWidget(self.label_scoreperlevel)
 
@@ -675,7 +681,7 @@ class Ui_QuizCreatorDialog(object):
         self.scrollArea_id.setWidgetResizable(True)
         self.scrollAreaWidgetContents_5 = QWidget()
         self.scrollAreaWidgetContents_5.setObjectName(u"scrollAreaWidgetContents_5")
-        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 323, 545))
+        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 355, 545))
         self.layout_identification = QVBoxLayout(self.scrollAreaWidgetContents_5)
         self.layout_identification.setObjectName(u"layout_identification")
         self.scrollArea_id.setWidget(self.scrollAreaWidgetContents_5)
@@ -738,7 +744,7 @@ class Ui_QuizCreatorDialog(object):
         self.scrollArea_mc.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 322, 545))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 356, 545))
         self.layout_multiplechoice = QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.layout_multiplechoice.setObjectName(u"layout_multiplechoice")
         self.scrollArea_mc.setWidget(self.scrollAreaWidgetContents_2)
@@ -801,7 +807,7 @@ class Ui_QuizCreatorDialog(object):
         self.scrollArea_tf.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 323, 545))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 355, 545))
         self.layout_trueorfalse = QVBoxLayout(self.scrollAreaWidgetContents_3)
         self.layout_trueorfalse.setObjectName(u"layout_trueorfalse")
         self.scrollArea_tf.setWidget(self.scrollAreaWidgetContents_3)
@@ -834,7 +840,7 @@ class Ui_QuizCreatorDialog(object):
         self.btn_save.setToolTip(QCoreApplication.translate("QuizCreatorDialog", u"Save (Ctrl + S)", None))
 #endif // QT_CONFIG(tooltip)
         self.btn_save.setText("")
-        self.label_6.setText(QCoreApplication.translate("QuizCreatorDialog", u"Diffuculty:", None))
+        self.label_6.setText(QCoreApplication.translate("QuizCreatorDialog", u"Difficulty:", None))
         self.btnEasy.setText(QCoreApplication.translate("QuizCreatorDialog", u"Easy", None))
         self.btnAverage.setText(QCoreApplication.translate("QuizCreatorDialog", u"Average", None))
         self.btnHard.setText(QCoreApplication.translate("QuizCreatorDialog", u"Hard", None))
