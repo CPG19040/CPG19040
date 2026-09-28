@@ -25,6 +25,7 @@ class Section(QDialog, Ui_SectionRegistrationDialog):
         self.label_sy.setText(f"School Year: {self.base_year} - {self.next_year}")
         self.txtCSVPath.clear()
         self.widget_CSV.setEnabled(False)
+        self.widget_template.setEnabled(False)
 
         self.populate_teachers(self.cmb_teacher, True)
         self.btnExportTemplate.clicked.connect(lambda: self.utility.export_classlist_template(parent=self))
@@ -57,6 +58,7 @@ class Section(QDialog, Ui_SectionRegistrationDialog):
 
     def update_state(self, checked):
         self.widget_CSV.setEnabled(not checked)
+        self.widget_template.setEnabled(not checked)
 
     def browse_csv(self):
         file_dialog = QFileDialog(self)

@@ -17,17 +17,17 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QComboBox, QDialog, QFrame,
     QHBoxLayout, QLabel, QLineEdit, QProgressBar,
-    QPushButton, QRadioButton, QSizePolicy, QSpacerItem,
-    QVBoxLayout, QWidget)
+    QPushButton, QRadioButton, QScrollArea, QSizePolicy,
+    QSpacerItem, QVBoxLayout, QWidget)
 import resources_rc
 
 class Ui_SectionRegistrationDialog(object):
     def setupUi(self, SectionRegistrationDialog):
         if not SectionRegistrationDialog.objectName():
             SectionRegistrationDialog.setObjectName(u"SectionRegistrationDialog")
-        SectionRegistrationDialog.resize(620, 300)
-        SectionRegistrationDialog.setMinimumSize(QSize(620, 300))
-        SectionRegistrationDialog.setMaximumSize(QSize(1000, 300))
+        SectionRegistrationDialog.resize(620, 586)
+        SectionRegistrationDialog.setMinimumSize(QSize(620, 580))
+        SectionRegistrationDialog.setMaximumSize(QSize(1000, 630))
         SectionRegistrationDialog.setStyleSheet(u"* {\n"
 "	background-color: rgb(222, 221, 218); \n"
 "	color: black;\n"
@@ -91,13 +91,17 @@ class Ui_SectionRegistrationDialog(object):
 "	color: #aeaeae;\n"
 "}\n"
 "\n"
+"QLabel:disabled {\n"
+"	color: #aeaeae;\n"
+"}\n"
+"\n"
 "*[class=\"input-field\"] {\n"
-"	background-color: transparent;\n"
+"	background-color: transparent;"
+                        "\n"
 "}\n"
 "\n"
 "*[class=\"input-field\"] QLineEdit {\n"
-""
-                        "	background-color: #ffffff;\n"
+"	background-color: #ffffff;\n"
 "	border: 1px solid #999;\n"
 "	border-left: none;\n"
 "	border-top-right-radius: 15px;\n"
@@ -135,10 +139,10 @@ class Ui_SectionRegistrationDialog(object):
 "    background-color: #ffffff;\n"
 "    color: #333333;\n"
 "    font: 10pt \"Inter Medium\";\n"
-"    selection-background-color: #7eb4d7;\n"
+"    selection-background-color: #7eb4d7;"
+                        "\n"
 "	border-top-right-radius: 15px;\n"
-"	border-bottom-r"
-                        "ight-radius: 15px;\n"
+"	border-bottom-right-radius: 15px;\n"
 "}\n"
 "\n"
 "QComboBox:focus, QLineEdit:focus {\n"
@@ -175,16 +179,90 @@ class Ui_SectionRegistrationDialog(object):
 "}\n"
 "\n"
 "QComboBox QAbstractItemView::item {\n"
-"    padding: 0px 15px;\n"
-"    border-radius: 4px;\n"
 ""
-                        "    color: #333333;\n"
+                        "    padding: 0px 15px;\n"
+"    border-radius: 4px;\n"
+"    color: #333333;\n"
 "}\n"
 "\n"
 "/* Hover state for items inside the dropdown */\n"
 "QComboBox QAbstractItemView::item:hover {\n"
 "    background-color: #7eb4d7;\n"
 "    color: #ffffff;\n"
+"}\n"
+"\n"
+"QScrollArea { \n"
+"    border: none;\n"
+"    border-radius: 20px;\n"
+"	background-color: rgb(246, 245, 244);\n"
+"}\n"
+"\n"
+"/* 2. THE VIEWPORT (Crucial for transparency/backgrounds) */\n"
+"QScrollArea QWidget #qt_scrollarea_viewport {\n"
+"    background: transparent;\n"
+"    border-radius: 20px;\n"
+"}\n"
+"\n"
+"/* 3. VERTICAL SCROLLBAR */\n"
+"QScrollBar:vertical {\n"
+"    border: none;\n"
+"    background: #ffffff;\n"
+"    width: 10px;\n"
+"    margin: 0px;\n"
+"    border-radius: 5px;\n"
+"}\n"
+"\n"
+"QScrollBar::handle:vertical {\n"
+"    background: #7a7a7a;\n"
+"    min-height: 20px;\n"
+"    border-radius: 5px;\n"
+"}\n"
+"\n"
+"QScrollBar::handle:vertical:hover {\n"
+"    background: #574939;\n"
+"}\n"
+"\n"
+"/* 4. HORIZONTAL SCROLLBAR */\n"
+"QScrollBar:horizontal {"
+                        "\n"
+"    border: none;\n"
+"    background: #ffffff;\n"
+"    height: 10px; /* Note: height, not width */\n"
+"    margin: 0px;\n"
+"    border-radius: 5px;\n"
+"}\n"
+"\n"
+"QScrollBar::handle:horizontal {\n"
+"    background: #7a7a7a;\n"
+"    min-width: 20px;\n"
+"    border-radius: 5px;\n"
+"}\n"
+"\n"
+"QScrollBar::handle:horizontal:hover {\n"
+"    background: #574939;\n"
+"}\n"
+"\n"
+"/* 5. REMOVE BUTTONS & TRACK BACKGROUNDS */\n"
+"/* This handles both horizontal and vertical arrows/tracks */\n"
+"QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical,\n"
+"QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {\n"
+"    border: none;\n"
+"    background: none;\n"
+"    width: 0px;\n"
+"    height: 0px;\n"
+"}\n"
+"\n"
+"QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical,\n"
+"QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {\n"
+"    background: none;\n"
+"}\n"
+"\n"
+"/* 6. THE CORNER WIDGET \n"
+"   (The small square where both bars meet) */\n"
+"QScrollArea QWidget #qt_scrollarea_corner "
+                        "{\n"
+"    background: transparent;\n"
+"    border: none;\n"
 "}")
         self.verticalLayout = QVBoxLayout(SectionRegistrationDialog)
         self.verticalLayout.setObjectName(u"verticalLayout")
@@ -264,22 +342,12 @@ class Ui_SectionRegistrationDialog(object):
 
         self.horizontalLayout_4.addWidget(self.rb_importCSV)
 
-        self.btnExportTemplate = QPushButton(SectionRegistrationDialog)
-        self.btnExportTemplate.setObjectName(u"btnExportTemplate")
-        self.btnExportTemplate.setMinimumSize(QSize(30, 30))
-        self.btnExportTemplate.setMaximumSize(QSize(30, 30))
-        icon = QIcon()
-        icon.addFile(u":/Images/Images/export.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.btnExportTemplate.setIcon(icon)
-
-        self.horizontalLayout_4.addWidget(self.btnExportTemplate)
-
 
         self.verticalLayout.addLayout(self.horizontalLayout_4)
 
         self.widget_CSV = QWidget(SectionRegistrationDialog)
         self.widget_CSV.setObjectName(u"widget_CSV")
-        self.widget_CSV.setEnabled(False)
+        self.widget_CSV.setEnabled(True)
         self.widget_CSV.setMinimumSize(QSize(100, 0))
         self.widget_CSV.setStyleSheet(u"#label_14 {\n"
 "	background-color: rgb(192, 191, 188);\n"
@@ -361,7 +429,65 @@ class Ui_SectionRegistrationDialog(object):
 
         self.verticalLayout.addWidget(self.widget_CSV)
 
-        self.verticalSpacer = QSpacerItem(20, 56, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+        self.widget_template = QWidget(SectionRegistrationDialog)
+        self.widget_template.setObjectName(u"widget_template")
+        self.widget_template.setEnabled(True)
+        self.widget_template.setMinimumSize(QSize(0, 200))
+        self.verticalLayout_3 = QVBoxLayout(self.widget_template)
+        self.verticalLayout_3.setObjectName(u"verticalLayout_3")
+        self.horizontalLayout_5 = QHBoxLayout()
+        self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
+        self.horizontalLayout_5.setContentsMargins(-1, -1, -1, 0)
+        self.label = QLabel(self.widget_template)
+        self.label.setObjectName(u"label")
+        self.label.setEnabled(True)
+
+        self.horizontalLayout_5.addWidget(self.label)
+
+        self.btnExportTemplate = QPushButton(self.widget_template)
+        self.btnExportTemplate.setObjectName(u"btnExportTemplate")
+        self.btnExportTemplate.setEnabled(True)
+        self.btnExportTemplate.setMinimumSize(QSize(30, 30))
+        self.btnExportTemplate.setMaximumSize(QSize(30, 30))
+        icon = QIcon()
+        icon.addFile(u":/Images/Images/export.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.btnExportTemplate.setIcon(icon)
+        self.btnExportTemplate.setIconSize(QSize(18, 18))
+
+        self.horizontalLayout_5.addWidget(self.btnExportTemplate)
+
+
+        self.verticalLayout_3.addLayout(self.horizontalLayout_5)
+
+        self.scrollArea = QScrollArea(self.widget_template)
+        self.scrollArea.setObjectName(u"scrollArea")
+        self.scrollArea.setEnabled(True)
+        self.scrollArea.setMinimumSize(QSize(0, 220))
+        self.scrollArea.setWidgetResizable(True)
+        self.scrollAreaWidgetContents = QWidget()
+        self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 703, 210))
+        self.verticalLayout_4 = QVBoxLayout(self.scrollAreaWidgetContents)
+        self.verticalLayout_4.setObjectName(u"verticalLayout_4")
+        self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
+        self.label_2 = QLabel(self.scrollAreaWidgetContents)
+        self.label_2.setObjectName(u"label_2")
+        self.label_2.setEnabled(True)
+        self.label_2.setMaximumSize(QSize(16777215, 210))
+        self.label_2.setPixmap(QPixmap(u":/Images/Images/student_list_template.png"))
+        self.label_2.setScaledContents(False)
+        self.label_2.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_4.addWidget(self.label_2)
+
+        self.scrollArea.setWidget(self.scrollAreaWidgetContents)
+
+        self.verticalLayout_3.addWidget(self.scrollArea)
+
+
+        self.verticalLayout.addWidget(self.widget_template)
+
+        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout.addItem(self.verticalSpacer)
 
@@ -417,14 +543,16 @@ class Ui_SectionRegistrationDialog(object):
         self.widget_2.setProperty(u"class", QCoreApplication.translate("SectionRegistrationDialog", u"input-field", None))
         self.label_10.setText(QCoreApplication.translate("SectionRegistrationDialog", u"Adviser", None))
         self.rb_importCSV.setText(QCoreApplication.translate("SectionRegistrationDialog", u"Import students from CSV", None))
+        self.widget_CSV.setProperty(u"class", "")
+        self.label_14.setText(QCoreApplication.translate("SectionRegistrationDialog", u"Template file:", None))
+        self.label_14.setProperty(u"class", QCoreApplication.translate("SectionRegistrationDialog", u"input-field", None))
+        self.btnBrowseCSV.setText(QCoreApplication.translate("SectionRegistrationDialog", u"Browse", None))
+        self.label.setText(QCoreApplication.translate("SectionRegistrationDialog", u"Template (Sample):", None))
 #if QT_CONFIG(tooltip)
         self.btnExportTemplate.setToolTip(QCoreApplication.translate("SectionRegistrationDialog", u"Export Template", None))
 #endif // QT_CONFIG(tooltip)
         self.btnExportTemplate.setText("")
-        self.widget_CSV.setProperty(u"class", "")
-        self.label_14.setText(QCoreApplication.translate("SectionRegistrationDialog", u"Template:", None))
-        self.label_14.setProperty(u"class", QCoreApplication.translate("SectionRegistrationDialog", u"input-field", None))
-        self.btnBrowseCSV.setText(QCoreApplication.translate("SectionRegistrationDialog", u"Browse", None))
+        self.label_2.setText("")
         self.btnCancel.setText(QCoreApplication.translate("SectionRegistrationDialog", u"Cancel", None))
         self.btnCancel.setProperty(u"class", QCoreApplication.translate("SectionRegistrationDialog", u"button-normal", None))
         self.btnSave.setText(QCoreApplication.translate("SectionRegistrationDialog", u"Save", None))
