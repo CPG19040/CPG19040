@@ -165,15 +165,15 @@ class Controller:
         # Sections
         self.ui.comboBox_Section.currentIndexChanged.connect(self.display_section_info)
         self.sectionObj = Section(user)
-        self.sectionObj.populate_sections(self.ui.comboBox_Section, False)
-        self.sectionObj.populate_sections(self.ui.cmb_studSection, True)
+        self.sectionObj.populate_sections(self.ui.comboBox_Section, '', False)
+        self.sectionObj.populate_sections(self.ui.cmb_studSection, '', True)
         self.ui.cmb_studSection.currentIndexChanged.connect(self.handle_student_searching)
         self.ui.btnSectionAdd.clicked.connect(self.register_section)
         self.ui.btnSectionDelete.clicked.connect(self.delete_selected_sections)
         self.ui.btnSectionEdit.clicked.connect(self.section_edit)
 
         # Reports
-        self.sectionObj.populate_sections(self.ui.comboBox_ReportsSection, False)
+        self.sectionObj.populate_sections(self.ui.comboBox_ReportsSection, '', False)
         self.ui.cmb_school_year_2.currentIndexChanged.connect(self.handle_report_stud_prog_filter)
         self.ui.comboBox_ReportsSection.currentIndexChanged.connect(self.handle_report_stud_prog_filter)
         self.ui.spin_quiz_no.valueChanged.connect(self.handle_report_stud_prog_filter)
@@ -331,7 +331,7 @@ class Controller:
             self.get_dynamic_grading_period_dates()
 
         elif index == 1: # Student List
-            self.sectionObj.populate_sections(self.ui.cmb_studSection, True)
+            self.sectionObj.populate_sections(self.ui.cmb_studSection, '', True)
             self.display_student_cards()
             self.display_student_info()
 
@@ -711,7 +711,7 @@ class Controller:
         self.sectionObj.cmb_teacher.setCurrentIndex(0)
 
         if self.sectionObj.exec() == QDialog.DialogCode.Accepted:
-            self.sectionObj.populate_sections(self.ui.comboBox_Section, False)
+            self.sectionObj.populate_sections(self.ui.comboBox_Section, '', False)
             self.display_section_info()
 
     def display_section_info(self):
@@ -741,16 +741,16 @@ class Controller:
 
         if dialog == QMessageBox.Ok:
             self.sectionObj.delete_section(sectionId, sectionName)
-            self.sectionObj.populate_sections(self.ui.comboBox_Section, False)
+            self.sectionObj.populate_sections(self.ui.comboBox_Section, '', False)
             self.display_section_info()
 
     def section_edit(self):
         from App.SectionDialog import SectionAdviserEditor
-        sectionEditor = SectionAdviserEditor(self.sectionObj)
+        section_id = self.ui.comboBox_Section.currentData()
+        sectionEditor = SectionAdviserEditor(self.sectionObj, section_id)
 
         sectionEditor.exec()
 
-        section_id = self.ui.comboBox_Section.currentData()
         class_adviser = self.sectionObj.get_adviser(section_id)
         self.ui.label_Adviser.setText(class_adviser)
 

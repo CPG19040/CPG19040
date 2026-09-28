@@ -1,4 +1,4 @@
-import psycopg2, csv
+import csv
 from passlib.hash import bcrypt
 from pathlib import Path
 
@@ -7,7 +7,7 @@ from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QDialog, QMessageBox, QHeaderView, QComboBox, QFileDialog
 
 from App.CRUDTools import DatabaseTools
-from App.Tools import Utility
+from App.Tools import CustomMessageBox, Utility
 from App.FormSectionRegistration import Ui_SectionRegistrationDialog
 from App.FormSectionAdviserEditor import Ui_SectionAdviserEditorDialog
 
@@ -111,7 +111,42 @@ class Section(QDialog, Ui_SectionRegistrationDialog):
                     %s, %s, %s, %s, %s, %s, %s, %s);
             """
 
+            skip_all = False
+            no_all = False
+            skipped_students = []
+
             for i, row in enumerate(reader, 1):
+                name = f"{row['LAST NAME']}, {row['FIRST NAME']} {row['MIDDLE NAME']}"
+
+                if not no_all and self.check_duplicate_student(row['LAST NAME'], row['FIRST NAME'], row['MIDDLE NAME']):
+                   
+                    if not skip_all:
+                        reply = QMessageBox.question(
+                            self, "Duplicate Entry",
+                            f"Student {name} already exists. Do you want to skip it?",
+                            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.YesAll | QMessageBox.StandardButton.No | QMessageBox.StandardButton.NoAll,
+                            QMessageBox.StandardButton.Yes
+                        )
+                    
+                        if reply == QMessageBox.StandardButton.Yes:
+                            skipped_students.append(name)
+                            self.progressBar.setValue(i)
+                            continue
+
+                        elif reply == QMessageBox.StandardButton.YesAll:
+                            skip_all = True
+                            skipped_students.append(name)
+                            self.progressBar.setValue(i)
+                            continue
+
+                        elif reply == QMessageBox.StandardButton.NoAll:
+                            no_all = True
+
+                    elif skip_all:
+                        skipped_students.append(name)
+                        self.progressBar.setValue(i)
+                        continue
+
                 self.db_tools.execute_query(query, (
                     f"{self.base_year}-{self.next_year}",
                     row['LAST NAME'],
@@ -127,7 +162,29 @@ class Section(QDialog, Ui_SectionRegistrationDialog):
 
                 self.progressBar.setValue(i)
 
+        if skipped_students:
+            skipped_list = "\n".join(skipped_students)
+            msgbox = CustomMessageBox(self)
+            msgbox.information("Skipped Students", f"The following students were skipped due to duplicates:\n\n{skipped_list}")
+            msgbox.exec()
+
         return 0
+
+    def check_duplicate_student(self, last_name, first_name, middle_name):
+        existing_student = self.db_tools.fetch_all(
+            """
+                SELECT studentid FROM cai.tbl_student_info
+                WHERE UPPER(lastname) = UPPER(%s) 
+                    AND UPPER(firstname) = UPPER(%s) 
+                    AND UPPER(middlename) = UPPER(%s)
+            """,
+            (last_name, first_name, middle_name)
+        )
+
+        if existing_student:
+            return True
+
+        return False
 
     def register(self):
         section_name = self.txtSectionName.text().strip()
@@ -242,14 +299,14 @@ class Section(QDialog, Ui_SectionRegistrationDialog):
 
         self.utility.populate_pulldown(combo_box, sql, ('2',), add_empty=add_empty)
 
-    def populate_sections(self, combo_box:QComboBox, add_empty:bool):
+    def populate_sections(self, combo_box:QComboBox, value:str, add_empty:bool):
         sql = 'SELECT\n'
         sql += '    sectionid AS index\n'
         sql += '    ,sectionname AS itemname\n'
         sql += 'FROM cai.tbl_section\n'
         sql += 'ORDER BY sectionname ASC'
 
-        self.utility.populate_pulldown(combo_box, sql, add_empty=add_empty)
+        self.utility.populate_pulldown(combo_box, sql, default_value=value, add_empty=add_empty)
 
     def delete_section(self, sectionId, sectionName):
         """
@@ -337,21 +394,24 @@ class Section(QDialog, Ui_SectionRegistrationDialog):
 
 class SectionAdviserEditor(QDialog, Ui_SectionAdviserEditorDialog):
 
-    def __init__(self, section:Section):
+    def __init__(self, section:Section, section_id=None):
         super().__init__()
         self.setupUi(self)
 
         self.db_tools = DatabaseTools()
-        self.user = section.user
-        self.section = section
-
-        self.table_section.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.ResizeToContents)
+        self.user     = section.user
+        self.section  = section
+        
         model = section.refresh_section_table()
 
         if model:
             self.table_section.setModel(model)
+            header = self.table_section.horizontalHeader()
+            header.setMinimumSectionSize(100)
+            header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+            header.setSectionResizeMode(0, QHeaderView.ResizeMode.ResizeToContents)
 
-        section.populate_sections(self.cmb_section, True)
+        section.populate_sections(self.cmb_section, section_id, True)
         section.populate_teachers(self.cmb_teacher, True)
 
         self.btnSave.clicked.connect(self.save)

@@ -121,7 +121,7 @@ class Lesson:
         if not lesson_id:
             return tuple([""] * 8)
 
-        sql = 'SELECT\n'
+        sql  = 'SELECT\n'
         sql += '    lesson_id\n'
         sql += '    ,chapter \n'
         sql += '    ,lessonnum\n'
@@ -215,6 +215,7 @@ class Lesson:
 
 
 class LessonDialog(QDialog, Ui_LessonDialog):
+
     def __init__(self, mode=1, lesson_id=None): # mode: 1 Add, 2 Edit
         super().__init__()
         self.setupUi(self)

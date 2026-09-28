@@ -25,7 +25,9 @@ class Ui_SectionAdviserEditorDialog(object):
     def setupUi(self, SectionAdviserEditorDialog):
         if not SectionAdviserEditorDialog.objectName():
             SectionAdviserEditorDialog.setObjectName(u"SectionAdviserEditorDialog")
-        SectionAdviserEditorDialog.resize(546, 517)
+        SectionAdviserEditorDialog.resize(550, 520)
+        SectionAdviserEditorDialog.setMinimumSize(QSize(550, 520))
+        SectionAdviserEditorDialog.setMaximumSize(QSize(900, 600))
         SectionAdviserEditorDialog.setStyleSheet(u"* {\n"
 "	background-color: rgb(222, 221, 218); \n"
 "	color: black;\n"
@@ -254,6 +256,7 @@ class Ui_SectionAdviserEditorDialog(object):
 
         self.table_section = QTableView(SectionAdviserEditorDialog)
         self.table_section.setObjectName(u"table_section")
+        self.table_section.setEnabled(False)
         self.table_section.setStyleSheet(u"QTableView {\n"
 "    border: 1px solid rgb(38, 162, 105);\n"
 "    gridline-color: #f0f0f0;\n"
@@ -315,6 +318,7 @@ class Ui_SectionAdviserEditorDialog(object):
 "QScrollBar::add-line, QScrollBar::sub-line {\n"
 "    width: 0px; height: 0px;\n"
 "}")
+        self.table_section.setSelectionMode(QAbstractItemView.NoSelection)
         self.table_section.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.table_section.verticalHeader().setVisible(False)
 
@@ -355,7 +359,7 @@ class Ui_SectionAdviserEditorDialog(object):
     # setupUi
 
     def retranslateUi(self, SectionAdviserEditorDialog):
-        SectionAdviserEditorDialog.setWindowTitle(QCoreApplication.translate("SectionAdviserEditorDialog", u"Dialog", None))
+        SectionAdviserEditorDialog.setWindowTitle(QCoreApplication.translate("SectionAdviserEditorDialog", u"Section Adviser Editor", None))
         self.label_24.setText(QCoreApplication.translate("SectionAdviserEditorDialog", u"Assign an adviser to each section", None))
         self.widget_2.setProperty(u"class", QCoreApplication.translate("SectionAdviserEditorDialog", u"input-field", None))
         self.label_9.setText(QCoreApplication.translate("SectionAdviserEditorDialog", u"Section:", None))
