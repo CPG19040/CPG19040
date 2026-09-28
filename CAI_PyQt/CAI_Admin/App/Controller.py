@@ -225,13 +225,11 @@ class Controller:
             self.ui.btnAddStudent.setVisible(False)
             self.ui.btnLessonAdd.setVisible(False)
             self.ui.btnQuizAdd.setVisible(False)
-            self.ui.btnExerciseAdd.setVisible(False)
             self.ui.btnSectionAdd.setVisible(False)
 
             self.ui.btnEditStudent.setVisible(False)
             self.ui.btnLessonEdit.setVisible(False)
             self.ui.btnSectionEdit.setVisible(False)
-            self.ui.btnExerciseEdit.setVisible(False)
 
             self.ui.btnDeleteStudent.setVisible(False)
             self.ui.btnSectionDelete.setVisible(False)
@@ -241,7 +239,6 @@ class Controller:
         self.home_win.show()
 
     def displayDashboard(self):
-        
         self.ui.label_lessons_total.setText(f"{Lesson().count()}")
         self.ui.label_student_total.setText(f"{Student().count()}")
         self.ui.label_teachers_total.setText(f"{Staff().count()}")
@@ -263,6 +260,11 @@ class Controller:
                 widget.deleteLater()
         
         self.ui.HBoxLayout_Ranking.addItem(self.horizontalSpacer1)
+
+        if not top3:
+            label = QLabel("No ranking data available.")
+            label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+            self.ui.HBoxLayout_Ranking.addWidget(label)
 
         for row in top3:
             card_ranking = CardRanking()

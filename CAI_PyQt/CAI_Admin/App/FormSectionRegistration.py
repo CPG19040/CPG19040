@@ -449,6 +449,7 @@ class Ui_SectionRegistrationDialog(object):
         self.btnExportTemplate.setEnabled(True)
         self.btnExportTemplate.setMinimumSize(QSize(30, 30))
         self.btnExportTemplate.setMaximumSize(QSize(30, 30))
+        self.btnExportTemplate.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         icon = QIcon()
         icon.addFile(u":/Images/Images/export.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.btnExportTemplate.setIcon(icon)
