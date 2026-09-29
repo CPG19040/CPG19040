@@ -5,6 +5,7 @@ from PySide6.QtCore import Qt, Signal, QUrl, QObject, QEvent, QDate
 from PySide6.QtWebEngineWidgets import QWebEngineView
 from App.CRUDTools import DatabaseTools
 from App.CustomizedDialog import Ui_CustomDialog
+from App.CardStudent import Ui_CardStudent
 
 class Utility:
 
@@ -209,70 +210,34 @@ class Utility:
         return -1
 
 
-class StudentCard(QFrame):
+class StudentCard(QFrame, Ui_CardStudent):
     clicked = Signal(object, str)
 
-    def __init__(self, name, stud_id, image, border_radius='10px'):
+    def __init__(self, name, stud_id, image):
         """Custom widget representing a single card."""
         super().__init__()
+        self.setupUi(self)
 
         self.fullName = name
         self.studentid = stud_id
         self.pixMap = image
         self.setProperty("selected", False) # Initialize property
         self.setFrameShape(QFrame.Shape.StyledPanel)
-        self.setFixedSize(16777215, 100)
         self.setCursor(Qt.CursorShape.PointingHandCursor)
-        self.setStyleSheet("""
-            StudentCard {
-                background-color: #ffffff;
-                border-radius: """ + border_radius + """;
-                border: 1px solid #ddd;
-            }
-            StudentCard:hover {
-                border: 2px solid #3498db;
-                background-color: #f7fbfe;
-            }
-            /* This style applies when the custom property is true */
-            StudentCard[selected="true"] {
-                background-color: #e1f5fe;
-                border: 2px solid #3498db;
-            }
-            QLabel {
-                color: #333;
-            }
-        """)
 
         self.util = Utility()
 
         if self.util.isEmpty(self.pixMap):
             path = self.util.get_resource_path(os.path.join("..", "Images", "profile_gray.png"))
-            self.pixMap = self.util.getCircularPixmapFromImagePath(path, 80)
+            self.pixMap = self.util.getCircularPixmapFromImagePath(path, 100)
 
-        # Layout for the card
-        layout = QHBoxLayout(self)
-
-        self.photo = QLabel()
         circular_pixmap = self.util.makeCircularPixmap(self.pixMap)
-        self.photo.setPixmap(circular_pixmap)
-        self.photo.setFixedSize(80, 80)
-        self.photo.setStyleSheet("background-color: transparent;")
+        self.label_profile.setPixmap(circular_pixmap)
         
         # Information
-        info_layout = QVBoxLayout()
-        self.name_label = QLabel(name)
-        self.name_label.setStyleSheet("font-weight: bold; font-size: 16px; background-color: transparent;")
-        
-        self.label_studentid = QLabel(stud_id)
-        self.label_studentid.setStyleSheet("color: #777; font-size: 13px; background-color: transparent;")
-        
-        info_layout.addWidget(self.name_label)
-        info_layout.addWidget(self.label_studentid)
-        info_layout.addStretch()
-
-        layout.addWidget(self.photo)
-        layout.addLayout(info_layout)
-        layout.addStretch()
+        self.label_student_name.setText(name)
+        self.label_student_id.setText(stud_id)
+        self.info_layout.setAlignment(Qt.AlignmentFlag.AlignVCenter)
 
         # Ensure the widget can receive focus for keyboard navigation
         self.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
@@ -280,13 +245,13 @@ class StudentCard(QFrame):
     def mousePressEvent(self, event):
         """Triggered when the user clicks the card."""
         if event.button() == Qt.MouseButton.LeftButton:
-            self.clicked.emit(self, self.label_studentid.text())
+            self.clicked.emit(self, self.label_student_id.text())
             super().mousePressEvent(event)
 
     def focusInEvent(self, event):
         """Triggered when the card gains focus (e.g., via Tab key)."""
         if not self.property("selected"):
-            self.clicked.emit(self, self.label_studentid.text())
+            self.clicked.emit(self, self.label_student_id.text())
         super().focusInEvent(event)
 
     def set_selected(self, selected: bool):

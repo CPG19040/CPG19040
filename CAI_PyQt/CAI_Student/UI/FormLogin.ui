@@ -6,22 +6,29 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>968</width>
+    <width>1119</width>
     <height>665</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>0</width>
-    <height>0</height>
+    <width>968</width>
+    <height>665</height>
    </size>
   </property>
   <property name="windowTitle">
    <string>Login</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">#FormLogin { background-color: #ffdaa5; }
-#stackedWidget, #page1, #page2 { background: transparent; }</string>
+   <string notr="true">#FormLogin {
+    background-color: #ebc898;
+}
+
+#stackedWidget,
+#page1,
+#page2 {
+    background: transparent;
+}</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_3">
    <property name="leftMargin">
@@ -393,55 +400,47 @@
              <enum>Qt::TabFocus</enum>
             </property>
             <property name="styleSheet">
-             <string notr="true">/* 1. THE LIST CONTAINER */
-QListWidget {
+             <string notr="true">QListWidget {
     background-color: rgb(248, 230, 203);
     border: 5px solid rgb(206, 152, 115);
     border-radius: 20px;
     padding: 5px;
 }
 
-/* 2. THE DEFAULT ITEM STATE */
 QListWidget::item {
     background-color: transparent;
     color: #333333;
-    padding: 10px 10px;      /* Vertical and horizontal spacing inside the item */
-    margin: 1px 0px;         /* Spacing between adjacent items */
-    border-radius: 20px;      /* Rounded corners for individual items */
+    padding: 10px 10px;
+    margin: 1px 0px;
+    border-radius: 20px;
 }
 
-/* 3. HOVER STATE (Mouse over item) */
 QListWidget::item:hover {
-    background-color: rgb(255, 200, 116);
-    color: #574939;
+	background-color: rgb(255, 190, 111)
 }
 
-/* 4. SELECTED STATE (Active/Clicked item) */
 QListWidget::item:selected {
-    background-color: #574939;
-    color: #ffffff;
+	background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #f6d32d, stop:1 #f6b02d);
+	border: 2px solid rgb(255, 120, 0);
 	font-weight: bold;
 }
 
-/* 5. SELECTED &amp; HOVERED STATE */
-/* Prevents the hover color from overriding the selection color when clicking */
 QListWidget::item:selected:hover {
-    background-color: #4a3e30; 
-    color: #ffffff;
+	background-color: rgb(255, 190, 111);
+	border: 2px solid rgb(255, 120, 0);
+	font-weight: bold;
 }
 
-/* 6. DISABLED STATE */
 QListWidget::item:disabled {
     background-color: transparent;
     color: #aaaaaa;
 }
 
-/* 3. VERTICAL SCROLLBAR */
 QScrollBar:vertical {
     border: none;
     background: #ffffff;
     width: 10px;
-    margin: 5px 0px 5px 0px; /* Adds a little padding so it doesn't hug the border */
+    margin: 5px 0px 5px 0px;
     border-radius: 5px;
 }
 
@@ -456,10 +455,9 @@ QScrollBar::handle:vertical:hover {
 }
 
 QScrollBar::handle:vertical:pressed {
-    background: #3d3327; /* Darker shade for active dragging */
+    background: #3d3327;
 }
 
-/* 4. HORIZONTAL SCROLLBAR */
 QScrollBar:horizontal {
     border: none;
     background: #ffffff;
@@ -482,7 +480,6 @@ QScrollBar::handle:horizontal:pressed {
     background: #3d3327;
 }
 
-/* 5. REMOVE BUTTONS &amp; TRACK BACKGROUNDS */
 QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical,
 QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {
     border: none;
@@ -496,8 +493,6 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
     background: none;
 }
 
-/* 6. THE CORNER WIDGET */
-/* Native Qt selector for the bottom-right intersection square */
 QListWidget QCornerWidget {
     background: transparent;
     border: none;
@@ -685,30 +680,26 @@ QListWidget QCornerWidget {
           <item>
            <widget class="QScrollArea" name="scrollArea">
             <property name="styleSheet">
-             <string notr="true">/* 1. THE MAIN CONTAINER */
-#scrollArea { 
+             <string notr="true">#scrollArea { 
     border: 5px solid rgb(206, 152, 115);
     border-radius: 20px; 
     background-color: rgb(248, 230, 203);
 }
 
-/* 2. THE VIEWPORT &amp; INNER CONTENT */
-/* Enforces transparency and helps keep content within the rounded border */
 #scrollArea &gt; QWidget &gt; QWidget {
     background: transparent;
 }
 
 #scrollArea QWidget #qt_scrollarea_viewport {
     background: transparent;
-    border-radius: 15px; /* Slightly smaller than container to prevent clipping artifacts */
+    border-radius: 15px;
 }
 
-/* 3. VERTICAL SCROLLBAR */
 QScrollBar:vertical {
     border: none;
     background: #ffffff;
     width: 10px;
-    margin: 5px 0px 5px 0px; /* Adds a little padding so it doesn't hug the border */
+    margin: 5px 0px 5px 0px;
     border-radius: 5px;
 }
 
@@ -723,10 +714,9 @@ QScrollBar::handle:vertical:hover {
 }
 
 QScrollBar::handle:vertical:pressed {
-    background: #3d3327; /* Darker shade for active dragging */
+    background: #3d3327;
 }
 
-/* 4. HORIZONTAL SCROLLBAR */
 QScrollBar:horizontal {
     border: none;
     background: #ffffff;
@@ -749,7 +739,6 @@ QScrollBar::handle:horizontal:pressed {
     background: #3d3327;
 }
 
-/* 5. REMOVE BUTTONS &amp; TRACK BACKGROUNDS */
 QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical,
 QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {
     border: none;
@@ -763,8 +752,6 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
     background: none;
 }
 
-/* 6. THE CORNER WIDGET */
-/* Native Qt selector for the bottom-right intersection square */
 QAbstractScrollArea QCornerWidget {
     background: transparent;
     border: none;
@@ -784,14 +771,18 @@ QAbstractScrollArea QCornerWidget {
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>634</width>
+               <width>785</width>
                <height>531</height>
               </rect>
              </property>
              <property name="styleSheet">
               <string notr="true"/>
              </property>
-             <layout class="QGridLayout" name="gridLayout"/>
+             <layout class="QGridLayout" name="gridLayout">
+              <property name="verticalSpacing">
+               <number>6</number>
+              </property>
+             </layout>
             </widget>
            </widget>
           </item>

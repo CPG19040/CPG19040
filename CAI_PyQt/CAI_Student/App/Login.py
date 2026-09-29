@@ -98,22 +98,27 @@ class Login(QWidget, Ui_FormLogin):
         self.list_sections.currentItemChanged.connect(self.display_student_cards)
         self.btnSound.clicked.connect(lambda checked: self.toggle_sound(checked))
 
+        if record:
+            self.list_sections.viewport().setCursor(Qt.CursorShape.PointingHandCursor)
+        else:
+            self.list_sections.viewport().unsetCursor()
+
         for index_data, item_name in record:
-            # Create the visual item
             item = QListWidgetItem(item_name)
-
-            # Store the 'index' (UUID) in the background slot
             item.setData(Qt.ItemDataRole.UserRole, index_data)
-
-            # Add to UI
             self.list_sections.addItem(item)
 
-        # --- AUTO-SELECT FIRST ITEM ---
         if self.list_sections.count() > 0:
             self.list_sections.setCurrentRow(0)
 
             first_item = self.list_sections.item(0)
             self.display_student_cards(first_item)
+
+    def _on_item_hovered(self, item):
+        if item is not None:
+            self.list_sections.viewport().setCursor(Qt.CursorShape.PointingHandCursor)
+        else:
+            self.list_sections.viewport().unsetCursor()
 
     def eventFilter(self, watched_obj, event):
 
@@ -279,7 +284,7 @@ class Login(QWidget, Ui_FormLogin):
                     pixmap = QPixmap.fromImage(image)
 
             full_name = self.util.formatFullname(f_name, m_name, l_name)
-            card = StudentCard(full_name, sid, pixmap, "20px")
+            card = StudentCard(full_name, sid, pixmap)
 
             card.clicked.connect(self.handle_card_selection)
 

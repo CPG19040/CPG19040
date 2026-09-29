@@ -1,6 +1,8 @@
 <RCC>
   <qresource prefix="Images">
     <file>Images/Addition.png</file>
+    <file>Images/name_tag_1.svg</file>
+    <file>Images/name_tag_2.svg</file>
     <file>Images/backbtn.png</file>
     <file>Images/backbtnGlow.png</file>
     <file>Images/bagCirlce.png</file>
