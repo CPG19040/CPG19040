@@ -405,7 +405,7 @@ class Ui_FormLogin(object):
 "    border: none;\n"
 "    background: #ffffff;\n"
 "    height: 10px;\n"
-"    margin: 2px 4px 2px 4px; \n"
+"    margin: 0px 4px 0px 4px;\n"
 "    border-radius: 5px;\n"
 "}\n"
 "\n"
