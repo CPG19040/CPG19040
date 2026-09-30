@@ -74,7 +74,7 @@ class Ui_CardStudent(object):
         self.label_student_name.setLayoutDirection(Qt.LeftToRight)
         self.label_student_name.setStyleSheet(u"#label_student_name {\n"
 "	font: 20pt \"Biscuit Glitch\";\n"
-"	color: rgb(99, 69, 44)\n"
+"	color: rgb(99, 69, 44);\n"
 "}")
         self.label_student_name.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
 

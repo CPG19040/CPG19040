@@ -133,7 +133,7 @@
            <property name="styleSheet">
             <string notr="true">#label_student_name {
 	font: 20pt &quot;Biscuit Glitch&quot;;
-	color: rgb(99, 69, 44)
+	color: rgb(99, 69, 44);
 }</string>
            </property>
            <property name="text">

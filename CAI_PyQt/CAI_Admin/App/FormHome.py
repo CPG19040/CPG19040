@@ -1281,7 +1281,7 @@ class Ui_Home(object):
         self.scrollArea_classlist.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
         self.container = QWidget()
         self.container.setObjectName(u"container")
-        self.container.setGeometry(QRect(0, 0, 100, 30))
+        self.container.setGeometry(QRect(0, 0, 788, 627))
         self.gridLayout_stud_card = QGridLayout(self.container)
         self.gridLayout_stud_card.setObjectName(u"gridLayout_stud_card")
         self.scrollArea_classlist.setWidget(self.container)
@@ -2269,7 +2269,7 @@ class Ui_Home(object):
         self.scrollArea_tf.setWidgetResizable(True)
         self.scrollAreaWidgetContents_4 = QWidget()
         self.scrollAreaWidgetContents_4.setObjectName(u"scrollAreaWidgetContents_4")
-        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 100, 30))
+        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 318, 538))
         self.verticalLayout_13 = QVBoxLayout(self.scrollAreaWidgetContents_4)
         self.verticalLayout_13.setObjectName(u"verticalLayout_13")
         self.scrollArea_tf.setWidget(self.scrollAreaWidgetContents_4)
@@ -2295,7 +2295,7 @@ class Ui_Home(object):
         self.scrollArea_mc.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 100, 30))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 317, 538))
         self.verticalLayout_12 = QVBoxLayout(self.scrollAreaWidgetContents_3)
         self.verticalLayout_12.setObjectName(u"verticalLayout_12")
         self.scrollArea_mc.setWidget(self.scrollAreaWidgetContents_3)
@@ -2308,7 +2308,7 @@ class Ui_Home(object):
         self.scrollArea_id.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 100, 30))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 318, 538))
         self.verticalLayout_11 = QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_11.setObjectName(u"verticalLayout_11")
         self.scrollArea_id.setWidget(self.scrollAreaWidgetContents_2)
@@ -2476,7 +2476,7 @@ class Ui_Home(object):
 
         self.comboBox_Section = QComboBox(self.pageSections)
         self.comboBox_Section.setObjectName(u"comboBox_Section")
-        self.comboBox_Section.setMinimumSize(QSize(0, 30))
+        self.comboBox_Section.setMinimumSize(QSize(150, 30))
         self.comboBox_Section.setMaximumSize(QSize(16777215, 30))
         self.comboBox_Section.setStyleSheet(u"")
         self.comboBox_Section.setSizeAdjustPolicy(QComboBox.AdjustToContents)
@@ -2506,14 +2506,6 @@ class Ui_Home(object):
 
         self.horizontalLayout_8.addItem(self.horizontalSpacer_3)
 
-        self.btnSectionEdit = QPushButton(self.pageSections)
-        self.btnSectionEdit.setObjectName(u"btnSectionEdit")
-        self.btnSectionEdit.setMinimumSize(QSize(50, 30))
-        self.btnSectionEdit.setMaximumSize(QSize(16777215, 30))
-        self.btnSectionEdit.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-
-        self.horizontalLayout_8.addWidget(self.btnSectionEdit)
-
         self.label_5 = QLabel(self.pageSections)
         self.label_5.setObjectName(u"label_5")
         self.label_5.setMinimumSize(QSize(0, 0))
@@ -2535,6 +2527,14 @@ class Ui_Home(object):
         self.label_Adviser.setWordWrap(False)
 
         self.horizontalLayout_8.addWidget(self.label_Adviser)
+
+        self.btnSectionEdit = QPushButton(self.pageSections)
+        self.btnSectionEdit.setObjectName(u"btnSectionEdit")
+        self.btnSectionEdit.setMinimumSize(QSize(50, 30))
+        self.btnSectionEdit.setMaximumSize(QSize(16777215, 30))
+        self.btnSectionEdit.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+
+        self.horizontalLayout_8.addWidget(self.btnSectionEdit)
 
 
         self.verticalLayout_2.addLayout(self.horizontalLayout_8)
@@ -3814,7 +3814,7 @@ class Ui_Home(object):
         self.scrollArea_settings.setWidgetResizable(True)
         self.scrollAreaWidgetContents_5 = QWidget()
         self.scrollAreaWidgetContents_5.setObjectName(u"scrollAreaWidgetContents_5")
-        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 961, 665))
+        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 463, 579))
         self.verticalLayout_10 = QVBoxLayout(self.scrollAreaWidgetContents_5)
         self.verticalLayout_10.setObjectName(u"verticalLayout_10")
         self.verticalLayout_10.setContentsMargins(0, 0, 0, 0)
@@ -4638,10 +4638,10 @@ class Ui_Home(object):
         self.btnSectionAdd.setProperty(u"class", QCoreApplication.translate("Home", u"button-normal", None))
         self.btnSectionDelete.setText(QCoreApplication.translate("Home", u"Delete this section", None))
         self.btnSectionDelete.setProperty(u"class", QCoreApplication.translate("Home", u"button-normal", None))
-        self.btnSectionEdit.setText(QCoreApplication.translate("Home", u"Edit", None))
-        self.btnSectionEdit.setProperty(u"class", QCoreApplication.translate("Home", u"button-normal", None))
         self.label_5.setText(QCoreApplication.translate("Home", u"Adviser:", None))
         self.label_Adviser.setText("")
+        self.btnSectionEdit.setText(QCoreApplication.translate("Home", u"Edit", None))
+        self.btnSectionEdit.setProperty(u"class", QCoreApplication.translate("Home", u"button-normal", None))
         self.label_48.setText(QCoreApplication.translate("Home", u"School Year:", None))
         self.cmb_school_year_2.setPlaceholderText("")
         self.cmb_school_year_2.setProperty(u"class", QCoreApplication.translate("Home", u"combobox-main", None))
