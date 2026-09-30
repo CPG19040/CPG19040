@@ -544,6 +544,9 @@ class Ui_FormLogin(object):
 
         self.verticalLayout_2.addWidget(self.widget_6)
 
+        self.horizontalLayout_4 = QHBoxLayout()
+        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
+        self.horizontalLayout_4.setContentsMargins(-1, -1, -1, 0)
         self.labelFullName = QLabel(self.widget_3)
         self.labelFullName.setObjectName(u"labelFullName")
         self.labelFullName.setMaximumSize(QSize(500, 16777215))
@@ -557,7 +560,10 @@ class Ui_FormLogin(object):
         self.labelFullName.setAlignment(Qt.AlignCenter)
         self.labelFullName.setMargin(4)
 
-        self.verticalLayout_2.addWidget(self.labelFullName)
+        self.horizontalLayout_4.addWidget(self.labelFullName)
+
+
+        self.verticalLayout_2.addLayout(self.horizontalLayout_4)
 
         self.widget_2 = QWidget(self.widget_3)
         self.widget_2.setObjectName(u"widget_2")

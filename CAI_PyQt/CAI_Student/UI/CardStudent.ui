@@ -131,8 +131,10 @@
             <enum>Qt::LeftToRight</enum>
            </property>
            <property name="styleSheet">
-            <string notr="true">font: 20pt &quot;Biscuit Glitch&quot;;
-color: #FFF;</string>
+            <string notr="true">#label_student_name {
+	font: 20pt &quot;Biscuit Glitch&quot;;
+	color: rgb(99, 69, 44)
+}</string>
            </property>
            <property name="text">
             <string>FirstName A. LastName</string>
@@ -160,7 +162,7 @@ color: #FFF;</string>
             <enum>Qt::LeftToRight</enum>
            </property>
            <property name="styleSheet">
-            <string notr="true">font: 11pt &quot;Inter SemiBold&quot;; color: rgb(249, 240, 107)</string>
+            <string notr="true">font: 11pt &quot;Inter SemiBold&quot;; color: rgb(99, 69, 44);</string>
            </property>
            <property name="text">
             <string>2026-0000-STU</string>

@@ -72,8 +72,10 @@ class Ui_CardStudent(object):
         self.label_student_name = QLabel(self.widget_1)
         self.label_student_name.setObjectName(u"label_student_name")
         self.label_student_name.setLayoutDirection(Qt.LeftToRight)
-        self.label_student_name.setStyleSheet(u"font: 20pt \"Biscuit Glitch\";\n"
-"color: #FFF;")
+        self.label_student_name.setStyleSheet(u"#label_student_name {\n"
+"	font: 20pt \"Biscuit Glitch\";\n"
+"	color: rgb(99, 69, 44)\n"
+"}")
         self.label_student_name.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
 
         self.info_layout.addWidget(self.label_student_name)
@@ -83,7 +85,7 @@ class Ui_CardStudent(object):
         self.label_student_id.setMinimumSize(QSize(0, 26))
         self.label_student_id.setMaximumSize(QSize(16777215, 26))
         self.label_student_id.setLayoutDirection(Qt.LeftToRight)
-        self.label_student_id.setStyleSheet(u"font: 11pt \"Inter SemiBold\"; color: rgb(249, 240, 107)")
+        self.label_student_id.setStyleSheet(u"font: 11pt \"Inter SemiBold\"; color: rgb(99, 69, 44);")
         self.label_student_id.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
 
         self.info_layout.addWidget(self.label_student_id)
