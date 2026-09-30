@@ -254,7 +254,7 @@ class Login(QWidget, Ui_FormLogin):
         layout.setAlignment(Qt.AlignmentFlag.AlignTop)
         layout.setSpacing(10)
 
-        # Efficiently clear existing cards
+        # Clear existing cards
         while layout.count():
             # takeAt removes the layout item, allowing access to the widget
             item_to_remove = layout.takeAt(0)

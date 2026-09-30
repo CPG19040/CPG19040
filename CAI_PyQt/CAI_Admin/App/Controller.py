@@ -731,7 +731,7 @@ class Controller:
 
         self.ui.table_section.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
         self.ui.table_section.sortByColumn(-1, Qt.AscendingOrder)
-        class_adviser = self.sectionObj.get_adviser(section_id)
+        _, class_adviser = self.sectionObj.get_adviser(section_id)
         self.ui.label_Adviser.setText(class_adviser)
 
     def delete_selected_sections(self):
@@ -748,12 +748,13 @@ class Controller:
 
     def section_edit(self):
         from App.SectionDialog import SectionAdviserEditor
-        section_id = self.ui.comboBox_Section.currentData()
-        sectionEditor = SectionAdviserEditor(self.sectionObj, section_id)
+        section_id    = self.ui.comboBox_Section.currentData()
+        school_id, _  = self.sectionObj.get_adviser(section_id)
+        sectionEditor = SectionAdviserEditor(self.sectionObj, section_id, school_id)
 
         sectionEditor.exec()
 
-        class_adviser = self.sectionObj.get_adviser(section_id)
+        _, class_adviser = self.sectionObj.get_adviser(section_id)
         self.ui.label_Adviser.setText(class_adviser)
 
     def handle_card_selection(self, clicked_card, student_id):

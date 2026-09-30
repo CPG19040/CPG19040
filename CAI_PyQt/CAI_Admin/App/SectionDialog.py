@@ -27,7 +27,7 @@ class Section(QDialog, Ui_SectionRegistrationDialog):
         self.widget_CSV.setEnabled(False)
         self.widget_template.setEnabled(False)
 
-        self.populate_teachers(self.cmb_teacher, True)
+        self.populate_teachers(self.cmb_teacher, None, True)
         self.btnExportTemplate.clicked.connect(lambda: self.utility.export_classlist_template(parent=self))
         self.rb_importCSV.toggled.connect(lambda checked: self.update_state(not checked))
         self.btnBrowseCSV.clicked.connect(self.browse_csv)
@@ -37,19 +37,20 @@ class Section(QDialog, Ui_SectionRegistrationDialog):
     def get_adviser(self, sectionid=None):
         sql = """
             SELECT 
-                B.lastname || ', ' || B.firstname || ' ' || B.middlename AS class_advisor
+                B.school_id, B.lastname || ', ' || B.firstname || ' ' || B.middlename AS class_advisor
             FROM cai.tbl_section A
             INNER JOIN cai.tbl_staff_info B ON A.teacherid = B.school_id
             WHERE A.sectionid = %s
         """
 
         cursor, conn = self.db_tools.retrieve_records(sql, (sectionid,))
-        class_advisor = ""
+        class_advisor = (None, None)
 
         if cursor:
             record = cursor.fetchone()
+
             if record:
-                class_advisor = record[0]
+                class_advisor = record
 
             cursor.close()
 
@@ -291,7 +292,7 @@ class Section(QDialog, Ui_SectionRegistrationDialog):
 
         return None
 
-    def populate_teachers(self, combo_box:QComboBox, add_empty:bool):
+    def populate_teachers(self, combo_box:QComboBox, school_id:str, add_empty:bool):
         sql = "SELECT\n"
         sql += "    school_id AS index\n"
         sql += "    ,lastname || ', ' || firstname || ' ' || COALESCE(middlename, '') AS itemname\n"
@@ -299,7 +300,7 @@ class Section(QDialog, Ui_SectionRegistrationDialog):
         sql += "WHERE positionid = %s\n"
         sql += "ORDER BY lastname ASC"
 
-        self.utility.populate_pulldown(combo_box, sql, ('2',), add_empty=add_empty)
+        self.utility.populate_pulldown(combo_box, sql, ('2',), default_value=school_id, add_empty=add_empty)
 
     def populate_sections(self, combo_box:QComboBox, value:str, add_empty:bool):
         sql = 'SELECT\n'
@@ -396,7 +397,7 @@ class Section(QDialog, Ui_SectionRegistrationDialog):
 
 class SectionAdviserEditor(QDialog, Ui_SectionAdviserEditorDialog):
 
-    def __init__(self, section:Section, section_id=None):
+    def __init__(self, section:Section, section_id=None, school_id=None):
         super().__init__()
         self.setupUi(self)
 
@@ -414,7 +415,7 @@ class SectionAdviserEditor(QDialog, Ui_SectionAdviserEditorDialog):
             header.setSectionResizeMode(0, QHeaderView.ResizeMode.ResizeToContents)
 
         section.populate_sections(self.cmb_section, section_id, True)
-        section.populate_teachers(self.cmb_teacher, True)
+        section.populate_teachers(self.cmb_teacher, school_id, True)
 
         self.btnSave.clicked.connect(self.save)
         self.btnCancel.clicked.connect(self.reject)
