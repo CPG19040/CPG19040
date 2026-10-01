@@ -16,9 +16,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QComboBox, QDialog, QFormLayout,
-    QFrame, QGridLayout, QHBoxLayout, QLabel,
-    QLineEdit, QPushButton, QSizePolicy, QSpacerItem,
-    QSpinBox, QVBoxLayout, QWidget)
+    QFrame, QHBoxLayout, QLabel, QLineEdit,
+    QPushButton, QSizePolicy, QSpacerItem, QSpinBox,
+    QVBoxLayout, QWidget)
 import resources_rc
 
 class Ui_EditStudentDialog(object):
@@ -296,8 +296,9 @@ class Ui_EditStudentDialog(object):
         self.formLayout.setObjectName(u"formLayout")
         self.widget = QWidget(self.widget_2)
         self.widget.setObjectName(u"widget")
-        self.gridLayout = QGridLayout(self.widget)
-        self.gridLayout.setObjectName(u"gridLayout")
+        self.verticalLayout_4 = QVBoxLayout(self.widget)
+        self.verticalLayout_4.setObjectName(u"verticalLayout_4")
+        self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
         self.label_profile_pic = QLabel(self.widget)
         self.label_profile_pic.setObjectName(u"label_profile_pic")
         self.label_profile_pic.setMinimumSize(QSize(150, 150))
@@ -306,7 +307,7 @@ class Ui_EditStudentDialog(object):
         self.label_profile_pic.setScaledContents(True)
         self.label_profile_pic.setAlignment(Qt.AlignCenter)
 
-        self.gridLayout.addWidget(self.label_profile_pic, 0, 0, 1, 1)
+        self.verticalLayout_4.addWidget(self.label_profile_pic)
 
         self.btnUploadPhoto = QPushButton(self.widget)
         self.btnUploadPhoto.setObjectName(u"btnUploadPhoto")
@@ -314,11 +315,17 @@ class Ui_EditStudentDialog(object):
         self.btnUploadPhoto.setMaximumSize(QSize(16777215, 30))
         self.btnUploadPhoto.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
-        self.gridLayout.addWidget(self.btnUploadPhoto, 1, 0, 1, 1)
+        self.verticalLayout_4.addWidget(self.btnUploadPhoto)
+
+        self.label_17 = QLabel(self.widget)
+        self.label_17.setObjectName(u"label_17")
+        self.label_17.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_4.addWidget(self.label_17)
 
         self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
-        self.gridLayout.addItem(self.verticalSpacer_2, 2, 0, 1, 1)
+        self.verticalLayout_4.addItem(self.verticalSpacer_2)
 
 
         self.formLayout.setWidget(0, QFormLayout.ItemRole.LabelRole, self.widget)
@@ -328,9 +335,9 @@ class Ui_EditStudentDialog(object):
         self.widget_form.setEnabled(True)
         self.widget_form.setStyleSheet(u"QWidget:disabled { color: rgba(0, 0, 0, 50); /* Very faded text */ background-color: rgba(200, 200, 200, 0); /* Faded background */}")
         self.verticalLayout_2 = QVBoxLayout(self.widget_form)
-        self.verticalLayout_2.setSpacing(0)
+        self.verticalLayout_2.setSpacing(6)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
-        self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_2.setContentsMargins(0, 0, 0, 13)
         self.widget_4 = QWidget(self.widget_form)
         self.widget_4.setObjectName(u"widget_4")
         self.horizontalLayout = QHBoxLayout(self.widget_4)
@@ -459,6 +466,10 @@ class Ui_EditStudentDialog(object):
 
 
         self.verticalLayout_2.addWidget(self.widget_8)
+
+        self.verticalSpacer_3 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.verticalLayout_2.addItem(self.verticalSpacer_3)
 
 
         self.formLayout.setWidget(0, QFormLayout.ItemRole.FieldRole, self.widget_form)
@@ -621,6 +632,7 @@ class Ui_EditStudentDialog(object):
         self.label_profile_pic.setText("")
         self.btnUploadPhoto.setText(QCoreApplication.translate("EditStudentDialog", u"Update photo", None))
         self.btnUploadPhoto.setProperty(u"class", QCoreApplication.translate("EditStudentDialog", u"button-normal", None))
+        self.label_17.setText(QCoreApplication.translate("EditStudentDialog", u"Aspect ratio (1:1)", None))
         self.widget_4.setProperty(u"class", QCoreApplication.translate("EditStudentDialog", u"input-field", None))
         self.label_8.setText(QCoreApplication.translate("EditStudentDialog", u"First name", None))
         self.widget_5.setProperty(u"class", QCoreApplication.translate("EditStudentDialog", u"input-field", None))

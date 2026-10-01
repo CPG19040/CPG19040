@@ -165,6 +165,14 @@ class Ui_AddNewUserDialog(object):
         self.widget_3.setObjectName(u"widget_3")
         self.gridLayout = QGridLayout(self.widget_3)
         self.gridLayout.setObjectName(u"gridLayout")
+        self.btnUploadPhoto = QPushButton(self.widget_3)
+        self.btnUploadPhoto.setObjectName(u"btnUploadPhoto")
+        self.btnUploadPhoto.setMinimumSize(QSize(0, 30))
+        self.btnUploadPhoto.setMaximumSize(QSize(16777215, 30))
+        self.btnUploadPhoto.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+
+        self.gridLayout.addWidget(self.btnUploadPhoto, 1, 0, 1, 1)
+
         self.label_profile_pic = QLabel(self.widget_3)
         self.label_profile_pic.setObjectName(u"label_profile_pic")
         self.label_profile_pic.setMinimumSize(QSize(160, 160))
@@ -175,13 +183,11 @@ class Ui_AddNewUserDialog(object):
 
         self.gridLayout.addWidget(self.label_profile_pic, 0, 0, 1, 1)
 
-        self.btnUploadPhoto = QPushButton(self.widget_3)
-        self.btnUploadPhoto.setObjectName(u"btnUploadPhoto")
-        self.btnUploadPhoto.setMinimumSize(QSize(0, 30))
-        self.btnUploadPhoto.setMaximumSize(QSize(16777215, 30))
-        self.btnUploadPhoto.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.label_25 = QLabel(self.widget_3)
+        self.label_25.setObjectName(u"label_25")
+        self.label_25.setAlignment(Qt.AlignCenter)
 
-        self.gridLayout.addWidget(self.btnUploadPhoto, 1, 0, 1, 1)
+        self.gridLayout.addWidget(self.label_25, 2, 0, 1, 1)
 
 
         self.horizontalLayout.addWidget(self.widget_3)
@@ -361,9 +367,10 @@ class Ui_AddNewUserDialog(object):
 
     def retranslateUi(self, AddNewUserDialog):
         AddNewUserDialog.setWindowTitle(QCoreApplication.translate("AddNewUserDialog", u"Registration", None))
-        self.label_profile_pic.setText("")
         self.btnUploadPhoto.setText(QCoreApplication.translate("AddNewUserDialog", u"Update photo", None))
         self.btnUploadPhoto.setProperty(u"class", QCoreApplication.translate("AddNewUserDialog", u"button-normal", None))
+        self.label_profile_pic.setText("")
+        self.label_25.setText(QCoreApplication.translate("AddNewUserDialog", u"Aspect ratio (1:1)", None))
         self.label_8.setText(QCoreApplication.translate("AddNewUserDialog", u"First name", None))
         self.label_9.setText(QCoreApplication.translate("AddNewUserDialog", u"Middle name", None))
         self.label_10.setText(QCoreApplication.translate("AddNewUserDialog", u"Last name", None))

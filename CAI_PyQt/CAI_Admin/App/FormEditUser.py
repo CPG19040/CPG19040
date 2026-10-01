@@ -16,9 +16,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QComboBox, QDialog, QFrame,
-    QGridLayout, QHBoxLayout, QLabel, QLineEdit,
-    QPushButton, QSizePolicy, QSpacerItem, QVBoxLayout,
-    QWidget)
+    QHBoxLayout, QLabel, QLineEdit, QPushButton,
+    QSizePolicy, QSpacerItem, QVBoxLayout, QWidget)
 import resources_rc
 
 class Ui_EditUserDialog(object):
@@ -186,8 +185,9 @@ class Ui_EditUserDialog(object):
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.widget_3 = QWidget(self.widget)
         self.widget_3.setObjectName(u"widget_3")
-        self.gridLayout = QGridLayout(self.widget_3)
-        self.gridLayout.setObjectName(u"gridLayout")
+        self.verticalLayout_2 = QVBoxLayout(self.widget_3)
+        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
+        self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.label_profile_pic = QLabel(self.widget_3)
         self.label_profile_pic.setObjectName(u"label_profile_pic")
         self.label_profile_pic.setMinimumSize(QSize(160, 160))
@@ -196,7 +196,7 @@ class Ui_EditUserDialog(object):
         self.label_profile_pic.setScaledContents(True)
         self.label_profile_pic.setAlignment(Qt.AlignCenter)
 
-        self.gridLayout.addWidget(self.label_profile_pic, 0, 0, 1, 1)
+        self.verticalLayout_2.addWidget(self.label_profile_pic)
 
         self.btnUploadPhoto = QPushButton(self.widget_3)
         self.btnUploadPhoto.setObjectName(u"btnUploadPhoto")
@@ -204,17 +204,23 @@ class Ui_EditUserDialog(object):
         self.btnUploadPhoto.setMaximumSize(QSize(16777215, 30))
         self.btnUploadPhoto.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
-        self.gridLayout.addWidget(self.btnUploadPhoto, 1, 0, 1, 1)
+        self.verticalLayout_2.addWidget(self.btnUploadPhoto)
+
+        self.label = QLabel(self.widget_3)
+        self.label.setObjectName(u"label")
+        self.label.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_2.addWidget(self.label)
 
 
         self.horizontalLayout.addWidget(self.widget_3)
 
         self.grp_info = QWidget(self.widget)
         self.grp_info.setObjectName(u"grp_info")
-        self.verticalLayout_2 = QVBoxLayout(self.grp_info)
-        self.verticalLayout_2.setSpacing(0)
-        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
-        self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
+        self.VLayout_Info = QVBoxLayout(self.grp_info)
+        self.VLayout_Info.setSpacing(6)
+        self.VLayout_Info.setObjectName(u"VLayout_Info")
+        self.VLayout_Info.setContentsMargins(0, 0, 0, 0)
         self.widget_2 = QWidget(self.grp_info)
         self.widget_2.setObjectName(u"widget_2")
         self.horizontalLayout_3 = QHBoxLayout(self.widget_2)
@@ -237,7 +243,7 @@ class Ui_EditUserDialog(object):
         self.horizontalLayout_3.addWidget(self.lineEdit_firstname)
 
 
-        self.verticalLayout_2.addWidget(self.widget_2)
+        self.VLayout_Info.addWidget(self.widget_2)
 
         self.widget_4 = QWidget(self.grp_info)
         self.widget_4.setObjectName(u"widget_4")
@@ -261,7 +267,7 @@ class Ui_EditUserDialog(object):
         self.horizontalLayout_4.addWidget(self.lineEdit_middlename)
 
 
-        self.verticalLayout_2.addWidget(self.widget_4)
+        self.VLayout_Info.addWidget(self.widget_4)
 
         self.widget_5 = QWidget(self.grp_info)
         self.widget_5.setObjectName(u"widget_5")
@@ -285,7 +291,7 @@ class Ui_EditUserDialog(object):
         self.horizontalLayout_5.addWidget(self.lineEdit_lastname)
 
 
-        self.verticalLayout_2.addWidget(self.widget_5)
+        self.VLayout_Info.addWidget(self.widget_5)
 
         self.widget_6 = QWidget(self.grp_info)
         self.widget_6.setObjectName(u"widget_6")
@@ -309,7 +315,7 @@ class Ui_EditUserDialog(object):
         self.horizontalLayout_6.addWidget(self.lineEdit_username)
 
 
-        self.verticalLayout_2.addWidget(self.widget_6)
+        self.VLayout_Info.addWidget(self.widget_6)
 
         self.widget_7 = QWidget(self.grp_info)
         self.widget_7.setObjectName(u"widget_7")
@@ -334,7 +340,11 @@ class Ui_EditUserDialog(object):
         self.horizontalLayout_7.addWidget(self.comboBox_position)
 
 
-        self.verticalLayout_2.addWidget(self.widget_7)
+        self.VLayout_Info.addWidget(self.widget_7)
+
+        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.VLayout_Info.addItem(self.verticalSpacer)
 
 
         self.horizontalLayout.addWidget(self.grp_info)
@@ -499,6 +509,7 @@ class Ui_EditUserDialog(object):
         self.label_profile_pic.setText("")
         self.btnUploadPhoto.setText(QCoreApplication.translate("EditUserDialog", u"Update photo", None))
         self.btnUploadPhoto.setProperty(u"class", QCoreApplication.translate("EditUserDialog", u"button-normal", None))
+        self.label.setText(QCoreApplication.translate("EditUserDialog", u"Aspect ratio (1:1)", None))
         self.widget_2.setProperty(u"class", QCoreApplication.translate("EditUserDialog", u"input-field", None))
         self.label_8.setText(QCoreApplication.translate("EditUserDialog", u"First name", None))
         self.widget_4.setProperty(u"class", QCoreApplication.translate("EditUserDialog", u"input-field", None))

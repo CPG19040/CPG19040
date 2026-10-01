@@ -16,9 +16,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QComboBox, QDialog, QFrame,
-    QGridLayout, QHBoxLayout, QLabel, QLineEdit,
-    QProgressBar, QPushButton, QRadioButton, QSizePolicy,
-    QSpacerItem, QSpinBox, QVBoxLayout, QWidget)
+    QHBoxLayout, QLabel, QLineEdit, QProgressBar,
+    QPushButton, QRadioButton, QSizePolicy, QSpacerItem,
+    QSpinBox, QVBoxLayout, QWidget)
 import resources_rc
 
 class Ui_AddNewStudentDialog(object):
@@ -338,20 +338,9 @@ class Ui_AddNewStudentDialog(object):
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.widget_3 = QWidget(self.widget_stud_info)
         self.widget_3.setObjectName(u"widget_3")
-        self.gridLayout = QGridLayout(self.widget_3)
-        self.gridLayout.setObjectName(u"gridLayout")
-        self.btnUploadPhoto = QPushButton(self.widget_3)
-        self.btnUploadPhoto.setObjectName(u"btnUploadPhoto")
-        self.btnUploadPhoto.setMinimumSize(QSize(100, 30))
-        self.btnUploadPhoto.setMaximumSize(QSize(16777215, 30))
-        self.btnUploadPhoto.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-
-        self.gridLayout.addWidget(self.btnUploadPhoto, 1, 0, 1, 1)
-
-        self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
-
-        self.gridLayout.addItem(self.verticalSpacer_2, 3, 0, 1, 1)
-
+        self.verticalLayout_4 = QVBoxLayout(self.widget_3)
+        self.verticalLayout_4.setObjectName(u"verticalLayout_4")
+        self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
         self.label_profile_pic = QLabel(self.widget_3)
         self.label_profile_pic.setObjectName(u"label_profile_pic")
         self.label_profile_pic.setMinimumSize(QSize(150, 150))
@@ -360,13 +349,25 @@ class Ui_AddNewStudentDialog(object):
         self.label_profile_pic.setScaledContents(True)
         self.label_profile_pic.setAlignment(Qt.AlignCenter)
 
-        self.gridLayout.addWidget(self.label_profile_pic, 0, 0, 1, 1)
+        self.verticalLayout_4.addWidget(self.label_profile_pic)
+
+        self.btnUploadPhoto = QPushButton(self.widget_3)
+        self.btnUploadPhoto.setObjectName(u"btnUploadPhoto")
+        self.btnUploadPhoto.setMinimumSize(QSize(100, 30))
+        self.btnUploadPhoto.setMaximumSize(QSize(16777215, 30))
+        self.btnUploadPhoto.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+
+        self.verticalLayout_4.addWidget(self.btnUploadPhoto)
 
         self.label_17 = QLabel(self.widget_3)
         self.label_17.setObjectName(u"label_17")
         self.label_17.setAlignment(Qt.AlignCenter)
 
-        self.gridLayout.addWidget(self.label_17, 2, 0, 1, 1)
+        self.verticalLayout_4.addWidget(self.label_17)
+
+        self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.verticalLayout_4.addItem(self.verticalSpacer_2)
 
 
         self.horizontalLayout.addWidget(self.widget_3)
@@ -376,7 +377,7 @@ class Ui_AddNewStudentDialog(object):
         self.widget_form.setEnabled(True)
         self.widget_form.setStyleSheet(u"")
         self.verticalLayout_2 = QVBoxLayout(self.widget_form)
-        self.verticalLayout_2.setSpacing(0)
+        self.verticalLayout_2.setSpacing(6)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.widget_2 = QWidget(self.widget_form)
@@ -528,6 +529,10 @@ class Ui_AddNewStudentDialog(object):
 
 
         self.verticalLayout_2.addWidget(self.widget_8)
+
+        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.verticalLayout_2.addItem(self.verticalSpacer)
 
 
         self.horizontalLayout.addWidget(self.widget_form)
@@ -771,12 +776,12 @@ class Ui_AddNewStudentDialog(object):
         self.label_16.setText(QCoreApplication.translate("AddNewStudentDialog", u"-", None))
         self.btnRefreshSY.setText("")
         self.btnRefreshSY.setProperty(u"class", QCoreApplication.translate("AddNewStudentDialog", u"button-normal", None))
-        self.btnUploadPhoto.setText(QCoreApplication.translate("AddNewStudentDialog", u"Update photo", None))
-        self.btnUploadPhoto.setProperty(u"class", QCoreApplication.translate("AddNewStudentDialog", u"button-normal", None))
 #if QT_CONFIG(tooltip)
         self.label_profile_pic.setToolTip(QCoreApplication.translate("AddNewStudentDialog", u"Aspect Ratio (1:1)", None))
 #endif // QT_CONFIG(tooltip)
         self.label_profile_pic.setText("")
+        self.btnUploadPhoto.setText(QCoreApplication.translate("AddNewStudentDialog", u"Update photo", None))
+        self.btnUploadPhoto.setProperty(u"class", QCoreApplication.translate("AddNewStudentDialog", u"button-normal", None))
         self.label_17.setText(QCoreApplication.translate("AddNewStudentDialog", u"Aspect ratio (1:1)", None))
         self.widget_2.setProperty(u"class", QCoreApplication.translate("AddNewStudentDialog", u"input-field", None))
         self.label_8.setText(QCoreApplication.translate("AddNewStudentDialog", u"First name", None))

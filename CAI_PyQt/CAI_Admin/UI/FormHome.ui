@@ -2573,8 +2573,8 @@ QSpinBox::down-arrow {
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>788</width>
-                <height>627</height>
+                <width>100</width>
+                <height>30</height>
                </rect>
               </property>
               <layout class="QGridLayout" name="gridLayout_stud_card"/>
@@ -4695,8 +4695,8 @@ QPushButton:hover {
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>318</width>
-                <height>538</height>
+                <width>100</width>
+                <height>30</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_13"/>
@@ -4738,8 +4738,8 @@ QPushButton:hover {
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>317</width>
-                <height>538</height>
+                <width>100</width>
+                <height>30</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_12"/>
@@ -4759,8 +4759,8 @@ QPushButton:hover {
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>318</width>
-                <height>538</height>
+                <width>100</width>
+                <height>30</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_11"/>

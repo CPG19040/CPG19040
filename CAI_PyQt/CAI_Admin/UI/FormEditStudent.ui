@@ -362,8 +362,20 @@ QSpinBox::down-arrow {
      <layout class="QFormLayout" name="formLayout">
       <item row="0" column="0">
        <widget class="QWidget" name="widget" native="true">
-        <layout class="QGridLayout" name="gridLayout">
-         <item row="0" column="0">
+        <layout class="QVBoxLayout" name="verticalLayout_4">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item>
           <widget class="QLabel" name="label_profile_pic">
            <property name="minimumSize">
             <size>
@@ -394,7 +406,7 @@ QSpinBox::down-arrow {
            </property>
           </widget>
          </item>
-         <item row="1" column="0">
+         <item>
           <widget class="QPushButton" name="btnUploadPhoto">
            <property name="minimumSize">
             <size>
@@ -419,7 +431,17 @@ QSpinBox::down-arrow {
            </property>
           </widget>
          </item>
-         <item row="2" column="0">
+         <item>
+          <widget class="QLabel" name="label_17">
+           <property name="text">
+            <string>Aspect ratio (1:1)</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
           <spacer name="verticalSpacer_2">
            <property name="orientation">
             <enum>Qt::Vertical</enum>
@@ -445,7 +467,7 @@ QSpinBox::down-arrow {
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_2">
          <property name="spacing">
-          <number>0</number>
+          <number>6</number>
          </property>
          <property name="leftMargin">
           <number>0</number>
@@ -457,7 +479,7 @@ QSpinBox::down-arrow {
           <number>0</number>
          </property>
          <property name="bottomMargin">
-          <number>0</number>
+          <number>13</number>
          </property>
          <item>
           <widget class="QWidget" name="widget_4" native="true">
@@ -799,6 +821,19 @@ QSpinBox::down-arrow {
             </item>
            </layout>
           </widget>
+         </item>
+         <item>
+          <spacer name="verticalSpacer_3">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
          </item>
         </layout>
        </widget>
