@@ -288,11 +288,11 @@ class Ui_SectionRegistrationDialog(object):
         self.frame_header.setMaximumSize(QSize(16777215, 35))
         self.frame_header.setMouseTracking(True)
         self.frame_header.setStyleSheet(u"#frame_header {\n"
-"	background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #e9e7e9, stop:1 #bababa);\n"
-"	border-top-left-radius: 10px;\n"
-"	border-top-right-radius: 10px;\n"
-"	border: 1px solid rgb(94, 92, 100);\n"
-"	border-bottom: 1px solid rgb(146, 146, 146);\n"
+"	background-color: #deddda;\n"
+"	border-top-left-radius: 12px;\n"
+"	border-top-right-radius: 12px;\n"
+"	border: 1px solid #7a7a7a;\n"
+"	border-bottom: none;\n"
 "}")
         self.frame_header.setFrameShape(QFrame.StyledPanel)
         self.frame_header.setFrameShadow(QFrame.Raised)
@@ -340,11 +340,11 @@ class Ui_SectionRegistrationDialog(object):
         self.btnMinimize.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btnMinimize.setStyleSheet(u"#btnMinimize {\n"
 "	border-radius: 12px;\n"
-"	background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #ffffff, stop:1 #d8ecf6);\n"
+"	background-color: transparent;\n"
 "}\n"
 "\n"
 "#btnMinimize:hover {\n"
-"	background-color: rgb(248, 228, 92);\n"
+"	background-color: #f8e45c;\n"
 "}")
         icon = QIcon()
         icon.addFile(u":/Images/Images/minimize-sign.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
@@ -360,7 +360,7 @@ class Ui_SectionRegistrationDialog(object):
         self.btnClose.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btnClose.setStyleSheet(u"#btnClose {\n"
 "	border-radius: 12px;\n"
-"	background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #ffffff, stop:1 #d8ecf6);\n"
+"	background-color: transparent;\n"
 "}\n"
 "\n"
 "#btnClose:hover {\n"
@@ -378,13 +378,12 @@ class Ui_SectionRegistrationDialog(object):
         self.verticalFrame = QFrame(SectionRegistrationDialog)
         self.verticalFrame.setObjectName(u"verticalFrame")
         self.verticalFrame.setStyleSheet(u"#verticalFrame {\n"
-"	background-color: rgb(222, 221, 218);\n"
+"	background-color: #deddda;\n"
+"	border: 1px solid #7a7a7a;\n"
 "	border-top: none;\n"
-"	border-right: 1px solid rgb(94, 92, 100);\n"
-"	border-bottom: 1px solid rgb(94, 92, 100);\n"
-"	border-left: 1px solid rgb(94, 92, 100);\n"
 "}")
         self.verticalLayout_5 = QVBoxLayout(self.verticalFrame)
+        self.verticalLayout_5.setSpacing(12)
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
         self.verticalLayout_5.setContentsMargins(9, 9, 9, 9)
         self.label_sy = QLabel(self.verticalFrame)
@@ -393,8 +392,9 @@ class Ui_SectionRegistrationDialog(object):
         self.verticalLayout_5.addWidget(self.label_sy)
 
         self.verticalLayout_2 = QVBoxLayout()
+        self.verticalLayout_2.setSpacing(6)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
-        self.verticalLayout_2.setContentsMargins(0, 0, 0, 20)
+        self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.widget_1 = QWidget(self.verticalFrame)
         self.widget_1.setObjectName(u"widget_1")
         self.horizontalLayout = QHBoxLayout(self.widget_1)
@@ -458,7 +458,7 @@ class Ui_SectionRegistrationDialog(object):
         self.rb_importCSV = QRadioButton(self.verticalFrame)
         self.rb_importCSV.setObjectName(u"rb_importCSV")
         self.rb_importCSV.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.rb_importCSV.setStyleSheet(u"background-color: rgb(222, 221, 218);")
+        self.rb_importCSV.setStyleSheet(u"background-color: #deddda;")
 
         self.verticalLayout_5.addWidget(self.rb_importCSV)
 
@@ -554,10 +554,10 @@ class Ui_SectionRegistrationDialog(object):
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.widget_3 = QWidget(self.widget_template)
         self.widget_3.setObjectName(u"widget_3")
-        self.widget_3.setStyleSheet(u"background-color: rgb(222, 221, 218);")
+        self.widget_3.setStyleSheet(u"background-color: #deddda;")
         self.horizontalLayout_5 = QHBoxLayout(self.widget_3)
         self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
-        self.horizontalLayout_5.setContentsMargins(-1, -1, -1, 1)
+        self.horizontalLayout_5.setContentsMargins(0, 0, 0, 0)
         self.label = QLabel(self.widget_3)
         self.label.setObjectName(u"label")
         self.label.setEnabled(True)

@@ -28,188 +28,67 @@ class Ui_Home(object):
     def setupUi(self, Home):
         if not Home.objectName():
             Home.setObjectName(u"Home")
-        Home.resize(1189, 732)
-        Home.setMinimumSize(QSize(1036, 675))
+        Home.resize(1190, 732)
+        Home.setMinimumSize(QSize(1190, 732))
         font = QFont()
         font.setFamilies([u"Inter"])
         font.setPointSize(10)
         font.setBold(False)
         font.setItalic(False)
         Home.setFont(font)
+        Home.setMouseTracking(True)
         icon = QIcon()
         icon.addFile(u":/Images/Images/favicon.ico", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         Home.setWindowIcon(icon)
-        Home.setStyleSheet(u"* {\n"
-"	margin: 0px;\n"
-"	background-color: rgb(222, 221, 218); \n"
-"	font: 10pt \"Inter\"; \n"
+        Home.setStyleSheet(u"QMainWindow, #centralwidget {\n"
+"	background: transparent;\n"
+"}\n"
+"\n"
+"QMessageBox {\n"
+"	background-color: #deddda;\n"
+"	font: 10pt \"Inter\";\n"
+"	color: black;\n"
+"}\n"
+"\n"
+"QMessageBox QLabel {\n"
+"	font: 10pt \"Inter\";\n"
 "	color: black;\n"
 "}\n"
 "\n"
 "QMessageBox QPushButton {\n"
-"	font: 10pt \"Inter\";\n"
 "	height: 30px;\n"
 "	padding: 0px 12px;\n"
-"}\n"
-"\n"
-"QPushButton[class=\"button-green\"] {\n"
-"	border: 1px solid #0a5128;\n"
-"    border-radius: 15px;\n"
-"    padding: 0px 10px 0px;\n"
-"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
-"                                stop:0 #1ebd5d, \n"
-"                                stop:1 #107f3f);\n"
-"    color: #FFF;\n"
-"    font: 10pt \"Inter SemiBold\";\n"
-"}\n"
-"\n"
-"QPushButton[class=\"button-green\"]:hover {\n"
-"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
-"                                stop:0 #2ecc71, \n"
-"                                stop:1 #27AE60);\n"
-"}\n"
-"\n"
-"QPushButton[class=\"button-green\"]:pressed {\n"
-"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
-"                                stop:0 #0b572a, \n"
-"                        "
-                        "        stop:1 #129046); \n"
-"}\n"
-"\n"
-"QPushButton[class=\"button-green\"]:disabled {\n"
-"    background: #A5D6A7;\n"
-"    color: #E8F5E9;\n"
-"    opacity: 0.6;\n"
-"}\n"
-"\n"
-"*[class=\"button-normal\"] {\n"
+"	background-color: #deddda;\n"
 "	font: 10pt \"Inter\";\n"
-"	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
-"                                stop:0 #ffffff, \n"
-"                                stop:1 #d8ecf6);\n"
 "	color: black;\n"
-"	border-radius: 15px;\n"
-"	border: 1px solid rgb(154, 153, 150);\n"
-"}\n"
-"\n"
-"*[class=\"button-normal\"]:hover {\n"
-"	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
-"                                stop:0 #ffffff, \n"
-"                                stop:1 #f2f6f8);\n"
-"}\n"
-"\n"
-"*[class=\"button-normal\"]:pressed {\n"
-"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
-"                                stop:0 #dce5e9, \n"
-"                                stop:1 #ffffff);\n"
-"}\n"
-"\n"
-"*[class=\"button-normal\"]:disabled {\n"
-"	background: #f5f5f5;\n"
-"	border: 1px solid #dcd"
-                        "cdc;\n"
-"	color: #aeaeae;\n"
-"}\n"
-"\n"
-"/* 1. THE MAIN CONTAINER */\n"
-"QScrollArea { \n"
-"    border: none;\n"
-"    border-radius: 20px;\n"
-"	background-color: rgb(246, 245, 244);\n"
-"}\n"
-"\n"
-"/* 2. THE VIEWPORT (Crucial for transparency/backgrounds) */\n"
-"QScrollArea QWidget #qt_scrollarea_viewport {\n"
-"    background: transparent;\n"
-"    border-radius: 20px;\n"
-"}\n"
-"\n"
-"/* 3. VERTICAL SCROLLBAR */\n"
-"QScrollBar:vertical {\n"
-"    border: none;\n"
-"    background: #ffffff;\n"
-"    width: 10px;\n"
-"    margin: 0px;\n"
-"    border-radius: 5px;\n"
-"}\n"
-"\n"
-"QScrollBar::handle:vertical {\n"
-"    background: #7a7a7a;\n"
-"    min-height: 20px;\n"
-"    border-radius: 5px;\n"
-"}\n"
-"\n"
-"QScrollBar::handle:vertical:hover {\n"
-"    background: #574939;\n"
-"}\n"
-"\n"
-"/* 4. HORIZONTAL SCROLLBAR */\n"
-"QScrollBar:horizontal {\n"
-"    border: none;\n"
-"    background: #ffffff;\n"
-"    height: 10px; /* Note: height, not width */\n"
-"    margin: 0px;\n"
-"    border-radius: 5px;\n"
-"}\n"
-"\n"
-"QScrollBar::handl"
-                        "e:horizontal {\n"
-"    background: #7a7a7a;\n"
-"    min-width: 20px;\n"
-"    border-radius: 5px;\n"
-"}\n"
-"\n"
-"QScrollBar::handle:horizontal:hover {\n"
-"    background: #574939;\n"
-"}\n"
-"\n"
-"/* 5. REMOVE BUTTONS & TRACK BACKGROUNDS */\n"
-"/* This handles both horizontal and vertical arrows/tracks */\n"
-"QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical,\n"
-"QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {\n"
-"    border: none;\n"
-"    background: none;\n"
-"    width: 0px;\n"
-"    height: 0px;\n"
-"}\n"
-"\n"
-"QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical,\n"
-"QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {\n"
-"    background: none;\n"
-"}\n"
-"\n"
-"/* 6. THE CORNER WIDGET \n"
-"   (The small square where both bars meet) */\n"
-"QScrollArea QWidget #qt_scrollarea_corner {\n"
-"    background: transparent;\n"
-"    border: none;\n"
-"}\n"
-"\n"
-"QDateEdit {\n"
-"	background-color: #fff;\n"
-"}\n"
-"\n"
-"QLabel {\n"
-"	background: transparent;\n"
 "}")
         self.centralwidget = QWidget(Home)
         self.centralwidget.setObjectName(u"centralwidget")
-        self.centralwidget.setStyleSheet(u"QComboBox[class=\"combobox-main\"] QAbstractItemView {\n"
-"    background-color: white;\n"
-"    border: 1px solid #999;\n"
-"    border-radius: 8px;\n"
-"    selection-background-color: #7eb4d7;\n"
-"    selection-color: #ffffff;\n"
-"    outline: 0; /* Removes the ugly dotted focus border */\n"
+        self.centralwidget.setStyleSheet(u"* {\n"
+"	color: black;\n"
+"	font: 10pt \"Inter\";\n"
+"}\n"
+"\n"
+"#contentWindow {\n"
+"	background-color: transparent;\n"
+"}\n"
+"\n"
+"QTabWidget, QTabWidget * {\n"
+"	background-color: #deddda;\n"
 "}")
         self.horizontalLayout_2 = QHBoxLayout(self.centralwidget)
+        self.horizontalLayout_2.setSpacing(0)
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
         self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.navigationBar = QWidget(self.centralwidget)
         self.navigationBar.setObjectName(u"navigationBar")
         self.navigationBar.setMaximumSize(QSize(200, 16777215))
         self.navigationBar.setFont(font)
-        self.navigationBar.setStyleSheet(u"#navigationBar, #widget_logo, #line, #line_2 {\n"
+        self.navigationBar.setStyleSheet(u"#navigationBar {\n"
+"	border-top-left-radius: 12px;\n"
+"}\n"
+"\n"
+"#navigationBar, #line, #line_2 {\n"
 "	background-color: rgb(61, 61, 61); /* Dark Gray or Storm Dust */\n"
 "}\n"
 "\n"
@@ -238,10 +117,10 @@ class Ui_Home(object):
         self.verticalLayout_5 = QVBoxLayout(self.navigationBar)
         self.verticalLayout_5.setSpacing(0)
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
-        self.verticalLayout_5.setContentsMargins(0, 0, 0, 9)
+        self.verticalLayout_5.setContentsMargins(0, 9, 0, 9)
         self.widget_logo = QWidget(self.navigationBar)
         self.widget_logo.setObjectName(u"widget_logo")
-        self.widget_logo.setStyleSheet(u"")
+        self.widget_logo.setStyleSheet(u"background: transparent;")
         self.horizontalLayout_10 = QHBoxLayout(self.widget_logo)
         self.horizontalLayout_10.setObjectName(u"horizontalLayout_10")
         self.label_20 = QLabel(self.widget_logo)
@@ -253,7 +132,7 @@ class Ui_Home(object):
         self.label_20.setSizePolicy(sizePolicy)
         self.label_20.setMinimumSize(QSize(100, 100))
         self.label_20.setMaximumSize(QSize(100, 100))
-        self.label_20.setStyleSheet(u"background-color: rgba(191, 64, 64, 0);")
+        self.label_20.setStyleSheet(u"background-color: transparent;")
         self.label_20.setPixmap(QPixmap(u":/Images/Images/lcs logo.png"))
         self.label_20.setScaledContents(True)
         self.label_20.setAlignment(Qt.AlignCenter)
@@ -450,7 +329,294 @@ class Ui_Home(object):
 
         self.horizontalLayout_2.addWidget(self.navigationBar)
 
-        self.stackedWidget = QStackedWidget(self.centralwidget)
+        self.contentWindow = QWidget(self.centralwidget)
+        self.contentWindow.setObjectName(u"contentWindow")
+        self.contentWindow.setStyleSheet(u"")
+        self.verticalLayout_35 = QVBoxLayout(self.contentWindow)
+        self.verticalLayout_35.setSpacing(0)
+        self.verticalLayout_35.setObjectName(u"verticalLayout_35")
+        self.verticalLayout_35.setContentsMargins(0, 0, 0, 0)
+        self.frame_header = QWidget(self.contentWindow)
+        self.frame_header.setObjectName(u"frame_header")
+        self.frame_header.setMouseTracking(True)
+        self.frame_header.setStyleSheet(u"#frame_header {\n"
+"	background-color: #deddda;\n"
+"	border-top-right-radius: 12px;\n"
+"	border: 1px solid #7a7a7a;\n"
+"	border-left: none;\n"
+"	border-bottom: none;\n"
+"}")
+        self.horizontalLayout_42 = QHBoxLayout(self.frame_header)
+        self.horizontalLayout_42.setSpacing(0)
+        self.horizontalLayout_42.setObjectName(u"horizontalLayout_42")
+        self.horizontalLayout_42.setContentsMargins(0, 0, 4, 0)
+        self.widget_window_icon = QWidget(self.frame_header)
+        self.widget_window_icon.setObjectName(u"widget_window_icon")
+        self.widget_window_icon.setMinimumSize(QSize(90, 35))
+        self.widget_window_icon.setMaximumSize(QSize(90, 35))
+        self.widget_window_icon.setStyleSheet(u"background: transparent;")
+        self.horizontalLayout_41 = QHBoxLayout(self.widget_window_icon)
+        self.horizontalLayout_41.setObjectName(u"horizontalLayout_41")
+        self.horizontalLayout_41.setContentsMargins(0, 0, 0, 0)
+
+        self.horizontalLayout_42.addWidget(self.widget_window_icon)
+
+        self.label_windowTitle = QLabel(self.frame_header)
+        self.label_windowTitle.setObjectName(u"label_windowTitle")
+        font2 = QFont()
+        font2.setFamilies([u"Inter SemiBold"])
+        font2.setPointSize(10)
+        font2.setBold(False)
+        font2.setItalic(False)
+        self.label_windowTitle.setFont(font2)
+        self.label_windowTitle.setStyleSheet(u"background: transparent;\n"
+"color: rgb(0, 0, 0);\n"
+"font: 10pt \"Inter SemiBold\";")
+        self.label_windowTitle.setAlignment(Qt.AlignCenter)
+
+        self.horizontalLayout_42.addWidget(self.label_windowTitle)
+
+        self.widget_window_buttons = QWidget(self.frame_header)
+        self.widget_window_buttons.setObjectName(u"widget_window_buttons")
+        self.widget_window_buttons.setMinimumSize(QSize(90, 35))
+        self.widget_window_buttons.setMaximumSize(QSize(90, 35))
+        self.widget_window_buttons.setStyleSheet(u"background: transparent;")
+        self.horizontalLayout_44 = QHBoxLayout(self.widget_window_buttons)
+        self.horizontalLayout_44.setSpacing(9)
+        self.horizontalLayout_44.setObjectName(u"horizontalLayout_44")
+        self.horizontalLayout_44.setContentsMargins(9, 0, 9, 0)
+        self.btnMinimize = QPushButton(self.widget_window_buttons)
+        self.btnMinimize.setObjectName(u"btnMinimize")
+        self.btnMinimize.setMinimumSize(QSize(24, 24))
+        self.btnMinimize.setMaximumSize(QSize(24, 24))
+        self.btnMinimize.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.btnMinimize.setStyleSheet(u"#btnMinimize {\n"
+"	border-radius: 12px;\n"
+"	background-color: transparent;\n"
+"}\n"
+"\n"
+"#btnMinimize:hover {\n"
+"	background-color: rgb(248, 228, 92);\n"
+"}")
+        icon11 = QIcon()
+        icon11.addFile(u":/Images/Images/minimize-sign.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.btnMinimize.setIcon(icon11)
+        self.btnMinimize.setIconSize(QSize(12, 12))
+
+        self.horizontalLayout_44.addWidget(self.btnMinimize)
+
+        self.btnMaximize = QPushButton(self.widget_window_buttons)
+        self.btnMaximize.setObjectName(u"btnMaximize")
+        self.btnMaximize.setMinimumSize(QSize(24, 24))
+        self.btnMaximize.setMaximumSize(QSize(24, 24))
+        self.btnMaximize.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.btnMaximize.setStyleSheet(u"#btnMaximize {\n"
+"	border-radius: 12px;\n"
+"	background-color: transparent;\n"
+"}\n"
+"\n"
+"#btnMaximize:hover {\n"
+"	background-color: #3bca5c;\n"
+"}")
+        icon12 = QIcon()
+        icon12.addFile(u":/Images/Images/maximize.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.btnMaximize.setIcon(icon12)
+
+        self.horizontalLayout_44.addWidget(self.btnMaximize)
+
+        self.btnClose = QPushButton(self.widget_window_buttons)
+        self.btnClose.setObjectName(u"btnClose")
+        self.btnClose.setMinimumSize(QSize(24, 24))
+        self.btnClose.setMaximumSize(QSize(24, 24))
+        self.btnClose.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.btnClose.setStyleSheet(u"#btnClose {\n"
+"	border-radius: 12px;\n"
+"	background-color: transparent;\n"
+"}\n"
+"\n"
+"#btnClose:hover {\n"
+"	background-color: rgb(246, 97, 81);\n"
+"}")
+        icon13 = QIcon()
+        icon13.addFile(u":/Images/Images/clear.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.btnClose.setIcon(icon13)
+
+        self.horizontalLayout_44.addWidget(self.btnClose)
+
+
+        self.horizontalLayout_42.addWidget(self.widget_window_buttons)
+
+
+        self.verticalLayout_35.addWidget(self.frame_header)
+
+        self.widget_body = QWidget(self.contentWindow)
+        self.widget_body.setObjectName(u"widget_body")
+        self.widget_body.setMinimumSize(QSize(0, 100))
+        self.widget_body.setStyleSheet(u"* {\n"
+"	background-color: #deddda;\n"
+"}\n"
+"\n"
+"#widget_body {\n"
+"	border: 1px solid #7a7a7a;\n"
+"	border-left: none;\n"
+"	border-top: none;\n"
+"}\n"
+"\n"
+"QComboBox[class=\"combobox-main\"] QAbstractItemView {\n"
+"    background-color: transparent;\n"
+"    border: 1px solid #999;\n"
+"    border-radius: 8px;\n"
+"    selection-background-color: #7eb4d7;\n"
+"    selection-color: #ffffff;\n"
+"    outline: 0; /* Removes the ugly dotted focus border */\n"
+"}\n"
+"\n"
+"QPushButton[class=\"button-green\"] {\n"
+"	border: 1px solid #0a5128;\n"
+"    border-radius: 15px;\n"
+"    padding: 0px 10px 0px;\n"
+"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
+"                                stop:0 #1ebd5d, \n"
+"                                stop:1 #107f3f);\n"
+"    color: #FFF;\n"
+"    font: 10pt \"Inter SemiBold\";\n"
+"}\n"
+"\n"
+"QPushButton[class=\"button-green\"]:hover {\n"
+"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
+"                                stop:0 #2ecc71, \n"
+"                    "
+                        "            stop:1 #27AE60);\n"
+"}\n"
+"\n"
+"QPushButton[class=\"button-green\"]:pressed {\n"
+"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
+"                                stop:0 #0b572a, \n"
+"                                stop:1 #129046); \n"
+"}\n"
+"\n"
+"QPushButton[class=\"button-green\"]:disabled {\n"
+"    background: #A5D6A7;\n"
+"    color: #E8F5E9;\n"
+"    opacity: 0.6;\n"
+"}\n"
+"\n"
+"*[class=\"button-normal\"] {\n"
+"	font: 10pt \"Inter\";\n"
+"	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
+"                                stop:0 #ffffff, \n"
+"                                stop:1 #d8ecf6);\n"
+"	color: black;\n"
+"	border-radius: 15px;\n"
+"	border: 1px solid rgb(154, 153, 150);\n"
+"}\n"
+"\n"
+"*[class=\"button-normal\"]:hover {\n"
+"	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
+"                                stop:0 #ffffff, \n"
+"                                stop:1 #f2f6f8);\n"
+"}\n"
+"\n"
+"*[class=\"button-normal\"]:pressed {\n"
+"    background: qlineargradient(x1:0,"
+                        " y1:0, x2:0, y2:1, \n"
+"                                stop:0 #dce5e9, \n"
+"                                stop:1 #ffffff);\n"
+"}\n"
+"\n"
+"*[class=\"button-normal\"]:disabled {\n"
+"	background: #f5f5f5;\n"
+"	border: 1px solid #dcdcdc;\n"
+"	color: #aeaeae;\n"
+"}\n"
+"\n"
+"/* 1. THE MAIN CONTAINER */\n"
+"QScrollArea { \n"
+"    border: none;\n"
+"    border-radius: 20px;\n"
+"	background-color: #deddda;\n"
+"}\n"
+"\n"
+"/* 2. THE VIEWPORT\n"
+"QScrollArea QWidget #qt_scrollarea_viewport {\n"
+"    background: transparent;\n"
+"    border-radius: 20px;\n"
+"}\n"
+"\n"
+"/* 3. VERTICAL SCROLLBAR */\n"
+"QScrollBar:vertical {\n"
+"    border: none;\n"
+"    background: #ffffff;\n"
+"    width: 10px;\n"
+"    margin: 0px;\n"
+"    border-radius: 5px;\n"
+"}\n"
+"\n"
+"QScrollBar::handle:vertical {\n"
+"    background: #7a7a7a;\n"
+"    min-height: 20px;\n"
+"    border-radius: 5px;\n"
+"}\n"
+"\n"
+"QScrollBar::handle:vertical:hover {\n"
+"    background: #574939;\n"
+"}\n"
+"\n"
+"/* 4. HORIZONTAL SCROLLBAR */\n"
+"QScrollBar:horizontal {\n"
+" "
+                        "   border: none;\n"
+"    background: #ffffff;\n"
+"    height: 10px;\n"
+"    margin: 0px;\n"
+"    border-radius: 5px;\n"
+"}\n"
+"\n"
+"QScrollBar::handle:horizontal {\n"
+"    background: #7a7a7a;\n"
+"    min-width: 20px;\n"
+"    border-radius: 5px;\n"
+"}\n"
+"\n"
+"QScrollBar::handle:horizontal:hover {\n"
+"    background: #574939;\n"
+"}\n"
+"\n"
+"/* 5. REMOVE BUTTONS & TRACK BACKGROUNDS */\n"
+"/* This handles both horizontal and vertical arrows/tracks */\n"
+"QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical,\n"
+"QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {\n"
+"    border: none;\n"
+"    background: none;\n"
+"    width: 0px;\n"
+"    height: 0px;\n"
+"}\n"
+"\n"
+"QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical,\n"
+"QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {\n"
+"    background: none;\n"
+"}\n"
+"\n"
+"/* 6. THE CORNER WIDGET \n"
+"   (The small square where both bars meet) */\n"
+"QScrollArea QWidget #qt_scrollarea_corner {\n"
+"    background: transparent;\n"
+""
+                        "    border: none;\n"
+"}\n"
+"\n"
+"QDateEdit {\n"
+"	background-color: #fff;\n"
+"}\n"
+"\n"
+"QLabel {\n"
+"	background: transparent;\n"
+"}")
+        self.verticalLayout_37 = QVBoxLayout(self.widget_body)
+        self.verticalLayout_37.setSpacing(0)
+        self.verticalLayout_37.setObjectName(u"verticalLayout_37")
+        self.verticalLayout_37.setContentsMargins(0, 0, 1, 1)
+        self.stackedWidget = QStackedWidget(self.widget_body)
         self.stackedWidget.setObjectName(u"stackedWidget")
         self.stackedWidget.setMinimumSize(QSize(0, 30))
         self.stackedWidget.setFont(font)
@@ -461,12 +627,12 @@ class Ui_Home(object):
         self.pageHome.setObjectName(u"pageHome")
         self.horizontalLayout_14 = QHBoxLayout(self.pageHome)
         self.horizontalLayout_14.setObjectName(u"horizontalLayout_14")
-        self.widget = QWidget(self.pageHome)
-        self.widget.setObjectName(u"widget")
-        self.verticalLayout_23 = QVBoxLayout(self.widget)
+        self.widget_1 = QWidget(self.pageHome)
+        self.widget_1.setObjectName(u"widget_1")
+        self.verticalLayout_23 = QVBoxLayout(self.widget_1)
         self.verticalLayout_23.setObjectName(u"verticalLayout_23")
         self.verticalLayout_23.setContentsMargins(0, 0, 0, 0)
-        self.widget_5 = QWidget(self.widget)
+        self.widget_5 = QWidget(self.widget_1)
         self.widget_5.setObjectName(u"widget_5")
         self.widget_5.setMinimumSize(QSize(0, 40))
         self.widget_5.setMaximumSize(QSize(16777215, 40))
@@ -480,12 +646,12 @@ class Ui_Home(object):
         self.label_timeAP_3.setObjectName(u"label_timeAP_3")
         self.label_timeAP_3.setMinimumSize(QSize(0, 30))
         self.label_timeAP_3.setMaximumSize(QSize(16777215, 30))
-        font2 = QFont()
-        font2.setFamilies([u"Inter Medium"])
-        font2.setPointSize(12)
-        font2.setBold(False)
-        font2.setItalic(False)
-        self.label_timeAP_3.setFont(font2)
+        font3 = QFont()
+        font3.setFamilies([u"Inter Medium"])
+        font3.setPointSize(12)
+        font3.setBold(False)
+        font3.setItalic(False)
+        self.label_timeAP_3.setFont(font3)
         self.label_timeAP_3.setStyleSheet(u"QLabel { color: rgb(36, 31, 49); background-color: transparent; font: 12pt \"Inter Medium\"; }")
         self.label_timeAP_3.setAlignment(Qt.AlignCenter)
 
@@ -509,7 +675,7 @@ class Ui_Home(object):
         self.label_SY.setObjectName(u"label_SY")
         self.label_SY.setMinimumSize(QSize(0, 30))
         self.label_SY.setMaximumSize(QSize(16777215, 30))
-        self.label_SY.setFont(font2)
+        self.label_SY.setFont(font3)
         self.label_SY.setStyleSheet(u"QLabel { color: rgb(36, 31, 49); background-color: transparent; font: 12pt \"Inter Medium\"; }")
         self.label_SY.setAlignment(Qt.AlignCenter)
 
@@ -518,13 +684,14 @@ class Ui_Home(object):
 
         self.verticalLayout_23.addWidget(self.widget_5)
 
-        self.widget_11 = QWidget(self.widget)
+        self.widget_11 = QWidget(self.widget_1)
         self.widget_11.setObjectName(u"widget_11")
         self.horizontalLayout_24 = QHBoxLayout(self.widget_11)
         self.horizontalLayout_24.setObjectName(u"horizontalLayout_24")
         self.horizontalLayout_24.setContentsMargins(0, 0, 0, 0)
         self.widget_13 = QWidget(self.widget_11)
         self.widget_13.setObjectName(u"widget_13")
+        self.widget_13.setStyleSheet(u"")
         self.verticalLayout_36 = QVBoxLayout(self.widget_13)
         self.verticalLayout_36.setObjectName(u"verticalLayout_36")
         self.widget_12 = QWidget(self.widget_13)
@@ -590,12 +757,12 @@ class Ui_Home(object):
 
         self.label_student_total = QLabel(self.widget_14)
         self.label_student_total.setObjectName(u"label_student_total")
-        font3 = QFont()
-        font3.setFamilies([u"Inter SemiBold"])
-        font3.setPointSize(20)
-        font3.setBold(False)
-        font3.setItalic(False)
-        self.label_student_total.setFont(font3)
+        font4 = QFont()
+        font4.setFamilies([u"Inter SemiBold"])
+        font4.setPointSize(20)
+        font4.setBold(False)
+        font4.setItalic(False)
+        self.label_student_total.setFont(font4)
         self.label_student_total.setAlignment(Qt.AlignCenter)
 
         self.verticalLayout_24.addWidget(self.label_student_total)
@@ -661,7 +828,7 @@ class Ui_Home(object):
 
         self.label_lessons_total = QLabel(self.widget_16)
         self.label_lessons_total.setObjectName(u"label_lessons_total")
-        self.label_lessons_total.setFont(font3)
+        self.label_lessons_total.setFont(font4)
         self.label_lessons_total.setStyleSheet(u"")
         self.label_lessons_total.setAlignment(Qt.AlignCenter)
 
@@ -728,7 +895,7 @@ class Ui_Home(object):
 
         self.label_teachers_total = QLabel(self.widget_18)
         self.label_teachers_total.setObjectName(u"label_teachers_total")
-        self.label_teachers_total.setFont(font3)
+        self.label_teachers_total.setFont(font4)
         self.label_teachers_total.setStyleSheet(u"")
         self.label_teachers_total.setAlignment(Qt.AlignCenter)
 
@@ -775,7 +942,7 @@ class Ui_Home(object):
         self.label_1.setObjectName(u"label_1")
         self.label_1.setMinimumSize(QSize(0, 30))
         self.label_1.setMaximumSize(QSize(16777215, 30))
-        self.label_1.setFont(font2)
+        self.label_1.setFont(font3)
         self.label_1.setStyleSheet(u"QLabel {\n"
 "    color: rgb(36, 31, 49);\n"
 "    background-color: transparent;\n"
@@ -792,14 +959,7 @@ class Ui_Home(object):
         self.scrollArea_Ranking.setObjectName(u"scrollArea_Ranking")
         self.scrollArea_Ranking.setMinimumSize(QSize(0, 220))
         self.scrollArea_Ranking.setMaximumSize(QSize(16777215, 220))
-        self.scrollArea_Ranking.setStyleSheet(u"/*\n"
-"#widget_top_scorers {\n"
-"	border-radius: 10px;\n"
-"	background-color: rgb(255, 255, 255);\n"
-"}\n"
-"*/\n"
-"\n"
-"#widget_student {\n"
+        self.scrollArea_Ranking.setStyleSheet(u"#widget_student {\n"
 "	background-color: rgb(255, 190, 111);\n"
 "	border-radius: 20px;\n"
 "}\n"
@@ -824,7 +984,7 @@ class Ui_Home(object):
         self.scrollArea_Ranking.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 730, 220))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 736, 220))
         self.HBoxLayout_Ranking = QHBoxLayout(self.scrollAreaWidgetContents)
         self.HBoxLayout_Ranking.setObjectName(u"HBoxLayout_Ranking")
         self.scrollArea_Ranking.setWidget(self.scrollAreaWidgetContents)
@@ -860,12 +1020,12 @@ class Ui_Home(object):
         self.verticalLayout_33.setContentsMargins(-1, 0, -1, 27)
         self.label_month = QLabel(self.widget_date)
         self.label_month.setObjectName(u"label_month")
-        font4 = QFont()
-        font4.setFamilies([u"Inter Medium"])
-        font4.setPointSize(18)
-        font4.setBold(False)
-        font4.setItalic(False)
-        self.label_month.setFont(font4)
+        font5 = QFont()
+        font5.setFamilies([u"Inter Medium"])
+        font5.setPointSize(18)
+        font5.setBold(False)
+        font5.setItalic(False)
+        self.label_month.setFont(font5)
         self.label_month.setStyleSheet(u"color: rgb(255, 255, 255); background-color: transparent; font: 57 18pt \"Inter Medium\"; margin-bottom: 3px;")
         self.label_month.setAlignment(Qt.AlignCenter)
 
@@ -873,12 +1033,12 @@ class Ui_Home(object):
 
         self.label_day = QLabel(self.widget_date)
         self.label_day.setObjectName(u"label_day")
-        font5 = QFont()
-        font5.setFamilies([u"Inter Medium"])
-        font5.setPointSize(50)
-        font5.setBold(False)
-        font5.setItalic(False)
-        self.label_day.setFont(font5)
+        font6 = QFont()
+        font6.setFamilies([u"Inter Medium"])
+        font6.setPointSize(50)
+        font6.setBold(False)
+        font6.setItalic(False)
+        self.label_day.setFont(font6)
         self.label_day.setStyleSheet(u"QLabel {\n"
 "	color: rgb(36, 31, 49);\n"
 "	background-color: transparent;\n"
@@ -906,12 +1066,12 @@ class Ui_Home(object):
 
         self.label_time = QLabel(self.horizontalWidget)
         self.label_time.setObjectName(u"label_time")
-        font6 = QFont()
-        font6.setFamilies([u"Inter Medium"])
-        font6.setPointSize(30)
-        font6.setBold(False)
-        font6.setItalic(False)
-        self.label_time.setFont(font6)
+        font7 = QFont()
+        font7.setFamilies([u"Inter Medium"])
+        font7.setPointSize(30)
+        font7.setBold(False)
+        font7.setItalic(False)
+        self.label_time.setFont(font7)
         self.label_time.setStyleSheet(u"QLabel { color: rgb(36, 31, 49); background-color: transparent; font: 57 30pt \"Inter Medium\"; }")
         self.label_time.setAlignment(Qt.AlignCenter)
 
@@ -919,12 +1079,12 @@ class Ui_Home(object):
 
         self.label_timeAP = QLabel(self.horizontalWidget)
         self.label_timeAP.setObjectName(u"label_timeAP")
-        font7 = QFont()
-        font7.setFamilies([u"Inter Medium"])
-        font7.setPointSize(14)
-        font7.setBold(False)
-        font7.setItalic(False)
-        self.label_timeAP.setFont(font7)
+        font8 = QFont()
+        font8.setFamilies([u"Inter Medium"])
+        font8.setPointSize(14)
+        font8.setBold(False)
+        font8.setItalic(False)
+        self.label_timeAP.setFont(font8)
         self.label_timeAP.setStyleSheet(u"QLabel { color: rgb(36, 31, 49); background-color: transparent; font: 57 14pt \"Inter Medium\"; }")
         self.label_timeAP.setAlignment(Qt.AlignCenter)
 
@@ -948,7 +1108,7 @@ class Ui_Home(object):
         self.verticalLayout_23.addWidget(self.widget_11)
 
 
-        self.horizontalLayout_14.addWidget(self.widget)
+        self.horizontalLayout_14.addWidget(self.widget_1)
 
         self.stackedWidget.addWidget(self.pageHome)
         self.pageClassList = QWidget()
@@ -1105,9 +1265,9 @@ class Ui_Home(object):
         self.btnRefreshSY.setMinimumSize(QSize(30, 30))
         self.btnRefreshSY.setMaximumSize(QSize(30, 30))
         self.btnRefreshSY.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        icon11 = QIcon()
-        icon11.addFile(u":/Images/Images/undo.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.btnRefreshSY.setIcon(icon11)
+        icon14 = QIcon()
+        icon14.addFile(u":/Images/Images/undo.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.btnRefreshSY.setIcon(icon14)
         self.btnRefreshSY.setIconSize(QSize(22, 22))
 
         self.horizontalLayout_18.addWidget(self.btnRefreshSY)
@@ -1175,12 +1335,12 @@ class Ui_Home(object):
 "*[class=\"button-clear-search\"]:pressed {\n"
 "	background-color: #FFD2D2;\n"
 "}")
-        icon12 = QIcon()
-        icon12.addFile(u":/Images/Images/clear.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        icon12.addFile(u":/Images/Images/clear.png", QSize(), QIcon.Mode.Normal, QIcon.State.On)
-        icon12.addFile(u":/Images/Images/clear.png", QSize(), QIcon.Mode.Active, QIcon.State.On)
-        self.btnClearSearch_1.setIcon(icon12)
-        self.btnClearSearch_1.setIconSize(QSize(8, 8))
+        icon15 = QIcon()
+        icon15.addFile(u":/Images/Images/clear.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        icon15.addFile(u":/Images/Images/clear.png", QSize(), QIcon.Mode.Normal, QIcon.State.On)
+        icon15.addFile(u":/Images/Images/clear.png", QSize(), QIcon.Mode.Active, QIcon.State.On)
+        self.btnClearSearch_1.setIcon(icon15)
+        self.btnClearSearch_1.setIconSize(QSize(14, 14))
 
         self.layout_search_2.addWidget(self.btnClearSearch_1)
 
@@ -1189,13 +1349,6 @@ class Ui_Home(object):
 
 
         self.verticalLayout_6.addWidget(self.widget_h)
-
-        self.line_8 = QFrame(self.widget_table_stud)
-        self.line_8.setObjectName(u"line_8")
-        self.line_8.setFrameShape(QFrame.Shape.HLine)
-        self.line_8.setFrameShadow(QFrame.Shadow.Sunken)
-
-        self.verticalLayout_6.addWidget(self.line_8)
 
         self.widget_19 = QWidget(self.widget_table_stud)
         self.widget_19.setObjectName(u"widget_19")
@@ -1214,12 +1367,7 @@ class Ui_Home(object):
         self.label_totalStudCount = QLabel(self.widget_19)
         self.label_totalStudCount.setObjectName(u"label_totalStudCount")
         self.label_totalStudCount.setMaximumSize(QSize(100, 20))
-        font8 = QFont()
-        font8.setFamilies([u"Inter SemiBold"])
-        font8.setPointSize(10)
-        font8.setBold(False)
-        font8.setItalic(False)
-        self.label_totalStudCount.setFont(font8)
+        self.label_totalStudCount.setFont(font2)
         self.label_totalStudCount.setStyleSheet(u"background-color: transparent; font: 10pt \"Inter SemiBold\";")
 
         self.horizontalLayout_3.addWidget(self.label_totalStudCount)
@@ -1235,9 +1383,9 @@ class Ui_Home(object):
         self.btnAddStudent.setFont(font)
         self.btnAddStudent.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btnAddStudent.setStyleSheet(u"")
-        icon13 = QIcon()
-        icon13.addFile(u":/Images/Images/plus.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.btnAddStudent.setIcon(icon13)
+        icon16 = QIcon()
+        icon16.addFile(u":/Images/Images/plus.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.btnAddStudent.setIcon(icon16)
 
         self.horizontalLayout_3.addWidget(self.btnAddStudent)
 
@@ -1248,9 +1396,9 @@ class Ui_Home(object):
         self.btnDeleteStudent.setFont(font)
         self.btnDeleteStudent.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btnDeleteStudent.setStyleSheet(u"")
-        icon14 = QIcon()
-        icon14.addFile(u":/Images/Images/trash.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.btnDeleteStudent.setIcon(icon14)
+        icon17 = QIcon()
+        icon17.addFile(u":/Images/Images/trash.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.btnDeleteStudent.setIcon(icon17)
 
         self.horizontalLayout_3.addWidget(self.btnDeleteStudent)
 
@@ -1261,9 +1409,9 @@ class Ui_Home(object):
         self.btnPrintStudentList.setFont(font)
         self.btnPrintStudentList.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btnPrintStudentList.setStyleSheet(u"")
-        icon15 = QIcon()
-        icon15.addFile(u":/Images/Images/printer.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.btnPrintStudentList.setIcon(icon15)
+        icon18 = QIcon()
+        icon18.addFile(u":/Images/Images/printer.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.btnPrintStudentList.setIcon(icon18)
 
         self.horizontalLayout_3.addWidget(self.btnPrintStudentList)
 
@@ -1281,7 +1429,7 @@ class Ui_Home(object):
         self.scrollArea_classlist.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
         self.container = QWidget()
         self.container.setObjectName(u"container")
-        self.container.setGeometry(QRect(0, 0, 100, 30))
+        self.container.setGeometry(QRect(0, 0, 794, 600))
         self.gridLayout_stud_card = QGridLayout(self.container)
         self.gridLayout_stud_card.setObjectName(u"gridLayout_stud_card")
         self.scrollArea_classlist.setWidget(self.container)
@@ -1314,7 +1462,7 @@ class Ui_Home(object):
         self.label_16 = QLabel(self.sub_info_panel)
         self.label_16.setObjectName(u"label_16")
         self.label_16.setMinimumSize(QSize(0, 30))
-        self.label_16.setFont(font2)
+        self.label_16.setFont(font3)
         self.label_16.setStyleSheet(u"background-color: transparent; color: rgb(253, 64, 115); font: 12pt \"Inter Medium\";")
 
         self.verticalLayout_9.addWidget(self.label_16)
@@ -1401,7 +1549,7 @@ class Ui_Home(object):
         self.label_17 = QLabel(self.sub_info_panel)
         self.label_17.setObjectName(u"label_17")
         self.label_17.setMinimumSize(QSize(0, 30))
-        self.label_17.setFont(font2)
+        self.label_17.setFont(font3)
         self.label_17.setStyleSheet(u"background-color: transparent; color: rgb(253, 64, 115); font: 12pt \"Inter Medium\";")
 
         self.verticalLayout_9.addWidget(self.label_17)
@@ -1499,7 +1647,7 @@ class Ui_Home(object):
         self.label_51.setObjectName(u"label_51")
         self.label_51.setMinimumSize(QSize(0, 30))
         self.label_51.setMaximumSize(QSize(16777215, 20))
-        self.label_51.setFont(font2)
+        self.label_51.setFont(font3)
         self.label_51.setStyleSheet(u"background-color: transparent; color: rgb(253, 64, 115); font: 12pt \"Inter Medium\";")
 
         self.verticalLayout_9.addWidget(self.label_51)
@@ -1555,9 +1703,9 @@ class Ui_Home(object):
         self.btnEditStudent.setFont(font)
         self.btnEditStudent.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btnEditStudent.setStyleSheet(u"")
-        icon16 = QIcon()
-        icon16.addFile(u":/Images/Images/pencil.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.btnEditStudent.setIcon(icon16)
+        icon19 = QIcon()
+        icon19.addFile(u":/Images/Images/pencil.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.btnEditStudent.setIcon(icon19)
 
         self.horizontalLayout_23.addWidget(self.btnEditStudent)
 
@@ -1662,8 +1810,8 @@ class Ui_Home(object):
 "*[class=\"button-clear-search\"]:pressed {\n"
 "	background-color: #FFD2D2;\n"
 "}")
-        self.btnClearSearch_2.setIcon(icon12)
-        self.btnClearSearch_2.setIconSize(QSize(8, 8))
+        self.btnClearSearch_2.setIcon(icon15)
+        self.btnClearSearch_2.setIconSize(QSize(14, 14))
 
         self.layout_search_3.addWidget(self.btnClearSearch_2)
 
@@ -1737,7 +1885,7 @@ class Ui_Home(object):
         self.btnRefreshLessonTable.setObjectName(u"btnRefreshLessonTable")
         self.btnRefreshLessonTable.setMinimumSize(QSize(30, 30))
         self.btnRefreshLessonTable.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.btnRefreshLessonTable.setIcon(icon11)
+        self.btnRefreshLessonTable.setIcon(icon14)
         self.btnRefreshLessonTable.setIconSize(QSize(18, 18))
 
         self.horizontalLayout_4.addWidget(self.btnRefreshLessonTable)
@@ -1751,9 +1899,9 @@ class Ui_Home(object):
         self.btnLessonView.setMinimumSize(QSize(100, 30))
         self.btnLessonView.setMaximumSize(QSize(16777215, 30))
         self.btnLessonView.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        icon17 = QIcon()
-        icon17.addFile(u":/Images/Images/eye.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.btnLessonView.setIcon(icon17)
+        icon20 = QIcon()
+        icon20.addFile(u":/Images/Images/eye.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.btnLessonView.setIcon(icon20)
 
         self.horizontalLayout_4.addWidget(self.btnLessonView)
 
@@ -1762,7 +1910,7 @@ class Ui_Home(object):
         self.btnLessonEdit.setMinimumSize(QSize(100, 30))
         self.btnLessonEdit.setMaximumSize(QSize(16777215, 30))
         self.btnLessonEdit.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.btnLessonEdit.setIcon(icon16)
+        self.btnLessonEdit.setIcon(icon19)
 
         self.horizontalLayout_4.addWidget(self.btnLessonEdit)
 
@@ -1771,7 +1919,7 @@ class Ui_Home(object):
         self.btnLessonAdd.setMinimumSize(QSize(100, 30))
         self.btnLessonAdd.setMaximumSize(QSize(16777215, 30))
         self.btnLessonAdd.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.btnLessonAdd.setIcon(icon13)
+        self.btnLessonAdd.setIcon(icon16)
 
         self.horizontalLayout_4.addWidget(self.btnLessonAdd)
 
@@ -3142,8 +3290,8 @@ class Ui_Home(object):
 "*[class=\"button-clear-search\"]:pressed {\n"
 "	background-color: #FFD2D2;\n"
 "}")
-        self.btnClearSearch_4.setIcon(icon12)
-        self.btnClearSearch_4.setIconSize(QSize(8, 8))
+        self.btnClearSearch_4.setIcon(icon15)
+        self.btnClearSearch_4.setIconSize(QSize(14, 14))
 
         self.layout_search_5.addWidget(self.btnClearSearch_4)
 
@@ -3276,7 +3424,7 @@ class Ui_Home(object):
         self.btnPrintQuizScores.setFont(font)
         self.btnPrintQuizScores.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btnPrintQuizScores.setStyleSheet(u"")
-        self.btnPrintQuizScores.setIcon(icon15)
+        self.btnPrintQuizScores.setIcon(icon18)
 
         self.horizontalLayout_21.addWidget(self.btnPrintQuizScores)
 
@@ -3418,8 +3566,8 @@ class Ui_Home(object):
 "*[class=\"button-clear-search\"]:pressed {\n"
 "	background-color: #FFD2D2;\n"
 "}")
-        self.btnClearSearch_5.setIcon(icon12)
-        self.btnClearSearch_5.setIconSize(QSize(8, 8))
+        self.btnClearSearch_5.setIcon(icon15)
+        self.btnClearSearch_5.setIconSize(QSize(14, 14))
 
         self.layout_search_6.addWidget(self.btnClearSearch_5)
 
@@ -3463,7 +3611,7 @@ class Ui_Home(object):
         self.btnRefreshUsers.setMaximumSize(QSize(30, 30))
         self.btnRefreshUsers.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btnRefreshUsers.setStyleSheet(u"")
-        self.btnRefreshUsers.setIcon(icon11)
+        self.btnRefreshUsers.setIcon(icon14)
         self.btnRefreshUsers.setIconSize(QSize(20, 20))
 
         self.horizontalLayout_19.addWidget(self.btnRefreshUsers)
@@ -3881,7 +4029,7 @@ class Ui_Home(object):
         self.btnSaveSettings_SY.setObjectName(u"btnSaveSettings_SY")
         self.btnSaveSettings_SY.setMinimumSize(QSize(130, 30))
         self.btnSaveSettings_SY.setMaximumSize(QSize(16777215, 30))
-        self.btnSaveSettings_SY.setFont(font8)
+        self.btnSaveSettings_SY.setFont(font2)
         self.btnSaveSettings_SY.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btnSaveSettings_SY.setStyleSheet(u"QPushButton {\n"
 "	border: 1px solid #0a5128;\n"
@@ -4203,7 +4351,7 @@ class Ui_Home(object):
         self.btnImportAllLessons.setObjectName(u"btnImportAllLessons")
         self.btnImportAllLessons.setMinimumSize(QSize(130, 30))
         self.btnImportAllLessons.setMaximumSize(QSize(16777215, 30))
-        self.btnImportAllLessons.setFont(font8)
+        self.btnImportAllLessons.setFont(font2)
         self.btnImportAllLessons.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btnImportAllLessons.setStyleSheet(u"QPushButton {\n"
 "	border: 1px solid #0a5128;\n"
@@ -4278,7 +4426,7 @@ class Ui_Home(object):
         self.btnSaveSettings_quiz.setObjectName(u"btnSaveSettings_quiz")
         self.btnSaveSettings_quiz.setMinimumSize(QSize(130, 30))
         self.btnSaveSettings_quiz.setMaximumSize(QSize(16777215, 30))
-        self.btnSaveSettings_quiz.setFont(font8)
+        self.btnSaveSettings_quiz.setFont(font2)
         self.btnSaveSettings_quiz.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btnSaveSettings_quiz.setStyleSheet(u"QPushButton {\n"
 "	border: 1px solid #0a5128;\n"
@@ -4453,7 +4601,13 @@ class Ui_Home(object):
 
         self.stackedWidget.addWidget(self.pageUtilities)
 
-        self.horizontalLayout_2.addWidget(self.stackedWidget)
+        self.verticalLayout_37.addWidget(self.stackedWidget)
+
+
+        self.verticalLayout_35.addWidget(self.widget_body)
+
+
+        self.horizontalLayout_2.addWidget(self.contentWindow)
 
         Home.setCentralWidget(self.centralwidget)
 
@@ -4495,6 +4649,10 @@ class Ui_Home(object):
         self.labelPosition.setText(QCoreApplication.translate("Home", u"Admin", None))
         self.btnLogout.setText(QCoreApplication.translate("Home", u"Log out", None))
         self.btnLogout.setProperty(u"class", QCoreApplication.translate("Home", u"button-left-nav", None))
+        self.label_windowTitle.setText(QCoreApplication.translate("Home", u"Computer-Aided Instructions System in Mathematics for the Grade 1 Students of La Camelle School", None))
+        self.btnMinimize.setText("")
+        self.btnMaximize.setText("")
+        self.btnClose.setText("")
         self.label_timeAP_3.setText(QCoreApplication.translate("Home", u"Welcome to La Camelle School", None))
         self.label_gradingperiod.setText(QCoreApplication.translate("Home", u"Grading", None))
         self.label_SY.setText(QCoreApplication.translate("Home", u"School Year", None))

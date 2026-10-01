@@ -220,11 +220,11 @@ QComboBox QAbstractItemView::item:hover {
      </property>
      <property name="styleSheet">
       <string notr="true">#frame_header {
-	background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #e9e7e9, stop:1 #bababa);
-	border-top-left-radius: 10px;
-	border-top-right-radius: 10px;
-	border: 1px solid rgb(94, 92, 100);
-	border-bottom: 1px solid rgb(146, 146, 146);
+	background-color: #deddda;
+	border-top-left-radius: 12px;
+	border-top-right-radius: 12px;
+	border: 1px solid #7a7a7a;
+	border-bottom: none;
 }</string>
      </property>
      <property name="frameShape">
@@ -349,7 +349,7 @@ font: 10pt &quot;Inter SemiBold&quot;;</string>
         <property name="styleSheet">
          <string notr="true">#btnMinimize {
 	border-radius: 12px;
-	background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #ffffff, stop:1 #d8ecf6);
+	background-color: transparent;
 }
 
 #btnMinimize:hover {
@@ -391,7 +391,7 @@ font: 10pt &quot;Inter SemiBold&quot;;</string>
         <property name="styleSheet">
          <string notr="true">#btnClose {
 	border-radius: 12px;
-	background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #ffffff, stop:1 #d8ecf6);
+	background-color: transparent;
 }
 
 #btnClose:hover {
@@ -414,14 +414,15 @@ font: 10pt &quot;Inter SemiBold&quot;;</string>
     <widget class="QWidget" name="widget_body" native="true">
      <property name="styleSheet">
       <string notr="true">#widget_body {
-	background-color: rgb(222, 221, 218);
+	background-color: #deddda;
+	border: 1px solid #7a7a7a;
 	border-top: none;
-	border-right: 1px solid rgb(94, 92, 100);
-	border-bottom: 1px solid rgb(94, 92, 100);
-	border-left: 1px solid rgb(94, 92, 100);
 }</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
+      <property name="spacing">
+       <number>12</number>
+      </property>
       <item>
        <widget class="QLabel" name="label_24">
         <property name="font">
@@ -432,28 +433,37 @@ font: 10pt &quot;Inter SemiBold&quot;;</string>
           <bold>false</bold>
          </font>
         </property>
+        <property name="styleSheet">
+         <string notr="true">background: transparent;</string>
+        </property>
         <property name="text">
          <string>Assign an adviser to each section</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QWidget" name="widget" native="true">
+       <widget class="QWidget" name="widget_1" native="true">
+        <property name="styleSheet">
+         <string notr="true">#widget_1 {
+	background-color: #d2d2d2;
+	border-radius: 12px;
+}</string>
+        </property>
         <layout class="QVBoxLayout" name="verticalLayout_2">
          <property name="spacing">
           <number>6</number>
          </property>
          <property name="leftMargin">
-          <number>0</number>
+          <number>12</number>
          </property>
          <property name="topMargin">
-          <number>0</number>
+          <number>9</number>
          </property>
          <property name="rightMargin">
-          <number>0</number>
+          <number>12</number>
          </property>
          <property name="bottomMargin">
-          <number>0</number>
+          <number>9</number>
          </property>
          <item>
           <widget class="QWidget" name="widget_2" native="true">
@@ -481,13 +491,13 @@ font: 10pt &quot;Inter SemiBold&quot;;</string>
               <property name="minimumSize">
                <size>
                 <width>100</width>
-                <height>30</height>
+                <height>32</height>
                </size>
               </property>
               <property name="maximumSize">
                <size>
                 <width>100</width>
-                <height>30</height>
+                <height>32</height>
                </size>
               </property>
               <property name="text">
@@ -503,7 +513,7 @@ font: 10pt &quot;Inter SemiBold&quot;;</string>
               <property name="minimumSize">
                <size>
                 <width>0</width>
-                <height>30</height>
+                <height>32</height>
                </size>
               </property>
               <property name="styleSheet">
@@ -543,13 +553,13 @@ font: 10pt &quot;Inter SemiBold&quot;;</string>
               <property name="minimumSize">
                <size>
                 <width>100</width>
-                <height>30</height>
+                <height>32</height>
                </size>
               </property>
               <property name="maximumSize">
                <size>
                 <width>100</width>
-                <height>30</height>
+                <height>32</height>
                </size>
               </property>
               <property name="text">
@@ -565,7 +575,13 @@ font: 10pt &quot;Inter SemiBold&quot;;</string>
               <property name="minimumSize">
                <size>
                 <width>0</width>
-                <height>30</height>
+                <height>32</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>32</height>
                </size>
               </property>
               <property name="styleSheet">

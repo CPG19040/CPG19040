@@ -6,20 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>750</width>
-    <height>456</height>
+    <width>800</width>
+    <height>550</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>750</width>
-    <height>456</height>
+    <height>550</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>750</width>
-    <height>456</height>
+    <width>800</width>
+    <height>550</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -27,8 +27,12 @@
   </property>
   <property name="styleSheet">
    <string notr="true">* {
-	background-color: rgb(222, 221, 218); 
+	background-color: transparent;
 	color: black;
+}
+
+#widget_profile_pic, #grp_info {
+	background-color: transparent;
 }
 
 *[class=&quot;button-normal&quot;] {
@@ -88,32 +92,52 @@ QPushButton[class=&quot;button-green&quot;]:disabled {
     opacity: 0.6;
 }
 
-QLineEdit {
-	background-color: rgb(255, 255, 255); 
-	border-radius: 15px;
+*[class=&quot;input-field&quot;] {
+	background-color: transparent;
+}
+
+*[class=&quot;input-field&quot;] QLineEdit {
+	background-color: #ffffff;
 	border: 1px solid #999;
-	padding: 0px 15px;
+	border-left: none;
+	border-top-right-radius: 18px;
+	border-bottom-right-radius: 18px;
+	padding: 0px 8px;
+	color: black;
 }
 
-QComboBox {
-    border: 1px solid #999;
-    border-radius: 15px; /* Fully rounded pills */
-    padding: 0px 15px 0px;
-    background-color: #ffffff;
-    color: #333333;
-    font: 10pt &quot;Inter Medium&quot;; /* Consolidated font settings */
-    selection-background-color: #7eb4d7;
+*[class=&quot;input-field&quot;] QLabel {
+	background-color: #d2d2d2;
+	border-left: 1px solid #999;
+	border-top: 1px solid #999;
+	border-bottom: 1px solid #999;
+	border-right: none;
+	border-top-left-radius: 18px;
+	border-bottom-left-radius: 18px;
+	padding-left: 8px;
+	color: black;
 }
 
-QComboBox:focus, QLineEdit:focus {
-    border: 1px solid #007BFF;
+*[class=&quot;input-field&quot;] QComboBox {
+	background-color: #FFF;
+	border: 1px solid #999;
+	border-left: none;
+	border-top-right-radius: 18px;
+	border-bottom-right-radius: 18px;
+	padding-left: 8px;
+	color: black;
 }
 
-QComboBox:hover, QLineEdit:hover {
+*[class=&quot;input-field&quot;] QComboBox:focus {
+	border: 1px solid #007BFF;
+}
+
+*[class=&quot;input-field&quot;] QLineEdit:hover,
+*[class=&quot;input-field&quot;] QComboBox:hover {
     border: 1px solid #3498db;
 }
 
-QComboBox::drop-down {
+*[class=&quot;input-field&quot;] QComboBox::drop-down {
     subcontrol-origin: padding;
     subcontrol-position: top right;
     width: 30px;
@@ -123,14 +147,14 @@ QComboBox::drop-down {
     border-bottom-right-radius: 15px;
 }
 
-QComboBox::down-arrow {
+*[class=&quot;input-field&quot;] QComboBox::down-arrow {
     image: url(:/Images/Images/caret-down.png);
     border: none;
     width: 8px;
     height: 8px;
 }
 
-QComboBox QAbstractItemView {
+*[class=&quot;input-field&quot;] QComboBox QAbstractItemView {
     background-color: white !important;
     border: 1px solid #999;
     selection-background-color: #7eb4d7;
@@ -138,7 +162,7 @@ QComboBox QAbstractItemView {
     outline: 0; /* Removes the ugly dotted focus border */
 }
 
-QComboBox QAbstractItemView::item {
+*[class=&quot;input-field&quot;] QComboBox QAbstractItemView::item {
     padding: 0px 15px;
     border-radius: 4px;
     color: #333333;
@@ -150,85 +174,88 @@ QComboBox QAbstractItemView::item:hover {
     color: #ffffff;
 }</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
    <item>
-    <widget class="QWidget" name="widget" native="true">
-     <property name="styleSheet">
-      <string notr="true"/>
+    <widget class="QFrame" name="frame_header">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>35</height>
+      </size>
      </property>
-     <layout class="QHBoxLayout" name="horizontalLayout">
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>35</height>
+      </size>
+     </property>
+     <property name="mouseTracking">
+      <bool>true</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">#frame_header {
+	background-color: #deddda;
+	border-top-left-radius: 12px;
+	border-top-right-radius: 12px;
+	border: 1px solid #7a7a7a;
+	border-bottom: none;
+}</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_6">
+      <property name="spacing">
+       <number>6</number>
+      </property>
+      <property name="leftMargin">
+       <number>9</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>9</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
       <item>
-       <widget class="QWidget" name="widget_3" native="true">
-        <layout class="QGridLayout" name="gridLayout">
-         <item row="1" column="0">
-          <widget class="QPushButton" name="btnUploadPhoto">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>30</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>30</height>
-            </size>
-           </property>
-           <property name="cursor">
-            <cursorShape>PointingHandCursor</cursorShape>
-           </property>
-           <property name="text">
-            <string>Update photo</string>
-           </property>
-           <property name="class" stdset="0">
-            <string>button-normal</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="0">
-          <widget class="QLabel" name="label_profile_pic">
-           <property name="minimumSize">
-            <size>
-             <width>160</width>
-             <height>160</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>160</width>
-             <height>160</height>
-            </size>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="pixmap">
-            <pixmap resource="../resources.qrc">:/Images/Images/profile_gray.png</pixmap>
-           </property>
-           <property name="scaledContents">
-            <bool>true</bool>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="0">
-          <widget class="QLabel" name="label_25">
-           <property name="text">
-            <string>Aspect ratio (1:1)</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-      </item>
-      <item>
-       <widget class="QWidget" name="grp_info" native="true">
-        <layout class="QFormLayout" name="formLayout_3">
+       <widget class="QWidget" name="widget_window_icon" native="true">
+        <property name="minimumSize">
+         <size>
+          <width>54</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>54</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background: transparent;</string>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
          <property name="leftMargin">
           <number>0</number>
          </property>
@@ -241,156 +268,700 @@ QComboBox QAbstractItemView::item:hover {
          <property name="bottomMargin">
           <number>0</number>
          </property>
-         <item row="0" column="0">
-          <widget class="QLabel" name="label_8">
-           <property name="text">
-            <string>First name</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QLineEdit" name="lineEdit_firstname">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>30</height>
-            </size>
-           </property>
-           <property name="styleSheet">
-            <string notr="true"/>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="label_9">
-           <property name="text">
-            <string>Middle name</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1">
-          <widget class="QLineEdit" name="lineEdit_middlename">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>30</height>
-            </size>
-           </property>
-           <property name="styleSheet">
-            <string notr="true"/>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="0">
-          <widget class="QLabel" name="label_10">
-           <property name="text">
-            <string>Last name</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="1">
-          <widget class="QLineEdit" name="lineEdit_lastname">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>30</height>
-            </size>
-           </property>
-           <property name="styleSheet">
-            <string notr="true"/>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="0">
-          <widget class="QLabel" name="label_11">
-           <property name="text">
-            <string>User name</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="1">
-          <widget class="QLineEdit" name="lineEdit_username">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>30</height>
-            </size>
-           </property>
-           <property name="styleSheet">
-            <string notr="true"/>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="0">
-          <widget class="QLabel" name="label_12">
-           <property name="text">
-            <string>Password</string>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="1">
-          <widget class="QLineEdit" name="lineEdit_password">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>30</height>
-            </size>
-           </property>
-           <property name="styleSheet">
-            <string notr="true"/>
-           </property>
-           <property name="echoMode">
-            <enum>QLineEdit::PasswordEchoOnEdit</enum>
-           </property>
-          </widget>
-         </item>
-         <item row="5" column="0">
-          <widget class="QLabel" name="label_13">
-           <property name="text">
-            <string>Position</string>
-           </property>
-          </widget>
-         </item>
-         <item row="5" column="1">
-          <widget class="QComboBox" name="comboBox_position">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>30</height>
-            </size>
-           </property>
-           <property name="styleSheet">
-            <string notr="true"/>
-           </property>
-           <property name="editable">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
         </layout>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_6">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_windowTitle">
+        <property name="font">
+         <font>
+          <family>Inter SemiBold</family>
+          <pointsize>10</pointsize>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background: transparent;
+color: rgb(0, 0, 0);
+font: 10pt &quot;Inter SemiBold&quot;;</string>
+        </property>
+        <property name="text">
+         <string>Registration</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_5">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnMinimize">
+        <property name="minimumSize">
+         <size>
+          <width>24</width>
+          <height>24</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>24</width>
+          <height>24</height>
+         </size>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">#btnMinimize {
+	border-radius: 12px;
+	background-color: transparent;
+}
+
+#btnMinimize:hover {
+	background-color: rgb(248, 228, 92);
+}</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../resources.qrc">
+          <normaloff>:/Images/Images/minimize-sign.png</normaloff>:/Images/Images/minimize-sign.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>12</width>
+          <height>12</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnClose">
+        <property name="minimumSize">
+         <size>
+          <width>24</width>
+          <height>24</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>24</width>
+          <height>24</height>
+         </size>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">#btnClose {
+	border-radius: 12px;
+	background-color: transparent;
+}
+
+#btnClose:hover {
+	background-color: rgb(246, 97, 81);
+}</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../resources.qrc">
+          <normaloff>:/Images/Images/clear.png</normaloff>:/Images/Images/clear.png</iconset>
+        </property>
        </widget>
       </item>
      </layout>
     </widget>
    </item>
    <item>
-    <widget class="Line" name="line">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QWidget" name="widget_form_2" native="true">
-     <property name="enabled">
-      <bool>true</bool>
-     </property>
+    <widget class="QWidget" name="widget_body" native="true">
      <property name="styleSheet">
-      <string notr="true"/>
+      <string notr="true">#widget_body {
+	background-color: #deddda;
+	border: 1px solid #7a7a7a;
+	border-top: none;
+}</string>
      </property>
-     <layout class="QFormLayout" name="formLayout_5">
-      <item row="0" column="0">
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <property name="spacing">
+       <number>6</number>
+      </property>
+      <property name="leftMargin">
+       <number>12</number>
+      </property>
+      <property name="rightMargin">
+       <number>12</number>
+      </property>
+      <item>
+       <widget class="QWidget" name="widget" native="true">
+        <property name="styleSheet">
+         <string notr="true">#widget {
+	background-color:  rgb(192, 191, 188);
+	border-radius: 12px;
+}</string>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <property name="leftMargin">
+          <number>9</number>
+         </property>
+         <property name="topMargin">
+          <number>9</number>
+         </property>
+         <property name="rightMargin">
+          <number>9</number>
+         </property>
+         <property name="bottomMargin">
+          <number>9</number>
+         </property>
+         <item>
+          <widget class="QWidget" name="widget_profile_pic" native="true">
+           <property name="styleSheet">
+            <string notr="true">QLabel {
+	background: transparent;
+}</string>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_3">
+            <item>
+             <widget class="QLabel" name="label_profile_pic">
+              <property name="minimumSize">
+               <size>
+                <width>160</width>
+                <height>160</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>160</width>
+                <height>160</height>
+               </size>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="pixmap">
+               <pixmap resource="../resources.qrc">:/Images/Images/profile_gray.png</pixmap>
+              </property>
+              <property name="scaledContents">
+               <bool>true</bool>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="btnUploadPhoto">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="cursor">
+               <cursorShape>PointingHandCursor</cursorShape>
+              </property>
+              <property name="text">
+               <string>Update photo</string>
+              </property>
+              <property name="class" stdset="0">
+               <string>button-normal</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_25">
+              <property name="text">
+               <string>Aspect ratio (1:1)</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QWidget" name="grp_info" native="true">
+           <layout class="QVBoxLayout" name="verticalLayout_5">
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QWidget" name="widget_4" native="true">
+              <property name="minimumSize">
+               <size>
+                <width>100</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="class" stdset="0">
+               <string>input-field</string>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_7">
+               <property name="spacing">
+                <number>0</number>
+               </property>
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="QLabel" name="label_8">
+                 <property name="minimumSize">
+                  <size>
+                   <width>96</width>
+                   <height>36</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>36</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>First name</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLineEdit" name="lineEdit_firstname">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>36</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>36</height>
+                  </size>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true"/>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QWidget" name="widget_5" native="true">
+              <property name="minimumSize">
+               <size>
+                <width>100</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="class" stdset="0">
+               <string>input-field</string>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_8">
+               <property name="spacing">
+                <number>0</number>
+               </property>
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="QLabel" name="label_9">
+                 <property name="minimumSize">
+                  <size>
+                   <width>96</width>
+                   <height>36</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>36</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>Middle name</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLineEdit" name="lineEdit_middlename">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>36</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>36</height>
+                  </size>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true"/>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QWidget" name="widget_6" native="true">
+              <property name="minimumSize">
+               <size>
+                <width>100</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="class" stdset="0">
+               <string>input-field</string>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_9">
+               <property name="spacing">
+                <number>0</number>
+               </property>
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="QLabel" name="label_10">
+                 <property name="minimumSize">
+                  <size>
+                   <width>96</width>
+                   <height>36</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>36</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>Last name</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLineEdit" name="lineEdit_lastname">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>36</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>36</height>
+                  </size>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true"/>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QWidget" name="widget_7" native="true">
+              <property name="minimumSize">
+               <size>
+                <width>100</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="class" stdset="0">
+               <string>input-field</string>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_10">
+               <property name="spacing">
+                <number>0</number>
+               </property>
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="QLabel" name="label_11">
+                 <property name="minimumSize">
+                  <size>
+                   <width>96</width>
+                   <height>36</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>36</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>User name</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLineEdit" name="lineEdit_username">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>36</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>36</height>
+                  </size>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true"/>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QWidget" name="widget_8" native="true">
+              <property name="minimumSize">
+               <size>
+                <width>100</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="class" stdset="0">
+               <string>input-field</string>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_11">
+               <property name="spacing">
+                <number>0</number>
+               </property>
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="QLabel" name="label_12">
+                 <property name="minimumSize">
+                  <size>
+                   <width>96</width>
+                   <height>36</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>36</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>Password</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLineEdit" name="lineEdit_password">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>36</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>36</height>
+                  </size>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true"/>
+                 </property>
+                 <property name="echoMode">
+                  <enum>QLineEdit::PasswordEchoOnEdit</enum>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QWidget" name="widget_9" native="true">
+              <property name="minimumSize">
+               <size>
+                <width>100</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="class" stdset="0">
+               <string>input-field</string>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_12">
+               <property name="spacing">
+                <number>0</number>
+               </property>
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="QLabel" name="label_13">
+                 <property name="minimumSize">
+                  <size>
+                   <width>96</width>
+                   <height>36</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>96</width>
+                   <height>36</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>Position</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="comboBox_position">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>36</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>36</height>
+                  </size>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true"/>
+                 </property>
+                 <property name="editable">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
        <widget class="QLabel" name="label_24">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>35</height>
+         </size>
+        </property>
         <property name="font">
          <font>
           <family>Inter SemiBold</family>
@@ -402,133 +973,253 @@ QComboBox QAbstractItemView::item:hover {
         <property name="text">
          <string>Emergency contact</string>
         </property>
+        <property name="alignment">
+         <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+        </property>
        </widget>
       </item>
-      <item row="1" column="1">
-       <widget class="QLineEdit" name="txtContactPerson">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>30</height>
-         </size>
+      <item>
+       <widget class="QWidget" name="widget_emergency_contact" native="true">
+        <property name="enabled">
+         <bool>true</bool>
         </property>
         <property name="styleSheet">
-         <string notr="true"/>
+         <string notr="true">#widget_emergency_contact {
+	background-color: rgb(192, 191, 188);
+	border-radius: 12px;
+}</string>
         </property>
+        <layout class="QVBoxLayout" name="verticalLayout_4">
+         <property name="leftMargin">
+          <number>12</number>
+         </property>
+         <property name="rightMargin">
+          <number>12</number>
+         </property>
+         <item>
+          <widget class="QWidget" name="widget_2" native="true">
+           <property name="minimumSize">
+            <size>
+             <width>33</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="class" stdset="0">
+            <string>input-field</string>
+           </property>
+           <layout class="QHBoxLayout" name="horizontalLayout_3">
+            <property name="spacing">
+             <number>0</number>
+            </property>
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="label_22">
+              <property name="minimumSize">
+               <size>
+                <width>120</width>
+                <height>36</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>120</width>
+                <height>36</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Contact Person</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="txtContactPerson">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>36</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>36</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QWidget" name="widget_3" native="true">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="class" stdset="0">
+            <string>input-field</string>
+           </property>
+           <layout class="QHBoxLayout" name="horizontalLayout_5">
+            <property name="spacing">
+             <number>0</number>
+            </property>
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="label_23">
+              <property name="minimumSize">
+               <size>
+                <width>120</width>
+                <height>36</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>120</width>
+                <height>36</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Contact Number</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="txtContactNum">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>36</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>36</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="label_23">
-        <property name="text">
-         <string>Contact Number</string>
+      <item>
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
         </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="QLineEdit" name="txtContactNum">
-        <property name="minimumSize">
+        <property name="sizeHint" stdset="0">
          <size>
-          <width>0</width>
-          <height>30</height>
+          <width>20</width>
+          <height>40</height>
          </size>
         </property>
-        <property name="styleSheet">
-         <string notr="true"/>
-        </property>
-       </widget>
+       </spacer>
       </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="label_22">
-        <property name="text">
-         <string>Contact Person</string>
-        </property>
-       </widget>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <spacer name="horizontalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnCancel">
+          <property name="minimumSize">
+           <size>
+            <width>100</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>100</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="text">
+           <string>Cancel</string>
+          </property>
+          <property name="class" stdset="0">
+           <string>button-normal</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnSave">
+          <property name="minimumSize">
+           <size>
+            <width>100</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>100</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="text">
+           <string>Save</string>
+          </property>
+          <property name="default">
+           <bool>true</bool>
+          </property>
+          <property name="class" stdset="0">
+           <string>button-green</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
      </layout>
     </widget>
-   </item>
-   <item>
-    <spacer name="verticalSpacer_3">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>20</width>
-       <height>40</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
-     <item>
-      <spacer name="horizontalSpacer_2">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="QPushButton" name="btnCancel">
-       <property name="minimumSize">
-        <size>
-         <width>100</width>
-         <height>30</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>100</width>
-         <height>30</height>
-        </size>
-       </property>
-       <property name="cursor">
-        <cursorShape>PointingHandCursor</cursorShape>
-       </property>
-       <property name="text">
-        <string>Cancel</string>
-       </property>
-       <property name="class" stdset="0">
-        <string>button-normal</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="btnSave">
-       <property name="minimumSize">
-        <size>
-         <width>100</width>
-         <height>30</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>100</width>
-         <height>30</height>
-        </size>
-       </property>
-       <property name="cursor">
-        <cursorShape>PointingHandCursor</cursorShape>
-       </property>
-       <property name="text">
-        <string>Save</string>
-       </property>
-       <property name="default">
-        <bool>true</bool>
-       </property>
-       <property name="class" stdset="0">
-        <string>button-green</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
    </item>
   </layout>
  </widget>

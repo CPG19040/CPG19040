@@ -64,10 +64,14 @@ class Controller:
         self.show_home(user)
 
     def show_home(self, user:dict):
-        self.home_win = QMainWindow()
+        self.home_win = HomeWindow()
         self.ui = Ui_Home()
         self.ui.setupUi(self.home_win)
+        self.home_win.header_widget = self.ui.frame_header
         # self.home_win.showMaximized()
+        self.ui.btnMinimize.clicked.connect(self.home_win.showMinimized)
+        self.ui.btnMaximize.clicked.connect(lambda: self.home_win.showMaximized() if not self.home_win.isMaximized() else self.home_win.showNormal())
+        self.ui.btnClose.clicked.connect(self.home_win.close)
 
         # SETUP UI
         # Timer for Clock
@@ -1527,4 +1531,72 @@ class Controller:
         model.setHorizontalHeaderLabels(headers)
         self.ui.table_quiz_score_idv.setModel(model)
         self.ui.table_quiz_score_idv.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+
+
+class HomeWindow(QMainWindow):
+    RESIZE_MARGIN = 8  # Clickable margin for resizing
+
+    def __init__(self):
+        super().__init__()
+        self.setMouseTracking(True)
+        self.setWindowFlags(Qt.WindowType.FramelessWindowHint)
+        self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground, True)
+
+        self.header_widget = None
+
+    def _get_resize_edge(self, pos):
+        rect = self.rect()
+        x, y = pos.x(), pos.y()
+        w, h = rect.width(), rect.height()
+        
+        edge = None
+        if x <= self.RESIZE_MARGIN:
+            edge = Qt.Edge.LeftEdge
+        elif x >= w - self.RESIZE_MARGIN:
+            edge = Qt.Edge.RightEdge
+            
+        if y <= self.RESIZE_MARGIN:
+            edge = Qt.Edge.TopEdge if edge is None else edge | Qt.Edge.TopEdge
+        elif y >= h - self.RESIZE_MARGIN:
+            edge = Qt.Edge.BottomEdge if edge is None else edge | Qt.Edge.BottomEdge
+                
+        return edge
+
+    def _update_cursor_shape(self, edge):
+        if edge == (Qt.Edge.TopEdge | Qt.Edge.LeftEdge) or edge == (Qt.Edge.BottomEdge | Qt.Edge.RightEdge):
+            self.setCursor(Qt.CursorShape.SizeFDiagCursor)
+        elif edge == (Qt.Edge.TopEdge | Qt.Edge.RightEdge) or edge == (Qt.Edge.BottomEdge | Qt.Edge.LeftEdge):
+            self.setCursor(Qt.CursorShape.SizeBDiagCursor)
+        elif edge and (edge & (Qt.Edge.LeftEdge | Qt.Edge.RightEdge)) and not (edge & (Qt.Edge.TopEdge | Qt.Edge.BottomEdge)):
+            self.setCursor(Qt.CursorShape.SizeHorCursor)
+        elif edge and (edge & (Qt.Edge.TopEdge | Qt.Edge.BottomEdge)) and not (edge & (Qt.Edge.LeftEdge | Qt.Edge.RightEdge)):
+            self.setCursor(Qt.CursorShape.SizeVerCursor)
+        else:
+            self.setCursor(Qt.CursorShape.ArrowCursor)
+
+    def mouseMoveEvent(self, event):
+        pos = event.position().toPoint()
+        edge = self._get_resize_edge(pos)
+        self._update_cursor_shape(edge)
+        super().mouseMoveEvent(event)
+
+    def mousePressEvent(self, event):
+        if event.button() == Qt.LeftButton:
+            pos = event.position().toPoint()
+            edge = self._get_resize_edge(pos)
+            
+            if edge:
+                if self.windowHandle():
+                    self.windowHandle().startSystemResize(edge)
+                event.accept()
+                return
+
+            if self.header_widget and self.header_widget.geometry().contains(pos):
+                if self.windowHandle():
+                    self.windowHandle().startSystemMove()
+                event.accept()
+                return
+            
+        super().mousePressEvent(event)
+
 

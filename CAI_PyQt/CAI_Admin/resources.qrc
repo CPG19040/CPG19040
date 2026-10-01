@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="Images">
+    <file>Images/maximize.png</file>
     <file>Images/minimize-sign.png</file>
     <file>Images/student_list_template.png</file>
     <file>Images/export.png</file>

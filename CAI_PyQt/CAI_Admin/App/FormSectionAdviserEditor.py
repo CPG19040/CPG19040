@@ -200,11 +200,11 @@ class Ui_SectionAdviserEditorDialog(object):
         self.frame_header.setMaximumSize(QSize(16777215, 35))
         self.frame_header.setMouseTracking(True)
         self.frame_header.setStyleSheet(u"#frame_header {\n"
-"	background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #e9e7e9, stop:1 #bababa);\n"
-"	border-top-left-radius: 10px;\n"
-"	border-top-right-radius: 10px;\n"
-"	border: 1px solid rgb(94, 92, 100);\n"
-"	border-bottom: 1px solid rgb(146, 146, 146);\n"
+"	background-color: #deddda;\n"
+"	border-top-left-radius: 12px;\n"
+"	border-top-right-radius: 12px;\n"
+"	border: 1px solid #7a7a7a;\n"
+"	border-bottom: none;\n"
 "}")
         self.frame_header.setFrameShape(QFrame.StyledPanel)
         self.frame_header.setFrameShadow(QFrame.Raised)
@@ -252,7 +252,7 @@ class Ui_SectionAdviserEditorDialog(object):
         self.btnMinimize.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btnMinimize.setStyleSheet(u"#btnMinimize {\n"
 "	border-radius: 12px;\n"
-"	background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #ffffff, stop:1 #d8ecf6);\n"
+"	background-color: transparent;\n"
 "}\n"
 "\n"
 "#btnMinimize:hover {\n"
@@ -272,7 +272,7 @@ class Ui_SectionAdviserEditorDialog(object):
         self.btnClose.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btnClose.setStyleSheet(u"#btnClose {\n"
 "	border-radius: 12px;\n"
-"	background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #ffffff, stop:1 #d8ecf6);\n"
+"	background-color: transparent;\n"
 "}\n"
 "\n"
 "#btnClose:hover {\n"
@@ -290,13 +290,12 @@ class Ui_SectionAdviserEditorDialog(object):
         self.widget_body = QWidget(SectionAdviserEditorDialog)
         self.widget_body.setObjectName(u"widget_body")
         self.widget_body.setStyleSheet(u"#widget_body {\n"
-"	background-color: rgb(222, 221, 218);\n"
+"	background-color: #deddda;\n"
+"	border: 1px solid #7a7a7a;\n"
 "	border-top: none;\n"
-"	border-right: 1px solid rgb(94, 92, 100);\n"
-"	border-bottom: 1px solid rgb(94, 92, 100);\n"
-"	border-left: 1px solid rgb(94, 92, 100);\n"
 "}")
         self.verticalLayout = QVBoxLayout(self.widget_body)
+        self.verticalLayout.setSpacing(12)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.label_24 = QLabel(self.widget_body)
         self.label_24.setObjectName(u"label_24")
@@ -305,16 +304,21 @@ class Ui_SectionAdviserEditorDialog(object):
         font1.setPointSize(11)
         font1.setBold(False)
         self.label_24.setFont(font1)
+        self.label_24.setStyleSheet(u"background: transparent;")
 
         self.verticalLayout.addWidget(self.label_24)
 
-        self.widget = QWidget(self.widget_body)
-        self.widget.setObjectName(u"widget")
-        self.verticalLayout_2 = QVBoxLayout(self.widget)
+        self.widget_1 = QWidget(self.widget_body)
+        self.widget_1.setObjectName(u"widget_1")
+        self.widget_1.setStyleSheet(u"#widget_1 {\n"
+"	background-color: #d2d2d2;\n"
+"	border-radius: 12px;\n"
+"}")
+        self.verticalLayout_2 = QVBoxLayout(self.widget_1)
         self.verticalLayout_2.setSpacing(6)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
-        self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
-        self.widget_2 = QWidget(self.widget)
+        self.verticalLayout_2.setContentsMargins(12, 9, 12, 9)
+        self.widget_2 = QWidget(self.widget_1)
         self.widget_2.setObjectName(u"widget_2")
         self.horizontalLayout = QHBoxLayout(self.widget_2)
         self.horizontalLayout.setSpacing(0)
@@ -322,15 +326,15 @@ class Ui_SectionAdviserEditorDialog(object):
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.label_9 = QLabel(self.widget_2)
         self.label_9.setObjectName(u"label_9")
-        self.label_9.setMinimumSize(QSize(100, 30))
-        self.label_9.setMaximumSize(QSize(100, 30))
+        self.label_9.setMinimumSize(QSize(100, 32))
+        self.label_9.setMaximumSize(QSize(100, 32))
         self.label_9.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout.addWidget(self.label_9)
 
         self.cmb_section = QComboBox(self.widget_2)
         self.cmb_section.setObjectName(u"cmb_section")
-        self.cmb_section.setMinimumSize(QSize(0, 30))
+        self.cmb_section.setMinimumSize(QSize(0, 32))
         self.cmb_section.setStyleSheet(u"")
         self.cmb_section.setEditable(False)
 
@@ -339,7 +343,7 @@ class Ui_SectionAdviserEditorDialog(object):
 
         self.verticalLayout_2.addWidget(self.widget_2)
 
-        self.widget_3 = QWidget(self.widget)
+        self.widget_3 = QWidget(self.widget_1)
         self.widget_3.setObjectName(u"widget_3")
         self.horizontalLayout_3 = QHBoxLayout(self.widget_3)
         self.horizontalLayout_3.setSpacing(0)
@@ -347,15 +351,16 @@ class Ui_SectionAdviserEditorDialog(object):
         self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
         self.label_10 = QLabel(self.widget_3)
         self.label_10.setObjectName(u"label_10")
-        self.label_10.setMinimumSize(QSize(100, 30))
-        self.label_10.setMaximumSize(QSize(100, 30))
+        self.label_10.setMinimumSize(QSize(100, 32))
+        self.label_10.setMaximumSize(QSize(100, 32))
         self.label_10.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout_3.addWidget(self.label_10)
 
         self.cmb_teacher = QComboBox(self.widget_3)
         self.cmb_teacher.setObjectName(u"cmb_teacher")
-        self.cmb_teacher.setMinimumSize(QSize(0, 30))
+        self.cmb_teacher.setMinimumSize(QSize(0, 32))
+        self.cmb_teacher.setMaximumSize(QSize(16777215, 32))
         self.cmb_teacher.setStyleSheet(u"")
         self.cmb_teacher.setEditable(False)
 
@@ -365,7 +370,7 @@ class Ui_SectionAdviserEditorDialog(object):
         self.verticalLayout_2.addWidget(self.widget_3)
 
 
-        self.verticalLayout.addWidget(self.widget)
+        self.verticalLayout.addWidget(self.widget_1)
 
         self.table_section = QTableView(self.widget_body)
         self.table_section.setObjectName(u"table_section")
