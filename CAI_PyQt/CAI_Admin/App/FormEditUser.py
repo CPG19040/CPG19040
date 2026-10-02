@@ -24,12 +24,149 @@ class Ui_EditUserDialog(object):
     def setupUi(self, EditUserDialog):
         if not EditUserDialog.objectName():
             EditUserDialog.setObjectName(u"EditUserDialog")
-        EditUserDialog.resize(790, 525)
-        EditUserDialog.setMinimumSize(QSize(790, 525))
-        EditUserDialog.setMaximumSize(QSize(790, 525))
+        EditUserDialog.resize(790, 624)
+        EditUserDialog.setMinimumSize(QSize(790, 624))
+        EditUserDialog.setMaximumSize(QSize(900, 624))
         EditUserDialog.setStyleSheet(u"* {\n"
 "	background-color: rgb(222, 221, 218); \n"
 "	color: black;\n"
+"}\n"
+"\n"
+"#EditUserDialog {\n"
+"	background: transparent;\n"
+"}\n"
+"\n"
+"QMessageBox {\n"
+"	background-color: #deddda;\n"
+"	font: 10pt \"Inter\";\n"
+"	color: black;\n"
+"}\n"
+"\n"
+"QMessageBox QLabel {\n"
+"	font: 10pt \"Inter\";\n"
+"	color: black;\n"
+"}\n"
+"\n"
+"QMessageBox QPushButton {\n"
+"	height: 30px;\n"
+"	padding: 0px 12px;\n"
+"	background-color: #deddda;\n"
+"	font: 10pt \"Inter\";\n"
+"	color: black;\n"
+"}")
+        EditUserDialog.setModal(True)
+        self.verticalLayout = QVBoxLayout(EditUserDialog)
+        self.verticalLayout.setSpacing(0)
+        self.verticalLayout.setObjectName(u"verticalLayout")
+        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
+        self.frame_header = QFrame(EditUserDialog)
+        self.frame_header.setObjectName(u"frame_header")
+        self.frame_header.setMinimumSize(QSize(0, 35))
+        self.frame_header.setMaximumSize(QSize(16777215, 35))
+        self.frame_header.setMouseTracking(True)
+        self.frame_header.setStyleSheet(u"#frame_header {\n"
+"	background-color: #deddda;\n"
+"	border-top-left-radius: 12px;\n"
+"	border-top-right-radius: 12px;\n"
+"	border: 1px solid #7a7a7a;\n"
+"	border-bottom: none;\n"
+"}")
+        self.frame_header.setFrameShape(QFrame.StyledPanel)
+        self.frame_header.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_10 = QHBoxLayout(self.frame_header)
+        self.horizontalLayout_10.setSpacing(6)
+        self.horizontalLayout_10.setObjectName(u"horizontalLayout_10")
+        self.horizontalLayout_10.setContentsMargins(4, 0, 0, 0)
+        self.widget_window_icon = QWidget(self.frame_header)
+        self.widget_window_icon.setObjectName(u"widget_window_icon")
+        self.widget_window_icon.setMinimumSize(QSize(72, 34))
+        self.widget_window_icon.setMaximumSize(QSize(72, 34))
+        self.widget_window_icon.setStyleSheet(u"background: transparent;")
+        self.horizontalLayout_12 = QHBoxLayout(self.widget_window_icon)
+        self.horizontalLayout_12.setObjectName(u"horizontalLayout_12")
+        self.horizontalLayout_12.setContentsMargins(0, 0, 0, 0)
+
+        self.horizontalLayout_10.addWidget(self.widget_window_icon)
+
+        self.label_windowTitle = QLabel(self.frame_header)
+        self.label_windowTitle.setObjectName(u"label_windowTitle")
+        font = QFont()
+        font.setFamilies([u"Inter SemiBold"])
+        font.setPointSize(10)
+        font.setBold(False)
+        font.setItalic(False)
+        self.label_windowTitle.setFont(font)
+        self.label_windowTitle.setStyleSheet(u"background: transparent;\n"
+"color: rgb(0, 0, 0);\n"
+"font: 10pt \"Inter SemiBold\";")
+        self.label_windowTitle.setAlignment(Qt.AlignCenter)
+
+        self.horizontalLayout_10.addWidget(self.label_windowTitle)
+
+        self.widget_window_buttons = QWidget(self.frame_header)
+        self.widget_window_buttons.setObjectName(u"widget_window_buttons")
+        self.widget_window_buttons.setMinimumSize(QSize(72, 34))
+        self.widget_window_buttons.setMaximumSize(QSize(72, 34))
+        self.widget_window_buttons.setStyleSheet(u"background: transparent;")
+        self.horizontalLayout_13 = QHBoxLayout(self.widget_window_buttons)
+        self.horizontalLayout_13.setObjectName(u"horizontalLayout_13")
+        self.horizontalLayout_13.setContentsMargins(0, 0, 0, 0)
+        self.btnMinimize = QPushButton(self.widget_window_buttons)
+        self.btnMinimize.setObjectName(u"btnMinimize")
+        self.btnMinimize.setMinimumSize(QSize(24, 24))
+        self.btnMinimize.setMaximumSize(QSize(24, 24))
+        self.btnMinimize.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.btnMinimize.setStyleSheet(u"#btnMinimize {\n"
+"	border-radius: 12px;\n"
+"	background-color: transparent;\n"
+"}\n"
+"\n"
+"#btnMinimize:hover {\n"
+"	background-color: rgb(248, 228, 92);\n"
+"}")
+        icon = QIcon()
+        icon.addFile(u":/Images/Images/minimize-sign.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.btnMinimize.setIcon(icon)
+        self.btnMinimize.setIconSize(QSize(12, 12))
+
+        self.horizontalLayout_13.addWidget(self.btnMinimize)
+
+        self.btnClose = QPushButton(self.widget_window_buttons)
+        self.btnClose.setObjectName(u"btnClose")
+        self.btnClose.setMinimumSize(QSize(24, 24))
+        self.btnClose.setMaximumSize(QSize(24, 24))
+        self.btnClose.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.btnClose.setStyleSheet(u"#btnClose {\n"
+"	border-radius: 12px;\n"
+"	background-color: transparent;\n"
+"}\n"
+"\n"
+"#btnClose:hover {\n"
+"	background-color: rgb(246, 97, 81);\n"
+"}")
+        icon1 = QIcon()
+        icon1.addFile(u":/Images/Images/clear.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.btnClose.setIcon(icon1)
+
+        self.horizontalLayout_13.addWidget(self.btnClose)
+
+
+        self.horizontalLayout_10.addWidget(self.widget_window_buttons)
+
+
+        self.verticalLayout.addWidget(self.frame_header)
+
+        self.widget_body = QWidget(EditUserDialog)
+        self.widget_body.setObjectName(u"widget_body")
+        self.widget_body.setMinimumSize(QSize(0, 100))
+        self.widget_body.setStyleSheet(u"#widget_body {\n"
+"	background-color: #deddda;\n"
+"	border: 1px solid #7a7a7a;\n"
+"	border-top: none;\n"
+"}\n"
+"\n"
+"#grp_info {\n"
+"	background-color: transparent;\n"
 "}\n"
 "\n"
 "QPushButton[class=\"button-green\"] {\n"
@@ -55,11 +192,11 @@ class Ui_EditUserDialog(object):
 "                                stop:1 #129046); \n"
 "}\n"
 "\n"
-"QPushButton[class=\"button-green\"]:disabled {\n"
+"QPushButton[class="
+                        "\"button-green\"]:disabled {\n"
 "    background: #A5D6A7;\n"
 "    color: #E8F5E9;\n"
-"    opacity:"
-                        " 0.6;\n"
+"    opacity: 0.6;\n"
 "}\n"
 "\n"
 "*[class=\"button-normal\"] {\n"
@@ -90,55 +227,59 @@ class Ui_EditUserDialog(object):
 "	color: #aeaeae;\n"
 "}\n"
 "\n"
+"/**[class=\"sectio"
+                        "n-widget\"] {\n"
+"	background-color: #c0bfbc;\n"
+"	border-radius: 12px;\n"
+"}*/\n"
+"\n"
 "*[class=\"input-field\"] {\n"
 "	background-color: transparent;\n"
 "}\n"
 "\n"
 "*[class=\"input-field\"] QLineEdit {\n"
-""
-                        "	background-color: #ffffff;\n"
+"	background-color: #ffffff;\n"
 "	border: 1px solid #999;\n"
 "	border-left: none;\n"
-"	border-top-right-radius: 15px;\n"
-"	border-bottom-right-radius: 15px;\n"
+"	border-top-right-radius: 18px;\n"
+"	border-bottom-right-radius: 18px;\n"
 "	padding: 0px 8px;\n"
 "	color: black;\n"
 "}\n"
 "\n"
 "*[class=\"input-field\"] QLabel {\n"
-"	background-color: rgb(192, 191, 188);\n"
+"	background-color: #d2d2d2;\n"
 "	border-left: 1px solid #999;\n"
 "	border-top: 1px solid #999;\n"
 "	border-bottom: 1px solid #999;\n"
 "	border-right: none;\n"
-"	border-top-left-radius: 15px;\n"
-"	border-bottom-left-radius: 15px;\n"
+"	border-top-left-radius: 18px;\n"
+"	border-bottom-left-radius: 18px;\n"
 "	padding-left: 8px;\n"
 "	color: black;\n"
 "}\n"
 "\n"
-"QComboBox {\n"
-"    border: 1px solid #999;\n"
-"    border-left: none;\n"
-"    padding: 0px 10px;\n"
-"    background-color: #ffffff;\n"
-"    color: #333333;\n"
-"    font: 10pt \"Inter Medium\";\n"
-"    selection-background-color: #7eb4d7;\n"
-"	border-top-right-radius: 15px;\n"
-"	border-bottom-right-radius: 15px;\n"
+"*[class=\"input-field\"] QComboBox {\n"
+"	background-color: #FFF;\n"
+"	border: 1px solid #999;\n"
+"	border-left: none;\n"
+"	border-top-right-radius: 18px;\n"
+"	border-bottom-right-radius: 18px;\n"
+"	padding-left: 8px;\n"
+"	color: black;\n"
 "}\n"
 "\n"
-"QComboBox:focus, QLineEdit:focus {\n"
-"    border: 1px solid #007BFF;\n"
+"*[class=\"input-field\"] QC"
+                        "omboBox:focus {\n"
+"	border: 1px solid #007BFF;\n"
 "}\n"
 "\n"
-"QComboBox:hover, QLineEdit:hover {\n"
-"    border: 1px solid #"
-                        "3498db;\n"
+"*[class=\"input-field\"] QLineEdit:hover,\n"
+"*[class=\"input-field\"] QComboBox:hover {\n"
+"    border: 1px solid #3498db;\n"
 "}\n"
 "\n"
-"QComboBox::drop-down {\n"
+"*[class=\"input-field\"] QComboBox::drop-down {\n"
 "    subcontrol-origin: padding;\n"
 "    subcontrol-position: top right;\n"
 "    width: 30px;\n"
@@ -148,14 +289,14 @@ class Ui_EditUserDialog(object):
 "    border-bottom-right-radius: 15px;\n"
 "}\n"
 "\n"
-"QComboBox::down-arrow {\n"
+"*[class=\"input-field\"] QComboBox::down-arrow {\n"
 "    image: url(:/Images/Images/caret-down.png);\n"
 "    border: none;\n"
 "    width: 8px;\n"
 "    height: 8px;\n"
 "}\n"
 "\n"
-"QComboBox QAbstractItemView {\n"
+"*[class=\"input-field\"] QComboBox QAbstractItemView {\n"
 "    background-color: white !important;\n"
 "    border: 1px solid #999;\n"
 "    selection-background-color: #7eb4d7;\n"
@@ -163,7 +304,8 @@ class Ui_EditUserDialog(object):
 "    outline: 0; /* Removes the ugly dotted focus border */\n"
 "}\n"
 "\n"
-"QComboBox QAbstractItemView::item {\n"
+"*[class=\"input-fiel"
+                        "d\"] QComboBox QAbstractItemView::item {\n"
 "    padding: 0px 15px;\n"
 "    border-radius: 4px;\n"
 "    color: #333333;\n"
@@ -172,19 +314,23 @@ class Ui_EditUserDialog(object):
 "/* Hover state for items inside the dropdown */\n"
 "QComboBox QAbstractItemView::item:hover {\n"
 "    background-color: #7eb4d7;\n"
-"    color: "
-                        "#ffffff;\n"
+"    color: #ffffff;\n"
 "}")
-        EditUserDialog.setModal(True)
-        self.verticalLayout = QVBoxLayout(EditUserDialog)
-        self.verticalLayout.setObjectName(u"verticalLayout")
-        self.widget = QWidget(EditUserDialog)
-        self.widget.setObjectName(u"widget")
-        self.widget.setStyleSheet(u"")
-        self.horizontalLayout = QHBoxLayout(self.widget)
+        self.verticalLayout_5 = QVBoxLayout(self.widget_body)
+        self.verticalLayout_5.setSpacing(6)
+        self.verticalLayout_5.setObjectName(u"verticalLayout_5")
+        self.verticalLayout_5.setContentsMargins(12, 9, 12, 9)
+        self.widget_1 = QWidget(self.widget_body)
+        self.widget_1.setObjectName(u"widget_1")
+        self.widget_1.setStyleSheet(u"")
+        self.horizontalLayout = QHBoxLayout(self.widget_1)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.widget_3 = QWidget(self.widget)
+        self.horizontalLayout.setContentsMargins(12, -1, 12, -1)
+        self.widget_3 = QWidget(self.widget_1)
         self.widget_3.setObjectName(u"widget_3")
+        self.widget_3.setStyleSheet(u"#widget_3, QLabel {\n"
+"	background: transparent;\n"
+"}")
         self.verticalLayout_2 = QVBoxLayout(self.widget_3)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
@@ -192,7 +338,7 @@ class Ui_EditUserDialog(object):
         self.label_profile_pic.setObjectName(u"label_profile_pic")
         self.label_profile_pic.setMinimumSize(QSize(160, 160))
         self.label_profile_pic.setMaximumSize(QSize(160, 160))
-        self.label_profile_pic.setPixmap(QPixmap(u":/Images/Images/profile_gray.png"))
+        self.label_profile_pic.setPixmap(QPixmap(u":/Images/Images/profile.png"))
         self.label_profile_pic.setScaledContents(True)
         self.label_profile_pic.setAlignment(Qt.AlignCenter)
 
@@ -215,7 +361,7 @@ class Ui_EditUserDialog(object):
 
         self.horizontalLayout.addWidget(self.widget_3)
 
-        self.grp_info = QWidget(self.widget)
+        self.grp_info = QWidget(self.widget_1)
         self.grp_info.setObjectName(u"grp_info")
         self.VLayout_Info = QVBoxLayout(self.grp_info)
         self.VLayout_Info.setSpacing(6)
@@ -229,15 +375,16 @@ class Ui_EditUserDialog(object):
         self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
         self.label_8 = QLabel(self.widget_2)
         self.label_8.setObjectName(u"label_8")
-        self.label_8.setMinimumSize(QSize(120, 30))
-        self.label_8.setMaximumSize(QSize(120, 30))
+        self.label_8.setMinimumSize(QSize(120, 36))
+        self.label_8.setMaximumSize(QSize(120, 36))
         self.label_8.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout_3.addWidget(self.label_8)
 
         self.lineEdit_firstname = QLineEdit(self.widget_2)
         self.lineEdit_firstname.setObjectName(u"lineEdit_firstname")
-        self.lineEdit_firstname.setMinimumSize(QSize(0, 30))
+        self.lineEdit_firstname.setMinimumSize(QSize(0, 36))
+        self.lineEdit_firstname.setMaximumSize(QSize(16777215, 36))
         self.lineEdit_firstname.setStyleSheet(u"")
 
         self.horizontalLayout_3.addWidget(self.lineEdit_firstname)
@@ -253,15 +400,16 @@ class Ui_EditUserDialog(object):
         self.horizontalLayout_4.setContentsMargins(0, 0, 0, 0)
         self.label_9 = QLabel(self.widget_4)
         self.label_9.setObjectName(u"label_9")
-        self.label_9.setMinimumSize(QSize(120, 30))
-        self.label_9.setMaximumSize(QSize(120, 30))
+        self.label_9.setMinimumSize(QSize(120, 36))
+        self.label_9.setMaximumSize(QSize(120, 36))
         self.label_9.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout_4.addWidget(self.label_9)
 
         self.lineEdit_middlename = QLineEdit(self.widget_4)
         self.lineEdit_middlename.setObjectName(u"lineEdit_middlename")
-        self.lineEdit_middlename.setMinimumSize(QSize(0, 30))
+        self.lineEdit_middlename.setMinimumSize(QSize(0, 36))
+        self.lineEdit_middlename.setMaximumSize(QSize(16777215, 36))
         self.lineEdit_middlename.setStyleSheet(u"")
 
         self.horizontalLayout_4.addWidget(self.lineEdit_middlename)
@@ -277,15 +425,16 @@ class Ui_EditUserDialog(object):
         self.horizontalLayout_5.setContentsMargins(0, 0, 0, 0)
         self.label_10 = QLabel(self.widget_5)
         self.label_10.setObjectName(u"label_10")
-        self.label_10.setMinimumSize(QSize(120, 30))
-        self.label_10.setMaximumSize(QSize(120, 30))
+        self.label_10.setMinimumSize(QSize(120, 36))
+        self.label_10.setMaximumSize(QSize(120, 36))
         self.label_10.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout_5.addWidget(self.label_10)
 
         self.lineEdit_lastname = QLineEdit(self.widget_5)
         self.lineEdit_lastname.setObjectName(u"lineEdit_lastname")
-        self.lineEdit_lastname.setMinimumSize(QSize(0, 30))
+        self.lineEdit_lastname.setMinimumSize(QSize(0, 36))
+        self.lineEdit_lastname.setMaximumSize(QSize(16777215, 36))
         self.lineEdit_lastname.setStyleSheet(u"")
 
         self.horizontalLayout_5.addWidget(self.lineEdit_lastname)
@@ -301,15 +450,16 @@ class Ui_EditUserDialog(object):
         self.horizontalLayout_6.setContentsMargins(0, 0, 0, 0)
         self.label_11 = QLabel(self.widget_6)
         self.label_11.setObjectName(u"label_11")
-        self.label_11.setMinimumSize(QSize(120, 30))
-        self.label_11.setMaximumSize(QSize(120, 30))
+        self.label_11.setMinimumSize(QSize(120, 36))
+        self.label_11.setMaximumSize(QSize(120, 36))
         self.label_11.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout_6.addWidget(self.label_11)
 
         self.lineEdit_username = QLineEdit(self.widget_6)
         self.lineEdit_username.setObjectName(u"lineEdit_username")
-        self.lineEdit_username.setMinimumSize(QSize(0, 30))
+        self.lineEdit_username.setMinimumSize(QSize(0, 36))
+        self.lineEdit_username.setMaximumSize(QSize(16777215, 36))
         self.lineEdit_username.setStyleSheet(u"")
 
         self.horizontalLayout_6.addWidget(self.lineEdit_username)
@@ -325,15 +475,16 @@ class Ui_EditUserDialog(object):
         self.horizontalLayout_7.setContentsMargins(0, 0, 0, 0)
         self.label_13 = QLabel(self.widget_7)
         self.label_13.setObjectName(u"label_13")
-        self.label_13.setMinimumSize(QSize(120, 30))
-        self.label_13.setMaximumSize(QSize(120, 30))
+        self.label_13.setMinimumSize(QSize(120, 36))
+        self.label_13.setMaximumSize(QSize(120, 36))
         self.label_13.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout_7.addWidget(self.label_13)
 
         self.comboBox_position = QComboBox(self.widget_7)
         self.comboBox_position.setObjectName(u"comboBox_position")
-        self.comboBox_position.setMinimumSize(QSize(0, 30))
+        self.comboBox_position.setMinimumSize(QSize(0, 36))
+        self.comboBox_position.setMaximumSize(QSize(16777215, 36))
         self.comboBox_position.setStyleSheet(u"")
         self.comboBox_position.setEditable(True)
 
@@ -342,36 +493,34 @@ class Ui_EditUserDialog(object):
 
         self.VLayout_Info.addWidget(self.widget_7)
 
-        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
-
-        self.VLayout_Info.addItem(self.verticalSpacer)
-
 
         self.horizontalLayout.addWidget(self.grp_info)
 
 
-        self.verticalLayout.addWidget(self.widget)
+        self.verticalLayout_5.addWidget(self.widget_1)
 
-        self.line = QFrame(EditUserDialog)
+        self.line = QFrame(self.widget_body)
         self.line.setObjectName(u"line")
         self.line.setFrameShape(QFrame.Shape.HLine)
         self.line.setFrameShadow(QFrame.Shadow.Sunken)
 
-        self.verticalLayout.addWidget(self.line)
+        self.verticalLayout_5.addWidget(self.line)
 
-        self.widget_form_3 = QWidget(EditUserDialog)
+        self.widget_form_3 = QWidget(self.widget_body)
         self.widget_form_3.setObjectName(u"widget_form_3")
         self.widget_form_3.setEnabled(True)
         self.widget_form_3.setStyleSheet(u"")
         self.verticalLayout_3 = QVBoxLayout(self.widget_form_3)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
+        self.verticalLayout_3.setContentsMargins(12, 12, 12, 12)
         self.label_25 = QLabel(self.widget_form_3)
         self.label_25.setObjectName(u"label_25")
-        font = QFont()
-        font.setFamilies([u"Inter SemiBold"])
-        font.setPointSize(11)
-        font.setBold(False)
-        self.label_25.setFont(font)
+        font1 = QFont()
+        font1.setFamilies([u"Inter SemiBold"])
+        font1.setPointSize(11)
+        font1.setBold(False)
+        self.label_25.setFont(font1)
+        self.label_25.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
 
         self.verticalLayout_3.addWidget(self.label_25)
 
@@ -380,18 +529,19 @@ class Ui_EditUserDialog(object):
         self.horizontalLayout_8 = QHBoxLayout(self.widget_8)
         self.horizontalLayout_8.setSpacing(0)
         self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
-        self.horizontalLayout_8.setContentsMargins(0, 0, 0, -1)
+        self.horizontalLayout_8.setContentsMargins(0, 0, 0, 0)
         self.label_12 = QLabel(self.widget_8)
         self.label_12.setObjectName(u"label_12")
-        self.label_12.setMinimumSize(QSize(100, 30))
-        self.label_12.setMaximumSize(QSize(16777215, 30))
+        self.label_12.setMinimumSize(QSize(120, 36))
+        self.label_12.setMaximumSize(QSize(120, 36))
         self.label_12.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout_8.addWidget(self.label_12)
 
         self.lineEdit_password = QLineEdit(self.widget_8)
         self.lineEdit_password.setObjectName(u"lineEdit_password")
-        self.lineEdit_password.setMinimumSize(QSize(0, 30))
+        self.lineEdit_password.setMinimumSize(QSize(0, 36))
+        self.lineEdit_password.setMaximumSize(QSize(16777215, 36))
         self.lineEdit_password.setStyleSheet(u"")
         self.lineEdit_password.setEchoMode(QLineEdit.PasswordEchoOnEdit)
 
@@ -401,17 +551,26 @@ class Ui_EditUserDialog(object):
         self.verticalLayout_3.addWidget(self.widget_8)
 
 
-        self.verticalLayout.addWidget(self.widget_form_3)
+        self.verticalLayout_5.addWidget(self.widget_form_3)
 
-        self.widget_form_2 = QWidget(EditUserDialog)
+        self.line_2 = QFrame(self.widget_body)
+        self.line_2.setObjectName(u"line_2")
+        self.line_2.setFrameShape(QFrame.Shape.HLine)
+        self.line_2.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.verticalLayout_5.addWidget(self.line_2)
+
+        self.widget_form_2 = QWidget(self.widget_body)
         self.widget_form_2.setObjectName(u"widget_form_2")
         self.widget_form_2.setEnabled(True)
         self.widget_form_2.setStyleSheet(u"")
         self.verticalLayout_4 = QVBoxLayout(self.widget_form_2)
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
+        self.verticalLayout_4.setContentsMargins(12, 12, 12, 12)
         self.label_24 = QLabel(self.widget_form_2)
         self.label_24.setObjectName(u"label_24")
-        self.label_24.setFont(font)
+        self.label_24.setFont(font1)
+        self.label_24.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
 
         self.verticalLayout_4.addWidget(self.label_24)
 
@@ -423,15 +582,16 @@ class Ui_EditUserDialog(object):
         self.horizontalLayout_9.setContentsMargins(0, 0, 0, 0)
         self.label_22 = QLabel(self.widget_9)
         self.label_22.setObjectName(u"label_22")
-        self.label_22.setMinimumSize(QSize(120, 30))
-        self.label_22.setMaximumSize(QSize(16777215, 30))
+        self.label_22.setMinimumSize(QSize(120, 36))
+        self.label_22.setMaximumSize(QSize(16777215, 36))
         self.label_22.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout_9.addWidget(self.label_22)
 
         self.txtContactPerson = QLineEdit(self.widget_9)
         self.txtContactPerson.setObjectName(u"txtContactPerson")
-        self.txtContactPerson.setMinimumSize(QSize(0, 30))
+        self.txtContactPerson.setMinimumSize(QSize(0, 36))
+        self.txtContactPerson.setMaximumSize(QSize(16777215, 36))
         self.txtContactPerson.setStyleSheet(u"")
 
         self.horizontalLayout_9.addWidget(self.txtContactPerson)
@@ -447,15 +607,16 @@ class Ui_EditUserDialog(object):
         self.horizontalLayout_11.setContentsMargins(0, 0, 0, 0)
         self.label_23 = QLabel(self.widget_11)
         self.label_23.setObjectName(u"label_23")
-        self.label_23.setMinimumSize(QSize(120, 30))
-        self.label_23.setMaximumSize(QSize(16777215, 30))
+        self.label_23.setMinimumSize(QSize(120, 36))
+        self.label_23.setMaximumSize(QSize(16777215, 36))
         self.label_23.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout_11.addWidget(self.label_23)
 
         self.txtContactNum = QLineEdit(self.widget_11)
         self.txtContactNum.setObjectName(u"txtContactNum")
-        self.txtContactNum.setMinimumSize(QSize(0, 30))
+        self.txtContactNum.setMinimumSize(QSize(0, 36))
+        self.txtContactNum.setMaximumSize(QSize(16777215, 36))
         self.txtContactNum.setStyleSheet(u"")
 
         self.horizontalLayout_11.addWidget(self.txtContactNum)
@@ -464,11 +625,11 @@ class Ui_EditUserDialog(object):
         self.verticalLayout_4.addWidget(self.widget_11)
 
 
-        self.verticalLayout.addWidget(self.widget_form_2)
+        self.verticalLayout_5.addWidget(self.widget_form_2)
 
-        self.verticalSpacer_3 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
-        self.verticalLayout.addItem(self.verticalSpacer_3)
+        self.verticalLayout_5.addItem(self.verticalSpacer)
 
         self.horizontalLayout_2 = QHBoxLayout()
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
@@ -476,7 +637,7 @@ class Ui_EditUserDialog(object):
 
         self.horizontalLayout_2.addItem(self.horizontalSpacer_2)
 
-        self.btnCancel = QPushButton(EditUserDialog)
+        self.btnCancel = QPushButton(self.widget_body)
         self.btnCancel.setObjectName(u"btnCancel")
         self.btnCancel.setMinimumSize(QSize(100, 30))
         self.btnCancel.setMaximumSize(QSize(100, 30))
@@ -484,7 +645,7 @@ class Ui_EditUserDialog(object):
 
         self.horizontalLayout_2.addWidget(self.btnCancel)
 
-        self.btnUpdate = QPushButton(EditUserDialog)
+        self.btnUpdate = QPushButton(self.widget_body)
         self.btnUpdate.setObjectName(u"btnUpdate")
         self.btnUpdate.setMinimumSize(QSize(100, 30))
         self.btnUpdate.setMaximumSize(QSize(100, 30))
@@ -493,7 +654,10 @@ class Ui_EditUserDialog(object):
         self.horizontalLayout_2.addWidget(self.btnUpdate)
 
 
-        self.verticalLayout.addLayout(self.horizontalLayout_2)
+        self.verticalLayout_5.addLayout(self.horizontalLayout_2)
+
+
+        self.verticalLayout.addWidget(self.widget_body)
 
 
         self.retranslateUi(EditUserDialog)
@@ -506,6 +670,10 @@ class Ui_EditUserDialog(object):
 
     def retranslateUi(self, EditUserDialog):
         EditUserDialog.setWindowTitle(QCoreApplication.translate("EditUserDialog", u"User Information", None))
+        self.label_windowTitle.setText(QCoreApplication.translate("EditUserDialog", u"User Information", None))
+        self.btnMinimize.setText("")
+        self.btnClose.setText("")
+        self.widget_1.setProperty(u"class", QCoreApplication.translate("EditUserDialog", u"section-widget", None))
         self.label_profile_pic.setText("")
         self.btnUploadPhoto.setText(QCoreApplication.translate("EditUserDialog", u"Update photo", None))
         self.btnUploadPhoto.setProperty(u"class", QCoreApplication.translate("EditUserDialog", u"button-normal", None))
@@ -520,9 +688,11 @@ class Ui_EditUserDialog(object):
         self.label_11.setText(QCoreApplication.translate("EditUserDialog", u"User name", None))
         self.widget_7.setProperty(u"class", QCoreApplication.translate("EditUserDialog", u"input-field", None))
         self.label_13.setText(QCoreApplication.translate("EditUserDialog", u"Position", None))
+        self.widget_form_3.setProperty(u"class", QCoreApplication.translate("EditUserDialog", u"section-widget", None))
         self.label_25.setText(QCoreApplication.translate("EditUserDialog", u"Change Password", None))
         self.widget_8.setProperty(u"class", QCoreApplication.translate("EditUserDialog", u"input-field", None))
         self.label_12.setText(QCoreApplication.translate("EditUserDialog", u"Password", None))
+        self.widget_form_2.setProperty(u"class", QCoreApplication.translate("EditUserDialog", u"section-widget", None))
         self.label_24.setText(QCoreApplication.translate("EditUserDialog", u"Emergency contact", None))
         self.widget_9.setProperty(u"class", QCoreApplication.translate("EditUserDialog", u"input-field", None))
         self.label_22.setText(QCoreApplication.translate("EditUserDialog", u"Contact Person", None))

@@ -477,8 +477,7 @@ class SectionAdviserEditor(QDialog, Ui_SectionAdviserEditorDialog):
         super().__init__()
         self.setupUi(self)
 
-        # Remove OS default window frame
-        self.setWindowFlags(Qt.WindowType.FramelessWindowHint)
+        self.setWindowFlags(Qt.WindowType.FramelessWindowHint) # Remove OS default window frame
         self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground, True)
         self.setMouseTracking(True)
 

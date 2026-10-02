@@ -83,7 +83,7 @@ class Ui_CardRanking(object):
         self.label_profile.setMinimumSize(QSize(80, 80))
         self.label_profile.setMaximumSize(QSize(80, 80))
         self.label_profile.setStyleSheet(u"background-color: transparent;")
-        self.label_profile.setPixmap(QPixmap(u":/Images/Images/profile_gray.png"))
+        self.label_profile.setPixmap(QPixmap(u":/Images/Images/profile.png"))
         self.label_profile.setScaledContents(True)
         self.label_profile.setAlignment(Qt.AlignCenter)
 

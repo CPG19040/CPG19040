@@ -56,7 +56,7 @@ class Student:
             WHERE studentid = %s
         """
         record = self.db_tools.fetch_all(sql, (studentid,))
-        pixmap = QPixmap(u":/Images/Images/profile_gray.png")
+        pixmap = QPixmap(u":/Images/Images/profile.png")
 
         if record:
             img_data = record[0]['profile_pic']
@@ -385,9 +385,18 @@ class Student:
 
 
 class AddNewStudentDialog(QDialog, Ui_AddNewStudentDialog):
+    RESIZE_MARGIN = 8
+
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+        
+        self.setWindowFlags(Qt.WindowType.FramelessWindowHint) # Remove OS default window frame
+        self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground, True)
+        self.setMouseTracking(True)
+
+        self.btnMinimize.clicked.connect(self.showMinimized)
+        self.btnClose.clicked.connect(self.reject)
 
         self.util = Utility()
         self.db_tools = DatabaseTools()
@@ -411,6 +420,72 @@ class AddNewStudentDialog(QDialog, Ui_AddNewStudentDialog):
 
         self.util.populate_pulldown(self.cmbSection, sql, add_empty=True)
         self.util.populate_pulldown(self.cmbSection_2, sql, add_empty=True)
+
+    def _get_resize_edge(self, pos):
+        """Determine which edge or corner the mouse is over based on RESIZE_MARGIN."""
+        rect = self.rect()
+        x, y = pos.x(), pos.y()
+        w, h = rect.width(), rect.height()
+        
+        edge = None
+        
+        # Horizontal edges
+        if x <= self.RESIZE_MARGIN:
+            edge = Qt.Edge.LeftEdge
+        elif x >= w - self.RESIZE_MARGIN:
+            edge = Qt.Edge.RightEdge
+            
+        # Vertical edges
+        if y <= self.RESIZE_MARGIN:
+            if edge is None:
+                edge = Qt.Edge.TopEdge
+            else:
+                edge |= Qt.Edge.TopEdge
+        elif y >= h - self.RESIZE_MARGIN:
+            if edge is None:
+                edge = Qt.Edge.BottomEdge
+            else:
+                edge |= Qt.Edge.BottomEdge
+                
+        return edge
+
+    def _update_cursor_shape(self, edge):
+        """Update cursor appearance depending on the active resize edge/corner."""
+        if edge == (Qt.Edge.TopEdge | Qt.Edge.LeftEdge) or edge == (Qt.Edge.BottomEdge | Qt.Edge.RightEdge):
+            self.setCursor(Qt.CursorShape.SizeFDiagCursor)
+        elif edge == (Qt.Edge.TopEdge | Qt.Edge.RightEdge) or edge == (Qt.Edge.BottomEdge | Qt.Edge.LeftEdge):
+            self.setCursor(Qt.CursorShape.SizeBDiagCursor)
+        elif edge and (edge & (Qt.Edge.LeftEdge | Qt.Edge.RightEdge)) and not (edge & (Qt.Edge.TopEdge | Qt.Edge.BottomEdge)):
+            self.setCursor(Qt.CursorShape.SizeHorCursor)
+        elif edge and (edge & (Qt.Edge.TopEdge | Qt.Edge.BottomEdge)) and not (edge & (Qt.Edge.LeftEdge | Qt.Edge.RightEdge)):
+            self.setCursor(Qt.CursorShape.SizeVerCursor)
+        else:
+            self.setCursor(Qt.CursorShape.ArrowCursor)
+
+    def mouseMoveEvent(self, event):
+        pos = event.position().toPoint()
+        edge = self._get_resize_edge(pos)
+        self._update_cursor_shape(edge)
+        super().mouseMoveEvent(event)
+
+    def mousePressEvent(self, event):
+        if event.button() == Qt.LeftButton:
+            pos = event.position().toPoint()
+            edge = self._get_resize_edge(pos)
+            
+            # 1. If clicking near any edge/corner, resize the window
+            if edge:
+                self.windowHandle().startSystemResize(edge)
+                event.accept()
+                return
+
+            # 2. If clicking inside the custom header, move the window
+            if self.frame_header.geometry().contains(pos):
+                self.windowHandle().startSystemMove()
+                event.accept()
+                return
+            
+        super().mousePressEvent(event)
 
     def displaySchoolYear(self):
         _, base_year, next_year = self.util.get_dynamic_school_year_dates()
@@ -634,9 +709,19 @@ class AddNewStudentDialog(QDialog, Ui_AddNewStudentDialog):
 
 
 class StudentEditorDialog(QDialog, Ui_EditStudentDialog):
+    RESIZE_MARGIN = 8
+
     def __init__(self, user, studentid=None):
         super().__init__()
         self.setupUi(self)
+
+        self.setWindowFlags(Qt.WindowType.FramelessWindowHint) # Remove OS default window frame
+        self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground, True)
+        self.setMouseTracking(True)
+
+        self.btnMinimize.clicked.connect(self.showMinimized)
+        self.btnClose.clicked.connect(self.reject)
+
         self.db_tools = DatabaseTools()
         self.util = Utility()
 
@@ -691,6 +776,72 @@ class StudentEditorDialog(QDialog, Ui_EditStudentDialog):
 
         self.txtContactPerson.setText(f"{contact_person}")
         self.txtContactNum.setText(f"{contact_num}")
+
+    def _get_resize_edge(self, pos):
+        """Determine which edge or corner the mouse is over based on RESIZE_MARGIN."""
+        rect = self.rect()
+        x, y = pos.x(), pos.y()
+        w, h = rect.width(), rect.height()
+        
+        edge = None
+        
+        # Horizontal edges
+        if x <= self.RESIZE_MARGIN:
+            edge = Qt.Edge.LeftEdge
+        elif x >= w - self.RESIZE_MARGIN:
+            edge = Qt.Edge.RightEdge
+            
+        # Vertical edges
+        if y <= self.RESIZE_MARGIN:
+            if edge is None:
+                edge = Qt.Edge.TopEdge
+            else:
+                edge |= Qt.Edge.TopEdge
+        elif y >= h - self.RESIZE_MARGIN:
+            if edge is None:
+                edge = Qt.Edge.BottomEdge
+            else:
+                edge |= Qt.Edge.BottomEdge
+                
+        return edge
+
+    def _update_cursor_shape(self, edge):
+        """Update cursor appearance depending on the active resize edge/corner."""
+        if edge == (Qt.Edge.TopEdge | Qt.Edge.LeftEdge) or edge == (Qt.Edge.BottomEdge | Qt.Edge.RightEdge):
+            self.setCursor(Qt.CursorShape.SizeFDiagCursor)
+        elif edge == (Qt.Edge.TopEdge | Qt.Edge.RightEdge) or edge == (Qt.Edge.BottomEdge | Qt.Edge.LeftEdge):
+            self.setCursor(Qt.CursorShape.SizeBDiagCursor)
+        elif edge and (edge & (Qt.Edge.LeftEdge | Qt.Edge.RightEdge)) and not (edge & (Qt.Edge.TopEdge | Qt.Edge.BottomEdge)):
+            self.setCursor(Qt.CursorShape.SizeHorCursor)
+        elif edge and (edge & (Qt.Edge.TopEdge | Qt.Edge.BottomEdge)) and not (edge & (Qt.Edge.LeftEdge | Qt.Edge.RightEdge)):
+            self.setCursor(Qt.CursorShape.SizeVerCursor)
+        else:
+            self.setCursor(Qt.CursorShape.ArrowCursor)
+
+    def mouseMoveEvent(self, event):
+        pos = event.position().toPoint()
+        edge = self._get_resize_edge(pos)
+        self._update_cursor_shape(edge)
+        super().mouseMoveEvent(event)
+
+    def mousePressEvent(self, event):
+        if event.button() == Qt.LeftButton:
+            pos = event.position().toPoint()
+            edge = self._get_resize_edge(pos)
+            
+            # 1. If clicking near any edge/corner, resize the window
+            if edge:
+                self.windowHandle().startSystemResize(edge)
+                event.accept()
+                return
+
+            # 2. If clicking inside the custom header, move the window
+            if self.frame_header.geometry().contains(pos):
+                self.windowHandle().startSystemMove()
+                event.accept()
+                return
+            
+        super().mousePressEvent(event)
 
     def displaySchoolYear(self, studentid):
         base_year, next_year = Student().getStudentSchoolYear(studentid)

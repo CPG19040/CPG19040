@@ -25,12 +25,143 @@ class Ui_EditStudentDialog(object):
     def setupUi(self, EditStudentDialog):
         if not EditStudentDialog.objectName():
             EditStudentDialog.setObjectName(u"EditStudentDialog")
-        EditStudentDialog.resize(890, 577)
-        EditStudentDialog.setMinimumSize(QSize(890, 577))
-        EditStudentDialog.setMaximumSize(QSize(890, 577))
+        EditStudentDialog.resize(890, 693)
+        EditStudentDialog.setMinimumSize(QSize(890, 693))
+        EditStudentDialog.setMaximumSize(QSize(1100, 693))
         EditStudentDialog.setStyleSheet(u"* {\n"
-"	background-color: rgb(222, 221, 218); \n"
 "	color: black;\n"
+"}\n"
+"\n"
+"QDialog {\n"
+"	background-color: transparent; \n"
+"}\n"
+"\n"
+"QMessageBox {\n"
+"	background-color: #deddda;\n"
+"	font: 10pt \"Inter\";\n"
+"	color: black;\n"
+"}\n"
+"\n"
+"QMessageBox QLabel {\n"
+"	font: 10pt \"Inter\";\n"
+"	color: black;\n"
+"}\n"
+"\n"
+"QMessageBox QPushButton {\n"
+"	height: 30px;\n"
+"	padding: 0px 12px;\n"
+"	background-color: #deddda;\n"
+"	font: 10pt \"Inter\";\n"
+"	color: black;\n"
+"}")
+        self.verticalLayout_5 = QVBoxLayout(EditStudentDialog)
+        self.verticalLayout_5.setSpacing(0)
+        self.verticalLayout_5.setObjectName(u"verticalLayout_5")
+        self.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
+        self.frame_header = QFrame(EditStudentDialog)
+        self.frame_header.setObjectName(u"frame_header")
+        self.frame_header.setMinimumSize(QSize(0, 35))
+        self.frame_header.setMaximumSize(QSize(16777215, 35))
+        self.frame_header.setMouseTracking(True)
+        self.frame_header.setStyleSheet(u"#frame_header {\n"
+"	background-color: #deddda;\n"
+"	border-top-left-radius: 12px;\n"
+"	border-top-right-radius: 12px;\n"
+"	border: 1px solid #7a7a7a;\n"
+"	border-bottom: none;\n"
+"}")
+        self.frame_header.setFrameShape(QFrame.StyledPanel)
+        self.frame_header.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_10 = QHBoxLayout(self.frame_header)
+        self.horizontalLayout_10.setSpacing(6)
+        self.horizontalLayout_10.setObjectName(u"horizontalLayout_10")
+        self.horizontalLayout_10.setContentsMargins(4, 0, 0, 0)
+        self.widget_window_icon = QWidget(self.frame_header)
+        self.widget_window_icon.setObjectName(u"widget_window_icon")
+        self.widget_window_icon.setMinimumSize(QSize(72, 34))
+        self.widget_window_icon.setMaximumSize(QSize(72, 34))
+        self.widget_window_icon.setStyleSheet(u"background: transparent;")
+        self.horizontalLayout_11 = QHBoxLayout(self.widget_window_icon)
+        self.horizontalLayout_11.setSpacing(0)
+        self.horizontalLayout_11.setObjectName(u"horizontalLayout_11")
+        self.horizontalLayout_11.setContentsMargins(0, 0, 0, 0)
+
+        self.horizontalLayout_10.addWidget(self.widget_window_icon)
+
+        self.label_windowTitle = QLabel(self.frame_header)
+        self.label_windowTitle.setObjectName(u"label_windowTitle")
+        font = QFont()
+        font.setFamilies([u"Inter SemiBold"])
+        font.setPointSize(10)
+        font.setBold(False)
+        font.setItalic(False)
+        self.label_windowTitle.setFont(font)
+        self.label_windowTitle.setStyleSheet(u"background: transparent;\n"
+"color: rgb(0, 0, 0);\n"
+"font: 10pt \"Inter SemiBold\";")
+        self.label_windowTitle.setAlignment(Qt.AlignCenter)
+
+        self.horizontalLayout_10.addWidget(self.label_windowTitle)
+
+        self.widget_window_buttons = QWidget(self.frame_header)
+        self.widget_window_buttons.setObjectName(u"widget_window_buttons")
+        self.widget_window_buttons.setMinimumSize(QSize(72, 34))
+        self.widget_window_buttons.setMaximumSize(QSize(72, 34))
+        self.horizontalLayout_12 = QHBoxLayout(self.widget_window_buttons)
+        self.horizontalLayout_12.setSpacing(0)
+        self.horizontalLayout_12.setObjectName(u"horizontalLayout_12")
+        self.horizontalLayout_12.setContentsMargins(0, 0, 0, 0)
+        self.btnMinimize = QPushButton(self.widget_window_buttons)
+        self.btnMinimize.setObjectName(u"btnMinimize")
+        self.btnMinimize.setMinimumSize(QSize(24, 24))
+        self.btnMinimize.setMaximumSize(QSize(24, 24))
+        self.btnMinimize.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.btnMinimize.setStyleSheet(u"#btnMinimize {\n"
+"	border-radius: 12px;\n"
+"	background-color: transparent;\n"
+"}\n"
+"\n"
+"#btnMinimize:hover {\n"
+"	background-color: rgb(248, 228, 92);\n"
+"}")
+        icon = QIcon()
+        icon.addFile(u":/Images/Images/minimize-sign.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.btnMinimize.setIcon(icon)
+        self.btnMinimize.setIconSize(QSize(12, 12))
+
+        self.horizontalLayout_12.addWidget(self.btnMinimize)
+
+        self.btnClose = QPushButton(self.widget_window_buttons)
+        self.btnClose.setObjectName(u"btnClose")
+        self.btnClose.setMinimumSize(QSize(24, 24))
+        self.btnClose.setMaximumSize(QSize(24, 24))
+        self.btnClose.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.btnClose.setStyleSheet(u"#btnClose {\n"
+"	border-radius: 12px;\n"
+"	background-color: transparent;\n"
+"}\n"
+"\n"
+"#btnClose:hover {\n"
+"	background-color: rgb(246, 97, 81);\n"
+"}")
+        icon1 = QIcon()
+        icon1.addFile(u":/Images/Images/clear.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.btnClose.setIcon(icon1)
+
+        self.horizontalLayout_12.addWidget(self.btnClose)
+
+
+        self.horizontalLayout_10.addWidget(self.widget_window_buttons)
+
+
+        self.verticalLayout_5.addWidget(self.frame_header)
+
+        self.widget_body = QWidget(EditStudentDialog)
+        self.widget_body.setObjectName(u"widget_body")
+        self.widget_body.setStyleSheet(u"#widget_body {\n"
+"	background-color: #deddda;\n"
+"	border: 1px solid #7a7a7a;\n"
+"	border-top: none;\n"
 "}\n"
 "\n"
 "QPushButton[class=\"button-green\"] {\n"
@@ -58,9 +189,9 @@ class Ui_EditStudentDialog(object):
 "\n"
 "QPushButton[class=\"button-green\"]:disabled {\n"
 "    background: #A5D6A7;\n"
-"    color: #E8F5E9;\n"
-"    opacity:"
-                        " 0.6;\n"
+" "
+                        "   color: #E8F5E9;\n"
+"    opacity: 0.6;\n"
 "}\n"
 "\n"
 "*[class=\"button-normal\"] {\n"
@@ -95,22 +226,23 @@ class Ui_EditStudentDialog(object):
 "	background-color: transparent;\n"
 "}\n"
 "\n"
-"*[class=\"input-field\"] QLineEdit {\n"
-""
-                        "	background-color: #ffffff;\n"
+"*[c"
+                        "lass=\"input-field\"] QLineEdit {\n"
+"	background-color: #ffffff;\n"
 "	border: 1px solid #ABABAB;\n"
 "	border-left: none;\n"
-"	border-top-right-radius: 15px;\n"
-"	border-bottom-right-radius: 15px;\n"
+"	border-top-right-radius: 18px;\n"
+"	border-bottom-right-radius: 18px;\n"
 "	padding: 0px 8px;\n"
 "	color: black;\n"
 "}\n"
 "\n"
 "*[class=\"input-field\"] QLabel {\n"
-"	background-color: rgb(192, 191, 188);\n"
+"	background-color: #d2d2d2;\n"
+"	border: 1px solid #999;\n"
 "	border-right: none;\n"
-"	border-top-left-radius: 15px;\n"
-"	border-bottom-left-radius: 15px;\n"
+"	border-top-left-radius: 18px;\n"
+"	border-bottom-left-radius: 18px;\n"
 "	padding-left: 8px;\n"
 "	color: black;\n"
 "}\n"
@@ -118,8 +250,8 @@ class Ui_EditStudentDialog(object):
 "QComboBox {\n"
 "    border: 1px solid #999;\n"
 "	border-left: none;\n"
-"	border-top-right-radius: 15px;\n"
-"	border-bottom-right-radius: 15px;\n"
+"	border-top-right-radius: 18px;\n"
+"	border-bottom-right-radius: 18px;\n"
 "	padding: 0px 15px 0px;\n"
 "	background-color: #ffffff;\n"
 "	color: #333333;\n"
@@ -135,9 +267,9 @@ class Ui_EditStudentDialog(object):
 "    border: 1px solid #3498db;\n"
 "}\n"
 "\n"
-"QComboBox::drop-down {\n"
-"    subcontrol-origin: padding;"
-                        "\n"
+"QC"
+                        "omboBox::drop-down {\n"
+"    subcontrol-origin: padding;\n"
 "    subcontrol-position: top right;\n"
 "    width: 30px;\n"
 "    border-left-width: 0px;\n"
@@ -173,10 +305,10 @@ class Ui_EditStudentDialog(object):
 "    color: #ffffff;\n"
 "}\n"
 "\n"
-"QSpinBox {\n"
+"Q"
+                        "SpinBox {\n"
 "	font: 10pt \"Inter Medium\";\n"
-"    heig"
-                        "ht: 30px;\n"
+"    height: 30px;\n"
 "    border: 1px solid #999;\n"
 "    border-radius: 15px;\n"
 "    padding: 0px 5px 0px;\n"
@@ -215,19 +347,20 @@ class Ui_EditStudentDialog(object):
 "\n"
 "QSpinBox::up-arrow {\n"
 "    image: url(:/Images/Images/caret-up.png);\n"
-"    width: 8px;\n"
+"    width: 8px"
+                        ";\n"
 "    height: 8px;\n"
 "}\n"
 "\n"
-"QSpinBox::down-arr"
-                        "ow {\n"
+"QSpinBox::down-arrow {\n"
 "    image: url(:/Images/Images/caret-down.png);\n"
 "    width: 8px;\n"
 "    height: 8px;\n"
 "}")
-        self.verticalLayout = QVBoxLayout(EditStudentDialog)
+        self.verticalLayout = QVBoxLayout(self.widget_body)
         self.verticalLayout.setObjectName(u"verticalLayout")
-        self.widget_3 = QWidget(EditStudentDialog)
+        self.verticalLayout.setContentsMargins(12, -1, 12, -1)
+        self.widget_3 = QWidget(self.widget_body)
         self.widget_3.setObjectName(u"widget_3")
         self.horizontalLayout_4 = QHBoxLayout(self.widget_3)
         self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
@@ -268,9 +401,9 @@ class Ui_EditStudentDialog(object):
         self.btnRefreshSY.setMinimumSize(QSize(30, 30))
         self.btnRefreshSY.setMaximumSize(QSize(30, 30))
         self.btnRefreshSY.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        icon = QIcon()
-        icon.addFile(u":/Images/Images/undo.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.btnRefreshSY.setIcon(icon)
+        icon2 = QIcon()
+        icon2.addFile(u":/Images/Images/undo.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.btnRefreshSY.setIcon(icon2)
         self.btnRefreshSY.setIconSize(QSize(25, 25))
 
         self.horizontalLayout_4.addWidget(self.btnRefreshSY)
@@ -282,14 +415,15 @@ class Ui_EditStudentDialog(object):
 
         self.verticalLayout.addWidget(self.widget_3)
 
-        self.line_2 = QFrame(EditStudentDialog)
+        self.line_2 = QFrame(self.widget_body)
         self.line_2.setObjectName(u"line_2")
+        self.line_2.setStyleSheet(u"background: #deddda;")
         self.line_2.setFrameShape(QFrame.Shape.HLine)
         self.line_2.setFrameShadow(QFrame.Shadow.Sunken)
 
         self.verticalLayout.addWidget(self.line_2)
 
-        self.widget_2 = QWidget(EditStudentDialog)
+        self.widget_2 = QWidget(self.widget_body)
         self.widget_2.setObjectName(u"widget_2")
         self.widget_2.setStyleSheet(u"")
         self.formLayout = QFormLayout(self.widget_2)
@@ -303,7 +437,7 @@ class Ui_EditStudentDialog(object):
         self.label_profile_pic.setObjectName(u"label_profile_pic")
         self.label_profile_pic.setMinimumSize(QSize(150, 150))
         self.label_profile_pic.setMaximumSize(QSize(150, 150))
-        self.label_profile_pic.setPixmap(QPixmap(u":/Images/Images/profile_gray.png"))
+        self.label_profile_pic.setPixmap(QPixmap(u":/Images/Images/profile.png"))
         self.label_profile_pic.setScaledContents(True)
         self.label_profile_pic.setAlignment(Qt.AlignCenter)
 
@@ -346,16 +480,16 @@ class Ui_EditStudentDialog(object):
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.label_8 = QLabel(self.widget_4)
         self.label_8.setObjectName(u"label_8")
-        self.label_8.setMinimumSize(QSize(100, 30))
-        self.label_8.setMaximumSize(QSize(16777215, 30))
+        self.label_8.setMinimumSize(QSize(100, 36))
+        self.label_8.setMaximumSize(QSize(16777215, 36))
         self.label_8.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout.addWidget(self.label_8)
 
         self.txtFirstName = QLineEdit(self.widget_4)
         self.txtFirstName.setObjectName(u"txtFirstName")
-        self.txtFirstName.setMinimumSize(QSize(0, 30))
-        self.txtFirstName.setMaximumSize(QSize(16777215, 30))
+        self.txtFirstName.setMinimumSize(QSize(0, 36))
+        self.txtFirstName.setMaximumSize(QSize(16777215, 36))
         self.txtFirstName.setStyleSheet(u"")
 
         self.horizontalLayout.addWidget(self.txtFirstName)
@@ -371,16 +505,16 @@ class Ui_EditStudentDialog(object):
         self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
         self.label_9 = QLabel(self.widget_5)
         self.label_9.setObjectName(u"label_9")
-        self.label_9.setMinimumSize(QSize(100, 30))
-        self.label_9.setMaximumSize(QSize(16777215, 30))
+        self.label_9.setMinimumSize(QSize(100, 36))
+        self.label_9.setMaximumSize(QSize(16777215, 36))
         self.label_9.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout_3.addWidget(self.label_9)
 
         self.txtMiddleName = QLineEdit(self.widget_5)
         self.txtMiddleName.setObjectName(u"txtMiddleName")
-        self.txtMiddleName.setMinimumSize(QSize(0, 30))
-        self.txtMiddleName.setMaximumSize(QSize(16777215, 30))
+        self.txtMiddleName.setMinimumSize(QSize(0, 36))
+        self.txtMiddleName.setMaximumSize(QSize(16777215, 36))
         self.txtMiddleName.setStyleSheet(u"")
 
         self.horizontalLayout_3.addWidget(self.txtMiddleName)
@@ -396,16 +530,16 @@ class Ui_EditStudentDialog(object):
         self.horizontalLayout_5.setContentsMargins(0, 0, 0, 0)
         self.label_10 = QLabel(self.widget_6)
         self.label_10.setObjectName(u"label_10")
-        self.label_10.setMinimumSize(QSize(100, 30))
-        self.label_10.setMaximumSize(QSize(16777215, 30))
+        self.label_10.setMinimumSize(QSize(100, 36))
+        self.label_10.setMaximumSize(QSize(16777215, 36))
         self.label_10.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout_5.addWidget(self.label_10)
 
         self.txtLastName = QLineEdit(self.widget_6)
         self.txtLastName.setObjectName(u"txtLastName")
-        self.txtLastName.setMinimumSize(QSize(0, 30))
-        self.txtLastName.setMaximumSize(QSize(16777215, 30))
+        self.txtLastName.setMinimumSize(QSize(0, 36))
+        self.txtLastName.setMaximumSize(QSize(16777215, 36))
         self.txtLastName.setStyleSheet(u"")
 
         self.horizontalLayout_5.addWidget(self.txtLastName)
@@ -421,16 +555,16 @@ class Ui_EditStudentDialog(object):
         self.horizontalLayout_6.setContentsMargins(0, 0, 0, 0)
         self.label_11 = QLabel(self.widget_7)
         self.label_11.setObjectName(u"label_11")
-        self.label_11.setMinimumSize(QSize(100, 30))
-        self.label_11.setMaximumSize(QSize(100, 30))
+        self.label_11.setMinimumSize(QSize(100, 36))
+        self.label_11.setMaximumSize(QSize(100, 36))
         self.label_11.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout_6.addWidget(self.label_11)
 
         self.cmbSection = QComboBox(self.widget_7)
         self.cmbSection.setObjectName(u"cmbSection")
-        self.cmbSection.setMinimumSize(QSize(0, 30))
-        self.cmbSection.setMaximumSize(QSize(16777215, 30))
+        self.cmbSection.setMinimumSize(QSize(0, 36))
+        self.cmbSection.setMaximumSize(QSize(16777215, 36))
         self.cmbSection.setStyleSheet(u"")
         self.cmbSection.setEditable(False)
 
@@ -447,8 +581,8 @@ class Ui_EditStudentDialog(object):
         self.horizontalLayout_7.setContentsMargins(0, 0, 0, 0)
         self.label_13 = QLabel(self.widget_8)
         self.label_13.setObjectName(u"label_13")
-        self.label_13.setMinimumSize(QSize(100, 30))
-        self.label_13.setMaximumSize(QSize(100, 30))
+        self.label_13.setMinimumSize(QSize(100, 36))
+        self.label_13.setMaximumSize(QSize(100, 36))
         self.label_13.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout_7.addWidget(self.label_13)
@@ -457,8 +591,8 @@ class Ui_EditStudentDialog(object):
         self.cmbGender.addItem("")
         self.cmbGender.addItem("")
         self.cmbGender.setObjectName(u"cmbGender")
-        self.cmbGender.setMinimumSize(QSize(0, 30))
-        self.cmbGender.setMaximumSize(QSize(16777215, 30))
+        self.cmbGender.setMinimumSize(QSize(0, 36))
+        self.cmbGender.setMaximumSize(QSize(16777215, 36))
         self.cmbGender.setStyleSheet(u"")
         self.cmbGender.setEditable(False)
 
@@ -477,29 +611,30 @@ class Ui_EditStudentDialog(object):
 
         self.verticalLayout.addWidget(self.widget_2)
 
-        self.line = QFrame(EditStudentDialog)
+        self.line = QFrame(self.widget_body)
         self.line.setObjectName(u"line")
+        self.line.setStyleSheet(u"background: #deddda;")
         self.line.setFrameShape(QFrame.Shape.HLine)
         self.line.setFrameShadow(QFrame.Shadow.Sunken)
 
         self.verticalLayout.addWidget(self.line)
 
-        self.label_24 = QLabel(EditStudentDialog)
-        self.label_24.setObjectName(u"label_24")
-        font = QFont()
-        font.setFamilies([u"Inter SemiBold"])
-        font.setPointSize(11)
-        font.setBold(False)
-        self.label_24.setFont(font)
-
-        self.verticalLayout.addWidget(self.label_24)
-
-        self.widget_form_2 = QWidget(EditStudentDialog)
+        self.widget_form_2 = QWidget(self.widget_body)
         self.widget_form_2.setObjectName(u"widget_form_2")
         self.widget_form_2.setEnabled(True)
         self.widget_form_2.setStyleSheet(u"")
         self.verticalLayout_3 = QVBoxLayout(self.widget_form_2)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
+        self.label_24 = QLabel(self.widget_form_2)
+        self.label_24.setObjectName(u"label_24")
+        font1 = QFont()
+        font1.setFamilies([u"Inter SemiBold"])
+        font1.setPointSize(11)
+        font1.setBold(False)
+        self.label_24.setFont(font1)
+
+        self.verticalLayout_3.addWidget(self.label_24)
+
         self.widget_9 = QWidget(self.widget_form_2)
         self.widget_9.setObjectName(u"widget_9")
         self.horizontalLayout_8 = QHBoxLayout(self.widget_9)
@@ -508,16 +643,16 @@ class Ui_EditStudentDialog(object):
         self.horizontalLayout_8.setContentsMargins(0, 0, 0, 0)
         self.label_22 = QLabel(self.widget_9)
         self.label_22.setObjectName(u"label_22")
-        self.label_22.setMinimumSize(QSize(130, 30))
-        self.label_22.setMaximumSize(QSize(130, 30))
+        self.label_22.setMinimumSize(QSize(130, 36))
+        self.label_22.setMaximumSize(QSize(130, 36))
         self.label_22.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout_8.addWidget(self.label_22)
 
         self.txtContactPerson = QLineEdit(self.widget_9)
         self.txtContactPerson.setObjectName(u"txtContactPerson")
-        self.txtContactPerson.setMinimumSize(QSize(0, 30))
-        self.txtContactPerson.setMaximumSize(QSize(16777215, 30))
+        self.txtContactPerson.setMinimumSize(QSize(0, 36))
+        self.txtContactPerson.setMaximumSize(QSize(16777215, 36))
         self.txtContactPerson.setStyleSheet(u"")
 
         self.horizontalLayout_8.addWidget(self.txtContactPerson)
@@ -533,16 +668,16 @@ class Ui_EditStudentDialog(object):
         self.horizontalLayout_9.setContentsMargins(0, 0, 0, 0)
         self.label_23 = QLabel(self.widget_10)
         self.label_23.setObjectName(u"label_23")
-        self.label_23.setMinimumSize(QSize(130, 30))
-        self.label_23.setMaximumSize(QSize(130, 30))
+        self.label_23.setMinimumSize(QSize(130, 36))
+        self.label_23.setMaximumSize(QSize(130, 36))
         self.label_23.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout_9.addWidget(self.label_23)
 
         self.txtContactNum = QLineEdit(self.widget_10)
         self.txtContactNum.setObjectName(u"txtContactNum")
-        self.txtContactNum.setMinimumSize(QSize(0, 30))
-        self.txtContactNum.setMaximumSize(QSize(16777215, 30))
+        self.txtContactNum.setMinimumSize(QSize(0, 36))
+        self.txtContactNum.setMaximumSize(QSize(16777215, 36))
         self.txtContactNum.setStyleSheet(u"")
         self.txtContactNum.setClearButtonEnabled(False)
 
@@ -554,34 +689,50 @@ class Ui_EditStudentDialog(object):
 
         self.verticalLayout.addWidget(self.widget_form_2)
 
-        self.line_3 = QFrame(EditStudentDialog)
+        self.line_3 = QFrame(self.widget_body)
         self.line_3.setObjectName(u"line_3")
+        self.line_3.setStyleSheet(u"background: #deddda;")
         self.line_3.setFrameShape(QFrame.Shape.HLine)
         self.line_3.setFrameShadow(QFrame.Shadow.Sunken)
 
         self.verticalLayout.addWidget(self.line_3)
 
-        self.label_25 = QLabel(EditStudentDialog)
+        self.widget_11 = QWidget(self.widget_body)
+        self.widget_11.setObjectName(u"widget_11")
+        self.verticalLayout_6 = QVBoxLayout(self.widget_11)
+        self.verticalLayout_6.setObjectName(u"verticalLayout_6")
+        self.label_25 = QLabel(self.widget_11)
         self.label_25.setObjectName(u"label_25")
-        self.label_25.setFont(font)
+        self.label_25.setFont(font1)
 
-        self.verticalLayout.addWidget(self.label_25)
+        self.verticalLayout_6.addWidget(self.label_25)
 
-        self.txtPassword = QLineEdit(EditStudentDialog)
+        self.txtPassword = QLineEdit(self.widget_11)
         self.txtPassword.setObjectName(u"txtPassword")
-        self.txtPassword.setMinimumSize(QSize(0, 30))
-        self.txtPassword.setMaximumSize(QSize(16777215, 30))
+        self.txtPassword.setMinimumSize(QSize(0, 36))
+        self.txtPassword.setMaximumSize(QSize(16777215, 36))
         self.txtPassword.setStyleSheet(u"QLineEdit {\n"
 "	background-color: rgb(255, 255, 255);\n"
-"	border-radius: 15px;\n"
+"	border-radius: 18px;\n"
 "	border: 1px solid #999;\n"
 "	padding: 0px 15px;\n"
+"}\n"
+"\n"
+"QLineEdit:focus {\n"
+"    border: 1px solid #007BFF;\n"
+"}\n"
+"\n"
+"QLineEdit:hover {\n"
+"    border: 1px solid #3498db;\n"
 "}")
         self.txtPassword.setEchoMode(QLineEdit.PasswordEchoOnEdit)
 
-        self.verticalLayout.addWidget(self.txtPassword)
+        self.verticalLayout_6.addWidget(self.txtPassword)
 
-        self.verticalSpacer = QSpacerItem(20, 21, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.verticalLayout.addWidget(self.widget_11)
+
+        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout.addItem(self.verticalSpacer)
 
@@ -591,7 +742,7 @@ class Ui_EditStudentDialog(object):
 
         self.horizontalLayout_2.addItem(self.horizontalSpacer_2)
 
-        self.btnCancel = QPushButton(EditStudentDialog)
+        self.btnCancel = QPushButton(self.widget_body)
         self.btnCancel.setObjectName(u"btnCancel")
         self.btnCancel.setMinimumSize(QSize(100, 30))
         self.btnCancel.setMaximumSize(QSize(100, 30))
@@ -599,7 +750,7 @@ class Ui_EditStudentDialog(object):
 
         self.horizontalLayout_2.addWidget(self.btnCancel)
 
-        self.btnUpdate = QPushButton(EditStudentDialog)
+        self.btnUpdate = QPushButton(self.widget_body)
         self.btnUpdate.setObjectName(u"btnUpdate")
         self.btnUpdate.setMinimumSize(QSize(100, 30))
         self.btnUpdate.setMaximumSize(QSize(100, 30))
@@ -609,6 +760,9 @@ class Ui_EditStudentDialog(object):
 
 
         self.verticalLayout.addLayout(self.horizontalLayout_2)
+
+
+        self.verticalLayout_5.addWidget(self.widget_body)
 
 
         self.retranslateUi(EditStudentDialog)
@@ -622,6 +776,9 @@ class Ui_EditStudentDialog(object):
 
     def retranslateUi(self, EditStudentDialog):
         EditStudentDialog.setWindowTitle(QCoreApplication.translate("EditStudentDialog", u"Student Information Editor", None))
+        self.label_windowTitle.setText(QCoreApplication.translate("EditStudentDialog", u"Student Information Editor", None))
+        self.btnMinimize.setText("")
+        self.btnClose.setText("")
         self.label_15.setText(QCoreApplication.translate("EditStudentDialog", u"School Year:", None))
         self.label_16.setText(QCoreApplication.translate("EditStudentDialog", u"-", None))
         self.btnRefreshSY.setText("")

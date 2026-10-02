@@ -5013,8 +5013,8 @@ QPushButton:hover {
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>100</width>
-                      <height>30</height>
+                      <width>320</width>
+                      <height>502</height>
                      </rect>
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout_13"/>
@@ -5056,8 +5056,8 @@ QPushButton:hover {
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>100</width>
-                      <height>30</height>
+                      <width>319</width>
+                      <height>502</height>
                      </rect>
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout_12"/>
@@ -5077,8 +5077,8 @@ QPushButton:hover {
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>100</width>
-                      <height>30</height>
+                      <width>320</width>
+                      <height>502</height>
                      </rect>
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout_11"/>
@@ -6631,7 +6631,7 @@ background-color: rgb(98, 160, 234);</string>
                               <string/>
                              </property>
                              <property name="pixmap">
-                              <pixmap resource="../resources.qrc">:/Images/Images/profile_gray.png</pixmap>
+                              <pixmap resource="../resources.qrc">:/Images/Images/profile.png</pixmap>
                              </property>
                              <property name="scaledContents">
                               <bool>true</bool>
@@ -7625,8 +7625,8 @@ QRadioButton::indicator:checked {
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>463</width>
-                       <height>579</height>
+                       <width>967</width>
+                       <height>629</height>
                       </rect>
                      </property>
                      <layout class="QVBoxLayout" name="verticalLayout_10">

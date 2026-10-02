@@ -433,7 +433,7 @@ class CardStudent(QFrame):
         self.util = Utility()
 
         if self.util.isEmpty(image):
-            path = self.util.get_resource_path(os.path.join("..", "Images", "profile_gray.png"))
+            path = self.util.get_resource_path(os.path.join("..", "Images", "profile.png"))
             image = self.util.getCircularPixmapFromImagePath(path, 80)
 
         # Layout for the card

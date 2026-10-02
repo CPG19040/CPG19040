@@ -387,7 +387,7 @@ class Controller:
             """
             self.util.populate_pulldown(self.ui.comboBox_ReportsLesson, query, params=(gpid,))
 
-            self.ui.label_student_icon.setPixmap(QPixmap(u":/Images/Images/profile_gray.png"))
+            self.ui.label_student_icon.setPixmap(QPixmap(u":/Images/Images/profile.png"))
             self.ui.label_student_name.clear()
             self.ui.label_average_percentage.setText("0%")
             self.ui.btnPrintQuizScores.setEnabled(False)
