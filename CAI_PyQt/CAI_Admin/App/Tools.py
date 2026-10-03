@@ -101,10 +101,10 @@ class Utility:
 
         return target
 
-    def makeCircularPixmap(self, src_pixmap:QPixmap, size=80):
+    def makeCircularPixmap(self, src_pixmap, size=80, radius=None):
         """
             Transform an image into cicular shape
-
+            
             Args:
                 src_pixmap (QPixmap): The pixmap object
                 size (float): Width and height of the image
@@ -118,33 +118,42 @@ class Utility:
         # Create a transparent square canvas
         target = QPixmap(size, size)
         target.fill(Qt.GlobalColor.transparent)
-
+        
         # Scale source image to fill the square
         scaled_pixmap = src_pixmap.scaled(
-            size, size,
-            Qt.AspectRatioMode.KeepAspectRatioByExpanding,
+            size, size, 
+            Qt.AspectRatioMode.KeepAspectRatioByExpanding, 
             Qt.TransformationMode.SmoothTransformation
         )
-
+        
         painter = QPainter(target)
         painter.setRenderHint(QPainter.RenderHint.Antialiasing)
         painter.setRenderHint(QPainter.RenderHint.SmoothPixmapTransform)
-
+        
         # Create a circular path
         path = QPainterPath()
-        path.addEllipse(0, 0, size, size)
-        painter.setClipPath(path)
 
+        if not radius:
+            path.addEllipse(0, 0, size, size)
+        else:
+            path.addRoundedRect(0, 0, size, size, radius, radius)
+
+        painter.setClipPath(path)
+        
         # Draw the image into the circle (centered)
         delta_x = (scaled_pixmap.width() - size) // 2
         delta_y = (scaled_pixmap.height() - size) // 2
         painter.drawPixmap(0, 0, scaled_pixmap.copy(delta_x, delta_y, size, size))
+        
+        # Optional: Add a subtle border
+        painter.setClipping(False) # Stop clipping to draw the border
+        painter.setPen(QPen(Qt.GlobalColor.lightGray, 1))
 
-        # # Optional: Add a subtle border
-        # painter.setClipping(False) # Stop clipping to draw the border
-        # painter.setPen(QPen(Qt.GlobalColor.lightGray, 1))
-        # painter.drawEllipse(0, 0, size - 1, size - 1)
-
+        if not radius:
+            painter.drawEllipse(0, 0, size - 1, size - 1)
+        else:
+            painter.drawRoundedRect(0, 0, size - 1, size - 1, radius, radius)
+        
         painter.end()
         return target
 

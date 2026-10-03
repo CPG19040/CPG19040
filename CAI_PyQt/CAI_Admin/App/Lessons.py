@@ -229,8 +229,8 @@ class LessonDialog(QDialog, Ui_LessonDialog):
         self.btnClose.clicked.connect(self.reject)
 
         self.db_tools = DatabaseTools()
-        self.util = Utility()
-        lesson = Lesson()
+        self.util     = Utility()
+        lesson        = Lesson()
 
         self.image_data = None
 
@@ -268,6 +268,7 @@ class LessonDialog(QDialog, Ui_LessonDialog):
 
                 if not image.isNull():
                     pixmap = QPixmap.fromImage(image)
+                    pixmap = self.util.makeCircularPixmap(pixmap, self.label_img.width(), 20)
                     self.label_img.setPixmap(pixmap)
 
         self.btnUploadPhoto.clicked.connect(self.update_photo)
@@ -450,6 +451,7 @@ class LessonDialog(QDialog, Ui_LessonDialog):
         pixmap, binaryImage = self.util.browsePhoto(self, self.label_img.width(), self.label_img.height())
 
         if pixmap:
+            pixmap = self.util.makeCircularPixmap(pixmap, self.label_img.width(), 20)
             self.label_img.setPixmap(pixmap)
 
         if binaryImage:
@@ -464,3 +466,4 @@ class LessonDialog(QDialog, Ui_LessonDialog):
 
             if selected_files:
                 self.txtLessonPath.setText(selected_files[0])
+

@@ -1,8 +1,9 @@
 from PySide6.QtWidgets import QMainWindow, QMessageBox
-from PySide6.QtCore import Signal
+from PySide6.QtCore import Signal, Qt
 from passlib.hash import bcrypt
 from App.FormLogIn import Ui_FormLogin
 from App.CRUDTools import DatabaseTools
+from App.Tools import Utility
 
 class Login(QMainWindow, Ui_FormLogin):
     login_success = Signal(object)
@@ -10,8 +11,36 @@ class Login(QMainWindow, Ui_FormLogin):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+
+        self.setWindowFlags(Qt.WindowType.FramelessWindowHint) # Remove OS default window frame
+        self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground, True)
+        self.setMouseTracking(True)
+
+        self.btnMinimize.clicked.connect(self.showMinimized)
+        self.btnClose.clicked.connect(self.close)
+
         self.btnLogin.clicked.connect(self.handle_login)
         self.db_tools = DatabaseTools()
+        self.util     = Utility()
+
+        _, base_year, next_year = self.util.get_dynamic_school_year_dates()
+        
+        self.label_SY.setText(f"School Year: {base_year}-{next_year}")
+
+    def mouseMoveEvent(self, event):
+        super().mouseMoveEvent(event)
+
+    def mousePressEvent(self, event):
+        if event.button() == Qt.LeftButton:
+            pos = event.position().toPoint()
+
+            # If clicking inside the custom header, move the window
+            if self.frame_header.geometry().contains(pos):
+                self.windowHandle().startSystemMove()
+                event.accept()
+                return
+            
+        super().mousePressEvent(event)
 
     def handle_login(self):
         username = self.txtUsername.text()

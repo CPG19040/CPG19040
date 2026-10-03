@@ -383,10 +383,10 @@ class QuizItemWidget(QFrame, Ui_CardQuiz_edit):
         super().__init__()
         self.setupUi(self)
 
-        self.util = Utility()
+        self.util      = Utility()
         self.item_type = item_type
-        self.img_path = None
-        self.id = None
+        self.img_path  = None
+        self.id        = None
 
         self.input_css = """
 
