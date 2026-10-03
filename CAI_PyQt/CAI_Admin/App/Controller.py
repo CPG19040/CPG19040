@@ -414,11 +414,11 @@ class Controller:
         self.ui.label_timeAP.setText(ap)
 
     def logout(self):
+        msgbox      = CustomMessageBox(self.home_win)
         confirm_msg = f"Are you sure you want to log out?"
-        confirm = QMessageBox.question(self.home_win, "Confirm Logout", confirm_msg,
-                                    QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
+        msgbox.question("Confirm Logout", confirm_msg)
 
-        if confirm == QMessageBox.StandardButton.No:
+        if msgbox.exec() == CustomMessageBox.No:
             return
 
         self.settings.clear()
@@ -1516,15 +1516,16 @@ class Controller:
             print(f"Error reading or displaying CSV: {e}")
 
     def import_lessons(self):
-        error = Lesson().add_all_lessons_from_csv(self.ui.label_lesson_CSV_path.text())
+        error  = Lesson().add_all_lessons_from_csv(self.ui.label_lesson_CSV_path.text())
+        msgbox = CustomMessageBox(self.home_win)
 
         if error:
-            msgbox = CustomMessageBox(self.home_win)
-            msgbox.information("Warning", error)
-            msgbox.exec()
+            msgbox.warning("Warning", error)
+            result = msgbox.exec()
 
         else:
-            QMessageBox.information(self.home_win, "Success", "Successfully imported all the predefined lessons.")
+            msgbox.information("Success", "Successfully imported all the predefined lessons.")
+            result = msgbox.exec()
 
     def initialize_table_quiz_score_idv(self):
         # Reports

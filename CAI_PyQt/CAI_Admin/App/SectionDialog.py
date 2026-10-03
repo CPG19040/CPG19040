@@ -4,7 +4,7 @@ from pathlib import Path
 
 from PySide6.QtGui import QStandardItemModel, QStandardItem
 from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QDialog, QMessageBox, QHeaderView, QComboBox, QFileDialog
+from PySide6.QtWidgets import QDialog, QHeaderView, QComboBox, QFileDialog
 
 from App.CRUDTools import DatabaseTools
 from App.Tools import CustomMessageBox, Utility
@@ -23,9 +23,10 @@ class Section(QDialog, Ui_SectionRegistrationDialog):
         self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground, True)
         self.setMouseTracking(True)
 
-        self.user = user
-        self.utility = Utility()
+        self.user     = user
+        self.utility  = Utility()
         self.db_tools = DatabaseTools()
+        self.msgbox   = CustomMessageBox(self)
 
         self.progressBar.setVisible(False)
         _, self.base_year, self.next_year = self.utility.get_dynamic_school_year_dates()
@@ -149,15 +150,18 @@ class Section(QDialog, Ui_SectionRegistrationDialog):
     def import_from_csv(self, csv_path, sectionid):
 
         if not sectionid:
-            QMessageBox.warning(self, "Validation Error", "Please select a section.")
+            self.msgbox.warning("Validation Error", "Please select a section.")
+            self.msgbox.exec()
             return 1
 
         if not csv_path:
-            QMessageBox.warning(self, "Validation Error", "Please select a CSV file.")
+            self.msgbox.warning("Validation Error", "Please select a CSV file.")
+            self.msgbox.exec()
             return 1
 
         if not Path(csv_path).exists():
-            QMessageBox.warning(self, "Validation Error", f"{csv_path}\n\nThe path does not exist.")
+            self.msgbox.warning("Validation Error", f"{csv_path}\n\nThe path does not exist.")
+            self.msgbox.exec()
             return 1
 
         self.progressBar.setVisible(True)
@@ -189,8 +193,8 @@ class Section(QDialog, Ui_SectionRegistrationDialog):
                     %s, %s, %s, %s, %s, %s, %s, %s);
             """
 
-            skip_all = False
-            no_all = False
+            skip_all         = False
+            no_all           = False
             skipped_students = []
 
             for i, row in enumerate(reader, 1):
@@ -199,25 +203,24 @@ class Section(QDialog, Ui_SectionRegistrationDialog):
                 if not no_all and self.check_duplicate_student(row['LAST NAME'], row['FIRST NAME'], row['MIDDLE NAME']):
                    
                     if not skip_all:
-                        reply = QMessageBox.question(
-                            self, "Duplicate Entry",
+                        self.msgbox.question(
+                            "Duplicate Entry",
                             f"Student {name} already exists. Do you want to skip it?",
-                            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.YesAll | QMessageBox.StandardButton.No | QMessageBox.StandardButton.NoAll,
-                            QMessageBox.StandardButton.Yes
+                            include_all=True
                         )
                     
-                        if reply == QMessageBox.StandardButton.Yes:
+                        if self.msgbox.exec() == CustomMessageBox.Yes:
                             skipped_students.append(name)
                             self.progressBar.setValue(i)
                             continue
 
-                        elif reply == QMessageBox.StandardButton.YesAll:
+                        elif self.msgbox.exec() == CustomMessageBox.YesToAll:
                             skip_all = True
                             skipped_students.append(name)
                             self.progressBar.setValue(i)
                             continue
 
-                        elif reply == QMessageBox.StandardButton.NoAll:
+                        elif self.msgbox.exec() == CustomMessageBox.NoToAll:
                             no_all = True
 
                     elif skip_all:
@@ -242,9 +245,8 @@ class Section(QDialog, Ui_SectionRegistrationDialog):
 
         if skipped_students:
             skipped_list = "\n".join(skipped_students)
-            msgbox = CustomMessageBox(self)
-            msgbox.information("Skipped Students", f"The following students were skipped due to duplicates:\n\n{skipped_list}")
-            msgbox.exec()
+            self.msgbox.information("Skipped Students", f"The following students were skipped due to duplicates:\n\n{skipped_list}")
+            self.msgbox.exec()
 
         return 0
 
@@ -271,11 +273,13 @@ class Section(QDialog, Ui_SectionRegistrationDialog):
         csv_path = self.txtCSVPath.text().strip()
 
         if not section_name:
-            QMessageBox.warning(self, "Input Error", "Please enter a section name.")
+            self.msgbox.warning("Input Error", "Please enter a section name.")
+            self.msgbox.exec()
             return
 
         if is_importing and not csv_path:
-            QMessageBox.warning(self, "Input Error", "Please select a CSV file to import.")
+            self.msgbox.warning("Input Error", "Please select a CSV file to import.")
+            self.msgbox.exec()
             return
 
         conn = None
@@ -292,7 +296,8 @@ class Section(QDialog, Ui_SectionRegistrationDialog):
 
                 if row and row[0]:
                     if not is_importing:
-                        QMessageBox.warning(self, "Duplicate Entry", f"Section '{section_name}' already exists.")
+                        self.msgbox.warning("Duplicate Entry", f"Section '{section_name}' already exists.")
+                        self.msgbox.exec()
                         return
                     else:
                         new_id = row[0]
@@ -317,7 +322,8 @@ class Section(QDialog, Ui_SectionRegistrationDialog):
                 cur.execute(audit_sql, (self.user["school_id"], self.user["username"], action_str))
 
             conn.commit()
-            QMessageBox.information(self, "Success", f"Section '{section_name}' processed successfully.")
+            self.msgbox.success("Success", f"Section '{section_name}' processed successfully.")
+            self.msgbox.exec()
             self.refresh_section_table()
             self.accept()
 
@@ -328,8 +334,9 @@ class Section(QDialog, Ui_SectionRegistrationDialog):
                     conn.rollback()
                 except Exception:
                     pass
-            QMessageBox.critical(self, "Database Error", f"An error occurred: {str(e)}")
-            
+            self.msgbox.critical("Database Error", f"An error occurred: {str(e)}")
+            self.msgbox.exec()
+
         finally:
             if conn:
                 try:
@@ -484,6 +491,7 @@ class SectionAdviserEditor(QDialog, Ui_SectionAdviserEditorDialog):
         self.db_tools = DatabaseTools()
         self.user     = section.user
         self.section  = section
+        self.msgbox   = CustomMessageBox(self)
         
         model = section.refresh_section_table()
 
@@ -519,7 +527,8 @@ class SectionAdviserEditor(QDialog, Ui_SectionAdviserEditorDialog):
             self.db_tools.execute_query(audit_sql, (self.user["school_id"], self.user["username"], actionStr))
 
             # 3. Notify User and Close
-            QMessageBox.information(self, "Success", f"Adviser for {sectionname} updated successfully.")
+            self.msgbox.success("Success", f"Adviser for {sectionname} updated successfully.")
+            self.msgbox.exec()
 
             model = self.section.refresh_section_table()
 
@@ -527,7 +536,8 @@ class SectionAdviserEditor(QDialog, Ui_SectionAdviserEditorDialog):
                 self.table_section.setModel(model)
 
         except Exception as e:
-            QMessageBox.critical(self, "Database Error", f"Failed to save changes: {str(e)}")
+            self.msgbox.critical("Database Error", f"Failed to save changes: {str(e)}")
+            self.msgbox.exec()
 
     def _get_resize_edge(self, pos):
         """Determine which edge or corner the mouse is over based on RESIZE_MARGIN."""

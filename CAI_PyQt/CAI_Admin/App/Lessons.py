@@ -73,7 +73,7 @@ class Lesson:
                     isDuplicate = self.check_lesson_duplicate(row["CHAPTER"], row["NUMBER"], row["GRADING PERIOD"], row["TITLE"])
 
                     if isDuplicate:
-                        errors.append(f"Row {row_idx}: Lesson '{row['TITLE']}' already exists.")
+                        errors.append(f"Row {row_idx}: Lesson '{row['TITLE']}' already exists. Skipped.")
                         continue
 
                     lessonImage = self.util.read_image_file_bytes(row["IMAGE"])

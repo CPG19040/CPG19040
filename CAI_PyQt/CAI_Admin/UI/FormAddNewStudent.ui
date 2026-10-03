@@ -1446,8 +1446,8 @@ QSpinBox::down-arrow {
 	color: black;
 	border: 1px solid #999;
 	border-right: none;
-	border-top-left-radius: 15px;
-	border-bottom-left-radius: 15px;
+	border-top-left-radius: 18px;
+	border-bottom-left-radius: 18px;
 	padding: 0px 10px;
 }
 
@@ -1456,8 +1456,8 @@ QSpinBox::down-arrow {
 	background-color: #e7e7e7;
 	color: black;
 	border: 1px solid rgb(154, 153, 150);
-	border-top-right-radius: 15px;
-	border-bottom-right-radius: 15px;
+	border-top-right-radius: 18px;
+	border-bottom-right-radius: 18px;
 }
 
 #btnBrowseCSV:hover {

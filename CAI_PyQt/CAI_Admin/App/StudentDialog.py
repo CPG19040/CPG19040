@@ -3,13 +3,13 @@ from passlib.hash import bcrypt
 from pathlib import Path
 
 from PySide6.QtGui import QStandardItemModel, QStandardItem, QImage, QPixmap
-from PySide6.QtWidgets import QDialog, QMessageBox, QFileDialog
+from PySide6.QtWidgets import QDialog, QFileDialog
 from PySide6.QtCore import Qt
 
 from App.FormAddNewStudent import Ui_AddNewStudentDialog
 from App.FormEditStudent import Ui_EditStudentDialog
 
-from App.Tools import Utility, CircularProgress
+from App.Tools import Utility, CircularProgress, CustomMessageBox
 from App.CRUDTools import DatabaseTools
 
 class Student:
@@ -515,11 +515,13 @@ class AddNewStudentDialog(QDialog, Ui_AddNewStudentDialog):
             self.label_profile_pic.setPixmap(self.util.makeCircularPixmap(self.profile_pic, w))
 
     def register(self):
+        dlg = CustomMessageBox(self)
+
         if self.rb_importCSV.isChecked():
             ret = self.import_from_csv(self.txtCSVPath.text())
             if ret == 0:
-                QMessageBox.information(self, "Success", "Students imported successfully!")
-                self.accept()
+                dlg.success("Success", "Students imported successfully!")
+                dlg.exec()
             return
 
         sy1 = self.spinBox_SY1.value()
@@ -549,7 +551,8 @@ class AddNewStudentDialog(QDialog, Ui_AddNewStudentDialog):
             errors.append("❌ Please select a gender.")
 
         if errors:
-            QMessageBox.warning(self, "Validation Error", "\n".join(errors))
+            dlg.warning("Validation Error", "\n".join(errors))
+            dlg.exec()
             return
 
         sql = 'INSERT INTO cai.tbl_student_info(\n'
@@ -582,29 +585,35 @@ class AddNewStudentDialog(QDialog, Ui_AddNewStudentDialog):
             contact_number
             )
         )
-        QMessageBox.information(self, "Success", "Student registered successfully!")
+        dlg.success("Success", "Student registered successfully!")
+        dlg.exec()
         self.accept()
 
     def import_from_csv(self, csv_path):
+        dlg     = CustomMessageBox(self)
         section = self.cmbSection_2.currentData()
 
         if not section:
-            QMessageBox.warning(self, "Validation Error", "Please select a section.")
+            dlg.warning("Validation Error", "Please select a section.")
+            dlg.exec()
             return 1
 
         if not csv_path:
-            QMessageBox.warning(self, "Validation Error", "Please select a CSV file.")
+            dlg.warning("Validation Error", "Please select a CSV file.")
+            dlg.exec()
             return 1
 
         if not Path(csv_path).exists():
-            QMessageBox.warning(self, "Validation Error", f"{csv_path}\n\nThe path does not exist.")
+            dlg.warning("Validation Error", f"{csv_path}\n\nThe path does not exist.")
+            dlg.exec()
             return 1
 
         sy1 = self.spinBox_SY1.value()
         sy2 = self.spinBox_SY2.value()
 
         if not sy1 or not sy2:
-            QMessageBox.warning(self, "Validation Error", "School year cannot be empty.")
+            dlg.warning("Validation Error", "School year cannot be empty.")
+            dlg.exec()
             return 1
 
         self.progressBar.setVisible(True)
@@ -886,6 +895,8 @@ class StudentEditorDialog(QDialog, Ui_EditStudentDialog):
         return tuple([""] * 10) # Return a tuple with 10 empty string values if no record is found
 
     def edit(self, studentid):
+        dlg = CustomMessageBox(self)
+
         try:
             sy1 = self.spinBox_SY1.value()
             sy2 = self.spinBox_SY2.value()
@@ -914,7 +925,8 @@ class StudentEditorDialog(QDialog, Ui_EditStudentDialog):
                 errors.append("❌ Please select a gender.")
 
             if errors:
-                QMessageBox.warning(self, "Validation Error", "\n".join(errors))
+                dlg.warning("Validation Error", "\n".join(errors))
+                dlg.exec()
                 return
 
             sql  = "UPDATE cai.tbl_student_info\n"
