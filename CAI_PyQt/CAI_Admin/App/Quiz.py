@@ -379,6 +379,7 @@ class Quiz:
 
 class QuizItemWidget(QFrame, Ui_CardQuiz_edit):
     """A reusable row for a single quiz question."""
+
     def __init__(self, item_type, remove_callback):
         super().__init__()
         self.setupUi(self)
@@ -545,9 +546,19 @@ class QuizItemWidget(QFrame, Ui_CardQuiz_edit):
 
 
 class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
+    RESIZE_MARGIN = 8
+
     def __init__(self, q_num, g_period, lesson_id, diff_level):
         super().__init__()
         self.setupUi(self)
+
+        self.setWindowFlags(Qt.WindowType.FramelessWindowHint) # Remove OS default window frame
+        self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground, True)
+        self.setMouseTracking(True)
+
+        self.btnMinimize.clicked.connect(self.showMinimized)
+        self.btnMaximize.clicked.connect(lambda: self.showMaximized() if not self.isMaximized() else self.showNormal())
+        self.btnClose.clicked.connect(self.close)
 
         self.difficulty_group = QButtonGroup(self)
         self.difficulty_group.setExclusive(True)
@@ -576,7 +587,7 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
 
         self.db_tools = DatabaseTools()
         self.util = Utility()
-
+        
         self.itemsToRemove = []
 
         self.count_id = self.count_mc = self.count_tf = 0
@@ -615,6 +626,72 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
         self.quiz_no.valueChanged.connect(self.refresh_quiz)
         self.cbGradingPeriod.currentIndexChanged.connect(self.populate_pulldown_lesson)
         self.cbLessonName.currentIndexChanged.connect(self.refresh_quiz)
+
+    def _get_resize_edge(self, pos):
+        """Determine which edge or corner the mouse is over based on RESIZE_MARGIN."""
+        rect = self.rect()
+        x, y = pos.x(), pos.y()
+        w, h = rect.width(), rect.height()
+        
+        edge = None
+        
+        # Horizontal edges
+        if x <= self.RESIZE_MARGIN:
+            edge = Qt.Edge.LeftEdge
+        elif x >= w - self.RESIZE_MARGIN:
+            edge = Qt.Edge.RightEdge
+            
+        # Vertical edges
+        if y <= self.RESIZE_MARGIN:
+            if edge is None:
+                edge = Qt.Edge.TopEdge
+            else:
+                edge |= Qt.Edge.TopEdge
+        elif y >= h - self.RESIZE_MARGIN:
+            if edge is None:
+                edge = Qt.Edge.BottomEdge
+            else:
+                edge |= Qt.Edge.BottomEdge
+                
+        return edge
+
+    def _update_cursor_shape(self, edge):
+        """Update cursor appearance depending on the active resize edge/corner."""
+        if edge == (Qt.Edge.TopEdge | Qt.Edge.LeftEdge) or edge == (Qt.Edge.BottomEdge | Qt.Edge.RightEdge):
+            self.setCursor(Qt.CursorShape.SizeFDiagCursor)
+        elif edge == (Qt.Edge.TopEdge | Qt.Edge.RightEdge) or edge == (Qt.Edge.BottomEdge | Qt.Edge.LeftEdge):
+            self.setCursor(Qt.CursorShape.SizeBDiagCursor)
+        elif edge and (edge & (Qt.Edge.LeftEdge | Qt.Edge.RightEdge)) and not (edge & (Qt.Edge.TopEdge | Qt.Edge.BottomEdge)):
+            self.setCursor(Qt.CursorShape.SizeHorCursor)
+        elif edge and (edge & (Qt.Edge.TopEdge | Qt.Edge.BottomEdge)) and not (edge & (Qt.Edge.LeftEdge | Qt.Edge.RightEdge)):
+            self.setCursor(Qt.CursorShape.SizeVerCursor)
+        else:
+            self.setCursor(Qt.CursorShape.ArrowCursor)
+
+    def mouseMoveEvent(self, event):
+        pos = event.position().toPoint()
+        edge = self._get_resize_edge(pos)
+        self._update_cursor_shape(edge)
+        super().mouseMoveEvent(event)
+
+    def mousePressEvent(self, event):
+        if event.button() == Qt.LeftButton:
+            pos = event.position().toPoint()
+            edge = self._get_resize_edge(pos)
+            
+            # 1. If clicking near any edge/corner, resize the window
+            if edge:
+                self.windowHandle().startSystemResize(edge)
+                event.accept()
+                return
+
+            # 2. If clicking inside the custom header, move the window
+            if self.frame_header.geometry().contains(pos):
+                self.windowHandle().startSystemMove()
+                event.accept()
+                return
+            
+        super().mousePressEvent(event)
 
     def handle_level_click(self, idx):
         self.refresh_quiz()
@@ -689,6 +766,7 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
         self.label_totalScore.setText(f"{total_score}")
 
     def populate_pulldown_lesson(self):
+        self.cbLessonName.blockSignals(True)
         selected_period = self.cbGradingPeriod.currentData()
         self.refresh_quiz()
 
@@ -702,6 +780,7 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
         sql += 'WHERE gradingperiod = %s\n'
         sql += 'ORDER BY chapter, lessonnum ASC'
         self.util.populate_pulldown(self.cbLessonName, sql, params=(selected_period,), add_empty=True)
+        self.cbLessonName.blockSignals(False)
 
     def add_item(self, name, container):
         widget = QuizItemWidget(name, self.remove_item)

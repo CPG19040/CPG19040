@@ -29,7 +29,143 @@ class Ui_QuizCreatorDialog(object):
         QuizCreatorDialog.setStyleSheet(u"* {\n"
 "    color: black;\n"
 "    font: 10pt \"Inter\";\n"
-"    background-color: rgb(222, 221, 218);\n"
+"}\n"
+"\n"
+"QuizCreatorDialog {\n"
+"	background-color: transparent;\n"
+"}")
+        self.verticalLayout_3 = QVBoxLayout(QuizCreatorDialog)
+        self.verticalLayout_3.setSpacing(0)
+        self.verticalLayout_3.setObjectName(u"verticalLayout_3")
+        self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
+        self.frame_header = QFrame(QuizCreatorDialog)
+        self.frame_header.setObjectName(u"frame_header")
+        self.frame_header.setMinimumSize(QSize(0, 35))
+        self.frame_header.setMaximumSize(QSize(16777215, 35))
+        self.frame_header.setMouseTracking(True)
+        self.frame_header.setStyleSheet(u"#frame_header {\n"
+"	background-color: #deddda;\n"
+"	border-top-left-radius: 12px;\n"
+"	border-top-right-radius: 12px;\n"
+"	border: 1px solid #7a7a7a;\n"
+"	border-bottom: none;\n"
+"}")
+        self.frame_header.setFrameShape(QFrame.StyledPanel)
+        self.frame_header.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_10 = QHBoxLayout(self.frame_header)
+        self.horizontalLayout_10.setSpacing(6)
+        self.horizontalLayout_10.setObjectName(u"horizontalLayout_10")
+        self.horizontalLayout_10.setContentsMargins(4, 0, 0, 0)
+        self.widget_window_icon = QWidget(self.frame_header)
+        self.widget_window_icon.setObjectName(u"widget_window_icon")
+        self.widget_window_icon.setMinimumSize(QSize(90, 35))
+        self.widget_window_icon.setMaximumSize(QSize(90, 35))
+        self.widget_window_icon.setStyleSheet(u"background: transparent;")
+        self.horizontalLayout_11 = QHBoxLayout(self.widget_window_icon)
+        self.horizontalLayout_11.setSpacing(0)
+        self.horizontalLayout_11.setObjectName(u"horizontalLayout_11")
+        self.horizontalLayout_11.setContentsMargins(0, 0, 0, 0)
+
+        self.horizontalLayout_10.addWidget(self.widget_window_icon)
+
+        self.label_windowTitle = QLabel(self.frame_header)
+        self.label_windowTitle.setObjectName(u"label_windowTitle")
+        font = QFont()
+        font.setFamilies([u"Inter SemiBold"])
+        font.setPointSize(10)
+        font.setBold(False)
+        font.setItalic(False)
+        self.label_windowTitle.setFont(font)
+        self.label_windowTitle.setStyleSheet(u"background: transparent;\n"
+"color: rgb(0, 0, 0);\n"
+"font: 10pt \"Inter SemiBold\";")
+        self.label_windowTitle.setAlignment(Qt.AlignCenter)
+
+        self.horizontalLayout_10.addWidget(self.label_windowTitle)
+
+        self.widget_window_buttons = QWidget(self.frame_header)
+        self.widget_window_buttons.setObjectName(u"widget_window_buttons")
+        self.widget_window_buttons.setMinimumSize(QSize(90, 35))
+        self.widget_window_buttons.setMaximumSize(QSize(90, 35))
+        self.widget_window_buttons.setStyleSheet(u"background: transparent;")
+        self.horizontalLayout_44 = QHBoxLayout(self.widget_window_buttons)
+        self.horizontalLayout_44.setSpacing(9)
+        self.horizontalLayout_44.setObjectName(u"horizontalLayout_44")
+        self.horizontalLayout_44.setContentsMargins(9, 0, 9, 0)
+        self.btnMinimize = QPushButton(self.widget_window_buttons)
+        self.btnMinimize.setObjectName(u"btnMinimize")
+        self.btnMinimize.setMinimumSize(QSize(24, 24))
+        self.btnMinimize.setMaximumSize(QSize(24, 24))
+        self.btnMinimize.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.btnMinimize.setStyleSheet(u"#btnMinimize {\n"
+"	border-radius: 12px;\n"
+"	background-color: transparent;\n"
+"}\n"
+"\n"
+"#btnMinimize:hover {\n"
+"	background-color: rgb(248, 228, 92);\n"
+"}")
+        icon = QIcon()
+        icon.addFile(u":/Images/Images/minimize-sign.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.btnMinimize.setIcon(icon)
+        self.btnMinimize.setIconSize(QSize(12, 12))
+
+        self.horizontalLayout_44.addWidget(self.btnMinimize)
+
+        self.btnMaximize = QPushButton(self.widget_window_buttons)
+        self.btnMaximize.setObjectName(u"btnMaximize")
+        self.btnMaximize.setMinimumSize(QSize(24, 24))
+        self.btnMaximize.setMaximumSize(QSize(24, 24))
+        self.btnMaximize.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.btnMaximize.setStyleSheet(u"#btnMaximize {\n"
+"	border-radius: 12px;\n"
+"	background-color: transparent;\n"
+"}\n"
+"\n"
+"#btnMaximize:hover {\n"
+"	background-color: #3bca5c;\n"
+"}")
+        icon1 = QIcon()
+        icon1.addFile(u":/Images/Images/maximize.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.btnMaximize.setIcon(icon1)
+
+        self.horizontalLayout_44.addWidget(self.btnMaximize)
+
+        self.btnClose = QPushButton(self.widget_window_buttons)
+        self.btnClose.setObjectName(u"btnClose")
+        self.btnClose.setMinimumSize(QSize(24, 24))
+        self.btnClose.setMaximumSize(QSize(24, 24))
+        self.btnClose.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.btnClose.setStyleSheet(u"#btnClose {\n"
+"	border-radius: 12px;\n"
+"	background-color: transparent;\n"
+"}\n"
+"\n"
+"#btnClose:hover {\n"
+"	background-color: rgb(246, 97, 81);\n"
+"}")
+        icon2 = QIcon()
+        icon2.addFile(u":/Images/Images/clear.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.btnClose.setIcon(icon2)
+
+        self.horizontalLayout_44.addWidget(self.btnClose)
+
+
+        self.horizontalLayout_10.addWidget(self.widget_window_buttons)
+
+
+        self.verticalLayout_3.addWidget(self.frame_header)
+
+        self.widget_body = QWidget(QuizCreatorDialog)
+        self.widget_body.setObjectName(u"widget_body")
+        self.widget_body.setStyleSheet(u"* {\n"
+"	background-color: #deddda;\n"
+"}\n"
+"\n"
+"#widget_body {\n"
+"	background-color: #deddda;\n"
+"	border: 1px solid #7a7a7a;\n"
+"	border-top: none;\n"
 "}\n"
 "\n"
 "QPushButton[class=\"button-green\"] {\n"
@@ -55,10 +191,10 @@ class Ui_QuizCreatorDialog(object):
 "                                stop:1 #129046); \n"
 "}\n"
 "\n"
-"QPushButton[class=\"button-green\"]:disabled {\n"
+"QPushButton[class=\"button-gre"
+                        "en\"]:disabled {\n"
 "	background: #A5D6A7;\n"
-"	bor"
-                        "der: 1px solid #94c096;\n"
+"	border: 1px solid #94c096;\n"
 "	color: #E8F5E9;\n"
 "	opacity: 0.6;\n"
 "}\n"
@@ -99,9 +235,9 @@ class Ui_QuizCreatorDialog(object):
 "}\n"
 "\n"
 "QComboBox QAbstractItemView {\n"
-"    background-color: white !important;\n"
-"    border: 1px solid #999"
-                        ";\n"
+"    background-colo"
+                        "r: white !important;\n"
+"    border: 1px solid #999;\n"
 "    selection-background-color: #7eb4d7;\n"
 "    selection-color: #ffffff;\n"
 "    outline: 0;\n"
@@ -140,10 +276,10 @@ class Ui_QuizCreatorDialog(object):
 "QSpinBox::up-button, QDoubleSpinBox::up-button {\n"
 "    subcontrol-origin: border;\n"
 "    subcontrol-position: top right;\n"
-"    width: 8px;\n"
+""
+                        "    width: 8px;\n"
 "    height: 8px;\n"
-"    bor"
-                        "der-top-right-radius: 15px;\n"
+"    border-top-right-radius: 15px;\n"
 "    padding: 6px 10px 6px 2px;\n"
 "	color: rgb(119, 118, 123);\n"
 "}\n"
@@ -177,17 +313,18 @@ class Ui_QuizCreatorDialog(object):
 "}\n"
 "\n"
 "QSpinBox::up-arrow:disabled, QDoubleSpinBox::up-arrow:disabled {\n"
-"    image: url(:/Images/Images/caret-up-disabled.png);\n"
+"    image: url(:/Images/Images/caret"
+                        "-up-disabled.png);\n"
 "}\n"
 "\n"
-"QSpinBox::down"
-                        "-arrow:disabled, QDoubleSpinBox::down-arrow:disabled {\n"
+"QSpinBox::down-arrow:disabled, QDoubleSpinBox::down-arrow:disabled {\n"
 "    image: url(:/Images/Images/caret-down-disabled.png);\n"
 "}\n"
 "")
-        self.verticalLayout_2 = QVBoxLayout(QuizCreatorDialog)
+        self.verticalLayout_2 = QVBoxLayout(self.widget_body)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
-        self.widget_header = QWidget(QuizCreatorDialog)
+        self.verticalLayout_2.setContentsMargins(12, -1, 12, -1)
+        self.widget_header = QWidget(self.widget_body)
         self.widget_header.setObjectName(u"widget_header")
         self.headerLayout = QHBoxLayout(self.widget_header)
         self.headerLayout.setObjectName(u"headerLayout")
@@ -287,14 +424,14 @@ class Ui_QuizCreatorDialog(object):
 
         self.verticalLayout_2.addWidget(self.widget_header)
 
-        self.line_3 = QFrame(QuizCreatorDialog)
+        self.line_3 = QFrame(self.widget_body)
         self.line_3.setObjectName(u"line_3")
         self.line_3.setFrameShape(QFrame.Shape.HLine)
         self.line_3.setFrameShadow(QFrame.Shadow.Sunken)
 
         self.verticalLayout_2.addWidget(self.line_3)
 
-        self.widget_builder = QWidget(QuizCreatorDialog)
+        self.widget_builder = QWidget(self.widget_body)
         self.widget_builder.setObjectName(u"widget_builder")
         self.widget_builder.setEnabled(False)
         self.widget_builder.setStyleSheet(u"#frame_5 { background: transparent; }")
@@ -305,12 +442,12 @@ class Ui_QuizCreatorDialog(object):
         self.btn_save.setObjectName(u"btn_save")
         self.btn_save.setMinimumSize(QSize(30, 30))
         self.btn_save.setMaximumSize(QSize(30, 30))
-        font = QFont()
-        font.setFamilies([u"Inter"])
-        font.setPointSize(10)
-        font.setBold(False)
-        font.setItalic(False)
-        self.btn_save.setFont(font)
+        font1 = QFont()
+        font1.setFamilies([u"Inter"])
+        font1.setPointSize(10)
+        font1.setBold(False)
+        font1.setItalic(False)
+        self.btn_save.setFont(font1)
         self.btn_save.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btn_save.setStyleSheet(u"#btn_save {\n"
 "	border: none; \n"
@@ -322,9 +459,9 @@ class Ui_QuizCreatorDialog(object):
 "	border-radius: 5px;\n"
 "}\n"
 "")
-        icon = QIcon()
-        icon.addFile(u":/Images/Images/save.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.btn_save.setIcon(icon)
+        icon3 = QIcon()
+        icon3.addFile(u":/Images/Images/save.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.btn_save.setIcon(icon3)
         self.btn_save.setIconSize(QSize(30, 30))
 
         self.horizontalLayout.addWidget(self.btn_save)
@@ -542,14 +679,14 @@ class Ui_QuizCreatorDialog(object):
 
         self.verticalLayout_2.addWidget(self.widget_builder)
 
-        self.line_2 = QFrame(QuizCreatorDialog)
+        self.line_2 = QFrame(self.widget_body)
         self.line_2.setObjectName(u"line_2")
         self.line_2.setFrameShape(QFrame.Shape.HLine)
         self.line_2.setFrameShadow(QFrame.Shadow.Sunken)
 
         self.verticalLayout_2.addWidget(self.line_2)
 
-        self.widget_quizview = QWidget(QuizCreatorDialog)
+        self.widget_quizview = QWidget(self.widget_body)
         self.widget_quizview.setObjectName(u"widget_quizview")
         self.widget_quizview.setEnabled(False)
         self.widget_quizview.setStyleSheet(u"/* 1. THE MAIN CONTAINER */\n"
@@ -681,7 +818,7 @@ class Ui_QuizCreatorDialog(object):
         self.scrollArea_id.setWidgetResizable(True)
         self.scrollAreaWidgetContents_5 = QWidget()
         self.scrollAreaWidgetContents_5.setObjectName(u"scrollAreaWidgetContents_5")
-        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 355, 545))
+        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 353, 510))
         self.layout_identification = QVBoxLayout(self.scrollAreaWidgetContents_5)
         self.layout_identification.setObjectName(u"layout_identification")
         self.scrollArea_id.setWidget(self.scrollAreaWidgetContents_5)
@@ -744,7 +881,7 @@ class Ui_QuizCreatorDialog(object):
         self.scrollArea_mc.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 356, 545))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 354, 510))
         self.layout_multiplechoice = QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.layout_multiplechoice.setObjectName(u"layout_multiplechoice")
         self.scrollArea_mc.setWidget(self.scrollAreaWidgetContents_2)
@@ -807,7 +944,7 @@ class Ui_QuizCreatorDialog(object):
         self.scrollArea_tf.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 355, 545))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 353, 510))
         self.layout_trueorfalse = QVBoxLayout(self.scrollAreaWidgetContents_3)
         self.layout_trueorfalse.setObjectName(u"layout_trueorfalse")
         self.scrollArea_tf.setWidget(self.scrollAreaWidgetContents_3)
@@ -821,6 +958,9 @@ class Ui_QuizCreatorDialog(object):
         self.verticalLayout_2.addWidget(self.widget_quizview)
 
 
+        self.verticalLayout_3.addWidget(self.widget_body)
+
+
         self.retranslateUi(QuizCreatorDialog)
 
         QMetaObject.connectSlotsByName(QuizCreatorDialog)
@@ -828,6 +968,10 @@ class Ui_QuizCreatorDialog(object):
 
     def retranslateUi(self, QuizCreatorDialog):
         QuizCreatorDialog.setWindowTitle(QCoreApplication.translate("QuizCreatorDialog", u"Quiz Editor", None))
+        self.label_windowTitle.setText(QCoreApplication.translate("QuizCreatorDialog", u"Quiz Editor", None))
+        self.btnMinimize.setText("")
+        self.btnMaximize.setText("")
+        self.btnClose.setText("")
         self.label_1.setText(QCoreApplication.translate("QuizCreatorDialog", u"Quiz #:", None))
         self.label_2.setText(QCoreApplication.translate("QuizCreatorDialog", u"Grading Period:", None))
         self.cbGradingPeriod.setProperty(u"class", QCoreApplication.translate("QuizCreatorDialog", u"combobox-main", None))

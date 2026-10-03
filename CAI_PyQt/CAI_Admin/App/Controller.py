@@ -889,6 +889,7 @@ class Controller:
             self.display_quiz()
 
     def handle_quiz_filter(self):
+        self.ui.cbLessonName.blockSignals(True)
         self.ui.cbLessonName.clear()
         selected_period = self.ui.cbGradingPeriod.currentData()
 
@@ -903,6 +904,7 @@ class Controller:
             """
             self.util.populate_pulldown(self.ui.cbLessonName, query, params=(selected_period,), add_empty=True)
 
+        self.ui.cbLessonName.blockSignals(False)
         self.display_quiz()
 
     def display_quiz(self):

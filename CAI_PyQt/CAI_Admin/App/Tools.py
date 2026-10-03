@@ -215,6 +215,7 @@ class Utility:
             self.populate_lesson_pulldown(selected_period, pulldown_lessons)
 
     def populate_lesson_pulldown(self, gpid, pulldown_lessons):
+        pulldown_lessons.blockSignals(True)
         sql  = 'SELECT\n'
         sql += '    lesson_id\n'
         sql += '    ,title\n'
@@ -222,6 +223,7 @@ class Utility:
         sql += 'WHERE gradingperiod = %s\n'
         sql += 'ORDER BY chapter, lessonnum ASC'
         self.populate_pulldown(pulldown_lessons, sql, params=(gpid,), add_empty=True)
+        pulldown_lessons.blockSignals(False)
 
     def isEmpty(self, val):
         """Evaluate if val is NONE, NULL, 'N/A', or empty string."""
@@ -497,6 +499,7 @@ class CardStudent(QFrame):
         self.update()
 
 
+
 class WickPlayer(QMainWindow):
 
     def __init__(self, file_path:str):
@@ -513,6 +516,7 @@ class WickPlayer(QMainWindow):
             print(f"Error: {file_path} not found.")
 
         self.setCentralWidget(self.browser)
+
 
 
 class CircularProgress(QWidget):
@@ -561,6 +565,7 @@ class CircularProgress(QWidget):
         painter.setPen(QColor("#333333"))
         painter.setFont(QFont("Arial", 18, QFont.Bold))
         painter.drawText(rect, Qt.AlignCenter, f"{int(self.value)}{self.suffix}")
+
 
 
 class NoScrollComboBox(QComboBox):
