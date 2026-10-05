@@ -29,25 +29,6 @@
 
 #AddNewStudentDialog {
 	background: transparent;
-}
-
-QMessageBox {
-	background-color: #deddda;
-	font: 10pt &quot;Inter&quot;;
-	color: black;
-}
-
-QMessageBox QLabel {
-	font: 10pt &quot;Inter&quot;;
-	color: black;
-}
-
-QMessageBox QPushButton {
-	height: 30px;
-	padding: 0px 12px;
-	background-color: #deddda;
-	font: 10pt &quot;Inter&quot;;
-	color: black;
 }</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_5">

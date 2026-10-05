@@ -26,7 +26,6 @@ class Section(QDialog, Ui_SectionRegistrationDialog):
         self.user     = user
         self.utility  = Utility()
         self.db_tools = DatabaseTools()
-        self.msgbox   = CustomMessageBox(self)
 
         self.progressBar.setVisible(False)
         _, self.base_year, self.next_year = self.utility.get_dynamic_school_year_dates()
@@ -150,18 +149,16 @@ class Section(QDialog, Ui_SectionRegistrationDialog):
     def import_from_csv(self, csv_path, sectionid):
 
         if not sectionid:
-            self.msgbox.warning("Validation Error", "Please select a section.")
-            self.msgbox.exec()
+            CustomMessageBox.warning(self, "Validation Error", "Please select a section.")
             return 1
 
         if not csv_path:
-            self.msgbox.warning("Validation Error", "Please select a CSV file.")
-            self.msgbox.exec()
+            CustomMessageBox.warning(self, "Validation Error", "Please select a CSV file.")
+            return 1
             return 1
 
         if not Path(csv_path).exists():
-            self.msgbox.warning("Validation Error", f"{csv_path}\n\nThe path does not exist.")
-            self.msgbox.exec()
+            CustomMessageBox.warning(self, "Validation Error", f"{csv_path}\n\nThe path does not exist.")
             return 1
 
         self.progressBar.setVisible(True)
@@ -203,24 +200,25 @@ class Section(QDialog, Ui_SectionRegistrationDialog):
                 if not no_all and self.check_duplicate_student(row['LAST NAME'], row['FIRST NAME'], row['MIDDLE NAME']):
                    
                     if not skip_all:
-                        self.msgbox.question(
+                        dlg_res = CustomMessageBox.question(
+                            self,
                             "Duplicate Entry",
                             f"Student {name} already exists. Do you want to skip it?",
                             include_all=True
                         )
                     
-                        if self.msgbox.exec() == CustomMessageBox.Yes:
+                        if dlg_res == CustomMessageBox.Yes:
                             skipped_students.append(name)
                             self.progressBar.setValue(i)
                             continue
 
-                        elif self.msgbox.exec() == CustomMessageBox.YesToAll:
+                        elif dlg_res == CustomMessageBox.YesToAll:
                             skip_all = True
                             skipped_students.append(name)
                             self.progressBar.setValue(i)
                             continue
 
-                        elif self.msgbox.exec() == CustomMessageBox.NoToAll:
+                        elif dlg_res == CustomMessageBox.NoToAll:
                             no_all = True
 
                     elif skip_all:
@@ -245,8 +243,7 @@ class Section(QDialog, Ui_SectionRegistrationDialog):
 
         if skipped_students:
             skipped_list = "\n".join(skipped_students)
-            self.msgbox.information("Skipped Students", f"The following students were skipped due to duplicates:\n\n{skipped_list}")
-            self.msgbox.exec()
+            CustomMessageBox.information(self, "Skipped Students", f"The following students were skipped due to duplicates:\n\n{skipped_list}")
 
         return 0
 
@@ -273,13 +270,11 @@ class Section(QDialog, Ui_SectionRegistrationDialog):
         csv_path = self.txtCSVPath.text().strip()
 
         if not section_name:
-            self.msgbox.warning("Input Error", "Please enter a section name.")
-            self.msgbox.exec()
+            CustomMessageBox.warning(self, "Input Error", "Please enter a section name.")
             return
 
         if is_importing and not csv_path:
-            self.msgbox.warning("Input Error", "Please select a CSV file to import.")
-            self.msgbox.exec()
+            CustomMessageBox.warning(self, "Input Error", "Please select a CSV file to import.")
             return
 
         conn = None
@@ -296,8 +291,7 @@ class Section(QDialog, Ui_SectionRegistrationDialog):
 
                 if row and row[0]:
                     if not is_importing:
-                        self.msgbox.warning("Duplicate Entry", f"Section '{section_name}' already exists.")
-                        self.msgbox.exec()
+                        CustomMessageBox.warning(self, "Duplicate Entry", f"Section '{section_name}' already exists.")
                         return
                     else:
                         new_id = row[0]
@@ -322,8 +316,7 @@ class Section(QDialog, Ui_SectionRegistrationDialog):
                 cur.execute(audit_sql, (self.user["school_id"], self.user["username"], action_str))
 
             conn.commit()
-            self.msgbox.success("Success", f"Section '{section_name}' processed successfully.")
-            self.msgbox.exec()
+            CustomMessageBox.success(self, "Success", f"Section '{section_name}' processed successfully.")
             self.refresh_section_table()
             self.accept()
 
@@ -334,8 +327,7 @@ class Section(QDialog, Ui_SectionRegistrationDialog):
                     conn.rollback()
                 except Exception:
                     pass
-            self.msgbox.critical("Database Error", f"An error occurred: {str(e)}")
-            self.msgbox.exec()
+            CustomMessageBox.critical(self, "Database Error", f"An error occurred: {str(e)}")
 
         finally:
             if conn:
@@ -491,7 +483,6 @@ class SectionAdviserEditor(QDialog, Ui_SectionAdviserEditorDialog):
         self.db_tools = DatabaseTools()
         self.user     = section.user
         self.section  = section
-        self.msgbox   = CustomMessageBox(self)
         
         model = section.refresh_section_table()
 
@@ -527,8 +518,7 @@ class SectionAdviserEditor(QDialog, Ui_SectionAdviserEditorDialog):
             self.db_tools.execute_query(audit_sql, (self.user["school_id"], self.user["username"], actionStr))
 
             # 3. Notify User and Close
-            self.msgbox.success("Success", f"Adviser for {sectionname} updated successfully.")
-            self.msgbox.exec()
+            CustomMessageBox.success(self, "Success", f"Adviser for {sectionname} updated successfully.")
 
             model = self.section.refresh_section_table()
 
@@ -536,8 +526,7 @@ class SectionAdviserEditor(QDialog, Ui_SectionAdviserEditorDialog):
                 self.table_section.setModel(model)
 
         except Exception as e:
-            self.msgbox.critical("Database Error", f"Failed to save changes: {str(e)}")
-            self.msgbox.exec()
+            CustomMessageBox.critical(self, "Database Error", f"Failed to save changes: {str(e)}")
 
     def _get_resize_edge(self, pos):
         """Determine which edge or corner the mouse is over based on RESIZE_MARGIN."""

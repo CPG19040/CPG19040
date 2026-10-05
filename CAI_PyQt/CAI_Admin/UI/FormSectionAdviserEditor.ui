@@ -35,16 +35,6 @@
 	background-color: transparent;
 }
 
-QMessageBox {
-	background-color: rgb(222, 221, 218); 
-}
-
-QMessageBox QPushButton {
-	font: 10pt &quot;Inter&quot;;
-	height: 30px;
-	padding: 0px 12px;
-}
-
 QPushButton[class=&quot;button-green&quot;] {
 	border: 1px solid #0a5128;
     border-radius: 15px;

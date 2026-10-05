@@ -515,13 +515,13 @@ class AddNewStudentDialog(QDialog, Ui_AddNewStudentDialog):
             self.label_profile_pic.setPixmap(self.util.makeCircularPixmap(self.profile_pic, w))
 
     def register(self):
-        dlg = CustomMessageBox(self)
 
         if self.rb_importCSV.isChecked():
             ret = self.import_from_csv(self.txtCSVPath.text())
+
             if ret == 0:
-                dlg.success("Success", "Students imported successfully!")
-                dlg.exec()
+                CustomMessageBox.success(self, "Success", "Students imported successfully!")
+
             return
 
         sy1 = self.spinBox_SY1.value()
@@ -551,8 +551,7 @@ class AddNewStudentDialog(QDialog, Ui_AddNewStudentDialog):
             errors.append("❌ Please select a gender.")
 
         if errors:
-            dlg.warning("Validation Error", "\n".join(errors))
-            dlg.exec()
+            CustomMessageBox.warning(self, "Validation Error", "\n".join(errors))
             return
 
         sql = 'INSERT INTO cai.tbl_student_info(\n'
@@ -585,35 +584,28 @@ class AddNewStudentDialog(QDialog, Ui_AddNewStudentDialog):
             contact_number
             )
         )
-        dlg.success("Success", "Student registered successfully!")
-        dlg.exec()
+        CustomMessageBox.success(self, "Success", "Student registered successfully!")
         self.accept()
 
     def import_from_csv(self, csv_path):
-        dlg     = CustomMessageBox(self)
         section = self.cmbSection_2.currentData()
 
         if not section:
-            dlg.warning("Validation Error", "Please select a section.")
-            dlg.exec()
+            CustomMessageBox.warning(self, "Validation Error", "Please select a section.")
             return 1
 
         if not csv_path:
-            dlg.warning("Validation Error", "Please select a CSV file.")
-            dlg.exec()
+            CustomMessageBox.warning(self, "Validation Error", "Please select a CSV file.")
             return 1
 
         if not Path(csv_path).exists():
-            dlg.warning("Validation Error", f"{csv_path}\n\nThe path does not exist.")
-            dlg.exec()
             return 1
 
         sy1 = self.spinBox_SY1.value()
         sy2 = self.spinBox_SY2.value()
 
         if not sy1 or not sy2:
-            dlg.warning("Validation Error", "School year cannot be empty.")
-            dlg.exec()
+            CustomMessageBox.warning(self, "Validation Error", "School year cannot be empty.")
             return 1
 
         self.progressBar.setVisible(True)
@@ -895,7 +887,6 @@ class StudentEditorDialog(QDialog, Ui_EditStudentDialog):
         return tuple([""] * 10) # Return a tuple with 10 empty string values if no record is found
 
     def edit(self, studentid):
-        dlg = CustomMessageBox(self)
 
         try:
             sy1 = self.spinBox_SY1.value()
@@ -925,8 +916,7 @@ class StudentEditorDialog(QDialog, Ui_EditStudentDialog):
                 errors.append("❌ Please select a gender.")
 
             if errors:
-                dlg.warning("Validation Error", "\n".join(errors))
-                dlg.exec()
+                CustomMessageBox.warning(self, "Validation Failed", "\n".join(errors))
                 return
 
             sql  = "UPDATE cai.tbl_student_info\n"

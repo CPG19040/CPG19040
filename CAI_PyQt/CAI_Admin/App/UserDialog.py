@@ -1,14 +1,14 @@
 import re, psycopg2
 from passlib.hash import bcrypt
 
-from PySide6.QtWidgets import QDialog, QMessageBox
+from PySide6.QtWidgets import QDialog
 from PySide6.QtGui import QImage, QPixmap, QStandardItemModel, QStandardItem
 from PySide6.QtCore import Qt
 
 from App.FormAddNewUser import Ui_AddNewUserDialog
 from App.FormEditUser import Ui_EditUserDialog
 from App.CRUDTools import DatabaseTools
-from App.Tools import Utility
+from App.Tools import Utility, CustomMessageBox
 
 class Staff:
 
@@ -354,25 +354,25 @@ class AddUserDialog(QDialog, Ui_AddNewUserDialog):
         # Basic Validation: Required Fields
         required_fields = ["fname", "lname", "uname", "pwd"]
         if not all(data[field] for field in required_fields):
-            QMessageBox.warning(self, "Validation Error", "All fields except Middle Name are required.")
+            CustomMessageBox.warning(self, "Validation Error", "All fields except Middle Name are required.")
             return
 
         # Format Validation: Names (No numbers allowed)
         name_regex = r"^[a-zA-Z\s.-]+$"
         if not re.match(name_regex, data["fname"]) or not re.match(name_regex, data["lname"]):
-            QMessageBox.warning(self, "Validation Error", "Names should only contain letters.")
+            CustomMessageBox.warning(self, "Validation Error", "Names should only contain letters.")
             return
 
         # Format Validation: Password Strength
         if len(data["pwd"]) < 6:
-            QMessageBox.warning(self, "Validation Error", "Password must be at least 6 characters long.")
+            CustomMessageBox.warning(self, "Validation Error", "Password must be at least 6 characters long.")
             return
 
         # Database Validation: Duplicate Username
         check_query = "SELECT COUNT(*) FROM cai.tbl_staff_info WHERE username = %s"
         exists = self.db.fetch_all(check_query, (data["uname"],))
         if exists and exists[0]['count'] > 0:
-            QMessageBox.warning(self, "Validation Error", f"Username '{data['uname']}' is already taken.")
+            CustomMessageBox.warning(self, "Validation Error", f"Username '{data['uname']}' is already taken.")
             return
 
         # Proceed to Registration
@@ -415,7 +415,7 @@ class AddUserDialog(QDialog, Ui_AddNewUserDialog):
             self.accept()
 
         except Exception as e:
-            QMessageBox.critical(self, "Database Error", f"Failed to register user: {str(e)}")
+            CustomMessageBox.critical(self, "Database Error", f"Failed to register user: {str(e)}")
 
 
 
@@ -555,14 +555,12 @@ class EditUserDialog(QDialog, Ui_EditUserDialog):
 
     def update_user(self):
         if self.mode == 1:
-            reply = QMessageBox.question(
+            reply = CustomMessageBox.question(
                 self, "Profile Update",
-                "Changing your profile requires a logout. Do you want to continue?",
-                QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
-                QMessageBox.StandardButton.No
+                "Changing your profile requires a logout. Do you want to continue?"
             )
 
-            if reply == QMessageBox.StandardButton.No:
+            if reply == CustomMessageBox.No:
                 return
 
         # 1. Collect data
@@ -580,18 +578,18 @@ class EditUserDialog(QDialog, Ui_EditUserDialog):
         # 2. Basic Validation: Required Fields
         required_fields = ["fname", "lname", "uname"]
         if not all(ui_data[field] for field in required_fields):
-            QMessageBox.warning(self, "Validation Error", "All fields except Middle Name are required.")
+            CustomMessageBox.warning(self, "Validation Error", "All fields except Middle Name are required.")
             return
 
         # 3. Format Validation: Names (No numbers allowed)
         name_regex = r"^[a-zA-Z\s.-]+$"
         if not re.match(name_regex, ui_data["fname"]) or not re.match(name_regex, ui_data["lname"]):
-            QMessageBox.warning(self, "Validation Error", "Names should only contain letters.")
+            CustomMessageBox.warning(self, "Validation Error", "Names should only contain letters.")
             return
 
         # 4. Format Validation: Password Strength
         if ui_data["pwd"] and len(ui_data["pwd"]) < 6:
-            QMessageBox.warning(self, "Validation Error", "Password must be at least 6 characters long.")
+            CustomMessageBox.warning(self, "Validation Error", "Password must be at least 6 characters long.")
             return
 
         # 5. Database Validation: Duplicate Username
@@ -600,7 +598,7 @@ class EditUserDialog(QDialog, Ui_EditUserDialog):
             exists = self.db.fetch_all(check_query, (ui_data["uname"],))
 
             if exists and exists[0]['count'] > 0:
-                QMessageBox.warning(self, "Validation Error", f"Username '{ui_data['uname']}' is already taken.")
+                CustomMessageBox.warning(self, "Validation Error", f"Username '{ui_data['uname']}' is already taken.")
                 return
 
         # 6. Proceed to Registration
@@ -656,5 +654,5 @@ class EditUserDialog(QDialog, Ui_EditUserDialog):
             self.accept()
 
         except Exception as e:
-            QMessageBox.critical(self, "Database Error", f"Failed to register user: {str(e)}")
+            CustomMessageBox.critical(self, "Database Error", f"Failed to register user: {str(e)}")
 

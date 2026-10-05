@@ -1,7 +1,7 @@
 import os, sys, subprocess, csv
 from pathlib import Path
 
-from PySide6.QtWidgets import QLayout, QVBoxLayout, QHBoxLayout, QLabel, QFrame, QFileDialog, QWidget, QMainWindow, QDialog, QComboBox
+from PySide6.QtWidgets import QVBoxLayout, QHBoxLayout, QLabel, QFrame, QFileDialog, QWidget, QMainWindow, QDialog, QComboBox
 from PySide6.QtGui import QPixmap, QPainter, QColor, QPen, QPainterPath, QFont
 from PySide6.QtCore import QIODevice, Qt, Signal, QDate, QUrl, QRectF, QPoint, QPropertyAnimation, QEasingCurve, QFile
 from PySide6.QtWebEngineWidgets import QWebEngineView
@@ -581,21 +581,25 @@ class NoScrollComboBox(QComboBox):
 
 
 class CustomMessageBox(QDialog, Ui_MessageBox):
-    Yes      = 100
-    No       = 101
-    YesToAll = 102
-    NoToAll  = 103
-    Cancel   = QDialog.DialogCode.Rejected  # Default Esc / Close code (0)
+    Yes           = 100
+    No            = 101
+    YesToAll      = 102
+    NoToAll       = 103
+    Cancel        = QDialog.DialogCode.Rejected  # Default Esc / Close code (0)
+    Ok            = QDialog.DialogCode.Accepted  # Standard OK code (1)
     RESIZE_MARGIN = 8
 
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setupUi(self)
 
-        self.setWindowFlags(Qt.WindowType.Window | Qt.WindowType.FramelessWindowHint) # Remove OS default window frame
+        self.setWindowFlags(Qt.WindowType.Window | Qt.WindowType.FramelessWindowHint)
         self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground, True)
         self.setMouseTracking(True)
         
+        # Signal Connections
+        if hasattr(self, 'btnOk'):
+            self.btnOk.clicked.connect(self.accept)
         if hasattr(self, 'btnYes'):
             self.btnYes.clicked.connect(lambda: self.done(self.Yes))
         if hasattr(self, 'btnNo'):
@@ -604,10 +608,95 @@ class CustomMessageBox(QDialog, Ui_MessageBox):
             self.btnYesAll.clicked.connect(lambda: self.done(self.YesToAll))
         if hasattr(self, 'btnNoAll'):
             self.btnNoAll.clicked.connect(lambda: self.done(self.NoToAll))
-        if hasattr(self, 'btnOk'):
-            self.btnOk.clicked.connect(self.accept)
         if hasattr(self, 'btnCancel'):
             self.btnCancel.clicked.connect(self.reject)
+
+    def _hide_all_buttons(self):
+        """Reset button visibility before showing modal."""
+        buttons = ['btnYes', 'btnNo', 'btnYesAll', 'btnNoAll', 'btnOk', 'btnCancel']
+
+        for btn_name in buttons:
+            if hasattr(self, btn_name):
+                getattr(self, btn_name).setVisible(False)
+
+    def _setup_dialog(self, title, message, icon_path):
+        self._hide_all_buttons()
+        self.setWindowTitle(title)
+
+        if hasattr(self, 'label_icon'):
+            self.label_icon.setPixmap(QPixmap(icon_path))
+        if hasattr(self, 'label_windowTitle'):
+            self.label_windowTitle.setText(title)
+        if hasattr(self, 'plainTextEdit'):
+            self.plainTextEdit.setPlainText(message)
+
+    # Static Helper Launchers
+    @classmethod
+    def information(cls, parent, title, message):
+        dlg = cls(parent)
+        dlg._setup_dialog(title, message, ":/Images/Images/information.png")
+        
+        if hasattr(dlg, 'btnOk'):
+            dlg.btnOk.setVisible(True)
+
+        dlg.adjustSize()
+
+        return dlg.exec()
+
+    @classmethod
+    def success(cls, parent, title, message):
+        dlg = cls(parent)
+        dlg._setup_dialog(title, message, ":/Images/Images/success.png")
+        
+        if hasattr(dlg, 'btnOk'):
+            dlg.btnOk.setVisible(True)
+
+        dlg.adjustSize()
+
+        return dlg.exec()
+
+    @classmethod
+    def question(cls, parent, title, message, include_all=False, show_cancel=False):
+        dlg = cls(parent)
+        dlg._setup_dialog(title, message, ":/Images/Images/question.png")
+        
+        if hasattr(dlg, 'btnYes'): dlg.btnYes.setVisible(True)
+        if hasattr(dlg, 'btnNo'): dlg.btnNo.setVisible(True)
+
+        if include_all:
+            if hasattr(dlg, 'btnYesAll'): dlg.btnYesAll.setVisible(True)
+            if hasattr(dlg, 'btnNoAll'): dlg.btnNoAll.setVisible(True)
+
+        if show_cancel and hasattr(dlg, 'btnCancel'):
+            dlg.btnCancel.setVisible(True)
+
+        dlg.adjustSize()
+
+        return dlg.exec()
+
+    @classmethod
+    def warning(cls, parent, title, message):
+        dlg = cls(parent)
+        dlg._setup_dialog(title, message, ":/Images/Images/warning.png")
+        
+        if hasattr(dlg, 'btnOk'):
+            dlg.btnOk.setVisible(True)
+
+        dlg.adjustSize()
+
+        return dlg.exec()
+
+    @classmethod
+    def critical(cls, parent, title, message):
+        dlg = cls(parent)
+        dlg._setup_dialog(title, message, ":/Images/Images/critical.png")
+        
+        if hasattr(dlg, 'btnOk'):
+            dlg.btnOk.setVisible(True)
+
+        dlg.adjustSize()
+
+        return dlg.exec()
 
     def _get_resize_edge(self, pos):
         """Determine which edge or corner the mouse is over based on RESIZE_MARGIN."""
@@ -678,80 +767,6 @@ class CustomMessageBox(QDialog, Ui_MessageBox):
                         return
             
         super().mousePressEvent(event)
-
-    def _hide_all_buttons(self):
-        """Reset button visibility before showing modal."""
-        buttons = ['btnYes', 'btnNo', 'btnYesAll', 'btnNoAll', 'btnOk', 'btnCancel']
-        for btn_name in buttons:
-            if hasattr(self, btn_name):
-                getattr(self, btn_name).setVisible(False)
-
-    def information(self, title, message):
-        self._hide_all_buttons()
-        self.setWindowTitle(title)
-        self.label_icon.setPixmap(QPixmap(u":/Images/Images/information.png"))
-        self.label_windowTitle.setText(title)
-        self.plainTextEdit.setPlainText(message)
-        
-        if hasattr(self, 'btnOk'):
-            self.btnOk.setVisible(True)
-
-        self.adjustSize()
-
-    def success(self, title, message):
-        self._hide_all_buttons()
-        self.setWindowTitle(title)
-        self.label_icon.setPixmap(QPixmap(u":/Images/Images/success.png"))
-        self.label_windowTitle.setText(title)
-        self.plainTextEdit.setPlainText(message)
-        
-        if hasattr(self, 'btnOk'):
-            self.btnOk.setVisible(True)
-
-        self.adjustSize()
-
-    def question(self, title, message, include_all=False, show_cancel=False):
-        self._hide_all_buttons()
-        self.setWindowTitle(title)
-        self.label_icon.setPixmap(QPixmap(u":/Images/Images/question.png"))
-        self.label_windowTitle.setText(title)
-        self.plainTextEdit.setPlainText(message)
-
-        self.btnYes.setVisible(True)
-        self.btnNo.setVisible(True)
-        
-        if include_all:
-            self.btnYesAll.setVisible(True)
-            self.btnNoAll.setVisible(True)
-            
-        if show_cancel and hasattr(self, 'btnCancel'):
-            self.btnCancel.setVisible(True)
-
-        self.adjustSize()
-
-    def warning(self, title, message):
-        self._hide_all_buttons()
-        self.setWindowTitle(title)
-        self.label_icon.setPixmap(QPixmap(u":/Images/Images/warning.png"))
-        self.label_windowTitle.setText(title)
-        self.plainTextEdit.setPlainText(message)
-        
-        if hasattr(self, 'btnOk'):
-            self.btnOk.setVisible(True)
-
-        self.adjustSize()
-
-    def critical(self, title, message):
-        self._hide_all_buttons()
-        self.setWindowTitle(title)
-        self.label_icon.setPixmap(QPixmap(u":/Images/Images/critical.png"))
-        self.label_windowTitle.setText(title)
-        self.plainTextEdit.setPlainText(message)
-        
-        if hasattr(self, 'btnOk'):
-            self.btnOk.setVisible(True)
-
-        self.adjustSize()
 
 
 

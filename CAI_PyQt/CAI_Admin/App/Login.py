@@ -1,9 +1,9 @@
-from PySide6.QtWidgets import QMainWindow, QMessageBox
+from PySide6.QtWidgets import QMainWindow
 from PySide6.QtCore import Signal, Qt
 from passlib.hash import bcrypt
 from App.FormLogIn import Ui_FormLogin
 from App.CRUDTools import DatabaseTools
-from App.Tools import Utility
+from App.Tools import Utility, CustomMessageBox
 
 class Login(QMainWindow, Ui_FormLogin):
     login_success = Signal(object)
@@ -50,7 +50,7 @@ class Login(QMainWindow, Ui_FormLogin):
         if user:
             self.login_success.emit(user)
         else:
-            QMessageBox.warning(self, "Error", "Invalid Username or Password")
+            CustomMessageBox.critical(self, "Error", "Invalid Username or Password")
 
     def authenticate_user(self, username, password):
         try:

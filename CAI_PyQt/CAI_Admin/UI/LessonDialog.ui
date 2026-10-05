@@ -34,25 +34,6 @@
 	background: transparent;
 }
 
-QMessageBox {
-	background-color: #deddda;
-	font: 10pt &quot;Inter&quot;;
-	color: black;
-}
-
-QMessageBox QLabel {
-	font: 10pt &quot;Inter&quot;;
-	color: black;
-}
-
-QMessageBox QPushButton {
-	height: 30px;
-	padding: 0px 12px;
-	background-color: #deddda;
-	font: 10pt &quot;Inter&quot;;
-	color: black;
-}
-
 *[class=&quot;button-normal&quot;] {
 	font: 10pt &quot;Inter&quot;;
 	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 

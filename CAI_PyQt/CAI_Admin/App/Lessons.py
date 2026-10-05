@@ -4,11 +4,11 @@ from pathlib import Path
 
 from PySide6.QtGui import QStandardItemModel, QStandardItem, QImage, QPixmap
 from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QMessageBox, QDialog, QFileDialog
+from PySide6.QtWidgets import QDialog, QFileDialog
 
 from App.CRUDTools import DatabaseTools
 from App.LessonDialog import Ui_LessonDialog
-from App.Tools import Utility
+from App.Tools import Utility, CustomMessageBox
 
 class Lesson:
 
@@ -355,7 +355,7 @@ class LessonDialog(QDialog, Ui_LessonDialog):
         if not lesson_num: errors.append("Lesson Number is required.")
 
         if errors:
-            QMessageBox.warning(self, "Validation Error", "\n".join(errors))
+            CustomMessageBox.warning(self, "Validation Error", "\n".join(errors))
             return
 
         file_name = ''
@@ -385,11 +385,11 @@ class LessonDialog(QDialog, Ui_LessonDialog):
                 f"{title.replace(' ', '_')}.pdf"
             ))
 
-            QMessageBox.information(self, "Success", "Lesson added successfully!")
+            CustomMessageBox.success(self, "Success", "Lesson added successfully!")
             self.accept()
 
         except Exception as e:
-            QMessageBox.critical(self, "Database Error", f"Failed to save: {str(e)}")
+            CustomMessageBox.critical(self, "Database Error", f"Failed to save: {str(e)}")
 
     def update_lesson(self, lesson_id):
         if not lesson_id:
@@ -408,7 +408,7 @@ class LessonDialog(QDialog, Ui_LessonDialog):
         if not lesson_num: errors.append("Lesson Number is required.")
 
         if errors:
-            QMessageBox.warning(self, "Validation Error", "\n".join(errors))
+            CustomMessageBox.warning(self, "Validation Error", "\n".join(errors))
             return
 
         file_name = ''
@@ -441,11 +441,11 @@ class LessonDialog(QDialog, Ui_LessonDialog):
                 lesson_id # The ID of the record you are editing
             ))
 
-            QMessageBox.information(self, "Success", "Lesson updated successfully!")
+            CustomMessageBox.success(self, "Success", "Lesson updated successfully!")
             self.accept()
 
         except Exception as e:
-            QMessageBox.critical(self, "Database Error", f"Failed to update: {str(e)}")
+            CustomMessageBox.critical(self, "Database Error", f"Failed to update: {str(e)}")
 
     def update_photo(self):
         pixmap, binaryImage = self.util.browsePhoto(self, self.label_img.width(), self.label_img.height())

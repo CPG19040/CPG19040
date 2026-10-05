@@ -34,25 +34,6 @@
 	background: transparent;
 }
 
-QMessageBox {
-	background-color: #deddda;
-	font: 10pt &quot;Inter&quot;;
-	color: black;
-}
-
-QMessageBox QLabel {
-	font: 10pt &quot;Inter&quot;;
-	color: black;
-}
-
-QMessageBox QPushButton {
-	height: 30px;
-	padding: 0px 12px;
-	background-color: #deddda;
-	font: 10pt &quot;Inter&quot;;
-	color: black;
-}
-
 #label_school_name {
 	color: rgb(255, 255, 255); 
 	font-family: 'Ubuntu'; 

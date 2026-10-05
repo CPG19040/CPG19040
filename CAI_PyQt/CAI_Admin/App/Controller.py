@@ -2,7 +2,7 @@ import os, csv
 
 # PyQt Imports
 from PySide6.QtCore import QSettings, QTimer, QDateTime, QPoint, QEasingCurve, QPropertyAnimation, QParallelAnimationGroup, Qt, QDate
-from PySide6.QtWidgets import QMainWindow, QHeaderView, QDialog, QFileDialog, QMessageBox, QApplication, QButtonGroup, QLabel, QSizePolicy, QSpacerItem
+from PySide6.QtWidgets import QMainWindow, QHeaderView, QDialog, QFileDialog, QApplication, QButtonGroup, QLabel, QSizePolicy, QSpacerItem
 from PySide6.QtGui import QFontDatabase, QImage, QPixmap, QGuiApplication, QStandardItemModel, QStandardItem
 from shiboken6 import isValid
 
@@ -414,11 +414,10 @@ class Controller:
         self.ui.label_timeAP.setText(ap)
 
     def logout(self):
-        msgbox      = CustomMessageBox(self.home_win)
         confirm_msg = f"Are you sure you want to log out?"
-        msgbox.question("Confirm Logout", confirm_msg)
+        result = CustomMessageBox.question(self.home_win, "Confirm Logout", confirm_msg)
 
-        if msgbox.exec() == CustomMessageBox.No:
+        if result == CustomMessageBox.No:
             return
 
         self.settings.clear()
@@ -478,7 +477,7 @@ class Controller:
             selection_model = self.ui.table_users.selectionModel()
 
             if not selection_model.hasSelection():
-                QMessageBox.information(self.home_win, "No Selection", f"Select a user to update.")
+                CustomMessageBox.information(self.home_win, "No Selection", f"Select a user to update.")
                 return
 
             selected_indices = selection_model.selectedRows()
@@ -650,19 +649,21 @@ class Controller:
 
     def edit_student(self, user):
         student_id = self.ui.label_studentId.text().strip()
+        
         if self.util.isEmpty(student_id):
-            QMessageBox.warning(self.home_win, "Warning", f"Select a student to update the information.")
+            CustomMessageBox.warning(self.home_win, "Warning", f"Select a student to update the information.")
             return
 
         editor = StudentEditorDialog(user, student_id)
+
         if editor.exec() == QDialog.DialogCode.Accepted:
             self.display_student_cards()
-            QMessageBox.information(editor, "Updated", f"Student {student_id} information has been updated.")
+            CustomMessageBox.success(self.home_win, "Updated", f"Student {student_id} information has been updated.")
 
     def print_student_list(self):
 
         if self.ui.gridLayout_stud_card.count() == 0:
-            QMessageBox.warning(self.home_win, "Empty Class", "No students found in this section.")
+            CustomMessageBox.information(self.home_win, "Empty Class", "No students found in this section.")
             return
 
         section_id = self.ui.cmb_studSection.currentData()
@@ -682,35 +683,38 @@ class Controller:
             success, message = reporter.generate_studentlist_report(section_id, output_pdf_path)
 
             if success:
-                QMessageBox.information(self.home_win, "Success", message)
+                CustomMessageBox.success(self.home_win, "Success", message)
+
             else:
-                QMessageBox.critical(self.home_win, "Error", message)
+                CustomMessageBox.critical(self.home_win, "Error", message)
 
     def delete_student(self, user):
         # Gather all selected student IDs
         selected_ids = [card.label_studentid.text() for card in self.cards if card.property("selected")]
 
         if not selected_ids:
-            QMessageBox.warning(self.home_win, "Warning", "Please select at least one student card to delete.")
+            CustomMessageBox.warning(self.home_win, "Warning", "Please select at least one student card to delete.")
             return
 
         # Confirm deletion with the user
-        count = len(selected_ids)
-        suffix = "students" if count > 1 else "student"
-        confirm_msg = f"Are you sure you want to delete {count} selected {suffix}?"
-        confirm = QMessageBox.question(self.home_win, "Confirm Delete", confirm_msg,
-                                    QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
+        count       = len(selected_ids)
+        confirm_msg = "Are you sure you want to delete this student?\n\n" + "\n".join(selected_ids)
 
-        if confirm == QMessageBox.StandardButton.Yes:
+        if count > 1:
+            confirm_msg = "Are you sure you want to delete these students?\n\n" + "\n".join(selected_ids)
+
+        confirm = CustomMessageBox.question(self.home_win, "Confirm Delete", confirm_msg)
+
+        if confirm == CustomMessageBox.Yes:
             stud = Student()
 
             # Pass the list (converted to tuple) to your DB method
             if stud.delete_student(tuple(selected_ids), user):
                 self.display_student_cards()
                 self.display_student_info() # Reset labels
-                QMessageBox.information(self.home_win, "Deleted", f"Successfully removed {count} students.")
+                CustomMessageBox.success(self.home_win, "Deleted", f"Successfully removed {count} students.")
             else:
-                QMessageBox.warning(self.home_win, "Error", "Could not delete students from the database.")
+                CustomMessageBox.warning(self.home_win, "Error", "Could not delete students from the database.")
 
     def register_section(self):
         self.sectionObj.txtSectionName.clear()
@@ -741,11 +745,10 @@ class Controller:
     def delete_selected_sections(self):
         sectionId = self.ui.comboBox_Section.currentData()
         sectionName = self.ui.comboBox_Section.currentText()
-        dialog = QMessageBox.warning(self.home_win, "Delete Section",
-                             f"Deleting ({sectionName}) section will also remove all associated students.",
-                             QMessageBox.Ok | QMessageBox.Cancel)
+        dialog = CustomMessageBox.question(self.home_win, "Delete Section",
+                             f"Deleting ({sectionName}) section will also remove all associated students. Do you want to continue?")
 
-        if dialog == QMessageBox.Ok:
+        if dialog == CustomMessageBox.Yes:
             self.sectionObj.delete_section(sectionId, sectionName)
             self.sectionObj.populate_sections(self.ui.comboBox_Section, '', False)
             self.display_section_info()
@@ -814,7 +817,7 @@ class Controller:
         selection = self.ui.table_lesson.selectionModel()
 
         if not selection.hasSelection():
-            QMessageBox.information(self.home_win, "No Selection", "Select a lesson to view.")
+            CustomMessageBox.information(self.home_win, "No Selection", "Select a lesson to view.")
             return
 
         # Get the index of the first selected row
@@ -841,10 +844,10 @@ class Controller:
                 self.lesson_window = WickPlayer(str(file_to_open))
                 self.lesson_window.show()
             else:
-                QMessageBox.warning(self.home_win, "File Not Found",
+                CustomMessageBox.warning(self.home_win, "File Not Found",
                                     f"The file does not exist at:\n{file_to_open}")
         else:
-            QMessageBox.warning(self.home_win, "Missing Path",
+            CustomMessageBox.warning(self.home_win, "Missing Path",
                                 f"No file path associated with:\n\n{lesson_title}")
 
     def cbLesson_selection_change(self):
@@ -867,7 +870,7 @@ class Controller:
                 lesson_id = self.ui.table_lesson.model().data(row_index)
 
             if not lesson_id:
-                QMessageBox.information(self.home_win, "No Selection", f"Select a lesson to update.")
+                CustomMessageBox.information(self.home_win, "No Selection", f"Select a lesson to update.")
                 return
 
         lessonDialog = LessonDialog(mode, lesson_id)
@@ -1012,7 +1015,7 @@ class Controller:
                     END;
                 """
                 self.db_tools.execute_query(sql, (self.ui.quiz_no.value(), self.ui.cbGradingPeriod.currentData(), lessonId))
-                QMessageBox.information(self.home_win, "Publishing", "This quiz is published. Students can see this.")
+                CustomMessageBox.information(self.home_win, "Publishing", "This quiz is published. Students can see this.")
 
             else:
                 sql = """
@@ -1022,7 +1025,7 @@ class Controller:
                 """
 
                 self.db_tools.execute_query(sql, (self.ui.quiz_no.value(), self.ui.cbGradingPeriod.currentData(), lessonId))
-                QMessageBox.information(self.home_win, "Publishing", "This quiz is unpublished. Students cannot see this.")
+                CustomMessageBox.information(self.home_win, "Publishing", "This quiz is unpublished. Students cannot see this.")
 
         except Exception as e:
             print(f"Error saving to database: {e}")
@@ -1042,22 +1045,21 @@ class Controller:
         selection = self.ui.table_users.selectionModel()
 
         if not selection.hasSelection():
-            QMessageBox.information(self.home_win, "No Selection", "Select a user to delete.")
+            CustomMessageBox.information(self.home_win, "No Selection", "Select a user to delete.")
             return
 
         # Get the index of the first selected row
         selected_row_index = selection.selectedRows()[0].row()
-        model = self.ui.table_users.model()
-        school_id = model.index(selected_row_index, 1).data()
-        firstname = model.index(selected_row_index, 2).data()
+        model      = self.ui.table_users.model()
+        school_id  = model.index(selected_row_index, 1).data()
+        firstname  = model.index(selected_row_index, 2).data()
         middlename = model.index(selected_row_index, 3).data()
-        lastname = model.index(selected_row_index, 4).data()
+        lastname   = model.index(selected_row_index, 4).data()
 
         confirm_msg = f"Are you sure you want to delete this user?\n\n{self.util.formatFullname(firstname, middlename, lastname)}"
-        confirm = QMessageBox.question(self.home_win, "Confirm Deletion", confirm_msg,
-                        QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
+        confirm     = CustomMessageBox.question(self.home_win, "Confirm Deletion", confirm_msg)
 
-        if confirm == QMessageBox.StandardButton.No:
+        if confirm == CustomMessageBox.No:
             return
 
         staff = Staff()
@@ -1240,10 +1242,10 @@ class Controller:
                 _success, _message = CrossPlatformPrinter().send_to_printer(output_pdf_path)
                 message = f"{message}\n\n{_message}"
 
-            QMessageBox.information(self.home_win, "Success", message)
+            CustomMessageBox.success(self.home_win, "Success", message)
 
         else:
-            QMessageBox.critical(self.home_win, "Error", message)
+            CustomMessageBox.critical(self.home_win, "Error", message)
 
     def cb_gp_quiz_idv_selectionChanged(self):
         selected_rows = self.ui.table_student_score_idv.selectionModel().selectedRows()
@@ -1392,10 +1394,10 @@ class Controller:
             err = self.db_tools.execute_query(sql, tuple(params))
 
             if not err:
-                QMessageBox.information(self.home_win, "Successful", "School year and grading period are saved.")
+                CustomMessageBox.success(self.home_win, "Successful", "School year and grading period are saved.")
 
             else:
-                QMessageBox.critical(self.home_win, "Failed", "Unable to save school year and grading period.")
+                CustomMessageBox.critical(self.home_win, "Failed", "Unable to save school year and grading period.")
 
     def display_grading_periods(self):
         sql = """
@@ -1470,9 +1472,9 @@ class Controller:
         err = self.db_tools.execute_query(query, (new_passing_score,))
 
         if not err:
-            QMessageBox.information(self.home_win, "Update", "Passing score updated successfully.")
+            CustomMessageBox.success(self.home_win, "Update", "Passing score updated successfully.")
         else:
-            QMessageBox.critical(self.home_win, "Update", "Failed to update passing score.")
+            CustomMessageBox.critical(self.home_win, "Update", "Failed to update passing score.")
 
     def browse_lessons_csv(self):
         file_dialog = QFileDialog(self.home_win)
@@ -1517,15 +1519,12 @@ class Controller:
 
     def import_lessons(self):
         error  = Lesson().add_all_lessons_from_csv(self.ui.label_lesson_CSV_path.text())
-        msgbox = CustomMessageBox(self.home_win)
 
         if error:
-            msgbox.warning("Warning", error)
-            result = msgbox.exec()
+            CustomMessageBox.warning(self.home_win, "Warning", error)
 
         else:
-            msgbox.information("Success", "Successfully imported all the predefined lessons.")
-            result = msgbox.exec()
+            CustomMessageBox.success(self.home_win, "Success", "Successfully imported all the predefined lessons.")
 
     def initialize_table_quiz_score_idv(self):
         # Reports

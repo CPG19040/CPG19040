@@ -1,13 +1,12 @@
 import os
 import psycopg2
 
-from PySide6.QtGui import QStandardItemModel, QStandardItem, QImage, QPixmap, QKeySequence, QShortcut, QColor, QBrush
-from PySide6.QtWidgets import (QHBoxLayout, QLabel, QLineEdit, QButtonGroup,
-                             QMessageBox, QFileDialog, QFrame, QDialog)
+from PySide6.QtGui import QStandardItemModel, QStandardItem, QImage, QPixmap, QKeySequence, QShortcut
+from PySide6.QtWidgets import (QHBoxLayout, QLabel, QLineEdit, QButtonGroup, QFileDialog, QFrame, QDialog)
 from PySide6.QtCore import Qt, QSize, Signal
 
 from App.CRUDTools import DatabaseTools
-from App.Tools import Utility, NoScrollComboBox
+from App.Tools import Utility, NoScrollComboBox, CustomMessageBox
 from App.QuizDialog import Ui_QuizCreatorDialog
 from App.CardQuiz import Ui_CardQuiz
 from App.CardQuiz_edit import Ui_CardQuiz_edit
@@ -1045,7 +1044,7 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
     def save_to_db(self):
         try:
             if not self.validate_inputs():
-                QMessageBox.warning(self, "Validation Error", "Please fill in all required fields.")
+                CustomMessageBox.warning(self, "Validation Error", "Please fill in all required fields.")
                 return
 
             q_num = self.quiz_no.value()
@@ -1274,7 +1273,7 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
                 conn.commit()
                 self.itemsToRemove.clear()
 
-                QMessageBox.information(self, "Success", "Quiz updated successfully!")
+                CustomMessageBox.success(self, "Success", "Quiz updated successfully!")
                 self.is_saved = True
                 self.setWindowTitle(self.title_init)
                 self.accept()
@@ -1282,7 +1281,7 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
         except Exception as e:
             if conn: conn.rollback()
             print(f"Database Error: {e}")
-            QMessageBox.critical(self, "Error", f"Failed to sync database: {e}")
+            CustomMessageBox.critical(self, "Error", f"Failed to sync database: {e}")
 
         finally:
             if conn: conn.close()
