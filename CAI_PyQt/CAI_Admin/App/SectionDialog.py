@@ -149,16 +149,15 @@ class Section(QDialog, Ui_SectionRegistrationDialog):
     def import_from_csv(self, csv_path, sectionid):
 
         if not sectionid:
-            CustomMessageBox.warning(self, "Validation Error", "Please select a section.")
+            CustomMessageBox.warning(self, "Validation Failed", "Please select a section.")
             return 1
 
         if not csv_path:
-            CustomMessageBox.warning(self, "Validation Error", "Please select a CSV file.")
-            return 1
+            CustomMessageBox.warning(self, "Validation Failed", "Please select a CSV file.")
             return 1
 
         if not Path(csv_path).exists():
-            CustomMessageBox.warning(self, "Validation Error", f"{csv_path}\n\nThe path does not exist.")
+            CustomMessageBox.warning(self, "Validation Failed", f"{csv_path}\n\nThe path does not exist.")
             return 1
 
         self.progressBar.setVisible(True)

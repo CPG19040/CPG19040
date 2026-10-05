@@ -355,7 +355,7 @@ class LessonDialog(QDialog, Ui_LessonDialog):
         if not lesson_num: errors.append("Lesson Number is required.")
 
         if errors:
-            CustomMessageBox.warning(self, "Validation Error", "\n".join(errors))
+            CustomMessageBox.warning(self, "Validation Failed", "\n".join(errors))
             return
 
         file_name = ''
@@ -408,7 +408,7 @@ class LessonDialog(QDialog, Ui_LessonDialog):
         if not lesson_num: errors.append("Lesson Number is required.")
 
         if errors:
-            CustomMessageBox.warning(self, "Validation Error", "\n".join(errors))
+            CustomMessageBox.warning(self, "Validation Failed", "\n".join(errors))
             return
 
         file_name = ''

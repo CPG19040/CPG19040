@@ -261,23 +261,37 @@ class Utility:
 
         return scaled_pixmap, binaryImage
 
-    def formatFullname(self, firstname, middlename, lastname, order=0):
-        if not firstname or not lastname:
+    def formatFullname(self, firstname: str, middlename: str, lastname: str, order: int = 0) -> str:
+        first  = (firstname or "").strip()
+        middle = (middlename or "").strip()
+        last   = (lastname or "").strip()
+
+        if not first or not last:
             return ""
 
-        middleInitial = middlename[:1].upper() + '.' if middlename else ""
+        middle_initial = f"{middle[0].upper()}." if middle else ""
 
-        if order == 0: # Natural Order
-            return f"{firstname} {middleInitial} {lastname}".title()
+        if order == 0:  # Natural Order: First [M.] Last
+            parts = [first, middle_initial, last]
+            return " ".join(p for p in parts if p)
 
-        if order == 1: # Reverse Order
-            return f"{lastname}, {firstname} {middleInitial}".title()
+        elif order == 1:  # Reverse Order: Last, First [M.]
+            given_names = " ".join(p for p in [first, middle_initial] if p)
+            return f"{last}, {given_names}"
 
-        if order == 2: # Formal/Legal Order
-            return f"{firstname}, {middlename} {lastname}".title()
+        elif order == 2:  # Formal/Legal Order: Last, First Middle
+            given_names = " ".join(p for p in [first, middle] if p)
+            return f"{last}, {given_names}"
 
-        if order == 3: # Monogram or Initialized Style
-            return f"{firstname[:1].upper()}, {middlename[:1].upper()} {lastname[:1].upper()}".title()
+        elif order == 3:  # Initialized Style: F. M. L.
+            first_init = f"{first[0].upper()}."
+            middle_init = f"{middle[0].upper()}." if middle else ""
+            last_init = f"{last[0].upper()}."
+            
+            parts = [first_init, middle_init, last_init]
+            return " ".join(p for p in parts if p)
+
+        return f"{first} {last}"
 
     def getDifficultyLevel(self, index):
         levels = { 1: "Easy", 2: "Average", 3: "Hard" }

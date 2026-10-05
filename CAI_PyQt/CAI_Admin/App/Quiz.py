@@ -1045,7 +1045,7 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
     def save_to_db(self):
         try:
             if not self.validate_inputs():
-                CustomMessageBox.warning(self, "Validation Error", "Please fill in all required fields.")
+                CustomMessageBox.warning(self, "Validation Failed", "Please fill in all required fields.")
                 return
 
             q_num = self.quiz_no.value()

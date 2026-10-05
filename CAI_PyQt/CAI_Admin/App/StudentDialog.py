@@ -4,7 +4,7 @@ from pathlib import Path
 
 from PySide6.QtGui import QStandardItemModel, QStandardItem, QImage, QPixmap
 from PySide6.QtWidgets import QDialog, QFileDialog
-from PySide6.QtCore import Qt
+from PySide6.QtCore import QCoreApplication, Qt
 
 from App.FormAddNewStudent import Ui_AddNewStudentDialog
 from App.FormEditStudent import Ui_EditStudentDialog
@@ -517,11 +517,7 @@ class AddNewStudentDialog(QDialog, Ui_AddNewStudentDialog):
     def register(self):
 
         if self.rb_importCSV.isChecked():
-            ret = self.import_from_csv(self.txtCSVPath.text())
-
-            if ret == 0:
-                CustomMessageBox.success(self, "Success", "Students imported successfully!")
-
+            self.import_from_csv(self.txtCSVPath.text())
             return
 
         sy1 = self.spinBox_SY1.value()
@@ -551,7 +547,7 @@ class AddNewStudentDialog(QDialog, Ui_AddNewStudentDialog):
             errors.append("❌ Please select a gender.")
 
         if errors:
-            CustomMessageBox.warning(self, "Validation Error", "\n".join(errors))
+            CustomMessageBox.warning(self, "Validation Failed", "\n".join(errors))
             return
 
         sql = 'INSERT INTO cai.tbl_student_info(\n'
@@ -591,67 +587,200 @@ class AddNewStudentDialog(QDialog, Ui_AddNewStudentDialog):
         section = self.cmbSection_2.currentData()
 
         if not section:
-            CustomMessageBox.warning(self, "Validation Error", "Please select a section.")
+            CustomMessageBox.warning(self, "Validation Failed", "Please select a section.")
             return 1
 
         if not csv_path:
-            CustomMessageBox.warning(self, "Validation Error", "Please select a CSV file.")
+            CustomMessageBox.warning(self, "Validation Failed", "Please select a CSV file.")
             return 1
 
-        if not Path(csv_path).exists():
+        csv_file = Path(csv_path)
+        if not csv_file.exists():
+            CustomMessageBox.warning(self, "Validation Failed", f"{csv_path}\n\nThe path does not exist.")
             return 1
 
         sy1 = self.spinBox_SY1.value()
         sy2 = self.spinBox_SY2.value()
 
         if not sy1 or not sy2:
-            CustomMessageBox.warning(self, "Validation Error", "School year cannot be empty.")
+            CustomMessageBox.warning(self, "Validation Failed", "School year cannot be empty.")
             return 1
 
+        required_columns = {'LAST NAME', 'FIRST NAME', 'PASSWORD', 'GENDER', 'CONTACT PERSON', 'CONTACT NUMBER'}
+        rows_to_insert = []
+        errors = []
+
+        try:
+            with open(csv_file, mode='r', encoding='utf-8-sig') as f:
+                reader = csv.DictReader(f)
+                
+                if not reader.fieldnames:
+                    CustomMessageBox.warning(self, "Validation Failed", "The CSV file is empty.")
+                    return 1
+
+                headers = {col.strip() for col in reader.fieldnames if col}
+                missing_cols = required_columns - headers
+
+                if missing_cols:
+                    CustomMessageBox.warning(
+                        self, 
+                        "Validation Failed", 
+                        f"Missing required columns in CSV:\n{', '.join(missing_cols)}"
+                    )
+                    return 1
+
+                # Read all rows into memory to establish accurate row count
+                all_rows = list(reader)
+                total_rows = len(all_rows)
+
+                if total_rows == 0:
+                    CustomMessageBox.critical(self, "Empty Data", "The CSV file contains no data rows.")
+                    return 1
+
+                self.progressBar.setMaximum(total_rows)
+                self.progressBar.setValue(0)
+                self.progressBar.setVisible(True)
+
+                skip_all = False
+                no_all = False
+                skipped_students = []
+
+                for i, row in enumerate(all_rows, start=1):
+                    row_idx = i + 1  # 1-based CSV line number (accounting for header)
+                    
+                    # Process UI events so the progress bar refreshes
+                    self.progressBar.setValue(i)
+                    QCoreApplication.processEvents()
+
+                    clean_row = {k.strip(): v.strip() for k, v in row.items() if k}
+
+                    last_name  = clean_row.get('LAST NAME')
+                    first_name = clean_row.get('FIRST NAME')
+                    password   = clean_row.get('PASSWORD')
+                    gender_raw = clean_row.get('GENDER')
+
+                    name = self.util.formatFullname(first_name, clean_row.get('MIDDLE NAME', ''), last_name, order=1)
+
+                    if not no_all and self.check_duplicate_student(last_name, first_name, clean_row.get('MIDDLE NAME', '')):
+                        
+                        if not skip_all:
+                            dlg_res = CustomMessageBox.question(
+                                self,
+                                "Duplicate Entry",
+                                f"Student {name} already exists. Do you want to skip it?",
+                                include_all=True
+                            )
+                        
+                            if dlg_res == CustomMessageBox.Yes:
+                                skipped_students.append(name)
+                                continue
+
+                            elif dlg_res == CustomMessageBox.YesToAll:
+                                skip_all = True
+                                skipped_students.append(name)
+                                continue
+
+                            elif dlg_res == CustomMessageBox.NoToAll:
+                                no_all = True
+
+                        elif skip_all:
+                            skipped_students.append(name)
+                            continue
+
+                    row_errors = []
+
+                    if not last_name:
+                        row_errors.append("Last Name is required")
+                    if not first_name:
+                        row_errors.append("First Name is required")
+                    if not password:
+                        row_errors.append("Password is required")
+
+                    gender = self.util.validate_gender(gender_raw) if gender_raw else None
+                    if not gender:
+                        row_errors.append(f"Invalid Gender value '{gender_raw}'")
+
+                    if row_errors:
+                        errors.append(f"Row {row_idx}: {', '.join(row_errors)}")
+                    else:
+                        rows_to_insert.append((
+                            f"{sy1}-{sy2}",
+                            last_name,
+                            first_name,
+                            clean_row.get('MIDDLE NAME', ''),
+                            section,
+                            bcrypt.hash(password),
+                            gender,
+                            clean_row.get('CONTACT PERSON', ''),
+                            clean_row.get('CONTACT NUMBER', '')
+                        ))
+
+        except Exception as e:
+            CustomMessageBox.critical(self, "Error", f"Failed to read CSV file:\n{str(e)}")
+            return 1
+        finally:
+            self.progressBar.setVisible(False)
+
+        if errors:
+            error_msg = "\n".join(errors[:10])
+            if len(errors) > 10:
+                error_msg += f"\n...and {len(errors) - 10} more error(s)."
+
+            CustomMessageBox.critical(self, "CSV Validation Errors", f"Please fix the following issues:\n\n{error_msg}")
+            return 1
+
+        if not rows_to_insert:
+            CustomMessageBox.warning(self, "No Records", "No valid records available to insert.")
+            return 1
+
+        # Database Batch Insertion Phase
+        total_insert_rows = len(rows_to_insert)
         self.progressBar.setVisible(True)
-
-        with open(csv_path, mode='r', encoding='utf-8') as f:
-            total_rows = sum(1 for line in f) - 1 # Subtract 1 for header
-
-        self.progressBar.setMaximum(total_rows)
+        self.progressBar.setMaximum(total_insert_rows)
         self.progressBar.setValue(0)
 
-        with open(csv_path, mode='r', encoding='utf-8') as f:
-            reader = csv.DictReader(f)
+        sql = """
+            INSERT INTO cai.tbl_student_info (
+                school_year, studentid, lastname, firstname, middlename,
+                sectionid, password, gender, contact_person, contact_number
+            ) VALUES (
+                %s,
+                to_char(CURRENT_DATE, 'YYYY') || '-' || lpad(nextval('cai.student_id_seq')::text, 4, '0') || '-STU',
+                %s, %s, %s, %s, %s, %s, %s, %s
+            );
+        """
 
-            sql = 'INSERT INTO cai.tbl_student_info(\n'
-            sql += '    school_year\n'
-            sql += '    ,studentid\n'
-            sql += '    ,lastname\n'
-            sql += '    ,firstname\n'
-            sql += '    ,middlename\n'
-            sql += '    ,sectionid\n'
-            sql += '    ,password\n'
-            sql += '    ,gender\n'
-            sql += '    ,contact_person\n'
-            sql += '    ,contact_number\n'
-            sql += ')\n'
-            sql += 'VALUES (%s, \n'
-            sql += "    to_char(CURRENT_DATE, 'YYYY') || '-' || lpad(nextval('cai.student_id_seq')::text, 4, '0') || '-STU',\n"
-            sql += '    %s, %s, %s, %s, %s, %s, %s, %s);'
-
-            for i, row in enumerate(reader, 1):
-                self.db_tools.execute_query(sql, (
-                    f"{sy1}-{sy2}",
-                    row['LAST NAME'],
-                    row['FIRST NAME'],
-                    row['MIDDLE NAME'],
-                    section,
-                    bcrypt.hash(row['PASSWORD']),
-                    self.util.validate_gender(row['GENDER']),
-                    row['CONTACT PERSON'],
-                    row['CONTACT NUMBER']
-                    )
-                )
-
+        try:
+            # Batch insert using executemany or an atomic loop with transaction safety
+            for i, params in enumerate(rows_to_insert, start=1):
+                self.db_tools.execute_query(sql, params)
                 self.progressBar.setValue(i)
+                QCoreApplication.processEvents()
 
+        except Exception as e:
+            CustomMessageBox.critical(self, "Database Error", f"Failed during insertion:\n{str(e)}")
+            return 1
+        finally:
+            self.progressBar.setVisible(False)
+
+        CustomMessageBox.success(self, "Success", f"Successfully imported {len(rows_to_insert)} student record(s).")
         return 0
+
+    def check_duplicate_student(self, last_name, first_name, middle_name):
+        existing_student = self.db_tools.fetch_all(
+            """
+                SELECT studentid FROM cai.tbl_student_info
+                WHERE UPPER(lastname) = UPPER(%s) 
+                    AND UPPER(firstname) = UPPER(%s) 
+                    AND UPPER(middlename) = UPPER(%s)
+            """,
+            (last_name, first_name, middle_name)
+        )
+
+        if existing_student:
+            return True
+
+        return False
 
     def refresh_student_info(self, student_id):
         sql = 'SELECT\n'

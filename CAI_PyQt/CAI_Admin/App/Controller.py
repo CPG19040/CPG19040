@@ -1058,12 +1058,10 @@ class Controller:
         confirm_msg = f"Are you sure you want to delete this user?\n\n{self.util.formatFullname(firstname, middlename, lastname)}"
         confirm     = CustomMessageBox.question(self.home_win, "Confirm Deletion", confirm_msg)
 
-        if confirm == CustomMessageBox.No:
-            return
-
-        staff = Staff()
-        staff.archive_and_delete_staff(user, school_id)
-        self.displayUsers()
+        if confirm == CustomMessageBox.Yes:
+            staff = Staff()
+            staff.archive_and_delete_staff(user, school_id)
+            self.displayUsers()
 
     def displayAuditTrail(self):
         sql = """

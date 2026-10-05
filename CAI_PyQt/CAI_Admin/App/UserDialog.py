@@ -354,25 +354,25 @@ class AddUserDialog(QDialog, Ui_AddNewUserDialog):
         # Basic Validation: Required Fields
         required_fields = ["fname", "lname", "uname", "pwd"]
         if not all(data[field] for field in required_fields):
-            CustomMessageBox.warning(self, "Validation Error", "All fields except Middle Name are required.")
+            CustomMessageBox.warning(self, "Validation Failed", "All fields except Middle Name are required.")
             return
 
         # Format Validation: Names (No numbers allowed)
         name_regex = r"^[a-zA-Z\s.-]+$"
         if not re.match(name_regex, data["fname"]) or not re.match(name_regex, data["lname"]):
-            CustomMessageBox.warning(self, "Validation Error", "Names should only contain letters.")
+            CustomMessageBox.warning(self, "Validation Failed", "Names should only contain letters.")
             return
 
         # Format Validation: Password Strength
         if len(data["pwd"]) < 6:
-            CustomMessageBox.warning(self, "Validation Error", "Password must be at least 6 characters long.")
+            CustomMessageBox.warning(self, "Validation Failed", "Password must be at least 6 characters long.")
             return
 
         # Database Validation: Duplicate Username
         check_query = "SELECT COUNT(*) FROM cai.tbl_staff_info WHERE username = %s"
         exists = self.db.fetch_all(check_query, (data["uname"],))
         if exists and exists[0]['count'] > 0:
-            CustomMessageBox.warning(self, "Validation Error", f"Username '{data['uname']}' is already taken.")
+            CustomMessageBox.warning(self, "Validation Failed", f"Username '{data['uname']}' is already taken.")
             return
 
         # Proceed to Registration
@@ -578,18 +578,18 @@ class EditUserDialog(QDialog, Ui_EditUserDialog):
         # 2. Basic Validation: Required Fields
         required_fields = ["fname", "lname", "uname"]
         if not all(ui_data[field] for field in required_fields):
-            CustomMessageBox.warning(self, "Validation Error", "All fields except Middle Name are required.")
+            CustomMessageBox.warning(self, "Validation Failed", "All fields except Middle Name are required.")
             return
 
         # 3. Format Validation: Names (No numbers allowed)
         name_regex = r"^[a-zA-Z\s.-]+$"
         if not re.match(name_regex, ui_data["fname"]) or not re.match(name_regex, ui_data["lname"]):
-            CustomMessageBox.warning(self, "Validation Error", "Names should only contain letters.")
+            CustomMessageBox.warning(self, "Validation Failed", "Names should only contain letters.")
             return
 
         # 4. Format Validation: Password Strength
         if ui_data["pwd"] and len(ui_data["pwd"]) < 6:
-            CustomMessageBox.warning(self, "Validation Error", "Password must be at least 6 characters long.")
+            CustomMessageBox.warning(self, "Validation Failed", "Password must be at least 6 characters long.")
             return
 
         # 5. Database Validation: Duplicate Username
@@ -598,7 +598,7 @@ class EditUserDialog(QDialog, Ui_EditUserDialog):
             exists = self.db.fetch_all(check_query, (ui_data["uname"],))
 
             if exists and exists[0]['count'] > 0:
-                CustomMessageBox.warning(self, "Validation Error", f"Username '{ui_data['uname']}' is already taken.")
+                CustomMessageBox.warning(self, "Validation Failed", f"Username '{ui_data['uname']}' is already taken.")
                 return
 
         # 6. Proceed to Registration
