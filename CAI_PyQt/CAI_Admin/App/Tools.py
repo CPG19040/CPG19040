@@ -215,18 +215,15 @@ class Utility:
         selected_period = pulldown_gradingPeroid.currentData()
 
         if selected_period:
-            self.populate_lesson_pulldown(selected_period, pulldown_lessons)
-
-    def populate_lesson_pulldown(self, gpid, pulldown_lessons):
-        pulldown_lessons.blockSignals(True)
-        sql  = 'SELECT\n'
-        sql += '    lesson_id\n'
-        sql += '    ,title\n'
-        sql += 'FROM cai.tbl_lessons\n'
-        sql += 'WHERE gradingperiod = %s\n'
-        sql += 'ORDER BY chapter, lessonnum ASC'
-        self.populate_pulldown(pulldown_lessons, sql, params=(gpid,), add_empty=True)
-        pulldown_lessons.blockSignals(False)
+            query = """
+                SELECT
+                    lesson_id
+                    ,title
+                FROM cai.tbl_lessons
+                WHERE gradingperiod = %s
+                ORDER BY chapter, lessonnum ASC
+            """
+            self.populate_pulldown(pulldown_lessons, query, params=(selected_period,), add_empty=True)
 
     def isEmpty(self, val):
         """Evaluate if val is NONE, NULL, 'N/A', or empty string."""

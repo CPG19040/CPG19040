@@ -33,10 +33,6 @@
     color: black;
     font: 10pt &quot;Inter&quot;;
     background-color: rgb(222, 221, 218);
-}
-
-QPlainTextEdit {
-	background-color: #fff;
 }</string>
   </property>
   <property name="modal">
@@ -77,10 +73,10 @@ QPlainTextEdit {
      </property>
      <property name="styleSheet">
       <string notr="true">#dlg_frame_header {
-	background-color: #deddda;
+	background-color: #FFF;
 	border-top-left-radius: 12px;
 	border-top-right-radius: 12px;
-	border: 1px solid #7a7a7a;
+	border: 1px solid #d6d6d6;
 	border-bottom: none;
 }</string>
      </property>
@@ -220,16 +216,16 @@ font: 11pt &quot;Inter SemiBold&quot;;</string>
     <widget class="QWidget" name="widget_body" native="true">
      <property name="styleSheet">
       <string notr="true">#widget_body {
-	background-color: #deddda;
-	border: 1px solid #7a7a7a;
+	background-color: #FFF;
+	border: 1px solid #d6d6d6;
 	border-bottom-left-radius: 12px;
 	border-bottom-right-radius: 12px;
 	border-top: none;
 }
 
-#plainTextEdit {
+#scrollArea, #scrollArea QLabel, #widget_window_buttons {
 	border: none;
-	background-color: #deddda;
+	background-color: #fff;
 }
 
 QPushButton[class=&quot;button-green&quot;] {
@@ -307,7 +303,6 @@ QScrollBar::handle:vertical:hover {
     background: #574939;
 }
 
-/* 4. HORIZONTAL SCROLLBAR */
 QScrollBar:horizontal {
     border: none;
     background: #ffffff;
@@ -326,7 +321,6 @@ QScrollBar::handle:horizontal:hover {
     background: #574939;
 }
 
-/* 5. REMOVE BUTTONS &amp; TRACK BACKGROUNDS */
 /* This handles both horizontal and vertical arrows/tracks */
 QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical,
 QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {
@@ -354,10 +348,7 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
       <item>
        <widget class="QScrollArea" name="scrollArea">
         <property name="styleSheet">
-         <string notr="true">#scrollArea {
-	border: none;
-	background: transparent;
-}</string>
+         <string notr="true"/>
         </property>
         <property name="widgetResizable">
          <bool>true</bool>

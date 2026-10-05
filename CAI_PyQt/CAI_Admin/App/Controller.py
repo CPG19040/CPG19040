@@ -744,10 +744,10 @@ class Controller:
         self.ui.label_Adviser.setText(class_adviser)
 
     def delete_selected_sections(self):
-        sectionId = self.ui.comboBox_Section.currentData()
+        sectionId   = self.ui.comboBox_Section.currentData()
         sectionName = self.ui.comboBox_Section.currentText()
-        dialog = CustomMessageBox.question(self.home_win, "Delete Section",
-                             f"Deleting ({sectionName}) section will also remove all associated students. Do you want to continue?")
+        dialog      = CustomMessageBox.question(self.home_win, "Delete Section",
+                             f"Deleting ({sectionName}) section will also remove all associated students.\nDo you want to continue?")
 
         if dialog == CustomMessageBox.Yes:
             self.sectionObj.delete_section(sectionId, sectionName)
@@ -893,7 +893,6 @@ class Controller:
             self.display_quiz()
 
     def handle_quiz_filter(self):
-        self.ui.cbLessonName.blockSignals(True)
         self.ui.cbLessonName.clear()
         selected_period = self.ui.cbGradingPeriod.currentData()
 
@@ -908,7 +907,6 @@ class Controller:
             """
             self.util.populate_pulldown(self.ui.cbLessonName, query, params=(selected_period,), add_empty=True)
 
-        self.ui.cbLessonName.blockSignals(False)
         self.display_quiz()
 
     def display_quiz(self):
@@ -1157,9 +1155,7 @@ class Controller:
                 WHERE gradingperiod = %s
                 ORDER BY chapter, lessonnum ASC
             """
-            self.ui.comboBox_ReportsLesson.blockSignals(True)
             self.util.populate_pulldown(self.ui.comboBox_ReportsLesson, query, params=(selected_period,))
-            self.ui.comboBox_ReportsLesson.blockSignals(False)
             
             self.handle_report_stud_prog_filter()
 

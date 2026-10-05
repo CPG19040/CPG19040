@@ -765,7 +765,6 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
         self.label_totalScore.setText(f"{total_score}")
 
     def populate_pulldown_lesson(self):
-        self.cbLessonName.blockSignals(True)
         selected_period = self.cbGradingPeriod.currentData()
         self.refresh_quiz()
 
@@ -779,7 +778,6 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
         sql += 'WHERE gradingperiod = %s\n'
         sql += 'ORDER BY chapter, lessonnum ASC'
         self.util.populate_pulldown(self.cbLessonName, sql, params=(selected_period,), add_empty=True)
-        self.cbLessonName.blockSignals(False)
 
     def add_item(self, name, container):
         widget = QuizItemWidget(name, self.remove_item)
@@ -950,9 +948,12 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
     def clear_layout(self, layout):
         """Helper to safely remove all widgets from a layout."""
         while layout.count():
-            child = layout.takeAt(0)
-            if child.widget():
-                child.widget().deleteLater()
+            child  = layout.takeAt(0)
+            widget = child.widget()
+
+            if widget:
+                widget.setParent(None)
+                widget.deleteLater()
 
     def remove_item(self, widget):
         self.itemsToRemove.append(widget.id)

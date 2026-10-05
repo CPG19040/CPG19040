@@ -32,10 +32,6 @@ class Ui_MessageBox(object):
 "    color: black;\n"
 "    font: 10pt \"Inter\";\n"
 "    background-color: rgb(222, 221, 218);\n"
-"}\n"
-"\n"
-"QPlainTextEdit {\n"
-"	background-color: #fff;\n"
 "}")
         MessageBox.setModal(True)
         self.verticalLayout = QVBoxLayout(MessageBox)
@@ -48,10 +44,10 @@ class Ui_MessageBox(object):
         self.dlg_frame_header.setMaximumSize(QSize(16777215, 35))
         self.dlg_frame_header.setMouseTracking(True)
         self.dlg_frame_header.setStyleSheet(u"#dlg_frame_header {\n"
-"	background-color: #deddda;\n"
+"	background-color: #FFF;\n"
 "	border-top-left-radius: 12px;\n"
 "	border-top-right-radius: 12px;\n"
-"	border: 1px solid #7a7a7a;\n"
+"	border: 1px solid #d6d6d6;\n"
 "	border-bottom: none;\n"
 "}")
         self.dlg_frame_header.setFrameShape(QFrame.StyledPanel)
@@ -108,16 +104,16 @@ class Ui_MessageBox(object):
         self.widget_body = QWidget(MessageBox)
         self.widget_body.setObjectName(u"widget_body")
         self.widget_body.setStyleSheet(u"#widget_body {\n"
-"	background-color: #deddda;\n"
-"	border: 1px solid #7a7a7a;\n"
+"	background-color: #FFF;\n"
+"	border: 1px solid #d6d6d6;\n"
 "	border-bottom-left-radius: 12px;\n"
 "	border-bottom-right-radius: 12px;\n"
 "	border-top: none;\n"
 "}\n"
 "\n"
-"#plainTextEdit {\n"
+"#scrollArea, #scrollArea QLabel, #widget_window_buttons {\n"
 "	border: none;\n"
-"	background-color: #deddda;\n"
+"	background-color: #fff;\n"
 "}\n"
 "\n"
 "QPushButton[class=\"button-green\"] {\n"
@@ -139,8 +135,8 @@ class Ui_MessageBox(object):
 "\n"
 "QPushButton[class=\"button-green\"]:pressed {\n"
 "    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
-"                                stop:0 "
-                        "#0b572a, \n"
+"    "
+                        "                            stop:0 #0b572a, \n"
 "                                stop:1 #129046); \n"
 "}\n"
 "\n"
@@ -172,9 +168,9 @@ class Ui_MessageBox(object):
 "                                stop:1 #ffffff);\n"
 "}\n"
 "\n"
-"*[class=\"button-normal\"]:disabled {\n"
-"	background"
-                        ": #f5f5f5;\n"
+"*[class=\"button-n"
+                        "ormal\"]:disabled {\n"
+"	background: #f5f5f5;\n"
 "	border: 1px solid #dcdcdc;\n"
 "	color: #aeaeae;\n"
 "}\n"
@@ -197,7 +193,6 @@ class Ui_MessageBox(object):
 "    background: #574939;\n"
 "}\n"
 "\n"
-"/* 4. HORIZONTAL SCROLLBAR */\n"
 "QScrollBar:horizontal {\n"
 "    border: none;\n"
 "    background: #ffffff;\n"
@@ -216,11 +211,10 @@ class Ui_MessageBox(object):
 "    background: #574939;\n"
 "}\n"
 "\n"
-"/* 5. REMOVE BUTTONS & TRACK BACKGROUNDS */\n"
 "/* This handles both horizontal and vertical arrows/tracks */\n"
-"QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical"
-                        ",\n"
-"QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {\n"
+"QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical,\n"
+"QScrollBar::add-line:horizontal, QScrollB"
+                        "ar::sub-line:horizontal {\n"
 "    border: none;\n"
 "    background: none;\n"
 "    width: 0px;\n"
@@ -236,10 +230,7 @@ class Ui_MessageBox(object):
         self.verticalLayout_2.setContentsMargins(12, -1, 12, 9)
         self.scrollArea = QScrollArea(self.widget_body)
         self.scrollArea.setObjectName(u"scrollArea")
-        self.scrollArea.setStyleSheet(u"#scrollArea {\n"
-"	border: none;\n"
-"	background: transparent;\n"
-"}")
+        self.scrollArea.setStyleSheet(u"")
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
