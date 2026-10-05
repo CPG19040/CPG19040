@@ -417,21 +417,22 @@ class Controller:
         confirm_msg = f"Are you sure you want to log out?"
         result = CustomMessageBox.question(self.home_win, "Confirm Logout", confirm_msg)
 
-        if result == CustomMessageBox.No:
+        if result == CustomMessageBox.Yes:
+            self.settings.clear()
+            self.settings.sync()
+
+            # Use [:] to create a snapshot of the list to avoid iteration errors
+            for widget in QApplication.topLevelWidgets()[:]:
+                widget.close()
+
+            self.login_win.txtUsername.clear()
+            self.login_win.txtPassword.clear()
+            self.login_win.txtUsername.setFocus()
+
+            self.login_win.show()
+
+        else:
             return
-
-        self.settings.clear()
-        self.settings.sync()
-
-        # Use [:] to create a snapshot of the list to avoid iteration errors
-        for widget in QApplication.topLevelWidgets()[:]:
-            widget.close()
-
-        self.login_win.txtUsername.clear()
-        self.login_win.txtPassword.clear()
-        self.login_win.txtUsername.setFocus()
-
-        self.login_win.show()
 
     def load_fonts(self):
         path = self.util.get_resource_path(os.path.join("..", "fonts"))

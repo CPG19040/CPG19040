@@ -1,4 +1,5 @@
 import os, sys, subprocess, csv
+from functools import partial
 from pathlib import Path
 
 from PySide6.QtWidgets import QVBoxLayout, QHBoxLayout, QLabel, QFrame, QFileDialog, QWidget, QMainWindow, QDialog, QComboBox
@@ -9,6 +10,8 @@ from PySide6.QtWebEngineWidgets import QWebEngineView
 from App.CRUDTools import DatabaseTools
 from App.MessageBox import Ui_MessageBox
 from App.CardRanking import Ui_CardRanking
+
+
 
 class Utility:
 
@@ -585,8 +588,8 @@ class CustomMessageBox(QDialog, Ui_MessageBox):
     No            = 101
     YesToAll      = 102
     NoToAll       = 103
-    Cancel        = QDialog.DialogCode.Rejected  # Default Esc / Close code (0)
-    Ok            = QDialog.DialogCode.Accepted  # Standard OK code (1)
+    Cancel        = QDialog.DialogCode.Rejected  # 0
+    Ok            = QDialog.DialogCode.Accepted  # 1
     RESIZE_MARGIN = 8
 
     def __init__(self, parent=None):
@@ -596,30 +599,32 @@ class CustomMessageBox(QDialog, Ui_MessageBox):
         self.setWindowFlags(Qt.WindowType.Window | Qt.WindowType.FramelessWindowHint)
         self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground, True)
         self.setMouseTracking(True)
-        
-        # Signal Connections
-        if hasattr(self, 'btnOk'):
-            self.btnOk.clicked.connect(self.accept)
-        if hasattr(self, 'btnYes'):
-            self.btnYes.clicked.connect(lambda: self.done(self.Yes))
-        if hasattr(self, 'btnNo'):
-            self.btnNo.clicked.connect(lambda: self.done(self.No))
-        if hasattr(self, 'btnYesAll'):
-            self.btnYesAll.clicked.connect(lambda: self.done(self.YesToAll))
-        if hasattr(self, 'btnNoAll'):
-            self.btnNoAll.clicked.connect(lambda: self.done(self.NoToAll))
-        if hasattr(self, 'btnCancel'):
-            self.btnCancel.clicked.connect(self.reject)
+
+        self._connect_signals()
+
+    def _connect_signals(self):
+        """Connect button signals safely using partial to prevent lambda retention."""
+        btn_map = [
+            ('btnOk', self.accept),
+            ('btnCancel', self.reject),
+            ('btnYes', partial(self.done, self.Yes)),
+            ('btnNo', partial(self.done, self.No)),
+            ('btnYesAll', partial(self.done, self.YesToAll)),
+            ('btnNoAll', partial(self.done, self.NoToAll)),
+        ]
+
+        for btn_name, slot in btn_map:
+            if hasattr(self, btn_name):
+                getattr(self, btn_name).clicked.connect(slot)
 
     def _hide_all_buttons(self):
         """Reset button visibility before showing modal."""
         buttons = ['btnYes', 'btnNo', 'btnYesAll', 'btnNoAll', 'btnOk', 'btnCancel']
-
         for btn_name in buttons:
             if hasattr(self, btn_name):
                 getattr(self, btn_name).setVisible(False)
 
-    def _setup_dialog(self, title, message, icon_path):
+    def _setup_dialog(self, title: str, message: str, icon_path: str):
         self._hide_all_buttons()
         self.setWindowTitle(title)
 
@@ -627,133 +632,106 @@ class CustomMessageBox(QDialog, Ui_MessageBox):
             self.label_icon.setPixmap(QPixmap(icon_path))
         if hasattr(self, 'label_windowTitle'):
             self.label_windowTitle.setText(title)
-        if hasattr(self, 'plainTextEdit'):
-            self.plainTextEdit.setPlainText(message)
+        if hasattr(self, 'label_message'):
+            self.label_message.setText(message)
 
-    # Static Helper Launchers
     @classmethod
-    def information(cls, parent, title, message):
+    def _create_and_exec(cls, parent, title, message, icon_path, visible_buttons):
         dlg = cls(parent)
-        dlg._setup_dialog(title, message, ":/Images/Images/information.png")
-        
-        if hasattr(dlg, 'btnOk'):
-            dlg.btnOk.setVisible(True)
+        dlg._setup_dialog(title, message, icon_path)
+
+        for btn_name in visible_buttons:
+            if hasattr(dlg, btn_name):
+                getattr(dlg, btn_name).setVisible(True)
 
         dlg.adjustSize()
-
         return dlg.exec()
+
+    @classmethod
+    def information(cls, parent, title, message):
+        return cls._create_and_exec(parent, title, message, ":/Images/Images/information.png", ['btnOk'])
 
     @classmethod
     def success(cls, parent, title, message):
-        dlg = cls(parent)
-        dlg._setup_dialog(title, message, ":/Images/Images/success.png")
-        
-        if hasattr(dlg, 'btnOk'):
-            dlg.btnOk.setVisible(True)
-
-        dlg.adjustSize()
-
-        return dlg.exec()
-
-    @classmethod
-    def question(cls, parent, title, message, include_all=False, show_cancel=False):
-        dlg = cls(parent)
-        dlg._setup_dialog(title, message, ":/Images/Images/question.png")
-        
-        if hasattr(dlg, 'btnYes'): dlg.btnYes.setVisible(True)
-        if hasattr(dlg, 'btnNo'): dlg.btnNo.setVisible(True)
-
-        if include_all:
-            if hasattr(dlg, 'btnYesAll'): dlg.btnYesAll.setVisible(True)
-            if hasattr(dlg, 'btnNoAll'): dlg.btnNoAll.setVisible(True)
-
-        if show_cancel and hasattr(dlg, 'btnCancel'):
-            dlg.btnCancel.setVisible(True)
-
-        dlg.adjustSize()
-
-        return dlg.exec()
+        return cls._create_and_exec(parent, title, message, ":/Images/Images/success.png", ['btnOk'])
 
     @classmethod
     def warning(cls, parent, title, message):
-        dlg = cls(parent)
-        dlg._setup_dialog(title, message, ":/Images/Images/warning.png")
-        
-        if hasattr(dlg, 'btnOk'):
-            dlg.btnOk.setVisible(True)
-
-        dlg.adjustSize()
-
-        return dlg.exec()
+        return cls._create_and_exec(parent, title, message, ":/Images/Images/warning.png", ['btnOk'])
 
     @classmethod
     def critical(cls, parent, title, message):
-        dlg = cls(parent)
-        dlg._setup_dialog(title, message, ":/Images/Images/critical.png")
-        
-        if hasattr(dlg, 'btnOk'):
-            dlg.btnOk.setVisible(True)
+        return cls._create_and_exec(parent, title, message, ":/Images/Images/critical.png", ['btnOk'])
 
-        dlg.adjustSize()
+    @classmethod
+    def question(cls, parent, title, message, include_all=False, show_cancel=False):
+        buttons = ['btnYes', 'btnNo']
 
-        return dlg.exec()
+        if include_all:
+            buttons.extend(['btnYesAll', 'btnNoAll'])
+        if show_cancel:
+            buttons.append('btnCancel')
+
+        return cls._create_and_exec(parent, title, message, ":/Images/Images/question.png", buttons)
 
     def _get_resize_edge(self, pos):
         """Determine which edge or corner the mouse is over based on RESIZE_MARGIN."""
         rect = self.rect()
         x, y = pos.x(), pos.y()
         w, h = rect.width(), rect.height()
-        
-        edge = None
-        
-        # Horizontal edges
-        if x <= self.RESIZE_MARGIN:
-            edge = Qt.Edge.LeftEdge
-        elif x >= w - self.RESIZE_MARGIN:
-            edge = Qt.Edge.RightEdge
-            
-        # Vertical edges
-        if y <= self.RESIZE_MARGIN:
-            if edge is None:
-                edge = Qt.Edge.TopEdge
-            else:
-                edge |= Qt.Edge.TopEdge
-        elif y >= h - self.RESIZE_MARGIN:
-            if edge is None:
-                edge = Qt.Edge.BottomEdge
-            else:
-                edge |= Qt.Edge.BottomEdge
-                
-        return edge
+
+        left   = x <= self.RESIZE_MARGIN
+        right  = x >= w - self.RESIZE_MARGIN
+        top    = y <= self.RESIZE_MARGIN
+        bottom = y >= h - self.RESIZE_MARGIN
+
+        if top and left:
+            return Qt.Edge.TopEdge | Qt.Edge.LeftEdge
+        if top and right:
+            return Qt.Edge.TopEdge | Qt.Edge.RightEdge
+        if bottom and left:
+            return Qt.Edge.BottomEdge | Qt.Edge.LeftEdge
+        if bottom and right:
+            return Qt.Edge.BottomEdge | Qt.Edge.RightEdge
+        if left:
+            return Qt.Edge.LeftEdge
+        if right:
+            return Qt.Edge.RightEdge
+        if top:
+            return Qt.Edge.TopEdge
+        if bottom:
+            return Qt.Edge.BottomEdge
+
+        return None
 
     def _update_cursor_shape(self, edge):
-        """Update cursor appearance depending on the active resize edge/corner."""
-        if edge == (Qt.Edge.TopEdge | Qt.Edge.LeftEdge) or edge == (Qt.Edge.BottomEdge | Qt.Edge.RightEdge):
+        """Update cursor appearance depending on active resize edge/corner."""
+        if edge in (Qt.Edge.TopEdge | Qt.Edge.LeftEdge, Qt.Edge.BottomEdge | Qt.Edge.RightEdge):
             self.setCursor(Qt.CursorShape.SizeFDiagCursor)
-        elif edge == (Qt.Edge.TopEdge | Qt.Edge.RightEdge) or edge == (Qt.Edge.BottomEdge | Qt.Edge.LeftEdge):
+        elif edge in (Qt.Edge.TopEdge | Qt.Edge.RightEdge, Qt.Edge.BottomEdge | Qt.Edge.LeftEdge):
             self.setCursor(Qt.CursorShape.SizeBDiagCursor)
-        elif edge and (edge & (Qt.Edge.LeftEdge | Qt.Edge.RightEdge)) and not (edge & (Qt.Edge.TopEdge | Qt.Edge.BottomEdge)):
+        elif edge in (Qt.Edge.LeftEdge, Qt.Edge.RightEdge):
             self.setCursor(Qt.CursorShape.SizeHorCursor)
-        elif edge and (edge & (Qt.Edge.TopEdge | Qt.Edge.BottomEdge)) and not (edge & (Qt.Edge.LeftEdge | Qt.Edge.RightEdge)):
+        elif edge in (Qt.Edge.TopEdge, Qt.Edge.BottomEdge):
             self.setCursor(Qt.CursorShape.SizeVerCursor)
         else:
             self.setCursor(Qt.CursorShape.ArrowCursor)
 
     def mouseMoveEvent(self, event):
-        pos = event.position().toPoint()
+        pos = event.position().toPoint() if hasattr(event, 'position') else event.pos()
         edge = self._get_resize_edge(pos)
         self._update_cursor_shape(edge)
         super().mouseMoveEvent(event)
 
     def mousePressEvent(self, event):
-        if event.button() == Qt.LeftButton:
-            pos = event.position().toPoint()
+        if event.button() == Qt.MouseButton.LeftButton:
+            pos = event.position().toPoint() if hasattr(event, 'position') else event.pos()
             edge = self._get_resize_edge(pos)
             handle = self.windowHandle()
-            
+
             if handle is not None:
                 # 1. Native Window Resize
-                if edge:
+                if edge is not None:
                     handle.startSystemResize(edge)
                     event.accept()
                     return
@@ -765,8 +743,18 @@ class CustomMessageBox(QDialog, Ui_MessageBox):
                         handle.startSystemMove()
                         event.accept()
                         return
-            
+
         super().mousePressEvent(event)
+
+    def keyPressEvent(self, event):
+        if event.key() == Qt.Key.Key_Escape:
+            self.reject()
+            return
+        super().keyPressEvent(event)
+
+    def closeEvent(self, event):
+        self.setResult(self.Cancel)
+        event.accept()
 
 
 

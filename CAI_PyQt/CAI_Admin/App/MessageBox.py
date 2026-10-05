@@ -15,9 +15,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QAbstractScrollArea, QApplication, QDialog, QFrame,
-    QHBoxLayout, QLabel, QPlainTextEdit, QPushButton,
-    QSizePolicy, QSpacerItem, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QDialog, QFrame, QHBoxLayout,
+    QLabel, QPushButton, QScrollArea, QSizePolicy,
+    QSpacerItem, QVBoxLayout, QWidget)
 import resources_rc
 
 class Ui_MessageBox(object):
@@ -25,8 +25,9 @@ class Ui_MessageBox(object):
         if not MessageBox.objectName():
             MessageBox.setObjectName(u"MessageBox")
         MessageBox.setWindowModality(Qt.NonModal)
-        MessageBox.resize(700, 287)
-        MessageBox.setMinimumSize(QSize(500, 0))
+        MessageBox.resize(700, 153)
+        MessageBox.setMinimumSize(QSize(300, 153))
+        MessageBox.setMaximumSize(QSize(1000, 16777215))
         MessageBox.setStyleSheet(u"* {\n"
 "    color: black;\n"
 "    font: 10pt \"Inter\";\n"
@@ -232,23 +233,38 @@ class Ui_MessageBox(object):
 "}")
         self.verticalLayout_2 = QVBoxLayout(self.widget_body)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
-        self.verticalLayout_2.setContentsMargins(12, -1, 12, -1)
-        self.plainTextEdit = QPlainTextEdit(self.widget_body)
-        self.plainTextEdit.setObjectName(u"plainTextEdit")
-        self.plainTextEdit.setSizeAdjustPolicy(QAbstractScrollArea.AdjustToContents)
-        self.plainTextEdit.setLineWrapMode(QPlainTextEdit.NoWrap)
-        self.plainTextEdit.setReadOnly(True)
+        self.verticalLayout_2.setContentsMargins(12, -1, 12, 9)
+        self.scrollArea = QScrollArea(self.widget_body)
+        self.scrollArea.setObjectName(u"scrollArea")
+        self.scrollArea.setStyleSheet(u"#scrollArea {\n"
+"	border: none;\n"
+"	background: transparent;\n"
+"}")
+        self.scrollArea.setWidgetResizable(True)
+        self.scrollAreaWidgetContents = QWidget()
+        self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 676, 50))
+        self.horizontalLayout = QHBoxLayout(self.scrollAreaWidgetContents)
+        self.horizontalLayout.setSpacing(0)
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
+        self.label_message = QLabel(self.scrollAreaWidgetContents)
+        self.label_message.setObjectName(u"label_message")
+        self.label_message.setWordWrap(False)
 
-        self.verticalLayout_2.addWidget(self.plainTextEdit)
+        self.horizontalLayout.addWidget(self.label_message)
+
+        self.scrollArea.setWidget(self.scrollAreaWidgetContents)
+
+        self.verticalLayout_2.addWidget(self.scrollArea)
 
         self.widget_window_buttons = QWidget(self.widget_body)
         self.widget_window_buttons.setObjectName(u"widget_window_buttons")
         self.widget_window_buttons.setMinimumSize(QSize(0, 36))
-        self.widget_window_buttons.setMaximumSize(QSize(16777215, 36))
         self.widget_window_buttons.setStyleSheet(u"")
         self.horizontalLayout_13 = QHBoxLayout(self.widget_window_buttons)
         self.horizontalLayout_13.setObjectName(u"horizontalLayout_13")
-        self.horizontalLayout_13.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_13.setContentsMargins(0, 14, 0, 0)
         self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_13.addItem(self.horizontalSpacer_2)
@@ -326,6 +342,7 @@ class Ui_MessageBox(object):
         MessageBox.setWindowTitle(QCoreApplication.translate("MessageBox", u"Message", None))
         self.label_icon.setText("")
         self.label_windowTitle.setText("")
+        self.label_message.setText("")
         self.btnYes.setText(QCoreApplication.translate("MessageBox", u"Yes", None))
         self.btnYes.setProperty(u"class", QCoreApplication.translate("MessageBox", u"button-green", None))
         self.btnYesAll.setText(QCoreApplication.translate("MessageBox", u"Yes to All", None))
