@@ -5,7 +5,7 @@ from PySide6.QtMultimedia import QSoundEffect, QMediaPlayer, QAudioOutput
 
 import os
 from passlib.hash import bcrypt
-from App.Tools import Utility, StudentCard, CustomShapeDialog
+from App.Tools import Utility, StudentCard, CustomMessageBox
 
 from App.FormLogin import Ui_FormLogin
 from App.CRUDTools import DatabaseTools
@@ -218,11 +218,11 @@ class Login(QWidget, Ui_FormLogin):
             self.login_success.emit(user)
 
         elif not password:
-            dialog = CustomShapeDialog("Please type your password.", parent=self, type=3)
+            dialog = CustomMessageBox("Please type your password.", parent=self, type=3)
             dialog.exec()
 
         else:
-            dialog = CustomShapeDialog("Oops! Wrong password.", parent=self, type=2)
+            dialog = CustomMessageBox("Oops! Wrong password.", parent=self, type=2)
             dialog.exec()
 
     def authenticate_user(self, studentid, password):

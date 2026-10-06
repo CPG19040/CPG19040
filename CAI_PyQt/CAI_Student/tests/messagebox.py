@@ -4,7 +4,7 @@ from PySide6.QtWidgets import (QApplication, QDialog, QVBoxLayout,
 from PySide6.QtCore import Qt, QPoint
 from PySide6.QtGui import QColor, QMouseEvent
 
-class CustomShapeDialog(QDialog):
+class CustomMessageBox(QDialog):
     def __init__(self, message, parent=None):
         super().__init__(parent)
 
@@ -78,6 +78,6 @@ class CustomShapeDialog(QDialog):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    dialog = CustomShapeDialog("Now it should drag\nsmoothly on Zorin!")
+    dialog = CustomMessageBox("Now it should drag\nsmoothly on Zorin!")
     dialog.show()
     sys.exit(app.exec())

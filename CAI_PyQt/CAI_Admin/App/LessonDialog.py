@@ -25,8 +25,13 @@ class Ui_LessonDialog(object):
         if not LessonDialog.objectName():
             LessonDialog.setObjectName(u"LessonDialog")
         LessonDialog.resize(939, 500)
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.MinimumExpanding, QSizePolicy.Policy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(LessonDialog.sizePolicy().hasHeightForWidth())
+        LessonDialog.setSizePolicy(sizePolicy)
         LessonDialog.setMinimumSize(QSize(939, 500))
-        LessonDialog.setMaximumSize(QSize(16777215, 500))
+        LessonDialog.setMaximumSize(QSize(1000, 500))
         LessonDialog.setStyleSheet(u"* {\n"
 "	color: black;\n"
 "}\n"

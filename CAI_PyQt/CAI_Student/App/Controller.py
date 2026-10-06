@@ -7,7 +7,7 @@ from PySide6.QtMultimedia import QSoundEffect, QMediaPlayer, QAudioOutput
 from App.Login import Login
 from App.FormHome import Ui_FormHome
 from App.Student import Student
-from App.Tools import Utility, WindowHandler, CustomShapeDialog, WickPlayer
+from App.Tools import Utility, WindowHandler, CustomMessageBox, WickPlayer
 from App.CRUDTools import DatabaseTools
 from App.Lessons import Lessons, LessonCard
 from App.MyScores import CardScores
@@ -205,8 +205,8 @@ class Controller:
         elif index == 4:
             self.display_myscores()
 
-        self.ui.label_score.setText(f"{record['quizscore']}/{record['totalscore']}")
-        
+        self.ui.label_score.setText(f"{record.get('quizscore')}/{record.get('totalscore')}")
+
         self.slide_to_page(index)
         button.setChecked(True)
 
@@ -223,7 +223,7 @@ class Controller:
         elif index == 2:
             sid = self.settings.value("studentid")
             _, record = Student().get_quiz_status(sid)
-            self.ui.label_score.setText(f"{record['quizscore']}/{record['totalscore']}")
+            self.ui.label_score.setText(f"{record.get('quizscore')}/{record.get('totalscore')}")
             self.displayQuizAnswers()
 
         current_page = stack.currentWidget()
@@ -255,20 +255,24 @@ class Controller:
         self.anim_group.start()
 
     def logout(self):
-        self.settings.clear()
-        self.home_win.player.stop()
-        self.home_win.close()
-        self.login_win.show()
-        self.login_win.txtPassword.clear()
+        confirm_msg = f"Are you sure you want to log out?"
+        result = CustomMessageBox.question(self.home_win, "Confirm Logout", confirm_msg)
 
-        self.settings.setValue("bg_music_mute", self.ui.btnSound.isChecked())
+        if result == CustomMessageBox.Yes:
+            self.settings.clear()
+            self.home_win.player.stop()
+            self.home_win.close()
+            self.login_win.show()
+            self.login_win.txtPassword.clear()
 
-        if self.ui.btnSound.isChecked():
-            self.login_win.player.stop()
-            self.login_win.btnSound.setChecked(True)
-        else:
-            self.login_win.player.play()
-            self.login_win.btnSound.setChecked(False)
+            self.settings.setValue("bg_music_mute", self.ui.btnSound.isChecked())
+
+            if self.ui.btnSound.isChecked():
+                self.login_win.player.stop()
+                self.login_win.btnSound.setChecked(True)
+            else:
+                self.login_win.player.play()
+                self.login_win.btnSound.setChecked(False)
 
     def load_fonts(self):
         path = self.util.get_resource_path(os.path.join("..", "Fonts"))
@@ -404,6 +408,13 @@ class Controller:
         record_id, record_mc, record_tf = qUtils.retrieve_quiz()
         itemCnt = 1
 
+        if not record_id and not record_mc and not record_tf:
+            self.ui.btnSubmitQuiz.setVisible(False)
+            self.ui.label_empty_quiz.setVisible(True)
+        else:
+            self.ui.btnSubmitQuiz.setVisible(True)
+            self.ui.label_empty_quiz.setVisible(False)
+
         index = self.util.find_tab_by_name(self.ui.tabWidget_quiz, "Indentification")
         if index != -1 and not record_id:
             self.ui.tabWidget_quiz.removeTab(index)
@@ -518,16 +529,21 @@ class Controller:
         layout = self.ui.gridLayout_3
         layout.setAlignment(Qt.AlignmentFlag.AlignTop)
 
-        while layout.count():
-            child = layout.takeAt(0)
-            if child.widget():
-                child.widget().deleteLater()
-
         myscores    = MyScores()
         student_id  = self.settings.value("studentid")
         record      = myscores.get_scores(student_id, self.GRADING_PERIOD)
         row_count   = len(record)
         NUM_COLUMNS = 3
+
+        if not record:
+            layout.addWidget(self.ui.label_empty_scores, 0, 0)
+            self.ui.label_empty_scores.setVisible(True)
+            return
+
+        while layout.count():
+            child = layout.takeAt(0)
+            if child.widget():
+                child.widget().deleteLater()
 
         for index, row in enumerate(record):
             quiznumber     = row['quiznumber']
@@ -573,18 +589,17 @@ class Controller:
         success, message = qUtils.save_quiz(student_id, self.quiz_cards)
 
         if success == 1: # Success, customized message for student
-            dialog = CustomShapeDialog("Good Job !!!", parent=self.home_win)
-            dialog.exec()
+            CustomMessageBox.success(self.home_win, "", "Good Job !!!")
             self.slide_to_page(2)
 
         elif success == 2: # Failed, customized message for student
-            dialog = CustomShapeDialog(message, parent=self.home_win, type=3)
-            dialog.exec()
+            CustomMessageBox.critical(self.home_win, "", message)
+            self.slide_to_page(2)
 
         else:
             print(message) # Failed, message for developers
-            dialog = CustomShapeDialog("Something went wrong.", parent=self.home_win, type=2)
-            dialog.exec()
+            CustomMessageBox.critical(self.home_win, "", "Something went wrong.")
+            self.slide_to_page(2)
 
     def handle_lesson_selection(self, clicked_card, lesson_id):
         print(f"Selected Lesson ID: {lesson_id}")
@@ -602,8 +617,7 @@ class Controller:
         filename = record[0][5]
 
         if not filename:
-            dialog = CustomShapeDialog("The file does not exist.", parent=self.home_win, type=2)
-            dialog.exec()
+            CustomMessageBox.critical(self.home_win, "", "The file does not exist.")
             return
 
         self.home_win.player.stop()

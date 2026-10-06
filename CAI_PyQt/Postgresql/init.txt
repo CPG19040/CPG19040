@@ -3,3 +3,5 @@ sudo -u postgres createdb DB_CAI
 
 //verify
 PGPASSWORD='1234' psql -h localhost -U postgres -d DB_CAI
+
+CREATE SCHEMA "cai";

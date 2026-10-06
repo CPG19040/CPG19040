@@ -26,8 +26,13 @@ class Ui_MessageBox(object):
             MessageBox.setObjectName(u"MessageBox")
         MessageBox.setWindowModality(Qt.NonModal)
         MessageBox.resize(700, 153)
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.MinimumExpanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(MessageBox.sizePolicy().hasHeightForWidth())
+        MessageBox.setSizePolicy(sizePolicy)
         MessageBox.setMinimumSize(QSize(300, 153))
-        MessageBox.setMaximumSize(QSize(1000, 16777215))
+        MessageBox.setMaximumSize(QSize(1000, 600))
         MessageBox.setStyleSheet(u"* {\n"
 "    color: black;\n"
 "    font: 10pt \"Inter\";\n"
@@ -230,6 +235,11 @@ class Ui_MessageBox(object):
         self.verticalLayout_2.setContentsMargins(12, -1, 12, 9)
         self.scrollArea = QScrollArea(self.widget_body)
         self.scrollArea.setObjectName(u"scrollArea")
+        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.MinimumExpanding)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.scrollArea.sizePolicy().hasHeightForWidth())
+        self.scrollArea.setSizePolicy(sizePolicy1)
         self.scrollArea.setStyleSheet(u"")
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()

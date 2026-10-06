@@ -26,7 +26,17 @@ class Ui_FormHome(object):
         if not FormHome.objectName():
             FormHome.setObjectName(u"FormHome")
         FormHome.resize(1360, 815)
-        FormHome.setStyleSheet(u"#btn_review, #btn_retake {\n"
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.MinimumExpanding, QSizePolicy.Policy.MinimumExpanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(FormHome.sizePolicy().hasHeightForWidth())
+        FormHome.setSizePolicy(sizePolicy)
+        FormHome.setMinimumSize(QSize(1360, 815))
+        FormHome.setStyleSheet(u"* {\n"
+"	font: 12pt \"Inter\";\n"
+"}\n"
+"\n"
+"#btn_review, #btn_retake {\n"
 "	border-image: url(:/Images/Images/btnWood.png);\n"
 "	color: #FFF;\n"
 "	font: 14pt \"BorderWall-OG55o\";\n"
@@ -129,11 +139,11 @@ class Ui_FormHome(object):
         self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
         self.widget_left_panel = QWidget(self.widget_2)
         self.widget_left_panel.setObjectName(u"widget_left_panel")
-        sizePolicy = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.widget_left_panel.sizePolicy().hasHeightForWidth())
-        self.widget_left_panel.setSizePolicy(sizePolicy)
+        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.widget_left_panel.sizePolicy().hasHeightForWidth())
+        self.widget_left_panel.setSizePolicy(sizePolicy1)
         self.widget_left_panel.setMinimumSize(QSize(280, 0))
         self.widget_left_panel.setMaximumSize(QSize(280, 16777215))
         self.widget_left_panel.setAutoFillBackground(False)
@@ -238,8 +248,10 @@ class Ui_FormHome(object):
         self.label_studentId.setObjectName(u"label_studentId")
         self.label_studentId.setMinimumSize(QSize(0, 30))
         font1 = QFont()
-        font1.setFamilies([u"Inter SemiBold"])
-        font1.setPointSize(11)
+        font1.setFamilies([u"Inter"])
+        font1.setPointSize(12)
+        font1.setBold(False)
+        font1.setItalic(False)
         self.label_studentId.setFont(font1)
         self.label_studentId.setStyleSheet(u"background-color: transparent; color: #d8bb96;")
         self.label_studentId.setAlignment(Qt.AlignCenter)
@@ -553,6 +565,7 @@ class Ui_FormHome(object):
         self.verticalLayout_12.setContentsMargins(0, 0, 0, 0)
         self.frame_4 = QFrame(self.pageQuiz)
         self.frame_4.setObjectName(u"frame_4")
+        self.frame_4.setStyleSheet(u"background: transparent;")
         self.frame_4.setFrameShape(QFrame.StyledPanel)
         self.frame_4.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_7 = QHBoxLayout(self.frame_4)
@@ -679,7 +692,7 @@ class Ui_FormHome(object):
         self.scrollArea_id.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 72, 18))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 1034, 523))
         self.verticalLayout_7 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_7.setObjectName(u"verticalLayout_7")
         self.scrollArea_id.setWidget(self.scrollAreaWidgetContents)
@@ -867,6 +880,18 @@ class Ui_FormHome(object):
         self.verticalLayout_22.addWidget(self.scrollArea_tf)
 
         self.tabWidget_quiz.addTab(self.tab_3, "")
+        self.tab_empty_quiz = QWidget()
+        self.tab_empty_quiz.setObjectName(u"tab_empty_quiz")
+        self.verticalLayout_10 = QVBoxLayout(self.tab_empty_quiz)
+        self.verticalLayout_10.setObjectName(u"verticalLayout_10")
+        self.label_empty_quiz = QLabel(self.tab_empty_quiz)
+        self.label_empty_quiz.setObjectName(u"label_empty_quiz")
+        self.label_empty_quiz.setStyleSheet(u"font: 25pt \"Biscuit Glitch\"; color: #FFF;")
+        self.label_empty_quiz.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_10.addWidget(self.label_empty_quiz)
+
+        self.tabWidget_quiz.addTab(self.tab_empty_quiz, "")
 
         self.horizontalLayout_7.addWidget(self.tabWidget_quiz)
 
@@ -875,6 +900,7 @@ class Ui_FormHome(object):
 
         self.frame_5 = QFrame(self.pageQuiz)
         self.frame_5.setObjectName(u"frame_5")
+        self.frame_5.setStyleSheet(u"background: transparent;")
         self.frame_5.setFrameShape(QFrame.StyledPanel)
         self.frame_5.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_8 = QHBoxLayout(self.frame_5)
@@ -1055,7 +1081,7 @@ class Ui_FormHome(object):
         self.scrollArea_quiz_answer.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
         self.scrollAreaWidgetContents_5 = QWidget()
         self.scrollAreaWidgetContents_5.setObjectName(u"scrollAreaWidgetContents_5")
-        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 100, 30))
+        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 1038, 558))
         self.verticalLayout_4 = QVBoxLayout(self.scrollAreaWidgetContents_5)
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
         self.scrollArea_quiz_answer.setWidget(self.scrollAreaWidgetContents_5)
@@ -1069,11 +1095,15 @@ class Ui_FormHome(object):
         self.pageExercise = QWidget()
         self.pageExercise.setObjectName(u"pageExercise")
         self.pageExercise.setStyleSheet(u"background: transparent;")
+        self.verticalLayout_11 = QVBoxLayout(self.pageExercise)
+        self.verticalLayout_11.setObjectName(u"verticalLayout_11")
         self.label_message_3 = QLabel(self.pageExercise)
         self.label_message_3.setObjectName(u"label_message_3")
-        self.label_message_3.setGeometry(QRect(370, 190, 269, 46))
         self.label_message_3.setStyleSheet(u"font: 25pt \"Biscuit Glitch\"; color: #FFF;")
         self.label_message_3.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_11.addWidget(self.label_message_3)
+
         self.stackedWidget.addWidget(self.pageExercise)
         self.pageScores = QWidget()
         self.pageScores.setObjectName(u"pageScores")
@@ -1158,10 +1188,17 @@ class Ui_FormHome(object):
         self.scrollArea_scores.setWidgetResizable(True)
         self.layout_scores = QWidget()
         self.layout_scores.setObjectName(u"layout_scores")
-        self.layout_scores.setGeometry(QRect(0, 0, 100, 30))
+        self.layout_scores.setGeometry(QRect(0, 0, 1038, 637))
         self.gridLayout_3 = QGridLayout(self.layout_scores)
         self.gridLayout_3.setSpacing(8)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
+        self.label_empty_scores = QLabel(self.layout_scores)
+        self.label_empty_scores.setObjectName(u"label_empty_scores")
+        self.label_empty_scores.setStyleSheet(u"font: 25pt \"Biscuit Glitch\"; color: #FFF;")
+        self.label_empty_scores.setAlignment(Qt.AlignCenter)
+
+        self.gridLayout_3.addWidget(self.label_empty_scores, 0, 0, 1, 1)
+
         self.scrollArea_scores.setWidget(self.layout_scores)
 
         self.verticalLayout_19.addWidget(self.scrollArea_scores)
@@ -1316,12 +1353,15 @@ class Ui_FormHome(object):
         self.tabWidget_quiz.setTabText(self.tabWidget_quiz.indexOf(self.tab), QCoreApplication.translate("FormHome", u"Indentification", None))
         self.tabWidget_quiz.setTabText(self.tabWidget_quiz.indexOf(self.tab_2), QCoreApplication.translate("FormHome", u"Multiple Choice", None))
         self.tabWidget_quiz.setTabText(self.tabWidget_quiz.indexOf(self.tab_3), QCoreApplication.translate("FormHome", u"True or False", None))
+        self.label_empty_quiz.setText(QCoreApplication.translate("FormHome", u"No available quiz.", None))
+        self.tabWidget_quiz.setTabText(self.tabWidget_quiz.indexOf(self.tab_empty_quiz), "")
         self.btnSubmitQuiz.setText(QCoreApplication.translate("FormHome", u"Submit", None))
         self.label_message.setText(QCoreApplication.translate("FormHome", u"QUIZ COMPLETED!", None))
         self.label_score.setText(QCoreApplication.translate("FormHome", u"0/0", None))
         self.label_message_2.setText(QCoreApplication.translate("FormHome", u"questions correct", None))
         self.btn_retake.setText(QCoreApplication.translate("FormHome", u"Try again", None))
         self.label_message_3.setText(QCoreApplication.translate("FormHome", u"Exercise Page", None))
+        self.label_empty_scores.setText(QCoreApplication.translate("FormHome", u"No scores available.", None))
         self.btnColors.setText("")
         self.btnAddition.setText("")
         self.btnMultiplication.setText("")

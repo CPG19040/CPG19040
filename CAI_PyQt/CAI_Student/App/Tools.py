@@ -1,10 +1,13 @@
 import os, sys
-from PySide6.QtWidgets import QVBoxLayout, QHBoxLayout, QLabel, QFrame, QFileDialog, QMainWindow, QDialog
+from functools import partial
+
+from PySide6.QtWidgets import QFrame, QFileDialog, QMainWindow, QDialog
 from PySide6.QtGui import QPixmap, QPainter, QPen, QMovie, QPainterPath
 from PySide6.QtCore import Qt, Signal, QUrl, QObject, QEvent, QDate
 from PySide6.QtWebEngineWidgets import QWebEngineView
+
 from App.CRUDTools import DatabaseTools
-from App.CustomizedDialog import Ui_CustomDialog
+from App.MessageBox import Ui_MessageBox
 from App.CardStudent import Ui_CardStudent
 
 class Utility:
@@ -348,25 +351,15 @@ class WindowHandler(QObject):
             self._window.setCursor(Qt.CursorShape.ArrowCursor)
 
 
-class CustomShapeDialog(QDialog, Ui_CustomDialog):
-    """
-    A custom, frameless, modal dialog box used for displaying styled alerts with 
-    animated GIF icons and messaging.
+class CustomMessageBox(QDialog, Ui_MessageBox):
+    Yes           = 100
+    No            = 101
+    YesToAll      = 102
+    NoToAll       = 103
+    Cancel        = QDialog.DialogCode.Rejected  # 0
+    Ok            = QDialog.DialogCode.Accepted  # 1
 
-    This dialog features a translucent, rounded-corner design, supports custom window 
-    dragging behavior via a WindowHandler, and dynamically adapts its visual theme 
-    (Success, Sad/Error, or Warning) based on the provided type argument.
-
-    Args:
-        message (str): The text message to display inside the dialog box.
-        parent (QWidget, optional): The parent widget for memory management and window centering. Defaults to None.
-        type (int, optional): The semantic state of the dialog which alters the displayed GIF.
-            1 = Success/Happy (Default)
-            2 = Sad/Error
-            3 = Warning
-    """
-
-    def __init__(self, message, parent=None, type=1):
+    def __init__(self, parent=None):
         super().__init__(parent)
         self.setupUi(self)
 
@@ -378,22 +371,81 @@ class CustomShapeDialog(QDialog, Ui_CustomDialog):
         # Re-use WindowHandler for dragging
         self.handler = WindowHandler(self)
 
-        self.util = Utility()
+        self.btnClose.clicked.connect(self.reject)
+        self._connect_signals()
+        
+    def _connect_signals(self):
+        """Connect button signals safely using partial to prevent lambda retention."""
+        btn_map = [
+            ('btnOk', self.accept),
+            ('btnCancel', self.reject),
+            ('btnYes', partial(self.done, self.Yes)),
+            ('btnNo', partial(self.done, self.No)),
+            ('btnYesAll', partial(self.done, self.YesToAll)),
+            ('btnNoAll', partial(self.done, self.NoToAll)),
+        ]
 
-        img_path = self.util.get_resource_path(os.path.join("..", "Images"))
-        file_path = os.path.join(img_path, "happy.gif") # Default
+        for btn_name, slot in btn_map:
+            if hasattr(self, btn_name):
+                getattr(self, btn_name).clicked.connect(slot)
 
-        if type == 2:
-            file_path = os.path.join(img_path, "tonton-sad.gif")
+    def _hide_all_buttons(self):
+        """Reset button visibility before showing modal."""
+        buttons = ['btnYes', 'btnNo', 'btnYesAll', 'btnNoAll', 'btnOk', 'btnCancel']
+        for btn_name in buttons:
+            if hasattr(self, btn_name):
+                getattr(self, btn_name).setVisible(False)
 
-        if type == 3:
-            file_path = os.path.join(img_path, "tonton-warning.gif")
+    def _setup_dialog(self, title: str, message: str, icon_path: str):
+        self._hide_all_buttons()
+        self.setWindowTitle(title)
 
-        movie = QMovie(file_path)
+        if hasattr(self, 'label_gif'):
+            self.label_gif.setMovie(movie := QMovie(icon_path))
+            movie.start()
 
-        # Content
-        self.label_gif.setMovie(movie)
-        movie.start()
-        self.label_message.setText(str(message))
-        self.btnClose.clicked.connect(self.accept)
+        if hasattr(self, 'label_windowTitle'):
+            self.label_windowTitle.setText(title)
+
+        if hasattr(self, 'label_message'):
+            self.label_message.setText(message)
+
+    @classmethod
+    def _create_and_exec(cls, parent, title, message, icon_path, visible_buttons):
+        dlg = cls(parent)
+        dlg._setup_dialog(title, message, icon_path)
+
+        for btn_name in visible_buttons:
+            if hasattr(dlg, btn_name):
+                getattr(dlg, btn_name).setVisible(True)
+
+        dlg.adjustSize()
+        return dlg.exec()
+
+    @classmethod
+    def information(cls, parent, title, message):
+        return cls._create_and_exec(parent, title, message, ":/Images/Images/happy.gif", ['btnOk'])
+
+    @classmethod
+    def success(cls, parent, title, message):
+        return cls._create_and_exec(parent, title, message, ":/Images/Images/happy.gif", ['btnOk'])
+
+    @classmethod
+    def warning(cls, parent, title, message):
+        return cls._create_and_exec(parent, title, message, ":/Images/Images/tonton-warning.gif", ['btnOk'])
+
+    @classmethod
+    def critical(cls, parent, title, message):
+        return cls._create_and_exec(parent, title, message, ":/Images/Images/tonton-sad.gif", ['btnOk'])
+
+    @classmethod
+    def question(cls, parent, title, message, include_all=False, show_cancel=False):
+        buttons = ['btnYes', 'btnNo']
+
+        if include_all:
+            buttons.extend(['btnYesAll', 'btnNoAll'])
+        if show_cancel:
+            buttons.append('btnCancel')
+
+        return cls._create_and_exec(parent, title, message, ":/Images/Images/tonton-warning.gif", buttons)
 
