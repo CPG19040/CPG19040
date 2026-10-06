@@ -363,7 +363,6 @@ class CustomMessageBox(QDialog, Ui_MessageBox):
         super().__init__(parent)
         self.setupUi(self)
 
-        # Essential Flags
         self.setWindowFlags(Qt.WindowType.FramelessWindowHint | Qt.WindowType.Dialog)
         self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground) # For rounded corners
         self.setModal(True)
