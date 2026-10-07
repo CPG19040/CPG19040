@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>420</width>
-    <height>390</height>
+    <width>348</width>
+    <height>297</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -18,8 +18,8 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>420</width>
-    <height>390</height>
+    <width>348</width>
+    <height>297</height>
    </size>
   </property>
   <property name="maximumSize">
@@ -38,11 +38,15 @@
 }
 
 #widget { 
-	border-image: url(:/Images/Images/slab.png); 
+	border: 5px solid #91404b;
+	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #5f2a31, stop:1 #91404b);;
+	border-radius: 20px;
 }
 
-#widget_2 { 
-	border-image: url(:/Images/Images/paper.svg); 
+#widget_body { 
+	border: 5px solid #91404b;
+	background: #dabe8f;
+	border-radius: 20px;
 	margin: 0px 20px 0px; 
 }
 
@@ -81,16 +85,16 @@
        <number>9</number>
       </property>
       <property name="topMargin">
-       <number>0</number>
+       <number>9</number>
       </property>
       <property name="rightMargin">
        <number>9</number>
       </property>
       <property name="bottomMargin">
-       <number>30</number>
+       <number>10</number>
       </property>
       <item>
-       <widget class="QWidget" name="widget_WindowsButtons" native="true">
+       <widget class="QWidget" name="widget_header" native="true">
         <property name="minimumSize">
          <size>
           <width>0</width>
@@ -117,17 +121,48 @@
           <number>0</number>
          </property>
          <item>
-          <spacer name="horizontalSpacer_13">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
+          <widget class="QWidget" name="widget_5" native="true">
+           <property name="minimumSize">
             <size>
              <width>40</width>
-             <height>20</height>
+             <height>40</height>
             </size>
            </property>
-          </spacer>
+           <property name="maximumSize">
+            <size>
+             <width>40</width>
+             <height>40</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_windowTitle">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>35</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>35</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">#label_windowTitle {
+	font: 13pt &quot;Kissy Hugs&quot;; 
+	color: #fff;
+}</string>
+           </property>
+           <property name="text">
+            <string>Title</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
          </item>
          <item>
           <widget class="QPushButton" name="btnClose">
@@ -159,63 +194,26 @@
        </widget>
       </item>
       <item>
-       <widget class="QWidget" name="widget_2" native="true">
+       <widget class="QWidget" name="widget_body" native="true">
         <property name="styleSheet">
          <string notr="true"/>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_3">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
          <property name="topMargin">
           <number>0</number>
          </property>
          <property name="rightMargin">
-          <number>9</number>
+          <number>0</number>
          </property>
-         <item>
-          <widget class="QWidget" name="widget_4" native="true">
-           <layout class="QHBoxLayout" name="horizontalLayout_4">
-            <property name="spacing">
-             <number>0</number>
-            </property>
-            <property name="leftMargin">
-             <number>50</number>
-            </property>
-            <property name="topMargin">
-             <number>0</number>
-            </property>
-            <property name="rightMargin">
-             <number>50</number>
-            </property>
-            <property name="bottomMargin">
-             <number>0</number>
-            </property>
-            <item>
-             <widget class="QLabel" name="label_windowTitle">
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>35</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>16777215</width>
-                <height>35</height>
-               </size>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">#label_windowTitle {
-	font: 13pt &quot;Kissy Hugs&quot;; 
-	color: Brown;
-}</string>
-              </property>
-              <property name="text">
-               <string>Title</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-         </item>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
          <item>
           <widget class="QWidget" name="widget_3" native="true">
            <layout class="QHBoxLayout" name="horizontalLayout">

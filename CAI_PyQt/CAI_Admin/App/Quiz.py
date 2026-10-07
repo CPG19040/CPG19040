@@ -421,7 +421,7 @@ class QuizItemWidget(QFrame, Ui_CardQuiz_edit):
                 padding: 0px 10px 0px;
                 background-color: #ffffff;
                 color: #333333;
-                font: 10pt "Inter";
+                font: 11pt "Inter";
                 selection-background-color: #7eb4d7;
                 border-top-right-radius: 15px;
                 border-bottom-right-radius: 15px;

@@ -32,7 +32,7 @@ class Ui_CardQuiz_edit(object):
         self.Card = QFrame(CardQuiz_edit)
         self.Card.setObjectName(u"Card")
         self.Card.setStyleSheet(u"* {\n"
-"	font: 10pt \"Inter\";\n"
+"	font: 11pt \"Inter\";\n"
 "}\n"
 "\n"
 "#Card {\n"

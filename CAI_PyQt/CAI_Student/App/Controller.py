@@ -1,6 +1,6 @@
 import os
 from PySide6.QtCore import QSettings, QPoint, QEasingCurve, QPropertyAnimation, QParallelAnimationGroup, Qt, QUrl, QEvent, QObject, QDate
-from PySide6.QtWidgets import QMainWindow, QButtonGroup
+from PySide6.QtWidgets import QMainWindow, QButtonGroup, QWidget
 from PySide6.QtGui import QFontDatabase, QImage, QPixmap
 from PySide6.QtMultimedia import QSoundEffect, QMediaPlayer, QAudioOutput
 
@@ -410,11 +410,10 @@ class Controller:
 
         if not record_id and not record_mc and not record_tf:
             self.ui.btnSubmitQuiz.setVisible(False)
-            self.ui.label_empty_quiz.setVisible(True)
         else:
             self.ui.btnSubmitQuiz.setVisible(True)
-            self.ui.label_empty_quiz.setVisible(False)
-
+            self.ui.tabWidget_quiz.removeTab(3) # Empty quiz tab page
+                
         index = self.util.find_tab_by_name(self.ui.tabWidget_quiz, "Indentification")
         if index != -1 and not record_id:
             self.ui.tabWidget_quiz.removeTab(index)

@@ -559,7 +559,7 @@ border-radius: 105px;</string>
                   </property>
                   <property name="font">
                    <font>
-                    <family>Inter</family>
+                    <family>Inter SemiBold</family>
                     <pointsize>12</pointsize>
                     <weight>50</weight>
                     <italic>false</italic>
@@ -567,7 +567,8 @@ border-radius: 105px;</string>
                    </font>
                   </property>
                   <property name="styleSheet">
-                   <string notr="true">background-color: transparent; color: #d8bb96;</string>
+                   <string notr="true">background-color: transparent; color: #d8bb96; 
+font: 12pt &quot;Inter SemiBold&quot;;</string>
                   </property>
                   <property name="text">
                    <string>2026-0001-STU</string>
@@ -590,7 +591,7 @@ border-radius: 105px;</string>
                   </property>
                   <property name="font">
                    <font>
-                    <family>Inter</family>
+                    <family>Inter SemiBold</family>
                     <pointsize>12</pointsize>
                     <weight>50</weight>
                     <italic>false</italic>
@@ -598,7 +599,7 @@ border-radius: 105px;</string>
                    </font>
                   </property>
                   <property name="styleSheet">
-                   <string notr="true">background-color: transparent; color: #d8bb96;</string>
+                   <string notr="true">background-color: transparent; color: #d8bb96; font: 12pt &quot;Inter SemiBold&quot;;</string>
                   </property>
                   <property name="text">
                    <string>Honesty</string>
@@ -1301,8 +1302,8 @@ QScrollArea QWidget #qt_scrollarea_corner {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>1034</width>
-                          <height>523</height>
+                          <width>72</width>
+                          <height>18</height>
                          </rect>
                         </property>
                         <layout class="QVBoxLayout" name="verticalLayout_7"/>
@@ -1840,8 +1841,8 @@ QScrollArea QWidget #qt_scrollarea_corner {
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>1038</width>
-                      <height>558</height>
+                      <width>100</width>
+                      <height>30</height>
                      </rect>
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout_4"/>
@@ -1962,8 +1963,8 @@ QScrollArea QWidget #qt_scrollarea_corner {
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>1038</width>
-                   <height>637</height>
+                   <width>325</width>
+                   <height>64</height>
                   </rect>
                  </property>
                  <layout class="QGridLayout" name="gridLayout_3">

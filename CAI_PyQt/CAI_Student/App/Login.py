@@ -218,12 +218,10 @@ class Login(QWidget, Ui_FormLogin):
             self.login_success.emit(user)
 
         elif not password:
-            dialog = CustomMessageBox("Please type your password.", parent=self, type=3)
-            dialog.exec()
+            CustomMessageBox.critical(self, "", "Please type your password.")
 
         else:
-            dialog = CustomMessageBox("Oops! Wrong password.", parent=self, type=2)
-            dialog.exec()
+            CustomMessageBox.critical(self, "", "Oops! Wrong password.")
 
     def authenticate_user(self, studentid, password):
         try:

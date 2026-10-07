@@ -16,21 +16,20 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QDialog, QHBoxLayout, QLabel,
-    QPushButton, QSizePolicy, QSpacerItem, QVBoxLayout,
-    QWidget)
+    QPushButton, QSizePolicy, QVBoxLayout, QWidget)
 import resources_rc
 
 class Ui_MessageBox(object):
     def setupUi(self, MessageBox):
         if not MessageBox.objectName():
             MessageBox.setObjectName(u"MessageBox")
-        MessageBox.resize(420, 390)
+        MessageBox.resize(348, 297)
         sizePolicy = QSizePolicy(QSizePolicy.Policy.MinimumExpanding, QSizePolicy.Policy.MinimumExpanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(MessageBox.sizePolicy().hasHeightForWidth())
         MessageBox.setSizePolicy(sizePolicy)
-        MessageBox.setMinimumSize(QSize(420, 390))
+        MessageBox.setMinimumSize(QSize(348, 297))
         MessageBox.setMaximumSize(QSize(420, 390))
         MessageBox.setStyleSheet(u"#MessageBox { \n"
 "	background: transparent;\n"
@@ -38,11 +37,15 @@ class Ui_MessageBox(object):
 "}\n"
 "\n"
 "#widget { \n"
-"	border-image: url(:/Images/Images/slab.png); \n"
+"	border: 5px solid #91404b;\n"
+"	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #5f2a31, stop:1 #91404b);;\n"
+"	border-radius: 20px;\n"
 "}\n"
 "\n"
-"#widget_2 { \n"
-"	border-image: url(:/Images/Images/paper.svg); \n"
+"#widget_body { \n"
+"	border: 5px solid #91404b;\n"
+"	background: #dabe8f;\n"
+"	border-radius: 20px;\n"
 "	margin: 0px 20px 0px; \n"
 "}\n"
 "\n"
@@ -61,19 +64,34 @@ class Ui_MessageBox(object):
         self.verticalLayout_2 = QVBoxLayout(self.widget)
         self.verticalLayout_2.setSpacing(0)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
-        self.verticalLayout_2.setContentsMargins(9, 0, 9, 30)
-        self.widget_WindowsButtons = QWidget(self.widget)
-        self.widget_WindowsButtons.setObjectName(u"widget_WindowsButtons")
-        self.widget_WindowsButtons.setMinimumSize(QSize(0, 40))
-        self.widget_WindowsButtons.setMaximumSize(QSize(16777215, 40))
-        self.horizontalLayout_2 = QHBoxLayout(self.widget_WindowsButtons)
+        self.verticalLayout_2.setContentsMargins(9, 9, 9, 10)
+        self.widget_header = QWidget(self.widget)
+        self.widget_header.setObjectName(u"widget_header")
+        self.widget_header.setMinimumSize(QSize(0, 40))
+        self.widget_header.setMaximumSize(QSize(16777215, 40))
+        self.horizontalLayout_2 = QHBoxLayout(self.widget_header)
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
         self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
-        self.horizontalSpacer_13 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.widget_5 = QWidget(self.widget_header)
+        self.widget_5.setObjectName(u"widget_5")
+        self.widget_5.setMinimumSize(QSize(40, 40))
+        self.widget_5.setMaximumSize(QSize(40, 40))
 
-        self.horizontalLayout_2.addItem(self.horizontalSpacer_13)
+        self.horizontalLayout_2.addWidget(self.widget_5)
 
-        self.btnClose = QPushButton(self.widget_WindowsButtons)
+        self.label_windowTitle = QLabel(self.widget_header)
+        self.label_windowTitle.setObjectName(u"label_windowTitle")
+        self.label_windowTitle.setMinimumSize(QSize(0, 35))
+        self.label_windowTitle.setMaximumSize(QSize(16777215, 35))
+        self.label_windowTitle.setStyleSheet(u"#label_windowTitle {\n"
+"	font: 13pt \"Kissy Hugs\"; \n"
+"	color: #fff;\n"
+"}")
+        self.label_windowTitle.setAlignment(Qt.AlignCenter)
+
+        self.horizontalLayout_2.addWidget(self.label_windowTitle)
+
+        self.btnClose = QPushButton(self.widget_header)
         self.btnClose.setObjectName(u"btnClose")
         self.btnClose.setMinimumSize(QSize(40, 40))
         self.btnClose.setMaximumSize(QSize(40, 40))
@@ -84,35 +102,16 @@ class Ui_MessageBox(object):
         self.horizontalLayout_2.addWidget(self.btnClose)
 
 
-        self.verticalLayout_2.addWidget(self.widget_WindowsButtons)
+        self.verticalLayout_2.addWidget(self.widget_header)
 
-        self.widget_2 = QWidget(self.widget)
-        self.widget_2.setObjectName(u"widget_2")
-        self.widget_2.setStyleSheet(u"")
-        self.verticalLayout_3 = QVBoxLayout(self.widget_2)
+        self.widget_body = QWidget(self.widget)
+        self.widget_body.setObjectName(u"widget_body")
+        self.widget_body.setStyleSheet(u"")
+        self.verticalLayout_3 = QVBoxLayout(self.widget_body)
+        self.verticalLayout_3.setSpacing(0)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
-        self.verticalLayout_3.setContentsMargins(-1, 0, 9, -1)
-        self.widget_4 = QWidget(self.widget_2)
-        self.widget_4.setObjectName(u"widget_4")
-        self.horizontalLayout_4 = QHBoxLayout(self.widget_4)
-        self.horizontalLayout_4.setSpacing(0)
-        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
-        self.horizontalLayout_4.setContentsMargins(50, 0, 50, 0)
-        self.label_windowTitle = QLabel(self.widget_4)
-        self.label_windowTitle.setObjectName(u"label_windowTitle")
-        self.label_windowTitle.setMinimumSize(QSize(0, 35))
-        self.label_windowTitle.setMaximumSize(QSize(16777215, 35))
-        self.label_windowTitle.setStyleSheet(u"#label_windowTitle {\n"
-"	font: 13pt \"Kissy Hugs\"; \n"
-"	color: Brown;\n"
-"}")
-
-        self.horizontalLayout_4.addWidget(self.label_windowTitle)
-
-
-        self.verticalLayout_3.addWidget(self.widget_4)
-
-        self.widget_3 = QWidget(self.widget_2)
+        self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
+        self.widget_3 = QWidget(self.widget_body)
         self.widget_3.setObjectName(u"widget_3")
         self.horizontalLayout = QHBoxLayout(self.widget_3)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
@@ -128,7 +127,7 @@ class Ui_MessageBox(object):
 
         self.verticalLayout_3.addWidget(self.widget_3)
 
-        self.label_message = QLabel(self.widget_2)
+        self.label_message = QLabel(self.widget_body)
         self.label_message.setObjectName(u"label_message")
         self.label_message.setStyleSheet(u"")
         self.label_message.setAlignment(Qt.AlignCenter)
@@ -137,7 +136,7 @@ class Ui_MessageBox(object):
         self.verticalLayout_3.addWidget(self.label_message)
 
 
-        self.verticalLayout_2.addWidget(self.widget_2)
+        self.verticalLayout_2.addWidget(self.widget_body)
 
         self.widget_buttons = QWidget(self.widget)
         self.widget_buttons.setObjectName(u"widget_buttons")
@@ -206,8 +205,8 @@ class Ui_MessageBox(object):
 
     def retranslateUi(self, MessageBox):
         MessageBox.setWindowTitle(QCoreApplication.translate("MessageBox", u"Dialog", None))
-        self.btnClose.setText("")
         self.label_windowTitle.setText(QCoreApplication.translate("MessageBox", u"Title", None))
+        self.btnClose.setText("")
         self.label_gif.setText("")
         self.label_message.setText(QCoreApplication.translate("MessageBox", u"Hello World", None))
         self.btnOk.setText(QCoreApplication.translate("MessageBox", u"OK", None))

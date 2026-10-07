@@ -33,7 +33,7 @@
     <widget class="QFrame" name="Card">
      <property name="styleSheet">
       <string notr="true">* {
-	font: 10pt &quot;Inter&quot;;
+	font: 11pt &quot;Inter&quot;;
 }
 
 #Card {
