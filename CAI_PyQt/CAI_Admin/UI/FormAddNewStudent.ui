@@ -10,13 +10,19 @@
     <x>0</x>
     <y>0</y>
     <width>870</width>
-    <height>707</height>
+    <height>711</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>870</width>
-    <height>707</height>
+    <height>711</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>870</width>
+    <height>711</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -25,6 +31,7 @@
   <property name="styleSheet">
    <string notr="true">* {
 	color: black;
+	font: 10pt &quot;Inter&quot;;
 }
 
 #AddNewStudentDialog {
@@ -1252,8 +1259,12 @@ QSpinBox::down-arrow {
              <family>Inter SemiBold</family>
              <pointsize>11</pointsize>
              <weight>50</weight>
+             <italic>false</italic>
              <bold>false</bold>
             </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">font: 11pt &quot;Inter SemiBold&quot;;</string>
            </property>
            <property name="text">
             <string>Emergency contact</string>

@@ -28,6 +28,7 @@
   <property name="styleSheet">
    <string notr="true">* {
 	color: black;
+	font: 10pt &quot;Inter&quot;;
 }
 
 QDialog {
@@ -146,9 +147,11 @@ QDialog {
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">background: transparent;
-color: rgb(0, 0, 0);
-font: 10pt &quot;Inter SemiBold&quot;;</string>
+         <string notr="true">QLabel {
+	background: transparent;
+	color: rgb(0, 0, 0);
+	font: 10pt &quot;Inter SemiBold&quot;;
+}</string>
         </property>
         <property name="text">
          <string>Student Information Editor</string>
@@ -285,9 +288,7 @@ QPushButton[class=&quot;button-green&quot;] {
 	border: 1px solid #0a5128;
     border-radius: 15px;
     padding: 0px 10px 0px;
-    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
-                                stop:0 #1ebd5d, 
-                                stop:1 #107f3f);
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #1ebd5d, stop:1 #107f3f);
     color: #FFF;
     font: 10pt &quot;Inter SemiBold&quot;;
 }
@@ -367,7 +368,7 @@ QComboBox {
 	border-left: none;
 	border-top-right-radius: 18px;
 	border-bottom-right-radius: 18px;
-	padding: 0px 15px 0px;
+	padding: 0px 10px;
 	background-color: #ffffff;
 	color: #333333;
 	font: 10pt &quot;Inter Medium&quot;; /* Consolidated font settings */
@@ -1127,8 +1128,12 @@ QSpinBox::down-arrow {
              <family>Inter SemiBold</family>
              <pointsize>11</pointsize>
              <weight>50</weight>
+             <italic>false</italic>
              <bold>false</bold>
             </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">font: 11pt &quot;Inter SemiBold&quot;;</string>
            </property>
            <property name="text">
             <string>Emergency contact</string>
@@ -1294,8 +1299,12 @@ QSpinBox::down-arrow {
              <family>Inter SemiBold</family>
              <pointsize>11</pointsize>
              <weight>50</weight>
+             <italic>false</italic>
              <bold>false</bold>
             </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">font: 11pt &quot;Inter SemiBold&quot;;</string>
            </property>
            <property name="text">
             <string>Change Password</string>

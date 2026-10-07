@@ -30,6 +30,7 @@ class Ui_EditStudentDialog(object):
         EditStudentDialog.setMaximumSize(QSize(1100, 693))
         EditStudentDialog.setStyleSheet(u"* {\n"
 "	color: black;\n"
+"	font: 10pt \"Inter\";\n"
 "}\n"
 "\n"
 "QDialog {\n"
@@ -77,9 +78,11 @@ class Ui_EditStudentDialog(object):
         font.setBold(False)
         font.setItalic(False)
         self.label_windowTitle.setFont(font)
-        self.label_windowTitle.setStyleSheet(u"background: transparent;\n"
-"color: rgb(0, 0, 0);\n"
-"font: 10pt \"Inter SemiBold\";")
+        self.label_windowTitle.setStyleSheet(u"QLabel {\n"
+"	background: transparent;\n"
+"	color: rgb(0, 0, 0);\n"
+"	font: 10pt \"Inter SemiBold\";\n"
+"}")
         self.label_windowTitle.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout_10.addWidget(self.label_windowTitle)
@@ -149,9 +152,7 @@ class Ui_EditStudentDialog(object):
 "	border: 1px solid #0a5128;\n"
 "    border-radius: 15px;\n"
 "    padding: 0px 10px 0px;\n"
-"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
-"                                stop:0 #1ebd5d, \n"
-"                                stop:1 #107f3f);\n"
+"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #1ebd5d, stop:1 #107f3f);\n"
 "    color: #FFF;\n"
 "    font: 10pt \"Inter SemiBold\";\n"
 "}\n"
@@ -170,12 +171,12 @@ class Ui_EditStudentDialog(object):
 "\n"
 "QPushButton[class=\"button-green\"]:disabled {\n"
 "    background: #A5D6A7;\n"
-" "
-                        "   color: #E8F5E9;\n"
+"    color: #E8F5E9;\n"
 "    opacity: 0.6;\n"
 "}\n"
 "\n"
-"*[class=\"button-normal\"] {\n"
+"*[class=\"button-n"
+                        "ormal\"] {\n"
 "	font: 10pt \"Inter\";\n"
 "	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
 "                                stop:0 #ffffff, \n"
@@ -207,10 +208,10 @@ class Ui_EditStudentDialog(object):
 "	background-color: transparent;\n"
 "}\n"
 "\n"
-"*[c"
-                        "lass=\"input-field\"] QLineEdit {\n"
+"*[class=\"input-field\"] QLineEdit {\n"
 "	background-color: #ffffff;\n"
-"	border: 1px solid #ABABAB;\n"
+"	bor"
+                        "der: 1px solid #ABABAB;\n"
 "	border-left: none;\n"
 "	border-top-right-radius: 18px;\n"
 "	border-bottom-right-radius: 18px;\n"
@@ -233,7 +234,7 @@ class Ui_EditStudentDialog(object):
 "	border-left: none;\n"
 "	border-top-right-radius: 18px;\n"
 "	border-bottom-right-radius: 18px;\n"
-"	padding: 0px 15px 0px;\n"
+"	padding: 0px 10px;\n"
 "	background-color: #ffffff;\n"
 "	color: #333333;\n"
 "	font: 10pt \"Inter Medium\"; /* Consolidated font settings */\n"
@@ -248,10 +249,10 @@ class Ui_EditStudentDialog(object):
 "    border: 1px solid #3498db;\n"
 "}\n"
 "\n"
-"QC"
-                        "omboBox::drop-down {\n"
+"QComboBox::drop-down {\n"
 "    subcontrol-origin: padding;\n"
-"    subcontrol-position: top right;\n"
+"    subcontrol-po"
+                        "sition: top right;\n"
 "    width: 30px;\n"
 "    border-left-width: 0px;\n"
 "    /* Match the 15px border-radius of the main control */\n"
@@ -286,11 +287,11 @@ class Ui_EditStudentDialog(object):
 "    color: #ffffff;\n"
 "}\n"
 "\n"
-"Q"
-                        "SpinBox {\n"
+"QSpinBox {\n"
 "	font: 10pt \"Inter Medium\";\n"
 "    height: 30px;\n"
-"    border: 1px solid #999;\n"
+"    bord"
+                        "er: 1px solid #999;\n"
 "    border-radius: 15px;\n"
 "    padding: 0px 5px 0px;\n"
 "    background-color: #ffffff;\n"
@@ -328,13 +329,13 @@ class Ui_EditStudentDialog(object):
 "\n"
 "QSpinBox::up-arrow {\n"
 "    image: url(:/Images/Images/caret-up.png);\n"
-"    width: 8px"
-                        ";\n"
+"    width: 8px;\n"
 "    height: 8px;\n"
 "}\n"
 "\n"
 "QSpinBox::down-arrow {\n"
-"    image: url(:/Images/Images/caret-down.png);\n"
+"    image: ur"
+                        "l(:/Images/Images/caret-down.png);\n"
 "    width: 8px;\n"
 "    height: 8px;\n"
 "}")
@@ -612,7 +613,9 @@ class Ui_EditStudentDialog(object):
         font1.setFamilies([u"Inter SemiBold"])
         font1.setPointSize(11)
         font1.setBold(False)
+        font1.setItalic(False)
         self.label_24.setFont(font1)
+        self.label_24.setStyleSheet(u"font: 11pt \"Inter SemiBold\";")
 
         self.verticalLayout_3.addWidget(self.label_24)
 
@@ -685,6 +688,7 @@ class Ui_EditStudentDialog(object):
         self.label_25 = QLabel(self.widget_11)
         self.label_25.setObjectName(u"label_25")
         self.label_25.setFont(font1)
+        self.label_25.setStyleSheet(u"font: 11pt \"Inter SemiBold\";")
 
         self.verticalLayout_6.addWidget(self.label_25)
 

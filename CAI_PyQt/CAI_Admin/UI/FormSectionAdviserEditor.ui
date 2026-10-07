@@ -29,6 +29,7 @@
    <string notr="true">* {
 	background-color: rgb(222, 221, 218); 
 	color: black;
+	font: 10pt &quot;Inter&quot;;
 }
 
 #SectionAdviserEditorDialog {
@@ -402,6 +403,24 @@ font: 10pt &quot;Inter SemiBold&quot;;</string>
    </item>
    <item>
     <widget class="QWidget" name="widget_body" native="true">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>550</width>
+       <height>485</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>550</width>
+       <height>485</height>
+      </size>
+     </property>
      <property name="styleSheet">
       <string notr="true">#widget_body {
 	background-color: #deddda;
@@ -413,6 +432,9 @@ font: 10pt &quot;Inter SemiBold&quot;;</string>
       <property name="spacing">
        <number>12</number>
       </property>
+      <property name="topMargin">
+       <number>12</number>
+      </property>
       <item>
        <widget class="QLabel" name="label_24">
         <property name="font">
@@ -420,11 +442,13 @@ font: 10pt &quot;Inter SemiBold&quot;;</string>
           <family>Inter SemiBold</family>
           <pointsize>11</pointsize>
           <weight>50</weight>
+          <italic>false</italic>
           <bold>false</bold>
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">background: transparent;</string>
+         <string notr="true">background: transparent;
+font: 11pt &quot;Inter SemiBold&quot;;</string>
         </property>
         <property name="text">
          <string>Assign an adviser to each section</string>
@@ -434,26 +458,23 @@ font: 10pt &quot;Inter SemiBold&quot;;</string>
       <item>
        <widget class="QWidget" name="widget_1" native="true">
         <property name="styleSheet">
-         <string notr="true">#widget_1 {
-	background-color: #d2d2d2;
-	border-radius: 12px;
-}</string>
+         <string notr="true"/>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_2">
          <property name="spacing">
           <number>6</number>
          </property>
          <property name="leftMargin">
-          <number>12</number>
+          <number>0</number>
          </property>
          <property name="topMargin">
-          <number>9</number>
+          <number>0</number>
          </property>
          <property name="rightMargin">
-          <number>12</number>
+          <number>0</number>
          </property>
          <property name="bottomMargin">
-          <number>9</number>
+          <number>0</number>
          </property>
          <item>
           <widget class="QWidget" name="widget_2" native="true">

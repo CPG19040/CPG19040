@@ -13,7 +13,7 @@
   <property name="minimumSize">
    <size>
     <width>620</width>
-    <height>580</height>
+    <height>586</height>
    </size>
   </property>
   <property name="maximumSize">
@@ -28,6 +28,7 @@
   <property name="styleSheet">
    <string notr="true">* {
 	color: black;
+	font: 10pt &quot;Inter&quot;;
 }
 
 #SectionRegistrationDialog {

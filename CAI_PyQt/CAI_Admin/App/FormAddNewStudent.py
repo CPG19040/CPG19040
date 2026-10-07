@@ -26,10 +26,12 @@ class Ui_AddNewStudentDialog(object):
         if not AddNewStudentDialog.objectName():
             AddNewStudentDialog.setObjectName(u"AddNewStudentDialog")
         AddNewStudentDialog.setEnabled(True)
-        AddNewStudentDialog.resize(870, 707)
-        AddNewStudentDialog.setMinimumSize(QSize(870, 707))
+        AddNewStudentDialog.resize(870, 711)
+        AddNewStudentDialog.setMinimumSize(QSize(870, 711))
+        AddNewStudentDialog.setMaximumSize(QSize(870, 711))
         AddNewStudentDialog.setStyleSheet(u"* {\n"
 "	color: black;\n"
+"	font: 10pt \"Inter\";\n"
 "}\n"
 "\n"
 "#AddNewStudentDialog {\n"
@@ -699,7 +701,9 @@ class Ui_AddNewStudentDialog(object):
         font1.setFamilies([u"Inter SemiBold"])
         font1.setPointSize(11)
         font1.setBold(False)
+        font1.setItalic(False)
         self.label_24.setFont(font1)
+        self.label_24.setStyleSheet(u"font: 11pt \"Inter SemiBold\";")
 
         self.verticalLayout_3.addWidget(self.label_24)
 

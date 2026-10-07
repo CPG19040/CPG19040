@@ -29,6 +29,7 @@ class Ui_AddNewUserDialog(object):
         AddNewUserDialog.setMaximumSize(QSize(1000, 550))
         AddNewUserDialog.setStyleSheet(u"* {\n"
 "	color: black;\n"
+"	font: 10pt \"Inter\";\n"
 "}\n"
 "\n"
 "#AddNewUserDialog {\n"
@@ -523,7 +524,9 @@ class Ui_AddNewUserDialog(object):
         font1.setFamilies([u"Inter SemiBold"])
         font1.setPointSize(11)
         font1.setBold(False)
+        font1.setItalic(False)
         self.label_24.setFont(font1)
+        self.label_24.setStyleSheet(u"font: 11pt \"Inter SemiBold\";")
         self.label_24.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
 
         self.verticalLayout_4.addWidget(self.label_24)

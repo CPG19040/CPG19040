@@ -30,6 +30,7 @@ class Ui_EditUserDialog(object):
         EditUserDialog.setStyleSheet(u"* {\n"
 "	background-color: rgb(222, 221, 218); \n"
 "	color: black;\n"
+"	font: 10pt \"Inter\";\n"
 "}\n"
 "\n"
 "#EditUserDialog {\n"
@@ -500,7 +501,9 @@ class Ui_EditUserDialog(object):
         font1.setFamilies([u"Inter SemiBold"])
         font1.setPointSize(11)
         font1.setBold(False)
+        font1.setItalic(False)
         self.label_25.setFont(font1)
+        self.label_25.setStyleSheet(u"font: 11pt \"Inter SemiBold\";")
         self.label_25.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
 
         self.verticalLayout_3.addWidget(self.label_25)
@@ -551,6 +554,7 @@ class Ui_EditUserDialog(object):
         self.label_24 = QLabel(self.widget_form_2)
         self.label_24.setObjectName(u"label_24")
         self.label_24.setFont(font1)
+        self.label_24.setStyleSheet(u"font: 11pt \"Inter SemiBold\";")
         self.label_24.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
 
         self.verticalLayout_4.addWidget(self.label_24)

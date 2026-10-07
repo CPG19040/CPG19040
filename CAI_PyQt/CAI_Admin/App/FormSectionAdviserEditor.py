@@ -31,6 +31,7 @@ class Ui_SectionAdviserEditorDialog(object):
         SectionAdviserEditorDialog.setStyleSheet(u"* {\n"
 "	background-color: rgb(222, 221, 218); \n"
 "	color: black;\n"
+"	font: 10pt \"Inter\";\n"
 "}\n"
 "\n"
 "#SectionAdviserEditorDialog {\n"
@@ -60,8 +61,8 @@ class Ui_SectionAdviserEditorDialog(object):
 "                                stop:1 #129046); \n"
 "}\n"
 "\n"
-"QPushButton[class=\"button-green\"]"
-                        ":disabled {\n"
+"QPushBut"
+                        "ton[class=\"button-green\"]:disabled {\n"
 "    background: #A5D6A7;\n"
 "    color: #E8F5E9;\n"
 "    opacity: 0.6;\n"
@@ -95,9 +96,9 @@ class Ui_SectionAdviserEditorDialog(object):
 "	color: #aeaeae;\n"
 "}\n"
 "\n"
-"*[class=\"input-field\"] {\n"
-"	bac"
-                        "kground-color: transparent;\n"
+"*[class="
+                        "\"input-field\"] {\n"
+"	background-color: transparent;\n"
 "}\n"
 "\n"
 "*[class=\"input-field\"] QLineEdit {\n"
@@ -135,8 +136,8 @@ class Ui_SectionAdviserEditorDialog(object):
 "}\n"
 "\n"
 "QComboBox:focus, QLineEdit:focus {\n"
-"    border: 1px solid #0"
-                        "07BFF;\n"
+""
+                        "    border: 1px solid #007BFF;\n"
 "}\n"
 "\n"
 "QComboBox:hover, QLineEdit:hover {\n"
@@ -174,9 +175,9 @@ class Ui_SectionAdviserEditorDialog(object):
 "    color: #333333;\n"
 "}\n"
 "\n"
-"/* Hover state for items inside the dropdown */\n"
-"QComboBo"
-                        "x QAbstractItemView::item:hover {\n"
+"/* Hover state for items inside the "
+                        "dropdown */\n"
+"QComboBox QAbstractItemView::item:hover {\n"
 "    background-color: #7eb4d7;\n"
 "    color: #ffffff;\n"
 "}")
@@ -279,6 +280,13 @@ class Ui_SectionAdviserEditorDialog(object):
 
         self.widget_body = QWidget(SectionAdviserEditorDialog)
         self.widget_body.setObjectName(u"widget_body")
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.widget_body.sizePolicy().hasHeightForWidth())
+        self.widget_body.setSizePolicy(sizePolicy)
+        self.widget_body.setMinimumSize(QSize(550, 485))
+        self.widget_body.setMaximumSize(QSize(550, 485))
         self.widget_body.setStyleSheet(u"#widget_body {\n"
 "	background-color: #deddda;\n"
 "	border: 1px solid #7a7a7a;\n"
@@ -287,27 +295,27 @@ class Ui_SectionAdviserEditorDialog(object):
         self.verticalLayout = QVBoxLayout(self.widget_body)
         self.verticalLayout.setSpacing(12)
         self.verticalLayout.setObjectName(u"verticalLayout")
+        self.verticalLayout.setContentsMargins(-1, 12, -1, -1)
         self.label_24 = QLabel(self.widget_body)
         self.label_24.setObjectName(u"label_24")
         font1 = QFont()
         font1.setFamilies([u"Inter SemiBold"])
         font1.setPointSize(11)
         font1.setBold(False)
+        font1.setItalic(False)
         self.label_24.setFont(font1)
-        self.label_24.setStyleSheet(u"background: transparent;")
+        self.label_24.setStyleSheet(u"background: transparent;\n"
+"font: 11pt \"Inter SemiBold\";")
 
         self.verticalLayout.addWidget(self.label_24)
 
         self.widget_1 = QWidget(self.widget_body)
         self.widget_1.setObjectName(u"widget_1")
-        self.widget_1.setStyleSheet(u"#widget_1 {\n"
-"	background-color: #d2d2d2;\n"
-"	border-radius: 12px;\n"
-"}")
+        self.widget_1.setStyleSheet(u"")
         self.verticalLayout_2 = QVBoxLayout(self.widget_1)
         self.verticalLayout_2.setSpacing(6)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
-        self.verticalLayout_2.setContentsMargins(12, 9, 12, 9)
+        self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.widget_2 = QWidget(self.widget_1)
         self.widget_2.setObjectName(u"widget_2")
         self.horizontalLayout = QHBoxLayout(self.widget_2)
