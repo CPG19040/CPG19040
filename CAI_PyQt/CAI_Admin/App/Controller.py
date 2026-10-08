@@ -133,7 +133,6 @@ class Controller:
             self.ui.navigationBar.setStyleSheet(Dark_Theme.navigationBar)
             self.ui.widget_body.setStyleSheet(Dark_Theme.widget_body)
             self.ui.widget_datetime.setStyleSheet(Dark_Theme.widget_datetime)
-            self.ui.stackedWidget.setStyleSheet(Dark_Theme.stackedWidget)
             self.ui.widget_toggle_gp.setStyleSheet(Dark_Theme.widget_toggle_gp)
 
         else: # Light mode
@@ -145,7 +144,6 @@ class Controller:
             self.ui.navigationBar.setStyleSheet(Light_Theme.navigationBar)
             self.ui.widget_body.setStyleSheet(Light_Theme.widget_body)
             self.ui.widget_datetime.setStyleSheet(Light_Theme.widget_datetime)
-            self.ui.stackedWidget.setStyleSheet(Light_Theme.stackedWidget)
             self.ui.widget_toggle_gp.setStyleSheet(Light_Theme.widget_toggle_gp)
 
     def show_home(self, user:dict):

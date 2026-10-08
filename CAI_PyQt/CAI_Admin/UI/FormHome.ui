@@ -1002,40 +1002,59 @@ QPushButton:hover {
           </size>
          </property>
          <property name="styleSheet">
-          <string notr="true">* {
-	background-color: #deddda;
+          <string notr="true">/* ==========================================================================
+   1. GLOBAL &amp; BASE STYLES
+   ========================================================================== */
+* {
+    color: #000000;
+    background-color: #deddda;
 }
 
 #widget_body {
-	border: 1px solid #7a7a7a;
-	border-left: none;
-	border-top: none;
+    border: 1px solid #7a7a7a;
+    border-left: none;
+    border-top: none;
 }
 
-QComboBox[class=&quot;combobox-main&quot;] QAbstractItemView {
+QLabel {
+    background: transparent;
+}
+
+*[class=&quot;label-faded&quot;] {
+    color: #7c7c7c;
     background-color: transparent;
-    border: 1px solid #999;
-    border-radius: 8px;
-    selection-background-color: #7eb4d7;
-    selection-color: #ffffff;
-    outline: 0; /* Removes the ugly dotted focus border */
 }
 
-QPushButton[class=&quot;button-green&quot;] {
-	border: 1px solid #0a5128;
+*[class=&quot;group-box&quot;] {
     border-radius: 15px;
-    padding: 0px 10px 0px;
+    background-color: #ffffff;
+}
+
+#grp_SectionInfo QLabel,
+#frame_student_info QLabel,
+#frame_contact_info QLabel {
+    font: 11pt &quot;Inter&quot;;
+}
+
+/* ==========================================================================
+   2. BUTTONS
+   ========================================================================== */
+/* Green Action Buttons */
+QPushButton[class=&quot;button-green&quot;] {
+    color: #ffffff;
+    font: 10pt &quot;Inter SemiBold&quot;;
+    padding: 0px 10px;
+    border: 1px solid #0a5128;
+    border-radius: 15px;
     background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
                                 stop:0 #1ebd5d, 
                                 stop:1 #107f3f);
-    color: #FFF;
-    font: 10pt &quot;Inter SemiBold&quot;;
 }
 
 QPushButton[class=&quot;button-green&quot;]:hover {
     background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
                                 stop:0 #2ecc71, 
-                                stop:1 #27AE60);
+                                stop:1 #27ae60);
 }
 
 QPushButton[class=&quot;button-green&quot;]:pressed {
@@ -1045,23 +1064,24 @@ QPushButton[class=&quot;button-green&quot;]:pressed {
 }
 
 QPushButton[class=&quot;button-green&quot;]:disabled {
-    background: #A5D6A7;
-    color: #E8F5E9;
+    color: #e8f5e9;
+    background: #a5d6a7;
     opacity: 0.6;
 }
 
+/* Normal / Default Buttons */
 *[class=&quot;button-normal&quot;] {
-	font: 10pt &quot;Inter&quot;;
-	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
+    color: #000000;
+    font: 10pt &quot;Inter&quot;;
+    border: 1px solid #9a9996;
+    border-radius: 15px;
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
                                 stop:0 #ffffff, 
                                 stop:1 #d8ecf6);
-	color: black;
-	border-radius: 15px;
-	border: 1px solid rgb(154, 153, 150);
 }
 
 *[class=&quot;button-normal&quot;]:hover {
-	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
                                 stop:0 #ffffff, 
                                 stop:1 #f2f6f8);
 }
@@ -1073,90 +1093,287 @@ QPushButton[class=&quot;button-green&quot;]:disabled {
 }
 
 *[class=&quot;button-normal&quot;]:disabled {
-	background: #f5f5f5;
-	border: 1px solid #dcdcdc;
-	color: #aeaeae;
+    color: #aeaeae;
+    border: 1px solid #dcdcdc;
+    background: #f5f5f5;
 }
 
-/* 1. THE MAIN CONTAINER */
+/* ==========================================================================
+   3. FORM CONTROLS (SpinBoxes, ComboBoxes, DateEdits, RadioButtons)
+   ========================================================================== */
+QComboBox[class=&quot;combobox-main&quot;],
+QSpinBox,
+QDoubleSpinBox,
+QDateEdit {
+    height: 30px;
+    padding: 0px 5px 0px 10px;
+    color: #333333;
+    font: 10pt &quot;Inter SemiBold&quot;;
+    background-color: #ffffff;
+    border: 1px solid #999999;
+    border-radius: 15px;
+    selection-background-color: #7eb4d7;
+}
+
+QComboBox[class=&quot;combobox-main&quot;]:hover,
+QSpinBox:hover,
+QDoubleSpinBox:hover,
+QDateEdit:hover {
+    border: 1px solid #3498db;
+}
+
+QComboBox[class=&quot;combobox-main&quot;]:focus,
+QSpinBox:focus,
+QDoubleSpinBox:focus,
+QDateEdit:focus {
+    border: 1px solid #007bff;
+}
+
+/* Dropdown Subcontrols */
+QComboBox::drop-down,
+QDoubleSpinBox::drop-down,
+QDateEdit::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 30px;
+    border-left-width: 0px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+QSpinBox::up-button,
+QDoubleSpinBox::up-button,
+QDateEdit::up-button {
+    subcontrol-origin: border;
+    subcontrol-position: top right;
+    width: 8px;
+    height: 8px;
+    padding: 6px 10px 6px 2px;
+    color: #77767b;
+    border-top-right-radius: 15px;
+}
+
+QSpinBox::down-button,
+QDoubleSpinBox::down-button,
+QDateEdit::down-button {
+    subcontrol-origin: border;
+    subcontrol-position: bottom right;
+    width: 8px;
+    height: 8px;
+    padding: 6px 10px 6px 2px;
+    color: #77767b;
+    border-bottom-right-radius: 15px;
+}
+
+/* Control Arrows */
+QComboBox::down-arrow,
+QSpinBox::down-arrow,
+QDoubleSpinBox::down-arrow,
+QDateEdit::down-arrow {
+    image: url(:/Images/Images/caret-down.png);
+    width: 8px;
+    height: 8px;
+    border: none;
+}
+
+QSpinBox::up-arrow,
+QDoubleSpinBox::up-arrow,
+QDateEdit::up-arrow {
+    image: url(:/Images/Images/caret-up.png);
+    width: 8px;
+    height: 8px;
+}
+
+/* ComboBox Item View Popup */
+QComboBox QAbstractItemView {
+    outline: 0;
+    border: 1px solid #999999;
+    background-color: #ffffff !important;
+    selection-color: #ffffff;
+    selection-background-color: #7eb4d7;
+}
+
+QComboBox QAbstractItemView::item {
+    padding-left: 10px;
+    color: #333333;
+    border-radius: 4px;
+}
+
+QComboBox[class=&quot;combobox-main&quot;] QAbstractItemView::item:hover {
+    color: #ffffff;
+    background-color: #7eb4d7;
+}
+
+/* Radio Buttons */
+QRadioButton {
+    color: #000000;
+    font: 10pt &quot;Inter Medium&quot;;
+    spacing: 8px;
+    padding: 0px 10px;
+    background: transparent;
+}
+
+QRadioButton::indicator {
+    border: 1px solid #999999;
+    border-radius: 6px;
+}
+
+QRadioButton::indicator:hover {
+    border-color: #3b82f6;
+}
+
+QRadioButton::indicator:checked {
+    border-color: #3b82f6;
+    background-color: #0000ff;
+}
+
+/* ==========================================================================
+   4. SEARCH WIDGETS
+   ========================================================================== */
+*[class=&quot;widget-search-container&quot;] {
+    background-color: #ffffff;
+    border: 1px solid #999999;
+    border-radius: 15px;
+}
+
+*[class=&quot;label-magnifying-search&quot;] {
+    background: transparent;
+    border: none;
+}
+
+*[class=&quot;textbox-search&quot;] {
+    background: transparent;
+    border: none;
+}
+
+*[class=&quot;button-clear-search&quot;] {
+    background: transparent;
+    border-radius: 10px;
+}
+
+*[class=&quot;button-clear-search&quot;]:hover {
+    background-color: #ffc0c0;
+}
+
+*[class=&quot;button-clear-search&quot;]:pressed {
+    background-color: #ffd2d2;
+}
+
+/* ==========================================================================
+   5. CONTAINERS &amp; PANELS
+   ========================================================================== */
+*[class=&quot;gradient-header&quot;] {
+    border: 1px solid #62a0ea;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
+                                stop:0 #ffffff, 
+                                stop:1 #c6e9ff);
+}
+
+*[class=&quot;gradient-body-1&quot;],
+*[class=&quot;gradient-body-2&quot;] {
+    background-color: #ffffff;
+    border: 1px solid #999999;
+    border-top: none;
+}
+
+*[class=&quot;gradient-body-2&quot;] QDateEdit:disabled {
+    background-color: #c0bfbc;
+}
+
+/* ==========================================================================
+   6. TABLES &amp; HEADERS
+   ========================================================================== */
+QTableView {
+    outline: none;
+    border: 1px solid #a1a1a1;
+    gridline-color: #f0f0f0;
+    background-color: #ffffff;
+    selection-color: #000000;
+    selection-background-color: rgba(38, 162, 105, 0.2);
+}
+
+/* Hide Vertical Headers (Row Numbers) */
+QHeaderView:vertical,
+QHeaderView::section:vertical {
+    width: 0px;
+    border: none;
+}
+
+/* Horizontal Header */
+QHeaderView::section:horizontal {
+    padding: 6px;
+    color: #000000;
+    font-weight: bold;
+    background-color: #f6f5f4;
+}
+
+/* ==========================================================================
+   7. SCROLL AREA &amp; SCROLLBARS
+   ========================================================================== */
 QScrollArea { 
     border: none;
     border-radius: 20px;
-	background-color: #deddda;
+    background-color: #deddda;
 }
 
-/* 2. THE VIEWPORT
-QScrollArea QWidget #qt_scrollarea_viewport {
-    background: transparent;
-    border-radius: 20px;
-}
-
-/* 3. VERTICAL SCROLLBAR */
 QScrollBar:vertical {
-    border: none;
-    background: #ffffff;
     width: 10px;
     margin: 0px;
+    border: none;
     border-radius: 5px;
+    background: #ffffff;
 }
 
 QScrollBar::handle:vertical {
-    background: #7a7a7a;
     min-height: 20px;
     border-radius: 5px;
+    background: #7a7a7a;
 }
 
 QScrollBar::handle:vertical:hover {
     background: #574939;
 }
 
-/* 4. HORIZONTAL SCROLLBAR */
 QScrollBar:horizontal {
-    border: none;
-    background: #ffffff;
     height: 10px;
     margin: 0px;
+    border: none;
     border-radius: 5px;
+    background: #ffffff;
 }
 
 QScrollBar::handle:horizontal {
-    background: #7a7a7a;
     min-width: 20px;
     border-radius: 5px;
+    background: #7a7a7a;
 }
 
 QScrollBar::handle:horizontal:hover {
     background: #574939;
 }
 
-/* 5. REMOVE BUTTONS &amp; TRACK BACKGROUNDS */
-/* This handles both horizontal and vertical arrows/tracks */
-QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical,
-QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {
-    border: none;
-    background: none;
+QScrollBar::add-line:vertical, 
+QScrollBar::sub-line:vertical,
+QScrollBar::add-line:horizontal, 
+QScrollBar::sub-line:horizontal {
     width: 0px;
     height: 0px;
-}
-
-QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical,
-QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
+    border: none;
     background: none;
 }
 
-/* 6. THE CORNER WIDGET 
-   (The small square where both bars meet) */
+QScrollBar::add-page:vertical, 
+QScrollBar::sub-page:vertical,
+QScrollBar::add-page:horizontal, 
+QScrollBar::sub-page:horizontal {
+    background: none;
+}
+
 QScrollArea QWidget #qt_scrollarea_corner {
     background: transparent;
     border: none;
-}
-
-QDateEdit {
-	background-color: #fff;
-}
-
-QLabel {
-	background: transparent;
 }</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_37">
@@ -1193,277 +1410,7 @@ QLabel {
              </font>
             </property>
             <property name="styleSheet">
-             <string notr="true">* {
-    color: black;
-}
-
-* [class=&quot;group-box&quot;] {
-	border-radius: 15px;
-	background-color: rgb(255, 255, 255);
-}
-
-*[class=&quot;label-faded&quot;] {
-    color: rgb(124, 124, 124);
-    background-color: transparent;
-}
-
-#grp_SectionInfo QLabel,
-#frame_student_info QLabel,
-#frame_contact_info QLabel {
-    font: 11pt &quot;Inter&quot;;
-}
-
-*[class=&quot;widget-search-container&quot;] {
-	background-color: #FFF;
-	border: 1px solid #999;
-	border-radius: 15px;
-}
-
-*[class=&quot;label-magnifying-search&quot;] {
-	background: transparent;
-	border: none;
-}
-
-*[class=&quot;textbox-search&quot;] {
-	border: none;
-	background: transparent;
-}
-
-*[class=&quot;button-clear-search&quot;] {
-    background: transparent;
-    border-radius: 10px;
-}
-
-*[class=&quot;button-clear-search&quot;]:hover {
-    background-color: #ffc0c0;
-}
-
-*[class=&quot;button-clear-search&quot;]:pressed {
-    background-color: #ffd2d2;
-}
-
-QComboBox[class=&quot;combobox-main&quot;],
-QSpinBox,
-QDoubleSpinBox,
-QDateEdit {
-    height: 30px;
-    padding: 0px 5px 0px 10px;
-    font: 10pt &quot;Inter SemiBold&quot;;
-    color: #333333;
-    background-color: #ffffff;
-    border: 1px solid #999999;
-    border-radius: 15px;
-    selection-background-color: #7eb4d7;
-}
-
-QComboBox[class=&quot;combobox-main&quot;]:hover,
-QSpinBox:hover,
-QDoubleSpinBox:hover,
-QDateEdit:hover {
-    border: 1px solid #3498db;
-}
-
-QComboBox[class=&quot;combobox-main&quot;]:focus,
-QSpinBox:focus,
-QDoubleSpinBox:focus,
-QDateEdit:focus {
-    border: 1px solid #007BFF;
-}
-
-/* Subcontrol Dropdown Buttons */
-QComboBox::drop-down,
-QDoubleSpinBox::drop-down,
-QDateEdit::drop-down {
-    subcontrol-origin: padding;
-    subcontrol-position: top right;
-    width: 30px;
-    border-left-width: 0px;
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
-}
-
-QSpinBox::up-button,
-QDoubleSpinBox::up-button,
-QDateEdit::up-button {
-    subcontrol-origin: border;
-    subcontrol-position: top right;
-    width: 8px;
-    height: 8px;
-    padding: 6px 10px 6px 2px;
-    color: rgb(119, 118, 123);
-    border-top-right-radius: 15px;
-}
-
-QSpinBox::down-button,
-QDoubleSpinBox::down-button,
-QDateEdit::down-button {
-    subcontrol-origin: border;
-    subcontrol-position: bottom right;
-    width: 8px;
-    height: 8px;
-    padding: 6px 10px 6px 2px;
-    color: rgb(119, 118, 123);
-    border-bottom-right-radius: 15px;
-}
-
-/* Subcontrol Arrows */
-QComboBox::down-arrow,
-QSpinBox::down-arrow,
-QDoubleSpinBox::down-arrow,
-QDateEdit::down-arrow {
-    image: url(:/Images/Images/caret-down.png);
-    width: 8px;
-    height: 8px;
-    border: none;
-}
-
-QSpinBox::up-arrow,
-QDoubleSpinBox::up-arrow,
-QDateEdit::up-arrow {
-    image: url(:/Images/Images/caret-up.png);
-    width: 8px;
-    height: 8px;
-}
-
-/* ComboBox Dropdown Menu Item View */
-QComboBox QAbstractItemView {
-    background-color: #ffffff !important;
-    border: 1px solid #999999;
-    selection-background-color: #7eb4d7;
-    selection-color: #ffffff;
-    outline: 0;
-}
-
-QComboBox QAbstractItemView::item {
-    padding-left: 10px;
-    color: #333333;
-    border-radius: 4px;
-}
-
-QComboBox[class=&quot;combobox-main&quot;] QAbstractItemView::item:hover {
-    background-color: #7eb4d7;
-    color: #ffffff;
-}
-
-QTableView {
-    background-color: #ffffff;
-    border: 1px solid #ff7d87;
-    gridline-color: #f0f0f0;
-    selection-background-color: rgba(255, 125, 135, 0.2);
-    selection-color: #000000;
-    outline: none;
-}
-
-/* Hide Vertical Headers (Row Numbers) */
-QHeaderView:vertical,
-QHeaderView::section:vertical {
-    width: 0px;
-    border: none;
-}
-
-/* Horizontal Header */
-QHeaderView::section:horizontal {
-    background-color: #ff7d87;
-    color: #ffffff;
-    padding: 6px;
-    font-weight: bold;
-    font-size: 11pt;
-    border: none;
-}
-
-/* Top-Left Header Corner */
-QTableCornerButton::section {
-    background-color: #ff7d87;
-    border: none;
-}
-
-QScrollBar:vertical {
-    background: #fdfdfd;
-    width: 10px;
-    border: none;
-}
-
-QScrollBar::handle:vertical {
-    background: #ff7d87;
-    min-height: 30px;
-    border-radius: 3px;
-    margin: 2px;
-}
-
-QScrollBar::handle:vertical:hover {
-    background: #e66a74;
-}
-
-QScrollBar:horizontal {
-    background: #fdfdfd;
-    height: 10px;
-    border: none;
-}
-
-QScrollBar::handle:horizontal {
-    background: #ff7d87;
-    min-width: 30px;
-    border-radius: 3px;
-    margin: 2px;
-}
-
-QScrollBar::handle:horizontal:hover {
-    background: #e66a74;
-}
-
-/* Scrollbar Buttons &amp; Page Track */
-QScrollBar::add-line,
-QScrollBar::sub-line {
-    width: 0px;
-    height: 0px;
-    background: none;
-    border: none;
-}
-
-QScrollBar::add-page,
-QScrollBar::sub-page {
-    background: none;
-}
-
-* [class=&quot;gradient-header&quot;] {
-    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #ffffff, stop:1 #c6e9ff);
-    border: 1px solid rgb(98, 160, 234);
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-}
-
-* [class=&quot;gradient-body-1&quot;],
-* [class=&quot;gradient-body-2&quot;] {
-    background-color: #fff;
-    border: 1px solid #999;
-    border-top: none;
-}
-
-* [class=&quot;gradient-body-2&quot;] QDateEdit:disabled {
-    background-color: rgb(192, 191, 188);
-}
-
-QRadioButton {
-    color: black;
-    spacing: 8px;
-    padding: 0px 10px;
-    background: transparent;
-    font: 10pt &quot;Inter Medium&quot;;
-}
-
-QRadioButton::indicator {
-    border: 1px solid #999;
-    border-radius: 6px;
-}
-
-QRadioButton::indicator:hover {
-    border-color: #3b82f6;
-}
-
-QRadioButton::indicator:checked {
-    border-color: #3b82f6;
-    background-color: blue;
-}</string>
+             <string notr="true"/>
             </property>
             <property name="frameShape">
              <enum>QFrame::NoFrame</enum>
@@ -2660,7 +2607,7 @@ QLabel {
                       </property>
                       <property name="maximumSize">
                        <size>
-                        <width>400</width>
+                        <width>250</width>
                         <height>30</height>
                        </size>
                       </property>
@@ -4239,72 +4186,16 @@ QLabel {
               <item>
                <widget class="QTableView" name="table_lesson">
                 <property name="styleSheet">
-                 <string notr="true">QTableView {
-    border: 1px solid rgb(38, 162, 105);
-    gridline-color: #f0f0f0;
-    background-color: white;
-    selection-background-color: rgba(38, 162, 105, 0.2);
-    selection-color: black;
-    outline: none;
-}
-
-/* Remove the row numbers (Vertical Header) */
-QHeaderView:vertical {
-    width: 0px;
-}
-
-QHeaderView::section:vertical {
-    width: 0px;
-    border: none;
-}
-
-/* Style the top horizontal header */
-QHeaderView::section:horizontal {
-    background-color: rgb(38, 162, 105);  
-    color: white;
-    padding: 6px;
-    font-weight: bold;
-    font-size: 11pt;
-    border: none;
-}
-
-/* Custom Scrollbars */
-QScrollBar:vertical {
-    border: none;
-    background: #f8f8f8;
-    width: 10px;
-}
-
-QScrollBar::handle:vertical {
-    background: rgb(38, 162, 105);
-    min-height: 30px;
-    border-radius: 3px; 
-    margin: 2px;
-}
-
-QScrollBar:horizontal {
-    border: none;
-    background: #f8f8f8;
-    height: 10px;
-}
-
-QScrollBar::handle:horizontal {
-    background: rgb(38, 162, 105);
-    min-width: 30px;
-    border-radius: 3px;
-    margin: 2px;
-}
-
-/* Remove scrollbar arrows */
-QScrollBar::add-line, QScrollBar::sub-line {
-    width: 0px; height: 0px;
-}</string>
+                 <string notr="true"/>
                 </property>
                 <property name="selectionBehavior">
                  <enum>QAbstractItemView::SelectRows</enum>
                 </property>
                 <property name="sortingEnabled">
                  <bool>true</bool>
+                </property>
+                <property name="class" stdset="0">
+                 <string>normal-table</string>
                 </property>
                 <attribute name="verticalHeaderVisible">
                  <bool>false</bool>
@@ -5167,7 +5058,7 @@ QPushButton:hover {
                   </property>
                   <property name="maximumSize">
                    <size>
-                    <width>16777215</width>
+                    <width>250</width>
                     <height>30</height>
                    </size>
                   </property>
@@ -5186,7 +5077,7 @@ QPushButton:hover {
                  <widget class="QPushButton" name="btnSectionAdd">
                   <property name="minimumSize">
                    <size>
-                    <width>30</width>
+                    <width>124</width>
                     <height>30</height>
                    </size>
                   </property>
@@ -5217,7 +5108,7 @@ QPushButton:hover {
                   </property>
                   <property name="minimumSize">
                    <size>
-                    <width>30</width>
+                    <width>135</width>
                     <height>30</height>
                    </size>
                   </property>
@@ -5337,72 +5228,16 @@ QPushButton:hover {
               <item>
                <widget class="QTableView" name="table_section">
                 <property name="styleSheet">
-                 <string notr="true">QTableView {
-    border: 1px solid rgb(38, 162, 105);
-    gridline-color: #f0f0f0;
-    background-color: white;
-    selection-background-color: rgba(38, 162, 105, 0.2);
-    selection-color: black;
-    outline: none;
-}
-
-/* Remove the row numbers (Vertical Header) */
-QHeaderView:vertical {
-    width: 0px;
-}
-
-QHeaderView::section:vertical {
-    width: 0px;
-    border: none;
-}
-
-/* Style the top horizontal header */
-QHeaderView::section:horizontal {
-    background-color: rgb(38, 162, 105);  
-    color: white;
-    padding: 6px;
-    font-weight: bold;
-    font-size: 11pt;
-    border: none;
-}
-
-/* Custom Scrollbars */
-QScrollBar:vertical {
-    border: none;
-    background: #f8f8f8;
-    width: 10px;
-}
-
-QScrollBar::handle:vertical {
-    background: rgb(38, 162, 105);
-    min-height: 30px;
-    border-radius: 3px; 
-    margin: 2px;
-}
-
-QScrollBar:horizontal {
-    border: none;
-    background: #f8f8f8;
-    height: 10px;
-}
-
-QScrollBar::handle:horizontal {
-    background: rgb(38, 162, 105);
-    min-width: 30px;
-    border-radius: 3px;
-    margin: 2px;
-}
-
-/* Remove scrollbar arrows */
-QScrollBar::add-line, QScrollBar::sub-line {
-    width: 0px; height: 0px;
-}</string>
+                 <string notr="true"/>
                 </property>
                 <property name="selectionBehavior">
                  <enum>QAbstractItemView::SelectRows</enum>
                 </property>
                 <property name="sortingEnabled">
                  <bool>true</bool>
+                </property>
+                <property name="class" stdset="0">
+                 <string>normal-table</string>
                 </property>
                 <attribute name="verticalHeaderVisible">
                  <bool>false</bool>
@@ -5441,82 +5276,7 @@ QScrollBar::add-line, QScrollBar::sub-line {
                 </property>
                 <widget class="QWidget" name="tab_1">
                  <property name="styleSheet">
-                  <string notr="true">QTableView {
-    border: 1px solid rgb(161, 161, 161);
-    gridline-color: #f0f0f0;
-    background-color: white;
-    selection-background-color: rgba(38, 162, 105, 0.2);
-    selection-color: black;
-    outline: none;
-}
-
-/* Remove the row numbers (Vertical Header) */
-QHeaderView:vertical {
-    width: 0px;
-}
-
-QHeaderView::section:vertical {
-    width: 0px;
-    border: none;
-}
-
-/* Style the top horizontal header */
-QHeaderView::section:horizontal {
-    background-color: rgb(246, 245, 244);  
-    color: black;
-    padding: 6px;
-    font-weight: bold;
-}
-
-/* Custom Scrollbars */
-QScrollBar:vertical {
-    border: none;
-    background: #f8f8f8;
-    width: 10px;
-}
-
-QScrollBar::handle:vertical {
-    background: rgb(38, 162, 105);
-    min-height: 30px;
-    border-radius: 3px; 
-    margin: 2px;
-}
-
-QScrollBar:horizontal {
-    border: none;
-    background: #f8f8f8;
-    height: 10px;
-}
-
-QScrollBar::handle:horizontal {
-    background: rgb(38, 162, 105);
-    min-width: 30px;
-    border-radius: 3px;
-    margin: 2px;
-}
-
-/* Remove scrollbar arrows */
-QScrollBar::add-line, QScrollBar::sub-line {
-    width: 0px; height: 0px;
-}
-
-*[class=&quot;button-normal&quot;] {
-	font: 10pt &quot;Inter&quot;;
-	background-color: #e7e7e7;
-	color: black;
-	border-radius: 15px;
-	border: 1px solid rgb(154, 153, 150);
-}
-
-*[class=&quot;button-normal&quot;]:hover {
-	background-color: white;
-}
-
-*[class=&quot;button-normal&quot;]:disabled {
-    background-color: #bdc3c7;
-    color: #7f8c8d;
-    border: 1px solid #95a5a6;
-}</string>
+                  <string notr="true"/>
                  </property>
                  <attribute name="title">
                   <string>Quiz Tracker</string>
@@ -5856,7 +5616,7 @@ QScrollBar::add-line, QScrollBar::sub-line {
                   <item>
                    <widget class="QTableView" name="table_quizcompletionstat">
                     <property name="styleSheet">
-                     <string notr="true">background-color: rgb(246, 245, 244);</string>
+                     <string notr="true"/>
                     </property>
                     <property name="selectionBehavior">
                      <enum>QAbstractItemView::SelectRows</enum>
@@ -5864,70 +5624,16 @@ QScrollBar::add-line, QScrollBar::sub-line {
                     <property name="sortingEnabled">
                      <bool>true</bool>
                     </property>
+                    <property name="class" stdset="0">
+                     <string>normal-table</string>
+                    </property>
                    </widget>
                   </item>
                  </layout>
                 </widget>
                 <widget class="QWidget" name="tab_2">
                  <property name="styleSheet">
-                  <string notr="true">QTableView {
-    border: 1px solid rgb(161, 161, 161);
-    gridline-color: #f0f0f0;
-    background-color: white;
-    selection-background-color: rgba(38, 162, 105, 0.2);
-    selection-color: black;
-    outline: none;
-}
-
-/* Remove the row numbers (Vertical Header) */
-QHeaderView:vertical {
-    width: 0px;
-}
-
-QHeaderView::section:vertical {
-    width: 0px;
-    border: none;
-}
-
-/* Style the top horizontal header */
-QHeaderView::section:horizontal {
-    background-color: rgb(246, 245, 244);  
-    color: black;
-    padding: 6px;
-    font-weight: bold;
-}
-
-/* Custom Scrollbars */
-QScrollBar:vertical {
-    border: none;
-    background: #f8f8f8;
-    width: 10px;
-}
-
-QScrollBar::handle:vertical {
-    background: rgb(38, 162, 105);
-    min-height: 30px;
-    border-radius: 3px; 
-    margin: 2px;
-}
-
-QScrollBar:horizontal {
-    border: none;
-    background: #f8f8f8;
-    height: 10px;
-}
-
-QScrollBar::handle:horizontal {
-    background: rgb(38, 162, 105);
-    min-width: 30px;
-    border-radius: 3px;
-    margin: 2px;
-}
-
-/* Remove scrollbar arrows */
-QScrollBar::add-line, QScrollBar::sub-line {
-    width: 0px; height: 0px;
-}</string>
+                  <string notr="true"/>
                  </property>
                  <attribute name="title">
                   <string>Raw scores</string>
@@ -6220,6 +5926,9 @@ QScrollBar::add-line, QScrollBar::sub-line {
                        </property>
                        <property name="sortingEnabled">
                         <bool>true</bool>
+                       </property>
+                       <property name="class" stdset="0">
+                        <string>normal-table</string>
                        </property>
                        <attribute name="verticalHeaderVisible">
                         <bool>false</bool>
@@ -6567,6 +6276,9 @@ background-color: rgb(98, 160, 234);</string>
                           </property>
                           <property name="sortingEnabled">
                            <bool>true</bool>
+                          </property>
+                          <property name="class" stdset="0">
+                           <string>normal-table</string>
                           </property>
                           <attribute name="verticalHeaderVisible">
                            <bool>false</bool>
@@ -6926,66 +6638,7 @@ background-color: rgb(98, 160, 234);</string>
               <item>
                <widget class="QTableView" name="table_users">
                 <property name="styleSheet">
-                 <string notr="true">QTableView {
-    border: 1px solid rgb(38, 162, 105);
-    gridline-color: #f0f0f0;
-    background-color: white;
-    selection-background-color: rgba(38, 162, 105, 0.2);
-    selection-color: black;
-    outline: none;
-}
-
-/* Remove the row numbers (Vertical Header) */
-QHeaderView:vertical {
-    width: 0px;
-}
-
-QHeaderView::section:vertical {
-    width: 0px;
-    border: none;
-}
-
-/* Style the top horizontal header */
-QHeaderView::section:horizontal {
-    background-color: rgb(38, 162, 105);  
-    color: white;
-    padding: 6px;
-    font-weight: bold;
-    font-size: 11pt;
-    border: none;
-}
-
-/* Custom Scrollbars */
-QScrollBar:vertical {
-    border: none;
-    background: #f8f8f8;
-    width: 10px;
-}
-
-QScrollBar::handle:vertical {
-    background: rgb(38, 162, 105);
-    min-height: 30px;
-    border-radius: 5px; 
-    margin: 2px;
-}
-
-QScrollBar:horizontal {
-    border: none;
-    background: #f8f8f8;
-    height: 10px;
-}
-
-QScrollBar::handle:horizontal {
-    background: rgb(38, 162, 105);
-    min-width: 30px;
-    border-radius: 5px;
-    margin: 2px;
-}
-
-/* Remove scrollbar arrows */
-QScrollBar::add-line, QScrollBar::sub-line {
-    width: 0px; height: 0px;
-}</string>
+                 <string notr="true"/>
                 </property>
                 <property name="selectionBehavior">
                  <enum>QAbstractItemView::SelectRows</enum>
@@ -7043,7 +6696,7 @@ QScrollBar::add-line, QScrollBar::sub-line {
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>461</width>
+                       <width>957</width>
                        <height>932</height>
                       </rect>
                      </property>

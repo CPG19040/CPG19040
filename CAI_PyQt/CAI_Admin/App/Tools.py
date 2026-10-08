@@ -425,7 +425,6 @@ class CardStudent(QFrame):
 
         self.setProperty("selected", False) # Initialize property
         self.setFrameShape(QFrame.Shape.StyledPanel)
-        self.setFixedSize(16777215, 100)
         self.setCursor(Qt.CursorShape.PointingHandCursor)
 
         self.app_settings = QSettings("CAI_System", "CAI_Admin_AppSettings")
