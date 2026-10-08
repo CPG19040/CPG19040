@@ -8,6 +8,7 @@ from shiboken6 import isValid
 
 # Core App Logic/Main Windows
 from App.FormHome import Ui_Home
+from App.Style import Light_Theme, Dark_Theme
 from App.Login import Login
 from App.Tools import CardStudent, Utility, CustomMessageBox, CrossPlatformPrinter, CardRanking
 from App.CRUDTools import DatabaseTools
@@ -26,9 +27,13 @@ class Controller:
     GRADING_PERIOD = 0
 
     def __init__(self):
-        self.settings = QSettings("CAI_System", "CAI_Admin_App")
-        self.util = Utility()
-        self.db_tools = DatabaseTools()
+        self.user_settings = QSettings("CAI_System", "CAI_Admin_UserInfo")
+        self.app_settings  = QSettings("CAI_System", "CAI_Admin_AppSettings")
+        self.util          = Utility()
+        self.db_tools      = DatabaseTools()
+
+        # Dark Mode Theme Preference (Default: False)
+        self.is_dark_mode = self.app_settings.value("dark_mode", False, type=bool)
 
         self.login_win = Login()
         self.login_win.txtUsername.returnPressed.connect(self.login_win.btnLogin.click)
@@ -42,15 +47,15 @@ class Controller:
         self.check_session()
 
     def check_session(self):
-        sid = self.settings.value("school_id")
+        sid = self.user_settings.value("school_id")
         if sid:
             user = {
                 "school_id": sid,
-                "username": self.settings.value("username"),
-                "firstname": self.settings.value("firstname"),
-                "lastname": self.settings.value("lastname"),
-                "position_id": self.settings.value("position_id"),
-                "position_name": self.settings.value("position_name")
+                "username": self.user_settings.value("username"),
+                "firstname": self.user_settings.value("firstname"),
+                "lastname": self.user_settings.value("lastname"),
+                "position_id": self.user_settings.value("position_id"),
+                "position_name": self.user_settings.value("position_name")
             }
             self.show_home(user)
         else:
@@ -58,22 +63,107 @@ class Controller:
 
     def on_login_success(self, user):
         for key, val in user.items():
-            self.settings.setValue(key, val)
+            self.user_settings.setValue(key, val)
 
-        self.settings.sync()
+        self.user_settings.sync()
         self.show_home(user)
+
+    def toggle_theme(self, value):
+        """Toggles dark mode on/off and persists the preference."""
+        if value == 1:
+            self.is_dark_mode = True
+            self.ui.label_darkmode.setText("ON")
+            self.ui.btnDarkModeToggle.setStyleSheet("""
+                QScrollBar:horizontal {
+                    background: #555;
+                    height: 24px;
+                    border-radius: 12px;
+                    margin: 0px;
+                }
+
+                QScrollBar::handle:horizontal {
+                    background: #BB86FC;
+                    min-width: 20px;
+                    border-radius: 10px;
+                    margin: 2px;
+                }
+
+                QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {
+                    width: 0px;
+                    background: none;
+                }
+            """)
+        else:
+            self.is_dark_mode = False
+            self.ui.label_darkmode.setText("OFF")
+            self.ui.btnDarkModeToggle.setStyleSheet("""
+                QScrollBar:horizontal {
+                    background: #ccc;
+                    height: 24px;
+                    border-radius: 12px;
+                    margin: 0px;
+                }
+
+                QScrollBar::handle:horizontal {
+                    background: #ffffff;
+                    min-width: 20px;
+                    border-radius: 10px;
+                    margin: 2px;
+                }
+
+                QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {
+                    width: 0px;
+                    background: none;
+                }
+            """)
+
+        
+        self.app_settings.setValue("dark_mode", self.is_dark_mode)
+        self.app_settings.sync()
+        self.apply_theme()
+
+    def apply_theme(self):
+
+        if self.is_dark_mode:
+            self.home_win.setStyleSheet(Dark_Theme.home_win)
+            self.ui.centralwidget.setStyleSheet(Dark_Theme.centralWidget)
+            self.ui.frame_header.setStyleSheet(Dark_Theme.frame_header)
+            self.ui.widget_header_welcome.setStyleSheet(Dark_Theme.widget_header_welcome)
+            self.ui.frame_ranking_title.setStyleSheet(Dark_Theme.frame_ranking_title)
+            self.ui.navigationBar.setStyleSheet(Dark_Theme.navigationBar)
+            self.ui.widget_body.setStyleSheet(Dark_Theme.widget_body)
+            self.ui.widget_datetime.setStyleSheet(Dark_Theme.widget_datetime)
+            self.ui.stackedWidget.setStyleSheet(Dark_Theme.stackedWidget)
+            self.ui.widget_toggle_gp.setStyleSheet(Dark_Theme.widget_toggle_gp)
+
+        else: # Light mode
+            self.home_win.setStyleSheet(Light_Theme.home_win)
+            self.ui.centralwidget.setStyleSheet(Light_Theme.centralWidget)
+            self.ui.frame_header.setStyleSheet(Light_Theme.frame_header)
+            self.ui.widget_header_welcome.setStyleSheet(Light_Theme.widget_header_welcome)
+            self.ui.frame_ranking_title.setStyleSheet(Light_Theme.frame_ranking_title)
+            self.ui.navigationBar.setStyleSheet(Light_Theme.navigationBar)
+            self.ui.widget_body.setStyleSheet(Light_Theme.widget_body)
+            self.ui.widget_datetime.setStyleSheet(Light_Theme.widget_datetime)
+            self.ui.stackedWidget.setStyleSheet(Light_Theme.stackedWidget)
+            self.ui.widget_toggle_gp.setStyleSheet(Light_Theme.widget_toggle_gp)
 
     def show_home(self, user:dict):
         self.home_win = HomeWindow()
         self.ui = Ui_Home()
         self.ui.setupUi(self.home_win)
         self.home_win.header_widget = self.ui.frame_header
+
+        # Apply stored theme preference
+        self.ui.btnDarkModeToggle.setValue(1 if self.is_dark_mode else 0)
+        self.toggle_theme(self.is_dark_mode)
+        self.apply_theme()
+        
         # self.home_win.showMaximized()
         self.ui.btnMinimize.clicked.connect(self.home_win.showMinimized)
         self.ui.btnMaximize.clicked.connect(lambda: self.home_win.showMaximized() if not self.home_win.isMaximized() else self.home_win.showNormal())
         self.ui.btnClose.clicked.connect(self.home_win.close)
 
-        # SETUP UI
         # Timer for Clock
         self.timer = QTimer()
         self.timer.timeout.connect(self.update_clock)
@@ -207,6 +297,7 @@ class Controller:
         self.ui.btnBrowseLessonsCSV.clicked.connect(self.browse_lessons_csv)
         self.ui.btnImportAllLessons.clicked.connect(self.import_lessons)
         self.ui.btnSaveSettings_quiz.clicked.connect(self.update_passing_score)
+        self.ui.btnDarkModeToggle.valueChanged.connect(self.toggle_theme)
 
         #=============================================================
         #  Application-Level Privileges (Role-Based Access Control)
@@ -418,8 +509,8 @@ class Controller:
         result = CustomMessageBox.question(self.home_win, "Confirm Logout", confirm_msg)
 
         if result == CustomMessageBox.Yes:
-            self.settings.clear()
-            self.settings.sync()
+            self.user_settings.clear()
+            self.user_settings.sync()
 
             # Use [:] to create a snapshot of the list to avoid iteration errors
             for widget in QApplication.topLevelWidgets()[:]:

@@ -4,7 +4,7 @@ from pathlib import Path
 
 from PySide6.QtWidgets import QVBoxLayout, QHBoxLayout, QLabel, QFrame, QFileDialog, QWidget, QMainWindow, QDialog, QComboBox
 from PySide6.QtGui import QPixmap, QPainter, QColor, QPen, QPainterPath, QFont
-from PySide6.QtCore import QIODevice, Qt, Signal, QDate, QUrl, QRectF, QPoint, QPropertyAnimation, QEasingCurve, QFile
+from PySide6.QtCore import QIODevice, QSettings, Qt, Signal, QDate, QUrl, QRectF, QPoint, QPropertyAnimation, QEasingCurve, QFile
 from PySide6.QtWebEngineWidgets import QWebEngineView
 
 from App.CRUDTools import DatabaseTools
@@ -428,32 +428,72 @@ class CardStudent(QFrame):
         self.setFixedSize(16777215, 100)
         self.setCursor(Qt.CursorShape.PointingHandCursor)
 
-        bgColor     = "#E1F5FE"
-        borderColor = "#3498DB"
+        self.app_settings = QSettings("CAI_System", "CAI_Admin_AppSettings")
+        self.is_dark_mode = self.app_settings.value("dark_mode", False, type=bool)
 
-        if gender.upper() == "FEMALE":
-            bgColor     = "#FFE5F0"
-            borderColor = "#E55B90"
-            
-        self.setStyleSheet(f"""
-            CardStudent {{
-                background-color: #FFFFFF;
-                border-radius: 10px;
-                border: 1px solid #ddd;
-            }}
-            CardStudent:hover {{
-                border: 1px solid {borderColor};
-                background-color: {bgColor};
-            }}
-            /* This style applies when the custom property is true */
-            CardStudent[selected="true"] {{
-                border: 2px solid {borderColor};
-                background-color: {bgColor};
-            }}
-            QLabel {{
-                color: #333;
-            }}
-        """)
+        name_css    = "font-weight: bold; font-size: 16px; background-color: transparent;"
+        _id_css     = "color: #777; font-size: 13px; background-color: transparent;"
+        section_css = "color: #777; font-size: 13px; background-color: transparent;"
+
+        if self.is_dark_mode:
+            bgColor     = "rgba(52, 152, 219, 0.2)"
+            borderColor = "#3498DB"
+
+            if gender.upper() == "FEMALE":
+                bgColor     = "rgba(229, 91, 144, 0.2)"
+                borderColor = "#E55B90"
+
+            self.setStyleSheet(f"""
+                CardStudent {{
+                    background-color: #2d2d2d;
+                    border-radius: 10px;
+                    border: 1px solid #4a4a4a;
+                }}
+                CardStudent:hover {{
+                    border: 1px solid {borderColor};
+                    background-color: {bgColor};
+                }}
+                /* This style applies when the custom property is true */
+                CardStudent[selected="true"] {{
+                    border: 2px solid {borderColor};
+                    background-color: {bgColor};
+                }}
+                QLabel {{
+                    color: #ffffff;
+                }}
+            """)
+
+            name_css    = "font-weight: bold; font-size: 16px; color: #ffffff; background-color: transparent;"
+            _id_css     = "color: #a0a0a0; font-size: 13px; background-color: transparent;"
+            section_css = "color: #a0a0a0; font-size: 13px; background-color: transparent;"    
+
+        else:
+            bgColor     = "#E1F5FE"
+            borderColor = "#3498DB"
+    
+            if gender.upper() == "FEMALE":
+                bgColor     = "#FFE5F0"
+                borderColor = "#E55B90"
+
+            self.setStyleSheet(f"""
+                CardStudent {{
+                    background-color: #FFFFFF;
+                    border-radius: 10px;
+                    border: 1px solid #ddd;
+                }}
+                CardStudent:hover {{
+                    border: 1px solid {borderColor};
+                    background-color: {bgColor};
+                }}
+                /* This style applies when the custom property is true */
+                CardStudent[selected="true"] {{
+                    border: 2px solid {borderColor};
+                    background-color: {bgColor};
+                }}
+                QLabel {{
+                    color: #333;
+                }}
+            """)
 
         self.util = Utility()
 
@@ -473,13 +513,13 @@ class CardStudent(QFrame):
         # Information
         info_layout = QVBoxLayout()
         self.name_label = QLabel(name)
-        self.name_label.setStyleSheet("font-weight: bold; font-size: 16px; background-color: transparent;")
+        self.name_label.setStyleSheet(name_css)
 
         self.label_studentid = QLabel(stud_id)
-        self.label_studentid.setStyleSheet("color: #777; font-size: 13px; background-color: transparent;")
+        self.label_studentid.setStyleSheet(_id_css)
 
         self.label_section = QLabel(sectionName)
-        self.label_section.setStyleSheet("color: #777; font-size: 13px; background-color: transparent;")
+        self.label_section.setStyleSheet(section_css)
 
         info_layout.addWidget(self.name_label)
         info_layout.addWidget(self.label_studentid)

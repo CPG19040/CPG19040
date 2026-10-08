@@ -36,18 +36,18 @@
     <normaloff>:/Images/Images/favicon.ico</normaloff>:/Images/Images/favicon.ico</iconset>
   </property>
   <property name="styleSheet">
-   <string notr="true">QMainWindow, #centralwidget {
+   <string notr="true">* {
+	color: black;
+	font: 10pt &quot;Inter&quot;;
+}
+
+QMainWindow, #centralwidget {
 	background: transparent;
 }</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <property name="styleSheet">
-    <string notr="true">* {
-	color: black;
-	font: 10pt &quot;Inter&quot;;
-}
-
-#contentWindow {
+    <string notr="true">#contentWindow {
 	background-color: transparent;
 }
 
@@ -757,6 +757,43 @@ QPushButton:hover {
 	border: 1px solid #7a7a7a;
 	border-left: none;
 	border-bottom: none;
+}
+
+#label_windowTitle {
+	background: transparent;
+	color: rgb(0, 0, 0);
+	font: 10pt &quot;Inter SemiBold&quot;;
+}
+
+#widget_window_buttons {
+	background: transparent;
+}
+
+#btnMinimize {
+	border-radius: 12px;
+	background-color: transparent;
+}
+
+#btnMinimize:hover {
+	background-color: rgb(248, 228, 92);
+}
+
+#btnMaximize {
+	border-radius: 12px;
+	background-color: transparent;
+}
+
+#btnMaximize:hover {
+	background-color: #3bca5c;
+}
+
+#btnClose {
+	border-radius: 12px;
+	background-color: transparent;
+}
+
+#btnClose:hover {
+	background-color: rgb(246, 97, 81);
 }</string>
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout_42">
@@ -779,13 +816,13 @@ QPushButton:hover {
            <widget class="QWidget" name="widget_window_icon" native="true">
             <property name="minimumSize">
              <size>
-              <width>90</width>
+              <width>94</width>
               <height>35</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
-              <width>90</width>
+              <width>94</width>
               <height>35</height>
              </size>
             </property>
@@ -810,6 +847,12 @@ QPushButton:hover {
           </item>
           <item>
            <widget class="QLabel" name="label_windowTitle">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="font">
              <font>
               <family>Inter SemiBold</family>
@@ -820,9 +863,7 @@ QPushButton:hover {
              </font>
             </property>
             <property name="styleSheet">
-             <string notr="true">background: transparent;
-color: rgb(0, 0, 0);
-font: 10pt &quot;Inter SemiBold&quot;;</string>
+             <string notr="true"/>
             </property>
             <property name="text">
              <string>Computer-Aided Instructions System in Mathematics for the Grade 1 Students of La Camelle School</string>
@@ -834,33 +875,21 @@ font: 10pt &quot;Inter SemiBold&quot;;</string>
           </item>
           <item>
            <widget class="QWidget" name="widget_window_buttons" native="true">
-            <property name="minimumSize">
-             <size>
-              <width>90</width>
-              <height>35</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>90</width>
-              <height>35</height>
-             </size>
-            </property>
             <property name="styleSheet">
-             <string notr="true">background: transparent;</string>
+             <string notr="true"/>
             </property>
             <layout class="QHBoxLayout" name="horizontalLayout_44">
              <property name="spacing">
               <number>9</number>
              </property>
              <property name="leftMargin">
-              <number>9</number>
+              <number>0</number>
              </property>
              <property name="topMargin">
               <number>0</number>
              </property>
              <property name="rightMargin">
-              <number>9</number>
+              <number>4</number>
              </property>
              <property name="bottomMargin">
               <number>0</number>
@@ -883,14 +912,7 @@ font: 10pt &quot;Inter SemiBold&quot;;</string>
                 <cursorShape>PointingHandCursor</cursorShape>
                </property>
                <property name="styleSheet">
-                <string notr="true">#btnMinimize {
-	border-radius: 12px;
-	background-color: transparent;
-}
-
-#btnMinimize:hover {
-	background-color: rgb(248, 228, 92);
-}</string>
+                <string notr="true"/>
                </property>
                <property name="text">
                 <string/>
@@ -925,14 +947,7 @@ font: 10pt &quot;Inter SemiBold&quot;;</string>
                 <cursorShape>PointingHandCursor</cursorShape>
                </property>
                <property name="styleSheet">
-                <string notr="true">#btnMaximize {
-	border-radius: 12px;
-	background-color: transparent;
-}
-
-#btnMaximize:hover {
-	background-color: #3bca5c;
-}</string>
+                <string notr="true"/>
                </property>
                <property name="text">
                 <string/>
@@ -961,14 +976,7 @@ font: 10pt &quot;Inter SemiBold&quot;;</string>
                 <cursorShape>PointingHandCursor</cursorShape>
                </property>
                <property name="styleSheet">
-                <string notr="true">#btnClose {
-	border-radius: 12px;
-	background-color: transparent;
-}
-
-#btnClose:hover {
-	background-color: rgb(246, 97, 81);
-}</string>
+                <string notr="true"/>
                </property>
                <property name="text">
                 <string/>
@@ -1185,7 +1193,277 @@ QLabel {
              </font>
             </property>
             <property name="styleSheet">
-             <string notr="true"/>
+             <string notr="true">* {
+    color: black;
+}
+
+* [class=&quot;group-box&quot;] {
+	border-radius: 15px;
+	background-color: rgb(255, 255, 255);
+}
+
+*[class=&quot;label-faded&quot;] {
+    color: rgb(124, 124, 124);
+    background-color: transparent;
+}
+
+#grp_SectionInfo QLabel,
+#frame_student_info QLabel,
+#frame_contact_info QLabel {
+    font: 11pt &quot;Inter&quot;;
+}
+
+*[class=&quot;widget-search-container&quot;] {
+	background-color: #FFF;
+	border: 1px solid #999;
+	border-radius: 15px;
+}
+
+*[class=&quot;label-magnifying-search&quot;] {
+	background: transparent;
+	border: none;
+}
+
+*[class=&quot;textbox-search&quot;] {
+	border: none;
+	background: transparent;
+}
+
+*[class=&quot;button-clear-search&quot;] {
+    background: transparent;
+    border-radius: 10px;
+}
+
+*[class=&quot;button-clear-search&quot;]:hover {
+    background-color: #ffc0c0;
+}
+
+*[class=&quot;button-clear-search&quot;]:pressed {
+    background-color: #ffd2d2;
+}
+
+QComboBox[class=&quot;combobox-main&quot;],
+QSpinBox,
+QDoubleSpinBox,
+QDateEdit {
+    height: 30px;
+    padding: 0px 5px 0px 10px;
+    font: 10pt &quot;Inter SemiBold&quot;;
+    color: #333333;
+    background-color: #ffffff;
+    border: 1px solid #999999;
+    border-radius: 15px;
+    selection-background-color: #7eb4d7;
+}
+
+QComboBox[class=&quot;combobox-main&quot;]:hover,
+QSpinBox:hover,
+QDoubleSpinBox:hover,
+QDateEdit:hover {
+    border: 1px solid #3498db;
+}
+
+QComboBox[class=&quot;combobox-main&quot;]:focus,
+QSpinBox:focus,
+QDoubleSpinBox:focus,
+QDateEdit:focus {
+    border: 1px solid #007BFF;
+}
+
+/* Subcontrol Dropdown Buttons */
+QComboBox::drop-down,
+QDoubleSpinBox::drop-down,
+QDateEdit::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 30px;
+    border-left-width: 0px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+QSpinBox::up-button,
+QDoubleSpinBox::up-button,
+QDateEdit::up-button {
+    subcontrol-origin: border;
+    subcontrol-position: top right;
+    width: 8px;
+    height: 8px;
+    padding: 6px 10px 6px 2px;
+    color: rgb(119, 118, 123);
+    border-top-right-radius: 15px;
+}
+
+QSpinBox::down-button,
+QDoubleSpinBox::down-button,
+QDateEdit::down-button {
+    subcontrol-origin: border;
+    subcontrol-position: bottom right;
+    width: 8px;
+    height: 8px;
+    padding: 6px 10px 6px 2px;
+    color: rgb(119, 118, 123);
+    border-bottom-right-radius: 15px;
+}
+
+/* Subcontrol Arrows */
+QComboBox::down-arrow,
+QSpinBox::down-arrow,
+QDoubleSpinBox::down-arrow,
+QDateEdit::down-arrow {
+    image: url(:/Images/Images/caret-down.png);
+    width: 8px;
+    height: 8px;
+    border: none;
+}
+
+QSpinBox::up-arrow,
+QDoubleSpinBox::up-arrow,
+QDateEdit::up-arrow {
+    image: url(:/Images/Images/caret-up.png);
+    width: 8px;
+    height: 8px;
+}
+
+/* ComboBox Dropdown Menu Item View */
+QComboBox QAbstractItemView {
+    background-color: #ffffff !important;
+    border: 1px solid #999999;
+    selection-background-color: #7eb4d7;
+    selection-color: #ffffff;
+    outline: 0;
+}
+
+QComboBox QAbstractItemView::item {
+    padding-left: 10px;
+    color: #333333;
+    border-radius: 4px;
+}
+
+QComboBox[class=&quot;combobox-main&quot;] QAbstractItemView::item:hover {
+    background-color: #7eb4d7;
+    color: #ffffff;
+}
+
+QTableView {
+    background-color: #ffffff;
+    border: 1px solid #ff7d87;
+    gridline-color: #f0f0f0;
+    selection-background-color: rgba(255, 125, 135, 0.2);
+    selection-color: #000000;
+    outline: none;
+}
+
+/* Hide Vertical Headers (Row Numbers) */
+QHeaderView:vertical,
+QHeaderView::section:vertical {
+    width: 0px;
+    border: none;
+}
+
+/* Horizontal Header */
+QHeaderView::section:horizontal {
+    background-color: #ff7d87;
+    color: #ffffff;
+    padding: 6px;
+    font-weight: bold;
+    font-size: 11pt;
+    border: none;
+}
+
+/* Top-Left Header Corner */
+QTableCornerButton::section {
+    background-color: #ff7d87;
+    border: none;
+}
+
+QScrollBar:vertical {
+    background: #fdfdfd;
+    width: 10px;
+    border: none;
+}
+
+QScrollBar::handle:vertical {
+    background: #ff7d87;
+    min-height: 30px;
+    border-radius: 3px;
+    margin: 2px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background: #e66a74;
+}
+
+QScrollBar:horizontal {
+    background: #fdfdfd;
+    height: 10px;
+    border: none;
+}
+
+QScrollBar::handle:horizontal {
+    background: #ff7d87;
+    min-width: 30px;
+    border-radius: 3px;
+    margin: 2px;
+}
+
+QScrollBar::handle:horizontal:hover {
+    background: #e66a74;
+}
+
+/* Scrollbar Buttons &amp; Page Track */
+QScrollBar::add-line,
+QScrollBar::sub-line {
+    width: 0px;
+    height: 0px;
+    background: none;
+    border: none;
+}
+
+QScrollBar::add-page,
+QScrollBar::sub-page {
+    background: none;
+}
+
+* [class=&quot;gradient-header&quot;] {
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #ffffff, stop:1 #c6e9ff);
+    border: 1px solid rgb(98, 160, 234);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+* [class=&quot;gradient-body-1&quot;],
+* [class=&quot;gradient-body-2&quot;] {
+    background-color: #fff;
+    border: 1px solid #999;
+    border-top: none;
+}
+
+* [class=&quot;gradient-body-2&quot;] QDateEdit:disabled {
+    background-color: rgb(192, 191, 188);
+}
+
+QRadioButton {
+    color: black;
+    spacing: 8px;
+    padding: 0px 10px;
+    background: transparent;
+    font: 10pt &quot;Inter Medium&quot;;
+}
+
+QRadioButton::indicator {
+    border: 1px solid #999;
+    border-radius: 6px;
+}
+
+QRadioButton::indicator:hover {
+    border-color: #3b82f6;
+}
+
+QRadioButton::indicator:checked {
+    border-color: #3b82f6;
+    background-color: blue;
+}</string>
             </property>
             <property name="frameShape">
              <enum>QFrame::NoFrame</enum>
@@ -1214,7 +1492,7 @@ QLabel {
                   <number>0</number>
                  </property>
                  <item>
-                  <widget class="QWidget" name="widget_5" native="true">
+                  <widget class="QWidget" name="widget_header_welcome" native="true">
                    <property name="minimumSize">
                     <size>
                      <width>0</width>
@@ -1228,9 +1506,31 @@ QLabel {
                     </size>
                    </property>
                    <property name="styleSheet">
-                    <string notr="true">background-color: rgb(246, 245, 244);
-padding: 0px 10px;
-border-radius: 20px;</string>
+                    <string notr="true">* {
+	color: #241f31;
+}
+
+#widget_header_welcome {
+	background-color: rgb(246, 245, 244);
+	padding: 0px 10px;
+	border-radius: 20px;
+}
+
+#label_welcome {
+	background-color: transparent;
+	font: 12pt &quot;Inter Medium&quot;;
+}
+
+#label_gradingperiod {
+	font: 10pt &quot;Inter Medium&quot;;
+	border-radius: 15px;
+	padding: 0px 10px 0px;
+}
+
+#label_SY {
+	background-color: transparent;
+	font: 12pt &quot;Inter Medium&quot;;
+}</string>
                    </property>
                    <layout class="QHBoxLayout" name="horizontalLayout_20">
                     <property name="topMargin">
@@ -1240,7 +1540,7 @@ border-radius: 20px;</string>
                      <number>2</number>
                     </property>
                     <item>
-                     <widget class="QLabel" name="label_timeAP_3">
+                     <widget class="QLabel" name="label_welcome">
                       <property name="minimumSize">
                        <size>
                         <width>0</width>
@@ -1263,7 +1563,7 @@ border-radius: 20px;</string>
                        </font>
                       </property>
                       <property name="styleSheet">
-                       <string notr="true">QLabel { color: rgb(36, 31, 49); background-color: transparent; font: 12pt &quot;Inter Medium&quot;; }</string>
+                       <string notr="true"/>
                       </property>
                       <property name="text">
                        <string>Welcome to La Camelle School</string>
@@ -1310,7 +1610,7 @@ border-radius: 20px;</string>
                        </font>
                       </property>
                       <property name="styleSheet">
-                       <string notr="true">font: 10pt &quot;Inter Medium&quot;; border-radius: 15px; padding: 0px 10px 0px;</string>
+                       <string notr="true"/>
                       </property>
                       <property name="text">
                        <string>Grading</string>
@@ -1344,7 +1644,7 @@ border-radius: 20px;</string>
                        </font>
                       </property>
                       <property name="styleSheet">
-                       <string notr="true">QLabel { color: rgb(36, 31, 49); background-color: transparent; font: 12pt &quot;Inter Medium&quot;; }</string>
+                       <string notr="true"/>
                       </property>
                       <property name="text">
                        <string>School Year</string>
@@ -1803,8 +2103,18 @@ border-radius: 20px;</string>
                           </size>
                          </property>
                          <property name="styleSheet">
-                          <string notr="true">#frame_ranking_title {
-	background-color: transparent; border-bottom: 1px solid rgb(146, 146, 146);
+                          <string notr="true">* {
+	color: rgb(36, 31, 49);
+}
+
+#frame_ranking_title {
+	background-color: transparent;
+	border-bottom: 1px solid rgb(146, 146, 146);
+}
+
+QLabel {
+    background-color: transparent;
+    font: 12pt &quot;Inter Medium&quot;;
 }</string>
                          </property>
                          <property name="frameShape">
@@ -1875,11 +2185,7 @@ border-radius: 20px;</string>
                              </font>
                             </property>
                             <property name="styleSheet">
-                             <string notr="true">QLabel {
-    color: rgb(36, 31, 49);
-    background-color: transparent;
-    font: 12pt &quot;Inter Medium&quot;;
-}</string>
+                             <string notr="true"/>
                             </property>
                             <property name="text">
                              <string>Ranking</string>
@@ -1965,6 +2271,31 @@ border-radius: 20px;</string>
                         <height>16777215</height>
                        </size>
                       </property>
+                      <property name="styleSheet">
+                       <string notr="true">#label_day {
+	color: rgb(36, 31, 49);
+	background-color: transparent;
+	font: 50pt &quot;Inter Medium&quot;;
+}
+
+#label_month {
+	color: rgb(255, 255, 255);
+	background-color: transparent; font: 57 18pt &quot;Inter Medium&quot;;
+	margin-bottom: 3px;
+}
+
+#label_time {
+	color: rgb(36, 31, 49);
+	background-color: transparent;
+	font: 57 30pt &quot;Inter Medium&quot;;
+}
+
+#label_timeAP {
+	color: rgb(36, 31, 49);
+	background-color: transparent;
+	font: 57 14pt &quot;Inter Medium&quot;;
+}</string>
+                      </property>
                       <layout class="QVBoxLayout" name="verticalLayout_34">
                        <property name="spacing">
                         <number>0</number>
@@ -2037,7 +2368,7 @@ border-radius: 20px;</string>
                                 </font>
                                </property>
                                <property name="styleSheet">
-                                <string notr="true">color: rgb(255, 255, 255); background-color: transparent; font: 57 18pt &quot;Inter Medium&quot;; margin-bottom: 3px;</string>
+                                <string notr="true"/>
                                </property>
                                <property name="text">
                                 <string>MAR</string>
@@ -2059,11 +2390,7 @@ border-radius: 20px;</string>
                                 </font>
                                </property>
                                <property name="styleSheet">
-                                <string notr="true">QLabel {
-	color: rgb(36, 31, 49);
-	background-color: transparent;
-	font: 50pt &quot;Inter Medium&quot;;
-}</string>
+                                <string notr="true"/>
                                </property>
                                <property name="text">
                                 <string>00</string>
@@ -2119,7 +2446,7 @@ border-radius: 20px;</string>
                              </font>
                             </property>
                             <property name="styleSheet">
-                             <string notr="true">QLabel { color: rgb(36, 31, 49); background-color: transparent; font: 57 30pt &quot;Inter Medium&quot;; }</string>
+                             <string notr="true"/>
                             </property>
                             <property name="text">
                              <string>00:00</string>
@@ -2141,7 +2468,7 @@ border-radius: 20px;</string>
                              </font>
                             </property>
                             <property name="styleSheet">
-                             <string notr="true">QLabel { color: rgb(36, 31, 49); background-color: transparent; font: 57 14pt &quot;Inter Medium&quot;; }</string>
+                             <string notr="true"/>
                             </property>
                             <property name="text">
                              <string>AM</string>
@@ -2193,122 +2520,7 @@ border-radius: 20px;</string>
             </widget>
             <widget class="QWidget" name="pageClassList">
              <property name="styleSheet">
-              <string notr="true">*[class=&quot;label-faded&quot;] {
-	color: rgb(124, 124, 124);
-	background-color: transparent;
-}
-
-#grp_SectionInfo QLabel, 
-#frame_student_info QLabel, 
-#frame_contact_info QLabel {
-	font: 11pt &quot;Inter&quot;; 
-}
-
-QComboBox[class=&quot;combobox-main&quot;] {
-    height: 30px;
-    border: 1px solid #999;
-    border-radius: 15px;
-    padding-left: 10px;
-    background-color: #ffffff;
-    color: #333333;
-    font: 10pt &quot;Inter Medium&quot;;
-    selection-background-color: #7eb4d7;
-}
-
-QComboBox:focus {
-    border: 1px solid #007BFF;
-}
-
-QComboBox:hover {
-    border: 1px solid #3498db;
-}
-
-QComboBox::drop-down {
-    subcontrol-origin: padding;
-    subcontrol-position: top right;
-    width: 30px;
-    border-left-width: 0px;
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
-}
-
-QComboBox::down-arrow {
-    image: url(:/Images/Images/caret-down.png);
-    border: none;
-    width: 8px;
-    height: 8px;
-}
-
-QComboBox QAbstractItemView {
-    background-color: white !important;
-    border: 1px solid #999;
-    selection-background-color: #7eb4d7;
-    selection-color: #ffffff;
-    outline: 0;
-}
-
-QComboBox QAbstractItemView::item {
-    padding-left: 10px;
-    border-radius: 4px;
-    color: #333333;
-}
-
-/* Hover state for items inside the dropdown */
-QComboBox[class=&quot;combobox-main&quot;] QAbstractItemView::item:hover {
-    background-color: #7eb4d7;
-    color: #ffffff;
-}
-
-QSpinBox {
-	font: 10pt &quot;Inter Medium&quot;;
-    height: 30px;
-    border: 1px solid #999;
-    border-radius: 15px;
-    padding: 0px 5px 0px;
-    background-color: #ffffff;
-    color: #333333;
-    selection-background-color: #7eb4d7;
-}
-
-QSpinBox:focus {
-    border: 1px solid #007BFF;
-}
-
-QSpinBox:hover {
-    border: 1px solid #3498db;
-}
-
-QSpinBox::up-button {
-    subcontrol-origin: border;
-    subcontrol-position: top right;
-    width: 8px;
-    height: 8px;
-    border-top-right-radius: 15px;
-    padding: 6px 10px 6px 2px;
-	color: rgb(119, 118, 123);
-}
-
-QSpinBox::down-button {
-    subcontrol-origin: border;
-    subcontrol-position: bottom right;
-    width: 8px;
-    height: 8px;
-    border-bottom-right-radius: 15px;
-    padding: 6px 10px 6px 2px;
-	color: rgb(119, 118, 123);
-}
-
-QSpinBox::up-arrow {
-    image: url(:/Images/Images/caret-up.png);
-    width: 8px;
-    height: 8px;
-}
-
-QSpinBox::down-arrow {
-    image: url(:/Images/Images/caret-down.png);
-    width: 8px;
-    height: 8px;
-}</string>
+              <string notr="true"/>
              </property>
              <layout class="QHBoxLayout" name="horizontalLayout_15">
               <item>
@@ -2382,7 +2594,7 @@ QSpinBox::down-arrow {
                       </property>
                       <property name="maximumSize">
                        <size>
-                        <width>16777215</width>
+                        <width>120</width>
                         <height>30</height>
                        </size>
                       </property>
@@ -2448,7 +2660,7 @@ QSpinBox::down-arrow {
                       </property>
                       <property name="maximumSize">
                        <size>
-                        <width>16777215</width>
+                        <width>400</width>
                         <height>30</height>
                        </size>
                       </property>
@@ -2473,16 +2685,12 @@ QSpinBox::down-arrow {
                       </property>
                       <property name="maximumSize">
                        <size>
-                        <width>16777215</width>
+                        <width>400</width>
                         <height>30</height>
                        </size>
                       </property>
                       <property name="styleSheet">
-                       <string notr="true">*[class=&quot;widget-search-container&quot;] {
-	background-color: #FFF;
-	border: 1px solid #999;
-	border-radius: 15px;
-}</string>
+                       <string notr="true"/>
                       </property>
                       <property name="class" stdset="0">
                        <string>widget-search-container</string>
@@ -2518,10 +2726,7 @@ QSpinBox::down-arrow {
                           </size>
                          </property>
                          <property name="styleSheet">
-                          <string notr="true">*[class=&quot;label-magnifying-search&quot;] {
-	background: transparent;
-	border: none;
-}</string>
+                          <string notr="true"/>
                          </property>
                          <property name="text">
                           <string/>
@@ -2555,10 +2760,7 @@ QSpinBox::down-arrow {
                           </size>
                          </property>
                          <property name="styleSheet">
-                          <string notr="true">#txt_classList_search {
-	border: none;
-	background: transparent;
-}</string>
+                          <string notr="true"/>
                          </property>
                          <property name="placeholderText">
                           <string>Search</string>
@@ -2589,18 +2791,7 @@ QSpinBox::down-arrow {
                           <string>Clear</string>
                          </property>
                          <property name="styleSheet">
-                          <string notr="true">*[class=&quot;button-clear-search&quot;] {
-	border-radius: 10px;
-	background: transparent;
-}
-
-*[class=&quot;button-clear-search&quot;]:hover {
-	background-color: #FFC0C0;
-}
-
-*[class=&quot;button-clear-search&quot;]:pressed {
-	background-color: #FFD2D2;
-}</string>
+                          <string notr="true"/>
                          </property>
                          <property name="text">
                           <string/>
@@ -2627,6 +2818,19 @@ QSpinBox::down-arrow {
                        </item>
                       </layout>
                      </widget>
+                    </item>
+                    <item>
+                     <spacer name="horizontalSpacer_13">
+                      <property name="orientation">
+                       <enum>Qt::Horizontal</enum>
+                      </property>
+                      <property name="sizeHint" stdset="0">
+                       <size>
+                        <width>40</width>
+                        <height>20</height>
+                       </size>
+                      </property>
+                     </spacer>
                     </item>
                    </layout>
                   </widget>
@@ -2872,8 +3076,8 @@ QSpinBox::down-arrow {
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>100</width>
-                      <height>30</height>
+                      <width>793</width>
+                      <height>600</height>
                      </rect>
                     </property>
                     <layout class="QGridLayout" name="gridLayout_stud_card"/>
@@ -2974,7 +3178,10 @@ QSpinBox::down-arrow {
                        </font>
                       </property>
                       <property name="styleSheet">
-                       <string notr="true">border-radius: 15px; background-color: rgb(255, 255, 255);</string>
+                       <string notr="true"/>
+                      </property>
+                      <property name="class" stdset="0">
+                       <string>group-box</string>
                       </property>
                       <layout class="QFormLayout" name="formLayout_2">
                        <item row="1" column="0">
@@ -3079,7 +3286,7 @@ QSpinBox::down-arrow {
                           </font>
                          </property>
                          <property name="styleSheet">
-                          <string notr="true">color: rgb(18, 18, 18); background-color: transparent;</string>
+                          <string notr="true"/>
                          </property>
                          <property name="text">
                           <string>null</string>
@@ -3104,7 +3311,7 @@ QSpinBox::down-arrow {
                           </font>
                          </property>
                          <property name="styleSheet">
-                          <string notr="true">color: rgb(18, 18, 18); background-color: transparent;</string>
+                          <string notr="true"/>
                          </property>
                          <property name="text">
                           <string>null</string>
@@ -3129,7 +3336,7 @@ QSpinBox::down-arrow {
                           </font>
                          </property>
                          <property name="styleSheet">
-                          <string notr="true">color: rgb(18, 18, 18); background-color: transparent;</string>
+                          <string notr="true"/>
                          </property>
                          <property name="text">
                           <string>null</string>
@@ -3182,7 +3389,7 @@ QSpinBox::down-arrow {
                           </font>
                          </property>
                          <property name="styleSheet">
-                          <string notr="true">color: rgb(18, 18, 18); background-color: transparent;</string>
+                          <string notr="true"/>
                          </property>
                          <property name="text">
                           <string>null</string>
@@ -3229,7 +3436,10 @@ QSpinBox::down-arrow {
                        </font>
                       </property>
                       <property name="styleSheet">
-                       <string notr="true">border-radius: 15px; background-color: rgb(255, 255, 255);</string>
+                       <string notr="true"/>
+                      </property>
+                      <property name="class" stdset="0">
+                       <string>group-box</string>
                       </property>
                       <layout class="QFormLayout" name="formLayout">
                        <item row="0" column="0">
@@ -3278,7 +3488,7 @@ QSpinBox::down-arrow {
                           </font>
                          </property>
                          <property name="styleSheet">
-                          <string notr="true">color: rgb(18, 18, 18); background-color: transparent;</string>
+                          <string notr="true"/>
                          </property>
                          <property name="text">
                           <string>null</string>
@@ -3331,7 +3541,7 @@ QSpinBox::down-arrow {
                           </font>
                          </property>
                          <property name="styleSheet">
-                          <string notr="true">color: rgb(18, 18, 18); background-color: transparent;</string>
+                          <string notr="true"/>
                          </property>
                          <property name="text">
                           <string>null</string>
@@ -3384,7 +3594,7 @@ QSpinBox::down-arrow {
                           </font>
                          </property>
                          <property name="styleSheet">
-                          <string notr="true">color: rgb(18, 18, 18); background-color: transparent;</string>
+                          <string notr="true"/>
                          </property>
                          <property name="text">
                           <string>null</string>
@@ -3437,7 +3647,7 @@ QSpinBox::down-arrow {
                           </font>
                          </property>
                          <property name="styleSheet">
-                          <string notr="true">color: rgb(18, 18, 18); background-color: transparent;</string>
+                          <string notr="true"/>
                          </property>
                          <property name="text">
                           <string>null</string>
@@ -3490,7 +3700,7 @@ QSpinBox::down-arrow {
                           </font>
                          </property>
                          <property name="styleSheet">
-                          <string notr="true">color: rgb(18, 18, 18); background-color: transparent;</string>
+                          <string notr="true"/>
                          </property>
                          <property name="text">
                           <string>null</string>
@@ -3543,7 +3753,10 @@ QSpinBox::down-arrow {
                        </font>
                       </property>
                       <property name="styleSheet">
-                       <string notr="true">border-radius: 15px; background-color: rgb(255, 255, 255);</string>
+                       <string notr="true"/>
+                      </property>
+                      <property name="class" stdset="0">
+                       <string>group-box</string>
                       </property>
                       <layout class="QFormLayout" name="formLayout_4">
                        <item row="0" column="0">
@@ -3586,7 +3799,7 @@ QSpinBox::down-arrow {
                           </font>
                          </property>
                          <property name="styleSheet">
-                          <string notr="true">color: rgb(18, 18, 18); background-color: transparent;</string>
+                          <string notr="true"/>
                          </property>
                          <property name="text">
                           <string>null</string>
@@ -3633,7 +3846,7 @@ QSpinBox::down-arrow {
                           </font>
                          </property>
                          <property name="styleSheet">
-                          <string notr="true">color: rgb(18, 18, 18); background-color: transparent;</string>
+                          <string notr="true"/>
                          </property>
                          <property name="text">
                           <string>null</string>
@@ -3740,298 +3953,11 @@ QSpinBox::down-arrow {
             </widget>
             <widget class="QWidget" name="pageLesson">
              <property name="styleSheet">
-              <string notr="true">*[class=&quot;label-magnifying-search&quot;] {
-	background-color: rgb(255, 255, 255);
-	border-top-left-radius: 15px;
-	border-bottom-left-radius: 15px;
-	border: 1px solid #999;
-	border-right: none;
-}
-
-*[class=&quot;textbox-search&quot;] {
-	background-color: rgb(255, 255, 255); 
-	border-top-right-radius: 15px;
-	border-bottom-right-radius: 15px;
-	border: 1px solid #999;
-	border-left: none;
-}
-
-*[class=&quot;widget-search-container&quot;] {
-	background: transparent;
-}</string>
+              <string notr="true"/>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout">
               <item>
-               <widget class="QWidget" name="widget_search_4" native="true">
-                <property name="minimumSize">
-                 <size>
-                  <width>0</width>
-                  <height>30</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>16777215</width>
-                  <height>30</height>
-                 </size>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true">*[class=&quot;widget-search-container&quot;] {
-	background-color: #FFF;
-	border: 1px solid #999;
-	border-radius: 15px;
-}</string>
-                </property>
-                <property name="class" stdset="0">
-                 <string>widget-search-container</string>
-                </property>
-                <layout class="QHBoxLayout" name="layout_search_3">
-                 <property name="spacing">
-                  <number>0</number>
-                 </property>
-                 <property name="leftMargin">
-                  <number>4</number>
-                 </property>
-                 <property name="topMargin">
-                  <number>0</number>
-                 </property>
-                 <property name="rightMargin">
-                  <number>6</number>
-                 </property>
-                 <property name="bottomMargin">
-                  <number>0</number>
-                 </property>
-                 <item>
-                  <widget class="QLabel" name="label_magnifying_stud_2">
-                   <property name="minimumSize">
-                    <size>
-                     <width>30</width>
-                     <height>30</height>
-                    </size>
-                   </property>
-                   <property name="maximumSize">
-                    <size>
-                     <width>30</width>
-                     <height>30</height>
-                    </size>
-                   </property>
-                   <property name="styleSheet">
-                    <string notr="true">*[class=&quot;label-magnifying-search&quot;] {
-	background: transparent;
-	border: none;
-}</string>
-                   </property>
-                   <property name="text">
-                    <string/>
-                   </property>
-                   <property name="pixmap">
-                    <pixmap resource="../resources.qrc">:/Images/Images/search.png</pixmap>
-                   </property>
-                   <property name="scaledContents">
-                    <bool>true</bool>
-                   </property>
-                   <property name="margin">
-                    <number>5</number>
-                   </property>
-                   <property name="class" stdset="0">
-                    <string>label-magnifying-search</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLineEdit" name="txtSearchLesson">
-                   <property name="minimumSize">
-                    <size>
-                     <width>0</width>
-                     <height>30</height>
-                    </size>
-                   </property>
-                   <property name="maximumSize">
-                    <size>
-                     <width>16777215</width>
-                     <height>30</height>
-                    </size>
-                   </property>
-                   <property name="styleSheet">
-                    <string notr="true">*[class=&quot;textbox-search&quot;] {
-	border: none;
-	background: transparent;
-}</string>
-                   </property>
-                   <property name="placeholderText">
-                    <string>Search</string>
-                   </property>
-                   <property name="class" stdset="0">
-                    <string>textbox-search</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QPushButton" name="btnClearSearch_2">
-                   <property name="minimumSize">
-                    <size>
-                     <width>20</width>
-                     <height>20</height>
-                    </size>
-                   </property>
-                   <property name="maximumSize">
-                    <size>
-                     <width>20</width>
-                     <height>20</height>
-                    </size>
-                   </property>
-                   <property name="cursor">
-                    <cursorShape>PointingHandCursor</cursorShape>
-                   </property>
-                   <property name="toolTip">
-                    <string>Clear</string>
-                   </property>
-                   <property name="styleSheet">
-                    <string notr="true">*[class=&quot;button-clear-search&quot;] {
-	border-radius: 10px;
-	background: transparent;
-}
-
-*[class=&quot;button-clear-search&quot;]:hover {
-	background-color: #FFC0C0;
-}
-
-*[class=&quot;button-clear-search&quot;]:pressed {
-	background-color: #FFD2D2;
-}</string>
-                   </property>
-                   <property name="text">
-                    <string/>
-                   </property>
-                   <property name="icon">
-                    <iconset resource="../resources.qrc">
-                     <normaloff>:/Images/Images/clear.png</normaloff>
-                     <normalon>:/Images/Images/clear.png</normalon>
-                     <activeon>:/Images/Images/clear.png</activeon>:/Images/Images/clear.png</iconset>
-                   </property>
-                   <property name="iconSize">
-                    <size>
-                     <width>14</width>
-                     <height>14</height>
-                    </size>
-                   </property>
-                   <property name="default">
-                    <bool>true</bool>
-                   </property>
-                   <property name="class" stdset="0">
-                    <string>button-clear-search</string>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </widget>
-              </item>
-              <item>
                <layout class="QHBoxLayout" name="horizontalLayout_4">
-                <item>
-                 <widget class="QWidget" name="widget_17" native="true">
-                  <property name="minimumSize">
-                   <size>
-                    <width>100</width>
-                    <height>0</height>
-                   </size>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true">#widget_17 {
-	background: transparent;
-}
-
-QPushButton {
-    border: 1px solid #999;
-    padding: 5px 15px;
-	font: 10pt &quot;Inter&quot;;
-    background-color: #f0f0f0;
-}
-
-QPushButton:hover {
-    background-color: #e0e0e0;
-}
-
-#btnAnimation {
-    border-top-left-radius: 15px;
-    border-bottom-left-radius: 15px;
-    border-right: none;
-}
-
-#btnAnimation:checked {
-    background-color: #72D582;
-	border: 2px solid #448D50;
-    color: #000;
-}
-
-#btnPowerPoint {
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
-}
-
-#btnPowerPoint:checked {
-    background-color: #72D582;
-	border: 2px solid #448D50;
-    color: #000;
-}</string>
-                  </property>
-                  <layout class="QHBoxLayout" name="horizontalLayout_32">
-                   <property name="spacing">
-                    <number>0</number>
-                   </property>
-                   <property name="leftMargin">
-                    <number>0</number>
-                   </property>
-                   <property name="topMargin">
-                    <number>0</number>
-                   </property>
-                   <property name="rightMargin">
-                    <number>0</number>
-                   </property>
-                   <property name="bottomMargin">
-                    <number>0</number>
-                   </property>
-                   <item>
-                    <widget class="QPushButton" name="btnAnimation">
-                     <property name="minimumSize">
-                      <size>
-                       <width>126</width>
-                       <height>30</height>
-                      </size>
-                     </property>
-                     <property name="cursor">
-                      <cursorShape>PointingHandCursor</cursorShape>
-                     </property>
-                     <property name="text">
-                      <string>Animation</string>
-                     </property>
-                     <property name="class" stdset="0">
-                      <string/>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QPushButton" name="btnPowerPoint">
-                     <property name="minimumSize">
-                      <size>
-                       <width>126</width>
-                       <height>30</height>
-                      </size>
-                     </property>
-                     <property name="cursor">
-                      <cursorShape>PointingHandCursor</cursorShape>
-                     </property>
-                     <property name="text">
-                      <string>MS PowerPoint</string>
-                     </property>
-                     <property name="class" stdset="0">
-                      <string/>
-                     </property>
-                    </widget>
-                   </item>
-                  </layout>
-                 </widget>
-                </item>
                 <item>
                  <widget class="QPushButton" name="btnRefreshLessonTable">
                   <property name="minimumSize">
@@ -4062,6 +3988,150 @@ QPushButton:hover {
                   <property name="class" stdset="0">
                    <string>button-normal</string>
                   </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QWidget" name="widget_search_4" native="true">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>400</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true"/>
+                  </property>
+                  <property name="class" stdset="0">
+                   <string>widget-search-container</string>
+                  </property>
+                  <layout class="QHBoxLayout" name="layout_search_3">
+                   <property name="spacing">
+                    <number>0</number>
+                   </property>
+                   <property name="leftMargin">
+                    <number>4</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>6</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <widget class="QLabel" name="label_magnifying_stud_2">
+                     <property name="minimumSize">
+                      <size>
+                       <width>30</width>
+                       <height>30</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>30</width>
+                       <height>30</height>
+                      </size>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true"/>
+                     </property>
+                     <property name="text">
+                      <string/>
+                     </property>
+                     <property name="pixmap">
+                      <pixmap resource="../resources.qrc">:/Images/Images/search.png</pixmap>
+                     </property>
+                     <property name="scaledContents">
+                      <bool>true</bool>
+                     </property>
+                     <property name="margin">
+                      <number>5</number>
+                     </property>
+                     <property name="class" stdset="0">
+                      <string>label-magnifying-search</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLineEdit" name="txtSearchLesson">
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>30</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>16777215</width>
+                       <height>30</height>
+                      </size>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true"/>
+                     </property>
+                     <property name="placeholderText">
+                      <string>Search</string>
+                     </property>
+                     <property name="class" stdset="0">
+                      <string>textbox-search</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QPushButton" name="btnClearSearch_2">
+                     <property name="minimumSize">
+                      <size>
+                       <width>20</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>20</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                     <property name="cursor">
+                      <cursorShape>PointingHandCursor</cursorShape>
+                     </property>
+                     <property name="toolTip">
+                      <string>Clear</string>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true"/>
+                     </property>
+                     <property name="text">
+                      <string/>
+                     </property>
+                     <property name="icon">
+                      <iconset resource="../resources.qrc">
+                       <normaloff>:/Images/Images/clear.png</normaloff>
+                       <normalon>:/Images/Images/clear.png</normalon>
+                       <activeon>:/Images/Images/clear.png</activeon>:/Images/Images/clear.png</iconset>
+                     </property>
+                     <property name="iconSize">
+                      <size>
+                       <width>14</width>
+                       <height>14</height>
+                      </size>
+                     </property>
+                     <property name="default">
+                      <bool>true</bool>
+                     </property>
+                     <property name="class" stdset="0">
+                      <string>button-clear-search</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
                  </widget>
                 </item>
                 <item>
@@ -4269,111 +4339,7 @@ QScrollBar::add-line, QScrollBar::sub-line {
             </widget>
             <widget class="QWidget" name="pageQuiz">
              <property name="styleSheet">
-              <string notr="true">QComboBox[class=&quot;combobox-main&quot;] {
-    height: 30px;
-    border: 1px solid #999;
-    border-radius: 15px;
-    padding-left: 10px;
-    background-color: #ffffff;
-    color: #333333;
-    font: 10pt &quot;Inter Medium&quot;;
-    selection-background-color: #7eb4d7;
-}
-
-QComboBox:focus {
-    border: 1px solid #007BFF;
-}
-
-QComboBox:hover {
-    border: 1px solid #3498db;
-}
-
-QComboBox::drop-down {
-    subcontrol-origin: padding;
-    subcontrol-position: top right;
-    width: 30px;
-    border-left-width: 0px;
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
-}
-
-QComboBox::down-arrow {
-    image: url(:/Images/Images/caret-down.png);
-    border: none;
-    width: 8px;
-    height: 8px;
-}
-
-QComboBox QAbstractItemView {
-    background-color: white !important;
-    border: 1px solid #999;
-    selection-background-color: #7eb4d7;
-    selection-color: #ffffff;
-    outline: 0;
-}
-
-QComboBox QAbstractItemView::item {
-    padding-left: 10px;
-    border-radius: 4px;
-    color: #333333;
-}
-
-/* Hover state for items inside the dropdown */
-QComboBox[class=&quot;combobox-main&quot;] QAbstractItemView::item:hover {
-    background-color: #7eb4d7;
-    color: #ffffff;
-}
-
-QSpinBox {
-	font: 10pt &quot;Inter Medium&quot;;
-    height: 30px;
-    border: 1px solid #999;
-    border-radius: 15px;
-    padding: 0px 5px 0px;
-    background-color: #ffffff;
-    color: #333333;
-    selection-background-color: #7eb4d7;
-}
-
-QSpinBox:focus {
-    border: 1px solid #007BFF;
-}
-
-QSpinBox:hover {
-    border: 1px solid #3498db;
-}
-
-QSpinBox::up-button {
-    subcontrol-origin: border;
-    subcontrol-position: top right;
-    width: 8px;
-    height: 8px;
-    border-top-right-radius: 15px;
-    padding: 6px 10px 6px 2px;
-	color: rgb(119, 118, 123);
-}
-
-QSpinBox::down-button {
-    subcontrol-origin: border;
-    subcontrol-position: bottom right;
-    width: 8px;
-    height: 8px;
-    border-bottom-right-radius: 15px;
-    padding: 6px 10px 6px 2px;
-	color: rgb(119, 118, 123);
-}
-
-QSpinBox::up-arrow {
-    image: url(:/Images/Images/caret-up.png);
-    width: 8px;
-    height: 8px;
-}
-
-QSpinBox::down-arrow {
-    image: url(:/Images/Images/caret-down.png);
-    width: 8px;
-    height: 8px;
-}</string>
+              <string notr="true"/>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
               <item>
@@ -4592,7 +4558,7 @@ QCheckBox::indicator:checked {
               <item>
                <widget class="Line" name="line_3">
                 <property name="styleSheet">
-                 <string notr="true">background-color: rgb(222, 221, 218);</string>
+                 <string notr="true"/>
                 </property>
                 <property name="orientation">
                  <enum>Qt::Horizontal</enum>
@@ -4959,7 +4925,7 @@ QPushButton:hover {
               <item>
                <widget class="Line" name="line_7">
                 <property name="styleSheet">
-                 <string notr="true">background-color: rgb(222, 221, 218);</string>
+                 <string notr="true"/>
                 </property>
                 <property name="orientation">
                  <enum>Qt::Horizontal</enum>
@@ -4994,8 +4960,8 @@ QPushButton:hover {
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>100</width>
-                      <height>30</height>
+                      <width>320</width>
+                      <height>499</height>
                      </rect>
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout_13"/>
@@ -5037,8 +5003,8 @@ QPushButton:hover {
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>100</width>
-                      <height>30</height>
+                      <width>319</width>
+                      <height>499</height>
                      </rect>
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout_12"/>
@@ -5058,8 +5024,8 @@ QPushButton:hover {
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>100</width>
-                      <height>30</height>
+                      <width>320</width>
+                      <height>499</height>
                      </rect>
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout_11"/>
@@ -5173,111 +5139,7 @@ QPushButton:hover {
             </widget>
             <widget class="QWidget" name="pageSections">
              <property name="styleSheet">
-              <string notr="true">QComboBox[class=&quot;combobox-main&quot;] {
-    height: 30px;
-    border: 1px solid #999;
-    border-radius: 15px;
-    padding-left: 10px;
-    background-color: #ffffff;
-    color: #333333;
-    font: 10pt &quot;Inter Medium&quot;;
-    selection-background-color: #7eb4d7;
-}
-
-QComboBox:focus {
-    border: 1px solid #007BFF;
-}
-
-QComboBox:hover {
-    border: 1px solid #3498db;
-}
-
-QComboBox::drop-down {
-    subcontrol-origin: padding;
-    subcontrol-position: top right;
-    width: 30px;
-    border-left-width: 0px;
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
-}
-
-QComboBox::down-arrow {
-    image: url(:/Images/Images/caret-down.png);
-    border: none;
-    width: 8px;
-    height: 8px;
-}
-
-QComboBox QAbstractItemView {
-    background-color: white !important;
-    border: 1px solid #999;
-    selection-background-color: #7eb4d7;
-    selection-color: #ffffff;
-    outline: 0;
-}
-
-QComboBox QAbstractItemView::item {
-    padding-left: 10px;
-    border-radius: 4px;
-    color: #333333;
-}
-
-/* Hover state for items inside the dropdown */
-QComboBox[class=&quot;combobox-main&quot;] QAbstractItemView::item:hover {
-    background-color: #7eb4d7;
-    color: #ffffff;
-}
-
-QSpinBox {
-	font: 10pt &quot;Inter Medium&quot;;
-    height: 30px;
-    border: 1px solid #999;
-    border-radius: 15px;
-    padding: 0px 5px 0px;
-    background-color: #ffffff;
-    color: #333333;
-    selection-background-color: #7eb4d7;
-}
-
-QSpinBox:focus {
-    border: 1px solid #007BFF;
-}
-
-QSpinBox:hover {
-    border: 1px solid #3498db;
-}
-
-QSpinBox::up-button {
-    subcontrol-origin: border;
-    subcontrol-position: top right;
-    width: 8px;
-    height: 8px;
-    border-top-right-radius: 15px;
-    padding: 6px 10px 6px 2px;
-	color: rgb(119, 118, 123);
-}
-
-QSpinBox::down-button {
-    subcontrol-origin: border;
-    subcontrol-position: bottom right;
-    width: 8px;
-    height: 8px;
-    border-bottom-right-radius: 15px;
-    padding: 6px 10px 6px 2px;
-	color: rgb(119, 118, 123);
-}
-
-QSpinBox::up-arrow {
-    image: url(:/Images/Images/caret-up.png);
-    width: 8px;
-    height: 8px;
-}
-
-QSpinBox::down-arrow {
-    image: url(:/Images/Images/caret-down.png);
-    width: 8px;
-    height: 8px;
-}</string>
+              <string notr="true"/>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_2">
               <item>
@@ -5572,132 +5434,7 @@ QScrollBar::add-line, QScrollBar::sub-line {
               <item>
                <widget class="QTabWidget" name="tabWidget_reports">
                 <property name="styleSheet">
-                 <string notr="true">*[class=&quot;label-magnifying-search&quot;] {
-	background-color: rgb(255, 255, 255);
-	border-top-left-radius: 15px;
-	border-bottom-left-radius: 15px;
-	border: 1px solid #999;
-	border-right: none;
-}
-
-*[class=&quot;textbox-search&quot;] {
-	background-color: rgb(255, 255, 255); 
-	border-top-right-radius: 15px;
-	border-bottom-right-radius: 15px;
-	border: 1px solid #999;
-	border-left: none;
-}
-
-*[class=&quot;widget-search-container&quot;] {
-	background: transparent;
-}
-
-QComboBox {
-    height: 30px;
-    border: 1px solid #999;
-    border-radius: 15px; /* Fully rounded pills */
-    padding-left: 10px;
-    background-color: #ffffff;
-    color: #333333;
-    font: 10pt &quot;Inter Medium&quot;; /* Consolidated font settings */
-    selection-background-color: #7eb4d7;
-}
-
-QComboBox:focus {
-    border: 1px solid #007BFF;
-}
-
-QComboBox:hover {
-    border: 1px solid #3498db;
-}
-
-QComboBox::drop-down {
-    subcontrol-origin: padding;
-    subcontrol-position: top right;
-    width: 30px;
-    border-left-width: 0px;
-    /* Match the 15px border-radius of the main control */
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
-}
-
-QComboBox::down-arrow {
-    image: url(:/Images/Images/caret-down.png);
-    border: none;
-    width: 8px;
-    height: 8px;
-}
-
-QComboBox QAbstractItemView {
-    background-color: white !important;
-    border: 1px solid #999;
-    selection-background-color: #7eb4d7;
-    selection-color: #ffffff;
-    outline: 0; /* Removes the ugly dotted focus border */
-}
-
-QComboBox QAbstractItemView::item {
-    padding-left: 10px;
-    border-radius: 4px;
-    color: #333333;
-}
-
-/* Hover state for items inside the dropdown */
-QComboBox[class=&quot;combobox-main&quot;] QAbstractItemView::item:hover {
-    background-color: #7eb4d7;
-    color: #ffffff;
-}
-
-QSpinBox {
-	font: 10pt &quot;Inter Medium&quot;;
-    height: 30px;
-    border: 1px solid #999;
-    border-radius: 15px;
-    padding: 0px 5px 0px;
-    background-color: #ffffff;
-    color: #333333;
-    selection-background-color: #7eb4d7;
-}
-
-QSpinBox:focus {
-    border: 1px solid #007BFF;
-}
-
-QSpinBox:hover {
-    border: 1px solid #3498db;
-}
-
-QSpinBox::up-button {
-    subcontrol-origin: border;
-    subcontrol-position: top right;
-    width: 8px;
-    height: 8px;
-    border-top-right-radius: 15px;
-    padding: 6px 10px 6px 2px;
-	color: rgb(119, 118, 123);
-}
-
-QSpinBox::down-button {
-    subcontrol-origin: border;
-    subcontrol-position: bottom right;
-    width: 8px;
-    height: 8px;
-    border-bottom-right-radius: 15px;
-    padding: 6px 10px 6px 2px;
-	color: rgb(119, 118, 123);
-}
-
-QSpinBox::up-arrow {
-    image: url(:/Images/Images/caret-up.png);
-    width: 8px;
-    height: 8px;
-}
-
-QSpinBox::down-arrow {
-    image: url(:/Images/Images/caret-down.png);
-    width: 8px;
-    height: 8px;
-}</string>
+                 <string notr="true"/>
                 </property>
                 <property name="currentIndex">
                  <number>0</number>
@@ -6229,14 +5966,10 @@ QScrollBar::add-line, QScrollBar::sub-line {
                         </size>
                        </property>
                        <property name="styleSheet">
-                        <string notr="true">#widget_stud_tblheader_idv { 
-	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
-                                stop:0 #ffffff, 
-                                stop:1 #c6e9ff);
-	border: 1px solid rgb(98, 160, 234);
-	border-top-left-radius: 10px;
-	border-top-right-radius: 10px;
-}</string>
+                        <string notr="true"/>
+                       </property>
+                       <property name="class" stdset="0">
+                        <string>gradient-header</string>
                        </property>
                        <layout class="QHBoxLayout" name="horizontalLayout_7">
                         <item>
@@ -6342,11 +6075,7 @@ QScrollBar::add-line, QScrollBar::sub-line {
                            </size>
                           </property>
                           <property name="styleSheet">
-                           <string notr="true">*[class=&quot;widget-search-container&quot;] {
-	background-color: #FFF;
-	border: 1px solid #999;
-	border-radius: 15px;
-}</string>
+                           <string notr="true"/>
                           </property>
                           <property name="class" stdset="0">
                            <string>widget-search-container</string>
@@ -6382,10 +6111,7 @@ QScrollBar::add-line, QScrollBar::sub-line {
                               </size>
                              </property>
                              <property name="styleSheet">
-                              <string notr="true">*[class=&quot;label-magnifying-search&quot;] {
-	background: transparent;
-	border: none;
-}</string>
+                              <string notr="true"/>
                              </property>
                              <property name="text">
                               <string/>
@@ -6419,10 +6145,7 @@ QScrollBar::add-line, QScrollBar::sub-line {
                               </size>
                              </property>
                              <property name="styleSheet">
-                              <string notr="true">*[class=&quot;textbox-search&quot;] {
-	border: none;
-	background: transparent;
-}</string>
+                              <string notr="true"/>
                              </property>
                              <property name="placeholderText">
                               <string>Search</string>
@@ -6453,18 +6176,7 @@ QScrollBar::add-line, QScrollBar::sub-line {
                               <string>Clear</string>
                              </property>
                              <property name="styleSheet">
-                              <string notr="true">*[class=&quot;button-clear-search&quot;] {
-	border-radius: 10px;
-	background: transparent;
-}
-
-*[class=&quot;button-clear-search&quot;]:hover {
-	background-color: #FFC0C0;
-}
-
-*[class=&quot;button-clear-search&quot;]:pressed {
-	background-color: #FFD2D2;
-}</string>
+                              <string notr="true"/>
                              </property>
                              <property name="text">
                               <string/>
@@ -6538,23 +6250,10 @@ QScrollBar::add-line, QScrollBar::sub-line {
                      <item>
                       <widget class="QWidget" name="widget_7" native="true">
                        <property name="styleSheet">
-                        <string notr="true">#widget_7 { 
-	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
-                                stop:0 #ffffff, 
-                                stop:1 #c6e9ff);
-	border: 1px solid rgb(98, 160, 234);
-	border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-}
-
-QLabel {
-	background: transparent;
-	border: none;
-}
-
-#label_student_icon {
-	
-}</string>
+                        <string notr="true"/>
+                       </property>
+                       <property name="class" stdset="0">
+                        <string>gradient-header</string>
                        </property>
                        <layout class="QHBoxLayout" name="horizontalLayout_21">
                         <property name="topMargin">
@@ -6888,25 +6587,7 @@ background-color: rgb(98, 160, 234);</string>
             </widget>
             <widget class="QWidget" name="pageUsers">
              <property name="styleSheet">
-              <string notr="true">*[class=&quot;label-magnifying-search&quot;] {
-	background-color: rgb(255, 255, 255);
-	border-top-left-radius: 15px;
-	border-bottom-left-radius: 15px;
-	border: 1px solid #999;
-	border-right: none;
-}
-
-*[class=&quot;textbox-search&quot;] {
-	background-color: rgb(255, 255, 255); 
-	border-top-right-radius: 15px;
-	border-bottom-right-radius: 15px;
-	border: 1px solid #999;
-	border-left: none;
-}
-
-*[class=&quot;widget-search-container&quot;] {
-	background: transparent;
-}</string>
+              <string notr="true"/>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_17">
               <item>
@@ -7336,258 +7017,14 @@ QScrollBar::add-line, QScrollBar::sub-line {
               <item>
                <widget class="QTabWidget" name="tabWidget_utility">
                 <property name="styleSheet">
-                 <string notr="true">QTableView {
-    border: 1px solid #ff7d87;
-    gridline-color: #f0f0f0;
-    background-color: white;
-    selection-background-color: rgba(255, 125, 135, 0.2); /* Transparent coral highlight */
-    selection-color: black;
-    outline: none;
-}
-
-/* Hide the row numbers (Vertical Header) */
-QHeaderView:vertical {
-    width: 0px;
-}
-
-QHeaderView::section:vertical {
-    width: 0px;
-    border: none;
-}
-
-/* Style the top horizontal header with the #ff7d87 theme */
-QHeaderView::section:horizontal {
-    background-color: #ff7d87;  
-    color: white;
-    padding: 6px;
-    font-weight: bold;
-    font-size: 11pt;
-    border: none;
-}
-
-/* Hide top-left corner button by matching header color */
-QTableCornerButton::section {
-    background-color: #ff7d87;
-    border: none;
-}
-
-/* Custom Scrollbars */
-QScrollBar:vertical {
-    border: none;
-    background: #fdfdfd;
-    width: 10px;
-}
-
-QScrollBar::handle:vertical {
-    background: #ff7d87;
-    min-height: 30px;
-    border-radius: 3px; 
-    margin: 2px;
-}
-
-QScrollBar::handle:vertical:hover {
-    background: #e66a74; /* Slightly darker shade for hover effect */
-}
-
-QScrollBar:horizontal {
-    border: none;
-    background: #fdfdfd;
-    height: 10px;
-}
-
-QScrollBar::handle:horizontal {
-    background: #ff7d87;
-    min-width: 30px;
-    border-radius: 3px;
-    margin: 2px;
-}
-
-QScrollBar::handle:horizontal:hover {
-    background: #e66a74;
-}
-
-/* Remove scrollbar arrows and extra space */
-QScrollBar::add-line, QScrollBar::sub-line {
-    width: 0px; height: 0px;
-    background: none;
-    border: none;
-}
-
-QScrollBar::add-page, QScrollBar::sub-page {
-    background: none;
-}
-
-QComboBox[class=&quot;combobox-main&quot;] {
-    height: 30px;
-    border: 1px solid #999;
-    border-radius: 15px; /* Fully rounded pills */
-    padding-left: 10px;
-    background-color: #ffffff;
-    color: #333333;
-    font: 10pt &quot;Inter Medium&quot;; /* Consolidated font settings */
-    selection-background-color: #7eb4d7;
-}
-
-QComboBox:focus {
-    border: 1px solid #007BFF;
-}
-
-QComboBox:hover {
-    border: 1px solid #3498db;
-}
-
-QComboBox::drop-down {
-    subcontrol-origin: padding;
-    subcontrol-position: top right;
-    width: 30px;
-    border-left-width: 0px;
-    /* Match the 15px border-radius of the main control */
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
-}
-
-QComboBox::down-arrow {
-    image: url(:/Images/Images/caret-down.png);
-    border: none;
-    width: 8px;
-    height: 8px;
-}
-
-QComboBox QAbstractItemView {
-    background-color: white !important;
-    border: 1px solid #999;
-    selection-background-color: #7eb4d7;
-    selection-color: #ffffff;
-    outline: 0; /* Removes the ugly dotted focus border */
-}
-
-QComboBox QAbstractItemView::item {
-    padding-left: 10px;
-    border-radius: 4px;
-    color: #333333;
-}
-
-/* Hover state for items inside the dropdown */
-QComboBox[class=&quot;combobox-main&quot;] QAbstractItemView::item:hover {
-    background-color: #7eb4d7;
-    color: #ffffff;
-}
-
-QSpinBox, 
-QDoubleSpinBox,
-QDateEdit {
-	font: 10pt &quot;Inter Medium&quot;;
-    height: 30px;
-    border: 1px solid #999;
-    border-radius: 15px;
-    padding: 0px 5px 0px;
-    background-color: #ffffff;
-    color: #333333;
-    selection-background-color: #7eb4d7;
-}
-
-QSpinBox:focus, 
-QDoubleSpinBox:focus,
-QDateEdit:focus {
-    border: 1px solid #007BFF;
-}
-
-QSpinBox:hover, 
-QDoubleSpinBox:hover,
-QDateEdit:hover {
-    border: 1px solid #3498db;
-}
-
-QSpinBox::up-button,
-QDoubleSpinBox::up-button,
-QDateEdit::up-button {
-    subcontrol-origin: border;
-    subcontrol-position: top right;
-    width: 8px;
-    height: 8px;
-    border-top-right-radius: 15px;
-    padding: 6px 10px 6px 2px;
-	color: rgb(119, 118, 123);
-}
-
-QSpinBox::down-button,
-QDoubleSpinBox::down-button,
-QDateEdit::down-button {
-    subcontrol-origin: border;
-    subcontrol-position: bottom right;
-    width: 8px;
-    height: 8px;
-    border-bottom-right-radius: 15px;
-    padding: 6px 10px 6px 2px;
-	color: rgb(119, 118, 123);
-}
-
-QSpinBox::up-arrow,
-QDoubleSpinBox::up-arrow,
-QDateEdit::up-arrow {
-    image: url(:/Images/Images/caret-up.png);
-    width: 8px;
-    height: 8px;
-}
-
-QSpinBox::down-arrow,
-QDoubleSpinBox::down-arrow,
-QDateEdit::down-arrow {
-    image: url(:/Images/Images/caret-down.png);
-    width: 8px;
-    height: 8px;
-}</string>
+                 <string notr="true"/>
                 </property>
                 <property name="currentIndex">
                  <number>0</number>
                 </property>
                 <widget class="QWidget" name="tab_settings">
                  <property name="styleSheet">
-                  <string notr="true">#widget_SY_header,
-#widget_SY_header_2,
-#widget_SY_header_3 {
-	background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
-			stop:0 #ffffff,
-			stop:1 #c6e9ff);
-	border: 1px solid rgb(98, 160, 234);
-	border-top-left-radius: 10px;
-	border-top-right-radius: 10px;
-}
-
-#widget_SY_body_1,
-#widget_SY_body_2,
-#widget_SY_body_3,
-#widget_SY_body_4 {
-	background-color: #fff;
-	border: 1px solid #999;
-	border-top: none;
-}
-
-#widget_SY_body_2 QDateEdit:disabled {
-	background-color: rgb(192, 191, 188);
-}
-
-QRadioButton {
-	color: black;
-	spacing: 8px;
-	padding: 0px 10px;
-	background: transparent;
-	font: 10pt &quot;Inter Medium&quot;;
-}
-
-QRadioButton::indicator {
-	border: 1px solid #999;
-	border-radius: 6px;
-}
-
-QRadioButton::indicator:hover {
-	border-color: #3b82f6;
-}
-
-QRadioButton::indicator:checked {
-	border-color: #3b82f6;
-	background-color: blue;
-}</string>
+                  <string notr="true"/>
                  </property>
                  <attribute name="title">
                   <string>Settings</string>
@@ -7606,8 +7043,8 @@ QRadioButton::indicator:checked {
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>463</width>
-                       <height>579</height>
+                       <width>461</width>
+                       <height>932</height>
                       </rect>
                      </property>
                      <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -7621,7 +7058,7 @@ QRadioButton::indicator:checked {
                        <number>0</number>
                       </property>
                       <property name="bottomMargin">
-                       <number>0</number>
+                       <number>12</number>
                       </property>
                       <item>
                        <widget class="QWidget" name="widget_SY_settings" native="true">
@@ -7657,6 +7094,9 @@ QRadioButton::indicator:checked {
                            </property>
                            <property name="styleSheet">
                             <string notr="true"/>
+                           </property>
+                           <property name="class" stdset="0">
+                            <string>gradient-header</string>
                            </property>
                            <layout class="QHBoxLayout" name="horizontalLayout_30">
                             <item>
@@ -7836,6 +7276,9 @@ QPushButton:disabled {
                            <property name="styleSheet">
                             <string notr="true"/>
                            </property>
+                           <property name="class" stdset="0">
+                            <string>gradient-body-1</string>
+                           </property>
                            <layout class="QHBoxLayout" name="horizontalLayout_31">
                             <item>
                              <widget class="QLabel" name="label_60">
@@ -7857,9 +7300,9 @@ QPushButton:disabled {
                              </widget>
                             </item>
                             <item>
-                             <widget class="QWidget" name="widget_15" native="true">
+                             <widget class="QWidget" name="widget_toggle_gp" native="true">
                               <property name="styleSheet">
-                               <string notr="true">#widget_15 {
+                               <string notr="true">#widget_toggle_gp {
     background: transparent;
 }
 
@@ -7984,6 +7427,9 @@ QPushButton:hover {
                          </item>
                          <item>
                           <widget class="QWidget" name="widget_SY_body_2" native="true">
+                           <property name="class" stdset="0">
+                            <string>gradient-body-2</string>
+                           </property>
                            <layout class="QGridLayout" name="gridLayout_3">
                             <property name="bottomMargin">
                              <number>9</number>
@@ -8053,6 +7499,9 @@ QPushButton:hover {
                               <property name="displayFormat">
                                <string>yyyy / MM / dd</string>
                               </property>
+                              <property name="class" stdset="0">
+                               <string>date-picker</string>
+                              </property>
                              </widget>
                             </item>
                             <item row="1" column="0">
@@ -8088,6 +7537,9 @@ QPushButton:hover {
                               <property name="displayFormat">
                                <string>yyyy / MM / dd</string>
                               </property>
+                              <property name="class" stdset="0">
+                               <string>date-picker</string>
+                              </property>
                              </widget>
                             </item>
                             <item row="1" column="2">
@@ -8109,6 +7561,9 @@ QPushButton:hover {
                               </property>
                               <property name="displayFormat">
                                <string>yyyy / MM / dd</string>
+                              </property>
+                              <property name="class" stdset="0">
+                               <string>date-picker</string>
                               </property>
                              </widget>
                             </item>
@@ -8152,6 +7607,9 @@ QPushButton:hover {
                               <property name="displayFormat">
                                <string>yyyy / MM / dd</string>
                               </property>
+                              <property name="class" stdset="0">
+                               <string>date-picker</string>
+                              </property>
                              </widget>
                             </item>
                             <item row="2" column="2">
@@ -8173,6 +7631,9 @@ QPushButton:hover {
                               </property>
                               <property name="displayFormat">
                                <string>yyyy / MM / dd</string>
+                              </property>
+                              <property name="class" stdset="0">
+                               <string>date-picker</string>
                               </property>
                              </widget>
                             </item>
@@ -8196,6 +7657,9 @@ QPushButton:hover {
                               <property name="displayFormat">
                                <string>yyyy / MM / dd</string>
                               </property>
+                              <property name="class" stdset="0">
+                               <string>date-picker</string>
+                              </property>
                              </widget>
                             </item>
                             <item row="2" column="1">
@@ -8217,6 +7681,9 @@ QPushButton:hover {
                               </property>
                               <property name="displayFormat">
                                <string>yyyy / MM / dd</string>
+                              </property>
+                              <property name="class" stdset="0">
+                               <string>date-picker</string>
                               </property>
                              </widget>
                             </item>
@@ -8240,6 +7707,9 @@ QPushButton:hover {
                               <property name="displayFormat">
                                <string>yyyy / MM / dd</string>
                               </property>
+                              <property name="class" stdset="0">
+                               <string>date-picker</string>
+                              </property>
                              </widget>
                             </item>
                             <item row="5" column="0">
@@ -8262,7 +7732,7 @@ QPushButton:hover {
                        </widget>
                       </item>
                       <item>
-                       <widget class="QWidget" name="widget_SY_settings_2" native="true">
+                       <widget class="QWidget" name="widget_settings_2" native="true">
                         <property name="styleSheet">
                          <string notr="true"/>
                         </property>
@@ -8283,7 +7753,7 @@ QPushButton:hover {
                           <number>0</number>
                          </property>
                          <item>
-                          <widget class="QWidget" name="widget_SY_header_2" native="true">
+                          <widget class="QWidget" name="widget_settings_2_header" native="true">
                            <property name="minimumSize">
                             <size>
                              <width>0</width>
@@ -8298,6 +7768,9 @@ QPushButton:hover {
                            </property>
                            <property name="styleSheet">
                             <string notr="true"/>
+                           </property>
+                           <property name="class" stdset="0">
+                            <string>gradient-header</string>
                            </property>
                            <layout class="QHBoxLayout" name="horizontalLayout_33">
                             <item>
@@ -8349,9 +7822,12 @@ font: 12pt &quot;Inter&quot;;</string>
                           </widget>
                          </item>
                          <item>
-                          <widget class="QWidget" name="widget_SY_body_3" native="true">
+                          <widget class="QWidget" name="widget_settings_2_body" native="true">
                            <property name="styleSheet">
                             <string notr="true"/>
+                           </property>
+                           <property name="class" stdset="0">
+                            <string>gradient-body-1</string>
                            </property>
                            <layout class="QHBoxLayout" name="horizontalLayout_34">
                             <item>
@@ -8372,36 +7848,13 @@ font: 12pt &quot;Inter&quot;;</string>
                                <cursorShape>PointingHandCursor</cursorShape>
                               </property>
                               <property name="styleSheet">
-                               <string notr="true">QPushButton {
-	font: 10pt &quot;Inter&quot;;
-	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
-                                stop:0 #ffffff, 
-                                stop:1 #d8ecf6);
-	color: black;
-	border-radius: 15px;
-	border: 1px solid rgb(154, 153, 150);
-}
-
-QPushButton:hover {
-	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
-                                stop:0 #ffffff, 
-                                stop:1 #f2f6f8);
-}
-
-QPushButton:pressed {
-    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
-                                stop:0 #dce5e9, 
-                                stop:1 #ffffff);
-}
-
-QPushButton:disabled {
-	background: #f5f5f5;
-	border: 1px solid #dcdcdc;
-	color: #aeaeae;
-}</string>
+                               <string notr="true"/>
                               </property>
                               <property name="text">
                                <string>Browse</string>
+                              </property>
+                              <property name="class" stdset="0">
+                               <string>button-normal</string>
                               </property>
                              </widget>
                             </item>
@@ -8502,7 +7955,14 @@ QPushButton:disabled {
                           </widget>
                          </item>
                          <item>
-                          <widget class="QTableView" name="tableView_LessonsCSV"/>
+                          <widget class="QTableView" name="tableView_LessonsCSV">
+                           <property name="minimumSize">
+                            <size>
+                             <width>0</width>
+                             <height>300</height>
+                            </size>
+                           </property>
+                          </widget>
                          </item>
                         </layout>
                        </widget>
@@ -8541,6 +8001,9 @@ QPushButton:disabled {
                            </property>
                            <property name="styleSheet">
                             <string notr="true"/>
+                           </property>
+                           <property name="class" stdset="0">
+                            <string>gradient-header</string>
                            </property>
                            <layout class="QHBoxLayout" name="horizontalLayout_37">
                             <item>
@@ -8657,6 +8120,9 @@ QPushButton:disabled {
                            <property name="styleSheet">
                             <string notr="true"/>
                            </property>
+                           <property name="class" stdset="0">
+                            <string>gradient-body-1</string>
+                           </property>
                            <layout class="QHBoxLayout" name="horizontalLayout_38">
                             <item>
                              <widget class="QLabel" name="label_61">
@@ -8755,6 +8221,271 @@ QPushButton:hover {
                             </item>
                             <item>
                              <spacer name="horizontalSpacer_29">
+                              <property name="orientation">
+                               <enum>Qt::Horizontal</enum>
+                              </property>
+                              <property name="sizeHint" stdset="0">
+                               <size>
+                                <width>40</width>
+                                <height>20</height>
+                               </size>
+                              </property>
+                             </spacer>
+                            </item>
+                           </layout>
+                          </widget>
+                         </item>
+                        </layout>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QWidget" name="widget_settings_appearance" native="true">
+                        <property name="styleSheet">
+                         <string notr="true"/>
+                        </property>
+                        <layout class="QVBoxLayout" name="verticalLayout_40">
+                         <property name="spacing">
+                          <number>0</number>
+                         </property>
+                         <property name="leftMargin">
+                          <number>0</number>
+                         </property>
+                         <property name="topMargin">
+                          <number>0</number>
+                         </property>
+                         <property name="rightMargin">
+                          <number>0</number>
+                         </property>
+                         <property name="bottomMargin">
+                          <number>0</number>
+                         </property>
+                         <item>
+                          <widget class="QWidget" name="widget_appearance_header" native="true">
+                           <property name="minimumSize">
+                            <size>
+                             <width>0</width>
+                             <height>50</height>
+                            </size>
+                           </property>
+                           <property name="maximumSize">
+                            <size>
+                             <width>16777215</width>
+                             <height>50</height>
+                            </size>
+                           </property>
+                           <property name="styleSheet">
+                            <string notr="true"/>
+                           </property>
+                           <property name="class" stdset="0">
+                            <string>gradient-header</string>
+                           </property>
+                           <layout class="QHBoxLayout" name="horizontalLayout_50">
+                            <item>
+                             <widget class="QLabel" name="label_57">
+                              <property name="minimumSize">
+                               <size>
+                                <width>0</width>
+                                <height>30</height>
+                               </size>
+                              </property>
+                              <property name="maximumSize">
+                               <size>
+                                <width>16777215</width>
+                                <height>30</height>
+                               </size>
+                              </property>
+                              <property name="font">
+                               <font>
+                                <family>Inter</family>
+                                <pointsize>12</pointsize>
+                                <weight>50</weight>
+                                <italic>false</italic>
+                                <bold>false</bold>
+                               </font>
+                              </property>
+                              <property name="styleSheet">
+                               <string notr="true">background: transparent; 
+font: 12pt &quot;Inter&quot;;</string>
+                              </property>
+                              <property name="text">
+                               <string>Appearance</string>
+                              </property>
+                             </widget>
+                            </item>
+                            <item>
+                             <spacer name="horizontalSpacer_34">
+                              <property name="orientation">
+                               <enum>Qt::Horizontal</enum>
+                              </property>
+                              <property name="sizeHint" stdset="0">
+                               <size>
+                                <width>40</width>
+                                <height>20</height>
+                               </size>
+                              </property>
+                             </spacer>
+                            </item>
+                           </layout>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QWidget" name="widget_appearance_body" native="true">
+                           <property name="styleSheet">
+                            <string notr="true"/>
+                           </property>
+                           <property name="class" stdset="0">
+                            <string>gradient-body-1</string>
+                           </property>
+                           <layout class="QHBoxLayout" name="horizontalLayout_51">
+                            <item>
+                             <widget class="QLabel" name="label_64">
+                              <property name="minimumSize">
+                               <size>
+                                <width>0</width>
+                                <height>30</height>
+                               </size>
+                              </property>
+                              <property name="maximumSize">
+                               <size>
+                                <width>16777215</width>
+                                <height>30</height>
+                               </size>
+                              </property>
+                              <property name="text">
+                               <string>Dark mode:</string>
+                              </property>
+                             </widget>
+                            </item>
+                            <item>
+                             <widget class="QScrollBar" name="btnDarkModeToggle">
+                              <property name="minimumSize">
+                               <size>
+                                <width>60</width>
+                                <height>24</height>
+                               </size>
+                              </property>
+                              <property name="maximumSize">
+                               <size>
+                                <width>60</width>
+                                <height>24</height>
+                               </size>
+                              </property>
+                              <property name="cursor">
+                               <cursorShape>PointingHandCursor</cursorShape>
+                              </property>
+                              <property name="styleSheet">
+                               <string notr="true">QScrollBar:horizontal {
+    background: #ccc;
+    height: 24px;
+    border-radius: 12px;
+    margin: 0px;
+}
+
+QScrollBar::handle:horizontal {
+    background: #ffffff;
+    min-width: 20px;
+    border-radius: 10px;
+    margin: 2px;
+}
+
+/* Hide scrollbar arrows */
+QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {
+    width: 0px;
+    background: none;
+}</string>
+                              </property>
+                              <property name="maximum">
+                               <number>1</number>
+                              </property>
+                              <property name="pageStep">
+                               <number>1</number>
+                              </property>
+                              <property name="orientation">
+                               <enum>Qt::Horizontal</enum>
+                              </property>
+                             </widget>
+                            </item>
+                            <item>
+                             <widget class="QLabel" name="label_darkmode">
+                              <property name="minimumSize">
+                               <size>
+                                <width>0</width>
+                                <height>30</height>
+                               </size>
+                              </property>
+                              <property name="maximumSize">
+                               <size>
+                                <width>16777215</width>
+                                <height>30</height>
+                               </size>
+                              </property>
+                              <property name="text">
+                               <string>OFF</string>
+                              </property>
+                             </widget>
+                            </item>
+                            <item>
+                             <widget class="QWidget" name="widget_28" native="true">
+                              <property name="styleSheet">
+                               <string notr="true">#widget_15 {
+    background: transparent;
+}
+
+QPushButton {
+    border: 1px solid #999;
+    padding: 4px 14px;
+    font: 10pt &quot;Inter&quot;;
+    background-color: #f0f0f0;
+}
+
+QPushButton:hover {
+    background-color: #e0e0e0;
+}
+
+#btn_manual {
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-right: none;
+}
+
+#btn_manual:checked {
+    background-color: #72D582;
+    border: 2px solid #448D50;
+    color: #000;
+}
+
+#btn_auto {
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+#btn_auto:checked {
+    background-color: #72D582;
+    border: 2px solid #448D50;
+    color: #000;
+}</string>
+                              </property>
+                              <layout class="QHBoxLayout" name="horizontalLayout_52">
+                               <property name="spacing">
+                                <number>0</number>
+                               </property>
+                               <property name="leftMargin">
+                                <number>0</number>
+                               </property>
+                               <property name="topMargin">
+                                <number>0</number>
+                               </property>
+                               <property name="rightMargin">
+                                <number>0</number>
+                               </property>
+                               <property name="bottomMargin">
+                                <number>0</number>
+                               </property>
+                              </layout>
+                             </widget>
+                            </item>
+                            <item>
+                             <spacer name="horizontalSpacer_35">
                               <property name="orientation">
                                <enum>Qt::Horizontal</enum>
                               </property>
@@ -8872,13 +8603,13 @@ QPushButton:hover {
                    <number>0</number>
                   </property>
                   <property name="leftMargin">
-                   <number>0</number>
+                   <number>12</number>
                   </property>
                   <property name="topMargin">
                    <number>0</number>
                   </property>
                   <property name="rightMargin">
-                   <number>0</number>
+                   <number>4</number>
                   </property>
                   <property name="bottomMargin">
                    <number>0</number>
@@ -8887,6 +8618,9 @@ QPushButton:hover {
                    <widget class="QTextEdit" name="textEdit">
                     <property name="styleSheet">
                      <string notr="true">border: 0px; background: transparent;</string>
+                    </property>
+                    <property name="readOnly">
+                     <bool>true</bool>
                     </property>
                     <property name="html">
                      <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
