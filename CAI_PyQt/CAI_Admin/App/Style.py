@@ -399,6 +399,10 @@ class Light_Theme:
             border-radius: 15px;
         }
 
+        *[class="widget-search-container"]:focus {
+            border: 1px solid #007bff;
+        }
+
         *[class="label-magnifying-search"] {
             background: transparent;
             border: none;
@@ -657,6 +661,35 @@ class Light_Theme:
 
         QPushButton:hover {
             background-color: #e0e0e0;
+        }
+    """
+
+    widget_remarks = """
+        #widget_remarks { 
+            border-left: 1px solid rgb(161, 161, 161);
+            border-right: 1px solid rgb(161, 161, 161);
+            background-color: rgb(246, 245, 244);
+        }
+
+        #plainTextEdit_remarks {
+            background-color: #FFF;
+            padding: 0px 5px;
+        }
+
+        #plainTextEdit_remarks:focus {
+            border: 1px solid #007bff;
+        }
+    """
+
+    widget_quizselector = """
+        #widget_quizselector {
+            background-color: rgb(192, 191, 188);
+            border-radius: 15px;
+            background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #ffffff, stop:1 #c6e9ff);
+        }
+
+        #widget_ReportsFilter {
+            background-color: transparent;
         }
     """
 
@@ -1066,6 +1099,10 @@ class Dark_Theme:
             border-radius: 15px;
         }
 
+        *[class="widget-search-container"]:focus {
+            border: 1px solid #3b82f6;
+        }
+
         *[class="label-magnifying-search"] {
             background: transparent;
             border: none;
@@ -1331,5 +1368,39 @@ class Dark_Theme:
             background-color: #c53030;
             border: 2px solid #f87171;
             color: #ffffff;
+        }
+    """
+
+    widget_remarks = """
+        #widget_remarks { 
+            border-left: 1px solid #3d3d3d;
+            border-right: 1px solid #3d3d3d;
+            background-color: #2d2d2d;
+        }
+
+        #plainTextEdit_remarks {
+            background-color: #1e1e1e;
+            color: #ffffff;
+            border: 1px solid #4a4a4a;
+            padding: 0px 5px;
+            selection-background-color: #3b82f6;
+            selection-color: #ffffff;
+        }
+
+        #plainTextEdit_remarks:focus {
+            border: 1px solid #3b82f6;
+        }
+    """
+
+    widget_quizselector = """
+        #widget_quizselector {
+            background-color: #1e293b;
+            border-radius: 15px;
+            background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #1e293b, stop:1 #0f172a);
+            border: 1px solid #3d3d3d;
+        }
+
+        #widget_ReportsFilter {
+            background-color: transparent;
         }
     """

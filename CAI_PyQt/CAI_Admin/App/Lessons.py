@@ -192,6 +192,9 @@ class Lesson:
                     item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsEditable)
                     model.setItem(row_idx, col_idx, item)
 
+                    if col_idx in [0, 3, 4, 5]:
+                        item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+
             cursor.close()
             conn.close()
             return model

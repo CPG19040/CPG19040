@@ -1,14 +1,27 @@
-import psycopg2
+import psycopg2, os
 from psycopg2 import extras
+from dotenv import load_dotenv,find_dotenv
+
 
 class DatabaseTools:
+
     def __init__(self):
+        # self.connection_config = {
+        #     'dbname'  : 'DB_CAI',
+        #     'user'    : 'postgres',
+        #     'password': '1234',
+        #     'host'    : 'localhost',
+        #     'port'    : '5432'
+        # }
+
+        load_dotenv(find_dotenv()) # Load variables from .env file into environment
+
         self.connection_config = {
-            'dbname': 'DB_CAI',
-            'user': 'postgres',
-            'password': '1234',
-            'host': 'localhost',
-            'port': '5432'
+            'dbname'  : os.getenv('DB_NAME'),
+            'user'    : os.getenv('DB_USER', 'postgres'),
+            'password': os.getenv('DB_PASSWORD'),
+            'host'    : os.getenv('DB_HOST', 'localhost'),
+            'port'    : os.getenv('DB_PORT', '5432')
         }
     
     def get_connection(self):

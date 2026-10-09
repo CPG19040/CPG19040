@@ -10,6 +10,7 @@ from PySide6.QtWebEngineWidgets import QWebEngineView
 from App.CRUDTools import DatabaseTools
 from App.MessageBox import Ui_MessageBox
 from App.CardRanking import Ui_CardRanking
+from App.CardStudent import Ui_CardStudent
 
 
 
@@ -415,128 +416,94 @@ class Utility:
 
 
 
-class CardStudent(QFrame):
-    # Define a signal that carries a string (the student's name)
+class CardStudent(QWidget, Ui_CardStudent):
     clicked = Signal(object, str)
 
-    """Custom widget representing a single card."""
     def __init__(self, name, stud_id, image, sectionName, gender):
         super().__init__()
+        self.setupUi(self)
 
-        self.setProperty("selected", False) # Initialize property
-        self.setFrameShape(QFrame.Shape.StyledPanel)
+        self.Card.setProperty("selected", False)
         self.setCursor(Qt.CursorShape.PointingHandCursor)
 
         self.app_settings = QSettings("CAI_System", "CAI_Admin_AppSettings")
         self.is_dark_mode = self.app_settings.value("dark_mode", False, type=bool)
 
-        name_css    = "font-weight: bold; font-size: 16px; background-color: transparent;"
-        _id_css     = "color: #777; font-size: 13px; background-color: transparent;"
-        section_css = "color: #777; font-size: 13px; background-color: transparent;"
+        # Set up color tokens based on mode and gender
+        is_female    = (gender.upper() == "FEMALE")
+        border_color = "#E55B90" if is_female else "#3498DB"
 
-        if self.is_dark_mode:
-            bgColor     = "rgba(52, 152, 219, 0.2)"
-            borderColor = "#3498DB"
+        if self.is_dark_mode: 
+            bg_hover    = "rgba(229, 91, 144, 0.2)" if is_female else "rgba(52, 152, 219, 0.2)"
+            card_bg     = "#2d2d2d"
+            card_border = "#4a4a4a"
+            text_name   = "#ffffff"
+            text_sub    = "#a0a0a0"
+        else: 
+            bg_hover    = "#FFE5F0" if is_female else "#E1F5FE"
+            card_bg     = "#FFFFFF"
+            card_border = "#ddd"
+            text_name   = "#000000"
+            text_sub    = "#777777"
 
-            if gender.upper() == "FEMALE":
-                bgColor     = "rgba(229, 91, 144, 0.2)"
-                borderColor = "#E55B90"
+        # Consolidated Stylesheet with fixed #ID selectors
+        self.Card.setStyleSheet(f"""
+            #Card {{
+                font: 10pt "Inter";
+                background-color: {card_bg};
+                border-radius: 10px;
+                border: 1px solid {card_border};
+            }}
 
-            self.setStyleSheet(f"""
-                CardStudent {{
-                    background-color: #2d2d2d;
-                    border-radius: 10px;
-                    border: 1px solid #4a4a4a;
-                }}
-                CardStudent:hover {{
-                    border: 1px solid {borderColor};
-                    background-color: {bgColor};
-                }}
-                /* This style applies when the custom property is true */
-                CardStudent[selected="true"] {{
-                    border: 2px solid {borderColor};
-                    background-color: {bgColor};
-                }}
-                QLabel {{
-                    color: #ffffff;
-                }}
-            """)
+            #Card:hover {{
+                border: 1px solid {border_color};
+                background-color: {bg_hover};
+            }}
 
-            name_css    = "font-weight: bold; font-size: 16px; color: #ffffff; background-color: transparent;"
-            _id_css     = "color: #a0a0a0; font-size: 13px; background-color: transparent;"
-            section_css = "color: #a0a0a0; font-size: 13px; background-color: transparent;"    
+            #Card[selected="true"] {{
+                border: 2px solid {border_color};
+                background-color: {bg_hover};
+            }}
 
-        else:
-            bgColor     = "#E1F5FE"
-            borderColor = "#3498DB"
-    
-            if gender.upper() == "FEMALE":
-                bgColor     = "#FFE5F0"
-                borderColor = "#E55B90"
+            #label_name {{
+                font-weight: bold;
+                font-size: 16px;
+                color: {text_name};
+                background-color: transparent;
+            }}
 
-            self.setStyleSheet(f"""
-                CardStudent {{
-                    background-color: #FFFFFF;
-                    border-radius: 10px;
-                    border: 1px solid #ddd;
-                }}
-                CardStudent:hover {{
-                    border: 1px solid {borderColor};
-                    background-color: {bgColor};
-                }}
-                /* This style applies when the custom property is true */
-                CardStudent[selected="true"] {{
-                    border: 2px solid {borderColor};
-                    background-color: {bgColor};
-                }}
-                QLabel {{
-                    color: #333;
-                }}
-            """)
+            #label_studentid,
+            #label_section {{
+                color: {text_sub};
+                font-size: 13px;
+                background-color: transparent;
+            }}
 
+            #label_photo {{
+                background-color: transparent;
+            }}
+        """)
+
+        # Process photo (single transformation)
         self.util = Utility()
-
         if self.util.isEmpty(image):
             image = QPixmap(u":/Images/Images/profile.png")
-            image = self.util.makeCircularPixmap(image, 80)
 
-        # Layout for the card
-        layout = QHBoxLayout(self)
-
-        self.photo = QLabel()
         circular_pixmap = self.util.makeCircularPixmap(image, 80)
-        self.photo.setPixmap(circular_pixmap)
-        self.photo.setFixedSize(80, 80)
-        self.photo.setStyleSheet("background-color: transparent;")
+        self.label_photo.setPixmap(circular_pixmap)
 
-        # Information
-        info_layout = QVBoxLayout()
-        self.name_label = QLabel(name)
-        self.name_label.setStyleSheet(name_css)
+        # Set Text Labels
+        self.label_name.setText(name)
+        self.label_studentid.setText(stud_id)
+        self.label_section.setText(sectionName)
 
-        self.label_studentid = QLabel(stud_id)
-        self.label_studentid.setStyleSheet(_id_css)
-
-        self.label_section = QLabel(sectionName)
-        self.label_section.setStyleSheet(section_css)
-
-        info_layout.addWidget(self.name_label)
-        info_layout.addWidget(self.label_studentid)
-        info_layout.addWidget(self.label_section)
-        info_layout.addStretch()
-
-        layout.addWidget(self.photo)
-        layout.addLayout(info_layout)
-        layout.addStretch()
-
-        # Ensure the widget can receive focus for keyboard navigation
         self.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
 
     def mousePressEvent(self, event):
         """Triggered when the user clicks the card."""
         if event.button() == Qt.MouseButton.LeftButton:
             self.clicked.emit(self, self.label_studentid.text())
-            super().mousePressEvent(event)
+        super().mousePressEvent(event)
 
     def focusInEvent(self, event):
         """Triggered when the card gains focus (e.g., via Tab key)."""
@@ -545,11 +512,12 @@ class CardStudent(QFrame):
         super().focusInEvent(event)
 
     def set_selected(self, selected: bool):
-        """Updates the property and refreshes the style."""
-        self.setProperty("selected", selected)
-        self.style().unpolish(self)
-        self.style().polish(self)
-        self.update()
+        """Updates property and forces style re-evaluation."""
+        if self.property("selected") != selected:
+            self.Card.setProperty("selected", selected)
+            self.style().unpolish(self.Card)
+            self.style().polish(self.Card)
+            self.update()
 
 
 

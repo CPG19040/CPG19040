@@ -448,410 +448,411 @@ class Ui_Home(object):
         self.widget_body.setObjectName(u"widget_body")
         self.widget_body.setMinimumSize(QSize(0, 100))
         self.widget_body.setStyleSheet(u"/*\n"
-"        ==========================================================================\n"
-"        1. GLOBAL & BASE STYLES\n"
-"        ==========================================================================\n"
-"        */\n"
-"        * {\n"
-"            color: #000000;\n"
-"            background-color: #deddda;\n"
-"        }\n"
+"==========================================================================\n"
+"1. GLOBAL & BASE STYLES\n"
+"==========================================================================\n"
+"*/\n"
+"* {\n"
+"    color: #000000;\n"
+"    background-color: #deddda;\n"
+"}\n"
 "\n"
-"        #widget_body {\n"
-"            border: 1px solid #7a7a7a;\n"
-"            border-left: none;\n"
-"            border-top: none;\n"
-"        }\n"
+"#widget_body {\n"
+"    border: 1px solid #7a7a7a;\n"
+"    border-left: none;\n"
+"    border-top: none;\n"
+"}\n"
 "\n"
-"        QLabel {\n"
-"            background: transparent;\n"
-"        }\n"
+"QLabel {\n"
+"    background: transparent;\n"
+"}\n"
 "\n"
-"        *[class=\"label-faded\"] {\n"
-"            color: #7c7c7c;\n"
-"            background-color: transparent;\n"
-"        }\n"
+"*[class=\"label-faded\"] {\n"
+"    color: #7c7c7c;\n"
+"    background-color: transparent;\n"
+"}\n"
 "\n"
-"        *[class=\"group-box\"] {\n"
-"            border-radius: 15px;\n"
-"            background-color: #ffffff;\n"
-"        }\n"
+"*[class=\"group-box\"] {\n"
+"    border-radius: 15px;\n"
+"    background-color: #ffffff;\n"
+"}\n"
 "\n"
-"        #grp_SectionInfo QLabel,\n"
-"        #frame_student_info QLabel,\n"
-"        #frame_contact_info QLabel {\n"
-"            font: 11pt \"Inter\";\n"
-"        }\n"
+"#grp_SectionInfo QLabel,\n"
+"#frame_student_info QLabel,\n"
+"#frame_contact_info QLabel {\n"
+"    font: 11pt \"Inter\";\n"
+"}\n"
+"\n"
+"/* \n"
+"==========================================================================\n"
+"2. BUTTONS\n"
+"==========================================================================\n"
+"*/\n"
+"/* Green Action Buttons */\n"
+"QPushButt"
+                        "on[class=\"button-green\"] {\n"
+"    color: #ffffff;\n"
+"    font: 10pt \"Inter SemiBold\";\n"
+"    padding: 0px 10px;\n"
+"    border: 1px solid #0a5128;\n"
+"    border-radius: 15px;\n"
+"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
+"                                stop:0 #1ebd5d, \n"
+"                                stop:1 #107f3f);\n"
+"}\n"
+"\n"
+"QPushButton[class=\"button-green\"]:hover {\n"
+"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
+"                                stop:0 #2ecc71, \n"
+"                                stop:1 #27ae60);\n"
+"}\n"
+"\n"
+"QPushButton[class=\"button-green\"]:pressed {\n"
+"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
+"                                stop:0 #0b572a, \n"
+"                                stop:1 #129046); \n"
+"}\n"
+"\n"
+"QPushButton[class=\"button-green\"]:disabled {\n"
+"    color: #e8f5e9;\n"
+"    background: #a5d6a7;\n"
+"    opacity: 0.6;\n"
+"}\n"
+"\n"
+"/* Normal / Default Buttons */\n"
+"*[class=\"button-normal\"] {\n"
+""
+                        "    color: #000000;\n"
+"    font: 10pt \"Inter\";\n"
+"    border: 1px solid #9a9996;\n"
+"    border-radius: 15px;\n"
+"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
+"                                stop:0 #ffffff, \n"
+"                                stop:1 #d8ecf6);\n"
+"}\n"
+"\n"
+"*[class=\"button-normal\"]:hover {\n"
+"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
+"                                stop:0 #ffffff, \n"
+"                                stop:1 #f2f6f8);\n"
+"}\n"
+"\n"
+"*[class=\"button-normal\"]:pressed {\n"
+"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
+"                                stop:0 #dce5e9, \n"
+"                                stop:1 #ffffff);\n"
+"}\n"
+"\n"
+"*[class=\"button-normal\"]:disabled {\n"
+"    color: #aeaeae;\n"
+"    border: 1px solid #dcdcdc;\n"
+"    background: #f5f5f5;\n"
+"}\n"
+"\n"
+"QLabel[class=\"accented-labels\"] {\n"
+"    background-color: rgb(255, 255, 255);\n"
+"    padding: 0px 10px 0px;\n"
+"    border-radius: 5px;\n"
+"}\n"
 "\n"
 ""
-                        "        /* \n"
-"        ==========================================================================\n"
-"        2. BUTTONS\n"
-"        ==========================================================================\n"
-"        */\n"
-"        /* Green Action Buttons */\n"
-"        QPushButton[class=\"button-green\"] {\n"
-"            color: #ffffff;\n"
-"            font: 10pt \"Inter SemiBold\";\n"
-"            padding: 0px 10px;\n"
-"            border: 1px solid #0a5128;\n"
-"            border-radius: 15px;\n"
-"            background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
-"                                        stop:0 #1ebd5d, \n"
-"                                        stop:1 #107f3f);\n"
-"        }\n"
+                        "/*\n"
+"==========================================================================\n"
+"3. FORM CONTROLS (SpinBoxes, ComboBoxes, DateEdits, RadioButtons)\n"
+"==========================================================================\n"
+"*/\n"
+"QComboBox[class=\"combobox-main\"],\n"
+"QSpinBox,\n"
+"QDoubleSpinBox,\n"
+"QDateEdit {\n"
+"    height: 30px;\n"
+"    padding: 0px 5px 0px 10px;\n"
+"    color: #333333;\n"
+"    font: 10pt \"Inter SemiBold\";\n"
+"    background-color: #ffffff;\n"
+"    border: 1px solid #999999;\n"
+"    border-radius: 15px;\n"
+"    selection-background-color: #7eb4d7;\n"
+"}\n"
 "\n"
-"        QPushButton[class=\"button-green\"]:hover {\n"
-"            background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
-"                                        stop:0 #2ecc71, \n"
-"                                        stop:1 #27ae60);\n"
-"        }\n"
+"QComboBox[class=\"combobox-main\"]:hover,\n"
+"QSpinBox:hover,\n"
+"QDoubleSpinBox:hover,\n"
+"QDateEdit:hover {\n"
+"    border: 1px solid #3498db;\n"
+"}\n"
 "\n"
-"        QPushButton[class=\"button-gre"
-                        "en\"]:pressed {\n"
-"            background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
-"                                        stop:0 #0b572a, \n"
-"                                        stop:1 #129046); \n"
-"        }\n"
+"QComboBox[class=\"combobox-main\"]:focus,\n"
+"QSpinBox:focus,\n"
+"QDoubleSpinBox:focus,\n"
+"QDateEdit:focus {\n"
+"    border: 1px solid #007bff;\n"
+"}\n"
 "\n"
-"        QPushButton[class=\"button-green\"]:disabled {\n"
-"            color: #e8f5e9;\n"
-"            background: #a5d6a7;\n"
-"            opacity: 0.6;\n"
-"        }\n"
+"/* Dropdown Subcontrols */\n"
+"QComboBox::drop-down,\n"
+"QDoubleSpinBox::drop-down,\n"
+"QDateEdit:"
+                        ":drop-down {\n"
+"    subcontrol-origin: padding;\n"
+"    subcontrol-position: top right;\n"
+"    width: 30px;\n"
+"    border-left-width: 0px;\n"
+"    border-top-right-radius: 15px;\n"
+"    border-bottom-right-radius: 15px;\n"
+"}\n"
 "\n"
-"        /* Normal / Default Buttons */\n"
-"        *[class=\"button-normal\"] {\n"
-"            color: #000000;\n"
-"            font: 10pt \"Inter\";\n"
-"            border: 1px solid #9a9996;\n"
-"            border-radius: 15px;\n"
-"            background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
-"                                        stop:0 #ffffff, \n"
-"                                        stop:1 #d8ecf6);\n"
-"        }\n"
+"QSpinBox::up-button,\n"
+"QDoubleSpinBox::up-button,\n"
+"QDateEdit::up-button {\n"
+"    subcontrol-origin: border;\n"
+"    subcontrol-position: top right;\n"
+"    width: 8px;\n"
+"    height: 8px;\n"
+"    padding: 6px 10px 6px 2px;\n"
+"    color: #77767b;\n"
+"    border-top-right-radius: 15px;\n"
+"}\n"
 "\n"
-"        *[class=\"button-normal\"]:hover {\n"
-"            background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
-"                                        stop:0 #ffffff, \n"
-""
-                        "                                        stop:1 #f2f6f8);\n"
-"        }\n"
+"QSpinBox::down-button,\n"
+"QDoubleSpinBox::down-button,\n"
+"QDateEdit::down-button {\n"
+"    subcontrol-origin: border;\n"
+"    subcontrol-position: bottom right;\n"
+"    width: 8px;\n"
+"    height: 8px;\n"
+"    padding: 6px 10px 6px 2px;\n"
+"    color: #77767b;\n"
+"    border-bottom-right-radius: 15px;\n"
+"}\n"
 "\n"
-"        *[class=\"button-normal\"]:pressed {\n"
-"            background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
-"                                        stop:0 #dce5e9, \n"
-"                                        stop:1 #ffffff);\n"
-"        }\n"
+"/* Control Arrows */\n"
+"QComboBox::down-arrow,\n"
+"QSpinBox::down-arrow,\n"
+"QDoubleSpinBox::down-arrow,\n"
+"QDateEdit::down-arrow {\n"
+"    image: url(:/Imag"
+                        "es/Images/caret-down.png);\n"
+"    width: 8px;\n"
+"    height: 8px;\n"
+"    border: none;\n"
+"}\n"
 "\n"
-"        *[class=\"button-normal\"]:disabled {\n"
-"            color: #aeaeae;\n"
-"            border: 1px solid #dcdcdc;\n"
-"            background: #f5f5f5;\n"
-"        }\n"
+"QSpinBox::up-arrow,\n"
+"QDoubleSpinBox::up-arrow,\n"
+"QDateEdit::up-arrow {\n"
+"    image: url(:/Images/Images/caret-up.png);\n"
+"    width: 8px;\n"
+"    height: 8px;\n"
+"}\n"
 "\n"
-"        QLabel[class=\"accented-labels\"] {\n"
-"            background-color: rgb(255, 255, 255);\n"
-"            padding: 0px 10px 0px;\n"
-"            border-radius: 5px;\n"
-"        }\n"
+"/* ComboBox Item View Popup */\n"
+"QComboBox QAbstractItemView {\n"
+"    outline: 0;\n"
+"    border: 1px solid #999999;\n"
+"    background-color: #ffffff !important;\n"
+"    selection-color: #ffffff;\n"
+"    selection-background-color: #7eb4d7;\n"
+"}\n"
 "\n"
-"        /*\n"
-"        ==========================================================================\n"
-"        3. FORM CONTROLS (SpinBoxes, ComboBoxes, DateEdits, RadioButtons)\n"
-"        ==========================================================================\n"
-"        */\n"
-"        QComboBox[class=\"c"
-                        "ombobox-main\"],\n"
-"        QSpinBox,\n"
-"        QDoubleSpinBox,\n"
-"        QDateEdit {\n"
-"            height: 30px;\n"
-"            padding: 0px 5px 0px 10px;\n"
-"            color: #333333;\n"
-"            font: 10pt \"Inter SemiBold\";\n"
-"            background-color: #ffffff;\n"
-"            border: 1px solid #999999;\n"
-"            border-radius: 15px;\n"
-"            selection-background-color: #7eb4d7;\n"
-"        }\n"
+"QComboBox QAbstractItemView::item {\n"
+"    padding-left: 10px;\n"
+"    color: #333333;\n"
+"    border-radius: 4px;\n"
+"}\n"
 "\n"
-"        QComboBox[class=\"combobox-main\"]:hover,\n"
-"        QSpinBox:hover,\n"
-"        QDoubleSpinBox:hover,\n"
-"        QDateEdit:hover {\n"
-"            border: 1px solid #3498db;\n"
-"        }\n"
+"QComboBox[class=\"combobox-main\"] QAbstractItemView::item:hover {\n"
+"    color: #ffffff;\n"
+"    background-color: #7eb4d7;\n"
+"}\n"
 "\n"
-"        QComboBox[class=\"combobox-main\"]:focus,\n"
-"        QSpinBox:focus,\n"
-"        QDoubleSpinBox:focus,\n"
-"        QDateEdit:focus {\n"
-"            border: 1px solid #007bff;\n"
-"        }\n"
+"/* Radio Buttons */\n"
+"QRadioButton {\n"
+"    color: #000000;\n"
+"    font: 10pt \"Inter Medium\";\n"
+"    spacing: 8px;\n"
+"    padding: 0px 10px;\n"
+"    background: transparent;\n"
+"}\n"
 "\n"
-"        /* Dropdown Subcontrols */\n"
-"        QComboBox::drop-down,\n"
-"        QDoubleSpinBox::drop-down,\n"
-"        QDateEdit::drop-down {\n"
-"            subcontr"
-                        "ol-origin: padding;\n"
-"            subcontrol-position: top right;\n"
-"            width: 30px;\n"
-"            border-left-width: 0px;\n"
-"            border-top-right-radius: 15px;\n"
-"            border-bottom-right-radius: 15px;\n"
-"        }\n"
+"QRadioBut"
+                        "ton::indicator {\n"
+"    border: 1px solid #999999;\n"
+"    border-radius: 6px;\n"
+"}\n"
 "\n"
-"        QSpinBox::up-button,\n"
-"        QDoubleSpinBox::up-button,\n"
-"        QDateEdit::up-button {\n"
-"            subcontrol-origin: border;\n"
-"            subcontrol-position: top right;\n"
-"            width: 8px;\n"
-"            height: 8px;\n"
-"            padding: 6px 10px 6px 2px;\n"
-"            color: #77767b;\n"
-"            border-top-right-radius: 15px;\n"
-"        }\n"
+"QRadioButton::indicator:hover {\n"
+"    border-color: #3b82f6;\n"
+"}\n"
 "\n"
-"        QSpinBox::down-button,\n"
-"        QDoubleSpinBox::down-button,\n"
-"        QDateEdit::down-button {\n"
-"            subcontrol-origin: border;\n"
-"            subcontrol-position: bottom right;\n"
-"            width: 8px;\n"
-"            height: 8px;\n"
-"            padding: 6px 10px 6px 2px;\n"
-"            color: #77767b;\n"
-"            border-bottom-right-r"
-                        "adius: 15px;\n"
-"        }\n"
+"QRadioButton::indicator:checked {\n"
+"    border-color: #3b82f6;\n"
+"    background-color: #0000ff;\n"
+"}\n"
 "\n"
-"        /* Control Arrows */\n"
-"        QComboBox::down-arrow,\n"
-"        QSpinBox::down-arrow,\n"
-"        QDoubleSpinBox::down-arrow,\n"
-"        QDateEdit::down-arrow {\n"
-"            image: url(:/Images/Images/caret-down.png);\n"
-"            width: 8px;\n"
-"            height: 8px;\n"
-"            border: none;\n"
-"        }\n"
+"/* ==========================================================================\n"
+"4. SEARCH WIDGETS\n"
+"========================================================================== */\n"
+"*[class=\"widget-search-container\"] {\n"
+"    background-color: #ffffff;\n"
+"    border: 1px solid #999999;\n"
+"    border-radius: 15px;\n"
+"}\n"
 "\n"
-"        QSpinBox::up-arrow,\n"
-"        QDoubleSpinBox::up-arrow,\n"
-"        QDateEdit::up-arrow {\n"
-"            image: url(:/Images/Images/caret-up.png);\n"
-"            width: 8px;\n"
-"            height: 8px;\n"
-"        }\n"
+"*[class=\"widget-search-container\"]:focus {\n"
+"    border: 1px solid #007bff;\n"
+"}\n"
 "\n"
-"        /* ComboBox Item View Popup */\n"
-"        QComboBox QAbstractItemView {\n"
-"            outline: 0;\n"
-"            border: 1px solid #999999;\n"
-"            background-color: #ffffff !important;\n"
-"            selection-color: #ffffff;\n"
-"            selection-background-color: #7eb4d7;\n"
-"        }\n"
+"*[class=\"label-magnifying-search\"] {\n"
+"    background: transparent;\n"
+"    border: none;\n"
+"}\n"
 "\n"
-"        QComboBox QAbstractItemView::item {\n"
-"            padding-left: 10px;\n"
-""
-                        "            color: #333333;\n"
-"            border-radius: 4px;\n"
-"        }\n"
+"*[class=\"textbox-search\"] {\n"
+"    background: transparent;\n"
+"    border: none;\n"
+"}\n"
 "\n"
-"        QComboBox[class=\"combobox-main\"] QAbstractItemView::item:hover {\n"
-"            color: #ffffff;\n"
-"            background-color: #7eb4d7;\n"
-"        }\n"
+"*[class=\"button-clear-search\"] {\n"
+"    background: transparent;\n"
+"    border-radius: 10p"
+                        "x;\n"
+"}\n"
 "\n"
-"        /* Radio Buttons */\n"
-"        QRadioButton {\n"
-"            color: #000000;\n"
-"            font: 10pt \"Inter Medium\";\n"
-"            spacing: 8px;\n"
-"            padding: 0px 10px;\n"
-"            background: transparent;\n"
-"        }\n"
+"*[class=\"button-clear-search\"]:hover {\n"
+"    background-color: #ffc0c0;\n"
+"}\n"
 "\n"
-"        QRadioButton::indicator {\n"
-"            border: 1px solid #999999;\n"
-"            border-radius: 6px;\n"
-"        }\n"
+"*[class=\"button-clear-search\"]:pressed {\n"
+"    background-color: #ffd2d2;\n"
+"}\n"
 "\n"
-"        QRadioButton::indicator:hover {\n"
-"            border-color: #3b82f6;\n"
-"        }\n"
+"/* ==========================================================================\n"
+"5. CONTAINERS & PANELS\n"
+"========================================================================== */\n"
+"*[class=\"gradient-header\"] {\n"
+"    border: 1px solid #62a0ea;\n"
+"    border-top-left-radius: 10px;\n"
+"    border-top-right-radius: 10px;\n"
+"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
+"                                stop:0 #ffffff, \n"
+"                                stop:1 #c6e9ff);\n"
+"}\n"
 "\n"
-"        QRadioButton::indicator:checked {\n"
-"            border-color: #3b82f6;\n"
-"            background-color: #0000ff;\n"
-"        }\n"
+"*[class=\"gradient-body-1\"],\n"
+"*[class=\"gradient-body-2\"] {\n"
+"    background-color: #ffffff;\n"
+"    border: 1px solid #999999;\n"
+"    border-top: none;\n"
+"}\n"
 "\n"
-"        /* ==========================================================================\n"
-"        4. SEARCH WIDGETS\n"
-""
-                        "        ========================================================================== */\n"
-"        *[class=\"widget-search-container\"] {\n"
-"            background-color: #ffffff;\n"
-"            border: 1px solid #999999;\n"
-"            border-radius: 15px;\n"
-"        }\n"
+"*[class=\"gradient-body-2\"] QDateEdit:disabled {\n"
+"    background-color: #c0bfbc;\n"
+"}\n"
 "\n"
-"        *[class=\"label-magnifying-search\"] {\n"
-"            background: transparent;\n"
-"            border: none;\n"
-"        }\n"
+"/* ============================"
+                        "==============================================\n"
+"6. TABLES & HEADERS\n"
+"========================================================================== */\n"
+"QTableView {\n"
+"    outline: none;\n"
+"    border: 1px solid #a1a1a1;\n"
+"    gridline-color: #f0f0f0;\n"
+"    background-color: #ffffff;\n"
+"    selection-color: #000000;\n"
+"    selection-background-color: rgba(38, 162, 105, 0.2);\n"
+"}\n"
 "\n"
-"        *[class=\"textbox-search\"] {\n"
-"            background: transparent;\n"
-"            border: none;\n"
-"        }\n"
+"/* Hide Vertical Headers (Row Numbers) */\n"
+"QHeaderView:vertical,\n"
+"QHeaderView::section:vertical {\n"
+"    width: 0px;\n"
+"    border: none;\n"
+"}\n"
 "\n"
-"        *[class=\"button-clear-search\"] {\n"
-"            background: transparent;\n"
-"            border-radius: 10px;\n"
-"        }\n"
+"/* Horizontal Header */\n"
+"QHeaderView::section:horizontal {\n"
+"    padding: 6px;\n"
+"    color: #000000;\n"
+"    font-weight: bold;\n"
+"    background-color: #f6f5f4;\n"
+"}\n"
 "\n"
-"        *[class=\"button-clear-search\"]:hover {\n"
-"            background-color: #ffc0c0;\n"
-"        }\n"
+"/* ==========================================================================\n"
+"7. SCROLL AREA & SCROLLBARS\n"
+"========================================================================== */\n"
+"QScrollArea { \n"
+"    border: none;\n"
+"    border-radius: 20px;\n"
+"    bac"
+                        "kground-color: #deddda;\n"
+"}\n"
 "\n"
-"        *[class=\"button-clear-search\"]:pressed {\n"
-"            background-color: #ffd2d2;\n"
-"        }\n"
+"QScrollBar:vertical {\n"
+"    width: 10px;\n"
+"    margin: 0px;\n"
+"    border: none;\n"
+"    border-radius: 5px;\n"
+"    background: #ffffff;\n"
+"}\n"
 "\n"
-"        /* ==========================================================================\n"
-"   "
-                        "     5. CONTAINERS & PANELS\n"
-"        ========================================================================== */\n"
-"        *[class=\"gradient-header\"] {\n"
-"            border: 1px solid #62a0ea;\n"
-"            border-top-left-radius: 10px;\n"
-"            border-top-right-radius: 10px;\n"
-"            background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
-"                                        stop:0 #ffffff, \n"
-"                                        stop:1 #c6e9ff);\n"
-"        }\n"
+"QScrollBar::handle:vertical {\n"
+"    min-height: 20px;\n"
+"    border-radius: 5px;\n"
+"    background: #7a7a7a;\n"
+"}\n"
 "\n"
-"        *[class=\"gradient-body-1\"],\n"
-"        *[class=\"gradient-body-2\"] {\n"
-"            background-color: #ffffff;\n"
-"            border: 1px solid #999999;\n"
-"            border-top: none;\n"
-"        }\n"
+"QScrollBar::handle:vertical:hover {\n"
+"    background: #574939;\n"
+"}\n"
 "\n"
-"        *[class=\"gradient-body-2\"] QDateEdit:disabled {\n"
-"            background-color: #c0bfbc;\n"
-"        }\n"
+"QScrollBar:horizontal {\n"
+"    height: 10px;\n"
+"    margin: 0px;\n"
+"    border: none;\n"
+"    border-radius: 5px;\n"
+"    background: #ffffff;\n"
+"}\n"
 "\n"
-"        /* ==========================================================================\n"
-"        6. TABLES & HEADERS\n"
-"        ===================================="
-                        "====================================== */\n"
-"        QTableView {\n"
-"            outline: none;\n"
-"            border: 1px solid #a1a1a1;\n"
-"            gridline-color: #f0f0f0;\n"
-"            background-color: #ffffff;\n"
-"            selection-color: #000000;\n"
-"            selection-background-color: rgba(38, 162, 105, 0.2);\n"
-"        }\n"
+"QScrollBar::handle:horizontal {\n"
+"    min-width: 20px;\n"
+"    border-radius: 5px;\n"
+"    background: #7a7a7a;\n"
+"}\n"
 "\n"
-"        /* Hide Vertical Headers (Row Numbers) */\n"
-"        QHeaderView:vertical,\n"
-"        QHeaderView::section:vertical {\n"
-"            width: 0px;\n"
-"            border: none;\n"
-"        }\n"
+"QScrollBar::handle:horizontal:hover {\n"
+"    background: #574939;\n"
+"}\n"
 "\n"
-"        /* Horizontal Header */\n"
-"        QHeaderView::section:horizontal {\n"
-"            padding: 6px;\n"
-"            color: #000000;\n"
-"            font-weight: bold;\n"
-"            background-color: #f6f5f4;\n"
-"        }\n"
+"QScrollBar::add-line:vertical, \n"
+"QScrollBar::sub-line:vertical,\n"
+"QScrollBar::add-line:horizontal, \n"
+"QScrollBar::sub-line:horizontal {\n"
+"    width: 0px;\n"
+"    height: 0px;\n"
+"    border: none;\n"
+"    background: none;\n"
+"}\n"
 "\n"
-"        /* ==========================================================================\n"
-"        7. SCROLL AREA & SCROLLBARS\n"
-"        ========================================================================== */\n"
-""
-                        "        QScrollArea { \n"
-"            border: none;\n"
-"            border-radius: 20px;\n"
-"            background-color: #deddda;\n"
-"        }\n"
+"Q"
+                        "ScrollBar::add-page:vertical, \n"
+"QScrollBar::sub-page:vertical,\n"
+"QScrollBar::add-page:horizontal, \n"
+"QScrollBar::sub-page:horizontal {\n"
+"    background: none;\n"
+"}\n"
 "\n"
-"        QScrollBar:vertical {\n"
-"            width: 10px;\n"
-"            margin: 0px;\n"
-"            border: none;\n"
-"            border-radius: 5px;\n"
-"            background: #ffffff;\n"
-"        }\n"
+"QScrollArea QWidget #qt_scrollarea_corner {\n"
+"    background: transparent;\n"
+"    border: none;\n"
+"}\n"
 "\n"
-"        QScrollBar::handle:vertical {\n"
-"            min-height: 20px;\n"
-"            border-radius: 5px;\n"
-"            background: #7a7a7a;\n"
-"        }\n"
-"\n"
-"        QScrollBar::handle:vertical:hover {\n"
-"            background: #574939;\n"
-"        }\n"
-"\n"
-"        QScrollBar:horizontal {\n"
-"            height: 10px;\n"
-"            margin: 0px;\n"
-"            border: none;\n"
-"            border-radius: 5px;\n"
-"            background: #ffffff;\n"
-"        }\n"
-"\n"
-"        QScrollBar::handle:horizontal {\n"
-"            min-width: 20px;\n"
-"            border-radius: 5px;\n"
-"            background: #7a7a7a;\n"
-"        }\n"
-"\n"
-""
-                        "        QScrollBar::handle:horizontal:hover {\n"
-"            background: #574939;\n"
-"        }\n"
-"\n"
-"        QScrollBar::add-line:vertical, \n"
-"        QScrollBar::sub-line:vertical,\n"
-"        QScrollBar::add-line:horizontal, \n"
-"        QScrollBar::sub-line:horizontal {\n"
-"            width: 0px;\n"
-"            height: 0px;\n"
-"            border: none;\n"
-"            background: none;\n"
-"        }\n"
-"\n"
-"        QScrollBar::add-page:vertical, \n"
-"        QScrollBar::sub-page:vertical,\n"
-"        QScrollBar::add-page:horizontal, \n"
-"        QScrollBar::sub-page:horizontal {\n"
-"            background: none;\n"
-"        }\n"
-"\n"
-"        QScrollArea QWidget #qt_scrollarea_corner {\n"
-"            background: transparent;\n"
-"            border: none;\n"
-"        }\n"
-"\n"
-"        #scrollArea_id #scrollAreaWidgetContents_2,\n"
-"        #scrollArea_mc #scrollAreaWidgetContents_3,\n"
-"        #scrollArea_tf #scrollAreaWidgetContents_4 {\n"
-"            background-color: #c8c7c5;\n"
-"          "
-                        "  border-radius: 10px;\n"
-"        }")
+"#scrollArea_id #scrollAreaWidgetContents_2,\n"
+"#scrollArea_mc #scrollAreaWidgetContents_3,\n"
+"#scrollArea_tf #scrollAreaWidgetContents_4 {\n"
+"    background-color: #c8c7c5;\n"
+"    border-radius: 10px;\n"
+"}")
         self.verticalLayout_37 = QVBoxLayout(self.widget_body)
         self.verticalLayout_37.setSpacing(0)
         self.verticalLayout_37.setObjectName(u"verticalLayout_37")
@@ -2302,7 +2303,7 @@ class Ui_Home(object):
         self.scrollArea_tf.setWidgetResizable(True)
         self.scrollAreaWidgetContents_4 = QWidget()
         self.scrollAreaWidgetContents_4.setObjectName(u"scrollAreaWidgetContents_4")
-        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 320, 499))
+        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 100, 30))
         self.verticalLayout_13 = QVBoxLayout(self.scrollAreaWidgetContents_4)
         self.verticalLayout_13.setObjectName(u"verticalLayout_13")
         self.scrollArea_tf.setWidget(self.scrollAreaWidgetContents_4)
@@ -2328,7 +2329,7 @@ class Ui_Home(object):
         self.scrollArea_mc.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 319, 499))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 100, 30))
         self.verticalLayout_12 = QVBoxLayout(self.scrollAreaWidgetContents_3)
         self.verticalLayout_12.setObjectName(u"verticalLayout_12")
         self.scrollArea_mc.setWidget(self.scrollAreaWidgetContents_3)
@@ -2341,7 +2342,7 @@ class Ui_Home(object):
         self.scrollArea_id.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 320, 499))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 100, 30))
         self.verticalLayout_11 = QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_11.setObjectName(u"verticalLayout_11")
         self.scrollArea_id.setWidget(self.scrollAreaWidgetContents_2)
@@ -2449,7 +2450,7 @@ class Ui_Home(object):
         self.label_Adviser.setSizePolicy(sizePolicy1)
         self.label_Adviser.setMinimumSize(QSize(150, 0))
         self.label_Adviser.setMaximumSize(QSize(16777215, 30))
-        self.label_Adviser.setStyleSheet(u"padding: 0px 10px 0px; background-color: rgb(246, 245, 244); border-radius: 10px;")
+        self.label_Adviser.setStyleSheet(u"")
         self.label_Adviser.setTextFormat(Qt.PlainText)
         self.label_Adviser.setWordWrap(False)
 
@@ -2537,30 +2538,28 @@ class Ui_Home(object):
 
         self.horizontalLayout_36.addWidget(self.widget_20)
 
-        self.widget_23 = QWidget(self.widget_22)
-        self.widget_23.setObjectName(u"widget_23")
-        self.widget_23.setMinimumSize(QSize(0, 50))
-        self.widget_23.setStyleSheet(u"#widget_23 {\n"
+        self.widget_quizselector = QWidget(self.widget_22)
+        self.widget_quizselector.setObjectName(u"widget_quizselector")
+        self.widget_quizselector.setMinimumSize(QSize(0, 50))
+        self.widget_quizselector.setStyleSheet(u"#widget_quizselector {\n"
 "	background-color: rgb(192, 191, 188);\n"
 "	border-radius: 15px;\n"
-"	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
-"                                stop:0 #ffffff, \n"
-"                                stop:1 #c6e9ff);\n"
+"	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #ffffff, stop:1 #c6e9ff);\n"
 "}\n"
 "\n"
 "#widget_ReportsFilter {\n"
 "	background-color: transparent;\n"
 "}")
-        self.verticalLayout_30 = QVBoxLayout(self.widget_23)
+        self.verticalLayout_30 = QVBoxLayout(self.widget_quizselector)
         self.verticalLayout_30.setObjectName(u"verticalLayout_30")
-        self.label_50 = QLabel(self.widget_23)
+        self.label_50 = QLabel(self.widget_quizselector)
         self.label_50.setObjectName(u"label_50")
         self.label_50.setMaximumSize(QSize(16777215, 30))
         self.label_50.setStyleSheet(u"font: 11pt \"Inter SemiBold\";")
 
         self.verticalLayout_30.addWidget(self.label_50)
 
-        self.widget_ReportsFilter = QWidget(self.widget_23)
+        self.widget_ReportsFilter = QWidget(self.widget_quizselector)
         self.widget_ReportsFilter.setObjectName(u"widget_ReportsFilter")
         self.widget_ReportsFilter.setLayoutDirection(Qt.LeftToRight)
         self.horizontalLayout_9 = QHBoxLayout(self.widget_ReportsFilter)
@@ -2618,7 +2617,7 @@ class Ui_Home(object):
         self.verticalLayout_30.addWidget(self.widget_ReportsFilter)
 
 
-        self.horizontalLayout_36.addWidget(self.widget_23)
+        self.horizontalLayout_36.addWidget(self.widget_quizselector)
 
         self.horizontalSpacer_7 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
@@ -2852,10 +2851,10 @@ class Ui_Home(object):
         self.verticalLayout_18.setSpacing(0)
         self.verticalLayout_18.setObjectName(u"verticalLayout_18")
         self.verticalLayout_18.setContentsMargins(0, 0, 0, 0)
-        self.widget_9 = QWidget(self.widget_6)
-        self.widget_9.setObjectName(u"widget_9")
-        self.widget_9.setMaximumSize(QSize(16777215, 70))
-        self.widget_9.setStyleSheet(u"#widget_9 { \n"
+        self.widget_remarks = QWidget(self.widget_6)
+        self.widget_remarks.setObjectName(u"widget_remarks")
+        self.widget_remarks.setMaximumSize(QSize(16777215, 70))
+        self.widget_remarks.setStyleSheet(u"#widget_remarks { \n"
 "	border-left: 1px solid rgb(161, 161, 161);\n"
 "	border-right: 1px solid rgb(161, 161, 161);\n"
 "	background-color: rgb(246, 245, 244);\n"
@@ -2865,10 +2864,10 @@ class Ui_Home(object):
 "	background-color: #FFF;\n"
 "	padding: 0px 5px;\n"
 "}")
-        self.horizontalLayout_22 = QHBoxLayout(self.widget_9)
+        self.horizontalLayout_22 = QHBoxLayout(self.widget_remarks)
         self.horizontalLayout_22.setObjectName(u"horizontalLayout_22")
         self.horizontalLayout_22.setContentsMargins(-1, 0, -1, 0)
-        self.plainTextEdit_remarks = QPlainTextEdit(self.widget_9)
+        self.plainTextEdit_remarks = QPlainTextEdit(self.widget_remarks)
         self.plainTextEdit_remarks.setObjectName(u"plainTextEdit_remarks")
         self.plainTextEdit_remarks.setMinimumSize(QSize(0, 30))
         self.plainTextEdit_remarks.setMaximumSize(QSize(16777215, 60))
@@ -2876,7 +2875,7 @@ class Ui_Home(object):
         self.horizontalLayout_22.addWidget(self.plainTextEdit_remarks)
 
 
-        self.verticalLayout_18.addWidget(self.widget_9)
+        self.verticalLayout_18.addWidget(self.widget_remarks)
 
         self.table_quiz_score_idv = QTableView(self.widget_6)
         self.table_quiz_score_idv.setObjectName(u"table_quiz_score_idv")
@@ -2913,11 +2912,7 @@ class Ui_Home(object):
         self.widget_search_7.setObjectName(u"widget_search_7")
         self.widget_search_7.setMinimumSize(QSize(0, 30))
         self.widget_search_7.setMaximumSize(QSize(16777215, 30))
-        self.widget_search_7.setStyleSheet(u"*[class=\"widget-search-container\"] {\n"
-"	background-color: #FFF;\n"
-"	border: 1px solid #999;\n"
-"	border-radius: 15px;\n"
-"}")
+        self.widget_search_7.setStyleSheet(u"")
         self.layout_search_6 = QHBoxLayout(self.widget_search_7)
         self.layout_search_6.setSpacing(0)
         self.layout_search_6.setObjectName(u"layout_search_6")
@@ -2926,10 +2921,7 @@ class Ui_Home(object):
         self.label_magnifying_stud_5.setObjectName(u"label_magnifying_stud_5")
         self.label_magnifying_stud_5.setMinimumSize(QSize(30, 30))
         self.label_magnifying_stud_5.setMaximumSize(QSize(30, 30))
-        self.label_magnifying_stud_5.setStyleSheet(u"*[class=\"label-magnifying-search\"] {\n"
-"	background: transparent;\n"
-"	border: none;\n"
-"}")
+        self.label_magnifying_stud_5.setStyleSheet(u"")
         self.label_magnifying_stud_5.setPixmap(QPixmap(u":/Images/Images/search.png"))
         self.label_magnifying_stud_5.setScaledContents(True)
         self.label_magnifying_stud_5.setMargin(5)
@@ -2940,10 +2932,7 @@ class Ui_Home(object):
         self.txt_search_user.setObjectName(u"txt_search_user")
         self.txt_search_user.setMinimumSize(QSize(0, 30))
         self.txt_search_user.setMaximumSize(QSize(16777215, 30))
-        self.txt_search_user.setStyleSheet(u"*[class=\"textbox-search\"] {\n"
-"	border: none;\n"
-"	background: transparent;\n"
-"}")
+        self.txt_search_user.setStyleSheet(u"")
 
         self.layout_search_6.addWidget(self.txt_search_user)
 
@@ -2952,18 +2941,7 @@ class Ui_Home(object):
         self.btnClearSearch_5.setMinimumSize(QSize(20, 20))
         self.btnClearSearch_5.setMaximumSize(QSize(20, 20))
         self.btnClearSearch_5.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.btnClearSearch_5.setStyleSheet(u"*[class=\"button-clear-search\"] {\n"
-"	border-radius: 10px;\n"
-"	background: transparent;\n"
-"}\n"
-"\n"
-"*[class=\"button-clear-search\"]:hover {\n"
-"	background-color: #FFC0C0;\n"
-"}\n"
-"\n"
-"*[class=\"button-clear-search\"]:pressed {\n"
-"	background-color: #FFD2D2;\n"
-"}")
+        self.btnClearSearch_5.setStyleSheet(u"")
         self.btnClearSearch_5.setIcon(icon15)
         self.btnClearSearch_5.setIconSize(QSize(14, 14))
 
@@ -3268,6 +3246,7 @@ class Ui_Home(object):
         self.dateEdit_firstgrading_start.setObjectName(u"dateEdit_firstgrading_start")
         self.dateEdit_firstgrading_start.setMinimumSize(QSize(0, 30))
         self.dateEdit_firstgrading_start.setMaximumSize(QSize(16777215, 30))
+        self.dateEdit_firstgrading_start.setFocusPolicy(Qt.StrongFocus)
         self.dateEdit_firstgrading_start.setAlignment(Qt.AlignCenter)
 
         self.gridLayout_3.addWidget(self.dateEdit_firstgrading_start, 1, 1, 1, 1)
@@ -3282,6 +3261,7 @@ class Ui_Home(object):
         self.dateEdit_fourthgrading_end.setObjectName(u"dateEdit_fourthgrading_end")
         self.dateEdit_fourthgrading_end.setMinimumSize(QSize(0, 30))
         self.dateEdit_fourthgrading_end.setMaximumSize(QSize(16777215, 30))
+        self.dateEdit_fourthgrading_end.setFocusPolicy(Qt.StrongFocus)
         self.dateEdit_fourthgrading_end.setAlignment(Qt.AlignCenter)
 
         self.gridLayout_3.addWidget(self.dateEdit_fourthgrading_end, 4, 2, 1, 1)
@@ -3290,6 +3270,7 @@ class Ui_Home(object):
         self.dateEdit_firstgrading_end.setObjectName(u"dateEdit_firstgrading_end")
         self.dateEdit_firstgrading_end.setMinimumSize(QSize(0, 30))
         self.dateEdit_firstgrading_end.setMaximumSize(QSize(16777215, 30))
+        self.dateEdit_firstgrading_end.setFocusPolicy(Qt.StrongFocus)
         self.dateEdit_firstgrading_end.setAlignment(Qt.AlignCenter)
 
         self.gridLayout_3.addWidget(self.dateEdit_firstgrading_end, 1, 2, 1, 1)
@@ -3310,6 +3291,7 @@ class Ui_Home(object):
         self.dateEdit_thirdgrading_start.setObjectName(u"dateEdit_thirdgrading_start")
         self.dateEdit_thirdgrading_start.setMinimumSize(QSize(0, 30))
         self.dateEdit_thirdgrading_start.setMaximumSize(QSize(16777215, 30))
+        self.dateEdit_thirdgrading_start.setFocusPolicy(Qt.StrongFocus)
         self.dateEdit_thirdgrading_start.setAlignment(Qt.AlignCenter)
 
         self.gridLayout_3.addWidget(self.dateEdit_thirdgrading_start, 3, 1, 1, 1)
@@ -3318,6 +3300,7 @@ class Ui_Home(object):
         self.dateEdit_secondgrading_end.setObjectName(u"dateEdit_secondgrading_end")
         self.dateEdit_secondgrading_end.setMinimumSize(QSize(0, 30))
         self.dateEdit_secondgrading_end.setMaximumSize(QSize(16777215, 30))
+        self.dateEdit_secondgrading_end.setFocusPolicy(Qt.StrongFocus)
         self.dateEdit_secondgrading_end.setAlignment(Qt.AlignCenter)
 
         self.gridLayout_3.addWidget(self.dateEdit_secondgrading_end, 2, 2, 1, 1)
@@ -3326,6 +3309,7 @@ class Ui_Home(object):
         self.dateEdit_fourthgrading_start.setObjectName(u"dateEdit_fourthgrading_start")
         self.dateEdit_fourthgrading_start.setMinimumSize(QSize(0, 30))
         self.dateEdit_fourthgrading_start.setMaximumSize(QSize(16777215, 30))
+        self.dateEdit_fourthgrading_start.setFocusPolicy(Qt.StrongFocus)
         self.dateEdit_fourthgrading_start.setAlignment(Qt.AlignCenter)
 
         self.gridLayout_3.addWidget(self.dateEdit_fourthgrading_start, 4, 1, 1, 1)
@@ -3334,6 +3318,7 @@ class Ui_Home(object):
         self.dateEdit_secondgrading_start.setObjectName(u"dateEdit_secondgrading_start")
         self.dateEdit_secondgrading_start.setMinimumSize(QSize(0, 30))
         self.dateEdit_secondgrading_start.setMaximumSize(QSize(16777215, 30))
+        self.dateEdit_secondgrading_start.setFocusPolicy(Qt.StrongFocus)
         self.dateEdit_secondgrading_start.setAlignment(Qt.AlignCenter)
 
         self.gridLayout_3.addWidget(self.dateEdit_secondgrading_start, 2, 1, 1, 1)
@@ -3342,6 +3327,7 @@ class Ui_Home(object):
         self.dateEdit_thirdgrading_end.setObjectName(u"dateEdit_thirdgrading_end")
         self.dateEdit_thirdgrading_end.setMinimumSize(QSize(0, 30))
         self.dateEdit_thirdgrading_end.setMaximumSize(QSize(16777215, 30))
+        self.dateEdit_thirdgrading_end.setFocusPolicy(Qt.StrongFocus)
         self.dateEdit_thirdgrading_end.setAlignment(Qt.AlignCenter)
 
         self.gridLayout_3.addWidget(self.dateEdit_thirdgrading_end, 3, 2, 1, 1)
@@ -3590,6 +3576,7 @@ class Ui_Home(object):
         self.doubleSpinBox_passing.setObjectName(u"doubleSpinBox_passing")
         self.doubleSpinBox_passing.setMinimumSize(QSize(0, 30))
         self.doubleSpinBox_passing.setMaximumSize(QSize(16777215, 30))
+        self.doubleSpinBox_passing.setFocusPolicy(Qt.StrongFocus)
 
         self.horizontalLayout_38.addWidget(self.doubleSpinBox_passing)
 
@@ -4008,6 +3995,7 @@ class Ui_Home(object):
         self.btnSectionDelete.setProperty(u"class", QCoreApplication.translate("Home", u"button-normal", None))
         self.label_5.setText(QCoreApplication.translate("Home", u"Adviser:", None))
         self.label_Adviser.setText("")
+        self.label_Adviser.setProperty(u"class", QCoreApplication.translate("Home", u"accented-labels", None))
         self.btnSectionEdit.setText(QCoreApplication.translate("Home", u"Edit", None))
         self.btnSectionEdit.setProperty(u"class", QCoreApplication.translate("Home", u"button-normal", None))
         self.table_section.setProperty(u"class", QCoreApplication.translate("Home", u"normal-table", None))

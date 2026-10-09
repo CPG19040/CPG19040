@@ -135,6 +135,8 @@ class Controller:
             self.ui.widget_datetime.setStyleSheet(Dark_Theme.widget_datetime)
             self.ui.widget_toggle_gp.setStyleSheet(Dark_Theme.widget_toggle_gp)
             self.ui.widget_difficulty_toggle.setStyleSheet(Dark_Theme.widget_difficulty_toggle)
+            self.ui.widget_remarks.setStyleSheet(Dark_Theme.widget_remarks)
+            self.ui.widget_quizselector.setStyleSheet(Dark_Theme.widget_quizselector)
 
         else: # Light mode
             self.home_win.setStyleSheet(Light_Theme.home_win)
@@ -147,8 +149,26 @@ class Controller:
             self.ui.widget_datetime.setStyleSheet(Light_Theme.widget_datetime)
             self.ui.widget_toggle_gp.setStyleSheet(Light_Theme.widget_toggle_gp)
             self.ui.widget_difficulty_toggle.setStyleSheet(Light_Theme.widget_difficulty_toggle)
+            self.ui.widget_remarks.setStyleSheet(Light_Theme.widget_remarks)
+            self.ui.widget_quizselector.setStyleSheet(Light_Theme.widget_quizselector)
 
     def show_home(self, user:dict):
+        # Safely tear down existing window if it already exists
+        if hasattr(self, "home_win") and self.home_win is not None:
+
+            if isValid(self.home_win):
+
+                # Stop active timers or loops to avoid firing signals into destroyed objects
+                if hasattr(self, "timer") and self.timer.isActive():
+                    self.timer.stop()
+
+                # Disconnect signals if necessary and schedule C++ deletion
+                self.home_win.hide()
+                self.home_win.setParent(None)
+                self.home_win.deleteLater()
+
+            self.home_win = None
+
         self.home_win = HomeWindow()
         self.ui = Ui_Home()
         self.ui.setupUi(self.home_win)
