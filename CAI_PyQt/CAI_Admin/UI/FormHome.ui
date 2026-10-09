@@ -1002,379 +1002,398 @@ QPushButton:hover {
           </size>
          </property>
          <property name="styleSheet">
-          <string notr="true">/* ==========================================================================
-   1. GLOBAL &amp; BASE STYLES
-   ========================================================================== */
-* {
-    color: #000000;
-    background-color: #deddda;
-}
+          <string notr="true">/*
+        ==========================================================================
+        1. GLOBAL &amp; BASE STYLES
+        ==========================================================================
+        */
+        * {
+            color: #000000;
+            background-color: #deddda;
+        }
 
-#widget_body {
-    border: 1px solid #7a7a7a;
-    border-left: none;
-    border-top: none;
-}
+        #widget_body {
+            border: 1px solid #7a7a7a;
+            border-left: none;
+            border-top: none;
+        }
 
-QLabel {
-    background: transparent;
-}
+        QLabel {
+            background: transparent;
+        }
 
-*[class=&quot;label-faded&quot;] {
-    color: #7c7c7c;
-    background-color: transparent;
-}
+        *[class=&quot;label-faded&quot;] {
+            color: #7c7c7c;
+            background-color: transparent;
+        }
 
-*[class=&quot;group-box&quot;] {
-    border-radius: 15px;
-    background-color: #ffffff;
-}
+        *[class=&quot;group-box&quot;] {
+            border-radius: 15px;
+            background-color: #ffffff;
+        }
 
-#grp_SectionInfo QLabel,
-#frame_student_info QLabel,
-#frame_contact_info QLabel {
-    font: 11pt &quot;Inter&quot;;
-}
+        #grp_SectionInfo QLabel,
+        #frame_student_info QLabel,
+        #frame_contact_info QLabel {
+            font: 11pt &quot;Inter&quot;;
+        }
 
-/* ==========================================================================
-   2. BUTTONS
-   ========================================================================== */
-/* Green Action Buttons */
-QPushButton[class=&quot;button-green&quot;] {
-    color: #ffffff;
-    font: 10pt &quot;Inter SemiBold&quot;;
-    padding: 0px 10px;
-    border: 1px solid #0a5128;
-    border-radius: 15px;
-    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
-                                stop:0 #1ebd5d, 
-                                stop:1 #107f3f);
-}
+        /* 
+        ==========================================================================
+        2. BUTTONS
+        ==========================================================================
+        */
+        /* Green Action Buttons */
+        QPushButton[class=&quot;button-green&quot;] {
+            color: #ffffff;
+            font: 10pt &quot;Inter SemiBold&quot;;
+            padding: 0px 10px;
+            border: 1px solid #0a5128;
+            border-radius: 15px;
+            background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
+                                        stop:0 #1ebd5d, 
+                                        stop:1 #107f3f);
+        }
 
-QPushButton[class=&quot;button-green&quot;]:hover {
-    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
-                                stop:0 #2ecc71, 
-                                stop:1 #27ae60);
-}
+        QPushButton[class=&quot;button-green&quot;]:hover {
+            background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
+                                        stop:0 #2ecc71, 
+                                        stop:1 #27ae60);
+        }
 
-QPushButton[class=&quot;button-green&quot;]:pressed {
-    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
-                                stop:0 #0b572a, 
-                                stop:1 #129046); 
-}
+        QPushButton[class=&quot;button-green&quot;]:pressed {
+            background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
+                                        stop:0 #0b572a, 
+                                        stop:1 #129046); 
+        }
 
-QPushButton[class=&quot;button-green&quot;]:disabled {
-    color: #e8f5e9;
-    background: #a5d6a7;
-    opacity: 0.6;
-}
+        QPushButton[class=&quot;button-green&quot;]:disabled {
+            color: #e8f5e9;
+            background: #a5d6a7;
+            opacity: 0.6;
+        }
 
-/* Normal / Default Buttons */
-*[class=&quot;button-normal&quot;] {
-    color: #000000;
-    font: 10pt &quot;Inter&quot;;
-    border: 1px solid #9a9996;
-    border-radius: 15px;
-    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
-                                stop:0 #ffffff, 
-                                stop:1 #d8ecf6);
-}
+        /* Normal / Default Buttons */
+        *[class=&quot;button-normal&quot;] {
+            color: #000000;
+            font: 10pt &quot;Inter&quot;;
+            border: 1px solid #9a9996;
+            border-radius: 15px;
+            background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
+                                        stop:0 #ffffff, 
+                                        stop:1 #d8ecf6);
+        }
 
-*[class=&quot;button-normal&quot;]:hover {
-    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
-                                stop:0 #ffffff, 
-                                stop:1 #f2f6f8);
-}
+        *[class=&quot;button-normal&quot;]:hover {
+            background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
+                                        stop:0 #ffffff, 
+                                        stop:1 #f2f6f8);
+        }
 
-*[class=&quot;button-normal&quot;]:pressed {
-    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
-                                stop:0 #dce5e9, 
-                                stop:1 #ffffff);
-}
+        *[class=&quot;button-normal&quot;]:pressed {
+            background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
+                                        stop:0 #dce5e9, 
+                                        stop:1 #ffffff);
+        }
 
-*[class=&quot;button-normal&quot;]:disabled {
-    color: #aeaeae;
-    border: 1px solid #dcdcdc;
-    background: #f5f5f5;
-}
+        *[class=&quot;button-normal&quot;]:disabled {
+            color: #aeaeae;
+            border: 1px solid #dcdcdc;
+            background: #f5f5f5;
+        }
 
-/* ==========================================================================
-   3. FORM CONTROLS (SpinBoxes, ComboBoxes, DateEdits, RadioButtons)
-   ========================================================================== */
-QComboBox[class=&quot;combobox-main&quot;],
-QSpinBox,
-QDoubleSpinBox,
-QDateEdit {
-    height: 30px;
-    padding: 0px 5px 0px 10px;
-    color: #333333;
-    font: 10pt &quot;Inter SemiBold&quot;;
-    background-color: #ffffff;
-    border: 1px solid #999999;
-    border-radius: 15px;
-    selection-background-color: #7eb4d7;
-}
+        QLabel[class=&quot;accented-labels&quot;] {
+            background-color: rgb(255, 255, 255);
+            padding: 0px 10px 0px;
+            border-radius: 5px;
+        }
 
-QComboBox[class=&quot;combobox-main&quot;]:hover,
-QSpinBox:hover,
-QDoubleSpinBox:hover,
-QDateEdit:hover {
-    border: 1px solid #3498db;
-}
+        /*
+        ==========================================================================
+        3. FORM CONTROLS (SpinBoxes, ComboBoxes, DateEdits, RadioButtons)
+        ==========================================================================
+        */
+        QComboBox[class=&quot;combobox-main&quot;],
+        QSpinBox,
+        QDoubleSpinBox,
+        QDateEdit {
+            height: 30px;
+            padding: 0px 5px 0px 10px;
+            color: #333333;
+            font: 10pt &quot;Inter SemiBold&quot;;
+            background-color: #ffffff;
+            border: 1px solid #999999;
+            border-radius: 15px;
+            selection-background-color: #7eb4d7;
+        }
 
-QComboBox[class=&quot;combobox-main&quot;]:focus,
-QSpinBox:focus,
-QDoubleSpinBox:focus,
-QDateEdit:focus {
-    border: 1px solid #007bff;
-}
+        QComboBox[class=&quot;combobox-main&quot;]:hover,
+        QSpinBox:hover,
+        QDoubleSpinBox:hover,
+        QDateEdit:hover {
+            border: 1px solid #3498db;
+        }
 
-/* Dropdown Subcontrols */
-QComboBox::drop-down,
-QDoubleSpinBox::drop-down,
-QDateEdit::drop-down {
-    subcontrol-origin: padding;
-    subcontrol-position: top right;
-    width: 30px;
-    border-left-width: 0px;
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
-}
+        QComboBox[class=&quot;combobox-main&quot;]:focus,
+        QSpinBox:focus,
+        QDoubleSpinBox:focus,
+        QDateEdit:focus {
+            border: 1px solid #007bff;
+        }
 
-QSpinBox::up-button,
-QDoubleSpinBox::up-button,
-QDateEdit::up-button {
-    subcontrol-origin: border;
-    subcontrol-position: top right;
-    width: 8px;
-    height: 8px;
-    padding: 6px 10px 6px 2px;
-    color: #77767b;
-    border-top-right-radius: 15px;
-}
+        /* Dropdown Subcontrols */
+        QComboBox::drop-down,
+        QDoubleSpinBox::drop-down,
+        QDateEdit::drop-down {
+            subcontrol-origin: padding;
+            subcontrol-position: top right;
+            width: 30px;
+            border-left-width: 0px;
+            border-top-right-radius: 15px;
+            border-bottom-right-radius: 15px;
+        }
 
-QSpinBox::down-button,
-QDoubleSpinBox::down-button,
-QDateEdit::down-button {
-    subcontrol-origin: border;
-    subcontrol-position: bottom right;
-    width: 8px;
-    height: 8px;
-    padding: 6px 10px 6px 2px;
-    color: #77767b;
-    border-bottom-right-radius: 15px;
-}
+        QSpinBox::up-button,
+        QDoubleSpinBox::up-button,
+        QDateEdit::up-button {
+            subcontrol-origin: border;
+            subcontrol-position: top right;
+            width: 8px;
+            height: 8px;
+            padding: 6px 10px 6px 2px;
+            color: #77767b;
+            border-top-right-radius: 15px;
+        }
 
-/* Control Arrows */
-QComboBox::down-arrow,
-QSpinBox::down-arrow,
-QDoubleSpinBox::down-arrow,
-QDateEdit::down-arrow {
-    image: url(:/Images/Images/caret-down.png);
-    width: 8px;
-    height: 8px;
-    border: none;
-}
+        QSpinBox::down-button,
+        QDoubleSpinBox::down-button,
+        QDateEdit::down-button {
+            subcontrol-origin: border;
+            subcontrol-position: bottom right;
+            width: 8px;
+            height: 8px;
+            padding: 6px 10px 6px 2px;
+            color: #77767b;
+            border-bottom-right-radius: 15px;
+        }
 
-QSpinBox::up-arrow,
-QDoubleSpinBox::up-arrow,
-QDateEdit::up-arrow {
-    image: url(:/Images/Images/caret-up.png);
-    width: 8px;
-    height: 8px;
-}
+        /* Control Arrows */
+        QComboBox::down-arrow,
+        QSpinBox::down-arrow,
+        QDoubleSpinBox::down-arrow,
+        QDateEdit::down-arrow {
+            image: url(:/Images/Images/caret-down.png);
+            width: 8px;
+            height: 8px;
+            border: none;
+        }
 
-/* ComboBox Item View Popup */
-QComboBox QAbstractItemView {
-    outline: 0;
-    border: 1px solid #999999;
-    background-color: #ffffff !important;
-    selection-color: #ffffff;
-    selection-background-color: #7eb4d7;
-}
+        QSpinBox::up-arrow,
+        QDoubleSpinBox::up-arrow,
+        QDateEdit::up-arrow {
+            image: url(:/Images/Images/caret-up.png);
+            width: 8px;
+            height: 8px;
+        }
 
-QComboBox QAbstractItemView::item {
-    padding-left: 10px;
-    color: #333333;
-    border-radius: 4px;
-}
+        /* ComboBox Item View Popup */
+        QComboBox QAbstractItemView {
+            outline: 0;
+            border: 1px solid #999999;
+            background-color: #ffffff !important;
+            selection-color: #ffffff;
+            selection-background-color: #7eb4d7;
+        }
 
-QComboBox[class=&quot;combobox-main&quot;] QAbstractItemView::item:hover {
-    color: #ffffff;
-    background-color: #7eb4d7;
-}
+        QComboBox QAbstractItemView::item {
+            padding-left: 10px;
+            color: #333333;
+            border-radius: 4px;
+        }
 
-/* Radio Buttons */
-QRadioButton {
-    color: #000000;
-    font: 10pt &quot;Inter Medium&quot;;
-    spacing: 8px;
-    padding: 0px 10px;
-    background: transparent;
-}
+        QComboBox[class=&quot;combobox-main&quot;] QAbstractItemView::item:hover {
+            color: #ffffff;
+            background-color: #7eb4d7;
+        }
 
-QRadioButton::indicator {
-    border: 1px solid #999999;
-    border-radius: 6px;
-}
+        /* Radio Buttons */
+        QRadioButton {
+            color: #000000;
+            font: 10pt &quot;Inter Medium&quot;;
+            spacing: 8px;
+            padding: 0px 10px;
+            background: transparent;
+        }
 
-QRadioButton::indicator:hover {
-    border-color: #3b82f6;
-}
+        QRadioButton::indicator {
+            border: 1px solid #999999;
+            border-radius: 6px;
+        }
 
-QRadioButton::indicator:checked {
-    border-color: #3b82f6;
-    background-color: #0000ff;
-}
+        QRadioButton::indicator:hover {
+            border-color: #3b82f6;
+        }
 
-/* ==========================================================================
-   4. SEARCH WIDGETS
-   ========================================================================== */
-*[class=&quot;widget-search-container&quot;] {
-    background-color: #ffffff;
-    border: 1px solid #999999;
-    border-radius: 15px;
-}
+        QRadioButton::indicator:checked {
+            border-color: #3b82f6;
+            background-color: #0000ff;
+        }
 
-*[class=&quot;label-magnifying-search&quot;] {
-    background: transparent;
-    border: none;
-}
+        /* ==========================================================================
+        4. SEARCH WIDGETS
+        ========================================================================== */
+        *[class=&quot;widget-search-container&quot;] {
+            background-color: #ffffff;
+            border: 1px solid #999999;
+            border-radius: 15px;
+        }
 
-*[class=&quot;textbox-search&quot;] {
-    background: transparent;
-    border: none;
-}
+        *[class=&quot;label-magnifying-search&quot;] {
+            background: transparent;
+            border: none;
+        }
 
-*[class=&quot;button-clear-search&quot;] {
-    background: transparent;
-    border-radius: 10px;
-}
+        *[class=&quot;textbox-search&quot;] {
+            background: transparent;
+            border: none;
+        }
 
-*[class=&quot;button-clear-search&quot;]:hover {
-    background-color: #ffc0c0;
-}
+        *[class=&quot;button-clear-search&quot;] {
+            background: transparent;
+            border-radius: 10px;
+        }
 
-*[class=&quot;button-clear-search&quot;]:pressed {
-    background-color: #ffd2d2;
-}
+        *[class=&quot;button-clear-search&quot;]:hover {
+            background-color: #ffc0c0;
+        }
 
-/* ==========================================================================
-   5. CONTAINERS &amp; PANELS
-   ========================================================================== */
-*[class=&quot;gradient-header&quot;] {
-    border: 1px solid #62a0ea;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
-                                stop:0 #ffffff, 
-                                stop:1 #c6e9ff);
-}
+        *[class=&quot;button-clear-search&quot;]:pressed {
+            background-color: #ffd2d2;
+        }
 
-*[class=&quot;gradient-body-1&quot;],
-*[class=&quot;gradient-body-2&quot;] {
-    background-color: #ffffff;
-    border: 1px solid #999999;
-    border-top: none;
-}
+        /* ==========================================================================
+        5. CONTAINERS &amp; PANELS
+        ========================================================================== */
+        *[class=&quot;gradient-header&quot;] {
+            border: 1px solid #62a0ea;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
+                                        stop:0 #ffffff, 
+                                        stop:1 #c6e9ff);
+        }
 
-*[class=&quot;gradient-body-2&quot;] QDateEdit:disabled {
-    background-color: #c0bfbc;
-}
+        *[class=&quot;gradient-body-1&quot;],
+        *[class=&quot;gradient-body-2&quot;] {
+            background-color: #ffffff;
+            border: 1px solid #999999;
+            border-top: none;
+        }
 
-/* ==========================================================================
-   6. TABLES &amp; HEADERS
-   ========================================================================== */
-QTableView {
-    outline: none;
-    border: 1px solid #a1a1a1;
-    gridline-color: #f0f0f0;
-    background-color: #ffffff;
-    selection-color: #000000;
-    selection-background-color: rgba(38, 162, 105, 0.2);
-}
+        *[class=&quot;gradient-body-2&quot;] QDateEdit:disabled {
+            background-color: #c0bfbc;
+        }
 
-/* Hide Vertical Headers (Row Numbers) */
-QHeaderView:vertical,
-QHeaderView::section:vertical {
-    width: 0px;
-    border: none;
-}
+        /* ==========================================================================
+        6. TABLES &amp; HEADERS
+        ========================================================================== */
+        QTableView {
+            outline: none;
+            border: 1px solid #a1a1a1;
+            gridline-color: #f0f0f0;
+            background-color: #ffffff;
+            selection-color: #000000;
+            selection-background-color: rgba(38, 162, 105, 0.2);
+        }
 
-/* Horizontal Header */
-QHeaderView::section:horizontal {
-    padding: 6px;
-    color: #000000;
-    font-weight: bold;
-    background-color: #f6f5f4;
-}
+        /* Hide Vertical Headers (Row Numbers) */
+        QHeaderView:vertical,
+        QHeaderView::section:vertical {
+            width: 0px;
+            border: none;
+        }
 
-/* ==========================================================================
-   7. SCROLL AREA &amp; SCROLLBARS
-   ========================================================================== */
-QScrollArea { 
-    border: none;
-    border-radius: 20px;
-    background-color: #deddda;
-}
+        /* Horizontal Header */
+        QHeaderView::section:horizontal {
+            padding: 6px;
+            color: #000000;
+            font-weight: bold;
+            background-color: #f6f5f4;
+        }
 
-QScrollBar:vertical {
-    width: 10px;
-    margin: 0px;
-    border: none;
-    border-radius: 5px;
-    background: #ffffff;
-}
+        /* ==========================================================================
+        7. SCROLL AREA &amp; SCROLLBARS
+        ========================================================================== */
+        QScrollArea { 
+            border: none;
+            border-radius: 20px;
+            background-color: #deddda;
+        }
 
-QScrollBar::handle:vertical {
-    min-height: 20px;
-    border-radius: 5px;
-    background: #7a7a7a;
-}
+        QScrollBar:vertical {
+            width: 10px;
+            margin: 0px;
+            border: none;
+            border-radius: 5px;
+            background: #ffffff;
+        }
 
-QScrollBar::handle:vertical:hover {
-    background: #574939;
-}
+        QScrollBar::handle:vertical {
+            min-height: 20px;
+            border-radius: 5px;
+            background: #7a7a7a;
+        }
 
-QScrollBar:horizontal {
-    height: 10px;
-    margin: 0px;
-    border: none;
-    border-radius: 5px;
-    background: #ffffff;
-}
+        QScrollBar::handle:vertical:hover {
+            background: #574939;
+        }
 
-QScrollBar::handle:horizontal {
-    min-width: 20px;
-    border-radius: 5px;
-    background: #7a7a7a;
-}
+        QScrollBar:horizontal {
+            height: 10px;
+            margin: 0px;
+            border: none;
+            border-radius: 5px;
+            background: #ffffff;
+        }
 
-QScrollBar::handle:horizontal:hover {
-    background: #574939;
-}
+        QScrollBar::handle:horizontal {
+            min-width: 20px;
+            border-radius: 5px;
+            background: #7a7a7a;
+        }
 
-QScrollBar::add-line:vertical, 
-QScrollBar::sub-line:vertical,
-QScrollBar::add-line:horizontal, 
-QScrollBar::sub-line:horizontal {
-    width: 0px;
-    height: 0px;
-    border: none;
-    background: none;
-}
+        QScrollBar::handle:horizontal:hover {
+            background: #574939;
+        }
 
-QScrollBar::add-page:vertical, 
-QScrollBar::sub-page:vertical,
-QScrollBar::add-page:horizontal, 
-QScrollBar::sub-page:horizontal {
-    background: none;
-}
+        QScrollBar::add-line:vertical, 
+        QScrollBar::sub-line:vertical,
+        QScrollBar::add-line:horizontal, 
+        QScrollBar::sub-line:horizontal {
+            width: 0px;
+            height: 0px;
+            border: none;
+            background: none;
+        }
 
-QScrollArea QWidget #qt_scrollarea_corner {
-    background: transparent;
-    border: none;
-}</string>
+        QScrollBar::add-page:vertical, 
+        QScrollBar::sub-page:vertical,
+        QScrollBar::add-page:horizontal, 
+        QScrollBar::sub-page:horizontal {
+            background: none;
+        }
+
+        QScrollArea QWidget #qt_scrollarea_corner {
+            background: transparent;
+            border: none;
+        }
+
+        #scrollArea_id #scrollAreaWidgetContents_2,
+        #scrollArea_mc #scrollAreaWidgetContents_3,
+        #scrollArea_tf #scrollAreaWidgetContents_4 {
+            background-color: #ffffff;
+            border-radius: 10px;
+        }</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_37">
           <property name="spacing">
@@ -4437,10 +4456,13 @@ QCheckBox::indicator:checked {
                    </size>
                   </property>
                   <property name="styleSheet">
-                   <string notr="true">background-color: rgb(255, 255, 255); padding: 0px 10px 0px; border-radius: 5px;</string>
+                   <string notr="true"/>
                   </property>
                   <property name="text">
                    <string>000</string>
+                  </property>
+                  <property name="class" stdset="0">
+                   <string>accented-labels</string>
                   </property>
                  </widget>
                 </item>
@@ -4459,7 +4481,7 @@ QCheckBox::indicator:checked {
               <item>
                <widget class="QWidget" name="widget_quiz_1" native="true">
                 <property name="styleSheet">
-                 <string notr="true">#frame_6 { background-color: transparent; }</string>
+                 <string notr="true"/>
                 </property>
                 <layout class="QHBoxLayout" name="horizontalLayout">
                  <item>
@@ -4476,51 +4498,49 @@ QCheckBox::indicator:checked {
                   </widget>
                  </item>
                  <item>
-                  <widget class="QWidget" name="widget_4" native="true">
+                  <widget class="QWidget" name="widget_difficulty_toggle" native="true">
                    <property name="styleSheet">
-                    <string notr="true">/* Base style for all difficulty buttons */
-QPushButton {
+                    <string notr="true">QPushButton {
     border: 1px solid #999;
     padding: 5px 15px;
-	font: 10pt &quot;Inter&quot;;
-    background-color: #f0f0f0; /* Default neutral color */
+    font: 10pt &quot;Inter&quot;;
+    background-color: #f0f0f0;
 }
 
-/* LEFT BUTTON (Easy) */
 QPushButton#btnEasy {
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
-    border-right: none; /* Avoid double borders in the middle */
+    border-right: none;
 }
+
 QPushButton#btnEasy:checked {
-    background-color: #72D582; /* Green */
-	border: 2px solid #448D50;
+    background-color: #72D582;
+    border: 2px solid #448D50;
     color: #000;
 }
 
-/* MIDDLE BUTTON (Average) */
 QPushButton#btnAverage {
     border-radius: 0px;
     border-right: none;
 }
+        
 QPushButton#btnAverage:checked {
-	background-color: #FFF2AC; /* Yellow */
-	border: 2px solid #FCB988;
-	color: #000;
+    background-color: #FFF2AC;
+    border: 2px solid #FCB988;
+    color: #000;
 }
 
-/* RIGHT BUTTON (Hard) */
 QPushButton#btnHard {
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
 }
+
 QPushButton#btnHard:checked {
-	background-color: #F07D75; /* Red */
-	border: 2px solid #E65247;
-	color: #000;
+	background-color: #F07D75;
+    border: 2px solid #E65247;
+    color: #000;
 }
 
-/* Hover effect */
 QPushButton:hover {
     background-color: #e0e0e0;
 }</string>
@@ -4676,13 +4696,16 @@ QPushButton:hover {
                     </size>
                    </property>
                    <property name="styleSheet">
-                    <string notr="true">background-color: rgb(255, 255, 255); padding: 0px 10px 0px; border-radius: 5px;</string>
+                    <string notr="true"/>
                    </property>
                    <property name="text">
                     <string>00</string>
                    </property>
                    <property name="alignment">
                     <set>Qt::AlignCenter</set>
+                   </property>
+                   <property name="class" stdset="0">
+                    <string>accented-labels</string>
                    </property>
                   </widget>
                  </item>
@@ -4714,13 +4737,16 @@ QPushButton:hover {
                     </size>
                    </property>
                    <property name="styleSheet">
-                    <string notr="true">background-color: rgb(255, 255, 255); padding: 0px 10px 0px; border-radius: 5px;</string>
+                    <string notr="true"/>
                    </property>
                    <property name="text">
                     <string>00</string>
                    </property>
                    <property name="alignment">
                     <set>Qt::AlignCenter</set>
+                   </property>
+                   <property name="class" stdset="0">
+                    <string>accented-labels</string>
                    </property>
                   </widget>
                  </item>
@@ -4752,13 +4778,16 @@ QPushButton:hover {
                     </size>
                    </property>
                    <property name="styleSheet">
-                    <string notr="true">background-color: rgb(255, 255, 255); padding: 0px 10px 0px; border-radius: 5px;</string>
+                    <string notr="true"/>
                    </property>
                    <property name="text">
                     <string>00</string>
                    </property>
                    <property name="alignment">
                     <set>Qt::AlignCenter</set>
+                   </property>
+                   <property name="class" stdset="0">
+                    <string>accented-labels</string>
                    </property>
                   </widget>
                  </item>
@@ -4803,10 +4832,13 @@ QPushButton:hover {
                     </size>
                    </property>
                    <property name="styleSheet">
-                    <string notr="true">background-color: rgb(255, 255, 255); padding: 0px 10px 0px; border-radius: 5px;</string>
+                    <string notr="true"/>
                    </property>
                    <property name="text">
                     <string>000</string>
+                   </property>
+                   <property name="class" stdset="0">
+                    <string>accented-labels</string>
                    </property>
                   </widget>
                  </item>
@@ -4841,7 +4873,7 @@ QPushButton:hover {
                  <item row="4" column="2">
                   <widget class="QScrollArea" name="scrollArea_tf">
                    <property name="styleSheet">
-                    <string notr="true">background-color: rgb(246, 245, 244);</string>
+                    <string notr="true"/>
                    </property>
                    <property name="widgetResizable">
                     <bool>true</bool>
@@ -4884,7 +4916,7 @@ QPushButton:hover {
                  <item row="4" column="1">
                   <widget class="QScrollArea" name="scrollArea_mc">
                    <property name="styleSheet">
-                    <string notr="true">background-color: rgb(246, 245, 244);</string>
+                    <string notr="true"/>
                    </property>
                    <property name="widgetResizable">
                     <bool>true</bool>
@@ -4905,7 +4937,7 @@ QPushButton:hover {
                  <item row="4" column="0">
                   <widget class="QScrollArea" name="scrollArea_id">
                    <property name="styleSheet">
-                    <string notr="true">background-color: rgb(246, 245, 244);</string>
+                    <string notr="true"/>
                    </property>
                    <property name="widgetResizable">
                     <bool>true</bool>

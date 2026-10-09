@@ -134,6 +134,7 @@ class Controller:
             self.ui.widget_body.setStyleSheet(Dark_Theme.widget_body)
             self.ui.widget_datetime.setStyleSheet(Dark_Theme.widget_datetime)
             self.ui.widget_toggle_gp.setStyleSheet(Dark_Theme.widget_toggle_gp)
+            self.ui.widget_difficulty_toggle.setStyleSheet(Dark_Theme.widget_difficulty_toggle)
 
         else: # Light mode
             self.home_win.setStyleSheet(Light_Theme.home_win)
@@ -145,6 +146,7 @@ class Controller:
             self.ui.widget_body.setStyleSheet(Light_Theme.widget_body)
             self.ui.widget_datetime.setStyleSheet(Light_Theme.widget_datetime)
             self.ui.widget_toggle_gp.setStyleSheet(Light_Theme.widget_toggle_gp)
+            self.ui.widget_difficulty_toggle.setStyleSheet(Light_Theme.widget_difficulty_toggle)
 
     def show_home(self, user:dict):
         self.home_win = HomeWindow()

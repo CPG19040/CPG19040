@@ -153,9 +153,11 @@ class Light_Theme:
     """
 
     widget_body = """
-        /* ==========================================================================
+        /*
+        ==========================================================================
         1. GLOBAL & BASE STYLES
-        ========================================================================== */
+        ==========================================================================
+        */
         * {
             color: #000000;
             background-color: #deddda;
@@ -187,9 +189,11 @@ class Light_Theme:
             font: 11pt "Inter";
         }
 
-        /* ==========================================================================
+        /* 
+        ==========================================================================
         2. BUTTONS
-        ========================================================================== */
+        ==========================================================================
+        */
         /* Green Action Buttons */
         QPushButton[class="button-green"] {
             color: #ffffff;
@@ -249,9 +253,17 @@ class Light_Theme:
             background: #f5f5f5;
         }
 
-        /* ==========================================================================
+        QLabel[class="accented-labels"] {
+            background-color: rgb(255, 255, 255);
+            padding: 0px 10px 0px;
+            border-radius: 5px;
+        }
+
+        /*
+        ==========================================================================
         3. FORM CONTROLS (SpinBoxes, ComboBoxes, DateEdits, RadioButtons)
-        ========================================================================== */
+        ==========================================================================
+        */
         QComboBox[class="combobox-main"],
         QSpinBox,
         QDoubleSpinBox,
@@ -526,6 +538,13 @@ class Light_Theme:
             background: transparent;
             border: none;
         }
+
+        #scrollArea_id #scrollAreaWidgetContents_2,
+        #scrollArea_mc #scrollAreaWidgetContents_3,
+        #scrollArea_tf #scrollAreaWidgetContents_4 {
+            background-color: #ffffff;
+            border-radius: 10px;
+        }
     """
 
     widget_datetime = """
@@ -591,6 +610,53 @@ class Light_Theme:
             background-color: #72D582;
             border: 2px solid #448D50;
             color: #000;
+        }
+    """
+
+    widget_difficulty_toggle = """
+        QPushButton {
+            border: 1px solid #999;
+            padding: 5px 10px;
+            font: 10pt "Inter";
+            background-color: #f0f0f0;
+        }
+
+        QPushButton#btnEasy {
+            border-top-left-radius: 15px;
+            border-bottom-left-radius: 15px;
+            border-right: none;
+        }
+
+        QPushButton#btnEasy:checked {
+            background-color: #72D582;
+            border: 2px solid #448D50;
+            color: #000;
+        }
+
+        QPushButton#btnAverage {
+            border-radius: 0px;
+            border-right: none;
+        }
+
+        QPushButton#btnAverage:checked {
+            background-color: #FFF2AC;
+            border: 2px solid #FCB988;
+            color: #000;
+        }
+
+        QPushButton#btnHard {
+            border-top-right-radius: 15px;
+            border-bottom-right-radius: 15px;
+        }
+
+        QPushButton#btnHard:checked {
+            background-color: #F07D75;
+            border: 2px solid #E65247;
+            color: #000;
+        }
+
+        QPushButton:hover {
+            background-color: #e0e0e0;
         }
     """
 
@@ -851,9 +917,18 @@ class Dark_Theme:
             background: #222225;
         }
 
-        /* ==========================================================================
+        QLabel[class="accented-labels"] {
+            color: #ffffff;
+            background-color: #2b2b30;
+            padding: 0px 10px 0px;
+            border-radius: 5px;
+        }
+
+        /*
+        ==========================================================================
         3. FORM CONTROLS (SpinBoxes, ComboBoxes, DateEdits, RadioButtons)
-        ========================================================================== */
+        ==========================================================================
+        */
         QComboBox[class="combobox-main"],
         QSpinBox,
         QDoubleSpinBox,
@@ -1134,6 +1209,13 @@ class Dark_Theme:
             background: transparent;
             border: none;
         }
+
+        #scrollArea_id #scrollAreaWidgetContents_2,
+        #scrollArea_mc #scrollAreaWidgetContents_3,
+        #scrollArea_tf #scrollAreaWidgetContents_4 {
+            background-color: #2b2b30;
+            border-radius: 10px;
+        }
     """
 
     widget_datetime = """
@@ -1200,6 +1282,54 @@ class Dark_Theme:
         #btn_auto:checked {
             background-color: #27ae60;
             border: 2px solid #1ebd5d;
+            color: #ffffff;
+        }
+    """
+
+    widget_difficulty_toggle = """
+        QPushButton {
+            border: 1px solid #4a4a4a;
+            padding: 5px 10px;
+            font: 10pt "Inter";
+            background-color: #2d2d2d;
+            color: #ffffff;
+        }
+
+        QPushButton:hover {
+            background-color: #3d3d3d;
+        }
+
+        QPushButton#btnEasy {
+            border-top-left-radius: 15px;
+            border-bottom-left-radius: 15px;
+            border-right: none;
+        }
+
+        QPushButton#btnEasy:checked {
+            background-color: #27ae60;
+            border: 2px solid #28da6f;
+            color: #ffffff;
+        }
+
+        QPushButton#btnAverage {
+            border-radius: 0px;
+            border-right: none;
+        }
+
+        QPushButton#btnAverage:checked {
+            background-color: #d97706;
+            border: 2px solid #f59e0b;
+            color: #ffffff;
+        }
+
+        QPushButton#btnHard {
+            border-top-right-radius: 15px;
+            border-bottom-right-radius: 15px;
+        }
+
+        QPushButton#btnHard:checked {
+            background-color: #c53030;
+            border: 2px solid #f87171;
             color: #ffffff;
         }
     """
