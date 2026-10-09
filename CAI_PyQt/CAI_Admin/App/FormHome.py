@@ -848,7 +848,7 @@ class Ui_Home(object):
 "        #scrollArea_id #scrollAreaWidgetContents_2,\n"
 "        #scrollArea_mc #scrollAreaWidgetContents_3,\n"
 "        #scrollArea_tf #scrollAreaWidgetContents_4 {\n"
-"            background-color: #ffffff;\n"
+"            background-color: #c8c7c5;\n"
 "          "
                         "  border-radius: 10px;\n"
 "        }")
@@ -1985,6 +1985,7 @@ class Ui_Home(object):
         self.table_lesson.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.table_lesson.setSortingEnabled(True)
         self.table_lesson.verticalHeader().setVisible(False)
+        self.table_lesson.verticalHeader().setMinimumSectionSize(40)
 
         self.verticalLayout.addWidget(self.table_lesson)
 
@@ -2631,6 +2632,7 @@ class Ui_Home(object):
         self.table_quizcompletionstat.setStyleSheet(u"")
         self.table_quizcompletionstat.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.table_quizcompletionstat.setSortingEnabled(True)
+        self.table_quizcompletionstat.verticalHeader().setMinimumSectionSize(40)
 
         self.verticalLayout_7.addWidget(self.table_quizcompletionstat)
 
@@ -2736,6 +2738,7 @@ class Ui_Home(object):
         self.table_student_score_idv.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.table_student_score_idv.setSortingEnabled(True)
         self.table_student_score_idv.verticalHeader().setVisible(False)
+        self.table_student_score_idv.verticalHeader().setMinimumSectionSize(40)
 
         self.verticalLayout_20.addWidget(self.table_student_score_idv)
 
@@ -2881,6 +2884,7 @@ class Ui_Home(object):
         self.table_quiz_score_idv.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.table_quiz_score_idv.setSortingEnabled(True)
         self.table_quiz_score_idv.verticalHeader().setVisible(False)
+        self.table_quiz_score_idv.verticalHeader().setMinimumSectionSize(40)
 
         self.verticalLayout_18.addWidget(self.table_quiz_score_idv)
 
@@ -3023,6 +3027,7 @@ class Ui_Home(object):
         self.table_users.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.table_users.setSortingEnabled(True)
         self.table_users.verticalHeader().setVisible(False)
+        self.table_users.verticalHeader().setMinimumSectionSize(40)
         self.table_users.verticalHeader().setDefaultSectionSize(40)
 
         self.verticalLayout_17.addWidget(self.table_users)
@@ -3757,6 +3762,7 @@ class Ui_Home(object):
         self.table_AuditTrail.setWordWrap(True)
         self.table_AuditTrail.horizontalHeader().setCascadingSectionResizes(True)
         self.table_AuditTrail.verticalHeader().setVisible(False)
+        self.table_AuditTrail.verticalHeader().setMinimumSectionSize(40)
 
         self.verticalLayout_15.addWidget(self.table_AuditTrail)
 
@@ -3776,6 +3782,7 @@ class Ui_Home(object):
         self.table_student_archive.setWordWrap(True)
         self.table_student_archive.horizontalHeader().setCascadingSectionResizes(True)
         self.table_student_archive.verticalHeader().setVisible(False)
+        self.table_student_archive.verticalHeader().setMinimumSectionSize(40)
 
         self.verticalLayout_16.addWidget(self.table_student_archive)
 

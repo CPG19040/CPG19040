@@ -542,7 +542,7 @@ class Light_Theme:
         #scrollArea_id #scrollAreaWidgetContents_2,
         #scrollArea_mc #scrollAreaWidgetContents_3,
         #scrollArea_tf #scrollAreaWidgetContents_4 {
-            background-color: #ffffff;
+            background-color: #c8c7c5;
             border-radius: 10px;
         }
     """

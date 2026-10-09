@@ -2,7 +2,7 @@ import os, csv
 
 # PyQt Imports
 from PySide6.QtCore import QSettings, QTimer, QDateTime, QPoint, QEasingCurve, QPropertyAnimation, QParallelAnimationGroup, Qt, QDate
-from PySide6.QtWidgets import QMainWindow, QHeaderView, QDialog, QFileDialog, QApplication, QButtonGroup, QLabel, QSizePolicy, QSpacerItem
+from PySide6.QtWidgets import QHBoxLayout, QMainWindow, QHeaderView, QDialog, QFileDialog, QApplication, QButtonGroup, QLabel, QSizePolicy, QSpacerItem, QWidget
 from PySide6.QtGui import QFontDatabase, QImage, QPixmap, QGuiApplication, QStandardItemModel, QStandardItem
 from shiboken6 import isValid
 
@@ -576,7 +576,7 @@ class Controller:
 
             if selected_indices:
                 row_index = selected_indices[0].row()
-                model = self.ui.table_users.model()
+                model     = self.ui.table_users.model()
                 school_id = model.index(row_index, 1).data()
 
                 if EditUserDialog(user, school_id, mode).exec() == QDialog.DialogCode.Accepted:
@@ -1267,12 +1267,25 @@ class Controller:
                 status_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
                 status_label.setStyleSheet("""
                     QLabel {
+                        color: #0b1f10;
                         background-color: rgb(145, 234, 168);
-                        border-radius: 14px;
+                        border-radius: 15px;
+                        min-height: 30px;
+                        max-height: 30px;
+                        padding: 0px 20px;
                     }
                 """)
+                container = QWidget()
+                container.setStyleSheet("background: transparent;")
+                
+                layout = QHBoxLayout(container)
+                layout.addWidget(status_label)
+                layout.setAlignment(Qt.AlignmentFlag.AlignCenter) 
+                
+                layout.setContentsMargins(0, 0, 0, 0)
+                
                 index = model.index(row, 3)
-                self.ui.table_quizcompletionstat.setIndexWidget(index, status_label)
+                self.ui.table_quizcompletionstat.setIndexWidget(index, container)
 
             self.ui.table_quizcompletionstat.sortByColumn(-1, Qt.AscendingOrder)
             header = self.ui.table_quizcompletionstat.horizontalHeader()

@@ -1391,7 +1391,7 @@ QPushButton:hover {
         #scrollArea_id #scrollAreaWidgetContents_2,
         #scrollArea_mc #scrollAreaWidgetContents_3,
         #scrollArea_tf #scrollAreaWidgetContents_4 {
-            background-color: #ffffff;
+            background-color: #c8c7c5;
             border-radius: 10px;
         }</string>
          </property>
@@ -4219,6 +4219,9 @@ QLabel {
                 <attribute name="verticalHeaderVisible">
                  <bool>false</bool>
                 </attribute>
+                <attribute name="verticalHeaderMinimumSectionSize">
+                 <number>40</number>
+                </attribute>
                </widget>
               </item>
               <item>
@@ -5659,6 +5662,9 @@ QPushButton:hover {
                     <property name="class" stdset="0">
                      <string>normal-table</string>
                     </property>
+                    <attribute name="verticalHeaderMinimumSectionSize">
+                     <number>40</number>
+                    </attribute>
                    </widget>
                   </item>
                  </layout>
@@ -5964,6 +5970,9 @@ QPushButton:hover {
                        </property>
                        <attribute name="verticalHeaderVisible">
                         <bool>false</bool>
+                       </attribute>
+                       <attribute name="verticalHeaderMinimumSectionSize">
+                        <number>40</number>
                        </attribute>
                       </widget>
                      </item>
@@ -6314,6 +6323,9 @@ background-color: rgb(98, 160, 234);</string>
                           </property>
                           <attribute name="verticalHeaderVisible">
                            <bool>false</bool>
+                          </attribute>
+                          <attribute name="verticalHeaderMinimumSectionSize">
+                           <number>40</number>
                           </attribute>
                          </widget>
                         </item>
@@ -6680,6 +6692,9 @@ background-color: rgb(98, 160, 234);</string>
                 </property>
                 <attribute name="verticalHeaderVisible">
                  <bool>false</bool>
+                </attribute>
+                <attribute name="verticalHeaderMinimumSectionSize">
+                 <number>40</number>
                 </attribute>
                 <attribute name="verticalHeaderDefaultSectionSize">
                  <number>40</number>
@@ -8237,6 +8252,9 @@ QPushButton:hover {
                     <attribute name="verticalHeaderVisible">
                      <bool>false</bool>
                     </attribute>
+                    <attribute name="verticalHeaderMinimumSectionSize">
+                     <number>40</number>
+                    </attribute>
                    </widget>
                   </item>
                  </layout>
@@ -8274,6 +8292,9 @@ QPushButton:hover {
                     </attribute>
                     <attribute name="verticalHeaderVisible">
                      <bool>false</bool>
+                    </attribute>
+                    <attribute name="verticalHeaderMinimumSectionSize">
+                     <number>40</number>
                     </attribute>
                    </widget>
                   </item>

@@ -3,7 +3,7 @@ import psycopg2
 
 from PySide6.QtGui import QStandardItemModel, QStandardItem, QImage, QPixmap, QKeySequence, QShortcut
 from PySide6.QtWidgets import (QHBoxLayout, QLabel, QLineEdit, QButtonGroup, QFileDialog, QFrame, QDialog)
-from PySide6.QtCore import Qt, QSize, Signal
+from PySide6.QtCore import QSettings, Qt, QSize, Signal
 
 from App.CRUDTools import DatabaseTools
 from App.Tools import Utility, NoScrollComboBox, CustomMessageBox
@@ -372,7 +372,6 @@ class Quiz:
                 model.setItem(row_idx, col_idx, item)
 
         return model, rows_completed
-
 
 
 
@@ -1288,6 +1287,7 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
             if conn: conn.close()
 
 
+
 class CardQuiz(QFrame, Ui_CardQuiz):
     """Custom widget representing a single card."""
 
@@ -1297,19 +1297,47 @@ class CardQuiz(QFrame, Ui_CardQuiz):
     def __init__(self, item_type):
         super().__init__()
         self.setupUi(self)
+        self.setFocusPolicy(Qt.FocusPolicy.StrongFocus) # Ensure the widget can receive focus for keyboard navigation
 
         self.util = Utility()
 
         self.item_type = item_type
-        self.idKey = None
-        self.itemno = 0
-        self.question = ""
-        self.choices = ""
-        self.answer = ""
-        self.imageQ = None
+        self.idKey     = None
+        self.itemno    = 0
+        self.question  = ""
+        self.choices   = ""
+        self.answer    = ""
+        self.imageQ    = None
 
-        # Ensure the widget can receive focus for keyboard navigation
-        self.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
+        self.app_settings = QSettings("CAI_System", "CAI_Admin_AppSettings")
+        self.is_dark_mode = self.app_settings.value("dark_mode", False, type=bool)
+
+        if self.is_dark_mode:
+            self.Card.setStyleSheet("""
+                #Card {
+                    font: 10pt "Inter";
+                    background-color: #404047;
+                    border-radius: 10px;
+                    border: 1px solid #4a4a4a;
+                }
+
+                QLabel {
+                    color: #ffffff;
+                }
+            """)
+        else:
+            self.Card.setStyleSheet("""
+                #Card {
+                    font: 10pt "Inter";
+                    background-color: #FFF;
+                    border-radius: 10px;
+                    border: 1px solid #ddd;
+                }
+
+                QLabel {
+                    color: #333;
+                }
+            """)
 
     def displayAttributes(self):
         self.label_itemno.setText(f"ITEM {self.itemno}")
@@ -1320,7 +1348,7 @@ class CardQuiz(QFrame, Ui_CardQuiz):
 
         if self.answer:
             layout = QHBoxLayout()
-            lbl = QLabel("Answer:")
+            lbl    = QLabel("Answer:")
             lbl.setMaximumSize(QSize(55, 55))
             lbl.setStyleSheet("font-weight: bold")
             lbl_ans = QLabel(self.answer)

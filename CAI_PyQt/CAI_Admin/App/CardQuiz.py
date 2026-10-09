@@ -23,13 +23,23 @@ class Ui_CardQuiz(object):
     def setupUi(self, CardQuiz):
         if not CardQuiz.objectName():
             CardQuiz.setObjectName(u"CardQuiz")
-        CardQuiz.resize(508, 191)
+        CardQuiz.resize(469, 143)
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Minimum)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(CardQuiz.sizePolicy().hasHeightForWidth())
+        CardQuiz.setSizePolicy(sizePolicy)
+        CardQuiz.setMinimumSize(QSize(0, 143))
+        CardQuiz.setMaximumSize(QSize(500, 500))
         CardQuiz.setStyleSheet(u"background: transparent;")
         self.horizontalLayout = QHBoxLayout(CardQuiz)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.Card = QFrame(CardQuiz)
         self.Card.setObjectName(u"Card")
+        sizePolicy.setHeightForWidth(self.Card.sizePolicy().hasHeightForWidth())
+        self.Card.setSizePolicy(sizePolicy)
+        self.Card.setMinimumSize(QSize(0, 143))
         self.Card.setStyleSheet(u"#Card {\n"
 "	font: 10pt \"Inter\";\n"
 "	background-color: #FFF;\n"
@@ -46,6 +56,9 @@ class Ui_CardQuiz(object):
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
         self.frame_2 = QFrame(self.Card)
         self.frame_2.setObjectName(u"frame_2")
+        sizePolicy.setHeightForWidth(self.frame_2.sizePolicy().hasHeightForWidth())
+        self.frame_2.setSizePolicy(sizePolicy)
+        self.frame_2.setMinimumSize(QSize(0, 50))
         self.frame_2.setFrameShape(QFrame.StyledPanel)
         self.frame_2.setFrameShadow(QFrame.Raised)
         self.layout_body_text = QVBoxLayout(self.frame_2)
@@ -66,6 +79,13 @@ class Ui_CardQuiz(object):
 
         self.label_question = QLabel(self.frame_2)
         self.label_question.setObjectName(u"label_question")
+        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.label_question.sizePolicy().hasHeightForWidth())
+        self.label_question.setSizePolicy(sizePolicy1)
+        self.label_question.setMinimumSize(QSize(0, 50))
+        self.label_question.setMaximumSize(QSize(500, 500))
         self.label_question.setStyleSheet(u"padding: 0px 10px 0px;")
         self.label_question.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
         self.label_question.setWordWrap(True)
