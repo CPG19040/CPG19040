@@ -1,8 +1,9 @@
 import os, sys, subprocess, csv
 from functools import partial
 from pathlib import Path
+from App.Logger import setup_logger
 
-from PySide6.QtWidgets import QVBoxLayout, QHBoxLayout, QLabel, QFrame, QFileDialog, QWidget, QMainWindow, QDialog, QComboBox
+from PySide6.QtWidgets import QFileDialog, QWidget, QMainWindow, QDialog, QComboBox
 from PySide6.QtGui import QPixmap, QPainter, QColor, QPen, QPainterPath, QFont
 from PySide6.QtCore import QIODevice, QSettings, Qt, Signal, QDate, QUrl, QRectF, QPoint, QPropertyAnimation, QEasingCurve, QFile
 from PySide6.QtWebEngineWidgets import QWebEngineView
@@ -13,6 +14,7 @@ from App.CardRanking import Ui_CardRanking
 from App.CardStudent import Ui_CardStudent
 
 
+logger = setup_logger("CAI_System", "admin_activity.log")
 
 class Utility:
 
@@ -48,7 +50,7 @@ class Utility:
         full_path = cai_admin_dir / "LessonImages" / file_name
 
         if not os.path.exists(full_path):
-            print(f"[Warning] read_image_file_bytes(): File not found: {full_path}")
+            logger.warning(f"read_image_file_bytes(): File not found: {full_path}", exc_info=True)
             return b""
         
         file = QFile(str(full_path))
@@ -173,7 +175,7 @@ class Utility:
             add_empty (bool): If True, adds a blank row at the top of the list.
         """
         if not sql:
-            print("[Error] populate_pulldown(): SQL query is empty.")
+            logger.error(f"populate_pulldown(): SQL query is empty.", exc_info=True)
             return
 
         pulldown.clear()
@@ -197,7 +199,7 @@ class Utility:
                         pulldown.setCurrentIndex(idx)
 
         except Exception as e:
-            print(f"[Error] populate_pulldown(): {e}")
+            logger.error(f"populate_pulldown(): {e}", exc_info=True)
 
         finally:
             if conn:
@@ -387,7 +389,7 @@ class Utility:
         )
 
         if not file_path:
-            print("Export cancelled by user.")
+            logger.info("Export cancelled by user.")
             return "Cancelled"
 
         headers = [
@@ -406,11 +408,10 @@ class Utility:
                 writer.writerow(headers)
             
             message = f"Template successfully saved to:\n{file_path}"
-            print(f"Successfully exported template to '{file_path}'")
             
         except Exception as e:
             message = f"Failed to save file:\n{str(e)}"
-            print(f"Error exporting template: {e}")
+            logger.error(f"Error exporting template: {e}", exc_info=True)
 
         return message
 
@@ -534,7 +535,7 @@ class WickPlayer(QMainWindow):
         if os.path.exists(file_path):
             self.browser.setUrl(QUrl.fromLocalFile(file_path))
         else:
-            print(f"Error: {file_path} not found.")
+            logger.error(f"{file_path} not found.", exc_info=True)
 
         self.setCentralWidget(self.browser)
 
@@ -794,7 +795,7 @@ class CrossPlatformPrinter:
                 # Extracts the printer queue names from the lpstat utility output
                 return [line.split()[0] for line in result.stdout.splitlines() if line]
         except Exception as e:
-            print(f"Error fetching printers: {e}")
+            logger.error(f"Error fetching printers: {e}", exc_info=True)
             return []
 
     def send_to_printer(self, file_path, printer_name=None):

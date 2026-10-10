@@ -1,11 +1,12 @@
 import psycopg2, os
 from psycopg2 import extras
 from dotenv import load_dotenv,find_dotenv
-
+from App.Logger import setup_logger
 
 class DatabaseTools:
 
     def __init__(self):
+        self.logger = setup_logger("CAI_System", "admin_activity.log")
         # self.connection_config = {
         #     'dbname'  : 'DB_CAI',
         #     'user'    : 'postgres',
@@ -40,7 +41,7 @@ class DatabaseTools:
                 return cur.fetchall()
 
         except Exception as e:
-            print(f"Database Error: {e}")
+            self.logger.error(f"DatabaseTools().fetch_all(): {e}", exc_info=True)
             return []
 
         finally:
@@ -61,7 +62,7 @@ class DatabaseTools:
                 conn.rollback()
 
             err = f"Database Error: {e}"
-            print(err)
+            self.logger.error(f"DatabaseTools().execute_query(): {e}", exc_info=True)
 
         finally:
             if conn:
@@ -78,7 +79,7 @@ class DatabaseTools:
             return cur, conn
 
         except Exception as e:
-            print(f"Database Error: {e}")
+            self.logger.error(f"DatabaseTools().retrieve_records(): {e}", exc_info=True)
             return None, None
        
 

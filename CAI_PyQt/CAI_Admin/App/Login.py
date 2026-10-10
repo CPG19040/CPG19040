@@ -4,6 +4,7 @@ from passlib.hash import bcrypt
 from App.FormLogIn import Ui_FormLogin
 from App.CRUDTools import DatabaseTools
 from App.Tools import Utility, CustomMessageBox
+from App.Logger import setup_logger
 
 class Login(QMainWindow, Ui_FormLogin):
     login_success = Signal(object)
@@ -11,6 +12,8 @@ class Login(QMainWindow, Ui_FormLogin):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+
+        self.logger = setup_logger("CAI_System", "admin_activity.log")
 
         self.setWindowFlags(Qt.WindowType.FramelessWindowHint) # Remove OS default window frame
         self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground, True)
@@ -90,7 +93,7 @@ class Login(QMainWindow, Ui_FormLogin):
             return None
 
         except Exception as e:
-            print(f"Database error: {e}")
+            self.logger.error(f"Login().authenticate_user(): {e}", exc_info=True)
             return None
             
         finally:

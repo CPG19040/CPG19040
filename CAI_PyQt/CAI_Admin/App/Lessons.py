@@ -60,10 +60,10 @@ class Lesson:
                     row_errors = []
 
                     # Validation checks
-                    if not row.get("TITLE"):          row_errors.append("Lesson Title is required.")
+                    if not row.get("TITLE"): row_errors.append("Lesson Title is required.")
                     if not row.get("GRADING PERIOD"): row_errors.append("Grading Period is required.")
-                    if not row.get("CHAPTER"):        row_errors.append("Chapter is required.")
-                    if not row.get("NUMBER"):         row_errors.append("Lesson Number is required.")
+                    if not row.get("CHAPTER"): row_errors.append("Chapter is required.")
+                    if not row.get("NUMBER"): row_errors.append("Lesson Number is required.")
 
                     if row_errors:
                         # Tracks which specific row had the issue
@@ -169,6 +169,7 @@ class Lesson:
             records = cursor.fetchall()
             model = QStandardItemModel(len(records), len(headers))
             model.setHorizontalHeaderLabels(headers)
+            row_pixmaps = []
 
             for row_idx, row_data in enumerate(records):
                 for col_idx, value in enumerate(row_data):
@@ -184,8 +185,9 @@ class Lesson:
                                 pixmap.load(str(value))
 
                             if not pixmap.isNull():
-                                scaled = pixmap.scaled(25, 25, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)
+                                scaled = pixmap.scaled(30, 30, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)
                                 item.setData(scaled, Qt.ItemDataRole.DecorationRole)
+                                row_pixmaps.append(row_idx)
                     else:
                         item.setText(str(value) if value is not None else "")
 
@@ -197,7 +199,7 @@ class Lesson:
 
             cursor.close()
             conn.close()
-            return model
+            return model, row_pixmaps
 
         if conn: conn.close()
         return None

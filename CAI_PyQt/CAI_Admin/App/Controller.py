@@ -13,6 +13,7 @@ from App.Login import Login
 from App.Tools import CardStudent, Utility, CustomMessageBox, CrossPlatformPrinter, CardRanking
 from App.CRUDTools import DatabaseTools
 from App.Report import StudentListReporter, QuizReporter
+from App.Logger import setup_logger
 
 # Dialogs
 from App.StudentDialog import Student, AddNewStudentDialog, StudentEditorDialog
@@ -29,6 +30,7 @@ class Controller:
     def __init__(self):
         self.user_settings = QSettings("CAI_System", "CAI_Admin_UserInfo")
         self.app_settings  = QSettings("CAI_System", "CAI_Admin_AppSettings")
+        self.logger        = setup_logger("CAI_System", "admin_activity.log")
         self.util          = Utility()
         self.db_tools      = DatabaseTools()
 
@@ -153,6 +155,8 @@ class Controller:
             self.ui.widget_quizselector.setStyleSheet(Light_Theme.widget_quizselector)
 
     def show_home(self, user:dict):
+        self.logger.info("Initializing Admin Dashboard window...")
+
         # Safely tear down existing window if it already exists
         if hasattr(self, "home_win") and self.home_win is not None:
 
@@ -558,14 +562,14 @@ class Controller:
                     if font_id != -1:
                         loaded_count += 1
                     else:
-                        print(f"❌ Failed to load font: {f}")
+                        self.logger.error(f"Failed to load font: {f}")
 
             if loaded_count > 0:
-                print(f"✅ {loaded_count} font(s) loaded successfully.")
+                self.logger.info(f"{loaded_count} font(s) loaded successfully.")
             else:
-                print("⚠️ Font folder found, but no valid fonts were loaded.")
+                self.logger.warning(f"Font folder found, but no valid fonts were loaded.")
         else:
-            print(f"⚠️ Font directory not found at: {path}")
+            self.logger.warning(f"Font directory not found at: {path}")
 
     def add_user(self, user):
 
@@ -898,10 +902,24 @@ class Controller:
 
     def displayLessons(self, searchText:str=""):
         lesson = Lesson()
-        model = lesson.retrieve_lessons_table(searchText)
+        model, row_pixmaps = lesson.retrieve_lessons_table(searchText)
 
         if model:
             self.ui.table_lesson.setModel(model)
+
+            for row in row_pixmaps:
+                index     = model.index(row, 1)
+                cell_data = model.data(index, Qt.ItemDataRole.DecorationRole)
+                label_img = QLabel(pixmap=cell_data)
+                label_img.setAlignment(Qt.AlignmentFlag.AlignCenter)
+                container = QWidget()
+                container.setStyleSheet("background: transparent;")
+                layout = QHBoxLayout(container)
+                layout.addWidget(label_img)
+                layout.setAlignment(Qt.AlignmentFlag.AlignCenter) 
+                layout.setContentsMargins(0, 0, 0, 0)
+                model.setData(index, None, Qt.ItemDataRole.DecorationRole)
+                self.ui.table_lesson.setIndexWidget(index, container)
 
             # --- CONNECT THE DOUBLE CLICK SIGNAL ---
             # Disconnect old connection safely to prevent stacking event behaviors
@@ -1301,9 +1319,7 @@ class Controller:
                 layout = QHBoxLayout(container)
                 layout.addWidget(status_label)
                 layout.setAlignment(Qt.AlignmentFlag.AlignCenter) 
-                
                 layout.setContentsMargins(0, 0, 0, 0)
-                
                 index = model.index(row, 3)
                 self.ui.table_quizcompletionstat.setIndexWidget(index, container)
 

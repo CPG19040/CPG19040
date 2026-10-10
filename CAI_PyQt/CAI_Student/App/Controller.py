@@ -1,6 +1,8 @@
 import os
+from App.Logger import setup_logger
+
 from PySide6.QtCore import QSettings, QPoint, QEasingCurve, QPropertyAnimation, QParallelAnimationGroup, Qt, QUrl, QEvent, QObject, QDate
-from PySide6.QtWidgets import QMainWindow, QButtonGroup, QWidget
+from PySide6.QtWidgets import QMainWindow, QButtonGroup
 from PySide6.QtGui import QFontDatabase, QImage, QPixmap
 from PySide6.QtMultimedia import QSoundEffect, QMediaPlayer, QAudioOutput
 
@@ -20,9 +22,10 @@ class Controller:
     GRADING_PERIOD = 0
 
     def __init__(self):
-        self.settings = QSettings("CAI_System", "CAI_Student_App")
-        self.util = Utility()
-        self.db_tools = DatabaseTools()
+        self.settings   = QSettings("CAI_System", "CAI_Student_App")
+        self.logger     = setup_logger("CAI_System", "student_activity.log")
+        self.util       = Utility()
+        self.db_tools   = DatabaseTools()
         self.audio_path = self.util.get_resource_path(os.path.join("..", "Audio"))
 
         self.login_win = Login()
