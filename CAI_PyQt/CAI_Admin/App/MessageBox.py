@@ -54,6 +54,12 @@ class Ui_MessageBox(object):
 "	border-top-right-radius: 12px;\n"
 "	border: 1px solid #d6d6d6;\n"
 "	border-bottom: none;\n"
+"}\n"
+"\n"
+"#label_windowTitle {\n"
+"	background: transparent;\n"
+"	color: rgb(0, 0, 0);\n"
+"	font: 11pt \"Inter SemiBold\";\n"
 "}")
         self.dlg_frame_header.setFrameShape(QFrame.StyledPanel)
         self.dlg_frame_header.setFrameShadow(QFrame.Raised)
@@ -89,9 +95,7 @@ class Ui_MessageBox(object):
         font.setBold(False)
         font.setItalic(False)
         self.label_windowTitle.setFont(font)
-        self.label_windowTitle.setStyleSheet(u"background: transparent;\n"
-"color: rgb(0, 0, 0);\n"
-"font: 11pt \"Inter SemiBold\";")
+        self.label_windowTitle.setStyleSheet(u"")
         self.label_windowTitle.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
 
         self.horizontalLayout_4.addWidget(self.label_windowTitle)

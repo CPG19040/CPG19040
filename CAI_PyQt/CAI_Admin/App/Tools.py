@@ -12,6 +12,7 @@ from App.CRUDTools import DatabaseTools
 from App.MessageBox import Ui_MessageBox
 from App.CardRanking import Ui_CardRanking
 from App.CardStudent import Ui_CardStudent
+from App.Style import Light_Theme, Dark_Theme
 
 
 logger = setup_logger("CAI_System", "admin_activity.log")
@@ -615,11 +616,23 @@ class CustomMessageBox(QDialog, Ui_MessageBox):
         super().__init__(parent)
         self.setupUi(self)
 
+        self.app_settings = QSettings("CAI_System", "CAI_Admin_AppSettings")
+        self.is_dark_mode = self.app_settings.value("dark_mode", False, type=bool)
+
         self.setWindowFlags(Qt.WindowType.Window | Qt.WindowType.FramelessWindowHint)
         self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground, True)
         self.setMouseTracking(True)
 
         self._connect_signals()
+
+        if self.is_dark_mode:
+            self.setStyleSheet(Dark_Theme.msgbox_main)
+            self.dlg_frame_header.setStyleSheet(Dark_Theme.msgbox_header)
+            self.widget_body.setStyleSheet(Dark_Theme.msgbox_body)
+        else:
+            self.setStyleSheet(Light_Theme.msgbox_main)
+            self.dlg_frame_header.setStyleSheet(Light_Theme.msgbox_header)
+            self.widget_body.setStyleSheet(Light_Theme.msgbox_body)
 
     def _connect_signals(self):
         """Connect button signals safely using partial to prevent lambda retention."""

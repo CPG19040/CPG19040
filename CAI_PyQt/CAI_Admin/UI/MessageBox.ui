@@ -84,6 +84,12 @@
 	border-top-right-radius: 12px;
 	border: 1px solid #d6d6d6;
 	border-bottom: none;
+}
+
+#label_windowTitle {
+	background: transparent;
+	color: rgb(0, 0, 0);
+	font: 11pt &quot;Inter SemiBold&quot;;
 }</string>
      </property>
      <property name="frameShape">
@@ -187,9 +193,7 @@
             </font>
            </property>
            <property name="styleSheet">
-            <string notr="true">background: transparent;
-color: rgb(0, 0, 0);
-font: 11pt &quot;Inter SemiBold&quot;;</string>
+            <string notr="true"/>
            </property>
            <property name="text">
             <string/>
