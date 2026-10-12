@@ -4,13 +4,14 @@ from pathlib import Path
 
 from PySide6.QtGui import QStandardItemModel, QStandardItem, QImage, QPixmap
 from PySide6.QtWidgets import QDialog, QFileDialog
-from PySide6.QtCore import QCoreApplication, Qt
+from PySide6.QtCore import QCoreApplication, QSettings, Qt
 
 from App.FormAddNewStudent import Ui_AddNewStudentDialog
 from App.FormEditStudent import Ui_EditStudentDialog
 
 from App.Tools import Utility, CircularProgress, CustomMessageBox
 from App.CRUDTools import DatabaseTools
+from App.Style import Light_Theme, Dark_Theme
 
 class Student:
 
@@ -398,8 +399,16 @@ class AddNewStudentDialog(QDialog, Ui_AddNewStudentDialog):
         self.btnMinimize.clicked.connect(self.showMinimized)
         self.btnClose.clicked.connect(self.reject)
 
-        self.util = Utility()
+        self.util     = Utility()
         self.db_tools = DatabaseTools()
+
+        self.app_settings = QSettings("CAI_System", "CAI_Admin_AppSettings")
+        self.is_dark_mode = self.app_settings.value("dark_mode", False, type=bool)
+
+        if self.is_dark_mode:
+            self.setStyleSheet(Dark_Theme.addNewStudent)
+        else:
+            self.setStyleSheet(Light_Theme.addNewStudent)
 
         self.displaySchoolYear()
         self.profile_pic = None
