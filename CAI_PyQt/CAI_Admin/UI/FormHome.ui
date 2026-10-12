@@ -3049,8 +3049,8 @@ QLabel {
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>793</width>
-                      <height>600</height>
+                      <width>100</width>
+                      <height>30</height>
                      </rect>
                     </property>
                     <layout class="QGridLayout" name="gridLayout_stud_card"/>
@@ -4893,8 +4893,8 @@ QPushButton:hover {
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>320</width>
-                      <height>499</height>
+                      <width>100</width>
+                      <height>30</height>
                      </rect>
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout_13"/>
@@ -4936,8 +4936,8 @@ QPushButton:hover {
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>319</width>
-                      <height>499</height>
+                      <width>100</width>
+                      <height>30</height>
                      </rect>
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout_12"/>
@@ -4957,8 +4957,8 @@ QPushButton:hover {
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>320</width>
-                      <height>499</height>
+                      <width>100</width>
+                      <height>30</height>
                      </rect>
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout_11"/>
@@ -5822,7 +5822,7 @@ QPushButton:hover {
                           </property>
                           <property name="maximumSize">
                            <size>
-                            <width>16777215</width>
+                            <width>400</width>
                             <height>30</height>
                            </size>
                           </property>
@@ -5955,6 +5955,19 @@ QPushButton:hover {
                            </item>
                           </layout>
                          </widget>
+                        </item>
+                        <item>
+                         <spacer name="horizontalSpacer_14">
+                          <property name="orientation">
+                           <enum>Qt::Horizontal</enum>
+                          </property>
+                          <property name="sizeHint" stdset="0">
+                           <size>
+                            <width>40</width>
+                            <height>20</height>
+                           </size>
+                          </property>
+                         </spacer>
                         </item>
                        </layout>
                       </widget>
@@ -6730,7 +6743,7 @@ background-color: rgb(98, 160, 234);</string>
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>461</width>
+                       <width>957</width>
                        <height>932</height>
                       </rect>
                      </property>
