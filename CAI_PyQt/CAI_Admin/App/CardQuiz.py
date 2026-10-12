@@ -30,7 +30,7 @@ class Ui_CardQuiz(object):
         sizePolicy.setHeightForWidth(CardQuiz.sizePolicy().hasHeightForWidth())
         CardQuiz.setSizePolicy(sizePolicy)
         CardQuiz.setMinimumSize(QSize(0, 143))
-        CardQuiz.setMaximumSize(QSize(500, 500))
+        CardQuiz.setMaximumSize(QSize(1000, 500))
         CardQuiz.setStyleSheet(u"background: transparent;")
         self.horizontalLayout = QHBoxLayout(CardQuiz)
         self.horizontalLayout.setObjectName(u"horizontalLayout")

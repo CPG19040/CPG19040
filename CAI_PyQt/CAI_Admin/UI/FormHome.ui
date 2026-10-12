@@ -2649,7 +2649,7 @@ QLabel {
                      <widget class="QWidget" name="widget_search_2" native="true">
                       <property name="minimumSize">
                        <size>
-                        <width>0</width>
+                        <width>300</width>
                         <height>30</height>
                        </size>
                       </property>
@@ -2793,6 +2793,9 @@ QLabel {
                      <spacer name="horizontalSpacer_13">
                       <property name="orientation">
                        <enum>Qt::Horizontal</enum>
+                      </property>
+                      <property name="sizeType">
+                       <enum>QSizePolicy::MinimumExpanding</enum>
                       </property>
                       <property name="sizeHint" stdset="0">
                        <size>
@@ -4890,8 +4893,8 @@ QPushButton:hover {
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>100</width>
-                      <height>30</height>
+                      <width>320</width>
+                      <height>499</height>
                      </rect>
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout_13"/>
@@ -4933,8 +4936,8 @@ QPushButton:hover {
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>100</width>
-                      <height>30</height>
+                      <width>319</width>
+                      <height>499</height>
                      </rect>
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout_12"/>
@@ -4954,8 +4957,8 @@ QPushButton:hover {
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>100</width>
-                      <height>30</height>
+                      <width>320</width>
+                      <height>499</height>
                      </rect>
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout_11"/>
@@ -6376,7 +6379,7 @@ background-color: rgb(98, 160, 234);</string>
                    </property>
                    <property name="maximumSize">
                     <size>
-                     <width>16777215</width>
+                     <width>400</width>
                      <height>30</height>
                     </size>
                    </property>
@@ -6727,7 +6730,7 @@ background-color: rgb(98, 160, 234);</string>
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>957</width>
+                       <width>461</width>
                        <height>932</height>
                       </rect>
                      </property>

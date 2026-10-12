@@ -1453,7 +1453,7 @@ class Ui_Home(object):
 
         self.widget_search_2 = QWidget(self.widget_h)
         self.widget_search_2.setObjectName(u"widget_search_2")
-        self.widget_search_2.setMinimumSize(QSize(0, 30))
+        self.widget_search_2.setMinimumSize(QSize(300, 30))
         self.widget_search_2.setMaximumSize(QSize(400, 30))
         self.widget_search_2.setStyleSheet(u"")
         self.layout_search_2 = QHBoxLayout(self.widget_search_2)
@@ -1497,7 +1497,7 @@ class Ui_Home(object):
 
         self.horizontalLayout_18.addWidget(self.widget_search_2)
 
-        self.horizontalSpacer_13 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.horizontalSpacer_13 = QSpacerItem(40, 20, QSizePolicy.Policy.MinimumExpanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_18.addItem(self.horizontalSpacer_13)
 
@@ -2303,7 +2303,7 @@ class Ui_Home(object):
         self.scrollArea_tf.setWidgetResizable(True)
         self.scrollAreaWidgetContents_4 = QWidget()
         self.scrollAreaWidgetContents_4.setObjectName(u"scrollAreaWidgetContents_4")
-        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 100, 30))
+        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 320, 499))
         self.verticalLayout_13 = QVBoxLayout(self.scrollAreaWidgetContents_4)
         self.verticalLayout_13.setObjectName(u"verticalLayout_13")
         self.scrollArea_tf.setWidget(self.scrollAreaWidgetContents_4)
@@ -2329,7 +2329,7 @@ class Ui_Home(object):
         self.scrollArea_mc.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 100, 30))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 319, 499))
         self.verticalLayout_12 = QVBoxLayout(self.scrollAreaWidgetContents_3)
         self.verticalLayout_12.setObjectName(u"verticalLayout_12")
         self.scrollArea_mc.setWidget(self.scrollAreaWidgetContents_3)
@@ -2342,7 +2342,7 @@ class Ui_Home(object):
         self.scrollArea_id.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 100, 30))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 320, 499))
         self.verticalLayout_11 = QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_11.setObjectName(u"verticalLayout_11")
         self.scrollArea_id.setWidget(self.scrollAreaWidgetContents_2)
@@ -2911,7 +2911,7 @@ class Ui_Home(object):
         self.widget_search_7 = QWidget(self.widget_header)
         self.widget_search_7.setObjectName(u"widget_search_7")
         self.widget_search_7.setMinimumSize(QSize(0, 30))
-        self.widget_search_7.setMaximumSize(QSize(16777215, 30))
+        self.widget_search_7.setMaximumSize(QSize(400, 30))
         self.widget_search_7.setStyleSheet(u"")
         self.layout_search_6 = QHBoxLayout(self.widget_search_7)
         self.layout_search_6.setSpacing(0)
@@ -3031,7 +3031,7 @@ class Ui_Home(object):
         self.scrollArea_settings.setWidgetResizable(True)
         self.scrollAreaWidgetContents_5 = QWidget()
         self.scrollAreaWidgetContents_5.setObjectName(u"scrollAreaWidgetContents_5")
-        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 957, 932))
+        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 461, 932))
         self.verticalLayout_10 = QVBoxLayout(self.scrollAreaWidgetContents_5)
         self.verticalLayout_10.setObjectName(u"verticalLayout_10")
         self.verticalLayout_10.setContentsMargins(0, 0, 0, 12)

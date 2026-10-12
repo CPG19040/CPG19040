@@ -1167,7 +1167,8 @@ class Controller:
             self.ui.table_users.sortByColumn(-1, Qt.AscendingOrder)
 
             header = self.ui.table_users.horizontalHeader()
-            header.setSectionResizeMode(QHeaderView.ResizeMode.ResizeToContents)
+            header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+            header.setSectionResizeMode(0, QHeaderView.ResizeMode.ResizeToContents)
 
     def delete_user(self, user):
         selection = self.ui.table_users.selectionModel()
