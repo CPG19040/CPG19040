@@ -1,7 +1,7 @@
 import os, csv
 
 # PyQt Imports
-from PySide6.QtCore import QSettings, QTimer, QDateTime, QPoint, QEasingCurve, QPropertyAnimation, QParallelAnimationGroup, Qt, QDate
+from PySide6.QtCore import QEvent, QSettings, QTimer, QDateTime, QPoint, QEasingCurve, QPropertyAnimation, QParallelAnimationGroup, Qt, QDate
 from PySide6.QtWidgets import QHBoxLayout, QMainWindow, QHeaderView, QDialog, QFileDialog, QApplication, QButtonGroup, QLabel, QSizePolicy, QSpacerItem, QWidget
 from PySide6.QtGui import QFontDatabase, QImage, QPixmap, QGuiApplication, QStandardItemModel, QStandardItem
 from shiboken6 import isValid
@@ -195,8 +195,28 @@ class Controller:
 
         self.ui.btnUserName.setText(f"{user['firstname']} {user['lastname']}")
         self.ui.labelPosition.setText(user['position_name'])
-
+        
         self.ui.HBoxLayout_Ranking.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+        self.home_win.search_widgets = [
+            self.ui.txt_classList_search, 
+            self.ui.txtSearchLesson, 
+            self.ui.txt_search_user, 
+            self.ui.txt_search_score_idv
+        ]
+
+        # self.home_win.search_widgets = self.search_widgets 
+
+        for widget in self.home_win.search_widgets:
+            parentWidget = widget.parentWidget()
+            parentWidget.setProperty("_hover", False)
+            parentWidget.setProperty("_focus", False)
+            parentWidget.style().unpolish(parentWidget)
+            parentWidget.style().polish(parentWidget)
+            widget.setMouseTracking(True)
+            widget.setAttribute(Qt.WidgetAttribute.WA_Hover, True)
+
+            widget.installEventFilter(self.home_win)
         
         self.card_layout = self.ui.gridLayout_stud_card
         self.card_layout.setAlignment(Qt.AlignmentFlag.AlignTop)
@@ -244,6 +264,8 @@ class Controller:
 
         if pic:
             self.ui.btnUserName.setIcon(pic)
+
+        QApplication.instance().focusChanged.connect(self.on_txtsearch_focus)
 
         # Student List
         self.ui.btnRefreshSY.clicked.connect(self.get_dynamic_grading_period_dates)
@@ -356,6 +378,26 @@ class Controller:
 
         self.login_win.close()
         self.home_win.show()
+
+    def on_txtsearch_focus(self, old_widget, now_widget):
+        if not hasattr(self, 'ui') or not hasattr(self, 'home_win') or self.home_win is None:
+            return
+
+        if now_widget in self.home_win.search_widgets:
+            parentWidget = now_widget.parentWidget()
+
+            if parentWidget:
+                parentWidget.setProperty("_focus", True)
+                parentWidget.style().unpolish(parentWidget)
+                parentWidget.style().polish(parentWidget)
+            
+        elif old_widget in self.home_win.search_widgets:
+            parentWidget = old_widget.parentWidget()
+
+            if parentWidget:
+                parentWidget.setProperty("_focus", False)
+                parentWidget.style().unpolish(parentWidget)
+                parentWidget.style().polish(parentWidget)
 
     def displayDashboard(self):
         self.ui.label_lessons_total.setText(f"{Lesson().count()}")
@@ -1736,5 +1778,27 @@ class HomeWindow(QMainWindow):
                 return
             
         super().mousePressEvent(event)
+
+    def eventFilter(self, obj, event):
+        
+        if hasattr(self, 'search_widgets') and obj in self.search_widgets:
+
+            if event.type() == QEvent.Type.HoverEnter:
+                parentWidget = obj.parentWidget()
+
+                if parentWidget:
+                    parentWidget.setProperty("_hover", True)
+                    parentWidget.style().unpolish(parentWidget)
+                    parentWidget.style().polish(parentWidget)
+
+            elif event.type() == QEvent.Type.HoverLeave:
+                parentWidget = obj.parentWidget()
+                
+                if parentWidget:
+                    parentWidget.setProperty("_hover", False)
+                    parentWidget.style().unpolish(parentWidget)
+                    parentWidget.style().polish(parentWidget)
+
+        return super().eventFilter(obj, event)
 
 

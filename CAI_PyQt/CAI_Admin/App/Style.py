@@ -393,8 +393,12 @@ class Light_Theme:
             border-radius: 15px;
         }
 
-        *[class="widget-search-container"]:focus {
+        QWidget[_focus="true"] {
             border: 1px solid #007bff;
+        }
+
+        QWidget[_hover="true"] {
+            border: 1px solid #3498db;
         }
 
         *[class="label-magnifying-search"] {
@@ -1566,8 +1570,12 @@ class Dark_Theme:
             border-radius: 15px;
         }
 
-        *[class="widget-search-container"]:focus {
+        QWidget[_focus="true"] {
             border: 1px solid #3b82f6;
+        }
+
+        QWidget[_hover="true"] {
+            border: 1px solid #60a5fa;
         }
 
         *[class="label-magnifying-search"] {

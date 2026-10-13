@@ -1079,21 +1079,15 @@ QPushButton[class=&quot;button-green&quot;]:disabled {
     font: 10pt &quot;Inter&quot;;
     border: 1px solid #9a9996;
     border-radius: 15px;
-    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
-                                stop:0 #ffffff, 
-                                stop:1 #d8ecf6);
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #ffffff, stop:1 #d8ecf6);
 }
 
 *[class=&quot;button-normal&quot;]:hover {
-    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
-                                stop:0 #ffffff, 
-                                stop:1 #f2f6f8);
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #ffffff, stop:1 #f2f6f8);
 }
 
 *[class=&quot;button-normal&quot;]:pressed {
-    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
-                                stop:0 #dce5e9, 
-                                stop:1 #ffffff);
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #dce5e9, stop:1 #ffffff);
 }
 
 *[class=&quot;button-normal&quot;]:disabled {
@@ -1248,8 +1242,12 @@ QRadioButton::indicator:checked {
     border-radius: 15px;
 }
 
-*[class=&quot;widget-search-container&quot;]:focus {
+QWidget[_focus=&quot;true&quot;] {
     border: 1px solid #007bff;
+}
+
+QWidget[_hover=&quot;true&quot;] {
+    border: 1px solid #3498db;
 }
 
 *[class=&quot;label-magnifying-search&quot;] {
@@ -1397,7 +1395,8 @@ QScrollArea QWidget #qt_scrollarea_corner {
 #scrollArea_tf #scrollAreaWidgetContents_4 {
     background-color: #c8c7c5;
     border-radius: 10px;
-}</string>
+}
+</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_37">
           <property name="spacing">
@@ -6743,7 +6742,7 @@ background-color: rgb(98, 160, 234);</string>
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>957</width>
+                       <width>461</width>
                        <height>932</height>
                       </rect>
                      </property>
