@@ -867,6 +867,14 @@ class StudentEditorDialog(QDialog, Ui_EditStudentDialog):
         if self.util.isEmpty(studentid) or self.util.isEmpty(user):
             self.reject()
 
+        self.app_settings = QSettings("CAI_System", "CAI_Admin_AppSettings")
+        self.is_dark_mode = self.app_settings.value("dark_mode", False, type=bool)
+
+        if self.is_dark_mode:
+            self.setStyleSheet(Dark_Theme.editStudent)
+        else:
+            self.setStyleSheet(Light_Theme.editStudent)
+
         self.image_data = None
         self.user = user
 

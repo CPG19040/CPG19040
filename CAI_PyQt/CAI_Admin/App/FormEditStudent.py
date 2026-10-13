@@ -15,10 +15,10 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QComboBox, QDialog, QFormLayout,
-    QFrame, QHBoxLayout, QLabel, QLineEdit,
-    QPushButton, QSizePolicy, QSpacerItem, QSpinBox,
-    QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QComboBox, QDialog, QFrame,
+    QHBoxLayout, QLabel, QLineEdit, QPushButton,
+    QSizePolicy, QSpacerItem, QSpinBox, QVBoxLayout,
+    QWidget)
 import resources_rc
 
 class Ui_EditStudentDialog(object):
@@ -28,14 +28,288 @@ class Ui_EditStudentDialog(object):
         EditStudentDialog.resize(890, 693)
         EditStudentDialog.setMinimumSize(QSize(890, 693))
         EditStudentDialog.setMaximumSize(QSize(1100, 693))
-        EditStudentDialog.setStyleSheet(u"* {\n"
-"	color: black;\n"
-"	font: 10pt \"Inter\";\n"
-"}\n"
+        EditStudentDialog.setStyleSheet(u" * {\n"
+"     color: #000000;\n"
+"     font: 10pt \"Inter\";\n"
+" }\n"
 "\n"
-"QDialog {\n"
-"	background-color: transparent; \n"
-"}")
+" QDialog {\n"
+"     background: transparent;\n"
+" }\n"
+"\n"
+" #line_1,\n"
+" #line_2,\n"
+" #line_3 {\n"
+"     background-color: #deddda;\n"
+" }\n"
+"\n"
+" #frame_header {\n"
+"     background-color: #deddda;\n"
+"     border-top-left-radius: 12px;\n"
+"     border-top-right-radius: 12px;\n"
+"     border: 1px solid #7a7a7a;\n"
+"     border-bottom: none;\n"
+" }\n"
+"\n"
+" #label_windowTitle {\n"
+"     background: transparent;\n"
+"     font: 10pt \"Inter SemiBold\";\n"
+"     color: #111827;\n"
+" }\n"
+"\n"
+" #widget_body {\n"
+"     background-color: #deddda;\n"
+"     border: 1px solid #7a7a7a;\n"
+"     border-top: none;\n"
+" }\n"
+"\n"
+" *[class=\"button-normal\"] {\n"
+"     color: #000000;\n"
+"     font: 10pt \"Inter\";\n"
+"     border: 1px solid #9a9996;\n"
+"     border-radius: 15px;\n"
+"     background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #ffffff, stop:1 #d8ecf6);\n"
+" }\n"
+"\n"
+" *[class=\"button-normal\"]:hover {\n"
+"     backgro"
+                        "und: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #ffffff, stop:1 #f2f6f8);\n"
+" }\n"
+"\n"
+" *[class=\"button-normal\"]:pressed {\n"
+"     background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #dce5e9, stop:1 #ffffff);\n"
+" }\n"
+"\n"
+" *[class=\"button-normal\"]:disabled {\n"
+"     color: #aeaeae;\n"
+"     border: 1px solid #dcdcdc;\n"
+"     background: #f5f5f5;\n"
+" }\n"
+"\n"
+" QPushButton[class=\"button-green\"] {\n"
+"     border: 1px solid #0a5128;\n"
+"     border-radius: 15px;\n"
+"     padding: 0px 10px 0px;\n"
+"     background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #1ebd5d, stop:1 #107f3f);\n"
+"     color: #FFF;\n"
+"     font: 10pt \"Inter SemiBold\";\n"
+" }\n"
+"\n"
+" QPushButton[class=\"button-green\"]:hover {\n"
+"     background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #2ecc71, stop:1 #27AE60);\n"
+" }\n"
+"\n"
+" QPushButton[class=\"button-green\"]:pressed {\n"
+"     background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #0b572a, stop:1 #129046);\n"
+" }\n"
+"\n"
+" QPushButton[cla"
+                        "ss=\"button-green\"]:disabled {\n"
+"     background: #A5D6A7;\n"
+"     color: #E8F5E9;\n"
+"     opacity: 0.6;\n"
+" }\n"
+"\n"
+" *[class=\"input-field\"] {\n"
+"     background-color: transparent;\n"
+" }\n"
+"\n"
+" *[class=\"input-field\"] QLineEdit {\n"
+"     background-color: #ffffff;\n"
+"     border: 1px solid #999;\n"
+"     border-left: none;\n"
+"     border-top-right-radius: 18px;\n"
+"     border-bottom-right-radius: 18px;\n"
+"     padding: 0px 8px;\n"
+"     color: #1f2937;\n"
+" }\n"
+"\n"
+" *[class=\"input-field\"] QLabel {\n"
+"     background-color: #d2d2d2;\n"
+"     border-left: 1px solid #999;\n"
+"     border-top: 1px solid #999;\n"
+"     border-bottom: 1px solid #999;\n"
+"     border-right: none;\n"
+"     border-top-left-radius: 18px;\n"
+"     border-bottom-left-radius: 18px;\n"
+"     padding-left: 8px;\n"
+"     color: #000000;\n"
+" }\n"
+"\n"
+" *[class=\"input-field\"] QLabel:disabled,\n"
+" #label_17:disabled,\n"
+" #label_24:disabled {\n"
+"     color: #999;\n"
+"     border: none;\n"
+" }\n"
+"\n"
+" #txtPass"
+                        "word {\n"
+"     background-color: rgb(255, 255, 255);\n"
+"     border-radius: 18px;\n"
+"     border: 1px solid #999;\n"
+"     padding: 0px 15px;\n"
+" }\n"
+"\n"
+" #txtPassword:focus {\n"
+"     border: 1px solid #007BFF;\n"
+" }\n"
+"\n"
+" #txtPassword:hover {\n"
+"     border: 1px solid #3498db;\n"
+" }\n"
+"\n"
+" *[class=\"input-field\"] QPushButton:disabled,\n"
+" *[class=\"input-field\"] QLineEdit:disabled,\n"
+" *[class=\"input-field\"] QComboBox:disabled {\n"
+"     background-color: #f3f4f6;\n"
+"     border: none;\n"
+"     color: #999;\n"
+" }\n"
+"\n"
+" QComboBox {\n"
+"     border: 1px solid #999;\n"
+"     border-left: none;\n"
+"     padding: 0px 10px;\n"
+"     background-color: #ffffff;\n"
+"     color: #1f2937;\n"
+"     font: 10pt \"Inter Medium\";\n"
+"     selection-background-color: #bfdbfe;\n"
+"     border-top-right-radius: 18px;\n"
+"     border-bottom-right-radius: 18px;\n"
+" }\n"
+"\n"
+" QComboBox:focus,\n"
+" QLineEdit:focus {\n"
+"     border: 1px solid #2563eb;\n"
+" }\n"
+"\n"
+" QComboBox:hover,\n"
+" QLineEdi"
+                        "t:hover {\n"
+"     border: 1px solid #3b82f6;\n"
+" }\n"
+"\n"
+" QComboBox::drop-down {\n"
+"     subcontrol-origin: padding;\n"
+"     subcontrol-position: top right;\n"
+"     width: 30px;\n"
+"     border-left-width: 0px;\n"
+"     border-top-right-radius: 15px;\n"
+"     border-bottom-right-radius: 15px;\n"
+" }\n"
+"\n"
+" QComboBox::down-arrow {\n"
+"     image: url(:/Images/Images/caret-down.png);\n"
+"     border: none;\n"
+"     width: 8px;\n"
+"     height: 8px;\n"
+" }\n"
+"\n"
+" QComboBox QAbstractItemView {\n"
+"     background-color: #ffffff !important;\n"
+"     border: 1px solid #999;\n"
+"     selection-background-color: #bfdbfe;\n"
+"     selection-color: #111827;\n"
+"     outline: 0;\n"
+" }\n"
+"\n"
+" QComboBox QAbstractItemView::item {\n"
+"     padding: 0px 15px;\n"
+"     border-radius: 4px;\n"
+"     color: #1f2937;\n"
+" }\n"
+"\n"
+" QComboBox QAbstractItemView::item:hover {\n"
+"     background-color: #bfdbfe;\n"
+"     color: #111827;\n"
+" }\n"
+"\n"
+" QComboBox:disabled {\n"
+"     background-color: #f3f4f6;\n"
+" "
+                        "    border: none;\n"
+"     color: #999;\n"
+" }\n"
+"\n"
+" QComboBox::drop-down:disabled {\n"
+"     border-top-right-radius: 15px;\n"
+"     border-bottom-right-radius: 15px;\n"
+"     background-color: transparent;\n"
+" }\n"
+"\n"
+" QComboBox::down-arrow:disabled {\n"
+"     image: url(:/Images/Images/caret-down-disabled.png);\n"
+" }\n"
+"\n"
+" QSpinBox {\n"
+"     font: 10pt \"Inter Medium\";\n"
+"     height: 30px;\n"
+"     border: 1px solid #999;\n"
+"     border-radius: 15px;\n"
+"     padding: 0px 5px;\n"
+"     background-color: #ffffff;\n"
+"     color: #1f2937;\n"
+"     selection-background-color: #bfdbfe;\n"
+" }\n"
+"\n"
+" QSpinBox:focus {\n"
+"     border: 1px solid #2563eb;\n"
+" }\n"
+"\n"
+" QSpinBox:hover {\n"
+"     border: 1px solid #3b82f6;\n"
+" }\n"
+"\n"
+" QSpinBox::up-button,\n"
+" QSpinBox::down-button {\n"
+"     subcontrol-origin: border;\n"
+"     width: 8px;\n"
+"     height: 8px;\n"
+"     padding: 6px 10px 6px 2px;\n"
+"     color: #6b7280;\n"
+" }\n"
+"\n"
+" QSpinBox::up-button {\n"
+"     subcontrol-position:"
+                        " top right;\n"
+"     border-top-right-radius: 15px;\n"
+" }\n"
+"\n"
+" QSpinBox::down-button {\n"
+"     subcontrol-position: bottom right;\n"
+"     border-bottom-right-radius: 15px;\n"
+" }\n"
+"\n"
+" QSpinBox::up-arrow {\n"
+"     image: url(:/Images/Images/caret-up.png);\n"
+"     width: 8px;\n"
+"     height: 8px;\n"
+" }\n"
+"\n"
+" QSpinBox::down-arrow {\n"
+"     image: url(:/Images/Images/caret-down.png);\n"
+"     width: 8px;\n"
+"     height: 8px;\n"
+" }\n"
+"\n"
+" #btnMinimize {\n"
+"     border-radius: 12px;\n"
+"     background-color: transparent;\n"
+" }\n"
+"\n"
+" #btnMinimize:hover {\n"
+"     background-color: #f8e45c;\n"
+" }\n"
+"\n"
+" #btnClose {\n"
+"     border-radius: 12px;\n"
+"     background-color: transparent;\n"
+" }\n"
+"\n"
+" #btnClose:hover {\n"
+"     background-color: #f66151;\n"
+" }")
         self.verticalLayout_5 = QVBoxLayout(EditStudentDialog)
         self.verticalLayout_5.setSpacing(0)
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
@@ -45,13 +319,7 @@ class Ui_EditStudentDialog(object):
         self.frame_header.setMinimumSize(QSize(0, 35))
         self.frame_header.setMaximumSize(QSize(16777215, 35))
         self.frame_header.setMouseTracking(True)
-        self.frame_header.setStyleSheet(u"#frame_header {\n"
-"	background-color: #deddda;\n"
-"	border-top-left-radius: 12px;\n"
-"	border-top-right-radius: 12px;\n"
-"	border: 1px solid #7a7a7a;\n"
-"	border-bottom: none;\n"
-"}")
+        self.frame_header.setStyleSheet(u"")
         self.frame_header.setFrameShape(QFrame.StyledPanel)
         self.frame_header.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_10 = QHBoxLayout(self.frame_header)
@@ -78,11 +346,7 @@ class Ui_EditStudentDialog(object):
         font.setBold(False)
         font.setItalic(False)
         self.label_windowTitle.setFont(font)
-        self.label_windowTitle.setStyleSheet(u"QLabel {\n"
-"	background: transparent;\n"
-"	color: rgb(0, 0, 0);\n"
-"	font: 10pt \"Inter SemiBold\";\n"
-"}")
+        self.label_windowTitle.setStyleSheet(u"")
         self.label_windowTitle.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout_10.addWidget(self.label_windowTitle)
@@ -100,14 +364,7 @@ class Ui_EditStudentDialog(object):
         self.btnMinimize.setMinimumSize(QSize(24, 24))
         self.btnMinimize.setMaximumSize(QSize(24, 24))
         self.btnMinimize.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.btnMinimize.setStyleSheet(u"#btnMinimize {\n"
-"	border-radius: 12px;\n"
-"	background-color: transparent;\n"
-"}\n"
-"\n"
-"#btnMinimize:hover {\n"
-"	background-color: rgb(248, 228, 92);\n"
-"}")
+        self.btnMinimize.setStyleSheet(u"")
         icon = QIcon()
         icon.addFile(u":/Images/Images/minimize-sign.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.btnMinimize.setIcon(icon)
@@ -120,14 +377,7 @@ class Ui_EditStudentDialog(object):
         self.btnClose.setMinimumSize(QSize(24, 24))
         self.btnClose.setMaximumSize(QSize(24, 24))
         self.btnClose.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.btnClose.setStyleSheet(u"#btnClose {\n"
-"	border-radius: 12px;\n"
-"	background-color: transparent;\n"
-"}\n"
-"\n"
-"#btnClose:hover {\n"
-"	background-color: rgb(246, 97, 81);\n"
-"}")
+        self.btnClose.setStyleSheet(u"")
         icon1 = QIcon()
         icon1.addFile(u":/Images/Images/clear.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.btnClose.setIcon(icon1)
@@ -142,203 +392,7 @@ class Ui_EditStudentDialog(object):
 
         self.widget_body = QWidget(EditStudentDialog)
         self.widget_body.setObjectName(u"widget_body")
-        self.widget_body.setStyleSheet(u"#widget_body {\n"
-"	background-color: #deddda;\n"
-"	border: 1px solid #7a7a7a;\n"
-"	border-top: none;\n"
-"}\n"
-"\n"
-"QPushButton[class=\"button-green\"] {\n"
-"	border: 1px solid #0a5128;\n"
-"    border-radius: 15px;\n"
-"    padding: 0px 10px 0px;\n"
-"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #1ebd5d, stop:1 #107f3f);\n"
-"    color: #FFF;\n"
-"    font: 10pt \"Inter SemiBold\";\n"
-"}\n"
-"\n"
-"QPushButton[class=\"button-green\"]:hover {\n"
-"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
-"                                stop:0 #2ecc71, \n"
-"                                stop:1 #27AE60);\n"
-"}\n"
-"\n"
-"QPushButton[class=\"button-green\"]:pressed {\n"
-"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
-"                                stop:0 #0b572a, \n"
-"                                stop:1 #129046); \n"
-"}\n"
-"\n"
-"QPushButton[class=\"button-green\"]:disabled {\n"
-"    background: #A5D6A7;\n"
-"    color: #E8F5E9;\n"
-"    opacity: 0.6;\n"
-"}\n"
-"\n"
-"*[class=\"button-n"
-                        "ormal\"] {\n"
-"	font: 10pt \"Inter\";\n"
-"	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
-"                                stop:0 #ffffff, \n"
-"                                stop:1 #d8ecf6);\n"
-"	color: black;\n"
-"	border-radius: 15px;\n"
-"	border: 1px solid rgb(154, 153, 150);\n"
-"}\n"
-"\n"
-"*[class=\"button-normal\"]:hover {\n"
-"	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
-"                                stop:0 #ffffff, \n"
-"                                stop:1 #f2f6f8);\n"
-"}\n"
-"\n"
-"*[class=\"button-normal\"]:pressed {\n"
-"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
-"                                stop:0 #dce5e9, \n"
-"                                stop:1 #ffffff);\n"
-"}\n"
-"\n"
-"*[class=\"button-normal\"]:disabled {\n"
-"	background: #f5f5f5;\n"
-"	border: 1px solid #dcdcdc;\n"
-"	color: #aeaeae;\n"
-"}\n"
-"\n"
-"*[class=\"input-field\"] {\n"
-"	background-color: transparent;\n"
-"}\n"
-"\n"
-"*[class=\"input-field\"] QLineEdit {\n"
-"	background-color: #ffffff;\n"
-"	bor"
-                        "der: 1px solid #ABABAB;\n"
-"	border-left: none;\n"
-"	border-top-right-radius: 18px;\n"
-"	border-bottom-right-radius: 18px;\n"
-"	padding: 0px 8px;\n"
-"	color: black;\n"
-"}\n"
-"\n"
-"*[class=\"input-field\"] QLabel {\n"
-"	background-color: #d2d2d2;\n"
-"	border: 1px solid #999;\n"
-"	border-right: none;\n"
-"	border-top-left-radius: 18px;\n"
-"	border-bottom-left-radius: 18px;\n"
-"	padding-left: 8px;\n"
-"	color: black;\n"
-"}\n"
-"\n"
-"QComboBox {\n"
-"    border: 1px solid #999;\n"
-"	border-left: none;\n"
-"	border-top-right-radius: 18px;\n"
-"	border-bottom-right-radius: 18px;\n"
-"	padding: 0px 10px;\n"
-"	background-color: #ffffff;\n"
-"	color: #333333;\n"
-"	font: 10pt \"Inter Medium\"; /* Consolidated font settings */\n"
-"	selection-background-color: #7eb4d7;\n"
-"}\n"
-"\n"
-"QComboBox:focus, QLineEdit:focus {\n"
-"    border: 1px solid #007BFF;\n"
-"}\n"
-"\n"
-"QComboBox:hover, QLineEdit:hover {\n"
-"    border: 1px solid #3498db;\n"
-"}\n"
-"\n"
-"QComboBox::drop-down {\n"
-"    subcontrol-origin: padding;\n"
-"    subcontrol-po"
-                        "sition: top right;\n"
-"    width: 30px;\n"
-"    border-left-width: 0px;\n"
-"    /* Match the 15px border-radius of the main control */\n"
-"    border-top-right-radius: 15px;\n"
-"    border-bottom-right-radius: 15px;\n"
-"}\n"
-"\n"
-"QComboBox::down-arrow {\n"
-"    image: url(:/Images/Images/caret-down.png);\n"
-"    border: none;\n"
-"    width: 8px;\n"
-"    height: 8px;\n"
-"}\n"
-"\n"
-"QComboBox QAbstractItemView {\n"
-"    background-color: white !important;\n"
-"    border: 1px solid #999;\n"
-"    selection-background-color: #7eb4d7;\n"
-"    selection-color: #ffffff;\n"
-"    outline: 0; /* Removes the ugly dotted focus border */\n"
-"}\n"
-"\n"
-"QComboBox QAbstractItemView::item {\n"
-"    padding: 0px 15px;\n"
-"    border-radius: 4px;\n"
-"    color: #333333;\n"
-"}\n"
-"\n"
-"/* Hover state for items inside the dropdown */\n"
-"QComboBox QAbstractItemView::item:hover {\n"
-"    background-color: #7eb4d7;\n"
-"    color: #ffffff;\n"
-"}\n"
-"\n"
-"QSpinBox {\n"
-"	font: 10pt \"Inter Medium\";\n"
-"    height: 30px;\n"
-"    bord"
-                        "er: 1px solid #999;\n"
-"    border-radius: 15px;\n"
-"    padding: 0px 5px 0px;\n"
-"    background-color: #ffffff;\n"
-"    color: #333333;\n"
-"    selection-background-color: #7eb4d7;\n"
-"}\n"
-"\n"
-"QSpinBox:focus {\n"
-"    border: 1px solid #007BFF;\n"
-"}\n"
-"\n"
-"QSpinBox:hover {\n"
-"    border: 1px solid #3498db;\n"
-"}\n"
-"\n"
-"QSpinBox::up-button {\n"
-"    subcontrol-origin: border;\n"
-"    subcontrol-position: top right;\n"
-"    width: 8px;\n"
-"    height: 8px;\n"
-"    border-top-right-radius: 15px;\n"
-"    padding: 6px 10px 6px 2px;\n"
-"	color: rgb(119, 118, 123);\n"
-"}\n"
-"\n"
-"QSpinBox::down-button {\n"
-"    subcontrol-origin: border;\n"
-"    subcontrol-position: bottom right;\n"
-"    width: 8px;\n"
-"    height: 8px;\n"
-"    border-bottom-right-radius: 15px;\n"
-"    padding: 6px 10px 6px 2px;\n"
-"	color: rgb(119, 118, 123);\n"
-"}\n"
-"\n"
-"QSpinBox::up-arrow {\n"
-"    image: url(:/Images/Images/caret-up.png);\n"
-"    width: 8px;\n"
-"    height: 8px;\n"
-"}\n"
-"\n"
-"QSpinBox::down-arrow {\n"
-"    image: ur"
-                        "l(:/Images/Images/caret-down.png);\n"
-"    width: 8px;\n"
-"    height: 8px;\n"
-"}")
+        self.widget_body.setStyleSheet(u"")
         self.verticalLayout = QVBoxLayout(self.widget_body)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.verticalLayout.setContentsMargins(12, -1, 12, -1)
@@ -397,19 +451,19 @@ class Ui_EditStudentDialog(object):
 
         self.verticalLayout.addWidget(self.widget_3)
 
-        self.line_2 = QFrame(self.widget_body)
-        self.line_2.setObjectName(u"line_2")
-        self.line_2.setStyleSheet(u"background: #deddda;")
-        self.line_2.setFrameShape(QFrame.Shape.HLine)
-        self.line_2.setFrameShadow(QFrame.Shadow.Sunken)
+        self.line_1 = QFrame(self.widget_body)
+        self.line_1.setObjectName(u"line_1")
+        self.line_1.setStyleSheet(u"")
+        self.line_1.setFrameShape(QFrame.Shape.HLine)
+        self.line_1.setFrameShadow(QFrame.Shadow.Sunken)
 
-        self.verticalLayout.addWidget(self.line_2)
+        self.verticalLayout.addWidget(self.line_1)
 
         self.widget_2 = QWidget(self.widget_body)
         self.widget_2.setObjectName(u"widget_2")
         self.widget_2.setStyleSheet(u"")
-        self.formLayout = QFormLayout(self.widget_2)
-        self.formLayout.setObjectName(u"formLayout")
+        self.horizontalLayout_13 = QHBoxLayout(self.widget_2)
+        self.horizontalLayout_13.setObjectName(u"horizontalLayout_13")
         self.widget = QWidget(self.widget_2)
         self.widget.setObjectName(u"widget")
         self.verticalLayout_4 = QVBoxLayout(self.widget)
@@ -444,7 +498,7 @@ class Ui_EditStudentDialog(object):
         self.verticalLayout_4.addItem(self.verticalSpacer_2)
 
 
-        self.formLayout.setWidget(0, QFormLayout.ItemRole.LabelRole, self.widget)
+        self.horizontalLayout_13.addWidget(self.widget)
 
         self.widget_form = QWidget(self.widget_2)
         self.widget_form.setObjectName(u"widget_form")
@@ -588,18 +642,18 @@ class Ui_EditStudentDialog(object):
         self.verticalLayout_2.addItem(self.verticalSpacer_3)
 
 
-        self.formLayout.setWidget(0, QFormLayout.ItemRole.FieldRole, self.widget_form)
+        self.horizontalLayout_13.addWidget(self.widget_form)
 
 
         self.verticalLayout.addWidget(self.widget_2)
 
-        self.line = QFrame(self.widget_body)
-        self.line.setObjectName(u"line")
-        self.line.setStyleSheet(u"background: #deddda;")
-        self.line.setFrameShape(QFrame.Shape.HLine)
-        self.line.setFrameShadow(QFrame.Shadow.Sunken)
+        self.line_2 = QFrame(self.widget_body)
+        self.line_2.setObjectName(u"line_2")
+        self.line_2.setStyleSheet(u"")
+        self.line_2.setFrameShape(QFrame.Shape.HLine)
+        self.line_2.setFrameShadow(QFrame.Shadow.Sunken)
 
-        self.verticalLayout.addWidget(self.line)
+        self.verticalLayout.addWidget(self.line_2)
 
         self.widget_form_2 = QWidget(self.widget_body)
         self.widget_form_2.setObjectName(u"widget_form_2")
@@ -675,7 +729,7 @@ class Ui_EditStudentDialog(object):
 
         self.line_3 = QFrame(self.widget_body)
         self.line_3.setObjectName(u"line_3")
-        self.line_3.setStyleSheet(u"background: #deddda;")
+        self.line_3.setStyleSheet(u"")
         self.line_3.setFrameShape(QFrame.Shape.HLine)
         self.line_3.setFrameShadow(QFrame.Shadow.Sunken)
 
@@ -696,20 +750,7 @@ class Ui_EditStudentDialog(object):
         self.txtPassword.setObjectName(u"txtPassword")
         self.txtPassword.setMinimumSize(QSize(0, 36))
         self.txtPassword.setMaximumSize(QSize(16777215, 36))
-        self.txtPassword.setStyleSheet(u"QLineEdit {\n"
-"	background-color: rgb(255, 255, 255);\n"
-"	border-radius: 18px;\n"
-"	border: 1px solid #999;\n"
-"	padding: 0px 15px;\n"
-"}\n"
-"\n"
-"QLineEdit:focus {\n"
-"    border: 1px solid #007BFF;\n"
-"}\n"
-"\n"
-"QLineEdit:hover {\n"
-"    border: 1px solid #3498db;\n"
-"}")
+        self.txtPassword.setStyleSheet(u"")
         self.txtPassword.setEchoMode(QLineEdit.PasswordEchoOnEdit)
 
         self.verticalLayout_6.addWidget(self.txtPassword)

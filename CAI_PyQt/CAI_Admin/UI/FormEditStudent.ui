@@ -26,14 +26,282 @@
    <string>Student Information Editor</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">* {
-	color: black;
-	font: 10pt &quot;Inter&quot;;
-}
+   <string notr="true"> * {
+     color: #000000;
+     font: 10pt &quot;Inter&quot;;
+ }
 
-QDialog {
-	background-color: transparent; 
-}</string>
+ QDialog {
+     background: transparent;
+ }
+
+ #line_1,
+ #line_2,
+ #line_3 {
+     background-color: #deddda;
+ }
+
+ #frame_header {
+     background-color: #deddda;
+     border-top-left-radius: 12px;
+     border-top-right-radius: 12px;
+     border: 1px solid #7a7a7a;
+     border-bottom: none;
+ }
+
+ #label_windowTitle {
+     background: transparent;
+     font: 10pt &quot;Inter SemiBold&quot;;
+     color: #111827;
+ }
+
+ #widget_body {
+     background-color: #deddda;
+     border: 1px solid #7a7a7a;
+     border-top: none;
+ }
+
+ *[class=&quot;button-normal&quot;] {
+     color: #000000;
+     font: 10pt &quot;Inter&quot;;
+     border: 1px solid #9a9996;
+     border-radius: 15px;
+     background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #ffffff, stop:1 #d8ecf6);
+ }
+
+ *[class=&quot;button-normal&quot;]:hover {
+     background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #ffffff, stop:1 #f2f6f8);
+ }
+
+ *[class=&quot;button-normal&quot;]:pressed {
+     background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #dce5e9, stop:1 #ffffff);
+ }
+
+ *[class=&quot;button-normal&quot;]:disabled {
+     color: #aeaeae;
+     border: 1px solid #dcdcdc;
+     background: #f5f5f5;
+ }
+
+ QPushButton[class=&quot;button-green&quot;] {
+     border: 1px solid #0a5128;
+     border-radius: 15px;
+     padding: 0px 10px 0px;
+     background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #1ebd5d, stop:1 #107f3f);
+     color: #FFF;
+     font: 10pt &quot;Inter SemiBold&quot;;
+ }
+
+ QPushButton[class=&quot;button-green&quot;]:hover {
+     background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #2ecc71, stop:1 #27AE60);
+ }
+
+ QPushButton[class=&quot;button-green&quot;]:pressed {
+     background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #0b572a, stop:1 #129046);
+ }
+
+ QPushButton[class=&quot;button-green&quot;]:disabled {
+     background: #A5D6A7;
+     color: #E8F5E9;
+     opacity: 0.6;
+ }
+
+ *[class=&quot;input-field&quot;] {
+     background-color: transparent;
+ }
+
+ *[class=&quot;input-field&quot;] QLineEdit {
+     background-color: #ffffff;
+     border: 1px solid #999;
+     border-left: none;
+     border-top-right-radius: 18px;
+     border-bottom-right-radius: 18px;
+     padding: 0px 8px;
+     color: #1f2937;
+ }
+
+ *[class=&quot;input-field&quot;] QLabel {
+     background-color: #d2d2d2;
+     border-left: 1px solid #999;
+     border-top: 1px solid #999;
+     border-bottom: 1px solid #999;
+     border-right: none;
+     border-top-left-radius: 18px;
+     border-bottom-left-radius: 18px;
+     padding-left: 8px;
+     color: #000000;
+ }
+
+ *[class=&quot;input-field&quot;] QLabel:disabled,
+ #label_17:disabled,
+ #label_24:disabled {
+     color: #999;
+     border: none;
+ }
+
+ #txtPassword {
+     background-color: rgb(255, 255, 255);
+     border-radius: 18px;
+     border: 1px solid #999;
+     padding: 0px 15px;
+ }
+
+ #txtPassword:focus {
+     border: 1px solid #007BFF;
+ }
+
+ #txtPassword:hover {
+     border: 1px solid #3498db;
+ }
+
+ *[class=&quot;input-field&quot;] QPushButton:disabled,
+ *[class=&quot;input-field&quot;] QLineEdit:disabled,
+ *[class=&quot;input-field&quot;] QComboBox:disabled {
+     background-color: #f3f4f6;
+     border: none;
+     color: #999;
+ }
+
+ QComboBox {
+     border: 1px solid #999;
+     border-left: none;
+     padding: 0px 10px;
+     background-color: #ffffff;
+     color: #1f2937;
+     font: 10pt &quot;Inter Medium&quot;;
+     selection-background-color: #bfdbfe;
+     border-top-right-radius: 18px;
+     border-bottom-right-radius: 18px;
+ }
+
+ QComboBox:focus,
+ QLineEdit:focus {
+     border: 1px solid #2563eb;
+ }
+
+ QComboBox:hover,
+ QLineEdit:hover {
+     border: 1px solid #3b82f6;
+ }
+
+ QComboBox::drop-down {
+     subcontrol-origin: padding;
+     subcontrol-position: top right;
+     width: 30px;
+     border-left-width: 0px;
+     border-top-right-radius: 15px;
+     border-bottom-right-radius: 15px;
+ }
+
+ QComboBox::down-arrow {
+     image: url(:/Images/Images/caret-down.png);
+     border: none;
+     width: 8px;
+     height: 8px;
+ }
+
+ QComboBox QAbstractItemView {
+     background-color: #ffffff !important;
+     border: 1px solid #999;
+     selection-background-color: #bfdbfe;
+     selection-color: #111827;
+     outline: 0;
+ }
+
+ QComboBox QAbstractItemView::item {
+     padding: 0px 15px;
+     border-radius: 4px;
+     color: #1f2937;
+ }
+
+ QComboBox QAbstractItemView::item:hover {
+     background-color: #bfdbfe;
+     color: #111827;
+ }
+
+ QComboBox:disabled {
+     background-color: #f3f4f6;
+     border: none;
+     color: #999;
+ }
+
+ QComboBox::drop-down:disabled {
+     border-top-right-radius: 15px;
+     border-bottom-right-radius: 15px;
+     background-color: transparent;
+ }
+
+ QComboBox::down-arrow:disabled {
+     image: url(:/Images/Images/caret-down-disabled.png);
+ }
+
+ QSpinBox {
+     font: 10pt &quot;Inter Medium&quot;;
+     height: 30px;
+     border: 1px solid #999;
+     border-radius: 15px;
+     padding: 0px 5px;
+     background-color: #ffffff;
+     color: #1f2937;
+     selection-background-color: #bfdbfe;
+ }
+
+ QSpinBox:focus {
+     border: 1px solid #2563eb;
+ }
+
+ QSpinBox:hover {
+     border: 1px solid #3b82f6;
+ }
+
+ QSpinBox::up-button,
+ QSpinBox::down-button {
+     subcontrol-origin: border;
+     width: 8px;
+     height: 8px;
+     padding: 6px 10px 6px 2px;
+     color: #6b7280;
+ }
+
+ QSpinBox::up-button {
+     subcontrol-position: top right;
+     border-top-right-radius: 15px;
+ }
+
+ QSpinBox::down-button {
+     subcontrol-position: bottom right;
+     border-bottom-right-radius: 15px;
+ }
+
+ QSpinBox::up-arrow {
+     image: url(:/Images/Images/caret-up.png);
+     width: 8px;
+     height: 8px;
+ }
+
+ QSpinBox::down-arrow {
+     image: url(:/Images/Images/caret-down.png);
+     width: 8px;
+     height: 8px;
+ }
+
+ #btnMinimize {
+     border-radius: 12px;
+     background-color: transparent;
+ }
+
+ #btnMinimize:hover {
+     background-color: #f8e45c;
+ }
+
+ #btnClose {
+     border-radius: 12px;
+     background-color: transparent;
+ }
+
+ #btnClose:hover {
+     background-color: #f66151;
+ }</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_5">
    <property name="spacing">
@@ -69,13 +337,7 @@ QDialog {
       <bool>true</bool>
      </property>
      <property name="styleSheet">
-      <string notr="true">#frame_header {
-	background-color: #deddda;
-	border-top-left-radius: 12px;
-	border-top-right-radius: 12px;
-	border: 1px solid #7a7a7a;
-	border-bottom: none;
-}</string>
+      <string notr="true"/>
      </property>
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
@@ -147,11 +409,7 @@ QDialog {
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">QLabel {
-	background: transparent;
-	color: rgb(0, 0, 0);
-	font: 10pt &quot;Inter SemiBold&quot;;
-}</string>
+         <string notr="true"/>
         </property>
         <property name="text">
          <string>Student Information Editor</string>
@@ -209,14 +467,7 @@ QDialog {
             <cursorShape>PointingHandCursor</cursorShape>
            </property>
            <property name="styleSheet">
-            <string notr="true">#btnMinimize {
-	border-radius: 12px;
-	background-color: transparent;
-}
-
-#btnMinimize:hover {
-	background-color: rgb(248, 228, 92);
-}</string>
+            <string notr="true"/>
            </property>
            <property name="text">
             <string/>
@@ -251,14 +502,7 @@ QDialog {
             <cursorShape>PointingHandCursor</cursorShape>
            </property>
            <property name="styleSheet">
-            <string notr="true">#btnClose {
-	border-radius: 12px;
-	background-color: transparent;
-}
-
-#btnClose:hover {
-	background-color: rgb(246, 97, 81);
-}</string>
+            <string notr="true"/>
            </property>
            <property name="text">
             <string/>
@@ -278,198 +522,7 @@ QDialog {
    <item>
     <widget class="QWidget" name="widget_body" native="true">
      <property name="styleSheet">
-      <string notr="true">#widget_body {
-	background-color: #deddda;
-	border: 1px solid #7a7a7a;
-	border-top: none;
-}
-
-QPushButton[class=&quot;button-green&quot;] {
-	border: 1px solid #0a5128;
-    border-radius: 15px;
-    padding: 0px 10px 0px;
-    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #1ebd5d, stop:1 #107f3f);
-    color: #FFF;
-    font: 10pt &quot;Inter SemiBold&quot;;
-}
-
-QPushButton[class=&quot;button-green&quot;]:hover {
-    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
-                                stop:0 #2ecc71, 
-                                stop:1 #27AE60);
-}
-
-QPushButton[class=&quot;button-green&quot;]:pressed {
-    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
-                                stop:0 #0b572a, 
-                                stop:1 #129046); 
-}
-
-QPushButton[class=&quot;button-green&quot;]:disabled {
-    background: #A5D6A7;
-    color: #E8F5E9;
-    opacity: 0.6;
-}
-
-*[class=&quot;button-normal&quot;] {
-	font: 10pt &quot;Inter&quot;;
-	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
-                                stop:0 #ffffff, 
-                                stop:1 #d8ecf6);
-	color: black;
-	border-radius: 15px;
-	border: 1px solid rgb(154, 153, 150);
-}
-
-*[class=&quot;button-normal&quot;]:hover {
-	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
-                                stop:0 #ffffff, 
-                                stop:1 #f2f6f8);
-}
-
-*[class=&quot;button-normal&quot;]:pressed {
-    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
-                                stop:0 #dce5e9, 
-                                stop:1 #ffffff);
-}
-
-*[class=&quot;button-normal&quot;]:disabled {
-	background: #f5f5f5;
-	border: 1px solid #dcdcdc;
-	color: #aeaeae;
-}
-
-*[class=&quot;input-field&quot;] {
-	background-color: transparent;
-}
-
-*[class=&quot;input-field&quot;] QLineEdit {
-	background-color: #ffffff;
-	border: 1px solid #ABABAB;
-	border-left: none;
-	border-top-right-radius: 18px;
-	border-bottom-right-radius: 18px;
-	padding: 0px 8px;
-	color: black;
-}
-
-*[class=&quot;input-field&quot;] QLabel {
-	background-color: #d2d2d2;
-	border: 1px solid #999;
-	border-right: none;
-	border-top-left-radius: 18px;
-	border-bottom-left-radius: 18px;
-	padding-left: 8px;
-	color: black;
-}
-
-QComboBox {
-    border: 1px solid #999;
-	border-left: none;
-	border-top-right-radius: 18px;
-	border-bottom-right-radius: 18px;
-	padding: 0px 10px;
-	background-color: #ffffff;
-	color: #333333;
-	font: 10pt &quot;Inter Medium&quot;; /* Consolidated font settings */
-	selection-background-color: #7eb4d7;
-}
-
-QComboBox:focus, QLineEdit:focus {
-    border: 1px solid #007BFF;
-}
-
-QComboBox:hover, QLineEdit:hover {
-    border: 1px solid #3498db;
-}
-
-QComboBox::drop-down {
-    subcontrol-origin: padding;
-    subcontrol-position: top right;
-    width: 30px;
-    border-left-width: 0px;
-    /* Match the 15px border-radius of the main control */
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
-}
-
-QComboBox::down-arrow {
-    image: url(:/Images/Images/caret-down.png);
-    border: none;
-    width: 8px;
-    height: 8px;
-}
-
-QComboBox QAbstractItemView {
-    background-color: white !important;
-    border: 1px solid #999;
-    selection-background-color: #7eb4d7;
-    selection-color: #ffffff;
-    outline: 0; /* Removes the ugly dotted focus border */
-}
-
-QComboBox QAbstractItemView::item {
-    padding: 0px 15px;
-    border-radius: 4px;
-    color: #333333;
-}
-
-/* Hover state for items inside the dropdown */
-QComboBox QAbstractItemView::item:hover {
-    background-color: #7eb4d7;
-    color: #ffffff;
-}
-
-QSpinBox {
-	font: 10pt &quot;Inter Medium&quot;;
-    height: 30px;
-    border: 1px solid #999;
-    border-radius: 15px;
-    padding: 0px 5px 0px;
-    background-color: #ffffff;
-    color: #333333;
-    selection-background-color: #7eb4d7;
-}
-
-QSpinBox:focus {
-    border: 1px solid #007BFF;
-}
-
-QSpinBox:hover {
-    border: 1px solid #3498db;
-}
-
-QSpinBox::up-button {
-    subcontrol-origin: border;
-    subcontrol-position: top right;
-    width: 8px;
-    height: 8px;
-    border-top-right-radius: 15px;
-    padding: 6px 10px 6px 2px;
-	color: rgb(119, 118, 123);
-}
-
-QSpinBox::down-button {
-    subcontrol-origin: border;
-    subcontrol-position: bottom right;
-    width: 8px;
-    height: 8px;
-    border-bottom-right-radius: 15px;
-    padding: 6px 10px 6px 2px;
-	color: rgb(119, 118, 123);
-}
-
-QSpinBox::up-arrow {
-    image: url(:/Images/Images/caret-up.png);
-    width: 8px;
-    height: 8px;
-}
-
-QSpinBox::down-arrow {
-    image: url(:/Images/Images/caret-down.png);
-    width: 8px;
-    height: 8px;
-}</string>
+      <string notr="true"/>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
       <property name="leftMargin">
@@ -606,9 +659,9 @@ QSpinBox::down-arrow {
        </widget>
       </item>
       <item>
-       <widget class="Line" name="line_2">
+       <widget class="Line" name="line_1">
         <property name="styleSheet">
-         <string notr="true">background: #deddda;</string>
+         <string notr="true"/>
         </property>
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
@@ -620,8 +673,8 @@ QSpinBox::down-arrow {
         <property name="styleSheet">
          <string notr="true"/>
         </property>
-        <layout class="QFormLayout" name="formLayout">
-         <item row="0" column="0">
+        <layout class="QHBoxLayout" name="horizontalLayout_13">
+         <item>
           <widget class="QWidget" name="widget" native="true">
            <layout class="QVBoxLayout" name="verticalLayout_4">
             <property name="leftMargin">
@@ -718,7 +771,7 @@ QSpinBox::down-arrow {
            </layout>
           </widget>
          </item>
-         <item row="0" column="1">
+         <item>
           <widget class="QWidget" name="widget_form" native="true">
            <property name="enabled">
             <bool>true</bool>
@@ -1103,9 +1156,9 @@ QSpinBox::down-arrow {
        </widget>
       </item>
       <item>
-       <widget class="Line" name="line">
+       <widget class="Line" name="line_2">
         <property name="styleSheet">
-         <string notr="true">background: #deddda;</string>
+         <string notr="true"/>
         </property>
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
@@ -1282,7 +1335,7 @@ QSpinBox::down-arrow {
       <item>
        <widget class="Line" name="line_3">
         <property name="styleSheet">
-         <string notr="true">background: #deddda;</string>
+         <string notr="true"/>
         </property>
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
@@ -1326,20 +1379,7 @@ QSpinBox::down-arrow {
             </size>
            </property>
            <property name="styleSheet">
-            <string notr="true">QLineEdit {
-	background-color: rgb(255, 255, 255);
-	border-radius: 18px;
-	border: 1px solid #999;
-	padding: 0px 15px;
-}
-
-QLineEdit:focus {
-    border: 1px solid #007BFF;
-}
-
-QLineEdit:hover {
-    border: 1px solid #3498db;
-}</string>
+            <string notr="true"/>
            </property>
            <property name="echoMode">
             <enum>QLineEdit::PasswordEchoOnEdit</enum>
