@@ -3,12 +3,14 @@ import csv
 from pathlib import Path
 
 from PySide6.QtGui import QStandardItemModel, QStandardItem, QImage, QPixmap
-from PySide6.QtCore import Qt
+from PySide6.QtCore import QSettings, Qt
 from PySide6.QtWidgets import QDialog, QFileDialog
 
 from App.CRUDTools import DatabaseTools
 from App.LessonDialog import Ui_LessonDialog
 from App.Tools import Utility, CustomMessageBox
+from App.Style import Light_Theme, Dark_Theme
+
 
 class Lesson:
 
@@ -236,6 +238,14 @@ class LessonDialog(QDialog, Ui_LessonDialog):
         self.db_tools = DatabaseTools()
         self.util     = Utility()
         lesson        = Lesson()
+
+        self.app_settings = QSettings("CAI_System", "CAI_Admin_AppSettings")
+        self.is_dark_mode = self.app_settings.value("dark_mode", False, type=bool)
+
+        if self.is_dark_mode:
+            self.setStyleSheet(Dark_Theme.lesson_dialog)
+        else:
+            self.setStyleSheet(Light_Theme.lesson_dialog)
 
         self.image_data = None
 
