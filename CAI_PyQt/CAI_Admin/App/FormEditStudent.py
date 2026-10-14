@@ -440,7 +440,7 @@ class Ui_EditStudentDialog(object):
         icon2 = QIcon()
         icon2.addFile(u":/Images/Images/undo.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.btnRefreshSY.setIcon(icon2)
-        self.btnRefreshSY.setIconSize(QSize(25, 25))
+        self.btnRefreshSY.setIconSize(QSize(22, 22))
 
         self.horizontalLayout_4.addWidget(self.btnRefreshSY)
 

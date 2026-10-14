@@ -3,12 +3,13 @@ from passlib.hash import bcrypt
 
 from PySide6.QtWidgets import QDialog
 from PySide6.QtGui import QImage, QPixmap, QStandardItemModel, QStandardItem
-from PySide6.QtCore import Qt
+from PySide6.QtCore import QSettings, Qt
 
 from App.FormAddNewUser import Ui_AddNewUserDialog
 from App.FormEditUser import Ui_EditUserDialog
 from App.CRUDTools import DatabaseTools
 from App.Tools import Utility, CustomMessageBox
+from App.Style import Light_Theme, Dark_Theme
 
 class Staff:
 
@@ -442,6 +443,14 @@ class EditUserDialog(QDialog, Ui_EditUserDialog):
 
         self.btnMinimize.clicked.connect(self.showMinimized)
         self.btnClose.clicked.connect(self.reject)
+
+        self.app_settings = QSettings("CAI_System", "CAI_Admin_AppSettings")
+        self.is_dark_mode = self.app_settings.value("dark_mode", False, type=bool)
+
+        if self.is_dark_mode:
+            self.setStyleSheet(Dark_Theme.user_info_dialog)
+        else:
+            self.setStyleSheet(Light_Theme.user_info_dialog)
 
         self.db = DatabaseTools()
         self.util = Utility()

@@ -3048,8 +3048,8 @@ QLabel {
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>100</width>
-                      <height>30</height>
+                      <width>793</width>
+                      <height>600</height>
                      </rect>
                     </property>
                     <layout class="QGridLayout" name="gridLayout_stud_card"/>
@@ -3953,8 +3953,8 @@ QLabel {
                   </property>
                   <property name="iconSize">
                    <size>
-                    <width>18</width>
-                    <height>18</height>
+                    <width>22</width>
+                    <height>22</height>
                    </size>
                   </property>
                   <property name="class" stdset="0">
@@ -4892,8 +4892,8 @@ QPushButton:hover {
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>100</width>
-                      <height>30</height>
+                      <width>320</width>
+                      <height>499</height>
                      </rect>
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout_13"/>
@@ -4935,8 +4935,8 @@ QPushButton:hover {
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>100</width>
-                      <height>30</height>
+                      <width>319</width>
+                      <height>499</height>
                      </rect>
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout_12"/>
@@ -4956,8 +4956,8 @@ QPushButton:hover {
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>100</width>
-                      <height>30</height>
+                      <width>320</width>
+                      <height>499</height>
                      </rect>
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout_11"/>
@@ -6653,8 +6653,8 @@ background-color: rgb(98, 160, 234);</string>
                    </property>
                    <property name="iconSize">
                     <size>
-                     <width>20</width>
-                     <height>20</height>
+                     <width>22</width>
+                     <height>22</height>
                     </size>
                    </property>
                    <property name="class" stdset="0">
@@ -6742,7 +6742,7 @@ background-color: rgb(98, 160, 234);</string>
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>461</width>
+                       <width>957</width>
                        <height>932</height>
                       </rect>
                      </property>

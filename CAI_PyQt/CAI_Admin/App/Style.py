@@ -104,6 +104,53 @@ class Light_Theme:
         }
     """
 
+    input_field = """
+        *[class="input-field"] {
+            background-color: transparent;
+        }
+
+        *[class="input-field"] QLineEdit {
+            background-color: #ffffff;
+            border: 1px solid #999;
+            border-left: none;
+            border-top-right-radius: 18px;
+            border-bottom-right-radius: 18px;
+            padding: 0px 8px;
+            color: #1f2937;
+        }
+
+        QLineEdit:focus {
+            border: 1px solid #2563eb;
+        }
+
+        QLineEdit:hover {
+            border: 1px solid #3b82f6;
+        }
+
+        *[class="input-field"] QLineEdit:disabled {
+            background-color: #f3f4f6;
+            border: none;
+            color: #999;
+        }
+
+        *[class="input-field"] QLabel {
+            background-color: #d2d2d2;
+            border-left: 1px solid #999;
+            border-top: 1px solid #999;
+            border-bottom: 1px solid #999;
+            border-right: none;
+            border-top-left-radius: 18px;
+            border-bottom-left-radius: 18px;
+            padding-left: 8px;
+            color: #000000;
+        }
+
+        *[class="input-field"] QLabel:disabled {
+            color: #999;
+            border: none;
+        }
+    """
+
     combo_box_input_field = """
         *[class="input-field"] QComboBox {
             border: 1px solid #999;
@@ -200,6 +247,44 @@ class Light_Theme:
 
         QTabWidget, QTabWidget * {
             background-color: #deddda;
+        }
+    """
+
+    header_dlg = """
+        #frame_header {
+            background-color: #deddda;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+            border: 1px solid #7a7a7a;
+            border-bottom: none;
+        }
+
+        #label_windowTitle {
+            background: transparent;
+            font: 10pt "Inter SemiBold";
+            color: #111827;
+        }
+
+        #widget_window_buttons {
+            background: transparent;
+        }
+
+        #btnMinimize {
+            border-radius: 12px;
+            background-color: transparent;
+        }
+
+        #btnMinimize:hover {
+            background-color: #f8e45c;
+        }
+
+        #btnClose {
+            border-radius: 12px;
+            background-color: transparent;
+        }
+
+        #btnClose:hover {
+            background-color: #f66151;
         }
     """
 
@@ -820,19 +905,7 @@ class Light_Theme:
             background-color: #deddda;
         }
 
-        #frame_header {
-            background-color: #deddda;
-            border-top-left-radius: 12px;
-            border-top-right-radius: 12px;
-            border: 1px solid #7a7a7a;
-            border-bottom: none;
-        }
-
-        #label_windowTitle {
-            background: transparent;
-            font: 10pt "Inter SemiBold";
-            color: #111827;
-        }
+        """ + header_dlg + """
 
         #widget_body {
             background-color: #deddda;
@@ -889,33 +962,10 @@ class Light_Theme:
 
         """ + buttons + """
 
-        *[class="input-field"] {
-            background-color: transparent;
-        }
+        """ + input_field + """
 
-        *[class="input-field"] QLineEdit {
-            background-color: #ffffff;
-            border: 1px solid #999;
-            border-left: none;
-            border-top-right-radius: 18px;
-            border-bottom-right-radius: 18px;
-            padding: 0px 8px;
-            color: #1f2937;
-        }
+        """ + combo_box_input_field + """
 
-        *[class="input-field"] QLabel {
-            background-color: #d2d2d2;
-            border-left: 1px solid #999;
-            border-top: 1px solid #999;
-            border-bottom: 1px solid #999;
-            border-right: none;
-            border-top-left-radius: 18px;
-            border-bottom-left-radius: 18px;
-            padding-left: 8px;
-            color: #000000;
-        }
-
-        *[class="input-field"] QLabel:disabled,
         #label_17:disabled,
         #label_24:disabled {
             color: #999;
@@ -930,14 +980,6 @@ class Light_Theme:
         QProgressBar::chunk {
             background-color: #007BFF;
             border-radius: 10px;
-        }
-
-        *[class="input-field"] QPushButton:disabled, 
-        *[class="input-field"] QLineEdit:disabled, 
-        *[class="input-field"] QComboBox:disabled {
-            background-color: #f3f4f6;
-            border: none;
-            color: #999;
         }
 
         QRadioButton {
@@ -961,16 +1003,6 @@ class Light_Theme:
             background-color: #2563eb;
         }
 
-        """ + combo_box_input_field + """
-
-        QLineEdit:focus {
-            border: 1px solid #2563eb;
-        }
-
-        QLineEdit:hover {
-            border: 1px solid #3b82f6;
-        }
-
         QSpinBox {
             font: 10pt "Inter Medium";
             height: 30px;
@@ -1019,26 +1051,7 @@ class Light_Theme:
             width: 8px;
             height: 8px;
         }
-
-        #btnMinimize {
-            border-radius: 12px;
-            background-color: transparent;
-        }
-
-        #btnMinimize:hover {
-            background-color: #f8e45c;
-        }
-
-        #btnClose {
-            border-radius: 12px;
-            background-color: transparent;
-        }
-
-        #btnClose:hover {
-            background-color: #f66151;
-        }
     """
-
 
     editStudent = """
         * {
@@ -1056,19 +1069,7 @@ class Light_Theme:
             background-color: #deddda;
         }
 
-        #frame_header {
-            background-color: #deddda;
-            border-top-left-radius: 12px;
-            border-top-right-radius: 12px;
-            border: 1px solid #7a7a7a;
-            border-bottom: none;
-        }
-
-        #label_windowTitle {
-            background: transparent;
-            font: 10pt "Inter SemiBold";
-            color: #111827;
-        }
+        """ + header_dlg + """
 
         #widget_body {
             background-color: #deddda;
@@ -1078,38 +1079,9 @@ class Light_Theme:
 
         """ + buttons + """
 
-        *[class="input-field"] {
-            background-color: transparent;
-        }
+        """ + input_field + """
 
-        *[class="input-field"] QLineEdit {
-            background-color: #ffffff;
-            border: 1px solid #999;
-            border-left: none;
-            border-top-right-radius: 18px;
-            border-bottom-right-radius: 18px;
-            padding: 0px 8px;
-            color: #1f2937;
-        }
-
-        *[class="input-field"] QLabel {
-            background-color: #d2d2d2;
-            border-left: 1px solid #999;
-            border-top: 1px solid #999;
-            border-bottom: 1px solid #999;
-            border-right: none;
-            border-top-left-radius: 18px;
-            border-bottom-left-radius: 18px;
-            padding-left: 8px;
-            color: #000000;
-        }
-
-        *[class="input-field"] QLabel:disabled,
-        #label_17:disabled,
-        #label_24:disabled {
-            color: #999;
-            border: none;
-        }
+        """ + combo_box_input_field + """
 
         #txtPassword {
             background-color: rgb(255, 255, 255);
@@ -1124,24 +1096,6 @@ class Light_Theme:
 
         #txtPassword:hover {
             border: 1px solid #3498db;
-        }
-
-        *[class="input-field"] QPushButton:disabled, 
-        *[class="input-field"] QLineEdit:disabled, 
-        *[class="input-field"] QComboBox:disabled {
-            background-color: #f3f4f6;
-            border: none;
-            color: #999;
-        }
-
-        """ + combo_box_input_field + """
-
-        QLineEdit:focus {
-            border: 1px solid #2563eb;
-        }
-
-        QLineEdit:hover {
-            border: 1px solid #3b82f6;
         }
 
         QSpinBox {
@@ -1192,24 +1146,6 @@ class Light_Theme:
             width: 8px;
             height: 8px;
         }
-
-        #btnMinimize {
-            border-radius: 12px;
-            background-color: transparent;
-        }
-
-        #btnMinimize:hover {
-            background-color: #f8e45c;
-        }
-
-        #btnClose {
-            border-radius: 12px;
-            background-color: transparent;
-        }
-
-        #btnClose:hover {
-            background-color: #f66151;
-        }
     """
 
     lesson_dialog = """
@@ -1222,19 +1158,7 @@ class Light_Theme:
             background: transparent;
         }
 
-        #frame_header {
-            background-color: #deddda;
-            border-top-left-radius: 12px;
-            border-top-right-radius: 12px;
-            border: 1px solid #7a7a7a;
-            border-bottom: none;
-        }
-
-        #label_windowTitle {
-            background: transparent;
-            font: 10pt "Inter SemiBold";
-            color: #111827;
-        }
+        """ + header_dlg + """
 
         #widget_body {
             background-color: #deddda;
@@ -1244,40 +1168,9 @@ class Light_Theme:
 
         """ + buttons + """
 
-        *[class="input-field"] {
-            background-color: transparent;
-        }
-
-        *[class="input-field"] QLineEdit {
-            background-color: #ffffff;
-            border: 1px solid #999;
-            border-left: none;
-            border-top-right-radius: 18px;
-            border-bottom-right-radius: 18px;
-            padding: 0px 8px;
-            color: #1f2937;
-        }
-
-        *[class="input-field"] QLabel,
-        *[class="input-and-browse"] QLabel {
-            background-color: #c0bfbc;
-            border: 1px solid #999;
-            border-right: none;
-            border-top-left-radius: 18px;
-            border-bottom-left-radius: 18px;
-            padding-left: 8px;
-            color: #000000;
-        }
+        """ + input_field + """
 
         """ + combo_box_input_field + """
-
-        QLineEdit:focus {
-            border: 1px solid #2563eb;
-        }
-
-        QLineEdit:hover {
-            border: 1px solid #3b82f6;
-        }
 
         QSpinBox {
             font: 10pt "Inter Medium";
@@ -1329,26 +1222,18 @@ class Light_Theme:
             height: 8px;
         }
 
-        #btnMinimize {
-            border-radius: 12px;
-            background-color: transparent;
-        }
-
-        #btnMinimize:hover {
-            background-color: #f8e45c;
-        }
-
-        #btnClose {
-            border-radius: 12px;
-            background-color: transparent;
-        }
-
-        #btnClose:hover {
-            background-color: #f66151;
-        }
-
         *[class="input-and-browse"] {
             background: transparent;
+        }
+
+        *[class="input-and-browse"] QLabel {
+            background-color: #c0bfbc;
+            border: 1px solid #999;
+            border-right: none;
+            border-top-left-radius: 18px;
+            border-bottom-left-radius: 18px;
+            padding-left: 8px;
+            color: #000000;
         }
 
         *[class="input-and-browse"] QLineEdit {
@@ -1381,6 +1266,36 @@ class Light_Theme:
 
         *[class="input-and-browse"] #btnBrowse:hover {
             background-color: #e0e0e0;
+        }
+    """
+
+    user_info_dialog = """
+        * {
+            color: black;
+            font: 10pt "Inter";
+        }
+
+        QDialog {
+            background: transparent;
+        }
+
+        """ + header_dlg + """
+
+        #widget_body {
+            background-color: #deddda;
+            border: 1px solid #7a7a7a;
+            border-top: none;
+        }
+
+        """ + input_field + """
+
+        """ + combo_box_input_field + """
+
+        """ + buttons + """
+
+        #line_1,
+        #line_2 {
+            background-color: #deddda;
         }
     """
 
@@ -1489,12 +1404,58 @@ class Dark_Theme:
         }
     """
 
+    input_field = """
+        *[class="input-field"] {
+            background-color: transparent;
+        }
+
+        *[class="input-field"] QLineEdit {
+            background-color: #1e1e1e;
+            border: 1px solid #4a4a4a;
+            border-left: none;
+            border-top-right-radius: 18px;
+            border-bottom-right-radius: 18px;
+            padding: 0px 8px;
+            color: #ffffff;
+        }
+
+        *[class="input-field"] QLineEdit:disabled {
+            border: none;
+            color: #666666;
+        }
+
+        *[class="input-field"] QLabel {
+            background-color: #262626;
+            border-left: 1px solid #4a4a4a;
+            border-top: 1px solid #4a4a4a;
+            border-bottom: 1px solid #4a4a4a;
+            border-right: none;
+            border-top-left-radius: 18px;
+            border-bottom-left-radius: 18px;
+            padding-left: 8px;
+            color: #a0a0a0;
+        }
+
+        *[class="input-field"] QLabel:disabled {
+            color: #666666;
+            border: none;
+        }
+
+        QLineEdit:focus {
+            border: 1px solid #2563eb;
+        }
+
+        QLineEdit:hover {
+            border: 1px solid #3b82f6;
+        }
+    """
+
     combo_box_input_field = """
         *[class="input-field"] QComboBox {
+            background-color: #1e1e1e;
             border: 1px solid #4a4a4a;
             border-left: none;
             padding: 0px 10px;
-            background-color: #1e1e1e;
             color: #ffffff;
             font: 10pt "Inter Medium";
             selection-background-color: #3b82f6;
@@ -1546,7 +1507,6 @@ class Dark_Theme:
         }
 
         QComboBox:disabled {
-            background-color: #1a1a1a;
             border: none;
             color: #666666;
         }
@@ -1585,6 +1545,43 @@ class Dark_Theme:
 
         QTabWidget, QTabWidget * {
             background-color: #1e1e1e;
+        }
+    """
+
+    header_dlg = """
+        #frame_header {
+            background-color: #2d2d2d;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+            border: 1px solid #4a4a4a;
+            border-bottom: none;
+        }
+
+        #label_windowTitle {
+            background: transparent;
+            font: 10pt "Inter SemiBold";
+        }
+
+        #widget_window_buttons {
+            background: transparent;
+        }
+
+        #btnMinimize {
+            border-radius: 12px;
+            background-color: #77767b;
+        }
+
+        #btnMinimize:hover {
+            background-color: #f8e45c;
+        }
+
+        #btnClose {
+            border-radius: 12px;
+            background-color: #77767b;
+        }
+
+        #btnClose:hover {
+            background-color: #f66151;
         }
     """
 
@@ -2223,19 +2220,7 @@ class Dark_Theme:
             background-color: #2d2d2d;
         }
 
-        #frame_header {
-            background-color: #2d2d2d;
-            border-top-left-radius: 12px;
-            border-top-right-radius: 12px;
-            border: 1px solid #4a4a4a;
-            border-bottom: none;
-        }
-
-        #label_windowTitle {
-            background: transparent;
-            font: 10pt "Inter SemiBold";
-            color: #ffffff;
-        }
+        """ + header_dlg + """
 
         #widget_body {
             background-color: #2d2d2d;
@@ -2291,33 +2276,10 @@ class Dark_Theme:
 
         """ + buttons + """
 
-        *[class="input-field"] {
-            background-color: transparent;
-        }
+        """ + input_field + """
 
-        *[class="input-field"] QLineEdit {
-            background-color: #1e1e1e;
-            border: 1px solid #4a4a4a;
-            border-left: none;
-            border-top-right-radius: 18px;
-            border-bottom-right-radius: 18px;
-            padding: 0px 8px;
-            color: #ffffff;
-        }
+        """ + combo_box_input_field + """
 
-        *[class="input-field"] QLabel {
-            background-color: #262626;
-            border-left: 1px solid #4a4a4a;
-            border-top: 1px solid #4a4a4a;
-            border-bottom: 1px solid #4a4a4a;
-            border-right: none;
-            border-top-left-radius: 18px;
-            border-bottom-left-radius: 18px;
-            padding-left: 8px;
-            color: #a0a0a0;
-        }
-
-        *[class="input-field"] QLabel:disabled,
         #label_17:disabled,
         #label_24:disabled {
             color: #666666;
@@ -2333,14 +2295,6 @@ class Dark_Theme:
         QProgressBar::chunk {
             background-color: #3b82f6;
             border-radius: 10px;
-        }
-
-        *[class="input-field"] QPushButton:disabled, 
-        *[class="input-field"] QLineEdit:disabled, 
-        *[class="input-field"] QComboBox:disabled {
-            background-color: #1a1a1a;
-            border: none;
-            color: #666666;
         }
 
         QRadioButton {
@@ -2364,16 +2318,6 @@ class Dark_Theme:
             background-color: #3b82f6;
         }
 
-        """ + combo_box_input_field + """
-
-        QLineEdit:focus {
-            border: 1px solid #2563eb;
-        }
-
-        QLineEdit:hover {
-            border: 1px solid #3b82f6;
-        }
-
         QSpinBox {
             font: 10pt "Inter Medium";
             height: 30px;
@@ -2421,24 +2365,6 @@ class Dark_Theme:
             image: url(:/Images/Images/caret-down.png);
             width: 8px;
             height: 8px;
-        }
-
-        #btnMinimize {
-            border-radius: 12px;
-            background-color: #77767b;
-        }
-
-        #btnMinimize:hover {
-            background-color: #f8e45c;
-        }
-
-        #btnClose {
-            border-radius: 12px;
-            background-color: #77767b;
-        }
-
-        #btnClose:hover {
-            background-color: #f66151;
         }
     """
 
@@ -2458,19 +2384,7 @@ class Dark_Theme:
             background-color: #2d2d2d;
         }
 
-        #frame_header {
-            background-color: #2d2d2d;
-            border-top-left-radius: 12px;
-            border-top-right-radius: 12px;
-            border: 1px solid #4a4a4a;
-            border-bottom: none;
-        }
-
-        #label_windowTitle {
-            background: transparent;
-            font: 10pt "Inter SemiBold";
-            color: #ffffff;
-        }
+        """ + header_dlg + """
 
         #widget_body {
             background-color: #2d2d2d;
@@ -2480,45 +2394,14 @@ class Dark_Theme:
 
         """ + buttons + """
 
-        *[class="input-field"] {
-            background-color: transparent;
-        }
+        """ + input_field + """
 
-        *[class="input-field"] QLineEdit {
-            background-color: #1e1e1e;
-            border: 1px solid #4a4a4a;
-            border-left: none;
-            border-top-right-radius: 18px;
-            border-bottom-right-radius: 18px;
-            padding: 0px 8px;
-            color: #ffffff;
-        }
+        """ + combo_box_input_field + """
 
-        *[class="input-field"] QLabel {
-            background-color: #262626;
-            border-left: 1px solid #4a4a4a;
-            border-top: 1px solid #4a4a4a;
-            border-bottom: 1px solid #4a4a4a;
-            border-right: none;
-            border-top-left-radius: 18px;
-            border-bottom-left-radius: 18px;
-            padding-left: 8px;
-            color: #a0a0a0;
-        }
-
-        *[class="input-field"] QLabel:disabled,
         #label_17:disabled,
         #label_24:disabled {
             color: #666666;
             border: none;
-        }
-
-        *[class="input-field"] QPushButton:disabled, 
-        *[class="input-field"] QLineEdit:disabled, 
-        *[class="input-field"] QComboBox:disabled {
-            background-color: #1a1a1a;
-            border: none;
-            color: #666666;
         }
 
         #txtPassword {
@@ -2534,24 +2417,6 @@ class Dark_Theme:
 
         #txtPassword:hover {
             border: 1px solid #3498db;
-        }
-
-        *[class="input-field"] QPushButton:disabled, 
-        *[class="input-field"] QLineEdit:disabled, 
-        *[class="input-field"] QComboBox:disabled {
-            background-color: #f3f4f6;
-            border: none;
-            color: #999;
-        }
-
-        """ + combo_box_input_field + """
-
-        QLineEdit:focus {
-            border: 1px solid #2563eb;
-        }
-
-        QLineEdit:hover {
-            border: 1px solid #3b82f6;
         }
 
         QSpinBox {
@@ -2602,24 +2467,6 @@ class Dark_Theme:
             width: 8px;
             height: 8px;
         }
-
-        #btnMinimize {
-            border-radius: 12px;
-            background-color: #77767b;
-        }
-
-        #btnMinimize:hover {
-            background-color: #f8e45c;
-        }
-
-        #btnClose {
-            border-radius: 12px;
-            background-color: #77767b;
-        }
-
-        #btnClose:hover {
-            background-color: #f66151;
-        }
     """
 
     lesson_dialog = """
@@ -2632,18 +2479,7 @@ class Dark_Theme:
             background: transparent;
         }
 
-        #frame_header {
-            background-color: #2d2d2d;
-            border-top-left-radius: 12px;
-            border-top-right-radius: 12px;
-            border: 1px solid #4a4a4a;
-            border-bottom: none;
-        }
-
-        #label_windowTitle {
-            background: transparent;
-            font: 10pt "Inter SemiBold";
-        }
+        """ + header_dlg + """
 
         #widget_body {
             background-color: #2d2d2d;
@@ -2653,40 +2489,9 @@ class Dark_Theme:
 
         """ + buttons + """
 
-        *[class="input-field"] {
-            background-color: transparent;
-        }
-
-        *[class="input-field"] QLineEdit {
-            background-color: #1e1e1e;
-            border: 1px solid #4a4a4a;
-            border-left: none;
-            border-top-right-radius: 18px;
-            border-bottom-right-radius: 18px;
-            padding: 0px 8px;
-            color: #ffffff;
-        }
-
-        *[class="input-field"] QLabel,
-        *[class="input-and-browse"] QLabel {
-            background-color: #262626;
-            border: 1px solid #4a4a4a;
-            border-right: none;
-            border-top-left-radius: 18px;
-            border-bottom-left-radius: 18px;
-            padding-left: 8px;
-            color: #a0a0a0;
-        }
-
+        """ + input_field + """
+        
         """ + combo_box_input_field + """
-
-        QLineEdit:focus {
-            border: 1px solid #2563eb;
-        }
-
-        QLineEdit:hover {
-            border: 1px solid #3b82f6;
-        }
 
         QSpinBox {
             font: 10pt "Inter Medium";
@@ -2738,26 +2543,18 @@ class Dark_Theme:
             height: 8px;
         }
 
-        #btnMinimize {
-            border-radius: 12px;
-            background-color: #77767b;
-        }
-
-        #btnMinimize:hover {
-            background-color: #f8e45c;
-        }
-
-        #btnClose {
-            border-radius: 12px;
-            background-color: #77767b;
-        }
-
-        #btnClose:hover {
-            background-color: #f66151;
-        }
-
         *[class="input-and-browse"] {
             background: transparent;
+        }
+
+        *[class="input-and-browse"] QLabel {
+            background-color: #262626;
+            border: 1px solid #4a4a4a;
+            border-right: none;
+            border-top-left-radius: 18px;
+            border-bottom-left-radius: 18px;
+            padding-left: 8px;
+            color: #a0a0a0;
         }
 
         *[class="input-and-browse"] QLineEdit {
@@ -2788,6 +2585,36 @@ class Dark_Theme:
 
         *[class="input-and-browse"] #btnBrowse:hover {
             background-color: #363636;
+        }
+    """
+
+    user_info_dialog = """
+        * {
+            color: #ffffff;
+            font: 10pt "Inter";
+        }
+
+        QDialog {
+            background: transparent;
+        }
+
+        """ + header_dlg + """
+
+        #widget_body {
+            background-color: #2d2d2d;
+            border: 1px solid #4a4a4a;
+            border-top: none;
+        }
+
+        """ + input_field + """
+
+        """ + combo_box_input_field + """
+
+        """ + buttons + """
+
+        #line_1,
+        #line_2 {
+            background-color: #2d2d2d;
         }
     """
 
