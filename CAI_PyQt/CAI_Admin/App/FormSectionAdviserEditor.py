@@ -29,119 +29,126 @@ class Ui_SectionAdviserEditorDialog(object):
         SectionAdviserEditorDialog.setMinimumSize(QSize(550, 520))
         SectionAdviserEditorDialog.setMaximumSize(QSize(900, 600))
         SectionAdviserEditorDialog.setStyleSheet(u"* {\n"
-"	background-color: rgb(222, 221, 218); \n"
-"	color: black;\n"
-"	font: 10pt \"Inter\";\n"
+"    color: #000000;\n"
+"    font: 10pt \"Inter\";\n"
 "}\n"
 "\n"
-"#SectionAdviserEditorDialog {\n"
-"	background-color: transparent;\n"
+"QDialog {\n"
+"    background: transparent;\n"
 "}\n"
 "\n"
-"QPushButton[class=\"button-green\"] {\n"
-"	border: 1px solid #0a5128;\n"
-"    border-radius: 15px;\n"
-"    padding: 0px 10px 0px;\n"
-"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
-"                                stop:0 #1ebd5d, \n"
-"                                stop:1 #107f3f);\n"
-"    color: #FFF;\n"
+"\n"
+"#frame_header {\n"
+"    background-color: #deddda;\n"
+"    border-top-left-radius: 12px;\n"
+"    border-top-right-radius: 12px;\n"
+"    border: 1px solid #7a7a7a;\n"
+"    border-bottom: none;\n"
+"}\n"
+"\n"
+"#label_windowTitle {\n"
+"    background: transparent;\n"
 "    font: 10pt \"Inter SemiBold\";\n"
+"    color: #111827;\n"
 "}\n"
 "\n"
-"QPushButton[class=\"button-green\"]:hover {\n"
-"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
-"                                stop:0 #2ecc71, \n"
-"                                stop:1 #27AE60);\n"
+"#widget_window_buttons {\n"
+"    background: transparent;\n"
 "}\n"
 "\n"
-"QPushButton[class=\"button-green\"]:pressed {\n"
-"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
-"                                stop:0 #0b572a, \n"
-"                                stop:1 #129046); \n"
+"#btnMinimize {\n"
+"    border-radius: 12px;\n"
+"    background-color: transparent;\n"
 "}\n"
 "\n"
-"QPushBut"
-                        "ton[class=\"button-green\"]:disabled {\n"
-"    background: #A5D6A7;\n"
-"    color: #E8F5E9;\n"
-"    opacity: 0.6;\n"
+"#btnMinimize:hover {\n"
+"    background-color: #f8e45c;\n"
 "}\n"
 "\n"
-"*[class=\"button-normal\"] {\n"
-"	font: 10pt \"Inter\";\n"
-"	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
-"                                stop:0 #ffffff, \n"
-"                                stop:1 #d8ecf6);\n"
-"	color: black;\n"
-"	border-radius: 15px;\n"
-"	border: 1px solid rgb(154, 153, 150);\n"
+"#btnClose {\n"
+"    border-radius: 12px;\n"
+"    background-color: transparent;\n"
 "}\n"
 "\n"
-"*[class=\"button-normal\"]:hover {\n"
-"	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
-"                                stop:0 #ffffff, \n"
-"                                stop:1 #f2f6f8);\n"
+"#btnClose:hover {\n"
+"    background-color: #f66151;\n"
 "}\n"
 "\n"
-"*[class=\"button-normal\"]:pressed {\n"
-"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
-"                                stop:0 #dce5e9, \n"
-"                                stop:1 #ffffff);\n"
+"\n"
+"#widget_body {\n"
+"    background-color: #deddda;\n"
+"    border: 1px solid #7a7a7a;\n"
+"    border-top: none;\n"
 "}\n"
 "\n"
-"*[class=\"button-normal\"]:disabled {\n"
-"	background: #f5f5f5;\n"
-"	border: 1px solid #dcdcdc;\n"
-"	color: #aeaeae;\n"
-"}\n"
 "\n"
-"*[class="
-                        "\"input-field\"] {\n"
-"	background-color: transparent;\n"
+"*[class=\""
+                        "input-field\"] {\n"
+"    background-color: transparent;\n"
 "}\n"
 "\n"
 "*[class=\"input-field\"] QLineEdit {\n"
-"	background-color: #ffffff;\n"
-"	border: 1px solid #999;\n"
-"	border-left: none;\n"
-"	border-top-right-radius: 15px;\n"
-"	border-bottom-right-radius: 15px;\n"
-"	padding: 0px 8px;\n"
-"	color: black;\n"
+"    background-color: #ffffff;\n"
+"    border: 1px solid #999;\n"
+"    border-left: none;\n"
+"    border-top-right-radius: 18px;\n"
+"    border-bottom-right-radius: 18px;\n"
+"    padding: 0px 8px;\n"
+"    color: #1f2937;\n"
+"}\n"
+"\n"
+"QLineEdit:focus {\n"
+"    border: 1px solid #2563eb;\n"
+"}\n"
+"\n"
+"QLineEdit:hover {\n"
+"    border: 1px solid #3b82f6;\n"
+"}\n"
+"\n"
+"*[class=\"input-field\"] QLineEdit:disabled {\n"
+"    background-color: #f3f4f6;\n"
+"    border: none;\n"
+"    color: #999;\n"
 "}\n"
 "\n"
 "*[class=\"input-field\"] QLabel {\n"
-"	background-color: rgb(192, 191, 188);\n"
-"	border-left: 1px solid #999;\n"
-"	border-top: 1px solid #999;\n"
-"	border-bottom: 1px solid #999;\n"
-"	border-right: none;\n"
-"	border-top-left-radius: 15px;\n"
-"	border-bottom-left-radius: 15px;\n"
-"	padding-left: 8px;\n"
-"	color: black;\n"
+"    background-color: #d2d2d2;\n"
+"    border-left: 1px solid #999;\n"
+"    border-top: 1px solid #999;\n"
+"    border-bottom: 1px solid #999;\n"
+"    border-right: none;\n"
+"    border-top-left-radius: 18px;\n"
+"    border-bottom-left-radius: 18px;\n"
+"    padding-left: 8px;\n"
+"    color: #000000;\n"
 "}\n"
 "\n"
-"QComboBox {\n"
+"*[class=\"input-field\"] QLabel:disabled {\n"
+" "
+                        "   color: #999;\n"
+"    border: none;\n"
+"}\n"
+"\n"
+"\n"
+"\n"
+"*[class=\"input-field\"] QComboBox {\n"
 "    border: 1px solid #999;\n"
 "    border-left: none;\n"
 "    padding: 0px 10px;\n"
 "    background-color: #ffffff;\n"
-"    color: #333333;\n"
+"    color: #1f2937;\n"
 "    font: 10pt \"Inter Medium\";\n"
-"    selection-background-color: #7eb4d7;\n"
-"	border-top-right-radius: 15px;\n"
-"	border-bottom-right-radius: 15px;\n"
+"    selection-background-color: #bfdbfe;\n"
+"    border-top-right-radius: 18px;\n"
+"    border-bottom-right-radius: 18px;\n"
 "}\n"
 "\n"
-"QComboBox:focus, QLineEdit:focus {\n"
-""
-                        "    border: 1px solid #007BFF;\n"
+"QComboBox:focus {\n"
+"    border: 1px solid #2563eb;\n"
 "}\n"
 "\n"
-"QComboBox:hover, QLineEdit:hover {\n"
-"    border: 1px solid #3498db;\n"
+"QComboBox:hover {\n"
+"    border: 1px solid #3b82f6;\n"
 "}\n"
 "\n"
 "QComboBox::drop-down {\n"
@@ -149,7 +156,6 @@ class Ui_SectionAdviserEditorDialog(object):
 "    subcontrol-position: top right;\n"
 "    width: 30px;\n"
 "    border-left-width: 0px;\n"
-"    /* Match the 15px border-radius of the main control */\n"
 "    border-top-right-radius: 15px;\n"
 "    border-bottom-right-radius: 15px;\n"
 "}\n"
@@ -162,24 +168,169 @@ class Ui_SectionAdviserEditorDialog(object):
 "}\n"
 "\n"
 "QComboBox QAbstractItemView {\n"
-"    background-color: white !important;\n"
+"    background-color: #ffffff "
+                        "!important;\n"
 "    border: 1px solid #999;\n"
-"    selection-background-color: #7eb4d7;\n"
-"    selection-color: #ffffff;\n"
-"    outline: 0; /* Removes the ugly dotted focus border */\n"
+"    selection-background-color: #bfdbfe;\n"
+"    selection-color: #111827;\n"
+"    outline: 0;\n"
 "}\n"
 "\n"
 "QComboBox QAbstractItemView::item {\n"
 "    padding: 0px 15px;\n"
 "    border-radius: 4px;\n"
-"    color: #333333;\n"
+"    color: #1f2937;\n"
 "}\n"
 "\n"
-"/* Hover state for items inside the "
-                        "dropdown */\n"
 "QComboBox QAbstractItemView::item:hover {\n"
-"    background-color: #7eb4d7;\n"
-"    color: #ffffff;\n"
+"    background-color: #bfdbfe;\n"
+"    color: #111827;\n"
+"}\n"
+"\n"
+"QComboBox:disabled {\n"
+"    background-color: #f3f4f6;\n"
+"    border: none;\n"
+"    color: #999;\n"
+"}\n"
+"\n"
+"QComboBox::drop-down:disabled {\n"
+"    border-top-right-radius: 15px;\n"
+"    border-bottom-right-radius: 15px;\n"
+"    background-color: transparent;\n"
+"}\n"
+"\n"
+"QComboBox::down-arrow:disabled {\n"
+"    image: url(:/Images/Images/caret-down-disabled.png);\n"
+"}\n"
+"\n"
+"\n"
+"\n"
+"QPushButton[class=\"button-green\"] {\n"
+"    border: 1px solid #0a5128;\n"
+"    border-radius: 15px;\n"
+"    padding: 0px 10px 0px;\n"
+"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #1ebd5d, stop:1 #107f"
+                        "3f);\n"
+"    color: #FFF;\n"
+"    font: 10pt \"Inter SemiBold\";\n"
+"}\n"
+"\n"
+"QPushButton[class=\"button-green\"]:hover {\n"
+"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #2ecc71, stop:1 #27AE60);\n"
+"}\n"
+"\n"
+"QPushButton[class=\"button-green\"]:pressed {\n"
+"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #0b572a, stop:1 #129046);\n"
+"}\n"
+"\n"
+"QPushButton[class=\"button-green\"]:disabled {\n"
+"    background: #A5D6A7;\n"
+"    color: #E8F5E9;\n"
+"    opacity: 0.6;\n"
+"}\n"
+"\n"
+"QPushButton[class=\"button-normal\"] {\n"
+"    color: #000000;\n"
+"    font: 10pt \"Inter\";\n"
+"    border: 1px solid #9a9996;\n"
+"    border-radius: 15px;\n"
+"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #ffffff, stop:1 #d8ecf6);\n"
+"}\n"
+"\n"
+"QPushButton[class=\"button-normal\"]:hover {\n"
+"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #ffffff, stop:1 #f2f6f8);\n"
+"}\n"
+"\n"
+"QPushButton[class=\"button-normal\"]:pressed {\n"
+"    background: qlineargradient(x"
+                        "1:0, y1:0, x2:0, y2:1, stop:0 #dce5e9, stop:1 #ffffff);\n"
+"}\n"
+"\n"
+"QPushButton[class=\"button-normal\"]:disabled {\n"
+"    color: #aeaeae;\n"
+"    border: 1px solid #dcdcdc;\n"
+"    background: #f5f5f5;\n"
+"}\n"
+"\n"
+"\n"
+"\n"
+"QScrollBar:vertical {\n"
+"    border: none;\n"
+"    background: #ffffff;\n"
+"    width: 10px;\n"
+"    margin: 0px;\n"
+"    border-radius: 5px;\n"
+"}\n"
+"\n"
+"QScrollBar::handle:vertical {\n"
+"    background: #7a7a7a;\n"
+"    min-height: 20px;\n"
+"    border-radius: 5px;\n"
+"}\n"
+"\n"
+"QScrollBar::handle:vertical:hover {\n"
+"    background: #574939;\n"
+"}\n"
+"\n"
+"QScrollBar:horizontal {\n"
+"    border: none;\n"
+"    background: #ffffff;\n"
+"    height: 10px;\n"
+"    margin: 0px;\n"
+"    border-radius: 5px;\n"
+"}\n"
+"\n"
+"QScrollBar::handle:horizontal {\n"
+"    background: #7a7a7a;\n"
+"    min-width: 20px;\n"
+"    border-radius: 5px;\n"
+"}\n"
+"\n"
+"QScrollBar::handle:horizontal:hover {\n"
+"    background: #574939;\n"
+"}\n"
+"\n"
+"QScrollBar::add-line:vertical,\n"
+"QScrollBar::sub-line"
+                        ":vertical,\n"
+"QScrollBar::add-line:horizontal,\n"
+"QScrollBar::sub-line:horizontal {\n"
+"    border: none;\n"
+"    background: none;\n"
+"    width: 0px;\n"
+"    height: 0px;\n"
+"}\n"
+"\n"
+"QScrollBar::add-page:vertical,\n"
+"QScrollBar::sub-page:vertical,\n"
+"QScrollBar::add-page:horizontal,\n"
+"QScrollBar::sub-page:horizontal {\n"
+"    background: none;\n"
+"}\n"
+"\n"
+"\n"
+"QTableView {\n"
+"    outline: none;\n"
+"    border: 1px solid #a1a1a1;\n"
+"    gridline-color: #f0f0f0;\n"
+"    background-color: #ffffff;\n"
+"    selection-color: #000000;\n"
+"    selection-background-color: rgba(38, 162, 105, 0.2);\n"
+"}\n"
+"\n"
+"/* Hide Vertical Headers (Row Numbers) */\n"
+"QHeaderView:vertical,\n"
+"QHeaderView::section:vertical {\n"
+"    width: 0px;\n"
+"    border: none;\n"
+"}\n"
+"\n"
+"/* Horizontal Header */\n"
+"QHeaderView::section:horizontal {\n"
+"    padding: 6px;\n"
+"    color: #000000;\n"
+"    font-weight: bold;\n"
+"    background-color: #f6f5f4;\n"
 "}")
         self.verticalLayout_3 = QVBoxLayout(SectionAdviserEditorDialog)
         self.verticalLayout_3.setSpacing(0)
@@ -190,33 +341,23 @@ class Ui_SectionAdviserEditorDialog(object):
         self.frame_header.setMinimumSize(QSize(0, 35))
         self.frame_header.setMaximumSize(QSize(16777215, 35))
         self.frame_header.setMouseTracking(True)
-        self.frame_header.setStyleSheet(u"#frame_header {\n"
-"	background-color: #deddda;\n"
-"	border-top-left-radius: 12px;\n"
-"	border-top-right-radius: 12px;\n"
-"	border: 1px solid #7a7a7a;\n"
-"	border-bottom: none;\n"
-"}")
+        self.frame_header.setStyleSheet(u"")
         self.frame_header.setFrameShape(QFrame.StyledPanel)
         self.frame_header.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_6 = QHBoxLayout(self.frame_header)
-        self.horizontalLayout_6.setSpacing(6)
+        self.horizontalLayout_6.setSpacing(0)
         self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
-        self.horizontalLayout_6.setContentsMargins(9, 0, 9, 0)
+        self.horizontalLayout_6.setContentsMargins(0, 0, 0, 0)
         self.widget_window_icon = QWidget(self.frame_header)
         self.widget_window_icon.setObjectName(u"widget_window_icon")
-        self.widget_window_icon.setMinimumSize(QSize(54, 35))
-        self.widget_window_icon.setMaximumSize(QSize(54, 35))
+        self.widget_window_icon.setMinimumSize(QSize(72, 34))
+        self.widget_window_icon.setMaximumSize(QSize(72, 34))
         self.widget_window_icon.setStyleSheet(u"background: transparent;")
         self.horizontalLayout_4 = QHBoxLayout(self.widget_window_icon)
         self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
         self.horizontalLayout_4.setContentsMargins(0, 0, 0, 0)
 
         self.horizontalLayout_6.addWidget(self.widget_window_icon)
-
-        self.horizontalSpacer_6 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.horizontalLayout_6.addItem(self.horizontalSpacer_6)
 
         self.label_windowTitle = QLabel(self.frame_header)
         self.label_windowTitle.setObjectName(u"label_windowTitle")
@@ -226,54 +367,47 @@ class Ui_SectionAdviserEditorDialog(object):
         font.setBold(False)
         font.setItalic(False)
         self.label_windowTitle.setFont(font)
-        self.label_windowTitle.setStyleSheet(u"background: transparent;\n"
-"color: rgb(0, 0, 0);\n"
-"font: 10pt \"Inter SemiBold\";")
+        self.label_windowTitle.setStyleSheet(u"")
+        self.label_windowTitle.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout_6.addWidget(self.label_windowTitle)
 
-        self.horizontalSpacer_5 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.horizontalLayout_6.addItem(self.horizontalSpacer_5)
-
-        self.btnMinimize = QPushButton(self.frame_header)
+        self.widget_window_buttons = QWidget(self.frame_header)
+        self.widget_window_buttons.setObjectName(u"widget_window_buttons")
+        self.widget_window_buttons.setMinimumSize(QSize(72, 34))
+        self.widget_window_buttons.setMaximumSize(QSize(72, 34))
+        self.widget_window_buttons.setStyleSheet(u"")
+        self.horizontalLayout_5 = QHBoxLayout(self.widget_window_buttons)
+        self.horizontalLayout_5.setSpacing(0)
+        self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
+        self.horizontalLayout_5.setContentsMargins(0, 0, 0, 0)
+        self.btnMinimize = QPushButton(self.widget_window_buttons)
         self.btnMinimize.setObjectName(u"btnMinimize")
         self.btnMinimize.setMinimumSize(QSize(24, 24))
         self.btnMinimize.setMaximumSize(QSize(24, 24))
         self.btnMinimize.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.btnMinimize.setStyleSheet(u"#btnMinimize {\n"
-"	border-radius: 12px;\n"
-"	background-color: transparent;\n"
-"}\n"
-"\n"
-"#btnMinimize:hover {\n"
-"	background-color: rgb(248, 228, 92);\n"
-"}")
+        self.btnMinimize.setStyleSheet(u"")
         icon = QIcon()
         icon.addFile(u":/Images/Images/minimize-sign.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.btnMinimize.setIcon(icon)
         self.btnMinimize.setIconSize(QSize(12, 12))
 
-        self.horizontalLayout_6.addWidget(self.btnMinimize)
+        self.horizontalLayout_5.addWidget(self.btnMinimize)
 
-        self.btnClose = QPushButton(self.frame_header)
+        self.btnClose = QPushButton(self.widget_window_buttons)
         self.btnClose.setObjectName(u"btnClose")
         self.btnClose.setMinimumSize(QSize(24, 24))
         self.btnClose.setMaximumSize(QSize(24, 24))
         self.btnClose.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.btnClose.setStyleSheet(u"#btnClose {\n"
-"	border-radius: 12px;\n"
-"	background-color: transparent;\n"
-"}\n"
-"\n"
-"#btnClose:hover {\n"
-"	background-color: rgb(246, 97, 81);\n"
-"}")
+        self.btnClose.setStyleSheet(u"")
         icon1 = QIcon()
         icon1.addFile(u":/Images/Images/clear.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.btnClose.setIcon(icon1)
 
-        self.horizontalLayout_6.addWidget(self.btnClose)
+        self.horizontalLayout_5.addWidget(self.btnClose)
+
+
+        self.horizontalLayout_6.addWidget(self.widget_window_buttons)
 
 
         self.verticalLayout_3.addWidget(self.frame_header)
@@ -285,13 +419,7 @@ class Ui_SectionAdviserEditorDialog(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.widget_body.sizePolicy().hasHeightForWidth())
         self.widget_body.setSizePolicy(sizePolicy)
-        self.widget_body.setMinimumSize(QSize(550, 485))
-        self.widget_body.setMaximumSize(QSize(550, 485))
-        self.widget_body.setStyleSheet(u"#widget_body {\n"
-"	background-color: #deddda;\n"
-"	border: 1px solid #7a7a7a;\n"
-"	border-top: none;\n"
-"}")
+        self.widget_body.setStyleSheet(u"")
         self.verticalLayout = QVBoxLayout(self.widget_body)
         self.verticalLayout.setSpacing(12)
         self.verticalLayout.setObjectName(u"verticalLayout")
@@ -304,8 +432,7 @@ class Ui_SectionAdviserEditorDialog(object):
         font1.setBold(False)
         font1.setItalic(False)
         self.label_24.setFont(font1)
-        self.label_24.setStyleSheet(u"background: transparent;\n"
-"font: 11pt \"Inter SemiBold\";")
+        self.label_24.setStyleSheet(u"background: transparent; font: 11pt \"Inter SemiBold\";")
 
         self.verticalLayout.addWidget(self.label_24)
 
@@ -324,15 +451,16 @@ class Ui_SectionAdviserEditorDialog(object):
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.label_9 = QLabel(self.widget_2)
         self.label_9.setObjectName(u"label_9")
-        self.label_9.setMinimumSize(QSize(100, 32))
-        self.label_9.setMaximumSize(QSize(100, 32))
+        self.label_9.setMinimumSize(QSize(100, 36))
+        self.label_9.setMaximumSize(QSize(100, 36))
         self.label_9.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout.addWidget(self.label_9)
 
         self.cmb_section = QComboBox(self.widget_2)
         self.cmb_section.setObjectName(u"cmb_section")
-        self.cmb_section.setMinimumSize(QSize(0, 32))
+        self.cmb_section.setMinimumSize(QSize(0, 36))
+        self.cmb_section.setMaximumSize(QSize(16777215, 36))
         self.cmb_section.setStyleSheet(u"")
         self.cmb_section.setEditable(False)
 
@@ -349,16 +477,16 @@ class Ui_SectionAdviserEditorDialog(object):
         self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
         self.label_10 = QLabel(self.widget_3)
         self.label_10.setObjectName(u"label_10")
-        self.label_10.setMinimumSize(QSize(100, 32))
-        self.label_10.setMaximumSize(QSize(100, 32))
+        self.label_10.setMinimumSize(QSize(100, 36))
+        self.label_10.setMaximumSize(QSize(100, 36))
         self.label_10.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout_3.addWidget(self.label_10)
 
         self.cmb_teacher = QComboBox(self.widget_3)
         self.cmb_teacher.setObjectName(u"cmb_teacher")
-        self.cmb_teacher.setMinimumSize(QSize(0, 32))
-        self.cmb_teacher.setMaximumSize(QSize(16777215, 32))
+        self.cmb_teacher.setMinimumSize(QSize(0, 36))
+        self.cmb_teacher.setMaximumSize(QSize(16777215, 36))
         self.cmb_teacher.setStyleSheet(u"")
         self.cmb_teacher.setEditable(False)
 
@@ -373,62 +501,7 @@ class Ui_SectionAdviserEditorDialog(object):
         self.table_section = QTableView(self.widget_body)
         self.table_section.setObjectName(u"table_section")
         self.table_section.setEnabled(False)
-        self.table_section.setStyleSheet(u"QTableView {\n"
-"    background-color: #f5f5f5;          \n"
-"    alternate-background-color: #eaeaea;\n"
-"    color: #2b2b2b;                     \n"
-"    gridline-color: #d0d0d0;            \n"
-"    border: 1px solid #bcbcbc;          \n"
-"    selection-background-color: #7b7b7b;\n"
-"    selection-color: #ffffff;           \n"
-"    outline: none;\n"
-"}\n"
-"\n"
-"QHeaderView::section {\n"
-"    background-color: #e0e0e0;\n"
-"    color: #1a1a1a;\n"
-"    padding: 6px;\n"
-"    border: 1px solid #bcbcbc;\n"
-"    font-weight: bold;\n"
-"}\n"
-"\n"
-"QTableView QTableCornerButton::section {\n"
-"    background-color: #cccccc;\n"
-"    border: 1px solid #bcbcbc;\n"
-"}\n"
-"\n"
-"/* Custom Scrollbars */\n"
-"QScrollBar:vertical {\n"
-"    border: none;\n"
-"    background: #f8f8f8;\n"
-"    width: 10px;\n"
-"}\n"
-"\n"
-"QScrollBar::handle:vertical {\n"
-"    background: rgb(38, 162, 105);\n"
-"    min-height: 30px;\n"
-"    border-radius: 5px; \n"
-"    margin: 2px;\n"
-"}\n"
-"\n"
-"QScrollBar:horizontal {\n"
-"    border: none;\n"
-"    b"
-                        "ackground: #f8f8f8;\n"
-"    height: 10px;\n"
-"}\n"
-"\n"
-"QScrollBar::handle:horizontal {\n"
-"    background: rgb(38, 162, 105);\n"
-"    min-width: 30px;\n"
-"    border-radius: 5px;\n"
-"    margin: 2px;\n"
-"}\n"
-"\n"
-"/* Remove scrollbar arrows */\n"
-"QScrollBar::add-line, QScrollBar::sub-line {\n"
-"    width: 0px; height: 0px;\n"
-"}")
+        self.table_section.setStyleSheet(u"")
         self.table_section.setSelectionMode(QAbstractItemView.NoSelection)
         self.table_section.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.table_section.verticalHeader().setVisible(False)

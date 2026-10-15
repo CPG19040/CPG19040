@@ -27,12 +27,483 @@ class Ui_QuizCreatorDialog(object):
             QuizCreatorDialog.setObjectName(u"QuizCreatorDialog")
         QuizCreatorDialog.resize(1114, 689)
         QuizCreatorDialog.setStyleSheet(u"* {\n"
-"    color: black;\n"
+"    color: #000000;\n"
 "    font: 10pt \"Inter\";\n"
 "}\n"
 "\n"
-"QuizCreatorDialog {\n"
-"	background-color: transparent;\n"
+"QLabel:disabled {\n"
+"    color: #999;\n"
+"}\n"
+"\n"
+"#QuizCreatorDialog {\n"
+"    background: transparent;\n"
+"}\n"
+"\n"
+"\n"
+"#frame_header {\n"
+"    background-color: #deddda;\n"
+"    border-top-left-radius: 12px;\n"
+"    border-top-right-radius: 12px;\n"
+"    border: 1px solid #7a7a7a;\n"
+"    border-bottom: none;\n"
+"}\n"
+"\n"
+"#label_windowTitle {\n"
+"    background: transparent;\n"
+"    font: 10pt \"Inter SemiBold\";\n"
+"    color: #111827;\n"
+"}\n"
+"\n"
+"#widget_window_buttons {\n"
+"    background: transparent;\n"
+"}\n"
+"\n"
+"#btnMinimize {\n"
+"    border-radius: 12px;\n"
+"    background-color: transparent;\n"
+"}\n"
+"\n"
+"#btnMinimize:hover {\n"
+"    background-color: #f8e45c;\n"
+"}\n"
+"\n"
+"#btnClose {\n"
+"    border-radius: 12px;\n"
+"    background-color: transparent;\n"
+"}\n"
+"\n"
+"#btnClose:hover {\n"
+"    background-color: #f66151;\n"
+"}\n"
+"\n"
+"\n"
+"#btnMaximize {\n"
+"    border-radius: 12px;\n"
+"    background-color: trans"
+                        "parent;\n"
+"}\n"
+"\n"
+"#btnMaximize:hover {\n"
+"    background-color: #3bca5c;\n"
+"}\n"
+"\n"
+"#widget_body {\n"
+"    background-color: #deddda;\n"
+"    border: 1px solid #7a7a7a;\n"
+"    border-top: none;\n"
+"}\n"
+"\n"
+"QLabel[class=\"accented-labels\"] {\n"
+"    background-color: rgb(255, 255, 255);\n"
+"    padding: 0px 10px 0px;\n"
+"    border-radius: 10px;\n"
+"}\n"
+"\n"
+"\n"
+"QPushButton[class=\"button-green\"] {\n"
+"    border: 1px solid #0a5128;\n"
+"    border-radius: 15px;\n"
+"    padding: 0px 10px 0px;\n"
+"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #1ebd5d, stop:1 #107f3f);\n"
+"    color: #FFF;\n"
+"    font: 10pt \"Inter SemiBold\";\n"
+"}\n"
+"\n"
+"QPushButton[class=\"button-green\"]:hover {\n"
+"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #2ecc71, stop:1 #27AE60);\n"
+"}\n"
+"\n"
+"QPushButton[class=\"button-green\"]:pressed {\n"
+"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #0b572a, stop:1 #129046);\n"
+"}\n"
+"\n"
+"QPushButton[class=\"button-green\"]:"
+                        "disabled {\n"
+"    background: #a7f3d0;\n"
+"    border: 1px solid #6ee7b7;\n"
+"    color: #098f69;\n"
+"}\n"
+"\n"
+"QPushButton[class=\"button-normal\"] {\n"
+"    color: #000000;\n"
+"    font: 10pt \"Inter\";\n"
+"    border: 1px solid #9a9996;\n"
+"    border-radius: 15px;\n"
+"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #ffffff, stop:1 #d8ecf6);\n"
+"}\n"
+"\n"
+"QPushButton[class=\"button-normal\"]:hover {\n"
+"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #ffffff, stop:1 #f2f6f8);\n"
+"}\n"
+"\n"
+"QPushButton[class=\"button-normal\"]:pressed {\n"
+"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #dce5e9, stop:1 #ffffff);\n"
+"}\n"
+"\n"
+"QPushButton[class=\"button-normal\"]:disabled {\n"
+"    color: #aeaeae;\n"
+"    border: 1px solid #dcdcdc;\n"
+"    background: #f5f5f5;\n"
+"}\n"
+"\n"
+"\n"
+"\n"
+"QScrollBar:vertical {\n"
+"    border: none;\n"
+"    background: #ffffff;\n"
+"    width: 10px;\n"
+"    margin: 0px;\n"
+"    border-radius: 5px;\n"
+"}\n"
+"\n"
+"QScrollBar::handle:"
+                        "vertical {\n"
+"    background: #7a7a7a;\n"
+"    min-height: 20px;\n"
+"    border-radius: 5px;\n"
+"}\n"
+"\n"
+"QScrollBar::handle:vertical:hover {\n"
+"    background: #574939;\n"
+"}\n"
+"\n"
+"QScrollBar:horizontal {\n"
+"    border: none;\n"
+"    background: #ffffff;\n"
+"    height: 10px;\n"
+"    margin: 0px;\n"
+"    border-radius: 5px;\n"
+"}\n"
+"\n"
+"QScrollBar::handle:horizontal {\n"
+"    background: #7a7a7a;\n"
+"    min-width: 20px;\n"
+"    border-radius: 5px;\n"
+"}\n"
+"\n"
+"QScrollBar::handle:horizontal:hover {\n"
+"    background: #574939;\n"
+"}\n"
+"\n"
+"QScrollBar::add-line:vertical,\n"
+"QScrollBar::sub-line:vertical,\n"
+"QScrollBar::add-line:horizontal,\n"
+"QScrollBar::sub-line:horizontal {\n"
+"    border: none;\n"
+"    background: none;\n"
+"    width: 0px;\n"
+"    height: 0px;\n"
+"}\n"
+"\n"
+"QScrollBar::add-page:vertical,\n"
+"QScrollBar::sub-page:vertical,\n"
+"QScrollBar::add-page:horizontal,\n"
+"QScrollBar::sub-page:horizontal {\n"
+"    background: none;\n"
+"}\n"
+"\n"
+"\n"
+"\n"
+"QToolTip {\n"
+"    backgrou"
+                        "nd-color: #ffffff;\n"
+"    color: #1f2937;\n"
+"    border: 1px solid #d1d5db;\n"
+"    padding: 6px 10px;\n"
+"    border-radius: 6px;\n"
+"    font: 9pt \"Inter\";\n"
+"}\n"
+"\n"
+"\n"
+"#btn_save {\n"
+"    border: none;\n"
+"    background: transparent;\n"
+"}\n"
+"\n"
+"#btn_save:hover {\n"
+"    background-color: rgb(255, 255, 255);\n"
+"    border-radius: 5px;\n"
+"}\n"
+"\n"
+"\n"
+"#widget_difficulty_toggle QPushButton {\n"
+"    border: 1px solid #9ca3af;\n"
+"    padding: 5px 10px;\n"
+"    font: 10pt \"Inter\";\n"
+"    background-color: #f3f4f6;\n"
+"    color: #1f2937;\n"
+"}\n"
+"\n"
+"#widget_difficulty_toggle QPushButton:hover {\n"
+"    background-color: #e5e7eb;\n"
+"}\n"
+"\n"
+"#widget_difficulty_toggle QPushButton:disabled {\n"
+"    background-color: #f3f4f6;\n"
+"    border: 1px solid #e5e7eb;\n"
+"    color: #9ca3af;\n"
+"}\n"
+"\n"
+"QPushButton#btnEasy {\n"
+"    border-top-left-radius: 15px;\n"
+"    border-bottom-left-radius: 15px;\n"
+"    border-right: none;\n"
+"}\n"
+"\n"
+"QPushButton#btnAverage {\n"
+"    border-radiu"
+                        "s: 0px;\n"
+"    border-right: none;\n"
+"}\n"
+"\n"
+"QPushButton#btnHard {\n"
+"    border-top-right-radius: 15px;\n"
+"    border-bottom-right-radius: 15px;\n"
+"}\n"
+"\n"
+"QPushButton#btnEasy:checked {\n"
+"    background-color: #86efac;\n"
+"    border: 2px solid #22c55e;\n"
+"    color: #14532d;\n"
+"}\n"
+"\n"
+"QPushButton#btnAverage:checked {\n"
+"    background-color: #fef08a;\n"
+"    border: 2px solid #eab308;\n"
+"    color: #713f12;\n"
+"}\n"
+"\n"
+"QPushButton#btnHard:checked {\n"
+"    background-color: #fca5a5;\n"
+"    border: 2px solid #ef4444;\n"
+"    color: #7f1d1d;\n"
+"}\n"
+"\n"
+"QPushButton#btnEasy:disabled,\n"
+"QPushButton#btnAverage:disabled {\n"
+"    border-right: none;\n"
+"}\n"
+"\n"
+"QPushButton#btnEasy:checked:disabled {\n"
+"    background-color: #dcfce7;\n"
+"    border: 2px solid #bbf7d0;\n"
+"    border-right: none;\n"
+"    color: #86efac;\n"
+"}\n"
+"\n"
+"QPushButton#btnAverage:checked:disabled {\n"
+"    background-color: #fefce8;\n"
+"    border: 2px solid #fef08a;\n"
+"    border-right: none;\n"
+"    c"
+                        "olor: #fde047;\n"
+"}\n"
+"\n"
+"QPushButton#btnHard:checked:disabled {\n"
+"    background-color: #fee2e2;\n"
+"    border: 2px solid #fecaca;\n"
+"    color: #fca5a5;\n"
+"}\n"
+"\n"
+"\n"
+"QComboBox[class=\"combobox-main\"],\n"
+"QSpinBox,\n"
+"QDoubleSpinBox,\n"
+"QDateEdit {\n"
+"    height: 30px;\n"
+"    padding: 0px 5px 0px 10px;\n"
+"    color: #333333;\n"
+"    font: 10pt \"Inter SemiBold\";\n"
+"    background-color: #ffffff;\n"
+"    border: 1px solid #999999;\n"
+"    border-radius: 15px;\n"
+"    selection-background-color: #7eb4d7;\n"
+"}\n"
+"\n"
+"QComboBox[class=\"combobox-main\"]:hover,\n"
+"QSpinBox:hover,\n"
+"QDoubleSpinBox:hover,\n"
+"QDateEdit:hover {\n"
+"    border: 1px solid #3498db;\n"
+"}\n"
+"\n"
+"QComboBox[class=\"combobox-main\"]:focus,\n"
+"QSpinBox:focus,\n"
+"QDoubleSpinBox:focus,\n"
+"QDateEdit:focus {\n"
+"    border: 1px solid #007bff;\n"
+"}\n"
+"\n"
+"QComboBox[class=\"combobox-main\"]:focus,\n"
+"QSpinBox:focus,\n"
+"QDoubleSpinBox:focus,\n"
+"QDateEdit:focus {\n"
+"    border: 1px solid #007BFF;\n"
+"}\n"
+"\n"
+""
+                        "QComboBox[class=\"combobox-main\"]:disabled,\n"
+"QSpinBox:disabled,\n"
+"QDoubleSpinBox:disabled,\n"
+"QDateEdit:disabled {\n"
+"    border: none;\n"
+"    color: #999;\n"
+"}\n"
+"\n"
+"/* Dropdown Subcontrols */\n"
+"QComboBox::drop-down,\n"
+"QDoubleSpinBox::drop-down,\n"
+"QDateEdit::drop-down {\n"
+"    subcontrol-origin: padding;\n"
+"    subcontrol-position: top right;\n"
+"    width: 30px;\n"
+"    border-left-width: 0px;\n"
+"    border-top-right-radius: 15px;\n"
+"    border-bottom-right-radius: 15px;\n"
+"}\n"
+"\n"
+"QSpinBox::up-button,\n"
+"QDoubleSpinBox::up-button,\n"
+"QDateEdit::up-button {\n"
+"    subcontrol-origin: border;\n"
+"    subcontrol-position: top right;\n"
+"    width: 8px;\n"
+"    height: 8px;\n"
+"    padding: 6px 10px 6px 2px;\n"
+"    color: #77767b;\n"
+"    border-top-right-radius: 15px;\n"
+"}\n"
+"\n"
+"QSpinBox::down-button,\n"
+"QDoubleSpinBox::down-button,\n"
+"QDateEdit::down-button {\n"
+"    subcontrol-origin: border;\n"
+"    subcontrol-position: bottom right;\n"
+"    width: 8px;\n"
+"    height: 8p"
+                        "x;\n"
+"    padding: 6px 10px 6px 2px;\n"
+"    color: #77767b;\n"
+"    border-bottom-right-radius: 15px;\n"
+"}\n"
+"\n"
+"/* Control Arrows */\n"
+"QComboBox::down-arrow,\n"
+"QSpinBox::down-arrow,\n"
+"QDoubleSpinBox::down-arrow,\n"
+"QDateEdit::down-arrow {\n"
+"    image: url(:/Images/Images/caret-down.png);\n"
+"    width: 8px;\n"
+"    height: 8px;\n"
+"    border: none;\n"
+"}\n"
+"\n"
+"QSpinBox::up-arrow,\n"
+"QDoubleSpinBox::up-arrow,\n"
+"QDateEdit::up-arrow {\n"
+"    image: url(:/Images/Images/caret-up.png);\n"
+"    width: 8px;\n"
+"    height: 8px;\n"
+"}\n"
+"\n"
+"QComboBox::down-arrow:disabled,\n"
+"QSpinBox::down-arrow:disabled,\n"
+"QDoubleSpinBox::down-arrow:disabled,\n"
+"QDateEdit::down-arrow:disabled {\n"
+"    image: url(:/Images/Images/caret-down-disabled.png);\n"
+"    width: 8px;\n"
+"    height: 8px;\n"
+"    border: none;\n"
+"}\n"
+"\n"
+"QSpinBox::up-arrow:disabled,\n"
+"QDoubleSpinBox::up-arrow:disabled,\n"
+"QDateEdit::up-arrow:disabled {\n"
+"    image: url(:/Images/Images/caret-up-disabled.png);\n"
+"    width:"
+                        " 8px;\n"
+"    height: 8px;\n"
+"}\n"
+"\n"
+"/* ComboBox Item View Popup */\n"
+"QComboBox QAbstractItemView {\n"
+"    outline: 0;\n"
+"    border: 1px solid #999999;\n"
+"    background-color: #ffffff !important;\n"
+"    selection-color: #ffffff;\n"
+"    selection-background-color: #7eb4d7;\n"
+"}\n"
+"\n"
+"QComboBox QAbstractItemView::item {\n"
+"    padding-left: 10px;\n"
+"    color: #333333;\n"
+"    border-radius: 4px;\n"
+"}\n"
+"\n"
+"QComboBox[class=\"combobox-main\"] QAbstractItemView::item:hover {\n"
+"    color: #ffffff;\n"
+"    background-color: #7eb4d7;\n"
+"}\n"
+"\n"
+"QScrollArea {\n"
+"    border: none;\n"
+"    border-radius: 20px;\n"
+"    background-color: #deddda;\n"
+"}\n"
+"\n"
+"QScrollArea QWidget #qt_scrollarea_corner {\n"
+"    background: transparent;\n"
+"    border: none;\n"
+"}\n"
+"\n"
+"#scrollArea_id #scrollAreaWidgetContents_1,\n"
+"#scrollArea_mc #scrollAreaWidgetContents_2,\n"
+"#scrollArea_tf #scrollAreaWidgetContents_3 {\n"
+"    background-color: #c8c7c5;\n"
+"    border-radius: 10px;\n"
+"}\n"
+"\n"
+"#l"
+                        "ine_1,\n"
+"#line_2,\n"
+"#line_3 {\n"
+"    background-color: #deddda;\n"
+"}\n"
+"\n"
+"\n"
+"QCheckBox {\n"
+"    background-color: transparent;\n"
+"    padding: 5px 10px;\n"
+"    color: #1f2937;\n"
+"    font: 10pt \"Inter\";\n"
+"}\n"
+"\n"
+"QCheckBox::indicator {\n"
+"    width: 18px;\n"
+"    height: 18px;\n"
+"    background-color: #ffffff;\n"
+"    border: 2px solid #9ca3af;\n"
+"    border-radius: 4px;\n"
+"}\n"
+"\n"
+"QCheckBox::indicator:hover {\n"
+"    border-color: #3b82f6;\n"
+"}\n"
+"\n"
+"QCheckBox::indicator:checked {\n"
+"    background-color: #2563eb;\n"
+"    border-color: #2563eb;\n"
+"    image: url(:/Images/Images/check.png);\n"
+"}\n"
+"\n"
+"QCheckBox::indicator:disabled {\n"
+"    background-color: #f3f4f6;\n"
+"    border: 2px solid #d1d5db;\n"
+"    image: none;\n"
+"}\n"
+"\n"
+"QCheckBox:disabled {\n"
+"    color: #9ca3af;\n"
 "}")
         self.verticalLayout_3 = QVBoxLayout(QuizCreatorDialog)
         self.verticalLayout_3.setSpacing(0)
@@ -43,23 +514,17 @@ class Ui_QuizCreatorDialog(object):
         self.frame_header.setMinimumSize(QSize(0, 35))
         self.frame_header.setMaximumSize(QSize(16777215, 35))
         self.frame_header.setMouseTracking(True)
-        self.frame_header.setStyleSheet(u"#frame_header {\n"
-"	background-color: #deddda;\n"
-"	border-top-left-radius: 12px;\n"
-"	border-top-right-radius: 12px;\n"
-"	border: 1px solid #7a7a7a;\n"
-"	border-bottom: none;\n"
-"}")
+        self.frame_header.setStyleSheet(u"")
         self.frame_header.setFrameShape(QFrame.StyledPanel)
         self.frame_header.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_10 = QHBoxLayout(self.frame_header)
         self.horizontalLayout_10.setSpacing(6)
         self.horizontalLayout_10.setObjectName(u"horizontalLayout_10")
-        self.horizontalLayout_10.setContentsMargins(4, 0, 0, 0)
+        self.horizontalLayout_10.setContentsMargins(4, 0, 4, 0)
         self.widget_window_icon = QWidget(self.frame_header)
         self.widget_window_icon.setObjectName(u"widget_window_icon")
-        self.widget_window_icon.setMinimumSize(QSize(90, 35))
-        self.widget_window_icon.setMaximumSize(QSize(90, 35))
+        self.widget_window_icon.setMinimumSize(QSize(90, 34))
+        self.widget_window_icon.setMaximumSize(QSize(90, 34))
         self.widget_window_icon.setStyleSheet(u"background: transparent;")
         self.horizontalLayout_11 = QHBoxLayout(self.widget_window_icon)
         self.horizontalLayout_11.setSpacing(0)
@@ -76,35 +541,26 @@ class Ui_QuizCreatorDialog(object):
         font.setBold(False)
         font.setItalic(False)
         self.label_windowTitle.setFont(font)
-        self.label_windowTitle.setStyleSheet(u"background: transparent;\n"
-"color: rgb(0, 0, 0);\n"
-"font: 10pt \"Inter SemiBold\";")
+        self.label_windowTitle.setStyleSheet(u"")
         self.label_windowTitle.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout_10.addWidget(self.label_windowTitle)
 
         self.widget_window_buttons = QWidget(self.frame_header)
         self.widget_window_buttons.setObjectName(u"widget_window_buttons")
-        self.widget_window_buttons.setMinimumSize(QSize(90, 35))
-        self.widget_window_buttons.setMaximumSize(QSize(90, 35))
-        self.widget_window_buttons.setStyleSheet(u"background: transparent;")
+        self.widget_window_buttons.setMinimumSize(QSize(90, 34))
+        self.widget_window_buttons.setMaximumSize(QSize(90, 34))
+        self.widget_window_buttons.setStyleSheet(u"")
         self.horizontalLayout_44 = QHBoxLayout(self.widget_window_buttons)
-        self.horizontalLayout_44.setSpacing(9)
+        self.horizontalLayout_44.setSpacing(6)
         self.horizontalLayout_44.setObjectName(u"horizontalLayout_44")
-        self.horizontalLayout_44.setContentsMargins(9, 0, 9, 0)
+        self.horizontalLayout_44.setContentsMargins(0, 0, 0, 0)
         self.btnMinimize = QPushButton(self.widget_window_buttons)
         self.btnMinimize.setObjectName(u"btnMinimize")
         self.btnMinimize.setMinimumSize(QSize(24, 24))
         self.btnMinimize.setMaximumSize(QSize(24, 24))
         self.btnMinimize.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.btnMinimize.setStyleSheet(u"#btnMinimize {\n"
-"	border-radius: 12px;\n"
-"	background-color: transparent;\n"
-"}\n"
-"\n"
-"#btnMinimize:hover {\n"
-"	background-color: rgb(248, 228, 92);\n"
-"}")
+        self.btnMinimize.setStyleSheet(u"")
         icon = QIcon()
         icon.addFile(u":/Images/Images/minimize-sign.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.btnMinimize.setIcon(icon)
@@ -117,14 +573,7 @@ class Ui_QuizCreatorDialog(object):
         self.btnMaximize.setMinimumSize(QSize(24, 24))
         self.btnMaximize.setMaximumSize(QSize(24, 24))
         self.btnMaximize.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.btnMaximize.setStyleSheet(u"#btnMaximize {\n"
-"	border-radius: 12px;\n"
-"	background-color: transparent;\n"
-"}\n"
-"\n"
-"#btnMaximize:hover {\n"
-"	background-color: #3bca5c;\n"
-"}")
+        self.btnMaximize.setStyleSheet(u"")
         icon1 = QIcon()
         icon1.addFile(u":/Images/Images/maximize.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.btnMaximize.setIcon(icon1)
@@ -136,14 +585,7 @@ class Ui_QuizCreatorDialog(object):
         self.btnClose.setMinimumSize(QSize(24, 24))
         self.btnClose.setMaximumSize(QSize(24, 24))
         self.btnClose.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.btnClose.setStyleSheet(u"#btnClose {\n"
-"	border-radius: 12px;\n"
-"	background-color: transparent;\n"
-"}\n"
-"\n"
-"#btnClose:hover {\n"
-"	background-color: rgb(246, 97, 81);\n"
-"}")
+        self.btnClose.setStyleSheet(u"")
         icon2 = QIcon()
         icon2.addFile(u":/Images/Images/clear.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.btnClose.setIcon(icon2)
@@ -158,169 +600,7 @@ class Ui_QuizCreatorDialog(object):
 
         self.widget_body = QWidget(QuizCreatorDialog)
         self.widget_body.setObjectName(u"widget_body")
-        self.widget_body.setStyleSheet(u"* {\n"
-"	background-color: #deddda;\n"
-"}\n"
-"\n"
-"#widget_body {\n"
-"	background-color: #deddda;\n"
-"	border: 1px solid #7a7a7a;\n"
-"	border-top: none;\n"
-"}\n"
-"\n"
-"QPushButton[class=\"button-green\"] {\n"
-"	border: 1px solid #0a5128;\n"
-"    border-radius: 15px;\n"
-"    padding: 0px 10px 0px;\n"
-"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
-"                                stop:0 #1ebd5d, \n"
-"                                stop:1 #107f3f);\n"
-"    color: #FFF;\n"
-"    font: 10pt \"Inter SemiBold\";\n"
-"}\n"
-"\n"
-"QPushButton[class=\"button-green\"]:hover {\n"
-"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
-"                                stop:0 #2ecc71, \n"
-"                                stop:1 #27AE60);\n"
-"}\n"
-"\n"
-"QPushButton[class=\"button-green\"]:pressed {\n"
-"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
-"                                stop:0 #0b572a, \n"
-"                                stop:1 #129046); \n"
-"}\n"
-"\n"
-"QPushButton[class=\"button-gre"
-                        "en\"]:disabled {\n"
-"	background: #A5D6A7;\n"
-"	border: 1px solid #94c096;\n"
-"	color: #E8F5E9;\n"
-"	opacity: 0.6;\n"
-"}\n"
-"\n"
-"QComboBox[class=\"combobox-main\"] {\n"
-"    height: 30px;\n"
-"    border: 1px solid #999;\n"
-"    border-radius: 15px;\n"
-"    padding-left: 10px;\n"
-"    background-color: #ffffff;\n"
-"    color: #333333;\n"
-"    font: 10pt \"Inter Medium\";\n"
-"    selection-background-color: #7eb4d7;\n"
-"}\n"
-"\n"
-"QComboBox:focus {\n"
-"    border: 1px solid #007BFF;\n"
-"}\n"
-"\n"
-"QComboBox:hover {\n"
-"    border: 1px solid #3498db;\n"
-"}\n"
-"\n"
-"QComboBox::drop-down {\n"
-"    subcontrol-origin: padding;\n"
-"    subcontrol-position: top right;\n"
-"    width: 30px;\n"
-"    border-left-width: 0px;\n"
-"    border-top-right-radius: 15px;\n"
-"    border-bottom-right-radius: 15px;\n"
-"}\n"
-"\n"
-"QComboBox::down-arrow {\n"
-"    image: url(:/Images/Images/caret-down.png);\n"
-"    border: none;\n"
-"    width: 8px;\n"
-"    height: 8px;\n"
-"}\n"
-"\n"
-"QComboBox QAbstractItemView {\n"
-"    background-colo"
-                        "r: white !important;\n"
-"    border: 1px solid #999;\n"
-"    selection-background-color: #7eb4d7;\n"
-"    selection-color: #ffffff;\n"
-"    outline: 0;\n"
-"}\n"
-"\n"
-"QComboBox QAbstractItemView::item {\n"
-"    border-radius: 4px;\n"
-"    color: #333333;\n"
-"}\n"
-"\n"
-"QComboBox[class=\"combobox-main\"] QAbstractItemView::item:hover {\n"
-"    background-color: #7eb4d7;\n"
-"    color: #ffffff;\n"
-"}\n"
-"\n"
-"QSpinBox, QDoubleSpinBox {\n"
-"    height: 30px;\n"
-"    border: 1px solid #999;\n"
-"    border-radius: 15px;\n"
-"    padding: 0px 5px 0px;\n"
-"    background-color: #ffffff;\n"
-"    color: #333333;\n"
-"    font-size: 12px;\n"
-"    selection-background-color: #7eb4d7;\n"
-"	font: 10pt \"Inter\";\n"
-"}\n"
-"\n"
-"QSpinBox:focus, QDoubleSpinBox:focus {\n"
-"    border: 1px solid #007BFF;\n"
-"}\n"
-"\n"
-"QSpinBox:hover, QDoubleSpinBox:hover {\n"
-"    border: 1px solid #3498db;\n"
-"}\n"
-"\n"
-"QSpinBox::up-button, QDoubleSpinBox::up-button {\n"
-"    subcontrol-origin: border;\n"
-"    subcontrol-position: top right;\n"
-""
-                        "    width: 8px;\n"
-"    height: 8px;\n"
-"    border-top-right-radius: 15px;\n"
-"    padding: 6px 10px 6px 2px;\n"
-"	color: rgb(119, 118, 123);\n"
-"}\n"
-"\n"
-"QSpinBox::down-button, QDoubleSpinBox::down-button {\n"
-"    subcontrol-origin: border;\n"
-"    subcontrol-position: bottom right;\n"
-"    width: 8px;\n"
-"    height: 8px;\n"
-"    border-bottom-right-radius: 15px;\n"
-"    padding: 6px 10px 6px 2px;\n"
-"	color: rgb(119, 118, 123);\n"
-"}\n"
-"\n"
-"QSpinBox::up-arrow, QDoubleSpinBox::up-arrow {\n"
-"    image: url(:/Images/Images/caret-up.png);\n"
-"    width: 8px;\n"
-"    height: 8px;\n"
-"}\n"
-"\n"
-"QSpinBox::down-arrow, QDoubleSpinBox::down-arrow {\n"
-"    image: url(:/Images/Images/caret-down.png);\n"
-"    width: 8px;\n"
-"    height: 8px;\n"
-"}\n"
-"\n"
-"QSpinBox:disabled, QDoubleSpinBox:disabled {\n"
-"    background-color: #f5f5f5;\n"
-"    border: 1px solid #dcdcdc;\n"
-"    color: #aaaaaa;\n"
-"}\n"
-"\n"
-"QSpinBox::up-arrow:disabled, QDoubleSpinBox::up-arrow:disabled {\n"
-"    image: url(:/Images/Images/caret"
-                        "-up-disabled.png);\n"
-"}\n"
-"\n"
-"QSpinBox::down-arrow:disabled, QDoubleSpinBox::down-arrow:disabled {\n"
-"    image: url(:/Images/Images/caret-down-disabled.png);\n"
-"}\n"
-"")
+        self.widget_body.setStyleSheet(u"")
         self.verticalLayout_2 = QVBoxLayout(self.widget_body)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.verticalLayout_2.setContentsMargins(12, -1, 12, -1)
@@ -378,30 +658,7 @@ class Ui_QuizCreatorDialog(object):
         self.checkBoxPublish.setMinimumSize(QSize(0, 30))
         self.checkBoxPublish.setMaximumSize(QSize(16777215, 30))
         self.checkBoxPublish.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.checkBoxPublish.setStyleSheet(u"QCheckBox {\n"
-"	background-color: transparent;\n"
-"	padding: 5px 10px;\n"
-"}\n"
-"QCheckBox::indicator {\n"
-"	width: 18px;\n"
-"	height: 18px;\n"
-"	background-color: rgb(246, 245, 244);\n"
-"	border: 2px solid #555555;\n"
-"	border-radius: 5px;\n"
-"}\n"
-"QCheckBox::indicator:checked {\n"
-"	image: url(:/Images/Images/check.png);\n"
-"}\n"
-"\n"
-"QCheckBox::indicator:disabled {\n"
-"	background-color: #E0E0E0;\n"
-"	border-color: #B0B0B0;\n"
-"}\n"
-"\n"
-"QCheckBox:disabled {\n"
-"	color: #7f8c8d;\n"
-"}\n"
-"")
+        self.checkBoxPublish.setStyleSheet(u"")
 
         self.headerLayout.addWidget(self.checkBoxPublish)
 
@@ -424,17 +681,17 @@ class Ui_QuizCreatorDialog(object):
 
         self.verticalLayout_2.addWidget(self.widget_header)
 
-        self.line_3 = QFrame(self.widget_body)
-        self.line_3.setObjectName(u"line_3")
-        self.line_3.setFrameShape(QFrame.Shape.HLine)
-        self.line_3.setFrameShadow(QFrame.Shadow.Sunken)
+        self.line_1 = QFrame(self.widget_body)
+        self.line_1.setObjectName(u"line_1")
+        self.line_1.setFrameShape(QFrame.Shape.HLine)
+        self.line_1.setFrameShadow(QFrame.Shadow.Sunken)
 
-        self.verticalLayout_2.addWidget(self.line_3)
+        self.verticalLayout_2.addWidget(self.line_1)
 
         self.widget_builder = QWidget(self.widget_body)
         self.widget_builder.setObjectName(u"widget_builder")
         self.widget_builder.setEnabled(False)
-        self.widget_builder.setStyleSheet(u"#frame_5 { background: transparent; }")
+        self.widget_builder.setStyleSheet(u"")
         self.horizontalLayout = QHBoxLayout(self.widget_builder)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
@@ -449,16 +706,7 @@ class Ui_QuizCreatorDialog(object):
         font1.setItalic(False)
         self.btn_save.setFont(font1)
         self.btn_save.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.btn_save.setStyleSheet(u"#btn_save {\n"
-"	border: none; \n"
-"	background: transparent;\n"
-"}\n"
-"\n"
-"#btn_save:hover {\n"
-"	background-color: rgb(255, 255, 255);\n"
-"	border-radius: 5px;\n"
-"}\n"
-"")
+        self.btn_save.setStyleSheet(u"")
         icon3 = QIcon()
         icon3.addFile(u":/Images/Images/save.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.btn_save.setIcon(icon3)
@@ -466,12 +714,12 @@ class Ui_QuizCreatorDialog(object):
 
         self.horizontalLayout.addWidget(self.btn_save)
 
-        self.line = QFrame(self.widget_builder)
-        self.line.setObjectName(u"line")
-        self.line.setFrameShape(QFrame.Shape.VLine)
-        self.line.setFrameShadow(QFrame.Shadow.Sunken)
+        self.line_3 = QFrame(self.widget_builder)
+        self.line_3.setObjectName(u"line_3")
+        self.line_3.setFrameShape(QFrame.Shape.VLine)
+        self.line_3.setFrameShadow(QFrame.Shadow.Sunken)
 
-        self.horizontalLayout.addWidget(self.line)
+        self.horizontalLayout.addWidget(self.line_3)
 
         self.label_6 = QLabel(self.widget_builder)
         self.label_6.setObjectName(u"label_6")
@@ -479,94 +727,14 @@ class Ui_QuizCreatorDialog(object):
 
         self.horizontalLayout.addWidget(self.label_6)
 
-        self.widget_2 = QWidget(self.widget_builder)
-        self.widget_2.setObjectName(u"widget_2")
-        self.widget_2.setStyleSheet(u"/* Base style for all difficulty buttons */\n"
-"QPushButton {\n"
-"    border: 1px solid #999;\n"
-"    padding: 5px 15px;\n"
-"	font: 10pt \"Inter\";\n"
-"    background-color: #f0f0f0; /* Default neutral color */\n"
-"}\n"
-"\n"
-"/* LEFT BUTTON (Easy) */\n"
-"QPushButton#btnEasy {\n"
-"    border-top-left-radius: 15px;\n"
-"    border-bottom-left-radius: 15px;\n"
-"    border-right: none; /* Avoid double borders in the middle */\n"
-"}\n"
-"QPushButton#btnEasy:checked {\n"
-"    background-color: #72D582; /* Green */\n"
-"	border: 2px solid #448D50;\n"
-"    color: #000;\n"
-"}\n"
-"\n"
-"/* MIDDLE BUTTON (Average) */\n"
-"QPushButton#btnAverage {\n"
-"    border-radius: 0px;\n"
-"    border-right: none;\n"
-"}\n"
-"QPushButton#btnAverage:checked {\n"
-"	background-color: #FFF2AC; /* Yellow */\n"
-"	border: 2px solid #FCB988;\n"
-"	color: #000;\n"
-"}\n"
-"\n"
-"/* RIGHT BUTTON (Hard) */\n"
-"QPushButton#btnHard {\n"
-"    border-top-right-radius: 15px;\n"
-"    border-bottom-right-radius: 15px;\n"
-"}\n"
-"QPushButton#btnHard:checked {\n"
-""
-                        "	background-color: #F07D75; /* Red */\n"
-"	border: 2px solid #E65247;\n"
-"	color: #000;\n"
-"}\n"
-"\n"
-"/* Hover effect */\n"
-"QPushButton:hover {\n"
-"    background-color: #e0e0e0;\n"
-"}\n"
-"\n"
-"QPushButton:disabled {\n"
-"    background-color: #E6E6E6; /* Flat, dull gray */\n"
-"    border: 1px solid #D0D0D0; /* Faded border */\n"
-"    color: #A0A0A0;            /* Grayed out text */\n"
-"}\n"
-"\n"
-"/* Fix borders for the middle/left buttons so they don't look weird when disabled */\n"
-"QPushButton#btnEasy:disabled,\n"
-"QPushButton#btnAverage:disabled {\n"
-"    border-right: none; \n"
-"}\n"
-"\n"
-"/* 2. Disabled + CHECKED states (If a difficulty is selected but the group is locked) */\n"
-"QPushButton#btnEasy:checked:disabled {\n"
-"    background-color: #D3EED7; /* Muted, faded green */\n"
-"    border: 2px solid #A2CBA8;\n"
-"    border-right: none;\n"
-"    color: #8A9A8D;\n"
-"}\n"
-"\n"
-"QPushButton#btnAverage:checked:disabled {\n"
-"    background-color: #FFF9E0; /* Muted, faded yellow */\n"
-"    border: 2px solid"
-                        " #E6D2B5;\n"
-"    border-right: none;\n"
-"    color: #9A9384;\n"
-"}\n"
-"\n"
-"QPushButton#btnHard:checked:disabled {\n"
-"    background-color: #FADAD7; /* Muted, faded red */\n"
-"    border: 2px solid #E0B3AF;\n"
-"    color: #A68D8A;\n"
-"}")
-        self.horizontalLayout_2 = QHBoxLayout(self.widget_2)
+        self.widget_difficulty_toggle = QWidget(self.widget_builder)
+        self.widget_difficulty_toggle.setObjectName(u"widget_difficulty_toggle")
+        self.widget_difficulty_toggle.setStyleSheet(u"")
+        self.horizontalLayout_2 = QHBoxLayout(self.widget_difficulty_toggle)
         self.horizontalLayout_2.setSpacing(0)
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
         self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
-        self.btnEasy = QPushButton(self.widget_2)
+        self.btnEasy = QPushButton(self.widget_difficulty_toggle)
         self.btnEasy.setObjectName(u"btnEasy")
         self.btnEasy.setMinimumSize(QSize(82, 30))
         self.btnEasy.setMaximumSize(QSize(82, 30))
@@ -575,7 +743,7 @@ class Ui_QuizCreatorDialog(object):
 
         self.horizontalLayout_2.addWidget(self.btnEasy)
 
-        self.btnAverage = QPushButton(self.widget_2)
+        self.btnAverage = QPushButton(self.widget_difficulty_toggle)
         self.btnAverage.setObjectName(u"btnAverage")
         self.btnAverage.setMinimumSize(QSize(82, 30))
         self.btnAverage.setMaximumSize(QSize(82, 30))
@@ -584,7 +752,7 @@ class Ui_QuizCreatorDialog(object):
 
         self.horizontalLayout_2.addWidget(self.btnAverage)
 
-        self.btnHard = QPushButton(self.widget_2)
+        self.btnHard = QPushButton(self.widget_difficulty_toggle)
         self.btnHard.setObjectName(u"btnHard")
         self.btnHard.setMinimumSize(QSize(82, 30))
         self.btnHard.setMaximumSize(QSize(82, 30))
@@ -594,7 +762,7 @@ class Ui_QuizCreatorDialog(object):
         self.horizontalLayout_2.addWidget(self.btnHard)
 
 
-        self.horizontalLayout.addWidget(self.widget_2)
+        self.horizontalLayout.addWidget(self.widget_difficulty_toggle)
 
         self.horizontalSpacer_6 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
@@ -672,7 +840,7 @@ class Ui_QuizCreatorDialog(object):
 
         self.label_scoreperlevel = QLabel(self.widget_builder)
         self.label_scoreperlevel.setObjectName(u"label_scoreperlevel")
-        self.label_scoreperlevel.setStyleSheet(u"background-color: rgb(255, 255, 255); padding: 0px 10px 0px; border-radius: 15px;")
+        self.label_scoreperlevel.setStyleSheet(u"")
 
         self.horizontalLayout.addWidget(self.label_scoreperlevel)
 
@@ -689,81 +857,9 @@ class Ui_QuizCreatorDialog(object):
         self.widget_quizview = QWidget(self.widget_body)
         self.widget_quizview.setObjectName(u"widget_quizview")
         self.widget_quizview.setEnabled(False)
-        self.widget_quizview.setStyleSheet(u"/* 1. THE MAIN CONTAINER */\n"
-"#QScrollArea { \n"
-"    border: none;\n"
-"    border-radius: 20px; \n"
-"    background-color: rgb(246, 245, 244);\n"
-"	font: 10pt \"Inter\";\n"
-"}\n"
-"\n"
-"/* 2. THE VIEWPORT (Crucial for transparency/backgrounds) */\n"
-"#QScrollArea QWidget #qt_scrollarea_viewport {\n"
-"    background: rgb(246, 245, 244);\n"
-"    border-radius: 20px;\n"
-"}\n"
-"\n"
-"/* 3. VERTICAL SCROLLBAR */\n"
-"QScrollBar:vertical {\n"
-"    border: none;\n"
-"    background: #ffffff;\n"
-"    width: 10px;\n"
-"    margin: 0px;\n"
-"    border-radius: 5px;\n"
-"}\n"
-"\n"
-"QScrollBar::handle:vertical {\n"
-"    background: #7a7a7a;\n"
-"    min-height: 20px;\n"
-"    border-radius: 5px;\n"
-"}\n"
-"\n"
-"QScrollBar::handle:vertical:hover {\n"
-"    background: #574939;\n"
-"}\n"
-"\n"
-"/* 4. HORIZONTAL SCROLLBAR */\n"
-"QScrollBar:horizontal {\n"
-"    border: none;\n"
-"    background: #ffffff;\n"
-"    height: 10px; /* Note: height, not width */\n"
-"    margin: 0px;\n"
-"    border-radius: 5px;\n"
-"}\n"
-"\n"
-"QScrollBar::handle"
-                        ":horizontal {\n"
-"    background: #7a7a7a;\n"
-"    min-width: 20px;\n"
-"    border-radius: 5px;\n"
-"}\n"
-"\n"
-"QScrollBar::handle:horizontal:hover {\n"
-"    background: #574939;\n"
-"}\n"
-"\n"
-"/* 5. REMOVE BUTTONS & TRACK BACKGROUNDS */\n"
-"/* This handles both horizontal and vertical arrows/tracks */\n"
-"QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical,\n"
-"QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {\n"
-"    border: none;\n"
-"    background: none;\n"
-"    width: 0px;\n"
-"    height: 0px;\n"
-"}\n"
-"\n"
-"QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical,\n"
-"QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {\n"
-"    background: none;\n"
-"}\n"
-"\n"
-"/* 6. THE CORNER WIDGET \n"
-"   (The small square where both bars meet) */\n"
-"#QScrollArea QWidget #qt_scrollarea_corner {\n"
-"    background: rgb(246, 245, 244);\n"
-"    border: none;\n"
-"}")
+        self.widget_quizview.setStyleSheet(u"")
         self.horizontalLayout_7 = QHBoxLayout(self.widget_quizview)
+        self.horizontalLayout_7.setSpacing(9)
         self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
         self.horizontalLayout_7.setContentsMargins(0, 0, 0, 0)
         self.widget_5 = QWidget(self.widget_quizview)
@@ -783,12 +879,6 @@ class Ui_QuizCreatorDialog(object):
         self.label_12.setStyleSheet(u"font: 11pt \"Inter SemiBold\"; ")
 
         self.horizontalLayout_3.addWidget(self.label_12)
-
-        self.label_9 = QLabel(self.widget)
-        self.label_9.setObjectName(u"label_9")
-        self.label_9.setMaximumSize(QSize(16777215, 30))
-
-        self.horizontalLayout_3.addWidget(self.label_9)
 
         self.label_id_count = QLabel(self.widget)
         self.label_id_count.setObjectName(u"label_id_count")
@@ -816,24 +906,17 @@ class Ui_QuizCreatorDialog(object):
         self.scrollArea_id.setFrameShape(QFrame.NoFrame)
         self.scrollArea_id.setFrameShadow(QFrame.Sunken)
         self.scrollArea_id.setWidgetResizable(True)
-        self.scrollAreaWidgetContents_5 = QWidget()
-        self.scrollAreaWidgetContents_5.setObjectName(u"scrollAreaWidgetContents_5")
-        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 353, 510))
-        self.layout_identification = QVBoxLayout(self.scrollAreaWidgetContents_5)
+        self.scrollAreaWidgetContents_1 = QWidget()
+        self.scrollAreaWidgetContents_1.setObjectName(u"scrollAreaWidgetContents_1")
+        self.scrollAreaWidgetContents_1.setGeometry(QRect(0, 0, 357, 510))
+        self.layout_identification = QVBoxLayout(self.scrollAreaWidgetContents_1)
         self.layout_identification.setObjectName(u"layout_identification")
-        self.scrollArea_id.setWidget(self.scrollAreaWidgetContents_5)
+        self.scrollArea_id.setWidget(self.scrollAreaWidgetContents_1)
 
         self.verticalLayout.addWidget(self.scrollArea_id)
 
 
         self.horizontalLayout_7.addWidget(self.widget_5)
-
-        self.line_4 = QFrame(self.widget_quizview)
-        self.line_4.setObjectName(u"line_4")
-        self.line_4.setFrameShape(QFrame.Shape.VLine)
-        self.line_4.setFrameShadow(QFrame.Shadow.Sunken)
-
-        self.horizontalLayout_7.addWidget(self.line_4)
 
         self.widget_7 = QWidget(self.widget_quizview)
         self.widget_7.setObjectName(u"widget_7")
@@ -881,7 +964,7 @@ class Ui_QuizCreatorDialog(object):
         self.scrollArea_mc.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 354, 510))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 358, 510))
         self.layout_multiplechoice = QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.layout_multiplechoice.setObjectName(u"layout_multiplechoice")
         self.scrollArea_mc.setWidget(self.scrollAreaWidgetContents_2)
@@ -890,13 +973,6 @@ class Ui_QuizCreatorDialog(object):
 
 
         self.horizontalLayout_7.addWidget(self.widget_7)
-
-        self.line_5 = QFrame(self.widget_quizview)
-        self.line_5.setObjectName(u"line_5")
-        self.line_5.setFrameShape(QFrame.Shape.VLine)
-        self.line_5.setFrameShadow(QFrame.Shadow.Sunken)
-
-        self.horizontalLayout_7.addWidget(self.line_5)
 
         self.widget_8 = QWidget(self.widget_quizview)
         self.widget_8.setObjectName(u"widget_8")
@@ -944,7 +1020,7 @@ class Ui_QuizCreatorDialog(object):
         self.scrollArea_tf.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 353, 510))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 357, 510))
         self.layout_trueorfalse = QVBoxLayout(self.scrollAreaWidgetContents_3)
         self.layout_trueorfalse.setObjectName(u"layout_trueorfalse")
         self.scrollArea_tf.setWidget(self.scrollAreaWidgetContents_3)
@@ -980,6 +1056,7 @@ class Ui_QuizCreatorDialog(object):
         self.checkBoxPublish.setText(QCoreApplication.translate("QuizCreatorDialog", u"Publish", None))
         self.label_5.setText(QCoreApplication.translate("QuizCreatorDialog", u"Total Score:", None))
         self.label_totalScore.setText(QCoreApplication.translate("QuizCreatorDialog", u"000", None))
+        self.label_totalScore.setProperty(u"class", QCoreApplication.translate("QuizCreatorDialog", u"accented-labels", None))
 #if QT_CONFIG(tooltip)
         self.btn_save.setToolTip(QCoreApplication.translate("QuizCreatorDialog", u"Save (Ctrl + S)", None))
 #endif // QT_CONFIG(tooltip)
@@ -994,17 +1071,20 @@ class Ui_QuizCreatorDialog(object):
         self.label_17.setText(QCoreApplication.translate("QuizCreatorDialog", u"Hard", None))
         self.label_4.setText(QCoreApplication.translate("QuizCreatorDialog", u"Score:", None))
         self.label_scoreperlevel.setText(QCoreApplication.translate("QuizCreatorDialog", u"000", None))
+        self.label_scoreperlevel.setProperty(u"class", QCoreApplication.translate("QuizCreatorDialog", u"accented-labels", None))
         self.label_12.setText(QCoreApplication.translate("QuizCreatorDialog", u"Identification", None))
-        self.label_9.setText("")
         self.label_id_count.setText(QCoreApplication.translate("QuizCreatorDialog", u"000", None))
+        self.label_id_count.setProperty(u"class", QCoreApplication.translate("QuizCreatorDialog", u"accented-labels", None))
         self.btnAddItem_id.setText(QCoreApplication.translate("QuizCreatorDialog", u"+ Add Item", None))
         self.btnAddItem_id.setProperty(u"class", QCoreApplication.translate("QuizCreatorDialog", u"button-green", None))
         self.label_13.setText(QCoreApplication.translate("QuizCreatorDialog", u"Multiple Choice", None))
         self.label_mc_count.setText(QCoreApplication.translate("QuizCreatorDialog", u"000", None))
+        self.label_mc_count.setProperty(u"class", QCoreApplication.translate("QuizCreatorDialog", u"accented-labels", None))
         self.btnAddItem_mc.setText(QCoreApplication.translate("QuizCreatorDialog", u"+ Add Item", None))
         self.btnAddItem_mc.setProperty(u"class", QCoreApplication.translate("QuizCreatorDialog", u"button-green", None))
         self.label_14.setText(QCoreApplication.translate("QuizCreatorDialog", u"True or False", None))
         self.label_tf_count.setText(QCoreApplication.translate("QuizCreatorDialog", u"000", None))
+        self.label_tf_count.setProperty(u"class", QCoreApplication.translate("QuizCreatorDialog", u"accented-labels", None))
         self.btnAddItem_tf.setText(QCoreApplication.translate("QuizCreatorDialog", u"+ Add Item", None))
         self.btnAddItem_tf.setProperty(u"class", QCoreApplication.translate("QuizCreatorDialog", u"button-green", None))
     # retranslateUi

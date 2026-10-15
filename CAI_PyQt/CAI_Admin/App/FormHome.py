@@ -2068,20 +2068,7 @@ class Ui_Home(object):
         self.checkBoxPublish.setMinimumSize(QSize(0, 30))
         self.checkBoxPublish.setMaximumSize(QSize(16777215, 30))
         self.checkBoxPublish.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.checkBoxPublish.setStyleSheet(u"QCheckBox {\n"
-"	background-color: transparent;\n"
-"	padding: 5px 10px;\n"
-"}\n"
-"QCheckBox::indicator {\n"
-"	width: 18px;\n"
-"	height: 18px;\n"
-"	background-color: rgb(246, 245, 244);\n"
-"	border: 2px solid #555555;\n"
-"	border-radius: 3px;\n"
-"}\n"
-"QCheckBox::indicator:checked {\n"
-"	image: url(:/Images/Images/check.png);\n"
-"}")
+        self.checkBoxPublish.setStyleSheet(u"")
 
         self.headerLayout.addWidget(self.checkBoxPublish)
 
@@ -3034,7 +3021,7 @@ class Ui_Home(object):
         self.scrollArea_settings.setWidgetResizable(True)
         self.scrollAreaWidgetContents_5 = QWidget()
         self.scrollAreaWidgetContents_5.setObjectName(u"scrollAreaWidgetContents_5")
-        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 957, 932))
+        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 461, 932))
         self.verticalLayout_10 = QVBoxLayout(self.scrollAreaWidgetContents_5)
         self.verticalLayout_10.setObjectName(u"verticalLayout_10")
         self.verticalLayout_10.setContentsMargins(0, 0, 0, 12)

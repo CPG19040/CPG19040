@@ -27,116 +27,124 @@
   </property>
   <property name="styleSheet">
    <string notr="true">* {
-	background-color: rgb(222, 221, 218); 
-	color: black;
-	font: 10pt &quot;Inter&quot;;
+    color: #000000;
+    font: 10pt &quot;Inter&quot;;
 }
 
-#SectionAdviserEditorDialog {
-	background-color: transparent;
+QDialog {
+    background: transparent;
 }
 
-QPushButton[class=&quot;button-green&quot;] {
-	border: 1px solid #0a5128;
-    border-radius: 15px;
-    padding: 0px 10px 0px;
-    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
-                                stop:0 #1ebd5d, 
-                                stop:1 #107f3f);
-    color: #FFF;
+
+#frame_header {
+    background-color: #deddda;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    border: 1px solid #7a7a7a;
+    border-bottom: none;
+}
+
+#label_windowTitle {
+    background: transparent;
     font: 10pt &quot;Inter SemiBold&quot;;
+    color: #111827;
 }
 
-QPushButton[class=&quot;button-green&quot;]:hover {
-    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
-                                stop:0 #2ecc71, 
-                                stop:1 #27AE60);
+#widget_window_buttons {
+    background: transparent;
 }
 
-QPushButton[class=&quot;button-green&quot;]:pressed {
-    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
-                                stop:0 #0b572a, 
-                                stop:1 #129046); 
+#btnMinimize {
+    border-radius: 12px;
+    background-color: transparent;
 }
 
-QPushButton[class=&quot;button-green&quot;]:disabled {
-    background: #A5D6A7;
-    color: #E8F5E9;
-    opacity: 0.6;
+#btnMinimize:hover {
+    background-color: #f8e45c;
 }
 
-*[class=&quot;button-normal&quot;] {
-	font: 10pt &quot;Inter&quot;;
-	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
-                                stop:0 #ffffff, 
-                                stop:1 #d8ecf6);
-	color: black;
-	border-radius: 15px;
-	border: 1px solid rgb(154, 153, 150);
+#btnClose {
+    border-radius: 12px;
+    background-color: transparent;
 }
 
-*[class=&quot;button-normal&quot;]:hover {
-	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
-                                stop:0 #ffffff, 
-                                stop:1 #f2f6f8);
+#btnClose:hover {
+    background-color: #f66151;
 }
 
-*[class=&quot;button-normal&quot;]:pressed {
-    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
-                                stop:0 #dce5e9, 
-                                stop:1 #ffffff);
+
+#widget_body {
+    background-color: #deddda;
+    border: 1px solid #7a7a7a;
+    border-top: none;
 }
 
-*[class=&quot;button-normal&quot;]:disabled {
-	background: #f5f5f5;
-	border: 1px solid #dcdcdc;
-	color: #aeaeae;
-}
 
 *[class=&quot;input-field&quot;] {
-	background-color: transparent;
+    background-color: transparent;
 }
 
 *[class=&quot;input-field&quot;] QLineEdit {
-	background-color: #ffffff;
-	border: 1px solid #999;
-	border-left: none;
-	border-top-right-radius: 15px;
-	border-bottom-right-radius: 15px;
-	padding: 0px 8px;
-	color: black;
+    background-color: #ffffff;
+    border: 1px solid #999;
+    border-left: none;
+    border-top-right-radius: 18px;
+    border-bottom-right-radius: 18px;
+    padding: 0px 8px;
+    color: #1f2937;
+}
+
+QLineEdit:focus {
+    border: 1px solid #2563eb;
+}
+
+QLineEdit:hover {
+    border: 1px solid #3b82f6;
+}
+
+*[class=&quot;input-field&quot;] QLineEdit:disabled {
+    background-color: #f3f4f6;
+    border: none;
+    color: #999;
 }
 
 *[class=&quot;input-field&quot;] QLabel {
-	background-color: rgb(192, 191, 188);
-	border-left: 1px solid #999;
-	border-top: 1px solid #999;
-	border-bottom: 1px solid #999;
-	border-right: none;
-	border-top-left-radius: 15px;
-	border-bottom-left-radius: 15px;
-	padding-left: 8px;
-	color: black;
+    background-color: #d2d2d2;
+    border-left: 1px solid #999;
+    border-top: 1px solid #999;
+    border-bottom: 1px solid #999;
+    border-right: none;
+    border-top-left-radius: 18px;
+    border-bottom-left-radius: 18px;
+    padding-left: 8px;
+    color: #000000;
 }
 
-QComboBox {
+*[class=&quot;input-field&quot;] QLabel:disabled {
+    color: #999;
+    border: none;
+}
+
+
+
+*[class=&quot;input-field&quot;] QComboBox {
     border: 1px solid #999;
     border-left: none;
     padding: 0px 10px;
     background-color: #ffffff;
-    color: #333333;
+    color: #1f2937;
     font: 10pt &quot;Inter Medium&quot;;
-    selection-background-color: #7eb4d7;
-	border-top-right-radius: 15px;
-	border-bottom-right-radius: 15px;
+    selection-background-color: #bfdbfe;
+    border-top-right-radius: 18px;
+    border-bottom-right-radius: 18px;
 }
 
-QComboBox:focus, QLineEdit:focus {
-    border: 1px solid #007BFF;
+QComboBox:focus {
+    border: 1px solid #2563eb;
 }
 
-QComboBox:hover, QLineEdit:hover {
-    border: 1px solid #3498db;
+QComboBox:hover {
+    border: 1px solid #3b82f6;
 }
 
 QComboBox::drop-down {
@@ -144,7 +152,6 @@ QComboBox::drop-down {
     subcontrol-position: top right;
     width: 30px;
     border-left-width: 0px;
-    /* Match the 15px border-radius of the main control */
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
 }
@@ -157,23 +164,165 @@ QComboBox::down-arrow {
 }
 
 QComboBox QAbstractItemView {
-    background-color: white !important;
+    background-color: #ffffff !important;
     border: 1px solid #999;
-    selection-background-color: #7eb4d7;
-    selection-color: #ffffff;
-    outline: 0; /* Removes the ugly dotted focus border */
+    selection-background-color: #bfdbfe;
+    selection-color: #111827;
+    outline: 0;
 }
 
 QComboBox QAbstractItemView::item {
     padding: 0px 15px;
     border-radius: 4px;
-    color: #333333;
+    color: #1f2937;
 }
 
-/* Hover state for items inside the dropdown */
 QComboBox QAbstractItemView::item:hover {
-    background-color: #7eb4d7;
-    color: #ffffff;
+    background-color: #bfdbfe;
+    color: #111827;
+}
+
+QComboBox:disabled {
+    background-color: #f3f4f6;
+    border: none;
+    color: #999;
+}
+
+QComboBox::drop-down:disabled {
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    background-color: transparent;
+}
+
+QComboBox::down-arrow:disabled {
+    image: url(:/Images/Images/caret-down-disabled.png);
+}
+
+
+
+QPushButton[class=&quot;button-green&quot;] {
+    border: 1px solid #0a5128;
+    border-radius: 15px;
+    padding: 0px 10px 0px;
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #1ebd5d, stop:1 #107f3f);
+    color: #FFF;
+    font: 10pt &quot;Inter SemiBold&quot;;
+}
+
+QPushButton[class=&quot;button-green&quot;]:hover {
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #2ecc71, stop:1 #27AE60);
+}
+
+QPushButton[class=&quot;button-green&quot;]:pressed {
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #0b572a, stop:1 #129046);
+}
+
+QPushButton[class=&quot;button-green&quot;]:disabled {
+    background: #A5D6A7;
+    color: #E8F5E9;
+    opacity: 0.6;
+}
+
+QPushButton[class=&quot;button-normal&quot;] {
+    color: #000000;
+    font: 10pt &quot;Inter&quot;;
+    border: 1px solid #9a9996;
+    border-radius: 15px;
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #ffffff, stop:1 #d8ecf6);
+}
+
+QPushButton[class=&quot;button-normal&quot;]:hover {
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #ffffff, stop:1 #f2f6f8);
+}
+
+QPushButton[class=&quot;button-normal&quot;]:pressed {
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #dce5e9, stop:1 #ffffff);
+}
+
+QPushButton[class=&quot;button-normal&quot;]:disabled {
+    color: #aeaeae;
+    border: 1px solid #dcdcdc;
+    background: #f5f5f5;
+}
+
+
+
+QScrollBar:vertical {
+    border: none;
+    background: #ffffff;
+    width: 10px;
+    margin: 0px;
+    border-radius: 5px;
+}
+
+QScrollBar::handle:vertical {
+    background: #7a7a7a;
+    min-height: 20px;
+    border-radius: 5px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background: #574939;
+}
+
+QScrollBar:horizontal {
+    border: none;
+    background: #ffffff;
+    height: 10px;
+    margin: 0px;
+    border-radius: 5px;
+}
+
+QScrollBar::handle:horizontal {
+    background: #7a7a7a;
+    min-width: 20px;
+    border-radius: 5px;
+}
+
+QScrollBar::handle:horizontal:hover {
+    background: #574939;
+}
+
+QScrollBar::add-line:vertical,
+QScrollBar::sub-line:vertical,
+QScrollBar::add-line:horizontal,
+QScrollBar::sub-line:horizontal {
+    border: none;
+    background: none;
+    width: 0px;
+    height: 0px;
+}
+
+QScrollBar::add-page:vertical,
+QScrollBar::sub-page:vertical,
+QScrollBar::add-page:horizontal,
+QScrollBar::sub-page:horizontal {
+    background: none;
+}
+
+
+QTableView {
+    outline: none;
+    border: 1px solid #a1a1a1;
+    gridline-color: #f0f0f0;
+    background-color: #ffffff;
+    selection-color: #000000;
+    selection-background-color: rgba(38, 162, 105, 0.2);
+}
+
+/* Hide Vertical Headers (Row Numbers) */
+QHeaderView:vertical,
+QHeaderView::section:vertical {
+    width: 0px;
+    border: none;
+}
+
+/* Horizontal Header */
+QHeaderView::section:horizontal {
+    padding: 6px;
+    color: #000000;
+    font-weight: bold;
+    background-color: #f6f5f4;
 }</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -210,13 +359,7 @@ QComboBox QAbstractItemView::item:hover {
       <bool>true</bool>
      </property>
      <property name="styleSheet">
-      <string notr="true">#frame_header {
-	background-color: #deddda;
-	border-top-left-radius: 12px;
-	border-top-right-radius: 12px;
-	border: 1px solid #7a7a7a;
-	border-bottom: none;
-}</string>
+      <string notr="true"/>
      </property>
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
@@ -226,16 +369,16 @@ QComboBox QAbstractItemView::item:hover {
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_6">
       <property name="spacing">
-       <number>6</number>
+       <number>0</number>
       </property>
       <property name="leftMargin">
-       <number>9</number>
+       <number>0</number>
       </property>
       <property name="topMargin">
        <number>0</number>
       </property>
       <property name="rightMargin">
-       <number>9</number>
+       <number>0</number>
       </property>
       <property name="bottomMargin">
        <number>0</number>
@@ -244,14 +387,14 @@ QComboBox QAbstractItemView::item:hover {
        <widget class="QWidget" name="widget_window_icon" native="true">
         <property name="minimumSize">
          <size>
-          <width>54</width>
-          <height>35</height>
+          <width>72</width>
+          <height>34</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>54</width>
-          <height>35</height>
+          <width>72</width>
+          <height>34</height>
          </size>
         </property>
         <property name="styleSheet">
@@ -274,19 +417,6 @@ QComboBox QAbstractItemView::item:hover {
        </widget>
       </item>
       <item>
-       <spacer name="horizontalSpacer_6">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
        <widget class="QLabel" name="label_windowTitle">
         <property name="font">
          <font>
@@ -298,104 +428,114 @@ QComboBox QAbstractItemView::item:hover {
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">background: transparent;
-color: rgb(0, 0, 0);
-font: 10pt &quot;Inter SemiBold&quot;;</string>
+         <string notr="true"/>
         </property>
         <property name="text">
          <string>Section Adviser Editor</string>
         </property>
-       </widget>
-      </item>
-      <item>
-       <spacer name="horizontalSpacer_5">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QPushButton" name="btnMinimize">
-        <property name="minimumSize">
-         <size>
-          <width>24</width>
-          <height>24</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>24</width>
-          <height>24</height>
-         </size>
-        </property>
-        <property name="cursor">
-         <cursorShape>PointingHandCursor</cursorShape>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">#btnMinimize {
-	border-radius: 12px;
-	background-color: transparent;
-}
-
-#btnMinimize:hover {
-	background-color: rgb(248, 228, 92);
-}</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="../resources.qrc">
-          <normaloff>:/Images/Images/minimize-sign.png</normaloff>:/Images/Images/minimize-sign.png</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>12</width>
-          <height>12</height>
-         </size>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="btnClose">
+       <widget class="QWidget" name="widget_window_buttons" native="true">
         <property name="minimumSize">
          <size>
-          <width>24</width>
-          <height>24</height>
+          <width>72</width>
+          <height>34</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>24</width>
-          <height>24</height>
+          <width>72</width>
+          <height>34</height>
          </size>
         </property>
-        <property name="cursor">
-         <cursorShape>PointingHandCursor</cursorShape>
-        </property>
         <property name="styleSheet">
-         <string notr="true">#btnClose {
-	border-radius: 12px;
-	background-color: transparent;
-}
-
-#btnClose:hover {
-	background-color: rgb(246, 97, 81);
-}</string>
+         <string notr="true"/>
         </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="../resources.qrc">
-          <normaloff>:/Images/Images/clear.png</normaloff>:/Images/Images/clear.png</iconset>
-        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_5">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QPushButton" name="btnMinimize">
+           <property name="minimumSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../resources.qrc">
+             <normaloff>:/Images/Images/minimize-sign.png</normaloff>:/Images/Images/minimize-sign.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>12</width>
+             <height>12</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnClose">
+           <property name="minimumSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../resources.qrc">
+             <normaloff>:/Images/Images/clear.png</normaloff>:/Images/Images/clear.png</iconset>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </item>
      </layout>
@@ -409,24 +549,8 @@ font: 10pt &quot;Inter SemiBold&quot;;</string>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-     <property name="minimumSize">
-      <size>
-       <width>550</width>
-       <height>485</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>550</width>
-       <height>485</height>
-      </size>
-     </property>
      <property name="styleSheet">
-      <string notr="true">#widget_body {
-	background-color: #deddda;
-	border: 1px solid #7a7a7a;
-	border-top: none;
-}</string>
+      <string notr="true"/>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
       <property name="spacing">
@@ -447,8 +571,7 @@ font: 10pt &quot;Inter SemiBold&quot;;</string>
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">background: transparent;
-font: 11pt &quot;Inter SemiBold&quot;;</string>
+         <string notr="true">background: transparent; font: 11pt &quot;Inter SemiBold&quot;;</string>
         </property>
         <property name="text">
          <string>Assign an adviser to each section</string>
@@ -502,13 +625,13 @@ font: 11pt &quot;Inter SemiBold&quot;;</string>
               <property name="minimumSize">
                <size>
                 <width>100</width>
-                <height>32</height>
+                <height>36</height>
                </size>
               </property>
               <property name="maximumSize">
                <size>
                 <width>100</width>
-                <height>32</height>
+                <height>36</height>
                </size>
               </property>
               <property name="text">
@@ -524,7 +647,13 @@ font: 11pt &quot;Inter SemiBold&quot;;</string>
               <property name="minimumSize">
                <size>
                 <width>0</width>
-                <height>32</height>
+                <height>36</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>36</height>
                </size>
               </property>
               <property name="styleSheet">
@@ -564,13 +693,13 @@ font: 11pt &quot;Inter SemiBold&quot;;</string>
               <property name="minimumSize">
                <size>
                 <width>100</width>
-                <height>32</height>
+                <height>36</height>
                </size>
               </property>
               <property name="maximumSize">
                <size>
                 <width>100</width>
-                <height>32</height>
+                <height>36</height>
                </size>
               </property>
               <property name="text">
@@ -586,13 +715,13 @@ font: 11pt &quot;Inter SemiBold&quot;;</string>
               <property name="minimumSize">
                <size>
                 <width>0</width>
-                <height>32</height>
+                <height>36</height>
                </size>
               </property>
               <property name="maximumSize">
                <size>
                 <width>16777215</width>
-                <height>32</height>
+                <height>36</height>
                </size>
               </property>
               <property name="styleSheet">
@@ -615,61 +744,7 @@ font: 11pt &quot;Inter SemiBold&quot;;</string>
          <bool>false</bool>
         </property>
         <property name="styleSheet">
-         <string notr="true">QTableView {
-    background-color: #f5f5f5;          
-    alternate-background-color: #eaeaea;
-    color: #2b2b2b;                     
-    gridline-color: #d0d0d0;            
-    border: 1px solid #bcbcbc;          
-    selection-background-color: #7b7b7b;
-    selection-color: #ffffff;           
-    outline: none;
-}
-
-QHeaderView::section {
-    background-color: #e0e0e0;
-    color: #1a1a1a;
-    padding: 6px;
-    border: 1px solid #bcbcbc;
-    font-weight: bold;
-}
-
-QTableView QTableCornerButton::section {
-    background-color: #cccccc;
-    border: 1px solid #bcbcbc;
-}
-
-/* Custom Scrollbars */
-QScrollBar:vertical {
-    border: none;
-    background: #f8f8f8;
-    width: 10px;
-}
-
-QScrollBar::handle:vertical {
-    background: rgb(38, 162, 105);
-    min-height: 30px;
-    border-radius: 5px; 
-    margin: 2px;
-}
-
-QScrollBar:horizontal {
-    border: none;
-    background: #f8f8f8;
-    height: 10px;
-}
-
-QScrollBar::handle:horizontal {
-    background: rgb(38, 162, 105);
-    min-width: 30px;
-    border-radius: 5px;
-    margin: 2px;
-}
-
-/* Remove scrollbar arrows */
-QScrollBar::add-line, QScrollBar::sub-line {
-    width: 0px; height: 0px;
-}</string>
+         <string notr="true"/>
         </property>
         <property name="selectionMode">
          <enum>QAbstractItemView::NoSelection</enum>

@@ -10,6 +10,7 @@ from App.Tools import Utility, NoScrollComboBox, CustomMessageBox
 from App.QuizDialog import Ui_QuizCreatorDialog
 from App.CardQuiz import Ui_CardQuiz
 from App.CardQuiz_edit import Ui_CardQuiz_edit
+from App.Style import Light_Theme, Dark_Theme
 
 
 class Quiz:
@@ -553,6 +554,14 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
         self.setWindowFlags(Qt.WindowType.FramelessWindowHint) # Remove OS default window frame
         self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground, True)
         self.setMouseTracking(True)
+
+        self.app_settings = QSettings("CAI_System", "CAI_Admin_AppSettings")
+        self.is_dark_mode = self.app_settings.value("dark_mode", False, type=bool)
+
+        if self.is_dark_mode:
+            self.setStyleSheet(Dark_Theme.quiz_editor)
+        else:
+            self.setStyleSheet(Light_Theme.quiz_editor)
 
         self.btnMinimize.clicked.connect(self.showMinimized)
         self.btnMaximize.clicked.connect(lambda: self.showMaximized() if not self.isMaximized() else self.showNormal())

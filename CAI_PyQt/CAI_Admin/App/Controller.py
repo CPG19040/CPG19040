@@ -920,9 +920,15 @@ class Controller:
 
     def section_edit(self):
         from App.SectionDialog import SectionAdviserEditor
-        section_id    = self.ui.comboBox_Section.currentData()
-        school_id, _  = self.sectionObj.get_adviser(section_id)
-        sectionEditor = SectionAdviserEditor(self.sectionObj, section_id, school_id)
+        section_id        = self.ui.comboBox_Section.currentData()
+        school_id, _      = self.sectionObj.get_adviser(section_id)
+        sectionEditor     = SectionAdviserEditor(self.sectionObj, section_id, school_id)
+        self.is_dark_mode = self.app_settings.value("dark_mode", False, type=bool)
+        
+        if self.is_dark_mode:
+            sectionEditor.setStyleSheet(Dark_Theme.section_edit_dialog)
+        else:
+            sectionEditor.setStyleSheet(Light_Theme.section_edit_dialog)
 
         sectionEditor.exec()
 
