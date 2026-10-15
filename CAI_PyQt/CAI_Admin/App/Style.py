@@ -49,6 +49,41 @@ class Light_Theme:
         }
     """
 
+    progress_bar = """
+        QProgressBar {
+            border-radius: 10px;
+            background-color: white;
+        }
+
+        QProgressBar::chunk {
+            background-color: #007BFF;
+            border-radius: 10px;
+        }
+    """
+
+    radio_button = """
+        QRadioButton {
+            color: #1f2937;
+            spacing: 8px;
+            padding: 0px 10px;
+            background: transparent;
+            font: 10pt "Inter";
+        }
+
+        QRadioButton::indicator {
+            background: #ffffff;
+            border: 2px solid #999;
+            min-width: 14px;
+            min-height: 14px;
+            border-radius: 7px;
+        }
+
+        QRadioButton::indicator:checked {
+            border-color: #93c5fd;
+            background-color: #2563eb;
+        }
+        """
+
     scrollbar = """
         QScrollBar:vertical {
             border: none;
@@ -915,21 +950,25 @@ class Light_Theme:
 
         #btnBrowseCSV {
             font: 10pt "Inter";
-            background-color: #f3f4f6;
+            background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #ffffff, stop:1 #d8ecf6);
+            border: 1px solid #9a9996;
             color: #1f2937;
-            border: 1px solid #999;
             border-top-right-radius: 18px;
             border-bottom-right-radius: 18px;
         }
-
+        
         #btnBrowseCSV:hover {
-            background-color: #ffffff;
+            background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #ffffff, stop:1 #f2f6f8);
+        }
+
+        #btnBrowseCSV:pressed {
+            background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #dce5e9, stop:1 #ffffff);
         }
 
         #btnBrowseCSV:disabled {
-            background-color: #e5e7eb;
-            border: none;
+            background-color: #d2d2d2;
             color: #999;
+            border: none;
         }
 
         #widget_CSV QLineEdit:disabled {
@@ -972,36 +1011,9 @@ class Light_Theme:
             border: none;
         }
 
-        QProgressBar {
-            border-radius: 10px;
-            background-color: white;
-        }
+        """ + progress_bar + """
 
-        QProgressBar::chunk {
-            background-color: #007BFF;
-            border-radius: 10px;
-        }
-
-        QRadioButton {
-            color: #1f2937;
-            spacing: 8px;
-            padding: 0px 10px;
-            background: transparent;
-            font: 10pt "Inter";
-        }
-
-        QRadioButton::indicator {
-            background: #ffffff;
-            border: 2px solid #999;
-            min-width: 14px;
-            min-height: 14px;
-            border-radius: 7px;
-        }
-
-        QRadioButton::indicator:checked {
-            border-color: #93c5fd;
-            background-color: #2563eb;
-        }
+        """ + radio_button + """
 
         QSpinBox {
             font: 10pt "Inter Medium";
@@ -1269,6 +1281,35 @@ class Light_Theme:
         }
     """
 
+    user_add_dialog = """
+        * {
+            color: black;
+            font: 10pt "Inter";
+        }
+
+        QDialog {
+            background: transparent;
+        }
+
+        """ + header_dlg + """
+
+        #widget_body {
+            background-color: #deddda;
+            border: 1px solid #7a7a7a;
+            border-top: none;
+        }
+
+        """ + input_field + """
+
+        """ + combo_box_input_field + """
+
+        """ + buttons + """
+
+        #line_1 {
+            background-color: #deddda;
+        }
+    """
+
     user_info_dialog = """
         * {
             color: black;
@@ -1296,6 +1337,126 @@ class Light_Theme:
         #line_1,
         #line_2 {
             background-color: #deddda;
+        }
+    """
+
+    section_reg_dialog = """
+        * {
+            color: #000000;
+            font: 10pt "Inter";
+        }
+
+        QDialog {
+            background: transparent;
+        }
+
+        """ + header_dlg + """
+
+        #widget_body {
+            background-color: #deddda;
+            border: 1px solid #7a7a7a;
+            border-top: none;
+        }
+
+        """ + input_field + """
+
+        """ + combo_box_input_field + """
+
+        """ + buttons + """
+
+        """ + progress_bar + """
+
+        """ + radio_button + """
+
+        """ + scrollbar + """
+
+        #line_1 {
+            background-color: #deddda;
+        }
+
+        #btnExportTemplate {
+            border: 1px solid #9a9996;
+            border-radius: 15px;
+            background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #ffffff, stop:1 #d8ecf6);
+        }
+
+        #btnExportTemplate:hover {
+            background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #ffffff, stop:1 #f2f6f8);
+        }
+
+        #btnExportTemplate:pressed {
+            background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #dce5e9, stop:1 #ffffff);
+        }
+
+        #btnExportTemplate:disabled {
+            color: #aeaeae;
+            border: 1px solid #dcdcdc;
+            background: #f5f5f5;
+        }
+
+        *[class="input-and-browse"] {
+            background: transparent;
+        }
+        
+        *[class="input-and-browse"] QLabel {
+            background-color: #d2d2d2;
+            border: 1px solid #999;
+            border-right: none;
+            border-top-left-radius: 18px;
+            border-bottom-left-radius: 18px;
+            padding-left: 8px;
+            color: #000000;
+        }
+
+        *[class="input-and-browse"] QLabel:disabled {
+            color: #999;
+            border: none;
+        }
+
+        *[class="input-and-browse"] QLineEdit {
+            background-color: #ffffff;
+            border: 1px solid #999;
+            border-left: none;
+            border-right: none;
+            padding: 0px 8px;
+        }
+
+        *[class="input-and-browse"] QLineEdit:hover {
+            border: 1px solid #3b82f6;
+        }
+
+        *[class="input-and-browse"] QLineEdit:focus {
+            border: 1px solid #2563eb;
+        }
+
+        *[class="input-and-browse"] QLineEdit:disabled {
+            background-color: #f3f4f6;
+            border: none;
+            color: #999;
+        }
+
+        *[class="input-and-browse"] #btnBrowseCSV {
+            font: 10pt "Inter";
+            background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #ffffff, stop:1 #d8ecf6);
+            border: 1px solid #9a9996;
+            padding: 5px 15px;
+
+            border-top-right-radius: 18px;
+            border-bottom-right-radius: 18px;
+        }
+
+        *[class="input-and-browse"] #btnBrowseCSV:hover {
+            background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #ffffff, stop:1 #f2f6f8);
+        }
+
+        *[class="input-and-browse"] #btnBrowseCSV:pressed {
+            background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #dce5e9, stop:1 #ffffff);
+        }
+
+        *[class="input-and-browse"] #btnBrowseCSV:disabled {
+            background-color: #d2d2d2;
+            color: #999;
+            border: none;
         }
     """
 
@@ -1346,6 +1507,42 @@ class Dark_Theme:
             color: #666666;
             border: 1px solid #333333;
             background: #222225;
+        }
+    """
+
+    progress_bar = """
+        QProgressBar {
+            border-radius: 10px;
+            background-color: #1e1e1e;
+            border: 1px solid #4a4a4a;
+        }
+
+        QProgressBar::chunk {
+            background-color: #3b82f6;
+            border-radius: 10px;
+        }
+    """
+
+    radio_button = """ 
+        QRadioButton {
+            color: #ffffff;
+            spacing: 8px;
+            padding: 0px 10px;
+            background: transparent;
+            font: 10pt "Inter";
+        }
+
+        QRadioButton::indicator {
+            background: #1e1e1e;
+            border: 2px solid #4a4a4a;
+            min-width: 14px;
+            min-height: 14px;
+            border-radius: 7px;
+        }
+
+        QRadioButton::indicator:checked {
+            border-color: #60a5fa;
+            background-color: #3b82f6;
         }
     """
 
@@ -2286,37 +2483,9 @@ class Dark_Theme:
             border: none;
         }
 
-        QProgressBar {
-            border-radius: 10px;
-            background-color: #1e1e1e;
-            border: 1px solid #4a4a4a;
-        }
+        """ + progress_bar + """
 
-        QProgressBar::chunk {
-            background-color: #3b82f6;
-            border-radius: 10px;
-        }
-
-        QRadioButton {
-            color: #ffffff;
-            spacing: 8px;
-            padding: 0px 10px;
-            background: transparent;
-            font: 10pt "Inter";
-        }
-
-        QRadioButton::indicator {
-            background: #1e1e1e;
-            border: 2px solid #4a4a4a;
-            min-width: 14px;
-            min-height: 14px;
-            border-radius: 7px;
-        }
-
-        QRadioButton::indicator:checked {
-            border-color: #60a5fa;
-            background-color: #3b82f6;
-        }
+        """ + radio_button + """
 
         QSpinBox {
             font: 10pt "Inter Medium";
@@ -2588,7 +2757,7 @@ class Dark_Theme:
         }
     """
 
-    user_info_dialog = """
+    user_add_dialog = """
         * {
             color: #ffffff;
             font: 10pt "Inter";
@@ -2615,6 +2784,154 @@ class Dark_Theme:
         #line_1,
         #line_2 {
             background-color: #2d2d2d;
+        }
+    """
+
+    user_info_dialog = """
+        * {
+            color: #ffffff;
+            font: 10pt "Inter";
+        }
+
+        QDialog {
+            background: transparent;
+        }
+
+        """ + header_dlg + """
+
+        #widget_body {
+            background-color: #2d2d2d;
+            border: 1px solid #4a4a4a;
+            border-top: none;
+        }
+
+        """ + input_field + """
+
+        """ + combo_box_input_field + """
+
+        """ + buttons + """
+
+        #line_1 {
+            background-color: #2d2d2d;
+        }
+    """
+
+    section_reg_dialog = """
+        * {
+            color: #ffffff;
+            font: 10pt "Inter";
+        }
+
+        QDialog {
+            background: transparent;
+        }
+
+        """ + header_dlg + """
+
+        #widget_body {
+            background-color: #2d2d2d;
+            border: 1px solid #4a4a4a;
+            border-top: none;
+        }
+
+        """ + input_field + """
+
+        """ + combo_box_input_field + """
+
+        """ + buttons + """
+
+        """ + progress_bar + """
+
+        """ + radio_button + """
+
+        """ + scroll_bar + """
+
+        #line_1 {
+            background-color: #2d2d2d;
+        }
+
+        #btnExportTemplate {
+            border: 1px solid #4a4a50;
+            border-radius: 15px;
+            background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #3a3a40, stop:1 #2d2d32);
+        }
+
+        #btnExportTemplate:hover {
+            background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #484850, stop:1 #35353c);
+        }
+
+        #btnExportTemplate:pressed {
+            background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #252529, stop:1 #35353c);
+        }
+
+        #btnExportTemplate:disabled {
+            color: #666666;
+            border: 1px solid #333333;
+            background: #222225;
+        }
+
+        *[class="input-and-browse"] {
+            background: transparent;
+        }
+
+        *[class="input-and-browse"] QLabel {
+            background-color: #262626;
+            border: 1px solid #4a4a4a;
+            border-right: none;
+            border-top-left-radius: 18px;
+            border-bottom-left-radius: 18px;
+            padding-left: 8px;
+            color: #a0a0a0;
+        }
+
+        *[class="input-and-browse"] QLabel:disabled {
+            color: #666666;
+            border: none;
+        }
+
+        *[class="input-and-browse"] QLineEdit {
+            background-color: #1e1e1e;
+            border: 1px solid #4a4a4a;
+            border-left: none;
+            border-right: none;
+            padding: 0px 8px;
+        }
+
+        *[class="input-and-browse"] QLineEdit:hover {
+            border: 1px solid #3b82f6;
+        }
+
+        *[class="input-and-browse"] QLineEdit:focus {
+            border: 1px solid #007BFF;
+        }
+
+        *[class="input-and-browse"] QLineEdit:disabled {
+            border: none;
+            color: #666666;
+        }
+
+        *[class="input-and-browse"] #btnBrowseCSV {
+            font: 10pt "Inter";
+            background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #3a3a40, stop:1 #2d2d32);
+            border: 1px solid #4a4a4a;
+            padding: 5px 15px;
+
+            border-top-right-radius: 18px;
+            border-bottom-right-radius: 18px;
+        }
+
+        *[class="input-and-browse"] #btnBrowseCSV:hover {
+            background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #484850, stop:1 #35353c);
+        }
+
+        *[class="input-and-browse"] #btnBrowseCSV:pressed {
+            background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #252529, stop:1 #35353c);
+        }
+
+        *[class="input-and-browse"] #btnBrowseCSV:disabled {
+            color: #666666;
+            border: none;
+            background: #222225;
         }
     """
 

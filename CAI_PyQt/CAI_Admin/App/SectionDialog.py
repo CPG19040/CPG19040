@@ -11,6 +11,7 @@ from App.Tools import CustomMessageBox, Utility
 from App.FormSectionRegistration import Ui_SectionRegistrationDialog
 from App.FormSectionAdviserEditor import Ui_SectionAdviserEditorDialog
 
+
 class Section(QDialog, Ui_SectionRegistrationDialog):
     RESIZE_MARGIN = 8  # The clickable area around the edges (in pixels)
 

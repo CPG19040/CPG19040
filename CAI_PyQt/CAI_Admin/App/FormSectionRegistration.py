@@ -29,136 +29,126 @@ class Ui_SectionRegistrationDialog(object):
         SectionRegistrationDialog.setMinimumSize(QSize(620, 586))
         SectionRegistrationDialog.setMaximumSize(QSize(742, 586))
         SectionRegistrationDialog.setStyleSheet(u"* {\n"
-"	color: black;\n"
-"	font: 10pt \"Inter\";\n"
+"    color: #000000;\n"
+"    font: 10pt \"Inter\";\n"
 "}\n"
 "\n"
-"#SectionRegistrationDialog {\n"
-"	background: transparent;\n"
+"QDialog {\n"
+"    background: transparent;\n"
 "}\n"
 "\n"
-"#verticalFrame {\n"
-"	background-color: rgb(222, 221, 218); \n"
+"\n"
+"#frame_header {\n"
+"    background-color: #deddda;\n"
+"    border-top-left-radius: 12px;\n"
+"    border-top-right-radius: 12px;\n"
+"    border: 1px solid #7a7a7a;\n"
+"    border-bottom: none;\n"
 "}\n"
 "\n"
-"QPushButton[class=\"button-green\"] {\n"
-"	border: 1px solid #0a5128;\n"
-"    border-radius: 15px;\n"
-"    padding: 0px 10px 0px;\n"
-"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
-"                                stop:0 #1ebd5d, \n"
-"                                stop:1 #107f3f);\n"
-"    color: #FFF;\n"
+"#label_windowTitle {\n"
+"    background: transparent;\n"
 "    font: 10pt \"Inter SemiBold\";\n"
+"    color: #111827;\n"
 "}\n"
 "\n"
-"QPushButton[class=\"button-green\"]:hover {\n"
-"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
-"                                stop:0 #2ecc71, \n"
-"                                stop:1 #27AE60);\n"
+"#widget_window_buttons {\n"
+"    background: transparent;\n"
 "}\n"
 "\n"
-"QPushButton[class=\"button-green\"]:pressed {\n"
-"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
-"                                stop:0 #0b572a, \n"
-"                                stop:1 #129046);"
-                        " \n"
+"#btnMinimize {\n"
+"    border-radius: 12px;\n"
+"    background-color: transparent;\n"
 "}\n"
 "\n"
-"QPushButton[class=\"button-green\"]:disabled {\n"
-"    background: #A5D6A7;\n"
-"    color: #E8F5E9;\n"
-"    opacity: 0.6;\n"
+"#btnMinimize:hover {\n"
+"    background-color: #f8e45c;\n"
 "}\n"
 "\n"
-"*[class=\"button-normal\"] {\n"
-"	font: 10pt \"Inter\";\n"
-"	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
-"                                stop:0 #ffffff, \n"
-"                                stop:1 #d8ecf6);\n"
-"	color: black;\n"
-"	border-radius: 15px;\n"
-"	border: 1px solid rgb(154, 153, 150);\n"
+"#btnClose {\n"
+"    border-radius: 12px;\n"
+"    background-color: transparent;\n"
 "}\n"
 "\n"
-"*[class=\"button-normal\"]:hover {\n"
-"	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
-"                                stop:0 #ffffff, \n"
-"                                stop:1 #f2f6f8);\n"
+"#btnClose:hover {\n"
+"    background-color: #f66151;\n"
 "}\n"
 "\n"
-"*[class=\"button-normal\"]:pressed {\n"
-"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
-"                                stop:0 #dce5e9, \n"
-"                                stop:1 #ffffff);\n"
+"\n"
+"#widget_body {\n"
+"    background-color: #deddda;\n"
+"    border: 1px solid #7a7a7a;\n"
+"    border-top: none;\n"
 "}\n"
 "\n"
-"*[class=\"button-normal\"]:disabled {\n"
-"	background: #f5f5f5;\n"
-"	border: 1px solid #dcdcdc;\n"
-"	color: #aeaeae"
-                        ";\n"
-"}\n"
 "\n"
-"QLabel:disabled {\n"
-"	color: #aeaeae;\n"
-"}\n"
-"\n"
-"*[class=\"input-field\"] {\n"
-"	background-color: transparent;\n"
+"*[class=\""
+                        "input-field\"] {\n"
+"    background-color: transparent;\n"
 "}\n"
 "\n"
 "*[class=\"input-field\"] QLineEdit {\n"
-"	background-color: #ffffff;\n"
-"	border: 1px solid #999;\n"
-"	border-left: none;\n"
-"	border-top-right-radius: 15px;\n"
-"	border-bottom-right-radius: 15px;\n"
-"	padding: 0px 8px;\n"
-"	color: black;\n"
+"    background-color: #ffffff;\n"
+"    border: 1px solid #999;\n"
+"    border-left: none;\n"
+"    border-top-right-radius: 18px;\n"
+"    border-bottom-right-radius: 18px;\n"
+"    padding: 0px 8px;\n"
+"    color: #1f2937;\n"
+"}\n"
+"\n"
+"QLineEdit:focus {\n"
+"    border: 1px solid #2563eb;\n"
+"}\n"
+"\n"
+"QLineEdit:hover {\n"
+"    border: 1px solid #3b82f6;\n"
+"}\n"
+"\n"
+"*[class=\"input-field\"] QLineEdit:disabled {\n"
+"    background-color: #f3f4f6;\n"
+"    border: none;\n"
+"    color: #999;\n"
 "}\n"
 "\n"
 "*[class=\"input-field\"] QLabel {\n"
-"	background-color: rgb(192, 191, 188);\n"
-"	border-left: 1px solid #999;\n"
-"	border-top: 1px solid #999;\n"
-"	border-bottom: 1px solid #999;\n"
-"	border-right: none;\n"
-"	border-top-left-radius: 15px;\n"
-"	border-bottom-left-radius: 15px;\n"
-"	padding-left: 8px;\n"
-"	color: black;\n"
+"    background-color: #d2d2d2;\n"
+"    border-left: 1px solid #999;\n"
+"    border-top: 1px solid #999;\n"
+"    border-bottom: 1px solid #999;\n"
+"    border-right: none;\n"
+"    border-top-left-radius: 18px;\n"
+"    border-bottom-left-radius: 18px;\n"
+"    padding-left: 8px;\n"
+"    color: #000000;\n"
 "}\n"
 "\n"
-"QProgressBar {\n"
-"	border-radius: 10px;\n"
-"	background-color: white;\n"
+"*[class=\"input-field\"] QLabel:disabled {\n"
+" "
+                        "   color: #999;\n"
+"    border: none;\n"
 "}\n"
 "\n"
-"QProgressBar::chunk {\n"
-"	background-color: #007BFF;\n"
-"	border-radius: 10px;\n"
-"}\n"
 "\n"
-"QComboBox {\n"
+"\n"
+"*[class=\"input-field\"] QComboBox {\n"
 "    border: 1px solid #999;\n"
 "    border-left: none;\n"
 "    padding: 0px 10px;\n"
-"   "
-                        " background-color: #ffffff;\n"
-"    color: #333333;\n"
+"    background-color: #ffffff;\n"
+"    color: #1f2937;\n"
 "    font: 10pt \"Inter Medium\";\n"
-"    selection-background-color: #7eb4d7;\n"
-"	border-top-right-radius: 15px;\n"
-"	border-bottom-right-radius: 15px;\n"
+"    selection-background-color: #bfdbfe;\n"
+"    border-top-right-radius: 18px;\n"
+"    border-bottom-right-radius: 18px;\n"
 "}\n"
 "\n"
-"QComboBox:focus, QLineEdit:focus {\n"
-"    border: 1px solid #007BFF;\n"
+"QComboBox:focus {\n"
+"    border: 1px solid #2563eb;\n"
 "}\n"
 "\n"
-"QComboBox:hover, QLineEdit:hover {\n"
-"    border: 1px solid #3498db;\n"
+"QComboBox:hover {\n"
+"    border: 1px solid #3b82f6;\n"
 "}\n"
 "\n"
 "QComboBox::drop-down {\n"
@@ -166,7 +156,6 @@ class Ui_SectionRegistrationDialog(object):
 "    subcontrol-position: top right;\n"
 "    width: 30px;\n"
 "    border-left-width: 0px;\n"
-"    /* Match the 15px border-radius of the main control */\n"
 "    border-top-right-radius: 15px;\n"
 "    border-bottom-right-radius: 15px;\n"
 "}\n"
@@ -179,45 +168,134 @@ class Ui_SectionRegistrationDialog(object):
 "}\n"
 "\n"
 "QComboBox QAbstractItemView {\n"
-"    background-color: white !important;\n"
+"    background-color: #ffffff "
+                        "!important;\n"
 "    border: 1px solid #999;\n"
-"    selection-background-color: #7eb4d7;\n"
-"    selecti"
-                        "on-color: #ffffff;\n"
-"    outline: 0; /* Removes the ugly dotted focus border */\n"
+"    selection-background-color: #bfdbfe;\n"
+"    selection-color: #111827;\n"
+"    outline: 0;\n"
 "}\n"
 "\n"
 "QComboBox QAbstractItemView::item {\n"
 "    padding: 0px 15px;\n"
 "    border-radius: 4px;\n"
-"    color: #333333;\n"
+"    color: #1f2937;\n"
 "}\n"
 "\n"
-"/* Hover state for items inside the dropdown */\n"
 "QComboBox QAbstractItemView::item:hover {\n"
-"    background-color: #7eb4d7;\n"
-"    color: #ffffff;\n"
+"    background-color: #bfdbfe;\n"
+"    color: #111827;\n"
 "}\n"
 "\n"
-"QScrollArea { \n"
+"QComboBox:disabled {\n"
+"    background-color: #f3f4f6;\n"
 "    border: none;\n"
-"    border-radius: 20px;\n"
-"	background-color: rgb(246, 245, 244);\n"
+"    color: #999;\n"
 "}\n"
 "\n"
-"/* 2. THE VIEWPORT (Crucial for transparency/backgrounds) */\n"
-"QScrollArea QWidget #qt_scrollarea_viewport {\n"
+"QComboBox::drop-down:disabled {\n"
+"    border-top-right-radius: 15px;\n"
+"    border-bottom-right-radius: 15px;\n"
+"    background-color: transparent;\n"
+"}\n"
+"\n"
+"QComboBox::down-arrow:disabled {\n"
+"    image: url(:/Images/Images/caret-down-disabled.png);\n"
+"}\n"
+"\n"
+"\n"
+"\n"
+"QPushButton[class=\"button-green\"] {\n"
+"    border: 1px solid #0a5128;\n"
+"    border-radius: 15px;\n"
+"    padding: 0px 10px 0px;\n"
+"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #1ebd5d, stop:1 #107f"
+                        "3f);\n"
+"    color: #FFF;\n"
+"    font: 10pt \"Inter SemiBold\";\n"
+"}\n"
+"\n"
+"QPushButton[class=\"button-green\"]:hover {\n"
+"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #2ecc71, stop:1 #27AE60);\n"
+"}\n"
+"\n"
+"QPushButton[class=\"button-green\"]:pressed {\n"
+"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #0b572a, stop:1 #129046);\n"
+"}\n"
+"\n"
+"QPushButton[class=\"button-green\"]:disabled {\n"
+"    background: #A5D6A7;\n"
+"    color: #E8F5E9;\n"
+"    opacity: 0.6;\n"
+"}\n"
+"\n"
+"QPushButton[class=\"button-normal\"] {\n"
+"    color: #000000;\n"
+"    font: 10pt \"Inter\";\n"
+"    border: 1px solid #9a9996;\n"
+"    border-radius: 15px;\n"
+"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #ffffff, stop:1 #d8ecf6);\n"
+"}\n"
+"\n"
+"QPushButton[class=\"button-normal\"]:hover {\n"
+"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #ffffff, stop:1 #f2f6f8);\n"
+"}\n"
+"\n"
+"QPushButton[class=\"button-normal\"]:pressed {\n"
+"    background: qlineargradient(x"
+                        "1:0, y1:0, x2:0, y2:1, stop:0 #dce5e9, stop:1 #ffffff);\n"
+"}\n"
+"\n"
+"QPushButton[class=\"button-normal\"]:disabled {\n"
+"    color: #aeaeae;\n"
+"    border: 1px solid #dcdcdc;\n"
+"    background: #f5f5f5;\n"
+"}\n"
+"\n"
+"\n"
+"\n"
+"QProgressBar {\n"
+"    border-radius: 10px;\n"
+"    background-color: white;\n"
+"}\n"
+"\n"
+"QProgressBar::chunk {\n"
+"    background-color: #007BFF;\n"
+"    border-radius: 10px;\n"
+"}\n"
+"\n"
+"\n"
+"\n"
+"QRadioButton {\n"
+"    color: #1f2937;\n"
+"    spacing: 8px;\n"
+"    padding: 0px 10px;\n"
 "    background: transparent;\n"
-"    border-radius: 20px;\n"
+"    font: 10pt \"Inter\";\n"
 "}\n"
 "\n"
-"/* 3. VERTICAL SCROLLBAR */\n"
+"QRadioButton::indicator {\n"
+"    background: #ffffff;\n"
+"    border: 2px solid #999;\n"
+"    min-width: 14px;\n"
+"    min-height: 14px;\n"
+"    border-radius: 7px;\n"
+"}\n"
+"\n"
+"QRadioButton::indicator:checked {\n"
+"    border-color: #93c5fd;\n"
+"    background-color: #2563eb;\n"
+"}\n"
+"\n"
+"\n"
+"\n"
 "QScrollBar:vertical {\n"
 "    border: none;\n"
 "    background: #ffffff;\n"
 "    width: 10px;\n"
 "    margin: 0px;\n"
-"    border-radius: 5px;\n"
+""
+                        "    border-radius: 5px;\n"
 "}\n"
 "\n"
 "QScrollBar::handle:vertical {\n"
@@ -226,16 +304,14 @@ class Ui_SectionRegistrationDialog(object):
 "    border-radius: 5px;\n"
 "}\n"
 "\n"
-""
-                        "QScrollBar::handle:vertical:hover {\n"
+"QScrollBar::handle:vertical:hover {\n"
 "    background: #574939;\n"
 "}\n"
 "\n"
-"/* 4. HORIZONTAL SCROLLBAR */\n"
 "QScrollBar:horizontal {\n"
 "    border: none;\n"
 "    background: #ffffff;\n"
-"    height: 10px; /* Note: height, not width */\n"
+"    height: 10px;\n"
 "    margin: 0px;\n"
 "    border-radius: 5px;\n"
 "}\n"
@@ -250,26 +326,113 @@ class Ui_SectionRegistrationDialog(object):
 "    background: #574939;\n"
 "}\n"
 "\n"
-"/* 5. REMOVE BUTTONS & TRACK BACKGROUNDS */\n"
-"/* This handles both horizontal and vertical arrows/tracks */\n"
-"QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical,\n"
-"QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {\n"
+"QScrollBar::add-line:vertical,\n"
+"QScrollBar::sub-line:vertical,\n"
+"QScrollBar::add-line:horizontal,\n"
+"QScrollBar::sub-line:horizontal {\n"
 "    border: none;\n"
 "    background: none;\n"
 "    width: 0px;\n"
 "    height: 0px;\n"
 "}\n"
 "\n"
-"QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical,\n"
-"QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {\n"
-"    background: none;"
-                        "\n"
+"QScrollBar::add-page:vertical,\n"
+"QScrollBar::sub-page:vertical,\n"
+"QScrollBar::add-page:horizontal,\n"
+"QScrollBar::sub-page:horizontal {\n"
+"    background: "
+                        "none;\n"
 "}\n"
 "\n"
-"/* 6. THE CORNER WIDGET \n"
-"   (The small square where both bars meet) */\n"
-"QScrollArea QWidget #qt_scrollarea_corner {\n"
+"\n"
+"#line_1 {\n"
+"    background-color: #deddda;\n"
+"}\n"
+"\n"
+"#btnExportTemplate {\n"
+"    border: 1px solid #9a9996;\n"
+"    border-radius: 15px;\n"
+"    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #ffffff, stop:1 #d8ecf6);\n"
+"}\n"
+"\n"
+"#btnExportTemplate:hover {\n"
+"    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #ffffff, stop:1 #f2f6f8);\n"
+"}\n"
+"\n"
+"#btnExportTemplate:pressed {\n"
+"    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #dce5e9, stop:1 #ffffff);\n"
+"}\n"
+"\n"
+"#btnExportTemplate:disabled {\n"
+"    color: #aeaeae;\n"
+"    border: 1px solid #dcdcdc;\n"
+"    background: #f5f5f5;\n"
+"}\n"
+"\n"
+"*[class=\"input-and-browse\"] {\n"
 "    background: transparent;\n"
+"}\n"
+"\n"
+"*[class=\"input-and-browse\"] QLabel {\n"
+"    background-color: #d2d2d2;\n"
+"    border: 1px solid #999;\n"
+"    border-right: none;\n"
+"    border-top-left-radius: 18px;\n"
+"    border-bottom-left-radius: 18px;\n"
+"    padding-left: 8px;\n"
+""
+                        "    color: #000000;\n"
+"}\n"
+"\n"
+"*[class=\"input-and-browse\"] QLabel:disabled {\n"
+"    color: #999;\n"
+"    border: none;\n"
+"}\n"
+"\n"
+"*[class=\"input-and-browse\"] QLineEdit {\n"
+"    background-color: #ffffff;\n"
+"    border: 1px solid #999;\n"
+"    border-left: none;\n"
+"    border-right: none;\n"
+"    padding: 0px 8px;\n"
+"}\n"
+"\n"
+"*[class=\"input-and-browse\"] QLineEdit:hover {\n"
+"    border: 1px solid #3b82f6;\n"
+"}\n"
+"\n"
+"*[class=\"input-and-browse\"] QLineEdit:focus {\n"
+"    border: 1px solid #2563eb;\n"
+"}\n"
+"\n"
+"*[class=\"input-and-browse\"] QLineEdit:disabled {\n"
+"    background-color: #f3f4f6;\n"
+"    border: none;\n"
+"    color: #999;\n"
+"}\n"
+"\n"
+"*[class=\"input-and-browse\"] #btnBrowseCSV {\n"
+"    font: 10pt \"Inter\";\n"
+"    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #ffffff, stop:1 #d8ecf6);\n"
+"    border: 1px solid #9a9996;\n"
+"    padding: 5px 15px;\n"
+"\n"
+"    border-top-right-radius: 18px;\n"
+"    border-bottom-right-radius: 18px;\n"
+"}\n"
+"\n"
+"*"
+                        "[class=\"input-and-browse\"] #btnBrowseCSV:hover {\n"
+"    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #ffffff, stop:1 #f2f6f8);\n"
+"}\n"
+"\n"
+"*[class=\"input-and-browse\"] #btnBrowseCSV:pressed {\n"
+"    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #dce5e9, stop:1 #ffffff);\n"
+"}\n"
+"\n"
+"*[class=\"input-and-browse\"] #btnBrowseCSV:disabled {\n"
+"    background-color: #d2d2d2;\n"
+"    color: #999;\n"
 "    border: none;\n"
 "}")
         self.verticalLayout = QVBoxLayout(SectionRegistrationDialog)
@@ -281,33 +444,24 @@ class Ui_SectionRegistrationDialog(object):
         self.frame_header.setMinimumSize(QSize(0, 35))
         self.frame_header.setMaximumSize(QSize(16777215, 35))
         self.frame_header.setMouseTracking(True)
-        self.frame_header.setStyleSheet(u"#frame_header {\n"
-"	background-color: #deddda;\n"
-"	border-top-left-radius: 12px;\n"
-"	border-top-right-radius: 12px;\n"
-"	border: 1px solid #7a7a7a;\n"
-"	border-bottom: none;\n"
-"}")
+        self.frame_header.setStyleSheet(u"")
         self.frame_header.setFrameShape(QFrame.StyledPanel)
         self.frame_header.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_6 = QHBoxLayout(self.frame_header)
         self.horizontalLayout_6.setSpacing(6)
         self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
-        self.horizontalLayout_6.setContentsMargins(9, 0, 9, 0)
+        self.horizontalLayout_6.setContentsMargins(9, 0, 0, 0)
         self.widget_window_icon = QWidget(self.frame_header)
         self.widget_window_icon.setObjectName(u"widget_window_icon")
-        self.widget_window_icon.setMinimumSize(QSize(54, 35))
-        self.widget_window_icon.setMaximumSize(QSize(54, 35))
+        self.widget_window_icon.setMinimumSize(QSize(72, 34))
+        self.widget_window_icon.setMaximumSize(QSize(72, 34))
         self.widget_window_icon.setStyleSheet(u"background: transparent;")
         self.horizontalLayout_4 = QHBoxLayout(self.widget_window_icon)
+        self.horizontalLayout_4.setSpacing(0)
         self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
         self.horizontalLayout_4.setContentsMargins(0, 0, 0, 0)
 
         self.horizontalLayout_6.addWidget(self.widget_window_icon)
-
-        self.horizontalSpacer_6 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.horizontalLayout_6.addItem(self.horizontalSpacer_6)
 
         self.label_windowTitle = QLabel(self.frame_header)
         self.label_windowTitle.setObjectName(u"label_windowTitle")
@@ -317,79 +471,67 @@ class Ui_SectionRegistrationDialog(object):
         font.setBold(False)
         font.setItalic(False)
         self.label_windowTitle.setFont(font)
-        self.label_windowTitle.setStyleSheet(u"background: transparent;\n"
-"color: rgb(0, 0, 0);\n"
-"font: 10pt \"Inter SemiBold\";")
+        self.label_windowTitle.setStyleSheet(u"")
+        self.label_windowTitle.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout_6.addWidget(self.label_windowTitle)
 
-        self.horizontalSpacer_5 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.horizontalLayout_6.addItem(self.horizontalSpacer_5)
-
-        self.btnMinimize = QPushButton(self.frame_header)
+        self.widget_window_buttons = QWidget(self.frame_header)
+        self.widget_window_buttons.setObjectName(u"widget_window_buttons")
+        self.widget_window_buttons.setMinimumSize(QSize(72, 34))
+        self.widget_window_buttons.setMaximumSize(QSize(72, 34))
+        self.widget_window_buttons.setStyleSheet(u"")
+        self.horizontalLayout_7 = QHBoxLayout(self.widget_window_buttons)
+        self.horizontalLayout_7.setSpacing(0)
+        self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
+        self.horizontalLayout_7.setContentsMargins(0, 0, 0, 0)
+        self.btnMinimize = QPushButton(self.widget_window_buttons)
         self.btnMinimize.setObjectName(u"btnMinimize")
         self.btnMinimize.setMinimumSize(QSize(24, 24))
         self.btnMinimize.setMaximumSize(QSize(24, 24))
         self.btnMinimize.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.btnMinimize.setStyleSheet(u"#btnMinimize {\n"
-"	border-radius: 12px;\n"
-"	background-color: transparent;\n"
-"}\n"
-"\n"
-"#btnMinimize:hover {\n"
-"	background-color: #f8e45c;\n"
-"}")
+        self.btnMinimize.setStyleSheet(u"")
         icon = QIcon()
         icon.addFile(u":/Images/Images/minimize-sign.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.btnMinimize.setIcon(icon)
         self.btnMinimize.setIconSize(QSize(12, 12))
 
-        self.horizontalLayout_6.addWidget(self.btnMinimize)
+        self.horizontalLayout_7.addWidget(self.btnMinimize)
 
-        self.btnClose = QPushButton(self.frame_header)
+        self.btnClose = QPushButton(self.widget_window_buttons)
         self.btnClose.setObjectName(u"btnClose")
         self.btnClose.setMinimumSize(QSize(24, 24))
         self.btnClose.setMaximumSize(QSize(24, 24))
         self.btnClose.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.btnClose.setStyleSheet(u"#btnClose {\n"
-"	border-radius: 12px;\n"
-"	background-color: transparent;\n"
-"}\n"
-"\n"
-"#btnClose:hover {\n"
-"	background-color: rgb(246, 97, 81);\n"
-"}")
+        self.btnClose.setStyleSheet(u"")
         icon1 = QIcon()
         icon1.addFile(u":/Images/Images/clear.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.btnClose.setIcon(icon1)
 
-        self.horizontalLayout_6.addWidget(self.btnClose)
+        self.horizontalLayout_7.addWidget(self.btnClose)
+
+
+        self.horizontalLayout_6.addWidget(self.widget_window_buttons)
 
 
         self.verticalLayout.addWidget(self.frame_header)
 
-        self.verticalFrame = QFrame(SectionRegistrationDialog)
-        self.verticalFrame.setObjectName(u"verticalFrame")
-        self.verticalFrame.setStyleSheet(u"#verticalFrame {\n"
-"	background-color: #deddda;\n"
-"	border: 1px solid #7a7a7a;\n"
-"	border-top: none;\n"
-"}")
-        self.verticalLayout_5 = QVBoxLayout(self.verticalFrame)
-        self.verticalLayout_5.setSpacing(12)
+        self.widget_body = QWidget(SectionRegistrationDialog)
+        self.widget_body.setObjectName(u"widget_body")
+        self.widget_body.setStyleSheet(u"")
+        self.verticalLayout_5 = QVBoxLayout(self.widget_body)
+        self.verticalLayout_5.setSpacing(9)
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
-        self.verticalLayout_5.setContentsMargins(9, 9, 9, 9)
-        self.label_sy = QLabel(self.verticalFrame)
+        self.verticalLayout_5.setContentsMargins(12, 9, 12, 9)
+        self.label_sy = QLabel(self.widget_body)
         self.label_sy.setObjectName(u"label_sy")
 
         self.verticalLayout_5.addWidget(self.label_sy)
 
         self.verticalLayout_2 = QVBoxLayout()
-        self.verticalLayout_2.setSpacing(6)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
-        self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
-        self.widget_1 = QWidget(self.verticalFrame)
+        self.verticalLayout_2.setContentsMargins(-1, 0, -1, 0)
+        self.widget_1 = QWidget(self.widget_body)
         self.widget_1.setObjectName(u"widget_1")
         self.horizontalLayout = QHBoxLayout(self.widget_1)
         self.horizontalLayout.setSpacing(0)
@@ -397,23 +539,24 @@ class Ui_SectionRegistrationDialog(object):
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.label_9 = QLabel(self.widget_1)
         self.label_9.setObjectName(u"label_9")
-        self.label_9.setMinimumSize(QSize(100, 30))
-        self.label_9.setMaximumSize(QSize(100, 30))
+        self.label_9.setMinimumSize(QSize(100, 36))
+        self.label_9.setMaximumSize(QSize(100, 36))
         self.label_9.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout.addWidget(self.label_9)
 
         self.txtSectionName = QLineEdit(self.widget_1)
         self.txtSectionName.setObjectName(u"txtSectionName")
-        self.txtSectionName.setMinimumSize(QSize(0, 30))
-        self.txtSectionName.setStyleSheet(u"background-color: rgb(246, 245, 244); padding: 0px 10px 0px;")
+        self.txtSectionName.setMinimumSize(QSize(0, 36))
+        self.txtSectionName.setMaximumSize(QSize(16777215, 36))
+        self.txtSectionName.setStyleSheet(u"")
 
         self.horizontalLayout.addWidget(self.txtSectionName)
 
 
         self.verticalLayout_2.addWidget(self.widget_1)
 
-        self.widget_2 = QWidget(self.verticalFrame)
+        self.widget_2 = QWidget(self.widget_body)
         self.widget_2.setObjectName(u"widget_2")
         self.horizontalLayout_3 = QHBoxLayout(self.widget_2)
         self.horizontalLayout_3.setSpacing(0)
@@ -421,16 +564,17 @@ class Ui_SectionRegistrationDialog(object):
         self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
         self.label_10 = QLabel(self.widget_2)
         self.label_10.setObjectName(u"label_10")
-        self.label_10.setMinimumSize(QSize(100, 30))
-        self.label_10.setMaximumSize(QSize(100, 30))
+        self.label_10.setMinimumSize(QSize(100, 36))
+        self.label_10.setMaximumSize(QSize(100, 36))
         self.label_10.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout_3.addWidget(self.label_10)
 
         self.cmb_teacher = QComboBox(self.widget_2)
         self.cmb_teacher.setObjectName(u"cmb_teacher")
-        self.cmb_teacher.setMinimumSize(QSize(0, 30))
-        self.cmb_teacher.setStyleSheet(u"background-color: rgb(246, 245, 244); padding: 0px 10px 0px;")
+        self.cmb_teacher.setMinimumSize(QSize(0, 36))
+        self.cmb_teacher.setMaximumSize(QSize(16777215, 36))
+        self.cmb_teacher.setStyleSheet(u"")
         self.cmb_teacher.setEditable(False)
 
         self.horizontalLayout_3.addWidget(self.cmb_teacher)
@@ -441,97 +585,61 @@ class Ui_SectionRegistrationDialog(object):
 
         self.verticalLayout_5.addLayout(self.verticalLayout_2)
 
-        self.line = QFrame(self.verticalFrame)
-        self.line.setObjectName(u"line")
-        self.line.setStyleSheet(u"background-color: rgb(222, 221, 218);")
-        self.line.setFrameShape(QFrame.Shape.HLine)
-        self.line.setFrameShadow(QFrame.Shadow.Sunken)
+        self.line_1 = QFrame(self.widget_body)
+        self.line_1.setObjectName(u"line_1")
+        self.line_1.setStyleSheet(u"")
+        self.line_1.setFrameShape(QFrame.Shape.HLine)
+        self.line_1.setFrameShadow(QFrame.Shadow.Sunken)
 
-        self.verticalLayout_5.addWidget(self.line)
+        self.verticalLayout_5.addWidget(self.line_1)
 
-        self.rb_importCSV = QRadioButton(self.verticalFrame)
+        self.horizontalLayout_8 = QHBoxLayout()
+        self.horizontalLayout_8.setSpacing(0)
+        self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
+        self.horizontalLayout_8.setContentsMargins(-1, 0, -1, -1)
+        self.rb_importCSV = QRadioButton(self.widget_body)
         self.rb_importCSV.setObjectName(u"rb_importCSV")
         self.rb_importCSV.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.rb_importCSV.setStyleSheet(u"background-color: #deddda;")
+        self.rb_importCSV.setStyleSheet(u"")
 
-        self.verticalLayout_5.addWidget(self.rb_importCSV)
+        self.horizontalLayout_8.addWidget(self.rb_importCSV)
 
-        self.widget_CSV = QWidget(self.verticalFrame)
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_8.addItem(self.horizontalSpacer)
+
+
+        self.verticalLayout_5.addLayout(self.horizontalLayout_8)
+
+        self.widget_CSV = QWidget(self.widget_body)
         self.widget_CSV.setObjectName(u"widget_CSV")
         self.widget_CSV.setEnabled(True)
         self.widget_CSV.setMinimumSize(QSize(100, 0))
-        self.widget_CSV.setStyleSheet(u"#label_14 {\n"
-"	background-color: rgb(192, 191, 188);\n"
-"	border-left: 1px solid #999;\n"
-"	border-top: 1px solid #999;\n"
-"	border-bottom: 1px solid #999;\n"
-"	border-right: none;\n"
-"	border-top-left-radius: 15px;\n"
-"	border-bottom-left-radius: 15px;\n"
-"	padding-left: 8px;\n"
-"	color: black;\n"
-"}\n"
-"\n"
-"QLineEdit {\n"
-"	background-color: #ffffff;\n"
-"	color: black;\n"
-"	border: 1px solid #999;\n"
-"	border-right: none;\n"
-"	border-left: none;\n"
-"	padding: 0px 10px;\n"
-"}\n"
-"\n"
-"#btnBrowseCSV {\n"
-"	font: 10pt \"Inter\";\n"
-"	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, \n"
-"                                stop:0 #ffffff, \n"
-"                                stop:1 #d8ecf6);\n"
-"	color: black;\n"
-"	border: 1px solid rgb(154, 153, 150);\n"
-"	border-top-right-radius: 15px;\n"
-"	border-bottom-right-radius: 15px;\n"
-"}\n"
-"\n"
-"#btnBrowseCSV:hover {\n"
-"	background-color: #FFF;\n"
-"}\n"
-"\n"
-"#btnBrowseCSV:disabled, #label_14:disabled {\n"
-"	background-color: rgb(192, 191, 188);\n"
-"	border: none;"
-                        "\n"
-"	color: #aeaeae;\n"
-"}\n"
-"\n"
-"#widget_CSV QLineEdit:disabled {\n"
-"	background-color: #f5f5f5;\n"
-"	border: none;\n"
-"	color: #aeaeae;\n"
-"}")
+        self.widget_CSV.setStyleSheet(u"")
         self.horizontalLayout_11 = QHBoxLayout(self.widget_CSV)
         self.horizontalLayout_11.setSpacing(0)
         self.horizontalLayout_11.setObjectName(u"horizontalLayout_11")
         self.horizontalLayout_11.setContentsMargins(0, 0, 0, 0)
         self.label_14 = QLabel(self.widget_CSV)
         self.label_14.setObjectName(u"label_14")
-        self.label_14.setMinimumSize(QSize(100, 30))
-        self.label_14.setMaximumSize(QSize(100, 30))
+        self.label_14.setMinimumSize(QSize(100, 36))
+        self.label_14.setMaximumSize(QSize(100, 36))
         self.label_14.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout_11.addWidget(self.label_14)
 
         self.txtCSVPath = QLineEdit(self.widget_CSV)
         self.txtCSVPath.setObjectName(u"txtCSVPath")
-        self.txtCSVPath.setMinimumSize(QSize(0, 30))
-        self.txtCSVPath.setMaximumSize(QSize(16777215, 30))
+        self.txtCSVPath.setMinimumSize(QSize(0, 36))
+        self.txtCSVPath.setMaximumSize(QSize(16777215, 36))
         self.txtCSVPath.setStyleSheet(u"")
 
         self.horizontalLayout_11.addWidget(self.txtCSVPath)
 
         self.btnBrowseCSV = QPushButton(self.widget_CSV)
         self.btnBrowseCSV.setObjectName(u"btnBrowseCSV")
-        self.btnBrowseCSV.setMinimumSize(QSize(100, 30))
-        self.btnBrowseCSV.setMaximumSize(QSize(100, 30))
+        self.btnBrowseCSV.setMinimumSize(QSize(100, 36))
+        self.btnBrowseCSV.setMaximumSize(QSize(100, 36))
         self.btnBrowseCSV.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btnBrowseCSV.setStyleSheet(u"")
 
@@ -540,7 +648,7 @@ class Ui_SectionRegistrationDialog(object):
 
         self.verticalLayout_5.addWidget(self.widget_CSV)
 
-        self.widget_template = QWidget(self.verticalFrame)
+        self.widget_template = QWidget(self.widget_body)
         self.widget_template.setObjectName(u"widget_template")
         self.widget_template.setEnabled(True)
         self.widget_template.setMinimumSize(QSize(0, 200))
@@ -548,7 +656,7 @@ class Ui_SectionRegistrationDialog(object):
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.widget_3 = QWidget(self.widget_template)
         self.widget_3.setObjectName(u"widget_3")
-        self.widget_3.setStyleSheet(u"background-color: #deddda;")
+        self.widget_3.setStyleSheet(u"")
         self.horizontalLayout_5 = QHBoxLayout(self.widget_3)
         self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
         self.horizontalLayout_5.setContentsMargins(0, 0, 0, 0)
@@ -608,7 +716,7 @@ class Ui_SectionRegistrationDialog(object):
 
         self.horizontalLayout_2 = QHBoxLayout()
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
-        self.progressBar = QProgressBar(self.verticalFrame)
+        self.progressBar = QProgressBar(self.widget_body)
         self.progressBar.setObjectName(u"progressBar")
         self.progressBar.setMinimumSize(QSize(0, 20))
         self.progressBar.setMaximumSize(QSize(16777215, 20))
@@ -622,7 +730,7 @@ class Ui_SectionRegistrationDialog(object):
 
         self.horizontalLayout_2.addItem(self.horizontalSpacer_2)
 
-        self.btnCancel = QPushButton(self.verticalFrame)
+        self.btnCancel = QPushButton(self.widget_body)
         self.btnCancel.setObjectName(u"btnCancel")
         self.btnCancel.setMinimumSize(QSize(100, 30))
         self.btnCancel.setMaximumSize(QSize(100, 30))
@@ -630,7 +738,7 @@ class Ui_SectionRegistrationDialog(object):
 
         self.horizontalLayout_2.addWidget(self.btnCancel)
 
-        self.btnSave = QPushButton(self.verticalFrame)
+        self.btnSave = QPushButton(self.widget_body)
         self.btnSave.setObjectName(u"btnSave")
         self.btnSave.setMinimumSize(QSize(100, 30))
         self.btnSave.setMaximumSize(QSize(100, 30))
@@ -642,7 +750,7 @@ class Ui_SectionRegistrationDialog(object):
         self.verticalLayout_5.addLayout(self.horizontalLayout_2)
 
 
-        self.verticalLayout.addWidget(self.verticalFrame)
+        self.verticalLayout.addWidget(self.widget_body)
 
 
         self.retranslateUi(SectionRegistrationDialog)
@@ -664,7 +772,7 @@ class Ui_SectionRegistrationDialog(object):
         self.widget_2.setProperty(u"class", QCoreApplication.translate("SectionRegistrationDialog", u"input-field", None))
         self.label_10.setText(QCoreApplication.translate("SectionRegistrationDialog", u"Adviser", None))
         self.rb_importCSV.setText(QCoreApplication.translate("SectionRegistrationDialog", u"Import students from CSV", None))
-        self.widget_CSV.setProperty(u"class", "")
+        self.widget_CSV.setProperty(u"class", QCoreApplication.translate("SectionRegistrationDialog", u"input-and-browse", None))
         self.label_14.setText(QCoreApplication.translate("SectionRegistrationDialog", u"Template file:", None))
         self.label_14.setProperty(u"class", QCoreApplication.translate("SectionRegistrationDialog", u"input-field", None))
         self.btnBrowseCSV.setText(QCoreApplication.translate("SectionRegistrationDialog", u"Browse", None))

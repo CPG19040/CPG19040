@@ -875,6 +875,13 @@ class Controller:
                 CustomMessageBox.warning(self.home_win, "Error", "Could not delete students from the database.")
 
     def register_section(self):
+        self.is_dark_mode = self.app_settings.value("dark_mode", False, type=bool)
+
+        if self.is_dark_mode:
+            self.sectionObj.setStyleSheet(Dark_Theme.section_reg_dialog)
+        else:
+            self.sectionObj.setStyleSheet(Light_Theme.section_reg_dialog)
+            
         self.sectionObj.txtSectionName.clear()
         self.sectionObj.cmb_teacher.setCurrentIndex(0)
 

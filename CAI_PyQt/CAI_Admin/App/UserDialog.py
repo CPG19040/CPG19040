@@ -246,6 +246,14 @@ class AddUserDialog(QDialog, Ui_AddNewUserDialog):
         self.btnMinimize.clicked.connect(self.showMinimized)
         self.btnClose.clicked.connect(self.reject)
 
+        self.app_settings = QSettings("CAI_System", "CAI_Admin_AppSettings")
+        self.is_dark_mode = self.app_settings.value("dark_mode", False, type=bool)
+
+        if self.is_dark_mode:
+            self.setStyleSheet(Dark_Theme.user_add_dialog)
+        else:
+            self.setStyleSheet(Light_Theme.user_add_dialog)
+
         self.db = DatabaseTools()
         self.util = Utility()
         self.staff = Staff()
