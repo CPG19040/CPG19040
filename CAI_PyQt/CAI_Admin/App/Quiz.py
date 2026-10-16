@@ -2,7 +2,7 @@ import os
 import psycopg2
 
 from PySide6.QtGui import QStandardItemModel, QStandardItem, QImage, QPixmap, QKeySequence, QShortcut
-from PySide6.QtWidgets import (QHBoxLayout, QLabel, QLineEdit, QButtonGroup, QFileDialog, QFrame, QDialog)
+from PySide6.QtWidgets import (QHBoxLayout, QLabel, QLineEdit, QButtonGroup, QFileDialog, QFrame, QDialog, QSizePolicy, QSpacerItem)
 from PySide6.QtCore import QSettings, Qt, QSize, Signal
 
 from App.CRUDTools import DatabaseTools
@@ -383,80 +383,169 @@ class QuizItemWidget(QFrame, Ui_CardQuiz_edit):
         super().__init__()
         self.setupUi(self)
 
+        self.app_settings = QSettings("CAI_System", "CAI_Admin_AppSettings")
+        self.is_dark_mode = self.app_settings.value("dark_mode", False, type=bool)
+
+        if self.is_dark_mode:
+            self.setStyleSheet(Dark_Theme.card_quiz_edit)
+            self.input_css = """
+                *[class="correct-label"] {
+                    background-color: #262626;
+                    color: #a0a0a0;
+                    border: 1px solid #4a4a4a;
+                    border-right: none;
+                    border-top-left-radius: 15px;
+                    border-bottom-left-radius: 15px;
+                    padding: 5px 10px;
+                    max-width: 62px;
+                }
+
+                QLineEdit[class="correct-input"],
+                QComboBox[class="correct-input"] {
+                    height: 30px;
+                    background-color: #1e1e1e;
+                    border: 1px solid #4a4a4a;
+                    border-left: none;
+                    border-top-right-radius: 15px;
+                    border-bottom-right-radius: 15px;
+                    padding: 0px 10px;
+                    color: #ffffff;
+                    font: 11pt "Inter";
+                    selection-background-color: #3b82f6;
+                    selection-color: #ffffff;
+                }
+
+                QLineEdit:focus, 
+                *[class="correct-input"]:focus,
+                QComboBox[class="correct-input"]:focus {
+                    border: 1px solid #3b82f6;
+                }
+
+                QLineEdit:hover, 
+                QComboBox[class="correct-input"]:hover {
+                    border: 1px solid #60a5fa;
+                }
+
+                QComboBox[class="correct-input"]::drop-down {
+                    subcontrol-origin: padding;
+                    subcontrol-position: top right;
+                    width: 30px;
+                    border-left-width: 0px;
+                    border-top-right-radius: 15px;
+                    border-bottom-right-radius: 15px;
+                }
+
+                QComboBox[class="correct-input"]::down-arrow {
+                    image: url(:/Images/Images/caret-down.png);
+                    border: none;
+                    width: 10px;
+                    height: 14px;
+                }
+
+                QComboBox[class="correct-input"] QAbstractItemView {
+                    background-color: #1e1e1e;
+                    border: 1px solid #4a4a4a;
+                    selection-background-color: #3b82f6;
+                    selection-color: #ffffff;
+                    border-radius: 5px;
+                    outline: 0;
+                }
+
+                QComboBox[class="correct-input"] QAbstractItemView::item {
+                    min-height: 35px;
+                    padding-left: 10px;
+                    border-radius: 4px;
+                    color: #ffffff;
+                }
+
+                QComboBox[class="correct-input"] QAbstractItemView::item:hover {
+                    background-color: #3b82f6;
+                    color: #ffffff;
+                }
+            """
+
+        else:
+            self.setStyleSheet(Light_Theme.card_quiz_edit)
+            self.input_css = """
+                *[class="correct-label"] {
+                    background-color: #f3f4f6;
+                    color: #4b5563;
+                    border: 1px solid #9ca3af;
+                    border-right: none;
+                    border-top-left-radius: 15px;
+                    border-bottom-left-radius: 15px;
+                    padding: 5px 10px;
+                    max-width: 62px;
+                }
+    
+                QLineEdit[class="correct-input"],
+                QComboBox[class="correct-input"] {
+                    height: 30px;
+                    background-color: #ffffff;
+                    border: 1px solid #9ca3af;
+                    border-left: none;
+                    border-top-right-radius: 15px;
+                    border-bottom-right-radius: 15px;
+                    padding: 0px 10px;
+                    color: #1f2937;
+                    font: 11pt "Inter";
+                    selection-background-color: #bfdbfe;
+                    selection-color: #111827;
+                }
+    
+                QLineEdit:focus, 
+                *[class="correct-input"]:focus,
+                QComboBox[class="correct-input"]:focus {
+                    border: 1px solid #2563eb;
+                }
+    
+                QLineEdit:hover, 
+                QComboBox[class="correct-input"]:hover {
+                    border: 1px solid #3b82f6;
+                }
+    
+                QComboBox[class="correct-input"]::drop-down {
+                    subcontrol-origin: padding;
+                    subcontrol-position: top right;
+                    width: 30px;
+                    border-left-width: 0px;
+                    border-top-right-radius: 15px;
+                    border-bottom-right-radius: 15px;
+                }
+    
+                QComboBox[class="correct-input"]::down-arrow {
+                    image: url(:/Images/Images/caret-down.png);
+                    border: none;
+                    width: 10px;
+                    height: 14px;
+                }
+    
+                QComboBox[class="correct-input"] QAbstractItemView {
+                    background-color: #ffffff;
+                    border: 1px solid #9ca3af;
+                    selection-background-color: #bfdbfe;
+                    selection-color: #111827;
+                    border-radius: 5px;
+                    outline: 0;
+                }
+    
+                QComboBox[class="correct-input"] QAbstractItemView::item {
+                    min-height: 35px;
+                    padding-left: 10px;
+                    border-radius: 4px;
+                    color: #1f2937;
+                }
+    
+                QComboBox[class="correct-input"] QAbstractItemView::item:hover {
+                    background-color: #bfdbfe;
+                    color: #111827;
+                }
+            """
+
         self.util      = Utility()
         self.item_type = item_type
         self.img_path  = None
         self.id        = None
-
-        self.input_css = """
-
-            *[class="correct-label"] {
-                background-color: #f0f0f0;
-                color: #555555;
-                border: 1px solid #ABABAB;
-                border-right: none;
-                border-top-left-radius: 15px;
-                border-bottom-left-radius: 15px;
-                padding-left: 10px;
-                max-width: 62px;
-            }
-
-            QLineEdit[class="correct-input"] {
-                background-color: #ffffff;
-                border: 1px solid #ABABAB;
-                border-left: none;
-                border-top-right-radius: 15px;
-                border-bottom-right-radius: 15px;
-                padding-left: 8px;
-                color: #333333;
-            }
-
-            QLineEdit:focus, *[class="correct-input"]:focus {
-                border: 1px solid #007BFF;
-            }
-
-            QComboBox[class="correct-input"] {
-                height: 30px;
-                border: 1px solid #999;
-                padding: 0px 10px 0px;
-                background-color: #ffffff;
-                color: #333333;
-                font: 11pt "Inter";
-                selection-background-color: #7eb4d7;
-                border-top-right-radius: 15px;
-                border-bottom-right-radius: 15px;
-            }
-
-            QLineEdit:hover, QComboBox[class="correct-input"]:hover {
-                border: 1px solid #3498db;
-            }
-
-            QComboBox[class="correct-input"]::drop-down {
-                subcontrol-origin: padding;
-                subcontrol-position: top right;
-                width: 30px;
-                border-left-width: 0px;
-            }
-
-            QComboBox[class="correct-input"]::down-arrow {
-                image: url(:/Images/Images/caret-down.png);
-                border: none;
-                width: 10px;
-                height: 14px;
-            }
-
-            QComboBox[class="correct-input"] QAbstractItemView {
-                background-color: #ffffff;
-                selection-background-color: #7eb4d7;
-                border-radius: 5px;
-            }
-
-            QComboBox[class="correct-input"] QAbstractItemView::item {
-                min-height: 35px;
-                padding-left: 10px;
-                border-radius: 4px;
-            }
-        """
 
         self.img_binary = None # from database
         self.btn_upload_img.clicked.connect(lambda: self.get_image())
@@ -923,6 +1012,9 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
 
                 layout.addWidget(new_w)
                 layout.setSpacing(10)
+
+            verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+            layout.addItem(verticalSpacer)
 
         sql  = "SELECT\n"
         sql += "    PUBLISH\n"

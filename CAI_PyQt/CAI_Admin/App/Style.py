@@ -1831,6 +1831,95 @@ class Light_Theme:
         """ + check_box + """
     """
 
+    card_quiz_edit = """
+        * {
+            font: 11pt "Inter";
+            color: #1f2937;
+        }
+
+        #CardQuiz_edit {
+            background: transparent;
+            color: #1f2937;
+        }
+
+        #Card {
+            background-color: #ffffff;
+            border-radius: 10px;
+            border: 1px solid #e5e7eb;
+        }
+
+        #frame_2, #widget_img {
+            border: none;
+        }
+
+        QLabel {
+            color: #374151;
+        }
+
+        #widget_header {
+            background-color: #ffffff;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        #label_itemno {
+            font: 10pt "Inter SemiBold";
+            color: #1e40af;
+        }
+
+        #btn_delete {
+            background-color: transparent;
+            color: #ef4444;
+            font: 12pt "Inter SemiBold";
+            border-radius: 15px;
+        }
+
+        #btn_delete:hover {
+            color: #ffffff;
+            background-color: #ef4444;
+            border: 1px solid #ef4444;
+        }
+
+        #btn_q_image {
+            background-color: #ffffff;
+            border: none;
+            border-radius: 8px;
+        }
+
+        #btn_q_image:hover {
+            background-color: #eff6ff;
+            border: none;
+        }
+
+        #btn_upload_img {
+            border: none;
+            color: #2563eb;
+            background-color: transparent;
+            margin: 0px 20px;
+            font: 10pt "Inter Medium";
+        }
+
+        #btn_upload_img:hover {
+            color: #1d4ed8;
+        }
+
+        #txt_question {
+            background-color: #ffffff;
+            border-radius: 15px;
+            padding: 8px 10px;
+            border: 1px solid #9ca3af;
+            color: #1f2937;
+        }
+
+        #txt_question:hover {
+            border: 1px solid #3b82f6;
+        }
+
+        #txt_question:focus {
+            border: 1px solid #2563eb;
+        }
+    """
+
 
 class Dark_Theme:
 
@@ -3672,6 +3761,95 @@ class Dark_Theme:
         }
 
         """ + check_box + """
+    """
+
+    card_quiz_edit = """
+        * {
+            font: 11pt "Inter";
+            color: #ffffff;
+        }
+
+        #CardQuiz_edit {
+            background: transparent;
+            color: #ffffff;
+        }
+
+        #Card {
+            background-color: #2a2c2e;
+            border-radius: 10px;
+            border: 1px solid #4a4a4a;
+        }
+
+        #frame_2, #widget_img {
+            border: none;
+        }
+
+        QLabel {
+            color: #e0e0e0;
+        }
+
+        #widget_header {
+            background-color: #2a2c2e;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        #label_itemno {
+            font: 10pt "Inter SemiBold";
+            color: #93c5fd;
+        }
+
+        #btn_delete {
+            background-color: transparent;
+            color: #f87171;
+            font: 12pt "Inter SemiBold";
+            border-radius: 15px;
+        }
+
+        #btn_delete:hover {
+            color: #ffffff;
+            background-color: #dc2626;
+            border: 1px solid #dc2626;
+        }
+
+        #btn_q_image {
+            background-color: #262626;
+            border: none;
+            border-radius: 8px;
+        }
+
+        #btn_q_image:hover {
+            background-color: #1e293b;
+            border: none;
+        }
+
+        #btn_upload_img {
+            border: none;
+            color: #60a5fa;
+            background-color: transparent;
+            margin: 0px 20px;
+            font: 10pt "Inter Medium";
+        }
+
+        #btn_upload_img:hover {
+            color: #93c5fd;
+        }
+
+        #txt_question {
+            background-color: #1e1e1e;
+            border-radius: 15px;
+            padding: 8px 10px;
+            border: 1px solid #4a4a4a;
+            color: #ffffff;
+        }
+
+        #txt_question:hover {
+            border: 1px solid #60a5fa;
+        }
+
+        #txt_question:focus {
+            border: 1px solid #3b82f6;
+        }
     """
 
 

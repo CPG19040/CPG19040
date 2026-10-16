@@ -6,15 +6,113 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>216</width>
-    <height>365</height>
+    <width>202</width>
+    <height>505</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>0</width>
+    <height>0</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background: transparent;</string>
+   <string notr="true">* {
+    font: 11pt &quot;Inter&quot;;
+    color: #1f2937;
+}
+
+#CardQuiz_edit {
+    background: transparent;
+    color: #1f2937;
+}
+
+#Card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+}
+
+#frame_2, #widget_img {
+    border: none;
+}
+
+QLabel {
+    color: #374151;
+}
+
+#widget_header {
+    background-color: #ffffff;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+#label_itemno {
+    font: 10pt &quot;Inter SemiBold&quot;;
+    color: #1e40af;
+}
+
+#btn_delete {
+    background-color: #ffffff;
+    color: #ef4444;
+    font: 12pt &quot;Inter SemiBold&quot;;
+    border-radius: 15px;
+    border: 1px solid #fecaca;
+}
+
+#btn_delete:hover {
+    color: #ffffff;
+    background-color: #ef4444;
+    border: 1px solid #ef4444;
+}
+
+#btn_q_image {
+    background-color: #ffffff;
+    border: none;
+    border-radius: 8px;
+}
+
+#btn_q_image:hover {
+    background-color: #eff6ff;
+    border: none;
+}
+
+#btn_upload_img {
+    border: none;
+    color: #2563eb;
+    background-color: transparent;
+    margin: 0px 20px;
+    font: 10pt &quot;Inter Medium&quot;;
+}
+
+#btn_upload_img:hover {
+    color: #1d4ed8;
+}
+
+#txt_question {
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 8px 10px;
+    border: 1px solid #9ca3af;
+    color: #1f2937;
+}
+
+#txt_question:hover {
+    border: 1px solid #3b82f6;
+}
+
+#txt_question:focus {
+    border: 1px solid #2563eb;
+}</string>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <property name="leftMargin">
@@ -31,75 +129,20 @@
    </property>
    <item>
     <widget class="QFrame" name="Card">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
      <property name="styleSheet">
-      <string notr="true">* {
-	font: 11pt &quot;Inter&quot;;
-}
-
-#Card {
-	background-color: #FFF;
-	border-radius: 10px;
-	border: 1px solid #ddd;
-}
-
-QLabel {
-	color: #333;
-}
-
-#widget_header {
-	background-color: rgb(153, 193, 241);
-	border-top-left-radius: 10px;
-	border-top-right-radius: 10px;
-}
-
-#label_itemno {
-	font: 10pt &quot;Inter SemiBold&quot;;
-}
-
-#btn_delete {
-	background-color: rgb(255, 255, 255);
-	color: red; 
-	font-weight: bold;
-	font: 12pt &quot;Inter&quot;;
-	border-radius: 15px;
-}
-
-#btn_delete:hover {
-	color: white;
-	background-color: red;
-}
-
-#btn_q_image {
-	background-color: white;
-	border: none;
-}
-
-#btn_q_image:hover {
-	background-color: rgb(208, 236, 255);
-	border: none;
-}
-
-#btn_upload_img {
-	border: none;
-	color: blue;
-	background-color: transparent; 
-	margin: 0px 20px 0px;
-}
-
-#txt_question {
-	background-color: white;
-	border-radius: 15px;
-	padding: 0px 10px 0px;
-	border: 1px solid #ABABAB;
-}
-
-#txt_question:hover {
-	border: 1px solid #3498db;
-}
-
-#txt_question:focus {
-	border: 1px solid #007BFF;
-}</string>
+      <string notr="true"/>
      </property>
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
@@ -125,6 +168,18 @@ QLabel {
       </property>
       <item>
        <widget class="QFrame" name="frame_2">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
         <property name="frameShape">
          <enum>QFrame::StyledPanel</enum>
         </property>
@@ -255,22 +310,9 @@ QLabel {
              <number>5</number>
             </property>
             <item>
-             <spacer name="horizontalSpacer">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item>
              <widget class="QLabel" name="label_q_image">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -301,19 +343,6 @@ QLabel {
               </property>
              </widget>
             </item>
-            <item>
-             <spacer name="horizontalSpacer_2">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
            </layout>
           </widget>
          </item>
@@ -324,7 +353,13 @@ QLabel {
              <widget class="QPushButton" name="btn_upload_img">
               <property name="minimumSize">
                <size>
-                <width>0</width>
+                <width>150</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>150</width>
                 <height>30</height>
                </size>
               </property>
@@ -347,10 +382,16 @@ QLabel {
            <layout class="QVBoxLayout" name="layout_inputs">
             <item>
              <widget class="QPlainTextEdit" name="txt_question">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="minimumSize">
                <size>
                 <width>0</width>
-                <height>50</height>
+                <height>100</height>
                </size>
               </property>
               <property name="placeholderText">
