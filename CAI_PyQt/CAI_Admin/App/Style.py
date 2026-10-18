@@ -91,9 +91,9 @@ class Light_Theme:
             background-color: #ffffff;
             color: #1f2937;
             border: 1px solid #d1d5db;
-            padding: 6px 10px;
+            padding: 4px 6px;
             border-radius: 6px;
-            font: 9pt "Inter";
+            font: 10pt "Inter";
         }
     """
 
@@ -1856,6 +1856,8 @@ class Light_Theme:
             color: #374151;
         }
 
+        """ + tool_tip + """
+
         #widget_header {
             background-color: #ffffff;
             border-top-left-radius: 10px;
@@ -2012,9 +2014,9 @@ class Dark_Theme:
             background-color: #262626;
             color: #ffffff;
             border: 1px solid #4a4a4a;
-            padding: 6px 10px;
+            padding: 4px 6px;
             border-radius: 6px;
-            font: 9pt "Inter";
+            font: 10pt "Inter";
         }
     """
 
@@ -3787,6 +3789,8 @@ class Dark_Theme:
         QLabel {
             color: #e0e0e0;
         }
+
+        """ + tool_tip + """
 
         #widget_header {
             background-color: #2a2c2e;

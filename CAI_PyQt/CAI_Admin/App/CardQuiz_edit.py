@@ -47,12 +47,22 @@ class Ui_CardQuiz_edit(object):
 "    border: 1px solid #e5e7eb;\n"
 "}\n"
 "\n"
-"#frame_2, #widget_img {\n"
+"#frame_2,\n"
+"#widget_img {\n"
 "    border: none;\n"
 "}\n"
 "\n"
 "QLabel {\n"
 "    color: #374151;\n"
+"}\n"
+"\n"
+"QToolTip {\n"
+"    background-color: #ffffff;\n"
+"    color: #1f2937;\n"
+"    border: 1px solid #d1d5db;\n"
+"    padding: 4px 6px;\n"
+"    border-radius: 6px;\n"
+"    font: 10pt \"Inter\";\n"
 "}\n"
 "\n"
 "#widget_header {\n"
@@ -67,15 +77,15 @@ class Ui_CardQuiz_edit(object):
 "}\n"
 "\n"
 "#btn_delete {\n"
-"    background-color: #ffffff;\n"
+"    background-color: transparent;\n"
 "    color: #ef4444;\n"
 "    font: 12pt \"Inter SemiBold\";\n"
 "    border-radius: 15px;\n"
-"    border: 1px solid #fecaca;\n"
 "}\n"
 "\n"
 "#btn_delete:hover {\n"
-"    color: #ffffff;\n"
+"  "
+                        "  color: #ffffff;\n"
 "    background-color: #ef4444;\n"
 "    border: 1px solid #ef4444;\n"
 "}\n"
@@ -83,8 +93,7 @@ class Ui_CardQuiz_edit(object):
 "#btn_q_image {\n"
 "    background-color: #ffffff;\n"
 "    border: none;\n"
-""
-                        "    border-radius: 8px;\n"
+"    border-radius: 8px;\n"
 "}\n"
 "\n"
 "#btn_q_image:hover {\n"
@@ -248,6 +257,9 @@ class Ui_CardQuiz_edit(object):
     def retranslateUi(self, CardQuiz_edit):
         CardQuiz_edit.setWindowTitle(QCoreApplication.translate("CardQuiz_edit", u"Form", None))
         self.label_itemno.setText(QCoreApplication.translate("CardQuiz_edit", u"ITEM 1", None))
+#if QT_CONFIG(tooltip)
+        self.btn_delete.setToolTip(QCoreApplication.translate("CardQuiz_edit", u"Delete", None))
+#endif // QT_CONFIG(tooltip)
         self.btn_delete.setText(QCoreApplication.translate("CardQuiz_edit", u"\u2716", None))
         self.label_q_image.setText("")
         self.btn_upload_img.setText(QCoreApplication.translate("CardQuiz_edit", u"Upload Image", None))

@@ -42,12 +42,22 @@
     border: 1px solid #e5e7eb;
 }
 
-#frame_2, #widget_img {
+#frame_2,
+#widget_img {
     border: none;
 }
 
 QLabel {
     color: #374151;
+}
+
+QToolTip {
+    background-color: #ffffff;
+    color: #1f2937;
+    border: 1px solid #d1d5db;
+    padding: 4px 6px;
+    border-radius: 6px;
+    font: 10pt &quot;Inter&quot;;
 }
 
 #widget_header {
@@ -62,11 +72,10 @@ QLabel {
 }
 
 #btn_delete {
-    background-color: #ffffff;
+    background-color: transparent;
     color: #ef4444;
     font: 12pt &quot;Inter SemiBold&quot;;
     border-radius: 15px;
-    border: 1px solid #fecaca;
 }
 
 #btn_delete:hover {
@@ -279,6 +288,9 @@ QLabel {
               </property>
               <property name="cursor">
                <cursorShape>PointingHandCursor</cursorShape>
+              </property>
+              <property name="toolTip">
+               <string>Delete</string>
               </property>
               <property name="text">
                <string>✖</string>
