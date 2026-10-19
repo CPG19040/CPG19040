@@ -4,10 +4,9 @@ from pathlib import Path
 
 from PySide6.QtGui import QStandardItemModel, QStandardItem
 from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QDialog, QHeaderView, QComboBox, QFileDialog
+from PySide6.QtWidgets import QApplication, QDialog, QHeaderView, QComboBox, QFileDialog
 
-from App.CRUDTools import DatabaseTools
-from App.Tools import CustomMessageBox, Utility
+from App.Tools import CustomMessageBox
 from App.FormSectionRegistration import Ui_SectionRegistrationDialog
 from App.FormSectionAdviserEditor import Ui_SectionAdviserEditorDialog
 
@@ -25,8 +24,8 @@ class Section(QDialog, Ui_SectionRegistrationDialog):
         self.setMouseTracking(True)
 
         self.user     = user
-        self.utility  = Utility()
-        self.db_tools = DatabaseTools()
+        self.db_tools = QApplication.instance().db_tools
+        self.utility  = QApplication.instance().utility
 
         self.progressBar.setVisible(False)
         _, self.base_year, self.next_year = self.utility.get_dynamic_school_year_dates()
@@ -480,7 +479,7 @@ class SectionAdviserEditor(QDialog, Ui_SectionAdviserEditorDialog):
         self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground, True)
         self.setMouseTracking(True)
 
-        self.db_tools = DatabaseTools()
+        self.db_tools = QApplication.instance().db_tools
         self.user     = section.user
         self.section  = section
         

@@ -4,19 +4,18 @@ from pathlib import Path
 
 from PySide6.QtGui import QStandardItemModel, QStandardItem, QImage, QPixmap
 from PySide6.QtCore import QSettings, Qt
-from PySide6.QtWidgets import QDialog, QFileDialog
+from PySide6.QtWidgets import QApplication, QDialog, QFileDialog
 
-from App.CRUDTools import DatabaseTools
 from App.LessonDialog import Ui_LessonDialog
-from App.Tools import Utility, CustomMessageBox
+from App.Tools import CustomMessageBox
 from App.Style import Light_Theme, Dark_Theme
 
 
 class Lesson:
 
     def __init__(self):
-        self.db_tools = DatabaseTools()
-        self.util = Utility()
+        self.db_tools = QApplication.instance().db_tools
+        self.util     = QApplication.instance().utility
 
     def count(self):
         sql = "SELECT COUNT(*) FROM cai.tbl_lessons;"
@@ -235,8 +234,8 @@ class LessonDialog(QDialog, Ui_LessonDialog):
         self.btnMinimize.clicked.connect(self.showMinimized)
         self.btnClose.clicked.connect(self.reject)
 
-        self.db_tools = DatabaseTools()
-        self.util     = Utility()
+        self.db_tools = QApplication.instance().db_tools
+        self.util     = QApplication.instance().utility
         lesson        = Lesson()
 
         self.app_settings = QSettings("CAI_System", "CAI_Admin_AppSettings")

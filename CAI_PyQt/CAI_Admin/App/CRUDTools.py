@@ -4,9 +4,15 @@ from dotenv import load_dotenv,find_dotenv
 from App.Logger import setup_logger
 
 class DatabaseTools:
-
-    def __init__(self):
+    
+    def __init__(self, user_role: str = "Admin"):
+        """
+        Args:
+            user_role (str): 'Admin' or 'Teacher'
+        """
+        self.user_role = user_role
         self.logger = setup_logger("CAI_System", "admin_activity.log")
+
         # self.connection_config = {
         #     'dbname'  : 'DB_CAI',
         #     'user'    : 'postgres',
@@ -15,7 +21,7 @@ class DatabaseTools:
         #     'port'    : '5432'
         # }
 
-        load_dotenv(find_dotenv()) # Load variables from .env file into environment
+        load_dotenv(find_dotenv())
 
         self.connection_config = {
             'dbname'  : os.getenv('DB_NAME'),
@@ -24,56 +30,60 @@ class DatabaseTools:
             'host'    : os.getenv('DB_HOST', 'localhost'),
             'port'    : os.getenv('DB_PORT', '5432')
         }
-    
+
     def get_connection(self):
-        return psycopg2.connect(**self.connection_config)
+        """
+        Establishes a connection and sets the appropriate staff Postgres role ('cai_admin' or 'cai_teacher').
+        """
+        conn = psycopg2.connect(**self.connection_config)
+        with conn.cursor() as cur:
+            role_map = {
+                "Admin": "cai_admin",
+                "Teacher": "cai_teacher"
+            }
+            pg_role = role_map.get(self.user_role, "cai_teacher")
+            cur.execute(f"SET ROLE {pg_role};")
+
+        return conn
 
     def fetch_all(self, sql, params=None):
-        """
-            Returns:
-                List of dicts (list[RealDictCursor]):
-        """
+        """Returns all matching records for staff query requests."""
+        conn = None
         try:
-            conn = psycopg2.connect(**self.connection_config)
+            conn = self.get_connection()
             with conn.cursor(cursor_factory=extras.RealDictCursor) as cur:
                 cur.execute(sql, params)
-                # print(cur.mogrify(sql, params).decode('utf-8'))
                 return cur.fetchall()
-
         except Exception as e:
             self.logger.error(f"DatabaseTools().fetch_all(): {e}", exc_info=True)
             return []
-
-        finally:
-            if conn: conn.close()
-
-    def execute_query(self, sql, params=None):
-        """Equivalent to ExecuteNonQuery."""
-        err = ""
-        conn = None
-        try:
-            conn = psycopg2.connect(**self.connection_config)
-            with conn.cursor() as cur:
-                cur.execute(sql, params)
-            conn.commit()
-
-        except Exception as e:
-            if conn:
-                conn.rollback()
-
-            err = f"Database Error: {e}"
-            self.logger.error(f"DatabaseTools().execute_query(): {e}", exc_info=True)
-
         finally:
             if conn:
                 conn.close()
 
+    def execute_query(self, sql, params=None):
+        """Executes administrative or instructional modifications (CRUD operations)."""
+        err = ""
+        conn = None
+        try:
+            conn = self.get_connection()
+            with conn.cursor() as cur:
+                cur.execute(sql, params)
+            conn.commit()
+        except Exception as e:
+            if conn:
+                conn.rollback()
+            err = f"Database Error: {e}"
+            self.logger.error(f"DatabaseTools().execute_query(): {e}", exc_info=True)
+        finally:
+            if conn:
+                conn.close()
         return err
 
-    def retrieve_records(self, sql:str, params:tuple=None):
-        """Returns a cursor for reading records (use with fetchone/fetchall)."""
+    def retrieve_records(self, sql: str, params: tuple = None):
+        """Returns a cursor for streaming or manual fetching of administrative records."""
         try:
-            conn = psycopg2.connect(**self.connection_config)
+            conn = self.get_connection()
             cur = conn.cursor()
             cur.execute(sql, params)
             return cur, conn

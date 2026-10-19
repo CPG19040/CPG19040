@@ -2,11 +2,10 @@ import os
 import psycopg2
 
 from PySide6.QtGui import QStandardItemModel, QStandardItem, QImage, QPixmap, QKeySequence, QShortcut
-from PySide6.QtWidgets import (QHBoxLayout, QLabel, QLineEdit, QButtonGroup, QFileDialog, QFrame, QDialog, QSizePolicy, QSpacerItem)
+from PySide6.QtWidgets import (QApplication, QHBoxLayout, QLabel, QLineEdit, QButtonGroup, QFileDialog, QFrame, QDialog, QSizePolicy, QSpacerItem)
 from PySide6.QtCore import QSettings, Qt, QSize, Signal
 
-from App.CRUDTools import DatabaseTools
-from App.Tools import Utility, NoScrollComboBox, CustomMessageBox
+from App.Tools import NoScrollComboBox, CustomMessageBox
 from App.QuizDialog import Ui_QuizCreatorDialog
 from App.CardQuiz import Ui_CardQuiz
 from App.CardQuiz_edit import Ui_CardQuiz_edit
@@ -15,7 +14,7 @@ from App.Style import Light_Theme, Dark_Theme
 
 class Quiz:
     def __init__(self):
-        self.db_tools = DatabaseTools()
+        self.db_tools = QApplication.instance().db_tools
 
     def get_scores(self, studentId, gradingperiod):
         """
@@ -542,7 +541,7 @@ class QuizItemWidget(QFrame, Ui_CardQuiz_edit):
                 }
             """
 
-        self.util      = Utility()
+        self.util      = QApplication.instance().utility
         self.item_type = item_type
         self.img_path  = None
         self.id        = None
@@ -681,8 +680,8 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
 
         self.save_shortcut = QShortcut(QKeySequence("Ctrl+S"), self)
 
-        self.db_tools = DatabaseTools()
-        self.util = Utility()
+        self.db_tools = QApplication.instance().db_tools
+        self.util     = QApplication.instance().utility
         
         self.itemsToRemove = []
 

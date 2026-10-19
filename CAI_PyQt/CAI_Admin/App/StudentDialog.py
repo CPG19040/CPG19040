@@ -3,21 +3,20 @@ from passlib.hash import bcrypt
 from pathlib import Path
 
 from PySide6.QtGui import QStandardItemModel, QStandardItem, QImage, QPixmap
-from PySide6.QtWidgets import QDialog, QFileDialog
+from PySide6.QtWidgets import QApplication, QDialog, QFileDialog
 from PySide6.QtCore import QCoreApplication, QSettings, Qt
 
 from App.FormAddNewStudent import Ui_AddNewStudentDialog
 from App.FormEditStudent import Ui_EditStudentDialog
 
-from App.Tools import Utility, CircularProgress, CustomMessageBox
-from App.CRUDTools import DatabaseTools
+from App.Tools import CircularProgress, CustomMessageBox
 from App.Style import Light_Theme, Dark_Theme
 
 class Student:
 
     def __init__(self):
-        self.db_tools = DatabaseTools()
-        self.util = Utility()
+        self.db_tools = QApplication.instance().db_tools
+        self.util     = QApplication.instance().utility
         self.circular_bar = CircularProgress()
 
     def count(self):
@@ -399,8 +398,8 @@ class AddNewStudentDialog(QDialog, Ui_AddNewStudentDialog):
         self.btnMinimize.clicked.connect(self.showMinimized)
         self.btnClose.clicked.connect(self.reject)
 
-        self.util     = Utility()
-        self.db_tools = DatabaseTools()
+        self.db_tools = QApplication.instance().db_tools
+        self.util     = QApplication.instance().utility
 
         self.app_settings = QSettings("CAI_System", "CAI_Admin_AppSettings")
         self.is_dark_mode = self.app_settings.value("dark_mode", False, type=bool)
@@ -861,8 +860,8 @@ class StudentEditorDialog(QDialog, Ui_EditStudentDialog):
         self.btnMinimize.clicked.connect(self.showMinimized)
         self.btnClose.clicked.connect(self.reject)
 
-        self.db_tools = DatabaseTools()
-        self.util = Utility()
+        self.db_tools = QApplication.instance().db_tools
+        self.util     = QApplication.instance().utility
 
         if self.util.isEmpty(studentid) or self.util.isEmpty(user):
             self.reject()

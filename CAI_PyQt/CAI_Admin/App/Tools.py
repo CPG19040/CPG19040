@@ -3,7 +3,7 @@ from functools import partial
 from pathlib import Path
 from App.Logger import setup_logger
 
-from PySide6.QtWidgets import QFileDialog, QWidget, QMainWindow, QDialog, QComboBox
+from PySide6.QtWidgets import QApplication, QFileDialog, QWidget, QMainWindow, QDialog, QComboBox
 from PySide6.QtGui import QPixmap, QPainter, QColor, QPen, QPainterPath, QFont
 from PySide6.QtCore import QIODevice, QSettings, Qt, Signal, QDate, QUrl, QRectF, QPoint, QPropertyAnimation, QEasingCurve, QFile
 from PySide6.QtWebEngineWidgets import QWebEngineView
@@ -19,8 +19,8 @@ logger = setup_logger("CAI_System", "admin_activity.log")
 
 class Utility:
 
-    def __init__(self):
-        self.db_tools = DatabaseTools()
+    def __init__(self, db_tools:DatabaseTools):
+        self.db_tools = db_tools
 
     def get_resource_path(self, relative_path):
         """ Safely retrieves asset paths across development files and standalone compiled EXEs """
@@ -487,7 +487,8 @@ class CardStudent(QWidget, Ui_CardStudent):
         """)
 
         # Process photo (single transformation)
-        self.util = Utility()
+        self.util = QApplication.instance().utility
+        
         if self.util.isEmpty(image):
             image = QPixmap(u":/Images/Images/profile.png")
 

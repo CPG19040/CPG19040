@@ -31,8 +31,10 @@ class Controller:
         self.user_settings = QSettings("CAI_System", "CAI_Admin_UserInfo")
         self.app_settings  = QSettings("CAI_System", "CAI_Admin_AppSettings")
         self.logger        = setup_logger("CAI_System", "admin_activity.log")
-        self.util          = Utility()
-        self.db_tools      = DatabaseTools()
+
+        self.app          = QApplication.instance()
+        self.app.db_tools = DatabaseTools("Admin")
+        self.app.utility  = Utility(self.app.db_tools)
 
         # Dark Mode Theme Preference (Default: False)
         self.is_dark_mode = self.app_settings.value("dark_mode", False, type=bool)
@@ -59,6 +61,8 @@ class Controller:
                 "position_id": self.user_settings.value("position_id"),
                 "position_name": self.user_settings.value("position_name")
             }
+            self.app.db_tools = DatabaseTools(user["position_name"])
+            self.app.utility  = Utility(self.app.db_tools)
             self.show_home(user)
         else:
             self.login_win.show()
@@ -345,37 +349,6 @@ class Controller:
         self.ui.btnSaveSettings_quiz.clicked.connect(self.update_passing_score)
         self.ui.btnDarkModeToggle.valueChanged.connect(self.toggle_theme)
 
-        #=============================================================
-        #  Application-Level Privileges (Role-Based Access Control)
-        #=============================================================
-
-        role = user.get("position_name")
-
-        if role == "Admin":
-           pass
-
-        elif role == "Teacher":
-            self.ui.btnAddNewUser.setVisible(False)
-            self.ui.btnEditUserInfo.setVisible(False)
-            self.ui.btnDeleteUser.setVisible(False)
-
-        else:
-            self.ui.btnUsers.setVisible(False)
-            self.ui.btnUtility.setVisible(False)
-
-            self.ui.btnAddStudent.setVisible(False)
-            self.ui.btnLessonAdd.setVisible(False)
-            self.ui.btnQuizAdd.setVisible(False)
-            self.ui.btnSectionAdd.setVisible(False)
-
-            self.ui.btnEditStudent.setVisible(False)
-            self.ui.btnLessonEdit.setVisible(False)
-            self.ui.btnSectionEdit.setVisible(False)
-
-            self.ui.btnDeleteStudent.setVisible(False)
-            self.ui.btnSectionDelete.setVisible(False)
-            self.ui.btnDeleteUser.setVisible(False)
-
         self.login_win.close()
         self.home_win.show()
 
@@ -431,9 +404,9 @@ class Controller:
             card_ranking = CardRanking()
             avatar_width = card_ranking.label_profile.width()
             profile_pic  = student.get_student_picture(row['studentid'], size=avatar_width)
-            circular_pic = self.util.makeCircularPixmap(profile_pic, avatar_width)
+            circular_pic = self.app.utility.makeCircularPixmap(profile_pic, avatar_width)
             middle_name  = row.get('middlename', '')
-            full_name    = self.util.formatFullname(row['firstname'], middle_name, row['lastname'])
+            full_name    = self.app.utility.formatFullname(row['firstname'], middle_name, row['lastname'])
             
             card_ranking.avatar = circular_pic
             card_ranking.name   = full_name
@@ -503,7 +476,7 @@ class Controller:
             self.displayLessons()
 
         elif index == 3: # Quiz
-            self.util.populate_gradingperiod_pulldown(self.ui.cbGradingPeriod, self.ui.cbLessonName, default_gp=self.GRADING_PERIOD)
+            self.app.utility.populate_gradingperiod_pulldown(self.ui.cbGradingPeriod, self.ui.cbLessonName, default_gp=self.GRADING_PERIOD)
             self.display_quiz()
 
         elif index == 4: # Sections
@@ -522,15 +495,15 @@ class Controller:
                 ) sub
                 ORDER BY idx
             """
-            self.util.populate_pulldown(self.ui.cmb_school_year_2, query)
-            self.util.populate_pulldown(self.ui.cmb_school_year_3, query)
+            self.app.utility.populate_pulldown(self.ui.cmb_school_year_2, query)
+            self.app.utility.populate_pulldown(self.ui.cmb_school_year_3, query)
 
             query = """
                 SELECT gpid, gpname
                 FROM cai.tbl_grading_period;
             """
-            self.util.populate_pulldown(self.ui.comboBox_ReportsGradingPeriod, query, default_value=self.GRADING_PERIOD)
-            self.util.populate_pulldown(self.ui.cb_gp_quiz_idv, query, default_value=self.GRADING_PERIOD)
+            self.app.utility.populate_pulldown(self.ui.comboBox_ReportsGradingPeriod, query, default_value=self.GRADING_PERIOD)
+            self.app.utility.populate_pulldown(self.ui.cb_gp_quiz_idv, query, default_value=self.GRADING_PERIOD)
             
             gpid = self.ui.comboBox_ReportsGradingPeriod.currentData()
 
@@ -542,7 +515,7 @@ class Controller:
                 WHERE gradingperiod = %s
                 ORDER BY chapter, lessonnum ASC
             """
-            self.util.populate_pulldown(self.ui.comboBox_ReportsLesson, query, params=(gpid,))
+            self.app.utility.populate_pulldown(self.ui.comboBox_ReportsLesson, query, params=(gpid,))
 
             self.ui.label_student_icon.setPixmap(QPixmap(u":/Images/Images/profile.png"))
             self.ui.label_student_name.clear()
@@ -592,7 +565,7 @@ class Controller:
             return
 
     def load_fonts(self):
-        path = self.util.get_resource_path(os.path.join("..", "fonts"))
+        path = self.app.utility.get_resource_path(os.path.join("..", "fonts"))
         loaded_count = 0
 
         if os.path.exists(path):
@@ -700,7 +673,7 @@ class Controller:
                     if not image.isNull():
                         pixmap = QPixmap.fromImage(image)
 
-                full_name = self.util.formatFullname(f_name, m_name, l_name)
+                full_name = self.app.utility.formatFullname(f_name, m_name, l_name)
                 card = CardStudent(full_name, sid, pixmap, sectionName, gender)
                 card.clicked.connect(self.handle_card_selection)
 
@@ -746,7 +719,7 @@ class Controller:
             self.ui.label_contact_person.setText(f"{contact_person}")
             self.ui.label_contact_number.setText(f"{contact_num}")
 
-            self.util.animate_slide(self.ui.sub_info_panel, show=False, direction="right")
+            self.app.utility.animate_slide(self.ui.sub_info_panel, show=False, direction="right")
 
             return
     
@@ -786,9 +759,9 @@ class Controller:
         self.ui.label_contact_person.setText(f"{contact_person}")
         self.ui.label_contact_number.setText(f"{contact_num}")
 
-        self.util.animate_slide(self.ui.sub_info_panel, show=True, direction="right")
+        self.app.utility.animate_slide(self.ui.sub_info_panel, show=True, direction="right")
 
-        # if not self.util.isEmpty(sid):
+        # if not self.app.utility.isEmpty(sid):
         #     layout = self.ui.verticalLayout_14
         #     layout.setAlignment(Qt.AlignmentFlag.AlignTop)
         #     layout.setSpacing(10)
@@ -808,7 +781,7 @@ class Controller:
     def edit_student(self, user):
         student_id = self.ui.label_studentId.text().strip()
         
-        if self.util.isEmpty(student_id):
+        if self.app.utility.isEmpty(student_id):
             CustomMessageBox.warning(self.home_win, "Warning", f"Select a student to update the information.")
             return
 
@@ -1089,7 +1062,7 @@ class Controller:
                 WHERE gradingperiod = %s
                 ORDER BY chapter, lessonnum ASC
             """
-            self.util.populate_pulldown(self.ui.cbLessonName, query, params=(selected_period,), add_empty=True)
+            self.app.utility.populate_pulldown(self.ui.cbLessonName, query, params=(selected_period,), add_empty=True)
 
         self.display_quiz()
 
@@ -1197,7 +1170,7 @@ class Controller:
                         ELSE false
                     END;
                 """
-                self.db_tools.execute_query(sql, (self.ui.quiz_no.value(), self.ui.cbGradingPeriod.currentData(), lessonId))
+                self.app.db_tools.execute_query(sql, (self.ui.quiz_no.value(), self.ui.cbGradingPeriod.currentData(), lessonId))
                 CustomMessageBox.information(self.home_win, "Publishing", "This quiz is published. Students can see this.")
 
             else:
@@ -1207,7 +1180,7 @@ class Controller:
                     WHERE quiznumber = %s AND gradingperiod = %s AND lessonid = %s;
                 """
 
-                self.db_tools.execute_query(sql, (self.ui.quiz_no.value(), self.ui.cbGradingPeriod.currentData(), lessonId))
+                self.app.db_tools.execute_query(sql, (self.ui.quiz_no.value(), self.ui.cbGradingPeriod.currentData(), lessonId))
                 CustomMessageBox.information(self.home_win, "Publishing", "This quiz is unpublished. Students cannot see this.")
 
         except Exception as e:
@@ -1240,7 +1213,7 @@ class Controller:
         middlename = model.index(selected_row_index, 3).data()
         lastname   = model.index(selected_row_index, 4).data()
 
-        confirm_msg = f"Are you sure you want to delete this user?\n\n{self.util.formatFullname(firstname, middlename, lastname)}"
+        confirm_msg = f"Are you sure you want to delete this user?\n\n{self.app.utility.formatFullname(firstname, middlename, lastname)}"
         confirm     = CustomMessageBox.question(self.home_win, "Confirm Deletion", confirm_msg)
 
         if confirm == CustomMessageBox.Yes:
@@ -1258,7 +1231,7 @@ class Controller:
             FROM cai.tbl_audit_trail
             ORDER BY date_logged DESC
         """
-        cursor, conn = self.db_tools.retrieve_records(sql)
+        cursor, conn = self.app.db_tools.retrieve_records(sql)
 
         if cursor:
             headers = [desc[0] for desc in cursor.description]
@@ -1302,7 +1275,7 @@ class Controller:
             FROM cai.TBL_STUDENT_INFO_ARCHIVE
             ORDER BY archived_at DESC
         """
-        cursor, conn = self.db_tools.retrieve_records(sql)
+        cursor, conn = self.app.db_tools.retrieve_records(sql)
 
         if cursor:
             headers = [desc[0] for desc in cursor.description]
@@ -1338,7 +1311,7 @@ class Controller:
                 WHERE gradingperiod = %s
                 ORDER BY chapter, lessonnum ASC
             """
-            self.util.populate_pulldown(self.ui.comboBox_ReportsLesson, query, params=(selected_period,))
+            self.app.utility.populate_pulldown(self.ui.comboBox_ReportsLesson, query, params=(selected_period,))
             
             self.handle_report_stud_prog_filter()
 
@@ -1463,7 +1436,7 @@ class Controller:
         firstName = row.siblingAtColumn(2).data()
         middleName = row.siblingAtColumn(3).data()
         
-        stud_name = self.util.formatFullname(firstName, middleName, lastName)
+        stud_name = self.app.utility.formatFullname(firstName, middleName, lastName)
         self.ui.label_student_name.setText(stud_name)
 
         stud = Student()
@@ -1497,7 +1470,7 @@ class Controller:
         self.ui.plainTextEdit_remarks.clear()
 
     def get_dynamic_grading_period_dates(self):
-        today, base_year, next_year = self.util.get_dynamic_school_year_dates()
+        today, base_year, next_year = self.app.utility.get_dynamic_school_year_dates()
 
         self.ui.label_SY.setText(f"School Year {base_year}-{next_year}")
         self.ui.spinBox_SY_start.setValue(base_year)
@@ -1513,7 +1486,7 @@ class Controller:
             ) sub
             ORDER BY idx
         """
-        self.util.populate_pulldown(self.ui.cmb_school_year, query)
+        self.app.utility.populate_pulldown(self.ui.cmb_school_year, query)
 
         quarters = []
 
@@ -1523,7 +1496,7 @@ class Controller:
                 FROM cai.tbl_grading_period;
             """
 
-            quarters = self.db_tools.fetch_all(sql)
+            quarters = self.app.db_tools.fetch_all(sql)
 
         else:
             # Generate the exact 4-Quarter DepEd standard milestones dynamically
@@ -1582,7 +1555,7 @@ class Controller:
             params.extend([dates["start"], dates["end"], gpid])
 
         if sql:
-            err = self.db_tools.execute_query(sql, tuple(params))
+            err = self.app.db_tools.execute_query(sql, tuple(params))
 
             if not err:
                 CustomMessageBox.success(self.home_win, "Successful", "School year and grading period are saved.")
@@ -1596,7 +1569,7 @@ class Controller:
 	        FROM cai.tbl_grading_period;
         """
 
-        rows = self.db_tools.fetch_all(sql)
+        rows = self.app.db_tools.fetch_all(sql)
 
         if rows:
             for row in rows:
@@ -1651,7 +1624,7 @@ class Controller:
 
     def display_passing_score(self):
         query = "SELECT passing_score FROM cai.tbl_grading_system WHERE category = 'Quiz';"
-        result = self.db_tools.fetch_all(query)
+        result = self.app.db_tools.fetch_all(query)
 
         if result:
             passing_score = result[0]['passing_score']
@@ -1660,7 +1633,7 @@ class Controller:
     def update_passing_score(self):
         new_passing_score = self.ui.doubleSpinBox_passing.value()
         query = "UPDATE cai.tbl_grading_system SET passing_score = %s WHERE category = 'Quiz';"
-        err = self.db_tools.execute_query(query, (new_passing_score,))
+        err = self.app.db_tools.execute_query(query, (new_passing_score,))
 
         if not err:
             CustomMessageBox.success(self.home_win, "Update", "Passing score updated successfully.")
@@ -1671,7 +1644,7 @@ class Controller:
         file_dialog = QFileDialog(self.home_win)
         file_dialog.setNameFilter("CSV files (*.csv)")
 
-        csv_path = self.util.get_resource_path(os.path.join("..", "Templates"))
+        csv_path = self.app.utility.get_resource_path(os.path.join("..", "Templates"))
         file_dialog.setDirectory(csv_path)
 
         if file_dialog.exec():

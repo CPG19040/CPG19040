@@ -1,21 +1,23 @@
 import re, psycopg2
 from passlib.hash import bcrypt
 
-from PySide6.QtWidgets import QDialog
+from PySide6.QtWidgets import QApplication, QDialog
 from PySide6.QtGui import QImage, QPixmap, QStandardItemModel, QStandardItem
 from PySide6.QtCore import QSettings, Qt
 
 from App.FormAddNewUser import Ui_AddNewUserDialog
 from App.FormEditUser import Ui_EditUserDialog
-from App.CRUDTools import DatabaseTools
-from App.Tools import Utility, CustomMessageBox
+from App.Tools import CustomMessageBox
 from App.Style import Light_Theme, Dark_Theme
+from App.Logger import setup_logger
+
 
 class Staff:
 
     def __init__(self):
-        self.db_tools = DatabaseTools()
-        self.util = Utility()
+        self.db_tools = QApplication.instance().db_tools
+        self.util     = QApplication.instance().utility
+        self.logger   = setup_logger("CAI_System", "admin_activity.log")
 
     def count(self):
         sql = """
@@ -143,42 +145,50 @@ class Staff:
 
         sql += 'ORDER BY lastname, firstname\n'
 
-        cursor, conn = self.db_tools.retrieve_records(sql, tuple(params))
+        try:
 
-        if cursor:
-            headers = [desc[0] for desc in cursor.description]
-            records = cursor.fetchall()
-            model = QStandardItemModel(len(records), len(headers))
-            model.setHorizontalHeaderLabels(headers)
+            conn = self.db_tools.get_connection()
+            conn.autocommit = False 
+            
+            with conn.cursor() as cursor:
+                cursor.execute(sql, tuple(params))
+                headers = [desc[0] for desc in cursor.description]
+                records = cursor.fetchall()
+                model   = QStandardItemModel(len(records), len(headers))
+                model.setHorizontalHeaderLabels(headers)
 
-            for row_idx, row_data in enumerate(records):
+                for row_idx, row_data in enumerate(records):
 
-                for col_idx, value in enumerate(row_data):
-                    item = QStandardItem()
+                    for col_idx, value in enumerate(row_data):
+                        item = QStandardItem()
 
-                    # Column index 0 is "profile_pic"
-                    if col_idx == 0:
-                        if value:
-                            pixmap = QPixmap()
-                            if isinstance(value, (bytes, bytearray, memoryview)):
-                                pixmap.loadFromData(bytes(value))
-                            else:
-                                pixmap.load(str(value))
+                        # Column index 0 is "profile_pic"
+                        if col_idx == 0:
+                            if value:
+                                pixmap = QPixmap()
+                                if isinstance(value, (bytes, bytearray, memoryview)):
+                                    pixmap.loadFromData(bytes(value))
+                                else:
+                                    pixmap.load(str(value))
 
-                            if not pixmap.isNull():
-                                scaled = self.util.makeCircularPixmap(pixmap, 36)
-                                item.setData(scaled, Qt.ItemDataRole.DecorationRole)
-                    else:
-                        item.setText(str(value) if value is not None else "")
+                                if not pixmap.isNull():
+                                    scaled = self.util.makeCircularPixmap(pixmap, 36)
+                                    item.setData(scaled, Qt.ItemDataRole.DecorationRole)
+                        else:
+                            item.setText(str(value) if value is not None else "")
 
-                    item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsEditable)
-                    model.setItem(row_idx, col_idx, item)
+                        item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsEditable)
+                        model.setItem(row_idx, col_idx, item)
 
-            cursor.close()
-            conn.close()
-            return model
+                return model
+            
+        except Exception as e:
+            self.logger.error(f"Database Error: {str(e)}")
 
-        if conn: conn.close()
+        finally:
+            if conn:
+                conn.close()
+
         return None
 
     def archive_and_delete_staff(self, user:dict, staff_id):
@@ -254,9 +264,9 @@ class AddUserDialog(QDialog, Ui_AddNewUserDialog):
         else:
             self.setStyleSheet(Light_Theme.user_add_dialog)
 
-        self.db = DatabaseTools()
-        self.util = Utility()
-        self.staff = Staff()
+        self.db_tools = QApplication.instance().db_tools
+        self.util     = QApplication.instance().utility
+        self.staff    = Staff()
         self.setup_ui_elements()
 
         self.profile_pic = None
@@ -460,9 +470,9 @@ class EditUserDialog(QDialog, Ui_EditUserDialog):
         else:
             self.setStyleSheet(Light_Theme.user_info_dialog)
 
-        self.db = DatabaseTools()
-        self.util = Utility()
-        self.staff = Staff()
+        self.db_tools = QApplication.instance().db_tools
+        self.util     = QApplication.instance().utility
+        self.staff    = Staff()
 
         sql = "SELECT\n"
         sql += "    position_id\n"

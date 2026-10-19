@@ -1,16 +1,14 @@
-import os, sys, subprocess
-
-from App.CRUDTools import DatabaseTools
-from App.Tools import Utility
-
+import os, shutil, subprocess
 from docxtpl import DocxTemplate
+
+from PySide6.QtWidgets import QApplication
 
 downloads_dir = os.path.expanduser("~/Downloads")
 
 class StudentListReporter:
     def __init__(self):
-        self.db_tools = DatabaseTools()
-        self.util = Utility()
+        self.db_tools = QApplication.instance().db_tools
+        self.util     = QApplication.instance().utility
 
         self.studentlist_template_path = self.util.get_resource_path(os.path.join("..", "Templates", "student_list.docx"))
         self.classlist_template_path = self.util.get_resource_path(os.path.join("..", "Templates", "class_list.docx"))
@@ -96,10 +94,14 @@ class StudentListReporter:
                 doc.save(temp_docx)
 
             try:
-                output_dir = os.path.dirname(os.path.abspath(output_pdf_path))
+                output_dir  = os.path.dirname(os.path.abspath(output_pdf_path))
+                soffice_bin = shutil.which('soffice') or shutil.which('libreoffice') or '/usr/bin/soffice' or '/usr/bin/libreoffice' or '/usr/lib/libreoffice/program/soffice'
+
+                if not soffice_bin:
+                    return False, "LibreOffice executable ('soffice' or 'libreoffice') was not found."
 
                 cmd = [
-                    'soffice',
+                    soffice_bin,
                     '--headless',
                     '--convert-to', 'pdf',
                     '--outdir', output_dir,
@@ -137,8 +139,8 @@ class QuizReporter:
         Generates styled Word Templates from DB and converts them directly to PDF.
     """
     def __init__(self):
-        self.db_tools = DatabaseTools()
-        self.util = Utility()
+        self.db_tools = QApplication.instance().db_tools
+        self.util     = QApplication.instance().utility
 
         self.quizscores_template_path = self.util.get_resource_path(os.path.join("..", "Templates", "quiz_report.docx"))
 

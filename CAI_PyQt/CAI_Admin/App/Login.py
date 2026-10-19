@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import QMainWindow
+from PySide6.QtWidgets import QApplication, QMainWindow
 from PySide6.QtCore import Signal, Qt
 from passlib.hash import bcrypt
 from App.FormLogIn import Ui_FormLogin
@@ -23,8 +23,9 @@ class Login(QMainWindow, Ui_FormLogin):
         self.btnClose.clicked.connect(self.close)
 
         self.btnLogin.clicked.connect(self.handle_login)
-        self.db_tools = DatabaseTools()
-        self.util     = Utility()
+        self.btnForgotPassword.clicked.connect(self.handle_forgot_password)
+        self.db_tools = DatabaseTools("Admin")
+        self.util     = Utility(self.db_tools)
 
         _, base_year, next_year = self.util.get_dynamic_school_year_dates()
         
@@ -48,36 +49,45 @@ class Login(QMainWindow, Ui_FormLogin):
     def handle_login(self):
         username = self.txtUsername.text()
         password = self.txtPassword.text()
-        user = self.authenticate_user(username, password)
+        user     = self.authenticate_user(username, password)
         
         if user:
             self.login_success.emit(user)
-        else:
-            CustomMessageBox.critical(self, "Error", "Invalid Username or Password")
 
     def authenticate_user(self, username, password):
         try:
-            query  = "SELECT\n"
-            query += "  A.school_id\n"
-            query += "  ,A.username\n"
-            query += "  ,A.firstname\n"
-            query += "  ,A.middlename\n"
-            query += "  ,A.lastname\n"
-            query += "  ,A.password\n"
-            query += "  ,B.position_id\n"
-            query += "  ,B.position_name\n"
-            query += "FROM cai.tbl_staff_info A\n"
-            query += "LEFT JOIN cai.tbl_staff_positions B\n"
-            query += "  ON A.positionid = B.position_id\n"
-            query += "WHERE A.username = %s"
+            query = """
+                SELECT
+                    A.school_id
+                    ,A.username
+                    ,A.firstname
+                    ,A.middlename
+                    ,A.lastname
+                    ,A.password
+                    ,B.position_id
+                    ,B.position_name
+                FROM cai.tbl_staff_info A
+                LEFT JOIN cai.tbl_staff_positions B
+                ON A.positionid = B.position_id
+                WHERE A.username = %s
+            """
             
             cur, conn = self.db_tools.retrieve_records(query, (username,))
-            result = cur.fetchone()
 
-            if result:
-                school_id, uname, fname, mname, lname, stored_hash, pos_id, pos_name = result
+            if not cur:
+                CustomMessageBox.critical(self, "Database Error", "Unable to connect to the database. Please try again later.")
+                return None
+            
+            user_data = cur.fetchone()
+
+            if user_data:
+                school_id, uname, fname, mname, lname, stored_hash, pos_id, pos_name = user_data
+                app          = QApplication.instance()
+                app.db_tools = DatabaseTools(pos_name)
+                app.utility  = Utility(app.db_tools)
+
                 if bcrypt.verify(password, stored_hash):
-                    self.db_tools.execute_query("UPDATE cai.tbl_staff_info SET new_user = FALSE WHERE username = %s", (username,))
+                    app.db_tools.execute_query("UPDATE cai.tbl_staff_info SET new_user = FALSE WHERE username = %s", (username,))
                     user = {
                         "school_id": school_id,
                         "username": uname,
@@ -89,7 +99,10 @@ class Login(QMainWindow, Ui_FormLogin):
                     }
                     
                     return user
-            
+
+            else:
+                CustomMessageBox.warning(self, "Authentication Failed", "Invalid username or password.")
+                
             return None
 
         except Exception as e:
@@ -99,3 +112,8 @@ class Login(QMainWindow, Ui_FormLogin):
         finally:
             if conn:
                 conn.close()
+
+    def handle_forgot_password(self):
+        CustomMessageBox.information(self, "Forgot Password", 
+            "Please contact the System Administrator to reset your login credentials."
+        )
