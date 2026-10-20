@@ -36,6 +36,8 @@ class Controller:
         self.app.utility  = Utility()
         self.app.logger   = setup_logger("CAI_System", "admin_activity.log")
 
+        self.user = {}
+
         # Dark Mode Theme Preference (Default: False)
         self.is_dark_mode = self.app_settings.value("dark_mode", False, type=bool)
 
@@ -158,6 +160,7 @@ class Controller:
 
     def show_home(self, user:dict):
         self.app.logger.info("Initializing Admin Dashboard window...")
+        self.user = user
 
         # Safely tear down existing window if it already exists
         if hasattr(self, "home_win") and self.home_win is not None:
@@ -307,15 +310,22 @@ class Controller:
         # Sections
         self.ui.comboBox_Section.currentIndexChanged.connect(self.display_section_info)
         self.sectionObj = Section(user)
-        self.sectionObj.populate_sections(self.ui.comboBox_Section, '', False)
-        self.sectionObj.populate_sections(self.ui.cmb_studSection, '', True)
+        self.teacherid  = None
+        add_empty       = True
+
+        if user["position_name"].upper() in ["TEACHER", "SUBSTITUTE", "OTHERS"]:
+            self.teacherid = user.get("school_id", None)
+            add_empty = False
+
+        self.sectionObj.populate_sections(self.ui.cmb_studSection, '', add_empty, teacherid=self.teacherid)
+        self.sectionObj.populate_sections(self.ui.comboBox_Section, '', False, teacherid=self.teacherid)
         self.ui.cmb_studSection.currentIndexChanged.connect(self.handle_student_searching)
         self.ui.btnSectionAdd.clicked.connect(self.register_section)
         self.ui.btnSectionDelete.clicked.connect(self.delete_selected_sections)
         self.ui.btnSectionEdit.clicked.connect(self.section_edit)
 
         # Reports
-        self.sectionObj.populate_sections(self.ui.comboBox_ReportsSection, '', False)
+        self.sectionObj.populate_sections(self.ui.comboBox_ReportsSection, '', False, teacherid=self.teacherid)
         self.ui.cmb_school_year_2.currentIndexChanged.connect(self.handle_report_stud_prog_filter)
         self.ui.comboBox_ReportsSection.currentIndexChanged.connect(self.handle_report_stud_prog_filter)
         self.ui.spin_quiz_no.valueChanged.connect(self.handle_report_stud_prog_filter)
@@ -347,8 +357,19 @@ class Controller:
         self.ui.btnSaveSettings_quiz.clicked.connect(self.update_passing_score)
         self.ui.btnDarkModeToggle.valueChanged.connect(self.toggle_theme)
 
-        if user["position_name"].upper() == "TEACHER":
+        if user["position_name"].upper() in ["TEACHER", "SUBSTITUTE", "OTHERS"]:
             self.ui.btnUsers.setVisible(False)
+            self.ui.btnAddStudent.setVisible(False)
+            self.ui.btnEditStudent.setVisible(False)
+            self.ui.btnDeleteStudent.setVisible(False)
+            self.ui.widget_SY_settings.setVisible(False)
+            self.ui.widget_lesson_settings.setVisible(False)
+            self.ui.widget_quiz_settings.setVisible(False)
+            self.ui.btnSectionAdd.setVisible(False)
+            self.ui.btnSectionEdit.setVisible(False)
+            self.ui.btnSectionDelete.setVisible(False)
+            self.ui.tabWidget_utility.setTabVisible(1, False)
+            self.ui.tabWidget_utility.setTabVisible(2, False)
 
         self.login_win.close()
         self.home_win.show()
@@ -468,7 +489,7 @@ class Controller:
             self.get_dynamic_grading_period_dates()
 
         elif index == 1: # Student List
-            self.sectionObj.populate_sections(self.ui.cmb_studSection, '', True)
+            self.sectionObj.populate_sections(self.ui.cmb_studSection, '', True, teacherid=self.teacherid)
             self.display_student_cards()
             self.display_student_info()
 
@@ -660,8 +681,8 @@ class Controller:
 
             self.cards.clear()
 
-            stud = Student()
-            students = stud.refresh_student_cards(params)
+            stud     = Student()
+            students = stud.refresh_student_cards(params, self.user)
 
             count = len(students)
             self.ui.label_totalStudCount.setText(f"{count} {'Student' if count <= 1 else 'Students'}")

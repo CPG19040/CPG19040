@@ -604,6 +604,22 @@ class Light_Theme:
             background-color: #7eb4d7;
         }
 
+        QComboBox:disabled {
+            background-color: #f3f4f6;
+            border: none;
+            color: #999;
+        }
+
+        QComboBox::drop-down:disabled {
+            border-top-right-radius: 15px;
+            border-bottom-right-radius: 15px;
+            background-color: transparent;
+        }
+
+        QComboBox::down-arrow:disabled {
+            image: url(:/Images/Images/caret-down-disabled.png);
+        }
+
         /* Radio Buttons */
         QRadioButton {
             color: #000000;
@@ -2530,6 +2546,21 @@ class Dark_Theme:
         QComboBox[class="combobox-main"] QAbstractItemView::item:hover {
             color: #ffffff;
             background-color: #3b82f6;
+        }
+
+        QComboBox:disabled {
+            border: none;
+            color: #666666;
+        }
+
+        QComboBox::drop-down:disabled {
+            border-top-right-radius: 15px;
+            border-bottom-right-radius: 15px;
+            background-color: transparent;
+        }
+
+        QComboBox::down-arrow:disabled {
+            image: url(:/Images/Images/caret-down.png);
         }
 
         /* Radio Buttons */

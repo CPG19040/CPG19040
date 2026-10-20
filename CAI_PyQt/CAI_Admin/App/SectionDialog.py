@@ -375,14 +375,30 @@ class Section(QDialog, Ui_SectionRegistrationDialog):
 
         self.utility.populate_pulldown(combo_box, sql, ('2',), default_value=school_id, add_empty=add_empty)
 
-    def populate_sections(self, combo_box:QComboBox, value:str, add_empty:bool):
-        sql = 'SELECT\n'
-        sql += '    sectionid AS index\n'
-        sql += '    ,sectionname AS itemname\n'
-        sql += 'FROM cai.tbl_section\n'
-        sql += 'ORDER BY sectionname ASC'
+    def populate_sections(self, combo_box, value, add_empty:bool, teacherid=None):
+        param = None
 
-        self.utility.populate_pulldown(combo_box, sql, default_value=value, add_empty=add_empty)
+        if teacherid:
+            sql = """
+                SELECT
+                    sectionid AS index
+                    ,sectionname AS itemname
+                FROM cai.tbl_section
+                WHERE teacherid = %s
+                ORDER BY sectionname ASC
+            """
+            param = (teacherid,)
+            
+        else:
+            sql = """
+                SELECT
+                    sectionid AS index
+                    ,sectionname AS itemname
+                FROM cai.tbl_section
+                ORDER BY sectionname ASC
+            """
+
+        self.utility.populate_pulldown(combo_box, sql, params=param, default_value=value, add_empty=add_empty)
 
     def delete_section(self, sectionId, sectionName):
         """

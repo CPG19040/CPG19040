@@ -171,26 +171,38 @@ class Student:
         if conn: conn.close()
         return None
 
-    def refresh_student_cards(self, params):
+    def refresh_student_cards(self, params, user:dict={}):
         schoolYear, sectionid, text = params
 
-        sql  = 'SELECT\n'
-        sql += '    stud.studentid\n'
-        sql += '    ,stud.firstname\n'
-        sql += '    ,stud.middlename\n'
-        sql += '    ,stud.lastname\n'
-        sql += '    ,stud.sectionid\n'
-        sql += '    ,sec.sectionname\n'
-        sql += '    ,stud.gender\n'
-        sql += '    ,stud.password\n'
-        sql += '    ,stud.profile_pic\n'
-        sql += 'FROM cai.tbl_student_info stud\n'
-        sql += 'LEFT JOIN\n'
-        sql += '    cai.tbl_section sec\n'
-        sql += '    ON stud.sectionid = sec.sectionid\n'
-        sql += 'WHERE school_year = %s\n'
+        sql = """
+                SELECT
+                stud.studentid
+                ,stud.firstname
+                ,stud.middlename
+                ,stud.lastname
+                ,stud.sectionid
+                ,sec.sectionname
+                ,stud.gender
+                ,stud.password
+                ,stud.profile_pic
+            FROM cai.tbl_student_info stud
+            LEFT JOIN
+                cai.tbl_section sec
+                ON stud.sectionid = sec.sectionid
+            WHERE school_year = %s
+        """
 
         params2 = [schoolYear]
+
+        if user.get('position_name', '').upper() == "TEACHER":
+            sql += """
+                AND sec.teacherid = (
+                    SELECT school_id 
+                    FROM cai.tbl_staff_info 
+                    WHERE school_id = %s
+                )
+            """
+            params2.append(user["school_id"])
 
         if sectionid:
             sql += '    AND stud.sectionid = %s\n'
@@ -198,11 +210,13 @@ class Student:
 
         # Global search across multiple columns
         if text:
-            sql += '    AND (\n'
-            sql += '        stud.studentid ILIKE %s OR\n'
-            sql += '        stud.firstname ILIKE %s OR\n'
-            sql += '        stud.lastname ILIKE %s\n'
-            sql += '    )\n'
+            sql += """
+                AND (
+                    stud.studentid ILIKE %s OR
+                    stud.firstname ILIKE %s OR
+                    stud.lastname ILIKE %s
+                )
+            """
 
             # Append the search term 3 times to match the 3 placeholders
             search_term = f"%{text}%"

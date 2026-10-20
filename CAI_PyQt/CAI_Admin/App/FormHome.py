@@ -1582,7 +1582,7 @@ class Ui_Home(object):
         self.scrollArea_classlist.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
         self.container = QWidget()
         self.container.setObjectName(u"container")
-        self.container.setGeometry(QRect(0, 0, 793, 600))
+        self.container.setGeometry(QRect(0, 0, 100, 30))
         self.gridLayout_stud_card = QGridLayout(self.container)
         self.gridLayout_stud_card.setObjectName(u"gridLayout_stud_card")
         self.scrollArea_classlist.setWidget(self.container)
@@ -2289,7 +2289,7 @@ class Ui_Home(object):
         self.scrollArea_tf.setWidgetResizable(True)
         self.scrollAreaWidgetContents_4 = QWidget()
         self.scrollAreaWidgetContents_4.setObjectName(u"scrollAreaWidgetContents_4")
-        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 320, 499))
+        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 100, 30))
         self.verticalLayout_13 = QVBoxLayout(self.scrollAreaWidgetContents_4)
         self.verticalLayout_13.setObjectName(u"verticalLayout_13")
         self.scrollArea_tf.setWidget(self.scrollAreaWidgetContents_4)
@@ -2315,7 +2315,7 @@ class Ui_Home(object):
         self.scrollArea_mc.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 319, 499))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 100, 30))
         self.verticalLayout_12 = QVBoxLayout(self.scrollAreaWidgetContents_3)
         self.verticalLayout_12.setObjectName(u"verticalLayout_12")
         self.scrollArea_mc.setWidget(self.scrollAreaWidgetContents_3)
@@ -2328,7 +2328,7 @@ class Ui_Home(object):
         self.scrollArea_id.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 320, 499))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 100, 30))
         self.verticalLayout_11 = QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_11.setObjectName(u"verticalLayout_11")
         self.scrollArea_id.setWidget(self.scrollAreaWidgetContents_2)
@@ -3021,7 +3021,7 @@ class Ui_Home(object):
         self.scrollArea_settings.setWidgetResizable(True)
         self.scrollAreaWidgetContents_5 = QWidget()
         self.scrollAreaWidgetContents_5.setObjectName(u"scrollAreaWidgetContents_5")
-        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 461, 932))
+        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 957, 938))
         self.verticalLayout_10 = QVBoxLayout(self.scrollAreaWidgetContents_5)
         self.verticalLayout_10.setObjectName(u"verticalLayout_10")
         self.verticalLayout_10.setContentsMargins(0, 0, 0, 12)
@@ -3332,21 +3332,21 @@ class Ui_Home(object):
 
         self.verticalLayout_10.addWidget(self.widget_SY_settings)
 
-        self.widget_settings_2 = QWidget(self.scrollAreaWidgetContents_5)
-        self.widget_settings_2.setObjectName(u"widget_settings_2")
-        self.widget_settings_2.setStyleSheet(u"")
-        self.verticalLayout_29 = QVBoxLayout(self.widget_settings_2)
+        self.widget_lesson_settings = QWidget(self.scrollAreaWidgetContents_5)
+        self.widget_lesson_settings.setObjectName(u"widget_lesson_settings")
+        self.widget_lesson_settings.setStyleSheet(u"")
+        self.verticalLayout_29 = QVBoxLayout(self.widget_lesson_settings)
         self.verticalLayout_29.setSpacing(0)
         self.verticalLayout_29.setObjectName(u"verticalLayout_29")
         self.verticalLayout_29.setContentsMargins(0, 0, 0, 0)
-        self.widget_settings_2_header = QWidget(self.widget_settings_2)
-        self.widget_settings_2_header.setObjectName(u"widget_settings_2_header")
-        self.widget_settings_2_header.setMinimumSize(QSize(0, 50))
-        self.widget_settings_2_header.setMaximumSize(QSize(16777215, 50))
-        self.widget_settings_2_header.setStyleSheet(u"")
-        self.horizontalLayout_33 = QHBoxLayout(self.widget_settings_2_header)
+        self.widget_lesson_settings_header = QWidget(self.widget_lesson_settings)
+        self.widget_lesson_settings_header.setObjectName(u"widget_lesson_settings_header")
+        self.widget_lesson_settings_header.setMinimumSize(QSize(0, 50))
+        self.widget_lesson_settings_header.setMaximumSize(QSize(16777215, 50))
+        self.widget_lesson_settings_header.setStyleSheet(u"")
+        self.horizontalLayout_33 = QHBoxLayout(self.widget_lesson_settings_header)
         self.horizontalLayout_33.setObjectName(u"horizontalLayout_33")
-        self.label_29 = QLabel(self.widget_settings_2_header)
+        self.label_29 = QLabel(self.widget_lesson_settings_header)
         self.label_29.setObjectName(u"label_29")
         self.label_29.setMinimumSize(QSize(0, 30))
         self.label_29.setMaximumSize(QSize(16777215, 30))
@@ -3361,14 +3361,14 @@ class Ui_Home(object):
         self.horizontalLayout_33.addItem(self.horizontalSpacer_25)
 
 
-        self.verticalLayout_29.addWidget(self.widget_settings_2_header)
+        self.verticalLayout_29.addWidget(self.widget_lesson_settings_header)
 
-        self.widget_settings_2_body = QWidget(self.widget_settings_2)
-        self.widget_settings_2_body.setObjectName(u"widget_settings_2_body")
-        self.widget_settings_2_body.setStyleSheet(u"")
-        self.horizontalLayout_34 = QHBoxLayout(self.widget_settings_2_body)
+        self.widget_lesson_settings_body = QWidget(self.widget_lesson_settings)
+        self.widget_lesson_settings_body.setObjectName(u"widget_lesson_settings_body")
+        self.widget_lesson_settings_body.setStyleSheet(u"")
+        self.horizontalLayout_34 = QHBoxLayout(self.widget_lesson_settings_body)
         self.horizontalLayout_34.setObjectName(u"horizontalLayout_34")
-        self.btnBrowseLessonsCSV = QPushButton(self.widget_settings_2_body)
+        self.btnBrowseLessonsCSV = QPushButton(self.widget_lesson_settings_body)
         self.btnBrowseLessonsCSV.setObjectName(u"btnBrowseLessonsCSV")
         self.btnBrowseLessonsCSV.setMinimumSize(QSize(100, 30))
         self.btnBrowseLessonsCSV.setMaximumSize(QSize(16777215, 30))
@@ -3377,7 +3377,7 @@ class Ui_Home(object):
 
         self.horizontalLayout_34.addWidget(self.btnBrowseLessonsCSV)
 
-        self.label_lesson_CSV_path = QLabel(self.widget_settings_2_body)
+        self.label_lesson_CSV_path = QLabel(self.widget_lesson_settings_body)
         self.label_lesson_CSV_path.setObjectName(u"label_lesson_CSV_path")
         self.label_lesson_CSV_path.setMinimumSize(QSize(100, 30))
         self.label_lesson_CSV_path.setMaximumSize(QSize(16777215, 30))
@@ -3388,7 +3388,7 @@ class Ui_Home(object):
 
         self.horizontalLayout_34.addItem(self.horizontalSpacer_26)
 
-        self.btnImportAllLessons = QPushButton(self.widget_settings_2_body)
+        self.btnImportAllLessons = QPushButton(self.widget_lesson_settings_body)
         self.btnImportAllLessons.setObjectName(u"btnImportAllLessons")
         self.btnImportAllLessons.setMinimumSize(QSize(130, 30))
         self.btnImportAllLessons.setMaximumSize(QSize(16777215, 30))
@@ -3426,31 +3426,31 @@ class Ui_Home(object):
         self.horizontalLayout_34.addWidget(self.btnImportAllLessons)
 
 
-        self.verticalLayout_29.addWidget(self.widget_settings_2_body)
+        self.verticalLayout_29.addWidget(self.widget_lesson_settings_body)
 
-        self.tableView_LessonsCSV = QTableView(self.widget_settings_2)
+        self.tableView_LessonsCSV = QTableView(self.widget_lesson_settings)
         self.tableView_LessonsCSV.setObjectName(u"tableView_LessonsCSV")
         self.tableView_LessonsCSV.setMinimumSize(QSize(0, 300))
 
         self.verticalLayout_29.addWidget(self.tableView_LessonsCSV)
 
 
-        self.verticalLayout_10.addWidget(self.widget_settings_2)
+        self.verticalLayout_10.addWidget(self.widget_lesson_settings)
 
-        self.widget_SY_settings_3 = QWidget(self.scrollAreaWidgetContents_5)
-        self.widget_SY_settings_3.setObjectName(u"widget_SY_settings_3")
-        self.verticalLayout_31 = QVBoxLayout(self.widget_SY_settings_3)
+        self.widget_quiz_settings = QWidget(self.scrollAreaWidgetContents_5)
+        self.widget_quiz_settings.setObjectName(u"widget_quiz_settings")
+        self.verticalLayout_31 = QVBoxLayout(self.widget_quiz_settings)
         self.verticalLayout_31.setSpacing(0)
         self.verticalLayout_31.setObjectName(u"verticalLayout_31")
         self.verticalLayout_31.setContentsMargins(0, 0, 0, 0)
-        self.widget_SY_header_3 = QWidget(self.widget_SY_settings_3)
-        self.widget_SY_header_3.setObjectName(u"widget_SY_header_3")
-        self.widget_SY_header_3.setMinimumSize(QSize(0, 50))
-        self.widget_SY_header_3.setMaximumSize(QSize(16777215, 50))
-        self.widget_SY_header_3.setStyleSheet(u"")
-        self.horizontalLayout_37 = QHBoxLayout(self.widget_SY_header_3)
+        self.widget_quiz_header = QWidget(self.widget_quiz_settings)
+        self.widget_quiz_header.setObjectName(u"widget_quiz_header")
+        self.widget_quiz_header.setMinimumSize(QSize(0, 50))
+        self.widget_quiz_header.setMaximumSize(QSize(16777215, 50))
+        self.widget_quiz_header.setStyleSheet(u"")
+        self.horizontalLayout_37 = QHBoxLayout(self.widget_quiz_header)
         self.horizontalLayout_37.setObjectName(u"horizontalLayout_37")
-        self.label_53 = QLabel(self.widget_SY_header_3)
+        self.label_53 = QLabel(self.widget_quiz_header)
         self.label_53.setObjectName(u"label_53")
         self.label_53.setMinimumSize(QSize(0, 30))
         self.label_53.setMaximumSize(QSize(16777215, 30))
@@ -3464,7 +3464,7 @@ class Ui_Home(object):
 
         self.horizontalLayout_37.addItem(self.horizontalSpacer_28)
 
-        self.btnSaveSettings_quiz = QPushButton(self.widget_SY_header_3)
+        self.btnSaveSettings_quiz = QPushButton(self.widget_quiz_header)
         self.btnSaveSettings_quiz.setObjectName(u"btnSaveSettings_quiz")
         self.btnSaveSettings_quiz.setMinimumSize(QSize(130, 30))
         self.btnSaveSettings_quiz.setMaximumSize(QSize(16777215, 30))
@@ -3502,67 +3502,21 @@ class Ui_Home(object):
         self.horizontalLayout_37.addWidget(self.btnSaveSettings_quiz)
 
 
-        self.verticalLayout_31.addWidget(self.widget_SY_header_3)
+        self.verticalLayout_31.addWidget(self.widget_quiz_header)
 
-        self.widget_SY_body_4 = QWidget(self.widget_SY_settings_3)
-        self.widget_SY_body_4.setObjectName(u"widget_SY_body_4")
-        self.widget_SY_body_4.setStyleSheet(u"")
-        self.horizontalLayout_38 = QHBoxLayout(self.widget_SY_body_4)
+        self.widget_quiz_body = QWidget(self.widget_quiz_settings)
+        self.widget_quiz_body.setObjectName(u"widget_quiz_body")
+        self.widget_quiz_body.setStyleSheet(u"")
+        self.horizontalLayout_38 = QHBoxLayout(self.widget_quiz_body)
         self.horizontalLayout_38.setObjectName(u"horizontalLayout_38")
-        self.label_61 = QLabel(self.widget_SY_body_4)
+        self.label_61 = QLabel(self.widget_quiz_body)
         self.label_61.setObjectName(u"label_61")
         self.label_61.setMinimumSize(QSize(0, 30))
         self.label_61.setMaximumSize(QSize(16777215, 30))
 
         self.horizontalLayout_38.addWidget(self.label_61)
 
-        self.widget_24 = QWidget(self.widget_SY_body_4)
-        self.widget_24.setObjectName(u"widget_24")
-        self.widget_24.setStyleSheet(u"#widget_15 {\n"
-"    background: transparent;\n"
-"}\n"
-"\n"
-"QPushButton {\n"
-"    border: 1px solid #999;\n"
-"    padding: 4px 14px;\n"
-"    font: 10pt \"Inter\";\n"
-"    background-color: #f0f0f0;\n"
-"}\n"
-"\n"
-"QPushButton:hover {\n"
-"    background-color: #e0e0e0;\n"
-"}\n"
-"\n"
-"#btn_manual {\n"
-"    border-top-left-radius: 15px;\n"
-"    border-bottom-left-radius: 15px;\n"
-"    border-right: none;\n"
-"}\n"
-"\n"
-"#btn_manual:checked {\n"
-"    background-color: #72D582;\n"
-"    border: 2px solid #448D50;\n"
-"    color: #000;\n"
-"}\n"
-"\n"
-"#btn_auto {\n"
-"    border-top-right-radius: 15px;\n"
-"    border-bottom-right-radius: 15px;\n"
-"}\n"
-"\n"
-"#btn_auto:checked {\n"
-"    background-color: #72D582;\n"
-"    border: 2px solid #448D50;\n"
-"    color: #000;\n"
-"}")
-        self.horizontalLayout_39 = QHBoxLayout(self.widget_24)
-        self.horizontalLayout_39.setSpacing(0)
-        self.horizontalLayout_39.setObjectName(u"horizontalLayout_39")
-        self.horizontalLayout_39.setContentsMargins(0, 0, 0, 0)
-
-        self.horizontalLayout_38.addWidget(self.widget_24)
-
-        self.doubleSpinBox_passing = QDoubleSpinBox(self.widget_SY_body_4)
+        self.doubleSpinBox_passing = QDoubleSpinBox(self.widget_quiz_body)
         self.doubleSpinBox_passing.setObjectName(u"doubleSpinBox_passing")
         self.doubleSpinBox_passing.setMinimumSize(QSize(0, 30))
         self.doubleSpinBox_passing.setMaximumSize(QSize(16777215, 30))
@@ -3575,10 +3529,10 @@ class Ui_Home(object):
         self.horizontalLayout_38.addItem(self.horizontalSpacer_29)
 
 
-        self.verticalLayout_31.addWidget(self.widget_SY_body_4)
+        self.verticalLayout_31.addWidget(self.widget_quiz_body)
 
 
-        self.verticalLayout_10.addWidget(self.widget_SY_settings_3)
+        self.verticalLayout_10.addWidget(self.widget_quiz_settings)
 
         self.widget_settings_appearance = QWidget(self.scrollAreaWidgetContents_5)
         self.widget_settings_appearance.setObjectName(u"widget_settings_appearance")
@@ -3715,6 +3669,10 @@ class Ui_Home(object):
 
 
         self.verticalLayout_10.addWidget(self.widget_settings_appearance)
+
+        self.verticalSpacer_5 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.verticalLayout_10.addItem(self.verticalSpacer_5)
 
         self.scrollArea_settings.setWidget(self.scrollAreaWidgetContents_5)
 
@@ -4085,17 +4043,17 @@ class Ui_Home(object):
         self.dateEdit_secondgrading_start.setProperty(u"class", QCoreApplication.translate("Home", u"date-picker", None))
         self.dateEdit_thirdgrading_end.setDisplayFormat(QCoreApplication.translate("Home", u"yyyy / MM / dd", None))
         self.dateEdit_thirdgrading_end.setProperty(u"class", QCoreApplication.translate("Home", u"date-picker", None))
-        self.widget_settings_2_header.setProperty(u"class", QCoreApplication.translate("Home", u"gradient-header", None))
+        self.widget_lesson_settings_header.setProperty(u"class", QCoreApplication.translate("Home", u"gradient-header", None))
         self.label_29.setText(QCoreApplication.translate("Home", u"Import All Predefined Lessons", None))
-        self.widget_settings_2_body.setProperty(u"class", QCoreApplication.translate("Home", u"gradient-body-1", None))
+        self.widget_lesson_settings_body.setProperty(u"class", QCoreApplication.translate("Home", u"gradient-body-1", None))
         self.btnBrowseLessonsCSV.setText(QCoreApplication.translate("Home", u"Browse", None))
         self.btnBrowseLessonsCSV.setProperty(u"class", QCoreApplication.translate("Home", u"button-normal", None))
         self.label_lesson_CSV_path.setText("")
         self.btnImportAllLessons.setText(QCoreApplication.translate("Home", u"Import", None))
-        self.widget_SY_header_3.setProperty(u"class", QCoreApplication.translate("Home", u"gradient-header", None))
+        self.widget_quiz_header.setProperty(u"class", QCoreApplication.translate("Home", u"gradient-header", None))
         self.label_53.setText(QCoreApplication.translate("Home", u"Quiz", None))
         self.btnSaveSettings_quiz.setText(QCoreApplication.translate("Home", u"Save", None))
-        self.widget_SY_body_4.setProperty(u"class", QCoreApplication.translate("Home", u"gradient-body-1", None))
+        self.widget_quiz_body.setProperty(u"class", QCoreApplication.translate("Home", u"gradient-body-1", None))
         self.label_61.setText(QCoreApplication.translate("Home", u"Passing Score:", None))
         self.widget_appearance_header.setProperty(u"class", QCoreApplication.translate("Home", u"gradient-header", None))
         self.label_57.setText(QCoreApplication.translate("Home", u"Appearance", None))

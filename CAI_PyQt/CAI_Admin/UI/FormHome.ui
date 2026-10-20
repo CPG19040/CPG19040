@@ -3048,8 +3048,8 @@ QLabel {
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>793</width>
-                      <height>600</height>
+                      <width>100</width>
+                      <height>30</height>
                      </rect>
                     </property>
                     <layout class="QGridLayout" name="gridLayout_stud_card"/>
@@ -4879,8 +4879,8 @@ QPushButton:hover {
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>320</width>
-                      <height>499</height>
+                      <width>100</width>
+                      <height>30</height>
                      </rect>
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout_13"/>
@@ -4922,8 +4922,8 @@ QPushButton:hover {
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>319</width>
-                      <height>499</height>
+                      <width>100</width>
+                      <height>30</height>
                      </rect>
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout_12"/>
@@ -4943,8 +4943,8 @@ QPushButton:hover {
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>320</width>
-                      <height>499</height>
+                      <width>100</width>
+                      <height>30</height>
                      </rect>
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout_11"/>
@@ -6729,8 +6729,8 @@ background-color: rgb(98, 160, 234);</string>
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>461</width>
-                       <height>932</height>
+                       <width>957</width>
+                       <height>938</height>
                       </rect>
                      </property>
                      <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -7442,7 +7442,7 @@ QPushButton:hover {
                        </widget>
                       </item>
                       <item>
-                       <widget class="QWidget" name="widget_settings_2" native="true">
+                       <widget class="QWidget" name="widget_lesson_settings" native="true">
                         <property name="styleSheet">
                          <string notr="true"/>
                         </property>
@@ -7463,7 +7463,7 @@ QPushButton:hover {
                           <number>0</number>
                          </property>
                          <item>
-                          <widget class="QWidget" name="widget_settings_2_header" native="true">
+                          <widget class="QWidget" name="widget_lesson_settings_header" native="true">
                            <property name="minimumSize">
                             <size>
                              <width>0</width>
@@ -7532,7 +7532,7 @@ font: 12pt &quot;Inter&quot;;</string>
                           </widget>
                          </item>
                          <item>
-                          <widget class="QWidget" name="widget_settings_2_body" native="true">
+                          <widget class="QWidget" name="widget_lesson_settings_body" native="true">
                            <property name="styleSheet">
                             <string notr="true"/>
                            </property>
@@ -7678,7 +7678,7 @@ QPushButton:disabled {
                        </widget>
                       </item>
                       <item>
-                       <widget class="QWidget" name="widget_SY_settings_3" native="true">
+                       <widget class="QWidget" name="widget_quiz_settings" native="true">
                         <layout class="QVBoxLayout" name="verticalLayout_31">
                          <property name="spacing">
                           <number>0</number>
@@ -7696,7 +7696,7 @@ QPushButton:disabled {
                           <number>0</number>
                          </property>
                          <item>
-                          <widget class="QWidget" name="widget_SY_header_3" native="true">
+                          <widget class="QWidget" name="widget_quiz_header" native="true">
                            <property name="minimumSize">
                             <size>
                              <width>0</width>
@@ -7826,7 +7826,7 @@ QPushButton:disabled {
                           </widget>
                          </item>
                          <item>
-                          <widget class="QWidget" name="widget_SY_body_4" native="true">
+                          <widget class="QWidget" name="widget_quiz_body" native="true">
                            <property name="styleSheet">
                             <string notr="true"/>
                            </property>
@@ -7851,66 +7851,6 @@ QPushButton:disabled {
                               <property name="text">
                                <string>Passing Score:</string>
                               </property>
-                             </widget>
-                            </item>
-                            <item>
-                             <widget class="QWidget" name="widget_24" native="true">
-                              <property name="styleSheet">
-                               <string notr="true">#widget_15 {
-    background: transparent;
-}
-
-QPushButton {
-    border: 1px solid #999;
-    padding: 4px 14px;
-    font: 10pt &quot;Inter&quot;;
-    background-color: #f0f0f0;
-}
-
-QPushButton:hover {
-    background-color: #e0e0e0;
-}
-
-#btn_manual {
-    border-top-left-radius: 15px;
-    border-bottom-left-radius: 15px;
-    border-right: none;
-}
-
-#btn_manual:checked {
-    background-color: #72D582;
-    border: 2px solid #448D50;
-    color: #000;
-}
-
-#btn_auto {
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
-}
-
-#btn_auto:checked {
-    background-color: #72D582;
-    border: 2px solid #448D50;
-    color: #000;
-}</string>
-                              </property>
-                              <layout class="QHBoxLayout" name="horizontalLayout_39">
-                               <property name="spacing">
-                                <number>0</number>
-                               </property>
-                               <property name="leftMargin">
-                                <number>0</number>
-                               </property>
-                               <property name="topMargin">
-                                <number>0</number>
-                               </property>
-                               <property name="rightMargin">
-                                <number>0</number>
-                               </property>
-                               <property name="bottomMargin">
-                                <number>0</number>
-                               </property>
-                              </layout>
                              </widget>
                             </item>
                             <item>
@@ -8215,6 +8155,19 @@ QPushButton:hover {
                          </item>
                         </layout>
                        </widget>
+                      </item>
+                      <item>
+                       <spacer name="verticalSpacer_5">
+                        <property name="orientation">
+                         <enum>Qt::Vertical</enum>
+                        </property>
+                        <property name="sizeHint" stdset="0">
+                         <size>
+                          <width>20</width>
+                          <height>40</height>
+                         </size>
+                        </property>
+                       </spacer>
                       </item>
                      </layout>
                     </widget>
