@@ -14,12 +14,11 @@ from App.Style import Light_Theme, Dark_Theme
 class Lesson:
 
     def __init__(self):
-        self.db_tools = QApplication.instance().db_tools
-        self.util     = QApplication.instance().utility
+        self.app = QApplication.instance()
 
     def count(self):
         sql = "SELECT COUNT(*) FROM cai.tbl_lessons;"
-        record = self.db_tools.fetch_all(sql)
+        record = self.app.db_tools.fetch_all(sql)
 
         count = 0
 
@@ -40,7 +39,7 @@ class Lesson:
                 gradingperiod = %s AND
                 title = %s;
         """
-        rows = self.db_tools.fetch_all(sql, (chapter, lessonnum, gradingperiod, title))
+        rows = self.app.db_tools.fetch_all(sql, (chapter, lessonnum, gradingperiod, title))
 
         if rows and rows[0]["count"] > 0:
             return True
@@ -77,7 +76,7 @@ class Lesson:
                         errors.append(f"Row {row_idx}: Lesson '{row['TITLE']}' already exists. Skipped.")
                         continue
 
-                    lessonImage = self.util.read_image_file_bytes(row["IMAGE"])
+                    lessonImage = self.app.util.read_image_file_bytes(row["IMAGE"])
                     sql  = "INSERT INTO cai.tbl_lessons (\n"
                     sql += "    chapter\n"
                     sql += "    ,lessonnum\n"
@@ -98,7 +97,7 @@ class Lesson:
                     )
 
                     params = params + (lessonImage,) if lessonImage else params
-                    self.db_tools.execute_query(sql, params)
+                    self.app.db_tools.execute_query(sql, params)
 
         except Exception as e:
             errors.append(f"Database/File error: {str(e)}")
@@ -134,7 +133,7 @@ class Lesson:
         sql += 'FROM cai.tbl_lessons\n'
         sql += 'WHERE lesson_id = %s\n'
         sql += 'ORDER BY lessonnum ASC'
-        cursor, conn = self.db_tools.retrieve_records(sql, (lesson_id,))
+        cursor, conn = self.app.db_tools.retrieve_records(sql, (lesson_id,))
 
         if cursor:
             records = cursor.fetchone()
@@ -163,7 +162,7 @@ class Lesson:
             params = (f"%{searchText}%",)
 
         sql += "ORDER BY gradingperiod, chapter, lessonnum"
-        cursor, conn = self.db_tools.retrieve_records(sql, params)
+        cursor, conn = self.app.db_tools.retrieve_records(sql, params)
 
         if cursor:
             headers = [desc[0] for desc in cursor.description]
@@ -234,9 +233,8 @@ class LessonDialog(QDialog, Ui_LessonDialog):
         self.btnMinimize.clicked.connect(self.showMinimized)
         self.btnClose.clicked.connect(self.reject)
 
-        self.db_tools = QApplication.instance().db_tools
-        self.util     = QApplication.instance().utility
-        lesson        = Lesson()
+        self.app = QApplication.instance()
+        lesson   = Lesson()
 
         self.app_settings = QSettings("CAI_System", "CAI_Admin_AppSettings")
         self.is_dark_mode = self.app_settings.value("dark_mode", False, type=bool)
@@ -252,7 +250,7 @@ class LessonDialog(QDialog, Ui_LessonDialog):
             SELECT gpid, gpname
 	        FROM cai.tbl_grading_period;
         """
-        self.util.populate_pulldown(self.cmbGradingPeriod, sql, add_empty=True)
+        self.app.util.populate_pulldown(self.cmbGradingPeriod, sql, add_empty=True)
 
         if mode == 1:
             self.setWindowTitle = "Add Lesson"
@@ -276,13 +274,13 @@ class LessonDialog(QDialog, Ui_LessonDialog):
             self.txtLessonNumber.setText(f"{lessonnum}")
             self.txtLessonPath.setText(str(file_path))
 
-            if not self.util.isEmpty(lessonimages):
+            if not self.app.util.isEmpty(lessonimages):
                 self.image_data = bytes(lessonimages)
                 image = QImage.fromData(bytes(lessonimages))
 
                 if not image.isNull():
                     pixmap = QPixmap.fromImage(image)
-                    pixmap = self.util.makeCircularPixmap(pixmap, self.label_img.width(), 20)
+                    pixmap = self.app.util.makeCircularPixmap(pixmap, self.label_img.width(), 20)
                     self.label_img.setPixmap(pixmap)
 
         self.btnUploadPhoto.clicked.connect(self.update_photo)
@@ -389,7 +387,7 @@ class LessonDialog(QDialog, Ui_LessonDialog):
         sql += "VALUES (%s, %s, %s, %s, %s, %s, %s);"
 
         try:
-            self.db_tools.execute_query(sql, (
+            self.app.db_tools.execute_query(sql, (
                 chapter,
                 lesson_num,
                 grading,
@@ -444,7 +442,7 @@ class LessonDialog(QDialog, Ui_LessonDialog):
         try:
             filename = f"{title.replace(' ', '_')}.pdf"
 
-            self.db_tools.execute_query(sql, (
+            self.app.db_tools.execute_query(sql, (
                 chapter,
                 lesson_num,
                 grading,
@@ -462,10 +460,10 @@ class LessonDialog(QDialog, Ui_LessonDialog):
             CustomMessageBox.critical(self, "Database Error", f"Failed to update: {str(e)}")
 
     def update_photo(self):
-        pixmap, binaryImage = self.util.browsePhoto(self, self.label_img.width(), self.label_img.height())
+        pixmap, binaryImage = self.app.util.browsePhoto(self, self.label_img.width(), self.label_img.height())
 
         if pixmap:
-            pixmap = self.util.makeCircularPixmap(pixmap, self.label_img.width(), 20)
+            pixmap = self.app.util.makeCircularPixmap(pixmap, self.label_img.width(), 20)
             self.label_img.setPixmap(pixmap)
 
         if binaryImage:

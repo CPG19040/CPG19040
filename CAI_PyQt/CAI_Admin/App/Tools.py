@@ -8,7 +8,6 @@ from PySide6.QtGui import QPixmap, QPainter, QColor, QPen, QPainterPath, QFont
 from PySide6.QtCore import QIODevice, QSettings, Qt, Signal, QDate, QUrl, QRectF, QPoint, QPropertyAnimation, QEasingCurve, QFile
 from PySide6.QtWebEngineWidgets import QWebEngineView
 
-from App.CRUDTools import DatabaseTools
 from App.MessageBox import Ui_MessageBox
 from App.CardRanking import Ui_CardRanking
 from App.CardStudent import Ui_CardStudent
@@ -19,8 +18,8 @@ logger = setup_logger("CAI_System", "admin_activity.log")
 
 class Utility:
 
-    def __init__(self, db_tools:DatabaseTools):
-        self.db_tools = db_tools
+    def __init__(self):
+        self.app = QApplication.instance()
 
     def get_resource_path(self, relative_path):
         """ Safely retrieves asset paths across development files and standalone compiled EXEs """
@@ -186,7 +185,7 @@ class Utility:
 
         conn = None
         try:
-            conn = self.db_tools.get_connection()
+            conn = self.app.db_tools.get_connection()
             with conn.cursor() as cur:
                 cur.execute(sql, params)
 

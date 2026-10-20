@@ -7,11 +7,10 @@ downloads_dir = os.path.expanduser("~/Downloads")
 
 class StudentListReporter:
     def __init__(self):
-        self.db_tools = QApplication.instance().db_tools
-        self.util     = QApplication.instance().utility
+        self.app = QApplication.instance()
 
-        self.studentlist_template_path = self.util.get_resource_path(os.path.join("..", "Templates", "student_list.docx"))
-        self.classlist_template_path = self.util.get_resource_path(os.path.join("..", "Templates", "class_list.docx"))
+        self.studentlist_template_path = self.app.util.get_resource_path(os.path.join("..", "Templates", "student_list.docx"))
+        self.classlist_template_path = self.app.util.get_resource_path(os.path.join("..", "Templates", "class_list.docx"))
 
     def generate_studentlist_report(self, section_id, output_pdf_path):
         """Fetches student data, merges using docxtpl, and converts to PDF."""
@@ -41,6 +40,7 @@ class StudentListReporter:
             WHERE 1 = 1
         """
         params = []
+        
         if section_id:
             query += """
                 AND s.sectionid = %s
@@ -52,7 +52,7 @@ class StudentListReporter:
         """
 
         try:
-            students = self.db_tools.fetch_all(query, tuple(params))
+            students = self.app.db_tools.fetch_all(query, tuple(params))
 
             if not students:
                 return False, "No students found in this section."
@@ -65,7 +65,7 @@ class StudentListReporter:
                 student_rows.append({
                     'idx': str(idx),
                     'studentid': str(student['studentid']),
-                    'fullname': self.util.formatFullname(student['firstname'], student['middlename'], student['lastname'], 1),
+                    'fullname': self.app.util.formatFullname(student['firstname'], student['middlename'], student['lastname'], 1),
                     'gender': str(student['gender'] or 'N/A'),
                     'sectionname': student['sectionname']
                 })
@@ -87,7 +87,7 @@ class StudentListReporter:
                 context = {
                     'school_year': school_year,
                     'sectionname': section_name,
-                    'teachername': self.util.formatFullname(student['teacher_firstname'], student['teacher_middlename'], student['teacher_lastname']),
+                    'teachername': self.app.util.formatFullname(student['teacher_firstname'], student['teacher_middlename'], student['teacher_lastname']),
                     'students': student_rows
                 }
                 doc.render(context)
@@ -139,10 +139,9 @@ class QuizReporter:
         Generates styled Word Templates from DB and converts them directly to PDF.
     """
     def __init__(self):
-        self.db_tools = QApplication.instance().db_tools
-        self.util     = QApplication.instance().utility
+        self.app = QApplication.instance()
 
-        self.quizscores_template_path = self.util.get_resource_path(os.path.join("..", "Templates", "quiz_report.docx"))
+        self.quizscores_template_path = self.app.util.get_resource_path(os.path.join("..", "Templates", "quiz_report.docx"))
 
     def generate_quizscores_report(self, studentid, remarks, output_pdf_path):
         """Fetches student data, merges using docxtpl, and converts to PDF."""
@@ -183,7 +182,7 @@ class QuizReporter:
         """
 
         try:
-            students = self.db_tools.fetch_all(query, (studentid,))
+            students = self.app.db_tools.fetch_all(query, (studentid,))
 
             if not students:
                 return False, "No students found in this section."
@@ -193,7 +192,7 @@ class QuizReporter:
             last_name = students[0]['lastname']
             school_year = students[0]['school_year']
             section_name = students[0]['sectionname']
-            teacher_name = self.util.formatFullname(students[0]['teacher_firstname'], students[0]['teacher_middlename'], students[0]['teacher_lastname'])
+            teacher_name = self.app.util.formatFullname(students[0]['teacher_firstname'], students[0]['teacher_middlename'], students[0]['teacher_lastname'])
 
             models = {1: model1, 2: model2, 3: model3, 4: model4}
             scores = {idx: [] for idx in models}
@@ -213,7 +212,7 @@ class QuizReporter:
 
             doc = DocxTemplate(self.quizscores_template_path)
             context = {
-                'studentname': self.util.formatFullname(first_name, middle_name, last_name, 1),
+                'studentname': self.app.util.formatFullname(first_name, middle_name, last_name, 1),
                 'studentid': studentid,
                 'schoolyear': school_year,
                 'sectionname': section_name,

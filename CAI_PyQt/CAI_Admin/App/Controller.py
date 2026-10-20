@@ -33,8 +33,8 @@ class Controller:
         self.logger        = setup_logger("CAI_System", "admin_activity.log")
 
         self.app          = QApplication.instance()
-        self.app.db_tools = DatabaseTools("Admin")
-        self.app.utility  = Utility(self.app.db_tools)
+        self.app.db_tools = DatabaseTools()
+        self.app.utility  = Utility()
 
         # Dark Mode Theme Preference (Default: False)
         self.is_dark_mode = self.app_settings.value("dark_mode", False, type=bool)
@@ -61,8 +61,6 @@ class Controller:
                 "position_id": self.user_settings.value("position_id"),
                 "position_name": self.user_settings.value("position_name")
             }
-            self.app.db_tools = DatabaseTools(user["position_name"])
-            self.app.utility  = Utility(self.app.db_tools)
             self.show_home(user)
         else:
             self.login_win.show()
@@ -269,7 +267,7 @@ class Controller:
         if pic:
             self.ui.btnUserName.setIcon(pic)
 
-        QApplication.instance().focusChanged.connect(self.on_txtsearch_focus)
+        self.app.focusChanged.connect(self.on_txtsearch_focus)
 
         # Student List
         self.ui.btnRefreshSY.clicked.connect(self.get_dynamic_grading_period_dates)
@@ -348,6 +346,9 @@ class Controller:
         self.ui.btnImportAllLessons.clicked.connect(self.import_lessons)
         self.ui.btnSaveSettings_quiz.clicked.connect(self.update_passing_score)
         self.ui.btnDarkModeToggle.valueChanged.connect(self.toggle_theme)
+
+        if user["position_name"].upper() == "TEACHER":
+            self.ui.btnUsers.setVisible(False)
 
         self.login_win.close()
         self.home_win.show()

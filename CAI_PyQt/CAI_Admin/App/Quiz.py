@@ -13,8 +13,9 @@ from App.Style import Light_Theme, Dark_Theme
 
 
 class Quiz:
+
     def __init__(self):
-        self.db_tools = QApplication.instance().db_tools
+        self.app = QApplication.instance()
 
     def get_scores(self, studentId, gradingperiod):
         """
@@ -66,7 +67,7 @@ class Quiz:
         """
 
         # Pass gradingperiod twice: once for the Common Table Expression (CTE) and once for the main WHERE clause
-        records = self.db_tools.fetch_all(sql, (gradingperiod, studentId, gradingperiod))
+        records = self.app.db_tools.fetch_all(sql, (gradingperiod, studentId, gradingperiod))
 
         ui_headers = ["QUIZ #", "LESSON TITLE", "SCORE", "PERCENTAGE", "DATE TAKEN"]
         model = QStandardItemModel(len(records), len(ui_headers))
@@ -145,7 +146,7 @@ class Quiz:
         sql += "WHERE quiznumber = %s\n"
         sql += "    AND gradingperiod = %s\n"
         sql += "    AND lessonid = %s"
-        cursor, conn = self.db_tools.retrieve_records(sql, (q_num, g_period, lesson_id))
+        cursor, conn = self.app.db_tools.retrieve_records(sql, (q_num, g_period, lesson_id))
 
         if cursor:
             record = cursor.fetchone()
@@ -217,7 +218,7 @@ class Quiz:
         ]
 
         for idx, sql in sections:
-            record = self.db_tools.fetch_all(sql, (q_num, g_period, lesson_id, diff_level))
+            record = self.app.db_tools.fetch_all(sql, (q_num, g_period, lesson_id, diff_level))
 
             if record:
 
@@ -251,7 +252,7 @@ class Quiz:
         sql += "    QUIZNUMBER = %s\n"
         sql += "    AND GRADINGPERIOD = %s\n"
         sql += "    AND LESSONID = %s\n"
-        cursor, conn = self.db_tools.retrieve_records(sql, (q_num, g_period, lesson_id))
+        cursor, conn = self.app.db_tools.retrieve_records(sql, (q_num, g_period, lesson_id))
 
         if cursor:
             record = cursor.fetchone()
@@ -299,7 +300,7 @@ class Quiz:
             GROUP BY M.QUIZNUMBER, M.LESSONID, M.EASY_MULTIPLIER, M.AVERAGE_MULTIPLIER, M.HARD_MULTIPLIER;
         """
 
-        record = self.db_tools.fetch_all(sql, (quiznumber, gradingperiod, lessonid))
+        record = self.app.db_tools.fetch_all(sql, (quiznumber, gradingperiod, lessonid))
 
         easy_score = 0
         average_score = 0
@@ -336,7 +337,7 @@ class Quiz:
                 AND S.SCHOOL_YEAR = %s
             ORDER BY S.LASTNAME, S.FIRSTNAME;
         """
-        records = self.db_tools.fetch_all(query, (quiznumber, gradingperiod, lessonid, sectionid, school_year))
+        records = self.app.db_tools.fetch_all(query, (quiznumber, gradingperiod, lessonid, sectionid, school_year))
 
         ui_headers = ["STUDENT ID", "LAST NAME", "FIRST NAME", "STATUS", "SCORE", "DATE TAKEN"]
         model = QStandardItemModel(len(records), len(ui_headers))
@@ -541,7 +542,6 @@ class QuizItemWidget(QFrame, Ui_CardQuiz_edit):
                 }
             """
 
-        self.util      = QApplication.instance().utility
         self.item_type = item_type
         self.img_path  = None
         self.id        = None
@@ -645,6 +645,7 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
 
         self.app_settings = QSettings("CAI_System", "CAI_Admin_AppSettings")
         self.is_dark_mode = self.app_settings.value("dark_mode", False, type=bool)
+        self.app = QApplication.instance()
 
         if self.is_dark_mode:
             self.setStyleSheet(Dark_Theme.quiz_editor)
@@ -679,9 +680,6 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
             self.record_id, self.record_mc, self.record_tf, _, _, _ = quiz.retrieve_quiz(q_num, g_period, lesson_id, diff_level)
 
         self.save_shortcut = QShortcut(QKeySequence("Ctrl+S"), self)
-
-        self.db_tools = QApplication.instance().db_tools
-        self.util     = QApplication.instance().utility
         
         self.itemsToRemove = []
 
@@ -692,7 +690,7 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
             SELECT gpid, gpname
 	        FROM cai.tbl_grading_period;
         """
-        self.util.populate_pulldown(self.cbGradingPeriod, sql)
+        self.app.utility.populate_pulldown(self.cbGradingPeriod, sql)
 
         self.btn_save.clicked.connect(self.save_to_db)
         self.save_shortcut.activated.connect(self.save_to_db)
@@ -706,7 +704,7 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
         self.btnAddItem_tf.clicked.connect(lambda: self.add_item("True or False", self.layout_trueorfalse))
 
         self.quiz_no.setValue(q_num)
-        self.util.populate_gradingperiod_pulldown(self.cbGradingPeriod, self.cbLessonName, default_gp=g_period)
+        self.app.utility.populate_gradingperiod_pulldown(self.cbGradingPeriod, self.cbLessonName, default_gp=g_period)
         self.countLayoutChildren()
 
         idx = self.cbGradingPeriod.findData(g_period)
@@ -873,7 +871,7 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
         sql += 'FROM cai.tbl_lessons\n'
         sql += 'WHERE gradingperiod = %s\n'
         sql += 'ORDER BY chapter, lessonnum ASC'
-        self.util.populate_pulldown(self.cbLessonName, sql, params=(selected_period,), add_empty=True)
+        self.app.utility.populate_pulldown(self.cbLessonName, sql, params=(selected_period,), add_empty=True)
 
     def add_item(self, name, container):
         widget = QuizItemWidget(name, self.remove_item)
@@ -959,7 +957,7 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
                 sql += "    AND Q.lessonid = %s"
                 sql += "    AND TF.DIFFICULTYLEVEL = %s"
 
-            records = self.db_tools.fetch_all(sql, (params[0], params[1], params[2], params[3]))
+            records = self.app.db_tools.fetch_all(sql, (params[0], params[1], params[2], params[3]))
 
             for row in records:
                 new_w = QuizItemWidget(item_type, self.remove_item)
@@ -977,7 +975,7 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
                 imgQ = row.get("imagequestion", "")
 
                 # Handle Image
-                if not self.util.isEmpty(imgQ):
+                if not self.app.utility.isEmpty(imgQ):
                     new_w.img_binary = bytes(imgQ)
                     image = QImage.fromData(bytes(imgQ))
 
@@ -1021,13 +1019,13 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
         sql += "WHERE quiznumber = %s\n"
         sql += "    AND gradingperiod = %s\n"
         sql += "    AND lessonid = %s"
-        cursor, conn = self.db_tools.retrieve_records(sql, (params[0], params[1], params[2]))
+        cursor, conn = self.app.db_tools.retrieve_records(sql, (params[0], params[1], params[2]))
         self.checkBoxPublish.setChecked(False)
 
         if cursor:
             record = cursor.fetchone()
 
-            if not self.util.isEmpty(record):
+            if not self.app.utility.isEmpty(record):
                 self.checkBoxPublish.setChecked(record[0])
 
             cursor.close()
@@ -1133,7 +1131,7 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
                 LESSONID = %s;
         """
 
-        record = self.db_tools.fetch_all(sql, (quiznumber, gradingperiod, lessonid))
+        record = self.app.db_tools.fetch_all(sql, (quiznumber, gradingperiod, lessonid))
         quiz_count = 0
 
         if record:
@@ -1155,7 +1153,7 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
             mc_count = self.layout_multiplechoice.count()
             tf_count = self.layout_trueorfalse.count()
 
-            conn = self.db_tools.get_connection()
+            conn = self.app.db_tools.get_connection()
             conn.autocommit = False
 
             with conn.cursor() as cur:
@@ -1399,7 +1397,7 @@ class CardQuiz(QFrame, Ui_CardQuiz):
         self.setupUi(self)
         self.setFocusPolicy(Qt.FocusPolicy.StrongFocus) # Ensure the widget can receive focus for keyboard navigation
 
-        self.util = QApplication.instance().utility
+        self.app = QApplication.instance()
 
         self.item_type = item_type
         self.idKey     = None
@@ -1458,7 +1456,7 @@ class CardQuiz(QFrame, Ui_CardQuiz):
             self.layout_body_text.addLayout(layout)
 
         # Handle Image
-        if not self.util.isEmpty(self.imageQ):
+        if not self.app.utility.isEmpty(self.imageQ):
             image = QImage.fromData(bytes(self.imageQ))
             if not image.isNull():
                 pixmap = QPixmap.fromImage(image)

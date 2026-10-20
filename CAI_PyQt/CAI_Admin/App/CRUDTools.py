@@ -5,12 +5,7 @@ from App.Logger import setup_logger
 
 class DatabaseTools:
     
-    def __init__(self, user_role: str = "Admin"):
-        """
-        Args:
-            user_role (str): 'Admin' or 'Teacher'
-        """
-        self.user_role = user_role
+    def __init__(self):
         self.logger = setup_logger("CAI_System", "admin_activity.log")
 
         # self.connection_config = {
@@ -32,18 +27,7 @@ class DatabaseTools:
         }
 
     def get_connection(self):
-        """
-        Establishes a connection and sets the appropriate staff Postgres role ('cai_admin' or 'cai_teacher').
-        """
         conn = psycopg2.connect(**self.connection_config)
-        with conn.cursor() as cur:
-            role_map = {
-                "Admin": "cai_admin",
-                "Teacher": "cai_teacher"
-            }
-            pg_role = role_map.get(self.user_role, "cai_teacher")
-            cur.execute(f"SET ROLE {pg_role};")
-
         return conn
 
     def fetch_all(self, sql, params=None):

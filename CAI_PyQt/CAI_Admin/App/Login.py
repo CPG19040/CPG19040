@@ -2,8 +2,7 @@ from PySide6.QtWidgets import QApplication, QMainWindow
 from PySide6.QtCore import Signal, Qt
 from passlib.hash import bcrypt
 from App.FormLogIn import Ui_FormLogin
-from App.CRUDTools import DatabaseTools
-from App.Tools import Utility, CustomMessageBox
+from App.Tools import CustomMessageBox
 from App.Logger import setup_logger
 
 class Login(QMainWindow, Ui_FormLogin):
@@ -24,10 +23,9 @@ class Login(QMainWindow, Ui_FormLogin):
 
         self.btnLogin.clicked.connect(self.handle_login)
         self.btnForgotPassword.clicked.connect(self.handle_forgot_password)
-        self.db_tools = DatabaseTools("Admin")
-        self.util     = Utility(self.db_tools)
+        self.app = QApplication.instance()
 
-        _, base_year, next_year = self.util.get_dynamic_school_year_dates()
+        _, base_year, next_year = self.app.utility.get_dynamic_school_year_dates()
         
         self.label_SY.setText(f"School Year: {base_year}-{next_year}")
 
@@ -72,7 +70,7 @@ class Login(QMainWindow, Ui_FormLogin):
                 WHERE A.username = %s
             """
             
-            cur, conn = self.db_tools.retrieve_records(query, (username,))
+            cur, conn = self.app.db_tools.retrieve_records(query, (username,))
 
             if not cur:
                 CustomMessageBox.critical(self, "Database Error", "Unable to connect to the database. Please try again later.")
@@ -82,12 +80,9 @@ class Login(QMainWindow, Ui_FormLogin):
 
             if user_data:
                 school_id, uname, fname, mname, lname, stored_hash, pos_id, pos_name = user_data
-                app          = QApplication.instance()
-                app.db_tools = DatabaseTools(pos_name)
-                app.utility  = Utility(app.db_tools)
 
                 if bcrypt.verify(password, stored_hash):
-                    app.db_tools.execute_query("UPDATE cai.tbl_staff_info SET new_user = FALSE WHERE username = %s", (username,))
+                    self.app.db_tools.execute_query("UPDATE cai.tbl_staff_info SET new_user = FALSE WHERE username = %s", (username,))
                     user = {
                         "school_id": school_id,
                         "username": uname,
