@@ -30,11 +30,11 @@ class Controller:
     def __init__(self):
         self.user_settings = QSettings("CAI_System", "CAI_Admin_UserInfo")
         self.app_settings  = QSettings("CAI_System", "CAI_Admin_AppSettings")
-        self.logger        = setup_logger("CAI_System", "admin_activity.log")
 
         self.app          = QApplication.instance()
         self.app.db_tools = DatabaseTools()
         self.app.utility  = Utility()
+        self.app.logger   = setup_logger("CAI_System", "admin_activity.log")
 
         # Dark Mode Theme Preference (Default: False)
         self.is_dark_mode = self.app_settings.value("dark_mode", False, type=bool)
@@ -157,7 +157,7 @@ class Controller:
             self.ui.widget_quizselector.setStyleSheet(Light_Theme.widget_quizselector)
 
     def show_home(self, user:dict):
-        self.logger.info("Initializing Admin Dashboard window...")
+        self.app.logger.info("Initializing Admin Dashboard window...")
 
         # Safely tear down existing window if it already exists
         if hasattr(self, "home_win") and self.home_win is not None:
@@ -578,14 +578,14 @@ class Controller:
                     if font_id != -1:
                         loaded_count += 1
                     else:
-                        self.logger.error(f"Failed to load font: {f}")
+                        self.app.logger.error(f"Failed to load font: {f}")
 
             if loaded_count > 0:
-                self.logger.info(f"{loaded_count} font(s) loaded successfully.")
+                self.app.logger.info(f"{loaded_count} font(s) loaded successfully.")
             else:
-                self.logger.warning(f"Font folder found, but no valid fonts were loaded.")
+                self.app.logger.warning(f"Font folder found, but no valid fonts were loaded.")
         else:
-            self.logger.warning(f"Font directory not found at: {path}")
+            self.app.logger.warning(f"Font directory not found at: {path}")
 
     def add_user(self, user):
 

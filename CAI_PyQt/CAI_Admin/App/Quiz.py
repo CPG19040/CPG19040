@@ -1378,8 +1378,8 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
 
         except Exception as e:
             if conn: conn.rollback()
-            print(f"Database Error: {e}")
-            CustomMessageBox.critical(self, "Error", f"Failed to sync database: {e}")
+            self.app.logger.error(f"Database Error: {e}")
+            CustomMessageBox.critical(self, "Error", f"Failed to save to the database.")
 
         finally:
             if conn: conn.close()
