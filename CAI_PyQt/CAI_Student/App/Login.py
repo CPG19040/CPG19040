@@ -272,7 +272,7 @@ class Login(QWidget, Ui_FormLogin):
         # Add new cards
         columns = 2
         for i, row in enumerate(students):
-            sid, f_name, m_name, l_name, _, gender, _, img_data = row # Unpacking for clarity
+            sid, f_name, m_name, l_name, _, gender, img_data = row
 
             # Handle Image
             pixmap = None

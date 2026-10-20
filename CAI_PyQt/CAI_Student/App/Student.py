@@ -33,7 +33,6 @@ class Student:
         sql += '    ,lastname\n'
         sql += '    ,sectionid\n'
         sql += '    ,gender\n'
-        sql += '    ,password\n'
         sql += '    ,profile_pic\n'
         sql += 'FROM cai.tbl_student_info\n'
         sql += 'WHERE sectionid = %s\n'

@@ -607,6 +607,10 @@ class Controller:
         else: # mode = 2
             selection_model = self.ui.table_users.selectionModel()
 
+            if not selection_model:
+                CustomMessageBox.information(self.home_win, "Empty Table", f"No records found to update.")
+                return
+
             if not selection_model.hasSelection():
                 CustomMessageBox.information(self.home_win, "No Selection", f"Select a user to update.")
                 return
@@ -974,6 +978,10 @@ class Controller:
     def view_lesson(self):
         selection = self.ui.table_lesson.selectionModel()
 
+        if not selection:
+            CustomMessageBox.information(self.home_win, "Empty Table", "No lesson to view.")
+            return
+
         if not selection.hasSelection():
             CustomMessageBox.information(self.home_win, "No Selection", "Select a lesson to view.")
             return
@@ -1200,6 +1208,10 @@ class Controller:
 
     def delete_user(self, user):
         selection = self.ui.table_users.selectionModel()
+
+        if not selection:
+            CustomMessageBox.information(self.home_win, "Empty Table", "No records to delete.")
+            return
 
         if not selection.hasSelection():
             CustomMessageBox.information(self.home_win, "No Selection", "Select a user to delete.")

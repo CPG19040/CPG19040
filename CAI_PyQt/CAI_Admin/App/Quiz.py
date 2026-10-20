@@ -1399,7 +1399,7 @@ class CardQuiz(QFrame, Ui_CardQuiz):
         self.setupUi(self)
         self.setFocusPolicy(Qt.FocusPolicy.StrongFocus) # Ensure the widget can receive focus for keyboard navigation
 
-        self.util = Utility()
+        self.util = QApplication.instance().utility
 
         self.item_type = item_type
         self.idKey     = None
