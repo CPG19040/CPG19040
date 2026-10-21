@@ -659,7 +659,7 @@ class CircularProgress(QWidget):
 
         # Draw Center Text
         painter.setPen(QColor(self.font_color))
-        painter.setFont(QFont("Inter", 12, QFont.Weight.Bold))
+        painter.setFont(QFont("Inter SemiBold", 11))
         painter.drawText(rect, Qt.AlignmentFlag.AlignCenter, display_text)
 
 

@@ -88,11 +88,11 @@ class Light_Theme:
 
     tool_tip = """
         QToolTip {
-            background-color: #ffffff;
+            background-color: #dff6ff;
             color: #1f2937;
             border: 1px solid #d1d5db;
             padding: 4px 6px;
-            border-radius: 8px;
+            border-radius: 0px;
             font: 10pt "Inter";
         }
     """
@@ -2027,11 +2027,11 @@ class Dark_Theme:
 
     tool_tip = """
         QToolTip {
-            background-color: #262626;
+            background-color: #191e34;
             color: #ffffff;
             border: 1px solid #4a4a4a;
             padding: 4px 6px;
-            border-radius: 8px;
+            border-radius: 0px;
             font: 10pt "Inter";
         }
     """

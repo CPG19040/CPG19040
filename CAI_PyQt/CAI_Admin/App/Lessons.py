@@ -82,7 +82,7 @@ class Lesson:
                         errors.append(f"Row {row_idx}: Lesson '{row['TITLE']}' already exists. Skipped.")
                         continue
 
-                    lessonImage = self.app.util.read_image_file_bytes(row["IMAGE"])
+                    lessonImage = self.app.utility.read_image_file_bytes(row["IMAGE"])
                     sql  = "INSERT INTO cai.tbl_lessons (\n"
                     sql += "    chapter\n"
                     sql += "    ,lessonnum\n"
@@ -256,7 +256,7 @@ class LessonDialog(QDialog, Ui_LessonDialog):
             SELECT gpid, gpname
 	        FROM cai.tbl_grading_period;
         """
-        self.app.util.populate_pulldown(self.cmbGradingPeriod, sql, add_empty=True)
+        self.app.utility.populate_pulldown(self.cmbGradingPeriod, sql, add_empty=True)
 
         if mode == 1:
             self.setWindowTitle = "Add Lesson"
@@ -280,13 +280,13 @@ class LessonDialog(QDialog, Ui_LessonDialog):
             self.txtLessonNumber.setText(f"{lessonnum}")
             self.txtLessonPath.setText(str(file_path))
 
-            if not self.app.util.isEmpty(lessonimages):
+            if not self.app.utility.isEmpty(lessonimages):
                 self.image_data = bytes(lessonimages)
                 image = QImage.fromData(bytes(lessonimages))
 
                 if not image.isNull():
                     pixmap = QPixmap.fromImage(image)
-                    pixmap = self.app.util.makeCircularPixmap(pixmap, self.label_img.width(), 20)
+                    pixmap = self.app.utility.makeCircularPixmap(pixmap, self.label_img.width(), 20)
                     self.label_img.setPixmap(pixmap)
 
         self.btnUploadPhoto.clicked.connect(self.update_photo)
@@ -466,10 +466,10 @@ class LessonDialog(QDialog, Ui_LessonDialog):
             CustomMessageBox.critical(self, "Database Error", f"Failed to update: {str(e)}")
 
     def update_photo(self):
-        pixmap, binaryImage = self.app.util.browsePhoto(self, self.label_img.width(), self.label_img.height())
+        pixmap, binaryImage = self.app.utility.browsePhoto(self, self.label_img.width(), self.label_img.height())
 
         if pixmap:
-            pixmap = self.app.util.makeCircularPixmap(pixmap, self.label_img.width(), 20)
+            pixmap = self.app.utility.makeCircularPixmap(pixmap, self.label_img.width(), 20)
             self.label_img.setPixmap(pixmap)
 
         if binaryImage:
