@@ -92,7 +92,7 @@ class Light_Theme:
             color: #1f2937;
             border: 1px solid #d1d5db;
             padding: 4px 6px;
-            border-radius: 6px;
+            border-radius: 8px;
             font: 10pt "Inter";
         }
     """
@@ -2031,7 +2031,7 @@ class Dark_Theme:
             color: #ffffff;
             border: 1px solid #4a4a4a;
             padding: 4px 6px;
-            border-radius: 6px;
+            border-radius: 8px;
             font: 10pt "Inter";
         }
     """

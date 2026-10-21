@@ -1,7 +1,7 @@
-import os, csv
+import os, csv, base64
 
 # PyQt Imports
-from PySide6.QtCore import QEvent, QSettings, QTimer, QDateTime, QPoint, QEasingCurve, QPropertyAnimation, QParallelAnimationGroup, Qt, QDate
+from PySide6.QtCore import QBuffer, QEvent, QIODevice, QSettings, QTimer, QDateTime, QPoint, QEasingCurve, QPropertyAnimation, QParallelAnimationGroup, Qt, QDate
 from PySide6.QtWidgets import QHBoxLayout, QMainWindow, QHeaderView, QDialog, QFileDialog, QApplication, QButtonGroup, QLabel, QSizePolicy, QSpacerItem, QWidget
 from PySide6.QtGui import QFontDatabase, QImage, QPixmap, QGuiApplication, QStandardItemModel, QStandardItem
 from shiboken6 import isValid
@@ -10,7 +10,7 @@ from shiboken6 import isValid
 from App.FormHome import Ui_Home
 from App.Style import Light_Theme, Dark_Theme
 from App.Login import Login
-from App.Tools import CardStudent, Utility, CustomMessageBox, CrossPlatformPrinter, CardRanking
+from App.Tools import CardStudent, CircularProgress, Utility, CustomMessageBox, CrossPlatformPrinter, CardRanking
 from App.CRUDTools import DatabaseTools
 from App.Report import StudentListReporter, QuizReporter
 from App.Logger import setup_logger
@@ -493,6 +493,18 @@ class Controller:
             self.display_student_cards()
             self.display_student_info()
 
+            round_progressbar = CircularProgress()
+            lesson_count = Lesson().count(self.GRADING_PERIOD)
+            round_progressbar.set_value(value=8, max_value=lesson_count, custom_text=f"8/{lesson_count}")
+            layout = self.ui.layout_stud_lesson_progress
+
+            while layout.count():
+                item = layout.takeAt(0)
+                if item.widget():
+                    item.widget().deleteLater()
+
+            layout.addWidget(round_progressbar)
+
         elif index == 2: # Lesson
             self.ui.txtSearchLesson.clear()
             self.displayLessons()
@@ -786,23 +798,6 @@ class Controller:
         self.ui.label_contact_number.setText(f"{contact_num}")
 
         self.app.utility.animate_slide(self.ui.sub_info_panel, show=True, direction="right")
-
-        # if not self.app.utility.isEmpty(sid):
-        #     layout = self.ui.verticalLayout_14
-        #     layout.setAlignment(Qt.AlignmentFlag.AlignTop)
-        #     layout.setSpacing(10)
-
-        #     while layout.count():
-        #         item = layout.takeAt(0)
-        #         widget = item.widget()
-        #         if widget:
-        #             widget.deleteLater()
-
-        #     student = Student()
-        #     progressBar = student.get_student_progress(sid, 1)
-        #     progressBar.setFixedSize(120, 120)
-
-        #     layout.addWidget(progressBar)
 
     def edit_student(self, user):
         student_id = self.ui.label_studentId.text().strip()
@@ -1465,18 +1460,45 @@ class Controller:
         self.reports_selectedRow_idv = row
 
         gradingperiod = self.ui.cb_gp_quiz_idv.currentData()
-        studentId = row.siblingAtColumn(0).data()
-        lastName = row.siblingAtColumn(1).data()
-        firstName = row.siblingAtColumn(2).data()
-        middleName = row.siblingAtColumn(3).data()
+        studentId     = row.siblingAtColumn(0).data()
+        lastName      = row.siblingAtColumn(1).data()
+        firstName     = row.siblingAtColumn(2).data()
+        middleName    = row.siblingAtColumn(3).data()
         
         stud_name = self.app.utility.formatFullname(firstName, middleName, lastName)
         self.ui.label_student_name.setText(stud_name)
 
-        stud = Student()
-        s = self.ui.label_student_icon.width()
-        pixmap = stud.get_student_picture(studentId, True, s)
+        stud   = Student()
+        size   = self.ui.label_student_icon.width()
+        pixmap = stud.get_student_picture(studentId, True, size)
         self.ui.label_student_icon.setPixmap(pixmap)
+
+        buffer = QBuffer()
+        size   = 200
+        pixmap = stud.get_student_picture(studentId, True, size)
+        buffer.open(QIODevice.OpenModeFlag.WriteOnly)
+        pixmap.save(buffer, "PNG")
+        base64_data = base64.b64encode(buffer.data().data()).decode("utf-8")
+        
+        if self.is_dark_mode:
+            self.ui.label_student_icon.setStyleSheet("""
+                QLabel {
+                    background: transparent;
+                    border-radius: 8px;
+                }
+                """ + Dark_Theme.tool_tip + """
+            """)
+
+        else:
+            self.ui.label_student_icon.setStyleSheet("""
+                QLabel {
+                    background: transparent;
+                    border-radius: 8px;
+                }
+                """ + Light_Theme.tool_tip + """
+            """)
+
+        self.ui.label_student_icon.setToolTip(f'<img src="data:image/png;base64,{base64_data}" width="{size}" height="{size}">')
 
         model, average_percentage = Quiz().get_scores(studentId, gradingperiod)
 
@@ -1500,6 +1522,9 @@ class Controller:
             self.ui.label_average_percentage.setText(f'{average_percentage:.2f}%')
         else:
             self.ui.label_average_percentage.setText('0%')
+
+        lesson_count = Lesson().count(gradingperiod)
+        self.ui.label_lessons_prog.setText(f"0/{lesson_count}")
         
         self.ui.plainTextEdit_remarks.clear()
 
@@ -1749,27 +1774,32 @@ class HomeWindow(QMainWindow):
         x, y = pos.x(), pos.y()
         w, h = rect.width(), rect.height()
         
-        edge = None
+        edge = Qt.Edge(0)
+        
         if x <= self.RESIZE_MARGIN:
-            edge = Qt.Edge.LeftEdge
+            edge |= Qt.Edge.LeftEdge
         elif x >= w - self.RESIZE_MARGIN:
-            edge = Qt.Edge.RightEdge
+            edge |= Qt.Edge.RightEdge
             
         if y <= self.RESIZE_MARGIN:
-            edge = Qt.Edge.TopEdge if edge is None else edge | Qt.Edge.TopEdge
+            edge |= Qt.Edge.TopEdge
         elif y >= h - self.RESIZE_MARGIN:
-            edge = Qt.Edge.BottomEdge if edge is None else edge | Qt.Edge.BottomEdge
+            edge |= Qt.Edge.BottomEdge
                 
         return edge
 
     def _update_cursor_shape(self, edge):
+        if not edge or edge == Qt.Edge(0):
+            self.setCursor(Qt.CursorShape.ArrowCursor)
+            return
+
         if edge == (Qt.Edge.TopEdge | Qt.Edge.LeftEdge) or edge == (Qt.Edge.BottomEdge | Qt.Edge.RightEdge):
             self.setCursor(Qt.CursorShape.SizeFDiagCursor)
         elif edge == (Qt.Edge.TopEdge | Qt.Edge.RightEdge) or edge == (Qt.Edge.BottomEdge | Qt.Edge.LeftEdge):
             self.setCursor(Qt.CursorShape.SizeBDiagCursor)
-        elif edge and (edge & (Qt.Edge.LeftEdge | Qt.Edge.RightEdge)) and not (edge & (Qt.Edge.TopEdge | Qt.Edge.BottomEdge)):
+        elif edge == Qt.Edge.LeftEdge or edge == Qt.Edge.RightEdge:
             self.setCursor(Qt.CursorShape.SizeHorCursor)
-        elif edge and (edge & (Qt.Edge.TopEdge | Qt.Edge.BottomEdge)) and not (edge & (Qt.Edge.LeftEdge | Qt.Edge.RightEdge)):
+        elif edge == Qt.Edge.TopEdge or edge == Qt.Edge.BottomEdge:
             self.setCursor(Qt.CursorShape.SizeVerCursor)
         else:
             self.setCursor(Qt.CursorShape.ArrowCursor)
@@ -1779,6 +1809,11 @@ class HomeWindow(QMainWindow):
         edge = self._get_resize_edge(pos)
         self._update_cursor_shape(edge)
         super().mouseMoveEvent(event)
+
+    def leaveEvent(self, event):
+        """Reset cursor shape when mouse leaves window."""
+        self.unsetCursor()
+        super().leaveEvent(event)
 
     def mousePressEvent(self, event):
         if event.button() == Qt.LeftButton:

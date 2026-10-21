@@ -1,11 +1,11 @@
-import os, sys, subprocess, csv
+import os, sys, subprocess, csv, base64
 from functools import partial
 from pathlib import Path
 from App.Logger import setup_logger
 
 from PySide6.QtWidgets import QApplication, QFileDialog, QWidget, QMainWindow, QDialog, QComboBox
 from PySide6.QtGui import QPixmap, QPainter, QColor, QPen, QPainterPath, QFont
-from PySide6.QtCore import QIODevice, QSettings, Qt, Signal, QDate, QUrl, QRectF, QPoint, QPropertyAnimation, QEasingCurve, QFile
+from PySide6.QtCore import QBuffer, QIODevice, QSettings, Qt, Signal, QDate, QUrl, QRectF, QPoint, QPropertyAnimation, QEasingCurve, QFile
 from PySide6.QtWebEngineWidgets import QWebEngineView
 
 from App.MessageBox import Ui_MessageBox
@@ -479,20 +479,50 @@ class CardStudent(QWidget, Ui_CardStudent):
                 font-size: 13px;
                 background-color: transparent;
             }}
-
-            #label_photo {{
-                background-color: transparent;
-            }}
         """)
 
         # Process photo (single transformation)
         self.util = QApplication.instance().utility
+        has_image = True
         
         if self.util.isEmpty(image):
             image = QPixmap(u":/Images/Images/profile.png")
+            has_image = False
 
         circular_pixmap = self.util.makeCircularPixmap(image, 80)
         self.label_photo.setPixmap(circular_pixmap)
+
+        if has_image:
+            buffer = QBuffer()
+            size   = 200
+            buffer.open(QIODevice.OpenModeFlag.WriteOnly)
+            scaled_pixmap = image.scaled(
+                size, size, 
+                Qt.AspectRatioMode.KeepAspectRatioByExpanding, 
+                Qt.TransformationMode.SmoothTransformation
+            )
+            scaled_pixmap.save(buffer, "PNG")
+            base64_data = base64.b64encode(buffer.data().data()).decode("utf-8")
+
+            if self.is_dark_mode:
+                self.label_photo.setStyleSheet("""
+                    #label_photo {
+                        background-color: transparent;
+                        border-radius: 8px;
+                    }
+                    """ + Dark_Theme.tool_tip + """
+                """)
+    
+            else:
+                self.label_photo.setStyleSheet("""
+                    #label_photo {
+                        background-color: transparent;
+                        border-radius: 8px;
+                    }
+                    """ + Light_Theme.tool_tip + """
+                """)
+
+            self.label_photo.setToolTip(f'<img src="data:image/png;base64,{base64_data}" width="{size}" height="{size}">')
 
         # Set Text Labels
         self.label_name.setText(name)
@@ -543,51 +573,94 @@ class WickPlayer(QMainWindow):
 
 
 class CircularProgress(QWidget):
+
     def __init__(self, parent=None):
         super().__init__(parent)
         self.value = 0
+        self.max_value = 100
+        self.percentage = 0.0
+        
+        self.prefix = ""
         self.suffix = "%"
-        self.setMinimumSize(150, 150)
+        self.custom_text = None  # If set, overrides automatic text rendering
+        self.font_color = "#333333"
 
-    def set_value(self, value):
-        self.value = max(0, min(100, value)) # Keep between 0-100
-        self.update() # Triggers repaint
+        self.setFixedSize(100, 100)
+        
+        self.app_settings = QSettings("CAI_System", "CAI_Admin_AppSettings")
+        self.is_dark_mode = self.app_settings.value("dark_mode", False, type=bool)
+
+        if self.is_dark_mode:
+            self.font_color = "#e0e0e0"
+        else:
+            self.font_color = "#333333"
+
+    def set_value(self, value, max_value=100, custom_text=None):
+        """
+        Set progress values.
+        
+        :param value: Current count or percentage value.
+        :param max_value: Maximum possible count (defaults to 100).
+        :param custom_text: Optional explicit string (e.g., "12/50" or "Passed").
+        """
+        self.value = value
+        self.max_value = max(1, max_value)  # Prevent division by zero
+        self.custom_text = custom_text
+        
+        # Calculate normalized percentage (0 to 100) for drawing the arc
+        raw_percentage = (self.value / self.max_value) * 100
+        self.percentage = max(0.0, min(100.0, raw_percentage))
+        
+        self.update()  # Trigger repaint
+
+    def set_format(self, prefix="", suffix="%"):
+        """Customize text formatting surrounding default numerical display."""
+        self.prefix = prefix
+        self.suffix = suffix
+        self.update()
 
     def paintEvent(self, event):
-        width = self.width()
+        width  = self.width()
         height = self.height()
         margin = 10
-        rect = QRectF(margin, margin, width - 2*margin, height - 2*margin)
+        rect   = QRectF(margin, margin, width - 2 * margin, height - 2 * margin)
 
         painter = QPainter(self)
-        painter.setRenderHint(QPainter.Antialiasing)
+        painter.setRenderHint(QPainter.RenderHint.Antialiasing)
 
-        # 1. Draw Background Circle (Track)
+        # Draw Background Track Circle
         pen = QPen()
-        pen.setWidth(12)
-        pen.setColor(QColor("#e6e6e6")) # Light gray
-        pen.setCapStyle(Qt.RoundCap)
+        pen.setWidth(8)
+        pen.setColor(QColor("#e6e6e6"))  # Light gray
+        pen.setCapStyle(Qt.PenCapStyle.RoundCap)
         painter.setPen(pen)
         painter.drawArc(rect, 0, 360 * 16)
 
-        # 2. Draw Progress (The "Bar")
-        # Color changes based on performance
-        color = "#ff4d4d" # Red
-        if self.value >= 85: color = "#2ecc71" # Green
-        elif self.value >= 70: color = "#f1c40f" # Yellow
+        # Progress Arc Color Logic (based on 0-100 percentage)
+        color = "#ff4d4d"  # Red
+        if self.percentage >= 85:
+            color = "#2ecc71"  # Green
+        elif self.percentage >= 70:
+            color = "#f1c40f"  # Yellow
 
         pen.setColor(QColor(color))
         painter.setPen(pen)
 
-        # Calculate angle: start at 90 degrees (top), span is negative for clockwise
+        # Calculate angle (start at top / 90 degrees, negative span for clockwise)
         start_angle = 90 * 16
-        span_angle = -self.value * 3.6 * 16
-        painter.drawArc(rect, start_angle, int(span_angle))
+        span_angle = -int(self.percentage * 3.6 * 16)
+        painter.drawArc(rect, start_angle, span_angle)
 
-        # 3. Draw Text in Center
-        painter.setPen(QColor("#333333"))
-        painter.setFont(QFont("Arial", 18, QFont.Bold))
-        painter.drawText(rect, Qt.AlignCenter, f"{int(self.value)}{self.suffix}")
+        # Determine Center Display Text
+        if self.custom_text is not None:
+            display_text = self.custom_text
+        else:
+            display_text = f"{self.prefix}{int(self.value)}{self.suffix}"
+
+        # Draw Center Text
+        painter.setPen(QColor(self.font_color))
+        painter.setFont(QFont("Inter", 12, QFont.Weight.Bold))
+        painter.drawText(rect, Qt.AlignmentFlag.AlignCenter, display_text)
 
 
 

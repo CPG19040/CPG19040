@@ -342,24 +342,6 @@ class Student:
 
         return top3
 
-    def get_student_progress(self, studentid, gradingperiod):
-        sql  = "SELECT\n"
-        sql += "    AVG((quizscore::numeric / totalitems) * 100) as overall_avg\n"
-        sql += "FROM cai.tbl_quizscores\n"
-        sql += "WHERE studentid = %s AND gradingperiod = %s;\n"
-
-        cur, conn = self.db_tools.retrieve_records(sql, (studentid, gradingperiod))
-        result = cur.fetchone()
-
-        if result and result[0] is not None:
-            score_avg = float(result[0])
-            self.circular_bar.set_value(score_avg)
-
-        else:
-            self.circular_bar.set_value(0)
-
-        return self.circular_bar
-
     def delete_student(self, ids, user):
 
         if isinstance(ids, list):

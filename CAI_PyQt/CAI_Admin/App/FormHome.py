@@ -1609,16 +1609,16 @@ class Ui_Home(object):
         self.sub_info_panel = QWidget(self.InformationPanel)
         self.sub_info_panel.setObjectName(u"sub_info_panel")
         self.sub_info_panel.setMinimumSize(QSize(0, 100))
-        self.verticalLayout_9 = QVBoxLayout(self.sub_info_panel)
-        self.verticalLayout_9.setObjectName(u"verticalLayout_9")
-        self.verticalLayout_9.setContentsMargins(-1, -1, 0, -1)
+        self.layout_stud_info = QVBoxLayout(self.sub_info_panel)
+        self.layout_stud_info.setObjectName(u"layout_stud_info")
+        self.layout_stud_info.setContentsMargins(-1, -1, 0, -1)
         self.label_16 = QLabel(self.sub_info_panel)
         self.label_16.setObjectName(u"label_16")
         self.label_16.setMinimumSize(QSize(0, 30))
         self.label_16.setFont(font3)
         self.label_16.setStyleSheet(u"background-color: transparent; color: rgb(253, 64, 115); font: 12pt \"Inter Medium\";")
 
-        self.verticalLayout_9.addWidget(self.label_16)
+        self.layout_stud_info.addWidget(self.label_16)
 
         self.grp_SectionInfo = QFrame(self.sub_info_panel)
         self.grp_SectionInfo.setObjectName(u"grp_SectionInfo")
@@ -1697,7 +1697,7 @@ class Ui_Home(object):
         self.formLayout_2.setWidget(0, QFormLayout.ItemRole.FieldRole, self.label_section)
 
 
-        self.verticalLayout_9.addWidget(self.grp_SectionInfo)
+        self.layout_stud_info.addWidget(self.grp_SectionInfo)
 
         self.label_17 = QLabel(self.sub_info_panel)
         self.label_17.setObjectName(u"label_17")
@@ -1705,7 +1705,7 @@ class Ui_Home(object):
         self.label_17.setFont(font3)
         self.label_17.setStyleSheet(u"background-color: transparent; color: rgb(253, 64, 115); font: 12pt \"Inter Medium\";")
 
-        self.verticalLayout_9.addWidget(self.label_17)
+        self.layout_stud_info.addWidget(self.label_17)
 
         self.frame_student_info = QFrame(self.sub_info_panel)
         self.frame_student_info.setObjectName(u"frame_student_info")
@@ -1794,7 +1794,7 @@ class Ui_Home(object):
         self.formLayout.setWidget(4, QFormLayout.ItemRole.FieldRole, self.label_studentGender)
 
 
-        self.verticalLayout_9.addWidget(self.frame_student_info)
+        self.layout_stud_info.addWidget(self.frame_student_info)
 
         self.label_51 = QLabel(self.sub_info_panel)
         self.label_51.setObjectName(u"label_51")
@@ -1803,7 +1803,7 @@ class Ui_Home(object):
         self.label_51.setFont(font3)
         self.label_51.setStyleSheet(u"background-color: transparent; color: rgb(253, 64, 115); font: 12pt \"Inter Medium\";")
 
-        self.verticalLayout_9.addWidget(self.label_51)
+        self.layout_stud_info.addWidget(self.label_51)
 
         self.frame_contact_info = QFrame(self.sub_info_panel)
         self.frame_contact_info.setObjectName(u"frame_contact_info")
@@ -1842,7 +1842,7 @@ class Ui_Home(object):
         self.formLayout_4.setWidget(1, QFormLayout.ItemRole.FieldRole, self.label_contact_number)
 
 
-        self.verticalLayout_9.addWidget(self.frame_contact_info)
+        self.layout_stud_info.addWidget(self.frame_contact_info)
 
         self.widget_21 = QWidget(self.sub_info_panel)
         self.widget_21.setObjectName(u"widget_21")
@@ -1863,11 +1863,26 @@ class Ui_Home(object):
         self.horizontalLayout_23.addWidget(self.btnEditStudent)
 
 
-        self.verticalLayout_9.addWidget(self.widget_21)
+        self.layout_stud_info.addWidget(self.widget_21)
 
         self.verticalSpacer_7 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
-        self.verticalLayout_9.addItem(self.verticalSpacer_7)
+        self.layout_stud_info.addItem(self.verticalSpacer_7)
+
+        self.layout_stud_lesson_progress = QHBoxLayout()
+        self.layout_stud_lesson_progress.setObjectName(u"layout_stud_lesson_progress")
+        self.layout_stud_lesson_progress.setContentsMargins(-1, -1, -1, 0)
+
+        self.layout_stud_info.addLayout(self.layout_stud_lesson_progress)
+
+        self.label_2 = QLabel(self.sub_info_panel)
+        self.label_2.setObjectName(u"label_2")
+        self.label_2.setMaximumSize(QSize(16777215, 20))
+        self.label_2.setFont(font)
+        self.label_2.setStyleSheet(u"")
+        self.label_2.setAlignment(Qt.AlignCenter)
+
+        self.layout_stud_info.addWidget(self.label_2)
 
 
         self.verticalLayout_3.addWidget(self.sub_info_panel)
@@ -2743,9 +2758,9 @@ class Ui_Home(object):
         self.widget_7 = QWidget(self.widget_8)
         self.widget_7.setObjectName(u"widget_7")
         self.widget_7.setStyleSheet(u"")
-        self.horizontalLayout_21 = QHBoxLayout(self.widget_7)
-        self.horizontalLayout_21.setObjectName(u"horizontalLayout_21")
-        self.horizontalLayout_21.setContentsMargins(-1, 5, -1, 5)
+        self.layout_stud_average = QHBoxLayout(self.widget_7)
+        self.layout_stud_average.setObjectName(u"layout_stud_average")
+        self.layout_stud_average.setContentsMargins(-1, 5, -1, 5)
         self.widget_3 = QWidget(self.widget_7)
         self.widget_3.setObjectName(u"widget_3")
         self.widget_3.setMinimumSize(QSize(34, 34))
@@ -2766,13 +2781,13 @@ class Ui_Home(object):
         self.horizontalLayout_35.addWidget(self.label_student_icon)
 
 
-        self.horizontalLayout_21.addWidget(self.widget_3)
+        self.layout_stud_average.addWidget(self.widget_3)
 
         self.label_student_name = QLabel(self.widget_7)
         self.label_student_name.setObjectName(u"label_student_name")
         self.label_student_name.setMaximumSize(QSize(16777215, 30))
 
-        self.horizontalLayout_21.addWidget(self.label_student_name)
+        self.layout_stud_average.addWidget(self.label_student_name)
 
         self.label_avg_icon = QLabel(self.widget_7)
         self.label_avg_icon.setObjectName(u"label_avg_icon")
@@ -2781,19 +2796,19 @@ class Ui_Home(object):
         self.label_avg_icon.setScaledContents(True)
         self.label_avg_icon.setMargin(2)
 
-        self.horizontalLayout_21.addWidget(self.label_avg_icon)
+        self.layout_stud_average.addWidget(self.label_avg_icon)
 
         self.label_avg = QLabel(self.widget_7)
         self.label_avg.setObjectName(u"label_avg")
         self.label_avg.setMaximumSize(QSize(16777215, 30))
 
-        self.horizontalLayout_21.addWidget(self.label_avg)
+        self.layout_stud_average.addWidget(self.label_avg)
 
         self.label_average_percentage = QLabel(self.widget_7)
         self.label_average_percentage.setObjectName(u"label_average_percentage")
         self.label_average_percentage.setMaximumSize(QSize(16777215, 30))
 
-        self.horizontalLayout_21.addWidget(self.label_average_percentage)
+        self.layout_stud_average.addWidget(self.label_average_percentage)
 
         self.label_lessons_prog_icon = QLabel(self.widget_7)
         self.label_lessons_prog_icon.setObjectName(u"label_lessons_prog_icon")
@@ -2802,23 +2817,23 @@ class Ui_Home(object):
         self.label_lessons_prog_icon.setScaledContents(True)
         self.label_lessons_prog_icon.setMargin(2)
 
-        self.horizontalLayout_21.addWidget(self.label_lessons_prog_icon)
+        self.layout_stud_average.addWidget(self.label_lessons_prog_icon)
 
         self.label_lessons_prog_1 = QLabel(self.widget_7)
         self.label_lessons_prog_1.setObjectName(u"label_lessons_prog_1")
         self.label_lessons_prog_1.setMaximumSize(QSize(16777215, 30))
 
-        self.horizontalLayout_21.addWidget(self.label_lessons_prog_1)
+        self.layout_stud_average.addWidget(self.label_lessons_prog_1)
 
         self.label_lessons_prog = QLabel(self.widget_7)
         self.label_lessons_prog.setObjectName(u"label_lessons_prog")
         self.label_lessons_prog.setMaximumSize(QSize(16777215, 30))
 
-        self.horizontalLayout_21.addWidget(self.label_lessons_prog)
+        self.layout_stud_average.addWidget(self.label_lessons_prog)
 
         self.horizontalSpacer_15 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
-        self.horizontalLayout_21.addItem(self.horizontalSpacer_15)
+        self.layout_stud_average.addItem(self.horizontalSpacer_15)
 
         self.btnPrintQuizScores = QPushButton(self.widget_7)
         self.btnPrintQuizScores.setObjectName(u"btnPrintQuizScores")
@@ -2830,7 +2845,7 @@ class Ui_Home(object):
         self.btnPrintQuizScores.setStyleSheet(u"")
         self.btnPrintQuizScores.setIcon(icon18)
 
-        self.horizontalLayout_21.addWidget(self.btnPrintQuizScores)
+        self.layout_stud_average.addWidget(self.btnPrintQuizScores)
 
 
         self.verticalLayout_19.addWidget(self.widget_7)
@@ -3021,7 +3036,7 @@ class Ui_Home(object):
         self.scrollArea_settings.setWidgetResizable(True)
         self.scrollAreaWidgetContents_5 = QWidget()
         self.scrollAreaWidgetContents_5.setObjectName(u"scrollAreaWidgetContents_5")
-        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 957, 938))
+        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 461, 938))
         self.verticalLayout_10 = QVBoxLayout(self.scrollAreaWidgetContents_5)
         self.verticalLayout_10.setObjectName(u"verticalLayout_10")
         self.verticalLayout_10.setContentsMargins(0, 0, 0, 12)
@@ -3800,6 +3815,9 @@ class Ui_Home(object):
         self.label_stud.setText(QCoreApplication.translate("Home", u"Students", None))
         self.label_student_total.setText(QCoreApplication.translate("Home", u"0", None))
         self.label_25.setText("")
+#if QT_CONFIG(tooltip)
+        self.label_8.setToolTip("")
+#endif // QT_CONFIG(tooltip)
         self.label_8.setText(QCoreApplication.translate("Home", u"Lessons", None))
         self.label_lessons_total.setText(QCoreApplication.translate("Home", u"0", None))
         self.label_27.setText("")
@@ -3881,6 +3899,7 @@ class Ui_Home(object):
         self.label_contact_number.setText(QCoreApplication.translate("Home", u"null", None))
         self.btnEditStudent.setText(QCoreApplication.translate("Home", u" Edit", None))
         self.btnEditStudent.setProperty(u"class", QCoreApplication.translate("Home", u"button-normal", None))
+        self.label_2.setText(QCoreApplication.translate("Home", u"Lessons Taken", None))
 #if QT_CONFIG(tooltip)
         self.btnRefreshLessonTable.setToolTip(QCoreApplication.translate("Home", u"Refresh table", None))
 #endif // QT_CONFIG(tooltip)
@@ -3982,10 +4001,10 @@ class Ui_Home(object):
         self.label_student_name.setText(QCoreApplication.translate("Home", u"Student Name", None))
         self.label_avg_icon.setText("")
         self.label_avg.setText(QCoreApplication.translate("Home", u"Average:", None))
-        self.label_average_percentage.setText(QCoreApplication.translate("Home", u"85%", None))
+        self.label_average_percentage.setText(QCoreApplication.translate("Home", u"0.00%", None))
         self.label_lessons_prog_icon.setText("")
         self.label_lessons_prog_1.setText(QCoreApplication.translate("Home", u"Lessons:", None))
-        self.label_lessons_prog.setText(QCoreApplication.translate("Home", u"12/20", None))
+        self.label_lessons_prog.setText(QCoreApplication.translate("Home", u"0/0", None))
         self.btnPrintQuizScores.setText(QCoreApplication.translate("Home", u" Print", None))
         self.btnPrintQuizScores.setProperty(u"class", QCoreApplication.translate("Home", u"button-normal", None))
         self.plainTextEdit_remarks.setPlaceholderText(QCoreApplication.translate("Home", u"Write teacher's remarks/comments here.", None))

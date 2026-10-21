@@ -16,14 +16,20 @@ class Lesson:
     def __init__(self):
         self.app = QApplication.instance()
 
-    def count(self):
-        sql = "SELECT COUNT(*) FROM cai.tbl_lessons;"
-        record = self.app.db_tools.fetch_all(sql)
+    def count(self, gradingperiod = 0):
+        query = "SELECT COUNT(*) FROM cai.tbl_lessons;"
+        param = None
+
+        if gradingperiod:
+            query = "SELECT COUNT(*) FROM cai.tbl_lessons WHERE gradingperiod = %s;"
+            param = (gradingperiod,)
+
+        record = self.app.db_tools.fetch_all(query, param)
 
         count = 0
 
         if record:
-            count = record[0]['count']
+            count = int(record[0]['count'])
 
         return count
 
