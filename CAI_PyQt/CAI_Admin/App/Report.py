@@ -6,11 +6,12 @@ from PySide6.QtWidgets import QApplication
 downloads_dir = os.path.expanduser("~/Downloads")
 
 class StudentListReporter:
+
     def __init__(self):
         self.app = QApplication.instance()
 
-        self.studentlist_template_path = self.app.util.get_resource_path(os.path.join("..", "Templates", "student_list.docx"))
-        self.classlist_template_path = self.app.util.get_resource_path(os.path.join("..", "Templates", "class_list.docx"))
+        self.studentlist_template_path = self.app.utility.get_resource_path(os.path.join("..", "Templates", "student_list.docx"))
+        self.classlist_template_path = self.app.utility.get_resource_path(os.path.join("..", "Templates", "class_list.docx"))
 
     def generate_studentlist_report(self, section_id, output_pdf_path):
         """Fetches student data, merges using docxtpl, and converts to PDF."""
@@ -40,7 +41,7 @@ class StudentListReporter:
             WHERE 1 = 1
         """
         params = []
-        
+
         if section_id:
             query += """
                 AND s.sectionid = %s
@@ -65,7 +66,7 @@ class StudentListReporter:
                 student_rows.append({
                     'idx': str(idx),
                     'studentid': str(student['studentid']),
-                    'fullname': self.app.util.formatFullname(student['firstname'], student['middlename'], student['lastname'], 1),
+                    'fullname': self.app.utility.formatFullname(student['firstname'], student['middlename'], student['lastname'], 1),
                     'gender': str(student['gender'] or 'N/A'),
                     'sectionname': student['sectionname']
                 })
@@ -87,7 +88,7 @@ class StudentListReporter:
                 context = {
                     'school_year': school_year,
                     'sectionname': section_name,
-                    'teachername': self.app.util.formatFullname(student['teacher_firstname'], student['teacher_middlename'], student['teacher_lastname']),
+                    'teachername': self.app.utility.formatFullname(student['teacher_firstname'], student['teacher_middlename'], student['teacher_lastname']),
                     'students': student_rows
                 }
                 doc.render(context)
@@ -95,18 +96,26 @@ class StudentListReporter:
 
             try:
                 output_dir  = os.path.dirname(os.path.abspath(output_pdf_path))
-                soffice_bin = shutil.which('soffice') or shutil.which('libreoffice') or '/usr/bin/soffice' or '/usr/bin/libreoffice' or '/usr/lib/libreoffice/program/soffice'
 
-                if not soffice_bin:
-                    return False, "LibreOffice executable ('soffice' or 'libreoffice') was not found."
+                if os.path.exists('/.flatpak-info'):
+                    cmd = [
+                        'flatpak-spawn',
+                        '--host', 'soffice',
+                        '--headless',
+                        '--convert-to', 'pdf',
+                        '--outdir', output_dir,
+                        temp_docx
+                    ]
 
-                cmd = [
-                    soffice_bin,
-                    '--headless',
-                    '--convert-to', 'pdf',
-                    '--outdir', output_dir,
-                    temp_docx
-                ]
+                else:
+                    soffice_bin = shutil.which('soffice') or shutil.which('libreoffice') or '/usr/bin/soffice' or '/usr/bin/libreoffice' or '/usr/lib/libreoffice/program/soffice'
+                    cmd = [
+                        soffice_bin,
+                        '--headless',
+                        '--convert-to', 'pdf',
+                        '--outdir', output_dir,
+                        temp_docx
+                    ]
 
                 subprocess.run(cmd, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
@@ -140,8 +149,7 @@ class QuizReporter:
     """
     def __init__(self):
         self.app = QApplication.instance()
-
-        self.quizscores_template_path = self.app.util.get_resource_path(os.path.join("..", "Templates", "quiz_report.docx"))
+        self.quizscores_template_path = self.app.utility.get_resource_path(os.path.join("..", "Templates", "quiz_report.docx"))
 
     def generate_quizscores_report(self, studentid, remarks, output_pdf_path):
         """Fetches student data, merges using docxtpl, and converts to PDF."""
@@ -152,7 +160,7 @@ class QuizReporter:
         model2, average_percentage2 = Quiz().get_scores(studentid, 2)
         model3, average_percentage3 = Quiz().get_scores(studentid, 3)
         model4, average_percentage4 = Quiz().get_scores(studentid, 4)
-        
+
         if not (model1 and model2 and model3 and model4):
             return False, "No quiz scores record found."
 
@@ -192,7 +200,7 @@ class QuizReporter:
             last_name = students[0]['lastname']
             school_year = students[0]['school_year']
             section_name = students[0]['sectionname']
-            teacher_name = self.app.util.formatFullname(students[0]['teacher_firstname'], students[0]['teacher_middlename'], students[0]['teacher_lastname'])
+            teacher_name = self.app.utility.formatFullname(students[0]['teacher_firstname'], students[0]['teacher_middlename'], students[0]['teacher_lastname'])
 
             models = {1: model1, 2: model2, 3: model3, 4: model4}
             scores = {idx: [] for idx in models}
@@ -212,7 +220,7 @@ class QuizReporter:
 
             doc = DocxTemplate(self.quizscores_template_path)
             context = {
-                'studentname': self.app.util.formatFullname(first_name, middle_name, last_name, 1),
+                'studentname': self.app.utility.formatFullname(first_name, middle_name, last_name, 1),
                 'studentid': studentid,
                 'schoolyear': school_year,
                 'sectionname': section_name,
@@ -233,13 +241,25 @@ class QuizReporter:
             try:
                 output_dir = os.path.dirname(os.path.abspath(output_pdf_path))
 
-                cmd = [
-                    'soffice',
-                    '--headless',
-                    '--convert-to', 'pdf',
-                    '--outdir', output_dir,
-                    temp_docx
-                ]
+                if os.path.exists('/.flatpak-info'):
+                    cmd = [
+                        'flatpak-spawn',
+                        '--host', 'soffice',
+                        '--headless',
+                        '--convert-to', 'pdf',
+                        '--outdir', output_dir,
+                        temp_docx
+                    ]
+
+                else:
+                    soffice_bin = shutil.which('soffice') or shutil.which('libreoffice') or '/usr/bin/soffice' or '/usr/bin/libreoffice' or '/usr/lib/libreoffice/program/soffice'
+                    cmd = [
+                        soffice_bin,
+                        '--headless',
+                        '--convert-to', 'pdf',
+                        '--outdir', output_dir,
+                        temp_docx
+                    ]
 
                 subprocess.run(cmd, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 

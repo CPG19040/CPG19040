@@ -66,6 +66,11 @@ class Student:
 
                 if not image.isNull():
                     pixmap = QPixmap.fromImage(image)
+                    pixmap = pixmap.scaled(
+                        size, size,
+                        Qt.AspectRatioMode.KeepAspectRatioByExpanding,
+                        Qt.TransformationMode.SmoothTransformation
+                    )
 
         if isCircular:
             pixmap = self.util.makeCircularPixmap(pixmap, size)
@@ -197,8 +202,8 @@ class Student:
         if user.get('position_name', '').upper() == "TEACHER":
             sql += """
                 AND sec.teacherid = (
-                    SELECT school_id 
-                    FROM cai.tbl_staff_info 
+                    SELECT school_id
+                    FROM cai.tbl_staff_info
                     WHERE school_id = %s
                 )
             """
@@ -386,7 +391,7 @@ class AddNewStudentDialog(QDialog, Ui_AddNewStudentDialog):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        
+
         self.setWindowFlags(Qt.WindowType.FramelessWindowHint) # Remove OS default window frame
         self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground, True)
         self.setMouseTracking(True)
@@ -430,15 +435,15 @@ class AddNewStudentDialog(QDialog, Ui_AddNewStudentDialog):
         rect = self.rect()
         x, y = pos.x(), pos.y()
         w, h = rect.width(), rect.height()
-        
+
         edge = None
-        
+
         # Horizontal edges
         if x <= self.RESIZE_MARGIN:
             edge = Qt.Edge.LeftEdge
         elif x >= w - self.RESIZE_MARGIN:
             edge = Qt.Edge.RightEdge
-            
+
         # Vertical edges
         if y <= self.RESIZE_MARGIN:
             if edge is None:
@@ -450,7 +455,7 @@ class AddNewStudentDialog(QDialog, Ui_AddNewStudentDialog):
                 edge = Qt.Edge.BottomEdge
             else:
                 edge |= Qt.Edge.BottomEdge
-                
+
         return edge
 
     def _update_cursor_shape(self, edge):
@@ -476,7 +481,7 @@ class AddNewStudentDialog(QDialog, Ui_AddNewStudentDialog):
         if event.button() == Qt.LeftButton:
             pos = event.position().toPoint()
             edge = self._get_resize_edge(pos)
-            
+
             # 1. If clicking near any edge/corner, resize the window
             if edge:
                 self.windowHandle().startSystemResize(edge)
@@ -488,7 +493,7 @@ class AddNewStudentDialog(QDialog, Ui_AddNewStudentDialog):
                 self.windowHandle().startSystemMove()
                 event.accept()
                 return
-            
+
         super().mousePressEvent(event)
 
     def displaySchoolYear(self):
@@ -617,7 +622,7 @@ class AddNewStudentDialog(QDialog, Ui_AddNewStudentDialog):
         try:
             with open(csv_file, mode='r', encoding='utf-8-sig') as f:
                 reader = csv.DictReader(f)
-                
+
                 if not reader.fieldnames:
                     CustomMessageBox.warning(self, "Validation Failed", "The CSV file is empty.")
                     return 1
@@ -627,8 +632,8 @@ class AddNewStudentDialog(QDialog, Ui_AddNewStudentDialog):
 
                 if missing_cols:
                     CustomMessageBox.warning(
-                        self, 
-                        "Validation Failed", 
+                        self,
+                        "Validation Failed",
                         f"Missing required columns in CSV:\n{', '.join(missing_cols)}"
                     )
                     return 1
@@ -651,7 +656,7 @@ class AddNewStudentDialog(QDialog, Ui_AddNewStudentDialog):
 
                 for i, row in enumerate(all_rows, start=1):
                     row_idx = i + 1  # 1-based CSV line number (accounting for header)
-                    
+
                     # Process UI events so the progress bar refreshes
                     self.progressBar.setValue(i)
                     QCoreApplication.processEvents()
@@ -666,7 +671,7 @@ class AddNewStudentDialog(QDialog, Ui_AddNewStudentDialog):
                     name = self.util.formatFullname(first_name, clean_row.get('MIDDLE NAME', ''), last_name, order=1)
 
                     if not no_all and self.check_duplicate_student(last_name, first_name, clean_row.get('MIDDLE NAME', '')):
-                        
+
                         if not skip_all:
                             dlg_res = CustomMessageBox.question(
                                 self,
@@ -674,7 +679,7 @@ class AddNewStudentDialog(QDialog, Ui_AddNewStudentDialog):
                                 f"Student {name} already exists. Do you want to skip it?",
                                 include_all=True
                             )
-                        
+
                             if dlg_res == CustomMessageBox.Yes:
                                 skipped_students.append(name)
                                 continue
@@ -774,8 +779,8 @@ class AddNewStudentDialog(QDialog, Ui_AddNewStudentDialog):
         existing_student = self.db_tools.fetch_all(
             """
                 SELECT studentid FROM cai.tbl_student_info
-                WHERE UPPER(lastname) = UPPER(%s) 
-                    AND UPPER(firstname) = UPPER(%s) 
+                WHERE UPPER(lastname) = UPPER(%s)
+                    AND UPPER(firstname) = UPPER(%s)
                     AND UPPER(middlename) = UPPER(%s)
             """,
             (last_name, first_name, middle_name)
@@ -924,15 +929,15 @@ class StudentEditorDialog(QDialog, Ui_EditStudentDialog):
         rect = self.rect()
         x, y = pos.x(), pos.y()
         w, h = rect.width(), rect.height()
-        
+
         edge = None
-        
+
         # Horizontal edges
         if x <= self.RESIZE_MARGIN:
             edge = Qt.Edge.LeftEdge
         elif x >= w - self.RESIZE_MARGIN:
             edge = Qt.Edge.RightEdge
-            
+
         # Vertical edges
         if y <= self.RESIZE_MARGIN:
             if edge is None:
@@ -944,7 +949,7 @@ class StudentEditorDialog(QDialog, Ui_EditStudentDialog):
                 edge = Qt.Edge.BottomEdge
             else:
                 edge |= Qt.Edge.BottomEdge
-                
+
         return edge
 
     def _update_cursor_shape(self, edge):
@@ -970,7 +975,7 @@ class StudentEditorDialog(QDialog, Ui_EditStudentDialog):
         if event.button() == Qt.LeftButton:
             pos = event.position().toPoint()
             edge = self._get_resize_edge(pos)
-            
+
             # 1. If clicking near any edge/corner, resize the window
             if edge:
                 self.windowHandle().startSystemResize(edge)
@@ -982,7 +987,7 @@ class StudentEditorDialog(QDialog, Ui_EditStudentDialog):
                 self.windowHandle().startSystemMove()
                 event.accept()
                 return
-            
+
         super().mousePressEvent(event)
 
     def displaySchoolYear(self, studentid):

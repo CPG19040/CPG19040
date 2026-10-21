@@ -26,7 +26,7 @@ class Login(QMainWindow, Ui_FormLogin):
         self.app = QApplication.instance()
 
         _, base_year, next_year = self.app.utility.get_dynamic_school_year_dates()
-        
+
         self.label_SY.setText(f"School Year: {base_year}-{next_year}")
 
     def mouseMoveEvent(self, event):
@@ -41,14 +41,14 @@ class Login(QMainWindow, Ui_FormLogin):
                 self.windowHandle().startSystemMove()
                 event.accept()
                 return
-            
+
         super().mousePressEvent(event)
 
     def handle_login(self):
         username = self.txtUsername.text()
         password = self.txtPassword.text()
         user     = self.authenticate_user(username, password)
-        
+
         if user:
             self.login_success.emit(user)
 
@@ -69,13 +69,13 @@ class Login(QMainWindow, Ui_FormLogin):
                 ON A.positionid = B.position_id
                 WHERE A.username = %s
             """
-            
+
             cur, conn = self.app.db_tools.retrieve_records(query, (username,))
 
             if not cur:
                 CustomMessageBox.critical(self, "Database Error", "Unable to connect to the database. Please try again later.")
                 return None
-            
+
             user_data = cur.fetchone()
 
             if user_data:
@@ -92,23 +92,23 @@ class Login(QMainWindow, Ui_FormLogin):
                         "position_id": pos_id,
                         "position_name": pos_name
                     }
-                    
+
                     return user
 
             else:
                 CustomMessageBox.warning(self, "Authentication Failed", "Invalid username or password.")
-                
+
             return None
 
         except Exception as e:
             self.logger.error(f"Login().authenticate_user(): {e}", exc_info=True)
             return None
-            
+
         finally:
             if conn:
                 conn.close()
 
     def handle_forgot_password(self):
-        CustomMessageBox.information(self, "Forgot Password", 
+        CustomMessageBox.information(self, "Forgot Password",
             "Please contact the System Administrator to reset your login credentials."
         )

@@ -123,7 +123,6 @@ class Controller:
                 }
             """)
 
-        
         self.app_settings.setValue("dark_mode", self.is_dark_mode)
         self.app_settings.sync()
         self.apply_theme()
@@ -187,7 +186,7 @@ class Controller:
         self.ui.btnDarkModeToggle.setValue(1 if self.is_dark_mode else 0)
         self.toggle_theme(self.is_dark_mode)
         self.apply_theme()
-        
+
         # self.home_win.showMaximized()
         self.ui.btnMinimize.clicked.connect(self.home_win.showMinimized)
         self.ui.btnMaximize.clicked.connect(lambda: self.home_win.showMaximized() if not self.home_win.isMaximized() else self.home_win.showNormal())
@@ -200,17 +199,17 @@ class Controller:
 
         self.ui.btnUserName.setText(f"{user['firstname']} {user['lastname']}")
         self.ui.labelPosition.setText(user['position_name'])
-        
+
         self.ui.HBoxLayout_Ranking.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.home_win.search_widgets = [
-            self.ui.txt_classList_search, 
-            self.ui.txtSearchLesson, 
-            self.ui.txt_search_user, 
+            self.ui.txt_classList_search,
+            self.ui.txtSearchLesson,
+            self.ui.txt_search_user,
             self.ui.txt_search_score_idv
         ]
 
-        # self.home_win.search_widgets = self.search_widgets 
+        # self.home_win.search_widgets = self.search_widgets
 
         for widget in self.home_win.search_widgets:
             parentWidget = widget.parentWidget()
@@ -222,7 +221,7 @@ class Controller:
             widget.setAttribute(Qt.WidgetAttribute.WA_Hover, True)
 
             widget.installEventFilter(self.home_win)
-        
+
         self.card_layout = self.ui.gridLayout_stud_card
         self.card_layout.setAlignment(Qt.AlignmentFlag.AlignTop)
         self.card_layout.setSpacing(10)
@@ -385,7 +384,7 @@ class Controller:
                 parentWidget.setProperty("_focus", True)
                 parentWidget.style().unpolish(parentWidget)
                 parentWidget.style().polish(parentWidget)
-            
+
         elif old_widget in self.home_win.search_widgets:
             parentWidget = old_widget.parentWidget()
 
@@ -414,7 +413,7 @@ class Controller:
                 except: pass
                 widget.setParent(None)
                 widget.deleteLater()
-        
+
         self.ui.HBoxLayout_Ranking.addItem(self.horizontalSpacer1)
 
         if not top3:
@@ -429,7 +428,7 @@ class Controller:
             circular_pic = self.app.utility.makeCircularPixmap(profile_pic, avatar_width)
             middle_name  = row.get('middlename', '')
             full_name    = self.app.utility.formatFullname(row['firstname'], middle_name, row['lastname'])
-            
+
             card_ranking.avatar = circular_pic
             card_ranking.name   = full_name
             card_ranking.score  = row['average_final_grade']
@@ -520,7 +519,7 @@ class Controller:
             self.get_dynamic_grading_period_dates()
 
             query = """
-                SELECT 
+                SELECT
                     ROW_NUMBER() OVER (ORDER BY school_year DESC) AS idx,
                     school_year
                 FROM (
@@ -538,7 +537,7 @@ class Controller:
             """
             self.app.utility.populate_pulldown(self.ui.comboBox_ReportsGradingPeriod, query, default_value=self.GRADING_PERIOD)
             self.app.utility.populate_pulldown(self.ui.cb_gp_quiz_idv, query, default_value=self.GRADING_PERIOD)
-            
+
             gpid = self.ui.comboBox_ReportsGradingPeriod.currentData()
 
             query = """
@@ -747,20 +746,20 @@ class Controller:
             self.ui.label_studentCount.setText('0')
             self.ui.label_boyCount.setText('0')
             self.ui.label_girlCount.setText('0')
-    
+
             self.ui.label_studentId.setText(f"{sid}")
             self.ui.label_studentLastName.setText(f"{lname}")
             self.ui.label_studentFirstName.setText(f"{fname}")
             self.ui.label_studentMiddleName.setText(f"{mname}")
             self.ui.label_studentGender.setText(f"{gender}")
-    
+
             self.ui.label_contact_person.setText(f"{contact_person}")
             self.ui.label_contact_number.setText(f"{contact_num}")
 
             self.app.utility.animate_slide(self.ui.sub_info_panel, show=False, direction="right")
 
             return
-    
+
         studDialog = AddNewStudentDialog()
         total, boys, girls = studDialog.update_section_stats(student_id)
         selected_row = studDialog.refresh_student_info(student_id)
@@ -801,7 +800,7 @@ class Controller:
 
     def edit_student(self, user):
         student_id = self.ui.label_studentId.text().strip()
-        
+
         if self.app.utility.isEmpty(student_id):
             CustomMessageBox.warning(self.home_win, "Warning", f"Select a student to update the information.")
             return
@@ -875,7 +874,7 @@ class Controller:
             self.sectionObj.setStyleSheet(Dark_Theme.section_reg_dialog)
         else:
             self.sectionObj.setStyleSheet(Light_Theme.section_reg_dialog)
-            
+
         self.sectionObj.txtSectionName.clear()
         self.sectionObj.cmb_teacher.setCurrentIndex(0)
 
@@ -918,7 +917,7 @@ class Controller:
         school_id, _      = self.sectionObj.get_adviser(section_id)
         sectionEditor     = SectionAdviserEditor(self.sectionObj, section_id, school_id)
         self.is_dark_mode = self.app_settings.value("dark_mode", False, type=bool)
-        
+
         if self.is_dark_mode:
             sectionEditor.setStyleSheet(Dark_Theme.section_edit_dialog)
         else:
@@ -965,7 +964,7 @@ class Controller:
                 container.setStyleSheet("background: transparent;")
                 layout = QHBoxLayout(container)
                 layout.addWidget(label_img)
-                layout.setAlignment(Qt.AlignmentFlag.AlignCenter) 
+                layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
                 layout.setContentsMargins(0, 0, 0, 0)
                 model.setData(index, None, Qt.ItemDataRole.DecorationRole)
                 self.ui.table_lesson.setIndexWidget(index, container)
@@ -1341,7 +1340,7 @@ class Controller:
                 ORDER BY chapter, lessonnum ASC
             """
             self.app.utility.populate_pulldown(self.ui.comboBox_ReportsLesson, query, params=(selected_period,))
-            
+
             self.handle_report_stud_prog_filter()
 
     def handle_report_stud_prog_filter(self, *args):
@@ -1373,10 +1372,10 @@ class Controller:
                 """)
                 container = QWidget()
                 container.setStyleSheet("background: transparent;")
-                
+
                 layout = QHBoxLayout(container)
                 layout.addWidget(status_label)
-                layout.setAlignment(Qt.AlignmentFlag.AlignCenter) 
+                layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
                 layout.setContentsMargins(0, 0, 0, 0)
                 index = model.index(row, 3)
                 self.ui.table_quizcompletionstat.setIndexWidget(index, container)
@@ -1390,7 +1389,7 @@ class Controller:
         self.reports_selectedRow_idv = None
         school_year = self.ui.cmb_school_year_3.currentText()
         text = self.ui.txt_search_score_idv.text().strip()
-        
+
         new_model = Student().search_student(school_year, text)
         self.ui.table_student_score_idv.sortByColumn(-1, Qt.AscendingOrder)
         self.ui.table_quiz_score_idv.sortByColumn(-1, Qt.AscendingOrder)
@@ -1464,7 +1463,7 @@ class Controller:
         lastName      = row.siblingAtColumn(1).data()
         firstName     = row.siblingAtColumn(2).data()
         middleName    = row.siblingAtColumn(3).data()
-        
+
         stud_name = self.app.utility.formatFullname(firstName, middleName, lastName)
         self.ui.label_student_name.setText(stud_name)
 
@@ -1475,11 +1474,11 @@ class Controller:
 
         buffer = QBuffer()
         size   = 200
-        pixmap = stud.get_student_picture(studentId, True, size)
+        pixmap = stud.get_student_picture(studentId, False, size)
         buffer.open(QIODevice.OpenModeFlag.WriteOnly)
         pixmap.save(buffer, "PNG")
         base64_data = base64.b64encode(buffer.data().data()).decode("utf-8")
-        
+
         if self.is_dark_mode:
             self.ui.label_student_icon.setStyleSheet("""
                 QLabel {
@@ -1525,7 +1524,7 @@ class Controller:
 
         lesson_count = Lesson().count(gradingperiod)
         self.ui.label_lessons_prog.setText(f"0/{lesson_count}")
-        
+
         self.ui.plainTextEdit_remarks.clear()
 
     def get_dynamic_grading_period_dates(self):
@@ -1536,7 +1535,7 @@ class Controller:
         self.ui.spinBox_SY_end.setValue(next_year)
 
         query = """
-            SELECT 
+            SELECT
                 ROW_NUMBER() OVER (ORDER BY school_year DESC) AS idx,
                 school_year
             FROM (
@@ -1773,19 +1772,19 @@ class HomeWindow(QMainWindow):
         rect = self.rect()
         x, y = pos.x(), pos.y()
         w, h = rect.width(), rect.height()
-        
+
         edge = Qt.Edge(0)
-        
+
         if x <= self.RESIZE_MARGIN:
             edge |= Qt.Edge.LeftEdge
         elif x >= w - self.RESIZE_MARGIN:
             edge |= Qt.Edge.RightEdge
-            
+
         if y <= self.RESIZE_MARGIN:
             edge |= Qt.Edge.TopEdge
         elif y >= h - self.RESIZE_MARGIN:
             edge |= Qt.Edge.BottomEdge
-                
+
         return edge
 
     def _update_cursor_shape(self, edge):
@@ -1819,7 +1818,7 @@ class HomeWindow(QMainWindow):
         if event.button() == Qt.LeftButton:
             pos = event.position().toPoint()
             edge = self._get_resize_edge(pos)
-            
+
             if edge:
                 if self.windowHandle():
                     self.windowHandle().startSystemResize(edge)
@@ -1831,11 +1830,11 @@ class HomeWindow(QMainWindow):
                     self.windowHandle().startSystemMove()
                 event.accept()
                 return
-            
+
         super().mousePressEvent(event)
 
     def eventFilter(self, obj, event):
-        
+
         if hasattr(self, 'search_widgets') and obj in self.search_widgets:
 
             if event.type() == QEvent.Type.HoverEnter:
@@ -1848,7 +1847,7 @@ class HomeWindow(QMainWindow):
 
             elif event.type() == QEvent.Type.HoverLeave:
                 parentWidget = obj.parentWidget()
-                
+
                 if parentWidget:
                     parentWidget.setProperty("_hover", False)
                     parentWidget.style().unpolish(parentWidget)

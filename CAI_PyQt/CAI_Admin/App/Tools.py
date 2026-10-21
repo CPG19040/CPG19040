@@ -52,14 +52,14 @@ class Utility:
         if not os.path.exists(full_path):
             logger.warning(f"read_image_file_bytes(): File not found: {full_path}", exc_info=True)
             return b""
-        
+
         file = QFile(str(full_path))
 
         if file.open(QIODevice.ReadOnly):
             file_bytes = file.readAll().data()
             file.close()
             return file_bytes
-        
+
         return b""
 
     def getCircularPixmapFromImagePath(self, image_path, size=100):
@@ -110,7 +110,7 @@ class Utility:
     def makeCircularPixmap(self, src_pixmap, size=80, radius=None):
         """
             Transform an image into cicular shape
-            
+
             Args:
                 src_pixmap (QPixmap): The pixmap object
                 size (float): Width and height of the image
@@ -124,18 +124,18 @@ class Utility:
         # Create a transparent square canvas
         target = QPixmap(size, size)
         target.fill(Qt.GlobalColor.transparent)
-        
+
         # Scale source image to fill the square
         scaled_pixmap = src_pixmap.scaled(
-            size, size, 
-            Qt.AspectRatioMode.KeepAspectRatioByExpanding, 
+            size, size,
+            Qt.AspectRatioMode.KeepAspectRatioByExpanding,
             Qt.TransformationMode.SmoothTransformation
         )
-        
+
         painter = QPainter(target)
         painter.setRenderHint(QPainter.RenderHint.Antialiasing)
         painter.setRenderHint(QPainter.RenderHint.SmoothPixmapTransform)
-        
+
         # Create a circular path
         path = QPainterPath()
 
@@ -145,12 +145,12 @@ class Utility:
             path.addRoundedRect(0, 0, size, size, radius, radius)
 
         painter.setClipPath(path)
-        
+
         # Draw the image into the circle (centered)
         delta_x = (scaled_pixmap.width() - size) // 2
         delta_y = (scaled_pixmap.height() - size) // 2
         painter.drawPixmap(0, 0, scaled_pixmap.copy(delta_x, delta_y, size, size))
-        
+
         # Optional: Add a subtle border
         painter.setClipping(False) # Stop clipping to draw the border
         painter.setPen(QPen(Qt.GlobalColor.lightGray, 1))
@@ -159,7 +159,7 @@ class Utility:
             painter.drawEllipse(0, 0, size - 1, size - 1)
         else:
             painter.drawRoundedRect(0, 0, size - 1, size - 1, radius, radius)
-        
+
         painter.end()
         return target
 
@@ -290,7 +290,7 @@ class Utility:
             first_init = f"{first[0].upper()}."
             middle_init = f"{middle[0].upper()}." if middle else ""
             last_init = f"{last[0].upper()}."
-            
+
             parts = [first_init, middle_init, last_init]
             return " ".join(p for p in parts if p)
 
@@ -349,7 +349,7 @@ class Utility:
 
         anim = widget._slide_anim
         anim.stop()
-        
+
         try:
             anim.finished.disconnect()
         except (RuntimeError, TypeError):
@@ -393,22 +393,22 @@ class Utility:
             return "Cancelled"
 
         headers = [
-            "LAST NAME", 
-            "FIRST NAME", 
-            "MIDDLE NAME", 
-            "GENDER", 
-            "PASSWORD", 
-            "CONTACT PERSON", 
+            "LAST NAME",
+            "FIRST NAME",
+            "MIDDLE NAME",
+            "GENDER",
+            "PASSWORD",
+            "CONTACT PERSON",
             "CONTACT NUMBER"
         ]
-        
+
         try:
             with open(file_path, mode='w', newline='', encoding='utf-8') as file:
                 writer = csv.writer(file)
                 writer.writerow(headers)
-            
+
             message = f"Template successfully saved to:\n{file_path}"
-            
+
         except Exception as e:
             message = f"Failed to save file:\n{str(e)}"
             logger.error(f"Error exporting template: {e}", exc_info=True)
@@ -434,13 +434,13 @@ class CardStudent(QWidget, Ui_CardStudent):
         is_female    = (gender.upper() == "FEMALE")
         border_color = "#E55B90" if is_female else "#3498DB"
 
-        if self.is_dark_mode: 
+        if self.is_dark_mode:
             bg_hover    = "rgba(229, 91, 144, 0.2)" if is_female else "rgba(52, 152, 219, 0.2)"
             card_bg     = "#2d2d2d"
             card_border = "#4a4a4a"
             text_name   = "#ffffff"
             text_sub    = "#a0a0a0"
-        else: 
+        else:
             bg_hover    = "#FFE5F0" if is_female else "#E1F5FE"
             card_bg     = "#FFFFFF"
             card_border = "#ddd"
@@ -484,7 +484,7 @@ class CardStudent(QWidget, Ui_CardStudent):
         # Process photo (single transformation)
         self.util = QApplication.instance().utility
         has_image = True
-        
+
         if self.util.isEmpty(image):
             image = QPixmap(u":/Images/Images/profile.png")
             has_image = False
@@ -497,8 +497,8 @@ class CardStudent(QWidget, Ui_CardStudent):
             size   = 200
             buffer.open(QIODevice.OpenModeFlag.WriteOnly)
             scaled_pixmap = image.scaled(
-                size, size, 
-                Qt.AspectRatioMode.KeepAspectRatioByExpanding, 
+                size, size,
+                Qt.AspectRatioMode.KeepAspectRatioByExpanding,
                 Qt.TransformationMode.SmoothTransformation
             )
             scaled_pixmap.save(buffer, "PNG")
@@ -512,7 +512,7 @@ class CardStudent(QWidget, Ui_CardStudent):
                     }
                     """ + Dark_Theme.tool_tip + """
                 """)
-    
+
             else:
                 self.label_photo.setStyleSheet("""
                     #label_photo {
@@ -579,14 +579,14 @@ class CircularProgress(QWidget):
         self.value = 0
         self.max_value = 100
         self.percentage = 0.0
-        
+
         self.prefix = ""
         self.suffix = "%"
         self.custom_text = None  # If set, overrides automatic text rendering
         self.font_color = "#333333"
 
         self.setFixedSize(100, 100)
-        
+
         self.app_settings = QSettings("CAI_System", "CAI_Admin_AppSettings")
         self.is_dark_mode = self.app_settings.value("dark_mode", False, type=bool)
 
@@ -598,7 +598,7 @@ class CircularProgress(QWidget):
     def set_value(self, value, max_value=100, custom_text=None):
         """
         Set progress values.
-        
+
         :param value: Current count or percentage value.
         :param max_value: Maximum possible count (defaults to 100).
         :param custom_text: Optional explicit string (e.g., "12/50" or "Passed").
@@ -606,11 +606,11 @@ class CircularProgress(QWidget):
         self.value = value
         self.max_value = max(1, max_value)  # Prevent division by zero
         self.custom_text = custom_text
-        
+
         # Calculate normalized percentage (0 to 100) for drawing the arc
         raw_percentage = (self.value / self.max_value) * 100
         self.percentage = max(0.0, min(100.0, raw_percentage))
-        
+
         self.update()  # Trigger repaint
 
     def set_format(self, prefix="", suffix="%"):
@@ -916,7 +916,7 @@ class CrossPlatformPrinter:
 
         except subprocess.CalledProcessError as e:
             return False, f"System command line printing failed: {e.stderr}"
-        
+
         except Exception as e:
             return False, f"Printing failed: {str(e)}"
 
@@ -982,7 +982,7 @@ class CardRanking(QWidget, Ui_CardRanking):
 
         if self.avatar:
             self.label_profile.setPixmap(self.avatar)
-            
+
         self.label_stud_name.setText(self.name)
         self.label_student_score.setText(f"{self.score}%")
         self.label_student_place.setText(f"{self.student_rank}{self.suffix}")

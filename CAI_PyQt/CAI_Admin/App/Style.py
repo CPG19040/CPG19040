@@ -17,7 +17,7 @@ class Light_Theme:
         }
 
         QPushButton[class="button-green"]:pressed {
-            background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #0b572a, stop:1 #129046); 
+            background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #0b572a, stop:1 #129046);
         }
 
         QPushButton[class="button-green"]:disabled {
@@ -683,7 +683,7 @@ class Light_Theme:
             font: 11pt "Inter";
         }
 
-       
+
         """ + buttons + """
 
         QLabel[class="accented-labels"] {
@@ -745,8 +745,8 @@ class Light_Theme:
             border: 1px solid #62a0ea;
             border-top-left-radius: 10px;
             border-top-right-radius: 10px;
-            background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
-                                        stop:0 #ffffff, 
+            background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                                        stop:0 #ffffff,
                                         stop:1 #c6e9ff);
         }
 
@@ -791,7 +791,7 @@ class Light_Theme:
         /* ==========================================================================
                 SCROLL AREA & SCROLLBARS
         ========================================================================== */
-        QScrollArea { 
+        QScrollArea {
             border: none;
             border-radius: 20px;
             background-color: #deddda;
@@ -933,7 +933,7 @@ class Light_Theme:
 
         QPushButton#btnEasy:disabled,
         QPushButton#btnAverage:disabled {
-            border-right: none; 
+            border-right: none;
         }
 
         QPushButton#btnEasy:checked:disabled {
@@ -958,7 +958,7 @@ class Light_Theme:
     """
 
     widget_remarks = """
-        #widget_remarks { 
+        #widget_remarks {
             border-left: 1px solid rgb(161, 161, 161);
             border-right: 1px solid rgb(161, 161, 161);
             background-color: rgb(246, 245, 244);
@@ -1060,7 +1060,7 @@ class Light_Theme:
             border-top-right-radius: 18px;
             border-bottom-right-radius: 18px;
         }
-        
+
         #btnBrowseCSV:hover {
             background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #ffffff, stop:1 #f2f6f8);
         }
@@ -1513,7 +1513,7 @@ class Light_Theme:
         *[class="input-and-browse"] {
             background: transparent;
         }
-        
+
         *[class="input-and-browse"] QLabel {
             background-color: #d2d2d2;
             border: 1px solid #999;
@@ -1603,7 +1603,7 @@ class Light_Theme:
         """ + scrollbar + """
 
         """ + tool_tip + """
-        
+
         QTableView {
             outline: none;
             border: 1px solid #a1a1a1;
@@ -1673,7 +1673,7 @@ class Light_Theme:
         """ + tool_tip + """
 
         #btn_save {
-            border: none; 
+            border: none;
             background: transparent;
         }
 
@@ -1820,7 +1820,7 @@ class Light_Theme:
             background-color: #7eb4d7;
         }
 
-        QScrollArea { 
+        QScrollArea {
             border: none;
             border-radius: 20px;
             background-color: #deddda;
@@ -1956,7 +1956,7 @@ class Dark_Theme:
         }
 
         QPushButton[class="button-green"]:pressed {
-            background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #0b572a, stop:1 #129046); 
+            background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #0b572a, stop:1 #129046);
         }
 
         QPushButton[class="button-green"]:disabled {
@@ -2049,7 +2049,7 @@ class Dark_Theme:
         }
     """
 
-    radio_button = """ 
+    radio_button = """
         QRadioButton {
             color: #ffffff;
             spacing: 8px;
@@ -2109,9 +2109,9 @@ class Dark_Theme:
             background: #6a6a72;
         }
 
-        QScrollBar::add-line:vertical, 
+        QScrollBar::add-line:vertical,
         QScrollBar::sub-line:vertical,
-        QScrollBar::add-line:horizontal, 
+        QScrollBar::add-line:horizontal,
         QScrollBar::sub-line:horizontal {
             width: 0px;
             height: 0px;
@@ -2119,9 +2119,9 @@ class Dark_Theme:
             background: none;
         }
 
-        QScrollBar::add-page:vertical, 
+        QScrollBar::add-page:vertical,
         QScrollBar::sub-page:vertical,
-        QScrollBar::add-page:horizontal, 
+        QScrollBar::add-page:horizontal,
         QScrollBar::sub-page:horizontal {
             background: none;
         }
@@ -2735,7 +2735,7 @@ class Dark_Theme:
         /* ==========================================================================
                 SCROLL AREA & SCROLLBARS
         ========================================================================== */
-        QScrollArea { 
+        QScrollArea {
             border: none;
             border-radius: 20px;
             background-color: #1e1e20;
@@ -2765,7 +2765,7 @@ class Dark_Theme:
 
         #label_month {
             color: #e0e0e0;
-            background-color: transparent; 
+            background-color: transparent;
             font: 57 18pt "Inter Medium";
             margin-bottom: 3px;
         }
@@ -2897,7 +2897,7 @@ class Dark_Theme:
     """
 
     widget_remarks = """
-        #widget_remarks { 
+        #widget_remarks {
             border-left: 1px solid #3d3d3d;
             border-right: 1px solid #3d3d3d;
             background-color: #2d2d2d;
@@ -3236,7 +3236,7 @@ class Dark_Theme:
         """ + buttons + """
 
         """ + input_field + """
-        
+
         """ + combo_box_input_field + """
 
         """ + tool_tip + """
@@ -3549,7 +3549,7 @@ class Dark_Theme:
         """ + scroll_bar + """
 
         """ + tool_tip + """
-        
+
         QTableView {
             outline: none;
             border: 1px solid #3d3d42;
@@ -3627,7 +3627,7 @@ class Dark_Theme:
         """ + scroll_bar + """
 
         #btn_save {
-            border: none; 
+            border: none;
             background: transparent;
         }
 
@@ -3638,7 +3638,7 @@ class Dark_Theme:
 
         """ + widget_difficulty_toggle + """
 
-        QScrollArea { 
+        QScrollArea {
             border: none;
             border-radius: 20px;
             background-color: #1e1e20;

@@ -298,15 +298,15 @@ class LessonDialog(QDialog, Ui_LessonDialog):
         rect = self.rect()
         x, y = pos.x(), pos.y()
         w, h = rect.width(), rect.height()
-        
+
         edge = None
-        
+
         # Horizontal edges
         if x <= self.RESIZE_MARGIN:
             edge = Qt.Edge.LeftEdge
         elif x >= w - self.RESIZE_MARGIN:
             edge = Qt.Edge.RightEdge
-            
+
         # Vertical edges
         if y <= self.RESIZE_MARGIN:
             if edge is None:
@@ -318,7 +318,7 @@ class LessonDialog(QDialog, Ui_LessonDialog):
                 edge = Qt.Edge.BottomEdge
             else:
                 edge |= Qt.Edge.BottomEdge
-                
+
         return edge
 
     def _update_cursor_shape(self, edge):
@@ -344,7 +344,7 @@ class LessonDialog(QDialog, Ui_LessonDialog):
         if event.button() == Qt.LeftButton:
             pos = event.position().toPoint()
             edge = self._get_resize_edge(pos)
-            
+
             # 1. If clicking near any edge/corner, resize the window
             if edge:
                 self.windowHandle().startSystemResize(edge)
@@ -356,7 +356,7 @@ class LessonDialog(QDialog, Ui_LessonDialog):
                 self.windowHandle().startSystemMove()
                 event.accept()
                 return
-            
+
         super().mousePressEvent(event)
 
     def add_lesson(self):

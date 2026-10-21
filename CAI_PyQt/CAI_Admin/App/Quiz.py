@@ -29,8 +29,8 @@ class Quiz:
         # Optimized SQL combining quiz details and total score calculations in a single trip
         sql = """
             WITH QuizTotals AS (
-                SELECT 
-                    Q.QUIZNUMBER, 
+                SELECT
+                    Q.QUIZNUMBER,
                     Q.LESSONID,
                     (COUNT(CASE WHEN Q.DIFFICULTYLEVEL = 1 THEN 1 END) * M.EASY_MULTIPLIER) +
                     (COUNT(CASE WHEN Q.DIFFICULTYLEVEL = 2 THEN 1 END) * M.AVERAGE_MULTIPLIER) +
@@ -83,7 +83,7 @@ class Quiz:
         for row_idx, row_data in enumerate(records):
             total_score = row_data['total_score']
             quiz_score = row_data['quizscore']
-            
+
             quiz_num_str = str(row_data['quiznumber'])
             score_str = f"{quiz_score}/{total_score}" if quiz_score is not None and total_score else ""
             percentage_str = ""
@@ -290,9 +290,9 @@ class Quiz:
                 SELECT QUIZNUMBER, LESSONID, GRADINGPERIOD, DIFFICULTYLEVEL FROM CAI.TBL_QUIZTRUEORFALSE
             ) Q
 
-            JOIN CAI.TBL_SCOREMULTIPLIER M 
-                ON Q.QUIZNUMBER = M.QUIZNUMBER 
-                AND Q.LESSONID = M.LESSONID 
+            JOIN CAI.TBL_SCOREMULTIPLIER M
+                ON Q.QUIZNUMBER = M.QUIZNUMBER
+                AND Q.LESSONID = M.LESSONID
                 AND Q.GRADINGPERIOD = M.GRADINGPERIOD
             WHERE q.quiznumber = %s
                 AND q.gradingperiod = %s
@@ -415,13 +415,13 @@ class QuizItemWidget(QFrame, Ui_CardQuiz_edit):
                     selection-color: #ffffff;
                 }
 
-                QLineEdit:focus, 
+                QLineEdit:focus,
                 *[class="correct-input"]:focus,
                 QComboBox[class="correct-input"]:focus {
                     border: 1px solid #3b82f6;
                 }
 
-                QLineEdit:hover, 
+                QLineEdit:hover,
                 QComboBox[class="correct-input"]:hover {
                     border: 1px solid #60a5fa;
                 }
@@ -477,7 +477,7 @@ class QuizItemWidget(QFrame, Ui_CardQuiz_edit):
                     padding: 5px 10px;
                     max-width: 62px;
                 }
-    
+
                 QLineEdit[class="correct-input"],
                 QComboBox[class="correct-input"] {
                     height: 30px;
@@ -492,18 +492,18 @@ class QuizItemWidget(QFrame, Ui_CardQuiz_edit):
                     selection-background-color: #bfdbfe;
                     selection-color: #111827;
                 }
-    
-                QLineEdit:focus, 
+
+                QLineEdit:focus,
                 *[class="correct-input"]:focus,
                 QComboBox[class="correct-input"]:focus {
                     border: 1px solid #2563eb;
                 }
-    
-                QLineEdit:hover, 
+
+                QLineEdit:hover,
                 QComboBox[class="correct-input"]:hover {
                     border: 1px solid #3b82f6;
                 }
-    
+
                 QComboBox[class="correct-input"]::drop-down {
                     subcontrol-origin: padding;
                     subcontrol-position: top right;
@@ -512,14 +512,14 @@ class QuizItemWidget(QFrame, Ui_CardQuiz_edit):
                     border-top-right-radius: 15px;
                     border-bottom-right-radius: 15px;
                 }
-    
+
                 QComboBox[class="correct-input"]::down-arrow {
                     image: url(:/Images/Images/caret-down.png);
                     border: none;
                     width: 10px;
                     height: 14px;
                 }
-    
+
                 QComboBox[class="correct-input"] QAbstractItemView {
                     background-color: #ffffff;
                     border: 1px solid #9ca3af;
@@ -528,14 +528,14 @@ class QuizItemWidget(QFrame, Ui_CardQuiz_edit):
                     border-radius: 5px;
                     outline: 0;
                 }
-    
+
                 QComboBox[class="correct-input"] QAbstractItemView::item {
                     min-height: 35px;
                     padding-left: 10px;
                     border-radius: 4px;
                     color: #1f2937;
                 }
-    
+
                 QComboBox[class="correct-input"] QAbstractItemView::item:hover {
                     background-color: #bfdbfe;
                     color: #111827;
@@ -680,7 +680,7 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
             self.record_id, self.record_mc, self.record_tf, _, _, _ = quiz.retrieve_quiz(q_num, g_period, lesson_id, diff_level)
 
         self.save_shortcut = QShortcut(QKeySequence("Ctrl+S"), self)
-        
+
         self.itemsToRemove = []
 
         self.count_id = self.count_mc = self.count_tf = 0
@@ -725,15 +725,15 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
         rect = self.rect()
         x, y = pos.x(), pos.y()
         w, h = rect.width(), rect.height()
-        
+
         edge = None
-        
+
         # Horizontal edges
         if x <= self.RESIZE_MARGIN:
             edge = Qt.Edge.LeftEdge
         elif x >= w - self.RESIZE_MARGIN:
             edge = Qt.Edge.RightEdge
-            
+
         # Vertical edges
         if y <= self.RESIZE_MARGIN:
             if edge is None:
@@ -745,7 +745,7 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
                 edge = Qt.Edge.BottomEdge
             else:
                 edge |= Qt.Edge.BottomEdge
-                
+
         return edge
 
     def _update_cursor_shape(self, edge):
@@ -771,7 +771,7 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
         if event.button() == Qt.LeftButton:
             pos = event.position().toPoint()
             edge = self._get_resize_edge(pos)
-            
+
             # 1. If clicking near any edge/corner, resize the window
             if edge:
                 self.windowHandle().startSystemResize(edge)
@@ -783,7 +783,7 @@ class QuizCreatorDialog(QDialog, Ui_QuizCreatorDialog):
                 self.windowHandle().startSystemMove()
                 event.accept()
                 return
-            
+
         super().mousePressEvent(event)
 
     def handle_level_click(self, idx):
