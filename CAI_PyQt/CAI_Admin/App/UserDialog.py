@@ -389,7 +389,7 @@ class AddUserDialog(QDialog, Ui_AddNewUserDialog):
 
         # Database Validation: Duplicate Username
         check_query = "SELECT COUNT(*) FROM cai.tbl_staff_info WHERE username = %s"
-        exists = self.db.fetch_all(check_query, (data["uname"],))
+        exists = self.db_tools.fetch_all(check_query, (data["uname"],))
         if exists and exists[0]['count'] > 0:
             CustomMessageBox.warning(self, "Validation Failed", f"Username '{data['uname']}' is already taken.")
             return
@@ -414,7 +414,7 @@ class AddUserDialog(QDialog, Ui_AddNewUserDialog):
                     %s, %s, %s, %s, %s, %s, %s, %s, %s);
             """
 
-            self.db.execute_query(sql, (
+            self.db_tools.execute_query(sql, (
                 data["fname"],
                 data["mname"],
                 data["lname"],
@@ -429,7 +429,7 @@ class AddUserDialog(QDialog, Ui_AddNewUserDialog):
             actionStr = f"Added a staff: {data['lname']}, {data['fname']} as {self.comboBox_position.currentText()}"
             sql  = "INSERT INTO cai.tbl_audit_trail(user_id, username, action)\n"
             sql += "VALUES (%s, %s, %s);\n"
-            self.db.execute_query(sql, (user["school_id"], user["username"], actionStr))
+            self.db_tools.execute_query(sql, (user["school_id"], user["username"], actionStr))
 
             self.accept()
 
@@ -622,7 +622,7 @@ class EditUserDialog(QDialog, Ui_EditUserDialog):
         # 5. Database Validation: Duplicate Username
         if self.userObj["username"] != ui_data["uname"]: # When changes in username is done.
             check_query = "SELECT COUNT(*) FROM cai.tbl_staff_info WHERE username = %s"
-            exists = self.db.fetch_all(check_query, (ui_data["uname"],))
+            exists = self.db_tools.fetch_all(check_query, (ui_data["uname"],))
 
             if exists and exists[0]['count'] > 0:
                 CustomMessageBox.warning(self, "Validation Failed", f"Username '{ui_data['uname']}' is already taken.")
@@ -671,12 +671,12 @@ class EditUserDialog(QDialog, Ui_EditUserDialog):
 
             params.append(self.userObj['school_id'])
 
-            self.db.execute_query(sql, tuple(params))
+            self.db_tools.execute_query(sql, tuple(params))
 
             actionStr = f"Updated {ui_data['lname']}, {ui_data['fname']}'s information."
             sql  = "INSERT INTO cai.tbl_audit_trail(user_id, username, action)\n"
             sql += "VALUES (%s, %s, %s);\n"
-            self.db.execute_query(sql, (self.user["school_id"], self.user["username"], actionStr))
+            self.db_tools.execute_query(sql, (self.user["school_id"], self.user["username"], actionStr))
 
             self.accept()
 
