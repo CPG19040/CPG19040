@@ -538,7 +538,7 @@ class Ui_AddNewUserDialog(object):
         self.comboBox_position.setMinimumSize(QSize(0, 36))
         self.comboBox_position.setMaximumSize(QSize(16777215, 36))
         self.comboBox_position.setStyleSheet(u"")
-        self.comboBox_position.setEditable(True)
+        self.comboBox_position.setEditable(False)
 
         self.horizontalLayout_12.addWidget(self.comboBox_position)
 

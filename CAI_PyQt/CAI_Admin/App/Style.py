@@ -280,7 +280,7 @@ class Light_Theme:
         }
 
         QComboBox QAbstractItemView::item {
-            padding: 0px 15px;
+            padding: 4px 15px;
             border-radius: 4px;
             color: #1f2937;
         }
@@ -2219,7 +2219,7 @@ class Dark_Theme:
         }
 
         QComboBox QAbstractItemView::item {
-            padding: 0px 15px;
+            padding: 4px 15px;
             border-radius: 4px;
             color: #ffffff;
         }
